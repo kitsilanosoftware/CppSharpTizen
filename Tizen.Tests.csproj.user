@@ -1,0 +1,5 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ReferencePath>..\..\build\vs2012\lib</ReferencePath>
+  </PropertyGroup>
+</Project>

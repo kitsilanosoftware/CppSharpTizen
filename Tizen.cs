@@ -11,10 +11,10 @@ namespace CppSharp
             var options = driver.Options;
             options.LibraryName = "Tizen";
             options.Headers.Add("FAppApp.h");
-            options.GeneratorKind = LanguageGeneratorKind.CPlusPlusCLI;
+            options.GeneratorKind = LanguageGeneratorKind.CSharp;
             options.IncludeDirs.Add("../../../examples/Tizen/osp");
             options.GenerateLibraryNamespace = false;
-            options.OutputDir = "gen";
+            options.OutputDir = "gen_csharp";
         }
 
         public void Preprocess(Driver driver, Library lib)

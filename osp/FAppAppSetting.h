@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -138,6 +137,48 @@ public:
 	 * @see			GetAppSettingVersionListN()
 	 */
 	static AppSetting* GetInstance(const Tizen::Base::String& settingVersion);
+
+	/**
+	 * Gets the application setting instance of the specified AppId.
+	 *
+	 * @since	2.0
+	 *
+	 * @privlevel	platform
+	 * @privilege	%http://tizen.org/privilege/appsetting
+	 *
+	 * @return		A pointer to the %AppSetting instance, @n
+	 *				else @c null if it fails
+	 * @param[in]	appId				The AppId of the application that has a valid application setting
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_OBJ_NOT_FOUND		The instance of specified AppId does not have setting information.
+	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
+	 * @exception	E_INVALID_ARG		The specified input parameter is invalid.
+	 * @exception	E_APP_NOT_INSTALLED	The AppId is not found.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
+	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
+	 * @see			ReleaseInstanceByAppId()
+	 */
+	static AppSetting* GetInstanceByAppId(const AppId& appId);
+
+	/**
+	 * Releases the specified application setting instance.
+	 *
+	 * @since	2.0
+	 *
+	 * @privlevel	platform
+	 * @privilege	%http://tizen.org/privilege/appsetting
+	 *
+	 * @return		An error code
+	 * @param[in]	appId				The AppId of the application that has a valid application setting
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_OBJ_NOT_FOUND		The specified instance of AppId is not found or already released.
+	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @remarks		Individual instances are managed by the platform. @n
+	 * 				It is recommended to release instances to reduce memory usage.
+	 * @see			GetInstanceByAppId()
+	 */
+	static result ReleaseInstanceByAppId(const AppId& appId);
 
 	/**
 	 * Gets a list of all the versions that existed prior to the current version. @n

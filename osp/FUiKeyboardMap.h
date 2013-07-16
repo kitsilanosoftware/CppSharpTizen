@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -41,7 +41,7 @@ namespace Tizen {namespace Ui
  * keys have one or more text labels.
  *
  *  @brief <i> [Deprecated]  </i>
- *  @deprecated     This enum is deprecated because it is not supported by platform.
+ *  @deprecated     This enum is deprecated because it is not supported by the platform.
  *  @since  2.0
  * @endif
  */
@@ -88,7 +88,7 @@ enum KeyboardKeyLabelType
  * @if OSPDEPREC
  * @class	KeyboardMap
  * @brief	<i> [Deprecated] </i> This class manages the hardware keyboard key mapping.
- * @deprecated     This class is deprecated because it is not supported by platform.
+ * @deprecated     This class is deprecated because it is not supported by the platform.
  * @since	2.0
  *
  * The %KeyboardMap class maintains a map of hardware keys. You can query the current
@@ -96,7 +96,7 @@ enum KeyboardKeyLabelType
  * specific key. Furthermore, you can query the labels that are printed on the
  * hardware keyboard of a specific key.
  *
- * The following example demonstrates how to get the type of the keyboard and the property of each key:
+ * The following example demonstrates how to use the %KeyboardMap class to get the type of the keyboard and the property of each key.
  *
  * @code
  * KeyboardMap* pKeyboardMap = KeyboardMap::GetInstance();
@@ -122,66 +122,66 @@ class _OSP_EXPORT_ KeyboardMap
 {
 public:
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * This destructor overrides Tizen::Base::Object::~Object().
 	 *
 	 * @brief		<i> [Deprecated] </i>
-	 * @deprecated	This class is deprecated because it is not supported by platform.
+	 * @deprecated	This class is deprecated because it is not supported by the platform.
 	 * @since		2.0
-	 * @endif
+         * @endif
 	 */
 	virtual ~KeyboardMap(void);
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Gets the pointer to the %KeyboardMap instance.
 	 *
 	 * @brief		<i> [Deprecated] </i>
-	 * @deprecated	This class is deprecated because it is not supported by platform.
+	 * @deprecated	This class is deprecated because it is not supported by the platform.
 	 * @since		2.0
 	 *
 	 * @return  	The current %KeyboardMap instance
-	 * @endif
+         * @endif
 	 */
 	static KeyboardMap* GetInstance(void);
 
 public:
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Checks whether the specified key is a printing key (the key has one or more labels printed on the corresponding key).
 	 *
 	 * @brief		<i> [Deprecated] </i>
-	 * @deprecated	This class is deprecated because it is not supported by platform.
+	 * @deprecated	This class is deprecated because it is not supported by the platform.
 	 * @since		2.0
 	 *
 	 * @return      @c true if the specified key is a printing key, @n
 	 *				else @c false
 	 * @param[in]	keyCode     The key
-	 * @endif
+         * @endif
 	 */
 	bool IsPrintingKey(KeyCode keyCode) const;
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Checks whether the specified key is available on the current keyboard.
 	 *
 	 * @brief		<i> [Deprecated] </i>
-	 * @deprecated	This class is deprecated because it is not supported by platform.
+	 * @deprecated	This class is deprecated because it is not supported by the platform.
 	 * @since		2.0
 	 *
 	 * @return      @c true if the specified key is available on the current keyboard, @n
 	 *				else @c false
 	 * @param[in]	keyCode     The key
-	 * @endif
+         * @endif
 	 */
 	bool IsKeyAvailable(KeyCode keyCode) const;
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Gets the name of the keyboard type.
 	 *
 	 * @brief		<i> [Deprecated] </i>
-	 * @deprecated	This class is deprecated because it is not supported by platform.
+	 * @deprecated	This class is deprecated because it is not supported by the platform.
 	 * @since		2.0
 	 *
 	 * @return		The name of the keyboard type
@@ -218,23 +218,23 @@ public:
 	 * <tr> <td> QWERTY_11x4_KOREA	        </td> <td> Korean, English                  </td> </tr>
 	 * <tr> <td> QWERTY_11x4_NORTH-AMERICA	</td> <td> English                          </td> </tr>
 	 * </table>
-	 * @endif
-	 */
+         * @endif
+	*/
 	Tizen::Base::String GetKeyboardType(void) const;
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Gets the label of the specified key.
 	 *
 	 * @brief		<i> [Deprecated] </i>
-	 * @deprecated	This class is deprecated because it is not supported by platform.
+	 * @deprecated	This class is deprecated because it is not supported by the platform.
 	 * @since		2.0
 	 *
 	 * @return      The text of the label, @n
 	 *				else an empty string if the specified key is not a printing key or the secondary/tertiary character label is not defined
 	 * @param[in]	keyCode     The key
 	 * @param[in]	type        The keyboard key label type
-	 * @endif
+         * @endif
 	 */
 	Tizen::Base::String GetDisplayableLabel(KeyCode keyCode, KeyboardKeyLabelType type = KEYBOARD_KEY_LABEL_1) const;
 
@@ -244,7 +244,7 @@ protected:
 	 * This is the default constructor for this class.
 	 *
 	 * @brief		<i> [Deprecated] </i>
-	 * @deprecated	This class is deprecated because it is not supported by platform.
+	 * @deprecated	This class is deprecated because it is not supported by the platform.
 	 * @since		2.0
 	 * @endif
 	 */
@@ -255,7 +255,7 @@ protected:
 	 * Initializes this instance of %KeyboardMap.
 	 *
 	 * @brief		<i> [Deprecated] </i>
-	 * @deprecated	This class is deprecated because it is not supported by platform.
+	 * @deprecated	This class is deprecated because it is not supported by the platform.
 	 * @since		2.0
 	 *
 	 * @return		An error code

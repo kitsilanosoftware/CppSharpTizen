@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -57,7 +56,7 @@ template< class Type > class __LinkedListNodeT;
  *	void
  *	MyClass::LinkedListTSample(void)
  *	{
- *		LinkedListT<int> list;
+ *		LinkedListT< int > list;
  *
  *		int int1 = 1;
  *		int int2 = 2;
@@ -76,7 +75,7 @@ template< class Type > class __LinkedListNodeT;
  *
  *		list.InsertAt(int4, 1);	// 1,4,2,3
  *
- *		ComparerT<int>* pIntComparer = new ComparerT<int>();
+ *		ComparerT< int >* pIntComparer = new ComparerT<int>();
  *		list.Sort(*pIntComparer);	// 1,2,3,4
  *
  *		delete pIntComparer;
@@ -85,7 +84,7 @@ template< class Type > class __LinkedListNodeT;
  *		list.RemoveAt(0);	// 2,4
  *
  *		// Uses an enumerator to access elements in the list
- *		IEnumeratorT<int>* pEnum = list.GetEnumeratorN();;
+ *		IEnumeratorT< int >* pEnum = list.GetEnumeratorN();;
  *		while (pEnum->MoveNext() == E_SUCCESS)
  *		{
  *			pEnum->GetCurrent(temp);

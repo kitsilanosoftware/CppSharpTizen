@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -51,18 +51,18 @@ class _OSP_EXPORT_ CustomControlBase
 // Lifecycle
 public:
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * This destructor overrides Tizen::Base::Object::~Object().
 	 *
 	 * @brief		<i> [Deprecated] </i>
 	 * @deprecated  This class is deprecated. Instead of using this class, use the Container class.
 	 * @since   2.0
-	 * @endif
+         * @endif
 	 */
 	virtual ~CustomControlBase(void);
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Notifies that the bounds of the control is about to change.
 	 *
 	 * @brief		<i> [Deprecated] </i>
@@ -77,12 +77,12 @@ public:
 	 *              Provide control specific exceptions.
 	 * @see         Tizen::Ui::Control::SetBounds()
 	 * @see         Tizen::Ui::Control::SetSize()
-	 * @endif
+         * @endif
 	 */
 	virtual result PrepareBoundsChange(const Tizen::Graphics::Rectangle& oldRect, const Tizen::Graphics::Rectangle& newRect);
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Overrides this method to indicate that the specified @c width and @c height
 	 * can be supported or a new @c width and @c height must be applied instead
 	 * of the specified values.
@@ -95,24 +95,24 @@ public:
 	 *                  and @ height are supported
 	 * @param[in, out]  width   The width that needs to  evaluate
 	 * @param[in, out]  height  The height that needs to evaluate
-	 * @endif
+         * @endif
 	 */
 	virtual bool EvaluateSize(int& width, int& height);
 
 protected:
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * The object is not fully constructed after this constructor is called. For full construction, one of the %Construct() method must be called right after calling this constructor.
 	 *
 	 * @brief		<i> [Deprecated] </i>
 	 * @deprecated  This class is deprecated. Instead of using this class, use the Container class.
 	 * @since	2.0
-	 * @endif
+         * @endif
 	 */
 	CustomControlBase(void);
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Initializes this instance of %CustomControlBase.
 	 *
 	 * @brief		<i> [Deprecated] </i>
@@ -131,12 +131,12 @@ protected:
 	 * @remarks     This method must be called from the derived classes's construct methods.
 	 * @remarks     If the @c resizable is @c false, IsResizable() returns @c false.
 	 * @see	IsResizable()
-	 * @endif
+         * @endif
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, bool resizable = true, bool movable = true);
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Initializes this instance of %CustomControlBase with the specified layout and rectangular region.
 	 *
 	 * @brief		<i> [Deprecated] </i>
@@ -158,12 +158,12 @@ protected:
 	 * @see	IsResizable()
 	 * @see	Tizen::Ui::Layout
 	 * @see	Tizen::Ui::Container::GetLayoutN()
-	 * @endif
+         * @endif
 	 */
 	result Construct(const Tizen::Ui::Layout& layout, const Tizen::Graphics::Rectangle& rect, bool resizable = true, bool movable = true);
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Initializes this instance of %CustomControlBase with the specified layouts and rectangular region.
 	 *
 	 * @brief		<i> [Deprecated] </i>
@@ -187,30 +187,30 @@ protected:
 	 * @see	Tizen::Ui::Container::GetLayoutN()
 	 * @see	Tizen::Ui::Container::GetPortraitLayoutN()
 	 * @see	Tizen::Ui::Container::GetLandscapeLayoutN()
-	 * @endif
+         * @endif
 	 */
 	result Construct(const Tizen::Ui::Layout& portraitLayout, const Tizen::Ui::Layout& landscapeLayout, const Tizen::Graphics::Rectangle& rect, bool resizable = true, bool movable = true);
 
 private:
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
 	 *
 	 * @brief		<i> [Deprecated] </i>
 	 * @deprecated  This class is deprecated. Instead of using this class, use the Container class.
 	 * @since	2.0
-	 * @endif
+         * @endif
 	 */
 	CustomControlBase(const CustomControlBase& rhs);
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit copying of objects.
 	 *
 	 * @brief		<i> [Deprecated] </i>
 	 * @deprecated  This class is deprecated. Instead of using this class, use the Container class.
 	 * @since	2.0
-	 * @endif
+         * @endif
 	 */
 	CustomControlBase& operator =(const CustomControlBase& rhs);
 
@@ -245,4 +245,3 @@ protected:
 }} // Tizen::Ui
 
 #endif // _FUI_CUSTOM_CONTROL_BASE_H_
-

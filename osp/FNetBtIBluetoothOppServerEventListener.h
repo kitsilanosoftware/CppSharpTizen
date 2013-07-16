@@ -80,23 +80,21 @@ public:
 	/**
 	 * Called when the file transfer has finished.
 	 *
-	 * @since           2.0
+	 * @since       2.0
 	 *
-	 * @param[in]       fileName        The name of the file to transfer
-	 * @param[in]       fileSize        The size of the file to transfer
-	 * @param[in]       isCompleted     Set to @c true if the transfer is successfully completed, @n
-	 *                                  else @c false
-	 * @remarks         If the name of the received file already exists in the destination path, the received file is renamed
-	 *                  automatically and @c isCompleted is set to @c true. For renaming, the specified postfix is appended to
-	 *                  the original file name. The postfix consists of an underscore and three digit sequence numbers starting
-	 *                  from 001. For example, "MySong.mp3" may be changed to "MySong_001.mp3".
+	 * @param[in]   fileName        The name of the file to transfer @n
+	 *                              If the name of the received file already exists in the destination path, the
+	 *                              original file is overwritten and @c isCompleted is set to @c true.
+	 * @param[in]   fileSize        The size of the file to transfer
+	 * @param[in]   isCompleted     Set to @c true if the transfer is successfully completed, @n
+	 *                              else @c false
 	 */
 	virtual void OnOppTransferDone(const Tizen::Base::String& fileName, int fileSize, bool isCompleted) = 0;
 
 protected:
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
-	//
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	// This method is reserved and may change its name at any time without prior notice.
 	//
 	// @since 2.0

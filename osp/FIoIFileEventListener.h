@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -53,8 +52,8 @@ public:
 	* @param[in]	events		The file event type @n
 	*				Multiple event type can be combined using bitwise OR (see Tizen::Io::FileEventType). @n
 	*				Tizen::Io::FILE_EVENT_TYPE_ALL is provided for all file event type.
-	* @param[in]	path		The path to the directory or file that event is occurred
-	* @param[in]	eventId		The event id associating related events for single operation such as File::Move, Directory::Rename
+	* @param[in]	path		The path to the directory or file where the event has occurred
+	* @param[in]	eventId		The event ID associating related events for single operation such as File::Move(), Directory::Rename()
 	*/
 	virtual void OnFileEventOccured(const unsigned long events, const Tizen::Base::String& path, const unsigned int eventId) = 0;
 

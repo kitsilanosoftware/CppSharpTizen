@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -63,8 +62,8 @@
  * @remarks		@b Header @b %file: @b \#include @b <FApp.h> @n
  *				@b Library : @b osp-appfw
  *
- * The %App namespace contains the classes for application development, including application life-cycle management, usage of
- * functionality exported by other applications through AppControl, and access to application registry and resources. Tizen
+ * The %App namespace contains classes for application development, including application life-cycle management, usage of
+ * functionality exported by other applications through AppControl, and access to application registry and resources. %Tizen
  * also provides various macros for debugging purposes.
  * @n
  * For more information on the %App namespace features and the macros, see <a href="../org.tizen.native.appprogramming/html/guide/app/app_namespace.htm">App Guide</a> and <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/debugging_macros.htm">Debugging Macros</a>.

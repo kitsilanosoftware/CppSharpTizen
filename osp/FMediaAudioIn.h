@@ -161,12 +161,11 @@ class _OSP_EXPORT_ AudioIn
 {
 public:
 	/**
-	 *	The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 *	The object is not fully constructed after this constructor is called. @n
+	 *	For full construction, the Construct() method must be called right after calling this constructor.
 	 *
 	 *  @since		2.0
 	 *
-	 *	@remarks	After creating an instance of this class, the Construct() method must be called explicitly to initialize this instance.
-	 *	@see			Construct()
 	 */
 	AudioIn(void);
 
@@ -183,7 +182,7 @@ public:
 
 	/**
 	*	Initializes this instance of %AudioIn with the specified IAudioInEventListener. @n
-	*	This method creates an instance of %AudioIn in the subsystem.
+	*	The %Construct() method creates an instance of %AudioIn in the subsystem.
 	*
 	*   @since		2.0
 	*
@@ -191,6 +190,7 @@ public:
 	*	@param[in]	listener					An instance of IAudioInEventListener
 	*	@exception	E_SUCCESS					The method is successful.
 	*	@exception	E_DEVICE_BUSY				The device cannot be approached because of other operations.
+	*	@exception	E_UNSUPPORTED_OPERATION		This operation is not supported.
 	*	@exception	E_OUT_OF_MEMORY		The memory is insufficient. 
 	*	@exception	E_SYSTEM							A system error has occurred.
 	*	@remarks Only one instance of %AudioIn is operational at a given time.
@@ -202,7 +202,7 @@ public:
 	*	Prepares the specified audio input device with the application-defined settings. @n
 	*   When the caller finishes using the audio input device, the resources must be released by calling the Unprepare() method.
 	*
-	* @brief <i> [Deprecated]  </i>
+	* @brief <i> [Deprecated] </i>
 	* @deprecated   This method is deprecated because AudioInputDevice is no longer used in %AudioIn class. @n
 	*  Instead of using this method, use Prepare(AudioSampleType audioSampleType, AudioChannelType audioChannelType, int audioSampleRate).
 	*
@@ -212,13 +212,12 @@ public:
 	*	@param[in]	audioInputDevice						An audio input device
 	*	@param[in]	audioSampleType						The type of audio sample
 	*	@param[in]	audioChannelType						The audio channel type
-	*	@param[in]	audioSampleRate						The audio sample rate in hertz (Hz)
+	*	@param[in]	audioSampleRate						The audio sample rate in Hertz (Hz)
 	*	@exception	E_SUCCESS								The method is successful.
 	*	@exception	E_INVALID_STATE						This instance is in an invalid state for this method.
 	*	@exception	E_SYSTEM								A system error has occurred.
 	*	@exception	E_INVALID_ARG							A specified input parameter is invalid.
 	*	@exception	E_UNSUPPORTED_FORMAT			The specified audio sample type is not supported.
-	*	@see		Unprepare()
 	* @endif
 	*/
 	result Prepare(AudioInputDevice audioInputDevice, AudioSampleType audioSampleType, AudioChannelType audioChannelType, int audioSampleRate);
@@ -232,18 +231,17 @@ public:
 	*	@return		An error code
 	*	@param[in]	audioSampleType						The type of audio sample
 	*	@param[in]	audioChannelType						The audio channel type
-	*	@param[in]	audioSampleRate						The audio sample rate in hertz (Hz)
+	*	@param[in]	audioSampleRate						The audio sample rate in Hertz (Hz)
 	*	@exception	E_SUCCESS									The method is successful.
 	*  @exception  E_DEVICE_FAILED          				The device failed with unknown reason.
 	*	@exception	E_INVALID_ARG							A specified input parameter is invalid.
 	*	@exception	E_UNSUPPORTED_FORMAT			The specified audio sample type is not supported.
-	*	@see		Unprepare()
 	*/
 	result Prepare(AudioSampleType audioSampleType, AudioChannelType audioChannelType, int audioSampleRate);
 
 	/**
 	*	Stops the usage of the input device and releases the allocated resources during the execution of the Prepare() method. @n
-	*   Resources allocated during Prepare() are released.
+	*   Resources allocated during %Prepare() are released.
 	*
 	*   @since		2.0
 	*
@@ -251,7 +249,6 @@ public:
 	*	@exception	E_SUCCESS						The method is successful.
 	*	@exception	E_INVALID_STATE		This instance is in an invalid state for this method.
 	*	@exception	E_SYSTEM							A system error has occurred.
-	*	@see		Prepare()
 	*/
 	result Unprepare(void);
 
@@ -270,7 +267,8 @@ public:
 	*	@exception	E_SYSTEM										A system error has occurred.
 	*	@exception	E_OUT_OF_MEMORY					The memory is insufficient.
 	*	@remarks	The data size of @c pByteBuffer must be the same as every call of this method.
-	*	@see		Start(), IAudioInEventListener::OnAudioInBufferIsFilled()
+	*	@see		Start()
+	*	@see		IAudioInEventListener::OnAudioInBufferIsFilled()
 	*/
 	result AddBuffer(const Tizen::Base::ByteBuffer* pByteBuffer);
 
@@ -285,14 +283,15 @@ public:
 	*	@exception	E_DEVICE_BUSY					The device cannot be approached because of other operations.
 	*	@exception	E_SYSTEM								A system error has occurred.
 	*	@remarks	Several buffers must be added to the queue with AddBuffer() before calling this method.
-	*	@see		Stop(), IAudioInEventListener::OnAudioInBufferIsFilled()
+	*	@see		Stop()
+    *   @see	    IAudioInEventListener::OnAudioInBufferIsFilled()
 	*/
 	result Start(void);
 
 	/**
 	*	Stops using the audio input device. @n
 	*	All pending and current buffers that are filled with audio data
-	*   at the time of calling this method, are returned to the listener.
+	*   at the time of calling the %Stop() method, are returned to the listener.
 	*	Use Start() to start capturing audio input data again.
 	*
 	*   @since		2.0
@@ -301,14 +300,14 @@ public:
 	*	@exception	E_SUCCESS						The method is successful.
 	*	@exception	E_INVALID_STATE		This instance is in an invalid state for this method.
 	*	@exception	E_SYSTEM							A system error has occurred.
-	*	@see		Start(), IAudioInEventListener::OnAudioInBufferIsFilled()
+	*   @see	    IAudioInEventListener::OnAudioInBufferIsFilled()
 	*/
 	result Stop(void);
 
 	/**
 	*	Resets using the audio input device without returning buffers to the caller. @n
 	*	All pending and current buffers are released immediately without any notifications.
-	*	The state is changed to AUDIOIN_STATE_PREPARED.
+	*	The state is changed to ::AUDIOIN_STATE_PREPARED.
 	*
 	*   @since		2.0
 	*
@@ -342,8 +341,9 @@ public:
 	*	@exception	E_SUCCESS						The method is successful.
 	*	@exception	E_INVALID_STATE		This instance is in an invalid state for this method.
 	*	@exception	E_SYSTEM							A system error has occurred.
-	*	@remarks	The return value is available after calling the Prepare() method.
-	*	@remarks	The specific error code can be accessed using the GetLastResult() method.
+	*	@remarks	
+	*				- The return value is available after calling the Prepare() method.
+	*				- The specific error code can be accessed using the GetLastResult() method.
 	*/
 	int GetMaxBufferSize(void) const;
 
@@ -353,13 +353,14 @@ public:
 	*
 	*   @since		2.0
 	*
-	*	@return			The minimum size of the buffer in bytes,	@n
+	*	@return			The minimum size of the buffer in bytes, @n
 	*				else @c -1 if an error occurs
 	*	@exception	E_SUCCESS						The method is successful.
 	*	@exception	E_INVALID_STATE		This instance is in an invalid state for this method.
 	*	@exception	E_SYSTEM							A system error has occurred.
-	*	@remarks	The return value is available after calling the Prepare() method.
-	*	@remarks	The specific error code can be accessed using the GetLastResult() method.
+	*	@remarks	
+	*				- The return value is available after calling the Prepare() method.
+	*				- The specific error code can be accessed using the GetLastResult() method.
 	*/
 	int GetMinBufferSize(void) const;
 
@@ -392,7 +393,7 @@ public:
 	*
 	*   @since		2.0
 	*
-	*	@return		The sample rate in hertz (Hz)
+	*	@return		The sample rate in Hertz (Hz)
 	*	@exception	E_SUCCESS						The method is successful.
 	*	@exception	E_SYSTEM							A system error has occurred.
 	*	@remarks	The specific error code can be accessed using the GetLastResult() method.

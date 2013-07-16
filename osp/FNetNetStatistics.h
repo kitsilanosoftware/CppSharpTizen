@@ -35,13 +35,13 @@ class _NetStatisticsImpl;
 
 /**
  * @class	NetStatistics
- * @brief	This class represents the statistical information on the Packet-Switched (PS) data call.
+ * @brief	This class represents the statistical information of the data network.
  *
  * @since	2.0
  *
  * @remarks	The %NetStatistics class cannot be tested on the emulator.
  *
- * The %NetStatistics class provides methods for getting the statistical information on the Packet-Switched (PS) data call.
+ * The %NetStatistics class provides methods for getting the statistical information of the data network.
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/net/network_statistics.htm">Network Statistics</a>.
  */
@@ -50,7 +50,8 @@ class _OSP_EXPORT_ NetStatistics
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the Construct() method must be called right after calling this constructor.
 	 *
 	 * @since		2.0
 	 *
@@ -81,18 +82,28 @@ public:
 	 * Gets the statistical information. @n
 	 * This can consist of details such as the call duration, the sent and received size, and so on.
 	 *
-	 * @since			2.0
-	 * @privilege		%http://tizen.org/privilege/network.statistics.read
+	 * @since		2.0
 	 *
-	 * @return			The number of bytes sent or received, @n
-	 *					else @c INVALID_HANDLE if an error occurs
-	 * @param[in]		bearerType			The bearer type of the data call operation @n
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/network.statistics @n
+	 * 				(%http://tizen.org/privilege/network.statistics.read is deprecated.)
+	 * @feature		%http://tizen.org/feature/network.wifi for the NET_BEARER_WIFI value and @n
+	 * 				%http://tizen.org/feature/network.telephony for the NET_BEARER_PS value of @c bearerType
+	 *
+	 * @return		The number of bytes sent or received, @n
+	 *				else @c INVALID_HANDLE if an error occurs
+	 * @param[in]	bearerType			The bearer type of the data call operation @n
 	 *										NET_BEARER_WIFI_DIRECT and NET_BEARER_USB are not supported.
-	 * @param[in]		netStatType			The type of statistical information to get
-	 * @exception		E_SUCCESS			The method is successful.
-	 * @exception		E_INVALID_ARG		A specified input parameter is invalid.
-	 * @exception		E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-	 * @remarks			The specific error code can be accessed using the GetLastResult() method.
+	 * @param[in]	netStatType			The type of statistical information to get
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
+	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_UNSUPPORTED_OPERATION	The target device does not support the required feature. @b Since: @b 2.1
+	 * 					For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+	 * @remarks
+	 * 				- The specific error code can be accessed using the GetLastResult() method.
+	 * 				- Before calling this method, check whether the feature is supported by 
+	 *				Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	 */
 	long long GetNetStatisticsInfo(NetBearerType bearerType, NetStatisticsInfoType netStatType) const;
 
@@ -100,7 +111,11 @@ public:
 	 * Resets the specified statistical information on the network according to the operation mode.
 	 *
 	 * @since		2.0
-	 * @privilege	%http://tizen.org/privilege/network.statistics.write
+	 *
+	 * @privlevel	platform
+	 * @privilege	%http://tizen.org/privilege/netstatisticsmanager
+	 * @feature		%http://tizen.org/feature/network.wifi for the NET_BEARER_WIFI value and @n
+	 * 				%http://tizen.org/feature/network.telephony for the NET_BEARER_PS value of @c bearerType
 	 *
 	 * @return		An error code
 	 * @param[in]	bearerType			The bearer type (OperationMode) whose statistical information is reset @n NET_BEARER_WIFI_DIRECT and NET_BEARER_USB are not supported.
@@ -109,7 +124,12 @@ public:
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
 	 * @exception	E_SYSTEM			An internal error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-	 * @remarks		This method must use warning pop-up for user notification.
+	 * @exception	E_UNSUPPORTED_OPERATION	The target device does not support the required feature. @b Since: @b 2.1
+	 * 					For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+	 * @remarks
+	 * 				- This method must use warning pop-up for user notification.
+	 * 				- Before calling this method, check whether the feature is supported by 
+	 *				Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	 * @see			GetNetStatisticsInfo()
 	 */
 	result Reset(NetBearerType bearerType, NetStatisticsInfoType netStatType);
@@ -118,7 +138,11 @@ public:
 	 * Resets all the specified statistical information on the network according to the operation mode.
 	 *
 	 * @since		2.0
-	 * @privilege	%http://tizen.org/privilege/network.statistics.write
+	 *
+	 * @privlevel	platform
+	 * @privilege	%http://tizen.org/privilege/netstatisticsmanager
+	 * @feature		%http://tizen.org/feature/network.wifi for the NET_BEARER_WIFI value and @n
+	 * 				%http://tizen.org/feature/network.telephony for the NET_BEARER_PS value of @c bearerType
 	 *
 	 * @return		An error code
 	 * @param[in]	bearerType			The bearer type (OperationMode) whose statistical information would be reset @n NET_BEARER_WIFI_DIRECT and NET_BEARER_USB are not supported.
@@ -126,8 +150,12 @@ public:
 	 * @exception	E_INVALID_ARG		The specified input parameter is invalid.
 	 * @exception	E_SYSTEM			An internal error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-	 *
-	 * @remarks		This method must use warning pop-up for user notification.
+	 * @exception	E_UNSUPPORTED_OPERATION	The target device does not support the required feature. @b Since: @b 2.1
+	 * 					For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+	 * @remarks
+	 * 				- This method must use warning pop-up for user notification.
+	 * 				- Before calling this method, check whether the feature is supported by 
+	 *				Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	 * @see			GetNetStatisticsInfo()
 	 */
 	result ResetAll(NetBearerType bearerType);

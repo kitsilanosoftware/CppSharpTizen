@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -16,12 +15,6 @@
 //
 
 /**
- * @if OSPCOMPAT
- * @file	FSysBattery.h
- * @brief	This is the header file for the %Battery class.
- *
- * This header file contains the declarations of the %Battery class.
- * @endif
  */
 
 #ifndef _FSYS_BATTERY_H_
@@ -34,23 +27,6 @@ namespace Tizen { namespace System
 {
 
 /**
- * @if OSPCOMPAT
- * @if OSPDEPREC
- * @class	Battery
- * @brief	<i>[Deprecated]</i> This class provides methods to get information related to the battery charge.
- *
- * @since	2.0
- *
- * @deprecated	This class is deprecated. Instead of using this class, use the PowerManager class.
- * @final	This class is not intended for extension.
- *
- * The %Battery class provides methods to get the status related to battery levels and
- * determine whether the battery is currently being charged.
- * You cannot create an instance of this class directly.
- *
- * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/system/battery_status.htm">Battery Status</a>.
- * @endif
- * @endif
  */
 class _OSP_EXPORT_ Battery
 	: public Tizen::Base::Object
@@ -68,7 +44,7 @@ public:
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_INVALID_STATE	The battery service is not available.
 	 * @exception   E_SYSTEM	The method cannot proceed due to a severe system error.
-	 * @remarks The resolution of the level is 1% since 2.0. The range of the level is 0(Minimum) to 100(Maximum).
+	 * @remarks The resolution of the level is @c 1% since 2.0. The range of the level is @c 0 (Minimum) to @c 100 (Maximum).
 	 */
 	static result GetCurrentLevelInPercentage(int& level);
 

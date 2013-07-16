@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -32,6 +31,66 @@
 namespace Tizen { namespace App
 {
 
+/**
+ * @interface	IActiveAppEventListener
+ * @brief		This interface is the listener interface for receiving the AppId of active application.
+ *
+ * @since	2.0
+ *
+ *
+ * The %IActiveAppEventListener interface is the listener interface for receiving the active application change events.
+ * The class that processes an active application change event implements this interface and registers using
+ * the AppManager::AddActiveAppEventListener() method.
+ *
+ */
+class _OSP_EXPORT_ IActiveAppEventListener
+	: virtual public Tizen::Base::Runtime::IEventListener
+{
+public:
+	/**
+	 * This polymorphic destructor should be overridden if required. This way,
+	 * the destructors of the derived classes are called when the destructor of this interface is called.
+	 *
+	 * @since	2.0
+	 *
+	 */
+	virtual ~IActiveAppEventListener(void) {}
+
+	/**
+	 * Called when the active application is changed.
+	 *
+	 * @since	2.0
+	 *
+	 * @param[in]	appId		The AppId of the active application
+	 */
+	virtual void OnActiveAppChanged(const AppId& appId) = 0;
+
+protected:
+	//
+	// This method is for internal use only. Using this method can cause behavioral,
+	// security-related, and consistency-related issues in the application.
+	//
+	// @since	2.0
+	//
+	virtual void IActiveAppEventListener_Reserved1(void) {}
+
+	//
+	// This method is for internal use only. Using this method can cause behavioral,
+	// security-related, and consistency-related issues in the application.
+	//
+	// @since	2.0
+	//
+	virtual void IActiveAppEventListener_Reserved2(void) {}
+
+	//
+	// This method is for internal use only. Using this method can cause behavioral,
+	// security-related, and consistency-related issues in the application.
+	//
+	// @since	2.0
+	//
+	virtual void IActiveAppEventListener_Reserved3(void) {}
+
+}; // IActiveAppEventListener
 } } // Tizen::App
 
 #endif // _FAPP_IACTIVE_APP_EVENT_LISTENER_H_

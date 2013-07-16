@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -64,7 +63,7 @@ class IMessagePortListener;
 *		: public Tizen::Io::IMessagePortListener
 * {
 * public:
-*	result Initialize(void);
+*	void Initialize(void);
 *	virtual void OnMessageReceivedN(RemoteMessagePort* pRemoteMessagePort, IMap* pMessage);
 *	IMap* GetOnlineFriends(void);
 *
@@ -80,9 +79,9 @@ class IMessagePortListener;
 * }
 *
 * void
-* MyAppClass::OnMessageReceivedN(RemoteMessagePort* pRemoteMessagePort, IMap* pMessage);
+* MyAppClass::OnMessageReceivedN(RemoteMessagePort* pRemoteMessagePort, IMap* pMessage)
 * {
-*	String* pValue = pMessage->GetValue(L"Request");
+*   String* pValue = static_cast<String*> (pMessage->GetValue(String(L"Request")));
 *
 *	if (*pValue == L"Friend")
 *	{

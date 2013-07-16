@@ -2,46 +2,48 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
+
 /**
- * @file			FUiCtrlTimePicker.h
- * @brief	This is the header file for the %TimePicker class.
- *
- * This header file contains the declarations of the %TimePicker class.
- */
+* @file			FUiCtrlTimePicker.h
+* @brief	This is the header file for the %TimePicker class.
+*
+* This header file contains the declarations of the %TimePicker class.
+*/
 #ifndef _FUI_CTRL_TIME_PICKER_H_
 #define _FUI_CTRL_TIME_PICKER_H_
 
 #include <FUiWindow.h>
 #include <FUiITimeChangeEventListener.h>
 
-namespace Tizen { namespace Ui { namespace  Controls
+namespace Tizen { namespace Ui { namespace Controls
 {
 
 /**
- * @class	TimePicker
- * @brief	This class displays a %TimePicker control on top of the screen.
- *
- * @since	2.0
- *
- * The %TimePicker class displays a full screen window-based selector that allows the user to select a certain time.
- *
- * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_datepicker.htm">DatePicker, TimePicker, and DateTimeimePicker</a>.
- *
- * The following example demonstrates how to use the %TimePicker class.
- *
- * @code
+* @class	TimePicker
+* @brief	This class displays a %TimePicker control on top of the screen.
+*
+* @since	2.0
+*
+* The %TimePicker class displays a full screen window-based selector that allows the user to select a certain time.
+*
+* For more information on the class features, see
+* <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_datepicker.htm">DatePicker, TimePicker, and DateTimeimePicker</a>.
+*
+* The following example demonstrates how to use the %TimePicker class.
+*
+* @code
 // Sample Code for TimePickerSample.h
 #include <FUi.h>
 
@@ -94,20 +96,20 @@ TimePickerSample::OnInitializing(void)
 {
 	result r = E_SUCCESS;
 
-	// Createa an instance of Button
+	// Creates an instance of Button
 	Button* pButton = new Button();
 	pButton->Construct(Rectangle(50, 50, 300, 200), L"Show TimePicker");
 	pButton->SetActionId(ID_BUTTON);
 	pButton->AddActionEventListener(*this);
 
-	// Adda a Button to the Form
-	AddControl(*pButton);
+	// Adds a Button to the Form
+	AddControl(pButton);
 
-	// Creates an instanceo of TimePicker
+	// Creates an instance of TimePicker
 	__pTimePicker = new TimePicker();
 	__pTimePicker->Construct();
 
-	// Adds an instanceo of ITimeChangeEventListener
+	// Adds an instance of ITimeChangeEventListener
 	__pTimePicker->AddTimeChangeEventListener(*this);
 
 	// Show TimePicker after it's owner Form is shown.
@@ -139,7 +141,7 @@ TimePickerSample::OnTerminating(void)
 	result r = E_SUCCESS;
 
 	// Deallocates the time picker
-	delete __pTimePicker;
+	__pTimePicker->Destroy();
 
 	return r;
 }
@@ -172,21 +174,23 @@ TimePickerSample::OnTimeChangeCanceled(const Control& source)
 {
 	// Todo:
 }
- * @endcode
- */
+* @endcode
+**/
 class _OSP_EXPORT_ TimePicker
 	: public Tizen::Ui::Window
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the TimePicker::Construct() method must be called right after calling this constructor.
 	 *
 	 * @since	2.0
 	 */
 	TimePicker(void);
 
 	/**
-	 *	This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required.@n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @since	2.0
 	 */
@@ -197,7 +201,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The listener to be added
+	 * @param[in]	listener	The listener to add
 	 * @see			ITimeChangeEventListener::OnTimeChanged()
 	 * @see			ITimeChangeEventListener::OnTimeChangeCanceled()
 	 * @see			RemoveTimeChangeEventListener()
@@ -210,7 +214,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener    The listener to be removed
+	 * @param[in]	listener    The listener to remove
 	 * @see			AddTimeChangeEventListener()
 	 */
 	void RemoveTimeChangeEventListener(Tizen::Ui::ITimeChangeEventListener& listener);
@@ -224,6 +228,10 @@ public:
 	 * @param[in]	title               The title
 	 * @exception	E_SUCCESS           The method is successful.
 	 * @exception	E_SYSTEM		    A system error has occurred.
+	 * @remarks		The default owner will be the current Form (or Frame). It is possible that this control may not be visible
+	 * due to this ownership relationship. @n In this case, use the SetOwner() method to change the ownership to the top-most window. @n
+	 * The optimal size of the control is defined in
+	 * <a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 */
 	result Construct(const Tizen::Base::String& title = L"");
 
@@ -299,7 +307,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	time	The time to be set
+	 * @param[in]	time	The time to set
 	 */
 	void SetTime(const Tizen::Base::DateTime& time);
 

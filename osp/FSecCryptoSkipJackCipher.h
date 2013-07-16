@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -160,7 +159,7 @@ public:
 	virtual Tizen::Base::ByteBuffer* DecryptN(const Tizen::Base::ByteBuffer& input);
 
 	/**
-	 * Initializes the multiple-part encryption or decryption operation.
+	 * Initializes a multiple-part encryption or decryption operation.
 	 *
 	 * @since		2.0
 	 *

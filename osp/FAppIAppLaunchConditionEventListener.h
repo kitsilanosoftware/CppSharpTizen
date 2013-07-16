@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -41,7 +40,7 @@ namespace Tizen { namespace App
 *
 * The %IAppLaunchConditionEventListener interface defines a listener for the AppLaunchCondition events.
 * @n
-* For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/app/launching_other_apps_within_apps.htm">Launching Other Applications</a>, <a href="../org.tizen.native.appprogramming/html/guide/app/registering_launch_condition.htm">Registering a Launch Condition</a>.
+* For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/app/launching_other_apps_within_apps.htm">Launching Other Applications</a> and <a href="../org.tizen.native.appprogramming/html/guide/app/registering_launch_condition.htm">Registering a Launch Condition</a>.
 */
 class _OSP_EXPORT_ IAppLaunchConditionEventListener
 	: virtual public Tizen::Base::Runtime::IEventListener

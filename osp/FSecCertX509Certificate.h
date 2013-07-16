@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -169,7 +168,7 @@ public:
 	/**
 	 * Gets the specification version value (version number) from the certificate. @n
 	 *
-	 * The ASN.1 definition for this is as follows:
+	 * This is defined in ASN.1 as demonstrated in the following code:
 	 *
 	 * @code
 	 * version  [0] EXPLICIT Version DEFAULT v1
@@ -187,7 +186,7 @@ public:
 	 * The serial number is an integer assigned by the Certification Authority (CA) to each certificate. It is unique for each certificate issued by a given
 	 * CA (that is, the issuer name and serial number must identify a unique certificate). @n
 	 *
-	 * The ASN.1 definition for this is as follows:
+	 * This is defined in ASN.1 as demonstrated in the following code:
 	 *
 	 * @code
 	 * serialNumber     CertificateSerialNumber
@@ -211,7 +210,7 @@ public:
 	 * It is valid if the current date and time are within the validity period given in the certificate. The validity period consists of two date and time
 	 * values: the initial date and time, and the final date and time until the validity of the certificate. @n
 	 *
-	 * It is defined in ASN.1 as:
+	 * This is defined in ASN.1 as demonstrated in the following code:
 	 *
 	 *  @code
 	 *	validity             Validity
@@ -300,7 +299,7 @@ public:
 	 * Gets the signature algorithm identifier from the given certificate. @n
 	 * For example, the string "SHA-1/DSA". @n
 	 *
-	 * The ASN.1 definition for this is as follows:
+	 * This is defined in ASN.1 as demonstrated in the following code:
 	 *
 	 *  @code
 	 *	signatureAlgorithm   AlgorithmIdentifier

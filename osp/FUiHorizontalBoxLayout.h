@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -94,24 +94,24 @@ HorizontalBoxLayoutSample::OnInitializing(void)
 		pLabel1->Construct(Rectangle(0,0,GetClientAreaBounds().width/4,100), L"TOP");
 		pLabel1->SetTextConfig(20, LABEL_TEXT_STYLE_NORMAL);
 		pLabel1->SetBackgroundColor(Color(0x00, 0x10, 0x80, 0xFF));
-		pTopPanel->AddControl(*pLabel1);
+		pTopPanel->AddControl(pLabel1);
 
 		Label* pLabel2 = new Label();
 		pLabel2->Construct(Rectangle(0,0,GetClientAreaBounds().width/4,100), L"MIDDLE");
 		pLabel2->SetTextConfig(20, LABEL_TEXT_STYLE_NORMAL);
 		pLabel2->SetBackgroundColor(Color(0x00, 0x20, 0xA0, 0xFF));
-		pTopPanel->AddControl(*pLabel2);
+		pTopPanel->AddControl(pLabel2);
 
 		Label* pLabel3 = new Label();
 		pLabel3->Construct(Rectangle(0,0,GetClientAreaBounds().width/4,100), L"BOTTOM");
 		pLabel3->SetTextConfig(20, LABEL_TEXT_STYLE_NORMAL);
 		pLabel3->SetBackgroundColor(Color(0x00, 0x30, 0xC0, 0xFF));
-		pTopPanel->AddControl(*pLabel3);
+		pTopPanel->AddControl(pLabel3);
 
 		Button* pButton = new Button();
 		pButton->Construct(Rectangle(0,0,GetClientAreaBounds().width/4 - 10,100), L"FIT\nTO\nPARENT");
 		pButton->SetTextSize(20);
-		pTopPanel->AddControl(*pButton);
+		pTopPanel->AddControl(pButton);
 
 		// Sets relations each label and button
 		topPanelLayout.SetVerticalAlignment(*pLabel1, LAYOUT_VERTICAL_ALIGN_TOP);
@@ -121,7 +121,7 @@ HorizontalBoxLayoutSample::OnInitializing(void)
 		topPanelLayout.SetVerticalFitPolicy(*pButton, FIT_POLICY_PARENT);
 	}
 	// Adds the top panel to the form
-	AddControl(*pTopPanel);
+	AddControl(pTopPanel);
 
 	// Creates an instance of HorizontalBoxLayout for bottom panel
 	HorizontalBoxLayout bottomPanelLayout;
@@ -135,17 +135,17 @@ HorizontalBoxLayoutSample::OnInitializing(void)
 		Label* pLabel1 = new Label();
 		pLabel1->Construct(Rectangle(0,0,30,100), L"W\n1.0f");
 		pLabel1->SetBackgroundColor(Color(0x00, 0x10, 0x80, 0xFF));
-		pBottomPanel->AddControl(*pLabel1);
+		pBottomPanel->AddControl(pLabel1);
 
 		Label* pLabel2 = new Label();
 		pLabel2->Construct(Rectangle(0,0,30,100), L"W\n2.0f");
 		pLabel2->SetBackgroundColor(Color(0x00, 0x20, 0xA0, 0xFF));
-		pBottomPanel->AddControl(*pLabel2);
+		pBottomPanel->AddControl(pLabel2);
 
 		Label* pLabel3 = new Label();
 		pLabel3->Construct(Rectangle(0,0,30,100), L"W\n3.0f");
 		pLabel3->SetBackgroundColor(Color(0x00, 0x30, 0xC0, 0xFF));
-		pBottomPanel->AddControl(*pLabel3);
+		pBottomPanel->AddControl(pLabel3);
 
 		// Sets relations each label
 		bottomPanelLayout.SetVerticalFitPolicy(*pLabel1, FIT_POLICY_PARENT);
@@ -157,7 +157,7 @@ HorizontalBoxLayoutSample::OnInitializing(void)
 	}
 
 	// Adds the bottom panel to the form
-	AddControl(*pBottomPanel);
+	AddControl(pBottomPanel);
 
 	//Gets the layout of the form
 	VerticalBoxLayout* pFormLayout = dynamic_cast<VerticalBoxLayout*>(this->GetLayoutN());
@@ -257,6 +257,21 @@ public:
 	result SetSpacing(Control& childControl, int space);
 
 	/**
+	 * Sets the space between the specified control and its predecessor.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	childControl	The control for which the space is set
+	 * @param[in]	space			The space
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_INVALID_ARG   The specified @c childControl parameter is not a child of the container that owns the layout.
+	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @remarks		By default, the spacing is set to @c 0.
+	 */
+	result SetSpacing(Control& childControl, float space);
+
+	/**
 	 * Sets the vertical margins of the specified control.
 	 *
 	 * @since		2.0
@@ -273,6 +288,22 @@ public:
 	result SetVerticalMargin(Control& childControl, int top, int bottom);
 
 	/**
+	 * Sets the vertical margins of the specified control.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	childControl	The control for which the margins are set
+	 * @param[in]	top				The top margin
+	 * @param[in]	bottom			The bottom margin
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_INVALID_ARG   The specified @c childControl parameter is not a child of the container that owns the layout.
+	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @remarks		By default, the margins are set to @c 0.
+	 */
+	result SetVerticalMargin(Control& childControl, float top, float bottom);
+
+	/**
 	 * Sets the width of the specified control with the fixed length.
 	 *
 	 * @since		2.0
@@ -285,6 +316,20 @@ public:
 	 * @exception	E_SYSTEM		A system error has occurred.
 	 */
 	result SetWidth(Control& childControl, int width);
+
+	/*
+	 * Sets the width of the specified control with the fixed length.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	childControl	The control for which the width is set
+	 * @param[in]	width		    The value of the width
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_INVALID_ARG   The specified @c childControl parameter is not a child of the container that owns the layout.
+	 * @exception	E_SYSTEM		A system error has occurred.
+	 */
+	result SetWidth(Control& childControl, float width);
 
 	/**
 	 * Sets the width of the specified control with the fitting policy.
@@ -314,6 +359,20 @@ public:
 	 * @exception	E_SYSTEM		A system error has occurred.
 	 */
 	result SetHeight(Control& childControl, int height);
+
+	/**
+	 * Sets the height of the specified control with a fixed length.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	childControl	The control for which the height is set
+	 * @param[in]	height			The value of the height
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_INVALID_ARG   The specified @c childControl parameter is not a child of the container that owns the layout.
+	 * @exception	E_SYSTEM		A system error has occurred.
+	 */
+	result SetHeight(Control& childControl, float height);
 
 	/**
 	 * Sets the height of the specified control with the fitting policy.

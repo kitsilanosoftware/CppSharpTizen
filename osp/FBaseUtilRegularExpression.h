@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -373,7 +372,7 @@ public:
 	 * @return		@c true if the specified instance is equal to the current instance, @n
 	 *				else @c false
 	 * @param[in]	obj	The object to compare with the current instance
-	 * @remarks 	The method returns @c true if all the attributes in the instance are the same.
+	 * @remarks 	This method returns @c true if all the attributes in the instance are the same.
 	 */
 	virtual bool Equals(const Tizen::Base::Object& obj) const;
 

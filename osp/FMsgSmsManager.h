@@ -26,13 +26,13 @@
 
 // Includes
 #include <FMsgISmsListener.h>
-
+#include <FMsgISmsEventListener.h>
 #include <FMsgISmsMessageEventListener.h>
-
-
+#include <FMsgICbsMessageEventListener.h>
+#include <FMsgIEtwsPrimaryNotificationEventListener.h>
 #include <FMsgSmsMessage.h>
-
-
+#include <FMsgCbsMessage.h>
+#include <FMsgCbsChannel.h>
 #include <FMsgRecipientList.h>
 
 namespace Tizen { namespace Messaging
@@ -55,7 +55,7 @@ namespace Tizen { namespace Messaging
 	*
 	* @code
 	*
-	// Creates a listener to override the OnSmsMessageSent() function of ISmsListener
+	// Creates a listener to override the OnSmsMessageSent() method of ISmsListener
 	// in order to be notified of a change in the state of the message being sent.
 
 	class SmsListener
@@ -138,10 +138,15 @@ namespace Tizen { namespace Messaging
 		*
 		* @since		2.0
 		*
+		* @feature		%http://tizen.org/feature/network.telephony
 		* @return		An error code
-		* @param[in]	listener			The listener to receive a send result asynchronously
-		* @exception 	E_SUCCESS			The method is successful.
-		* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
+		* @param[in]	listener				The listener to receive a send result asynchronously
+		* @exception 	E_SUCCESS				The method is successful.
+		* @exception	E_OUT_OF_MEMORY			The memory is insufficient.
+		* @exception  	E_UNSUPPORTED_OPERATION	The Emulator or target device does not support the required feature. @b Since: @b 2.1
+		* 										For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+		* @remarks    	Before calling this method, check whether the feature is supported by 
+		*				Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 		*/
 		result Construct(ISmsListener& listener);
 
@@ -149,8 +154,54 @@ namespace Tizen { namespace Messaging
 		* Adds the event listener for receiving SMS messages.
 		*
 		* @since		2.0
+		* @privlevel	partner
+		* @privilege	%http://tizen.org/privilege/smstrigger
 		*
-		* @privilege	%http://tizen.org/privilege/messaging.sms
+		* @return		An error code
+		* @param[in]	port					A port number
+		* @param[in]	eventListener			The listener to receive SMS messages
+		* @exception 	E_SUCCESS				The method is successful.
+		* @exception	E_OUT_OF_MEMORY			The memory is insufficient.
+		* @exception	E_OBJ_ALREADY_EXIST		The specified port number is already registered. @n
+		* 										The listener is already exists.
+		* @exception	E_FAILURE				The specified port number is already used in other applications.
+		* @exception	E_INVALID_ARG			The specified @c port is invalid. @n
+		* 										The port number must range from @c 1 to @c 9999 (1 <= port <= 9999).
+		* @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+		* @see			ISmsEventListener
+        * @see  		RemoveSmsEventListener()
+		*/
+		result AddSmsEventListener(int port, ISmsEventListener& eventListener);
+
+		/**
+		* Removes the event listener for receiving SMS messages.
+		*
+		* @since		2.0
+		* @privlevel	partner
+		* @privilege	%http://tizen.org/privilege/smstrigger
+		*
+		* @return		An error code
+		* @param[in]	port					A port number
+		* @param[in]	eventListener			The listener to receive SMS messages
+		* @exception 	E_SUCCESS				The method is successful.
+		* @exception	E_OUT_OF_MEMORY			The memory is insufficient.
+		* @exception	E_OBJ_NOT_FOUND			The listener is not found.
+		* @exception	E_SYSTEM				A system error has occurred.
+		* @exception	E_INVALID_ARG			The specified @c port is invalid. @n
+		* 										The port number must range from @c 1 to @c 9999 (1 <= port <= 9999).
+		* @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+		* @see			ISmsEventListener
+        * @see  		AddSmsEventListener()
+		*/
+		result RemoveSmsEventListener(int port, ISmsEventListener& eventListener);
+
+		/**
+		* Adds the event listener for receiving SMS messages.
+		*
+		* @since		2.0
+		* @privlevel	public
+		* @privilege	%http://tizen.org/privilege/messaging.read @n
+		* 				(%http://tizen.org/privilege/messaging.sms is deprecated.)
 		*
 		* @return		An error code
 		* @param[in]	eventListener			The listener to receive SMS messages
@@ -158,6 +209,7 @@ namespace Tizen { namespace Messaging
 		* @exception	E_OUT_OF_MEMORY			The memory is insufficient.
 		* @exception	E_OBJ_ALREADY_EXIST		The listener already exists.
 		* @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+		* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 		* @see			ISmsMessageEventListener
         * @see  		RemoveSmsMessageEventListener()
 		*/
@@ -167,8 +219,9 @@ namespace Tizen { namespace Messaging
 		* Removes the event listener for receiving SMS messages.
 		*
 		* @since		2.0
-		*
-		* @privilege	%http://tizen.org/privilege/messaging.sms
+		* @privlevel	public
+		* @privilege	%http://tizen.org/privilege/messaging.read @n
+		* 				(%http://tizen.org/privilege/messaging.sms is deprecated.)
 		*
 		* @return		An error code
 		* @param[in]	eventListener			The listener to receive SMS messages
@@ -177,6 +230,7 @@ namespace Tizen { namespace Messaging
 		* @exception	E_OBJ_NOT_FOUND			The listener is not found.
 		* @exception	E_SYSTEM				A system error has occurred.
 		* @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+		* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 		* @see			ISmsMessageEventListener
         * @see			AddSmsMessageEventListener()
 		*/
@@ -186,11 +240,11 @@ namespace Tizen { namespace Messaging
 		* Sends the SMS message.
 		*
 		* @since		2.0
-		*
-		* @privilege	%http://tizen.org/privilege/messaging.sms
+		* @privlevel	public
+		* @privilege	%http://tizen.org/privilege/messaging.write
 		*
 		* @return		An error code
-		* @param[in]	message					The message to be sent
+		* @param[in]	message					The message to send
 		* @param[in]	recipientList			The list of recipients
 		* @param[in]	saveToSentbox			Set to @c true to save the message in the Sentbox, @n
 		*										else @c false
@@ -204,6 +258,7 @@ namespace Tizen { namespace Messaging
 		* @exception	E_INVALID_ARG			The number of recipients is @c 0.
 		* @exception	E_MAX_EXCEEDED			The number of recipients has crossed the maximum limit (Maximum 10).
 		* @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+		* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 		* @remarks		The CC and BCC recipients in the @c recipientList are ignored when sending an SMS message.
 		* @see			ISmsListener::OnSmsMessageSent()
 		*/
@@ -213,8 +268,9 @@ namespace Tizen { namespace Messaging
 		* Gets the total number of SMS messages in the specified message box.
 		*
 		* @since		2.0
-		*
-		* @privilege	%http://tizen.org/privilege/messaging.sms
+		* @privlevel	public
+		* @privilege	%http://tizen.org/privilege/messaging.read @n
+		* 				(%http://tizen.org/privilege/messaging.sms is deprecated.)
 		*
 		* @return		The total number of SMS messages in the specified message box
 		* @param[in]	type				The type of message box
@@ -222,8 +278,10 @@ namespace Tizen { namespace Messaging
 		* @exception	E_INVALID_ARG		The specified @c type is invalid.
 		* @exception	E_SYSTEM			A system error has occurred.
 		* @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-		* @remarks		In case of an error, this method returns the negative value. For example, @c -1. @n
-		*		 		The specific error code can be accessed using the GetLastResult() method.
+		* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+		* @remarks		
+		*			- In case of an error, this method returns the negative value. For example, @c -1.
+		*		 	- The specific error code can be accessed using the GetLastResult() method.
 		*/
 		int GetTotalMessageCount(SmsMessageBoxType type) const;
 
@@ -231,8 +289,9 @@ namespace Tizen { namespace Messaging
 		* Searches the SMS messages by keyword and|or sender address in the Inbox.
 		*
 		* @since		2.0
-		*
-		* @privilege	%http://tizen.org/privilege/messaging.sms
+		* @privlevel	public
+		* @privilege	%http://tizen.org/privilege/messaging.read @n
+		* 				(%http://tizen.org/privilege/messaging.sms is deprecated.)
 		*
 		* @return		A pointer to the list of the SmsMessage class instances
 		* @param[in]	pKeyword			A part of the body text as a keyword (partial match) @n
@@ -245,16 +304,19 @@ namespace Tizen { namespace Messaging
 		* @exception	E_SUCCESS			The method is successful.
 		* @exception	E_INVALID_ARG		Either of the following conditions has occurred: @n
 		*									- The specified @c pKeyword string length is less than @c 2 or greater than @c 30. @n
+		* 									- The specified @c pSenderAddress string length is less than @c 3 or greater than @c 41. @n
 		* 									- The specified @c startIndex value is less than @c 0. @n
 		* 									- The specified @c count value is less than @c 0 or greater than @c 20.
 		* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 		* @exception	E_SYSTEM			A system error has occurred.
 		* @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-		* @remarks		The specific error code can be accessed using the GetLastResult() method. @n
-		* 		The search with the specified keywords searches using only the first 50 characters of the body text. @n
-		* 		The SMS messages in the searched result contain only @c 160 bytes for the body text. @n
-		* 				To check whether there is additional text, use the SmsMessage::HasMoreText() method. @n
-		* 				To get the full body text, use GetFullText() with its message ID.
+		* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+		* @remarks		
+		*			- The specific error code can be accessed using the GetLastResult() method.
+		* 			- The search with the specified keywords searches using only the first 50 characters of the body text.
+		* 			- The SMS messages in the searched result contain only @c 160 bytes for the body text.
+		* 			- To check whether there is additional text, use the SmsMessage::HasMoreText() method. @n
+		* 			- To get the full body text, use GetFullText() with its message ID.
 		* @see			SmsMessage
         * @see   		GetFullText()
 		*/
@@ -264,8 +326,9 @@ namespace Tizen { namespace Messaging
 		* Searches the SMS messages by keyword in the specified message box.
 		*
 		* @since		2.0
-		*
-		* @privilege	%http://tizen.org/privilege/messaging.sms
+		* @privlevel	public
+		* @privilege	%http://tizen.org/privilege/messaging.read @n
+		* 				(%http://tizen.org/privilege/messaging.sms is deprecated.)
 		*
 		* @return		A pointer to the list of the SmsMessage class instances
 		* @param[in]	type				The type of message box
@@ -283,12 +346,15 @@ namespace Tizen { namespace Messaging
 		* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 		* @exception	E_SYSTEM			A system error has occurred.
 		* @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-		* @remarks		The specific error code can be accessed using the GetLastResult() method. @n
-		* 		The search with the specified keywords searches using only the first 50 characters of the body text. @n
-		* 		The SMS messages in the searched result contain only @c 160 bytes for the body text. @n
-		* 				To check whether there is additional text, use the SmsMessage::HasMoreText() method. @n
-		* 				To get the full body text, use the GetFullText() method with its message ID.
-		* @see			SmsMessage, GetFullText()
+		* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+		* @remarks		
+		*			- The specific error code can be accessed using the GetLastResult() method.
+		* 			- The search with the specified keywords searches using only the first 50 characters of the body text.
+		* 			- The SMS messages in the searched result contain only @c 160 bytes for the body text.
+		* 			- To check whether there is additional text, use the SmsMessage::HasMoreText() method.
+		* 			- To get the full body text, use the GetFullText() method with its message ID.
+		* @see			SmsMessage
+		* @see			GetFullText()
 		*/
 		Tizen::Base::Collection::IList* SearchMessageBoxN(SmsMessageBoxType type, const Tizen::Base::String* pKeyword, int startIndex, int count, int& totalResultCount) const;
 
@@ -296,8 +362,9 @@ namespace Tizen { namespace Messaging
 		* Gets the full text of the SMS message in the message box using the message ID.
 		*
 		* @since		2.0
-		*
-		* @privilege	%http://tizen.org/privilege/messaging.sms
+		* @privlevel	public
+		* @privilege	%http://tizen.org/privilege/messaging.read @n
+		* 				(%http://tizen.org/privilege/messaging.sms is deprecated.)
 		*
 		* @return		The full text of the specified SMS message
 		* @param[in]	messageId			The unique ID of the message
@@ -306,11 +373,228 @@ namespace Tizen { namespace Messaging
 		* @exception	E_OBJ_NOT_FOUND		The SMS message with the specified @c messageId is not found.
 		* @exception	E_SYSTEM			A system error has occurred.
 		* @exception	E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
-		* @remarks		The specific error code can be accessed using the GetLastResult() method. @n
-		* 				In case of an error, this method returns an empty string.
+		* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+		* @remarks		
+		*				- The specific error code can be accessed using the GetLastResult() method.
+		* 				- In case of an error, this method returns an empty string.
 		* @see			SmsMessage::HasMoreText()
 		*/
 		Tizen::Base::String GetFullText(int messageId) const;
+
+		/**
+		* Sets the event listener for receiving CB messages.
+		*
+		* @since		2.0
+		* @privlevel	platform
+		* @privilege	%http://tizen.org/privilege/cellbroadcast
+		*
+		* @feature		%http://tizen.org/feature/network.telephony.sms.cbs
+		* @return		An error code
+		* @param[in]	pListener				The listener to receive CB messages
+		* @exception 	E_SUCCESS				The method is successful.
+		* @exception	E_SYSTEM				A system error has occurred.
+		* @exception	E_PRIVILEGE_DENIED  	The application does not have the privilege to call this method.
+		* @exception  	E_UNSUPPORTED_OPERATION	The Emulator or target device does not support the required feature. @b Since: @b 2.1
+		* 										For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+		* @remarks    	Before calling this method, check whether the feature is supported by 
+		*				Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
+		* @see			ICbsMessageEventListener
+		*/
+		result SetCbsMessageEventListener(ICbsMessageEventListener* pListener);
+
+		/**
+		* Sets the event listener for receiving ETWS primary notification.
+		*
+		* @since		2.0
+		* @privlevel	platform
+		* @privilege	%http://tizen.org/privilege/cellbroadcast
+		*
+		* @feature		%http://tizen.org/feature/network.telephony.sms.cbs
+		* @return		An error code
+		* @param[in]	pListener			The listener to receive ETWS primary notification
+		* @exception 	E_SUCCESS			The method is successful.
+		* @exception	E_SYSTEM			A system error has occurred.
+		* @exception	E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
+		* @exception  	E_UNSUPPORTED_OPERATION	The Emulator or target device does not support the required feature. @b Since: @b 2.1
+		* 										For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+		* @remarks    	Before calling this method, check whether the feature is supported by 
+		*				Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
+		* @see			IEtwsPrimaryNotificationEventListener
+		*/
+		result SetEtwsPrimaryNotificationEventListener(IEtwsPrimaryNotificationEventListener* pListener);
+
+		/**
+		* Enables or disables the save option for CBS message to the CbsBox.
+		*
+		* @since		2.0
+		* @privlevel	platform
+		* @privilege	%http://tizen.org/privilege/cellbroadcast
+		*
+		* @feature		%http://tizen.org/feature/network.telephony.sms.cbs
+		* @return		An error code
+		* @param[in]	enable				Set to @c true to save the message in the CbsBox, @n
+		*									else @c false
+		* @exception 	E_SUCCESS			The method is successful.
+		* @exception	E_SYSTEM			A system error has occurred.
+		* @exception	E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
+		* @exception  	E_UNSUPPORTED_OPERATION	The Emulator or target device does not support the required feature. @b Since: @b 2.1
+		* 										For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+		* @remarks    	Before calling this method, check whether the feature is supported by 
+		*				Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
+		*/
+		result SetSavingToCbsBoxEnabled(bool enable);
+
+		/**
+		* Checks whether the CB service is enabled.
+		*
+		* @since		2.0
+		* @privlevel	platform
+		* @privilege	%http://tizen.org/privilege/cellbroadcast
+		*
+		* @return		@c true if the CB service is enabled, @n
+		*				else @c false
+		* @see SetCbsEnabled()
+		*/
+		bool IsCbsEnabled(void) const;
+
+		/**
+		* Enables or disables the CB service.
+		*
+		* @since		2.0
+		* @privlevel	platform
+		* @privilege	%http://tizen.org/privilege/cellbroadcast
+		*
+		* @feature		%http://tizen.org/feature/network.telephony.sms.cbs
+		* @return		An error code
+		* @param[in]	enable					Set to @c true to enable the CB service, @n
+		*										else @c false
+		* @exception	E_SUCCESS               The method is successful.
+		* @exception	E_SYSTEM                A system error has occurred.
+		* @exception	E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+		* @exception  	E_UNSUPPORTED_OPERATION	The Emulator or target device does not support the required feature. @b Since: @b 2.1
+		* 										For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+		* @remarks    	Before calling this method, check whether the feature is supported by 
+		*				Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
+		* @see			IsCbsEnabled()
+		*/
+		result SetCbsEnabled(bool enable);
+
+		/**
+		* Adds a CBS channel with specified parameters.
+		*
+		* @since		2.0
+		* @privlevel	platform
+		* @privilege	%http://tizen.org/privilege/cellbroadcast
+		*
+		* @feature		%http://tizen.org/feature/network.telephony.sms.cbs
+		* @return		An error code
+		* @param[in]	from					The starting index of the message ID of the channel
+		* @param[in]	to						The last index of the message ID of the channel
+		* @param[in]	name					The name of the channel. (can be an empty string)
+		* @param[in]	activate				Set to @c true to activate the channel, @n
+		* 										else @c false.
+		* @exception	E_SUCCESS				The method is successful.
+		* @exception	E_INVALID_ARG			Either of the following conditions has occurred: @n
+		*                                       - The specified @c to parameter is smaller than @c from. @n
+		* 										- The specified @c to or @c from parameter is a negative value. @n
+		* 										- The specified @c to parameter exceeds the limit (0xFFFF). @n
+		* 										- The range (@c to - @c from) exceeds the limit (0xFFFF).
+		* 										- The specified @c name string length is greater than @c 32. @n
+		* @exception	E_ALREADY_SET			The channel range (@c from ~ @c to) is already set.
+		* @exception	E_ILLEGAL_ACCESS		The application does not have the permission to add the CBS channel.
+		* @exception	E_SYSTEM				A system error has occurred.
+		* @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+		* @exception  	E_UNSUPPORTED_OPERATION	The Emulator or target device does not support the required feature. @b Since: @b 2.1
+		* 										For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+		* @remarks    	Before calling this method, check whether the feature is supported by 
+		*				Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
+		* @see			RemoveCbsChannel()
+		*/
+		result AddCbsChannel(int from, int to, Tizen::Base::String& name, bool activate = true);
+
+		/**
+		* Removes a CBS channel.
+		*
+		* @since		2.0
+		* @privlevel	platform
+		* @privilege	%http://tizen.org/privilege/cellbroadcast
+		*
+		* @feature		%http://tizen.org/feature/network.telephony.sms.cbs
+		* @return		An error code
+		* @param[in]	from					The starting index of the message ID of the channel
+		* @param[in]	to						The last index of the message ID of the channel
+		* @exception	E_SUCCESS				The method is successful.
+		* @exception	E_INVALID_ARG			Either of the following conditions has occurred: @n
+		*                                       - The specified @c to parameter is smaller than @c from. @n
+		* 										- The specified @c to or @c from parameter is a negative value. @n
+		* 										- The specified @c to parameter exceeds the limit (0xFFFF). @n
+		* 										- The range (@c to - @c from) exceeds the limit (0xFFFF).
+		* @exception	E_OBJ_NOT_FOUND			The channel range (@c from ~ @c to) is not found.
+		* @exception	E_ILLEGAL_ACCESS		The application does not have the permission to remove the CBS channel.
+		* @exception	E_SYSTEM				A system error has occurred.
+		* @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+		* @exception  	E_UNSUPPORTED_OPERATION	The Emulator or target device does not support the required feature. @b Since: @b 2.1
+		* 										For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+		* @remarks    	Before calling this method, check whether the feature is supported by 
+		*				Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
+		* @see			AddCbsChannel()
+		*/
+		result RemoveCbsChannel(int from, int to);
+
+		/**
+		* Gets a CBS channel with specified range.
+		*
+		* @since		2.0
+		* @privlevel	platform
+		* @privilege	%http://tizen.org/privilege/cellbroadcast
+		*
+		* @feature		%http://tizen.org/feature/network.telephony.sms.cbs
+		* @return		A pointer to the CBS channel with specific range.
+		* @param[in]	from					The starting index of the message ID of the channel
+		* @param[in]	to						The last index of the message ID of the channel
+		* @exception	E_SUCCESS				The method is successful.
+		* @exception	E_INVALID_ARG			Either of the following conditions has occurred: @n
+		*										- The specified @c to parameter is smaller than @c from. @n
+		* 										- The specified @c to or @c from parameter is a negative value. @n
+		* 										- The specified @c to parameter exceeds the limit (0xFFFF). @n
+		* 										- The range (@c to - @c from) exceeds the limit (0xFFFF).
+ 		* @exception	E_SYSTEM				A system error has occurred.
+		* @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+		* @exception  	E_UNSUPPORTED_OPERATION	The Emulator or target device does not support the required feature. @b Since: @b 2.1
+		* 										For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+		* @remarks
+		*			- Before calling this method, check whether the feature is supported by 
+		*			Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
+		* 			- The specific error code can be accessed using the GetLastResult() method.
+		* @see          AddCbsChannel()
+        * @see  		RemoveCbsChannel()
+		*/
+		CbsChannel* GetCbsChannelN(int from, int to) const;
+
+		/**
+		* Gets the CBS channel list.
+		*
+		* @since		2.0
+		* @privlevel	platform
+		* @privilege	%http://tizen.org/privilege/cellbroadcast
+		*
+		* @feature		%http://tizen.org/feature/network.telephony.sms.cbs
+		*
+		* @return		A pointer to the list of CBS channel
+		* @exception	E_SUCCESS				The method is successful.
+		* @exception	E_SYSTEM				A system error has occurred.
+		* @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+		* @exception  	E_UNSUPPORTED_OPERATION	The Emulator or target device does not support the required feature. @b Since: @b 2.1
+		* 										For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+		* @remarks
+		*			- Before calling this method, check whether the feature is supported by 
+		*			Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
+		* 			- The specific error code can be accessed using the GetLastResult() method.
+		* @see			AddCbsChannel()
+        * @see  		RemoveCbsChannel()
+        * @see  		CbsChannel
+		*/
+		Tizen::Base::Collection::IList* GetCbsChannelListN(void);
 
 	private:
 		_SmsManagerImpl* __pImpl;

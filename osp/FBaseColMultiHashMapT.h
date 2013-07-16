@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -70,7 +69,7 @@ template< class ValueType > class __ValueNodeT;
  *	void
  *	MyClass::MultiHashMapTSample(void)
  *	{
- *		MultiHashMapT<int, int> map;
+ *		MultiHashMapT< int, int > map;
  *
  *		// Constructs a MultiHashMap instance with default capacity, load factor, hash code provider, and comparer
  *		map.Construct();
@@ -85,7 +84,7 @@ template< class ValueType > class __ValueNodeT;
  *
  *		// Gets values with the specified key
  *		key = 1;
- *		IEnumeratorT<int>*	pValueEnum = map.GetValuesN(key);
+ *		IEnumeratorT< int >*	pValueEnum = map.GetValuesN(key);
  *		while (pValueEnum->MoveNext() == E_SUCCESS)
  *		{
  *			pValueEnum->GetCurrent(value);
@@ -98,7 +97,7 @@ template< class ValueType > class __ValueNodeT;
  *		map.Remove(key);		// 30, 3000 removed
  *
  *		// Uses an enumerator to access elements in the map
- *		IMapEnumeratorT<int, int>*	pMapEnum = map.GetMapEnumeratorN();
+ *		IMapEnumeratorT< int, int >*	pMapEnum = map.GetMapEnumeratorN();
  *		while (pMapEnum->MoveNext() == E_SUCCESS)
  *		{
  *			pMapEnum->GetKey(key);
@@ -598,16 +597,15 @@ CATCH:
 	}
 
 	/**
-	 * Gets a list of all the keys in this map.
+	 * Gets a list of all unique keys in this map.
 	 *
 	 * @since 2.0
 	 *
-	 * @return		A list of all the keys in this map, @n
+	 * @return		A list of all unique keys in this map, @n
 	 *				else @c null if an exception occurs
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_OUT_OF_MEMORY	The memory is insufficient.
-	 * @remarks		The order of the keys is the same as the corresponding values in the IListT interface returned by the GetValuesN() method.
-	 *      		The specific error code can be accessed using the GetLastResult() method.
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @see			GetValuesN()
 	 */
 	virtual IListT< KeyType >* GetKeysN(void) const

@@ -47,28 +47,28 @@ public:
 	/**
 	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
-	 * @since	2.0
+	 * @since		2.0
 	 */
 	virtual ~IWebUiEventListener(void) {}
 
 	/**
 	 * Called when the layout of a page is updated. @n
-	 * The application must call Control::Show() if the screen needs to be updated.
+	 * The application must call Tizen::Ui::Control::Show() if the screen needs to be updated.
 	 *
-	 * @since				2.0
+	 * @since		2.0
 	 *
-	 * @param[in]		source				The source of the event
+	 * @param[in]	source		The source of the event
 	 */
 	virtual void OnWebPageShowRequested(Tizen::Web::Controls::Web& source) = 0;
 
 
 	/**
 	 * Called when a request for creating a new window is received. @n
-	 * The returned Web control instance must be constructed by using a child window's Construct() method.
+	 * The returned %Web control instance must be constructed by using a child window's Construct() method.
 	 *
-	 * @since				2.0
+	 * @since		2.0
 	 *
-	 * @return			A pointer to the new WebWindow instance
+	 * @return		A pointer to the new WebWindow instance
 	 */
 	virtual Tizen::Web::Controls::Web* OnWebWindowCreateRequested(void) = 0;
 
@@ -78,23 +78,35 @@ public:
 	 * This event is called from the parent window's listener that invoked the child window. @n
 	 * The application must free the resource allocated for the Web Control.
 	 *
-	 * @since			 2.0
+	 * @since		 2.0
 	 *
-	 * @param[in]        source             The source of the closing event
+	 * @param[in]	source		The source of the closing event
 	 */
 	virtual void OnWebWindowCloseRequested(Tizen::Web::Controls::Web& source) = 0;
 
 	/**
 	 * Called when the selected block of a page is updated.
 	 *
-	 * @since                    2.0
+	 * @since		2.0
 	 *
-	 * @param[in]              source             The source of the event
-	 * @param[in]		startPoint		The starting point of the selected block
-	 * @param[in]		endPoint		The ending point of the selected block
+	 * @param[in]	source		The source of the event
+	 * @param[in]	startPoint		The starting point of the selected block
+	 * @param[in]	endPoint		The ending point of the selected block
 	 */
 	virtual void OnWebPageBlockSelected(Tizen::Web::Controls::Web& source, Tizen::Graphics::Point& startPoint, Tizen::Graphics::Point& endPoint) = 0;
 
+	/**
+	 * Called just after the touch move event to determine whether the preventDefault() method is triggered or not. @n
+	 * The application that wants to support W3C preventDefault() feature is recommended to use this callback and delay to handle the touch move event until this callback is received.
+	 *
+	 * @since		2.1
+	 *
+	 * @param[in]	source		The source of the event
+	 * @param[in]	trigger		Set to @c true if the preventDefault() method is triggered, @n
+	 *						else @c false
+	 * @remarks				This callback is always called just after the touch move event and returns @c true when preventDefault() is triggered on the touch start or touch move event.
+	 */
+	virtual void OnWebPreventDefaultTriggered(Tizen::Web::Controls::Web& source, bool trigger) {};
 
 protected:
 	//
@@ -132,15 +144,6 @@ protected:
 	// @since		2.0
 	//
 	virtual void IWebUiEventListener_Reserved4(void) {};
-
-	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
-	//
-	// Gets the Impl instance.
-	//
-	// @since		2.0
-	//
-	virtual void IWebUiEventListener_Reserved5(void) {};
 }; // IWebUiEventListener
 
 }}} // Tizen::Web::Controls

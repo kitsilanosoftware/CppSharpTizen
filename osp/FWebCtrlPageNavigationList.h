@@ -42,12 +42,12 @@ namespace Tizen { namespace Web { namespace Controls
 {
 
 /**
- * @class	PageNavigationList
- * @brief		This class contains the back and forward list for a Web control.
+ * @class		PageNavigationList
+ * @brief		This class contains the back and forward list for a %Web control.
  *
- * @since	2.0
+ * @since		2.0
  *
- * The %PageNavigationList class provides the back and forward list for a Web control.
+ * The %PageNavigationList class provides the back and forward list for a %Web control.
  * @n
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/web/controls_namespace.htm">Web Controls Guide</a>.
  */
@@ -68,7 +68,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		The current history item, @n
-	 *              else @c null if no history item exists
+	 *					else @c null if no history item exists
 	 */
 	const Tizen::Web::HistoryItem* GetCurrentItem(void) const;
 
@@ -88,10 +88,10 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		A pointer to the history item at the specified @c index
-	 * @param[in]	index		The index of an element @n
-	 *                           The value of the index must be greater than or equal to @c 0.
-	 * @exception	E_OUT_OF_RANGE	The specified @c index is out of range.
-	 * @remarks	The specific error code can be accessed using the GetLastResult() method.
+	 * @param[in]	index			The index of an element @n
+	 *								The value of the index must be greater than or equal to @c 0.
+	 * @exception	E_OUT_OF_RANGE		The specified @c index is out of range.
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	const Tizen::Web::HistoryItem* GetItemAt(int index) const;
 
@@ -115,7 +115,7 @@ private:
 	//
 	// The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
 	//
-	// @param[in]	item		The instance of the %PageNavigationList class to copy from
+	// @param[in]	item			The instance of the %PageNavigationList class to copy from
 	// @remarks		This constructor is hidden.
 	//
 	PageNavigationList(const PageNavigationList& item);
@@ -123,7 +123,7 @@ private:
 	//
 	// The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit copying of objects.
 	//
-	// @param[in]	item		The instance of the %PageNavigationList class to assign from
+	// @param[in]	item			The instance of the %PageNavigationList class to assign from
 	// @remarks		This operator is hidden.
 	//
 	PageNavigationList& operator =(const PageNavigationList& item);

@@ -31,12 +31,14 @@ namespace Tizen { namespace Net { namespace Wifi
 class WifiDirectGroupMemberImpl;
 /**
  * @if OSPDEPREC
- * @class WifiDirectGroupMember
- * @brief <i> [Deprecated] </i> This class provides methods for the Wi-Fi Direct group member.
- * @deprecated   This method is deprecated because the Wi-Fi Direct APIs have been revised to allow the use of APIs with ease irrespective of the role (for example, group owner, group client, and so on). @n
-     * Earlier, the Wi-Fi Direct APIs were strictly provided depending on the role and so it was necessary to use these APIs.
+ * @class       WifiDirectGroupMember
+ * @brief       <i> [Deprecated] </i> This class provides methods for the Wi-Fi Direct group member.
+ * @deprecated  This method is deprecated because the Wi-Fi Direct APIs have been revised to allow the use of APIs with
+ *              ease irrespective of the role (for example, group owner, group client, and so on). @n
+ *              Earlier, the Wi-Fi Direct APIs were strictly provided depending on the role and so it was necessary to
+ *              use these APIs.
  *
- * @since   2.0
+ * @since       2.0
  *
  * The %WifiDirectGroupMember class provides methods for the Wi-Fi Direct group member.
  * @endif
@@ -46,120 +48,120 @@ class _OSP_EXPORT_ WifiDirectGroupMember
 	: public Tizen::Base::Object
 {
 public:
-    /**
-     * @if OSPDEPREC
-     * This destructor overrides Tizen::Base::Object::~Object().
-     *
-     * @brief   <i> [Deprecated] </i>
-     * @deprecated   This method is deprecated because the Wi-Fi Direct APIs have been revised to allow the use of APIs with ease irrespective of the role (for example, group owner, group client, and so on). @n
-     * Earlier, the Wi-Fi Direct APIs were strictly provided depending on the role and so it was necessary to use these APIs.
-     * @since 2.0
-     * @endif
-     */
-    virtual ~WifiDirectGroupMember(void){}
+	/**
+	 * @if OSPDEPREC
+	 * This destructor overrides Tizen::Base::Object::~Object().
+	 *
+	 * @brief       <i> [Deprecated] </i>
+	 * @deprecated  This method is deprecated because the Wi-Fi Direct APIs have been revised to allow the use of APIs
+	 *              with ease irrespective of the role (for example, group owner, group client, and so on). @n
+	 *              Earlier, the Wi-Fi Direct APIs were strictly provided depending on the role and so it was necessary
+	 *              to use these APIs.
+	 * @since       2.0
+	 * @endif
+	 */
+	virtual ~WifiDirectGroupMember(void){}
 
-    /**
-     * @if OSPDEPREC
-     * Gets the type of the Wi-Fi Direct group member.
-     *
-     * @brief   <i> [Deprecated] </i>
-     * @deprecated   This method is deprecated because the Wi-Fi Direct APIs have been revised to allow the use of APIs with ease irrespective of the role (for example, group owner, group client, and so on). @n
-     * Earlier, the Wi-Fi Direct APIs were strictly provided depending on the role and so it was necessary to use these APIs.
-     *
-     * @since 2.0
-     *
-     * @return The type of the Wi-Fi Direct group member
-     * @endif
-     */
-    WifiDirectGroupMemberType GetGroupMemberType(void) const;
+	/**
+	 * @if OSPDEPREC
+	 * Gets the type of the Wi-Fi Direct group member.
+	 *
+	 * @brief       <i> [Deprecated] </i>
+	 * @deprecated  This method is deprecated because the Wi-Fi Direct APIs have been revised to allow the use of APIs
+	 *              with ease irrespective of the role (for example, group owner, group client, and so on). @n
+	 *              Earlier, the Wi-Fi Direct APIs were strictly provided depending on the role and so it was necessary
+	 *              to use these APIs.
+	 *
+	 * @since       2.0
+	 *
+	 * @return      The type of the Wi-Fi Direct group member
+	 * @endif
+	 */
+	WifiDirectGroupMemberType GetGroupMemberType(void) const;
 
 protected:
-    /**
-     * This is the default constructor for this class.
-     *
-     * @since   2.0
-     */
-    WifiDirectGroupMember(void);
-    /**
-     * This is the copy constructor for the %WifiDirectGroupMember class. @n
+	/**
+	 * This is the default constructor for this class.
+	 *
+	 * @since       2.0
+	 */
+	WifiDirectGroupMember(void);
+
+	/**
+	 * This is the copy constructor for the %WifiDirectGroupMember class. @n
 	 * Do @b not use directly.
 	 *
-	 * @since   2.0
-     *
-     * @param[in]   value   An instance of %WifiDirectGroupMember
-     */
-    WifiDirectGroupMember(const WifiDirectGroupMember& value);
+	 * @since       2.0
+	 *
+	 * @param[in]   value       An instance of %WifiDirectGroupMember
+	 */
+	WifiDirectGroupMember(const WifiDirectGroupMember& value);
 
-    /**
-     * Assigns the value of the specified instance to the current instance of %WifiDirectGroupMember. @n
+	/**
+	 * Assigns the value of the specified instance to the current instance of %WifiDirectGroupMember. @n
 	 * Do @b not use directly.
 	 *
-	 * @since   2.0
-     *
-     * @param[in]   rhs     An instance of %WifiDirectGroupMember
-     */
-    WifiDirectGroupMember& operator =(const WifiDirectGroupMember& rhs);
+	 * @since       2.0
+	 *
+	 * @param[in]   rhs         An instance of %WifiDirectGroupMember
+	 */
+	WifiDirectGroupMember& operator =(const WifiDirectGroupMember& rhs);
 
-    //
-    // This method is for internal use only. Using this method can cause behavioral, security-related,
-    // and consistency-related issues in the application.
-    //
-    //
-    // This method is reserved and may change its name at any time without prior notice.
-    //
-    // @since       2.0
-    //
-    virtual void WifiDirectGroupMember_Reserved1(void){ }
+	//
+	// This method is for internal use only. Using this method can cause behavioral, security-related,
+	// and consistency-related issues in the application.
+	//
+	// This method is reserved and may change its name at any time without prior notice.
+	//
+	// @since       2.0
+	//
+	virtual void WifiDirectGroupMember_Reserved1(void){ }
 
-    //
-    // This method is for internal use only. Using this method can cause behavioral, security-related,
-    // and consistency-related issues in the application.
-    //
-    //
-    // This method is reserved and may change its name at any time without prior notice.
-    //
-    // @since       2.0
-    //
-    virtual void WifiDirectGroupMember_Reserved2(void){ }
+	//
+	// This method is for internal use only. Using this method can cause behavioral, security-related,
+	// and consistency-related issues in the application.
+	//
+	// This method is reserved and may change its name at any time without prior notice.
+	//
+	// @since       2.0
+	//
+	virtual void WifiDirectGroupMember_Reserved2(void){ }
 
-    //
-    // This method is for internal use only. Using this method can cause behavioral, security-related,
-    // and consistency-related issues in the application.
-    //
-    //
-    // This method is reserved and may change its name at any time without prior notice.
-    //
-    // @since       2.0
-    //
-    virtual void WifiDirectGroupMember_Reserved3(void){ }
+	//
+	// This method is for internal use only. Using this method can cause behavioral, security-related,
+	// and consistency-related issues in the application.
+	//
+	// This method is reserved and may change its name at any time without prior notice.
+	//
+	// @since       2.0
+	//
+	virtual void WifiDirectGroupMember_Reserved3(void){ }
 
-    //
-    // This method is for internal use only. Using this method can cause behavioral, security-related,
-    // and consistency-related issues in the application.
-    //
-    //
-    // This method is reserved and may change its name at any time without prior notice.
-    //
-    // @since       2.0
-    //
-    virtual void WifiDirectGroupMember_Reserved4(void){ }
+	//
+	// This method is for internal use only. Using this method can cause behavioral, security-related,
+	// and consistency-related issues in the application.
+	//
+	// This method is reserved and may change its name at any time without prior notice.
+	//
+	// @since       2.0
+	//
+	virtual void WifiDirectGroupMember_Reserved4(void){ }
 
-    //
-    // This method is for internal use only. Using this method can cause behavioral, security-related,
-    // and consistency-related issues in the application.
-    //
-    //
-    // This method is reserved and may change its name at any time without prior notice.
-    //
-    // @since       2.0
-    //
-    virtual void WifiDirectGroupMember_Reserved5(void){ }
+	//
+	// This method is for internal use only. Using this method can cause behavioral, security-related,
+	// and consistency-related issues in the application.
+	//
+	// This method is reserved and may change its name at any time without prior notice.
+	//
+	// @since       2.0
+	//
+	virtual void WifiDirectGroupMember_Reserved5(void){ }
 
 protected:
-    WifiDirectGroupMemberType _groupMemberType;
+	WifiDirectGroupMemberType _groupMemberType;
+	WifiDirectGroupMemberImpl* _pWifiDirectGroupMemberImpl;
 
-    WifiDirectGroupMemberImpl* _pWifiDirectGroupMemberImpl;
-    friend class WifiDirectGroupMemberImpl;
+	friend class WifiDirectGroupMemberImpl;
 }; // WifiDirectGroupMember
 
 } } } // Tizen::Net::Wifi

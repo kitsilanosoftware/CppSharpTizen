@@ -2,18 +2,19 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
+
 /**
  * @file	FUiCtrlSlider.h
  * @brief	This is the header file for the %Slider class.
@@ -34,7 +35,6 @@
 #include <FUiContainer.h>
 #include <FUiIAdjustmentEventListener.h>
 #include <FUiCtrlControlsTypes.h>
-#include <FUiCtrlGroupTypes.h>
 #include <FUiCtrlSliderTypes.h>
 #include <FUiCtrlISliderEventListener.h>
 
@@ -104,7 +104,7 @@ SliderSample::OnInitializing(void)
 	__pSlider->AddAdjustmentEventListener(*this);
 
 	// Adds the slider to the form
-	AddControl(*__pSlider);
+	AddControl(__pSlider);
 
 	return r;
 }
@@ -124,14 +124,16 @@ class _OSP_EXPORT_ Slider
 // Lifecycle
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the %Construct() method must be called right after calling this constructor.
 	 *
 	 * @since		2.0
 	 */
 	Slider(void);
 
 	/**
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required.@n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @since		2.0
 	 */
@@ -145,7 +147,9 @@ public:
 	 * @return		An error code
 	 * @param[in]	rect				An instance of the Graphics::Rectangle class @n
 	 *									This instance represents the x and y coordinates of the top-left corner of the created window along with
-	 *									the width and height of the control.
+	 *									the width and height of the control.@n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @param[in]	backgroundStyle		The background style set of the slider
 	 * @param[in]   showTitle			Set to @c true to enable the show title, @n
 	 *									else @c false
@@ -155,14 +159,45 @@ public:
 	 * @exception	E_SUCCESS           The method is successful.
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
 	 * @exception   E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *                                  The background style of BACKGROUND_STYLE_NONE does not work with group styles except GROUP_STYLE_NONE.
+	 *                                  The background style of @c BACKGROUND_STYLE_NONE does not work with group styles except ::GROUP_STYLE_NONE.
 	 * @exception	E_OUT_OF_RANGE		The specified values are less than @c -99 or greater than @c 999.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks		A control is fully usable only after it has been added to a container. Therefore, some methods may fail if used earlier. @n
-	 *				If the given size is less than the minimum, it returns E_INVALID_ARG.
-	 * @remarks		The size of the control must be within the range defined by the minimum size and the maximum size.
+	 * @remarks
+	 *				- A control is fully usable only after it has been added to a container. Therefore, some methods may fail if used earlier.
+	 *				- If the given size is less than the minimum, it returns @c E_INVALID_ARG.
+	 *				- The size of the control must be within the range defined by the minimum size and the maximum size.
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, BackgroundStyle backgroundStyle = BACKGROUND_STYLE_DEFAULT, bool showTitle = false, int minValue = 0, int maxValue = 100, GroupStyle groupStyle = GROUP_STYLE_NONE);
+
+	/**
+	 * Initializes this instance of %Slider with the specified parameters.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	rect				An instance of the Tizen::Graphics::FloatRectangle class @n
+	 *									This instance represents the x and y coordinates of the top-left corner of the created window along with
+	 *									the width and height of the control.@n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]	backgroundStyle		The background style set of the slider
+	 * @param[in]   showTitle			Set to @c true to enable the show title, @n
+	 *									else @c false
+	 * @param[in]	minValue			The minimum slider value
+	 * @param[in]	maxValue			The maximum slider value
+	 * @param[in]   groupStyle			The table view style of the slider
+	 * @exception	E_SUCCESS           The method is successful.
+	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
+	 * @exception   E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
+	 *                                  The background style of @c BACKGROUND_STYLE_NONE does not work with group styles except ::GROUP_STYLE_NONE.
+	 * @exception	E_OUT_OF_RANGE		The specified values are less than @c -99 or greater than @c 999.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @remarks
+	 *			- A control is fully usable only after it has been added to a container. Therefore, some methods may fail if used earlier.
+	 *			- If the given size is less than the minimum, it returns @c E_INVALID_ARG.
+	 *			- The size of the control must be within the range defined by the minimum size and the maximum size.
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, BackgroundStyle backgroundStyle = BACKGROUND_STYLE_DEFAULT, bool showTitle = false, int minValue = 0, int maxValue = 100, GroupStyle groupStyle = GROUP_STYLE_NONE);
 
 	/**
 	 * Adds a IAdjustmentEventListener instance. @n
@@ -170,7 +205,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 */
 	void AddAdjustmentEventListener(Tizen::Ui::IAdjustmentEventListener& listener);
 
@@ -180,7 +215,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 */
 	void RemoveAdjustmentEventListener(Tizen::Ui::IAdjustmentEventListener& listener);
 
@@ -236,22 +271,22 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]   position	The position of the icon (ICON_POSITION_LEFT/ICON_POSITION_RIGHT)
+	 * @param[in]   position	The position of the icon (@c ICON_POSITION_LEFT/@c ICON_POSITION_RIGHT)
 	 * @param[in]   icon        The bitmap image of the icon
 	 * @remarks     If the size of the bitmap is greater than the default size, the bitmap image is scaled down.
 	 */
 	void SetIcon(IconPosition position, const Tizen::Graphics::Bitmap& icon);
 
 	/**
- 	 * Sets the title of the slider.
-	 *
-	 * @since		2.0
-	 *
-	 * @return		An error code
-	 * @param[in]    title		        The title to be set
-	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_SYSTEM	        A system error has occurred.
-	 */
+	* Sets the title of the slider.
+	*
+	* @since		2.0
+	*
+	* @return		An error code
+	* @param[in]    title		        The title to set
+	* @exception	E_SUCCESS			The method is successful.
+	* @exception	E_SYSTEM	        A system error has occurred.
+	*/
 	result SetTitleText(const Tizen::Base::String& title);
 
 	/**
@@ -259,8 +294,9 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The title text of the entered string, @n
-	 *			    else an empty string if the %Slider instance is not constructed
+	 * @return		The title text of the entered string
+	 *
+	 * @remarks 		By default returns an empty string.
 	 */
 	Tizen::Base::String GetTitleText(void) const;
 
@@ -269,7 +305,7 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in]	color   The title text color to be set
+	 * @param[in]	color   The title text color to set
 	 */
 	void SetTitleTextColor(const Tizen::Graphics::Color& color);
 
@@ -290,22 +326,55 @@ public:
 	 * @return		An error code
 	 * @param[in]	rect				An instance of the Graphics::Rectangle class @n
 	 *								    This instance represents the x and y coordinates of the top-left corner of the created window along with
-	 *                                  its width and height.
+	 *                                  its width and height.@n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @param[in]	sliderStyle         The style of the slider @n
-	 *                                  Multiple link types can be combined using bitwise OR operator. See Tizen::Ui::Controls::SliderStyle.
+	 *                                  Multiple link types can be combined using bitwise OR operator.
 	 * @param[in]	minValue            The minimum slider value
 	 * @param[in]	maxValue            The maximum slider value
 	 * @exception	E_SUCCESS           The method is successful.
 	 * @exception	E_OUT_OF_RANGE      The specified minimum and maximum values are less than @c -99, or greater than @c 999.
 	 * @exception	E_INVALID_ARG       A specified input parameter is invalid, or the specified @c minValue is greater than @c maxVaue.
 	 * @exception	E_SYSTEM            A system error has occurred.
-	 * @remarks		A control is fully functional only after it has been added to a container. Therefore, some methods may fail if they are used before
-	 *				adding the control to the container. @n
-	 *				If the specified size is less than the minimum size, the %Slider control is constructed with the minimum size.
-	 * @remarks		The width and the height of the control must be greater than @c 0.
-	 * @remarks		The size of the control must be within the range defined by the minimum size and the maximum size.
+	 * @remarks
+	 *				- A control is fully functional only after it has been added to a container. Therefore, some methods may fail if they are used before
+	 *				adding the control to the container.
+	 *				- If the specified size is less than the minimum size, the %Slider control is constructed with the minimum size.
+	 *				- The width and the height of the control must be greater than @c 0.
+	 *				- The size of the control must be within the range defined by the minimum size and the maximum size.
+	 * @see		SliderStyle
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, unsigned long sliderStyle, int minValue = 0, int maxValue = 100);
+
+	/**
+	 * Initializes this instance of %Slider with the specified parameters.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	rect				An instance of the Tizen::Graphics::FloatRectangle class @n
+	 *								    This instance represents the x and y coordinates of the top-left corner of the created window along with
+	 *                                  its width and height.@n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]	sliderStyle         The style of the slider @n
+	 *                                  Multiple link types can be combined using bitwise OR operator.
+	 * @param[in]	minValue            The minimum slider value
+	 * @param[in]	maxValue            The maximum slider value
+	 * @exception	E_SUCCESS           The method is successful.
+	 * @exception	E_OUT_OF_RANGE      The specified minimum and maximum values are less than @c -99, or greater than @c 999.
+	 * @exception	E_INVALID_ARG       A specified input parameter is invalid, or the specified @c minValue is greater than @c maxVaue.
+	 * @exception	E_SYSTEM            A system error has occurred.
+	 * @remarks
+	 *			- A control is fully functional only after it has been added to a container. Therefore, some methods may fail if they are used before
+	 *			adding the control to the container.
+	 *			- If the specified size is less than the minimum size, the %Slider control is constructed with the minimum size.
+	 *			- The width and the height of the control must be greater than @c 0.
+	 *			- The size of the control must be within the range defined by the minimum size and the maximum size.
+	 * @see		SliderStyle
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, unsigned long sliderStyle, int minValue = 0, int maxValue = 100);
 
 	/**
 	 * Adds a ISliderEventListener instance. @n
@@ -313,7 +382,7 @@ public:
 	 *
 	 * @since     2.0
 	 *
-	 * @param[in] listener    The event listener to be added
+	 * @param[in] listener    The event listener to add
 	 */
 	void AddSliderEventListener(ISliderEventListener& listener);
 
@@ -323,7 +392,7 @@ public:
 	 *
 	 * @since     2.0
 	 *
-	 * @param[in] listener    The event listener to be removed
+	 * @param[in] listener    The event listener to remove
 	 */
 	void RemoveSliderEventListener(ISliderEventListener& listener);
 
@@ -333,7 +402,7 @@ public:
 	 * @since     2.0
 	 *
 	 * @return    An error code
-	 * @param[in] color             The color to be set
+	 * @param[in] color             The color to set
 	 * @exception E_SUCCESS         The method is successful.
 	 * @exception E_SYSTEM          A system error has occurred.
 	 * @remarks   The method ignores the alpha value of the @c color parameter and sets the alpha value to @c 255.
@@ -353,15 +422,38 @@ public:
 	Tizen::Graphics::Color GetBarColor(void) const;
 
 	/**
+	 * Sets the background color of the bar.
+	 *
+	 * @since     2.1
+	 *
+	 * @param[in] barBackgroundColor             The color to set
+	 * @remarks   This method ignores the alpha value of the @c color parameter and sets the alpha value to @c 255.
+	 * @see GetBarBackgroundColor()
+	 */
+	void SetBarBackgroundColor(const Tizen::Graphics::Color& barBackgroundColor);
+
+	/**
+	 * Gets the background color of the bar.
+	 *
+	 * @since     2.1
+	 *
+	 * @return    The background color of the bar, @n
+	 *			  else RGBA(0, 0, 0, 0) if an error occurs
+	 * @remarks   The specific error code can be accessed using the GetLastResult() method.
+	 * @see SetBarBackgroundColor()
+	 */
+	Tizen::Graphics::Color GetBarBackgroundColor(void) const;
+
+	/**
 	 * Sets the color of the slider.
 	 *
 	 * @since     2.0
 	 *
 	 * @return    An error code
-	 * @param[in] color                     The color to be set
+	 * @param[in] color                     The color to set
 	 * @exception E_SUCCESS                 The method is successful.
 	 * @exception E_INVALID_OPERATION		The current state of the instance prohibits the execution of the specified operation. @n
-	 *										The operation is not supported if the background style of the %Slider control is BACKGROUND_STYLE_NONE.
+	 *										The operation is not supported if the background style of the %Slider control is ::BACKGROUND_STYLE_NONE.
 	 * @exception E_SYSTEM                  A system error has occurred.
 	 * @remarks   If a device supports only the 16-bit color space, this method considers the color as opaque by ignoring the alpha value of @c color.
 	 */
@@ -373,7 +465,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		The color , @n
-	 *				else RGBA(0, 0, 0, 0) if an instance is invalid or the background style is BACKGROUND_STYLE_NONE
+	 *				else RGBA(0, 0, 0, 0) if an instance is invalid or the background style is ::BACKGROUND_STYLE_NONE
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_OPERATION	The background style is not proper.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -126,32 +125,16 @@ public:
 	virtual int GetHashCode(void) const;
 
 	/**
-         * Gets the type of the phone number.
-         *
-	 * @if OSPCOMPAT
-         * @brief <i> [Compatibility] </i>
-	 * @endif
-         * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-         *                           For more information, see @ref CompPhoneNumberGetTypePage "here".
-	 * @endif
-         *
-         * @return	The type of the phone number
-         */
+     * Gets the type of the phone number.
+     *
+	 * @since	2.0
+	 *
+     * @return	The type of the phone number
+     */
 	PhoneNumberType GetType(void) const;
 
 	/**
-	 * @if OSPCOMPAT
-         * @page                CompPhoneNumberGetTypePage         Compatibility for GetType()
-         * @section             CompPhoneNumberGetTypePageIssueSection             Issues
-	 * Implementing this method in OSP compatible applications has the following issue: @n
-         * -# PHONENUMBER_TYPE_CUSTOM is not supported. If the type of the phone number is PHONENUMBER_TYPE_CUSTOM, PHONENUMBER_TYPE_OTHER is returned instead.
-         *
-         * @section             CompPhoneNumberGetTypePageSolutionSection          Resolutions
-	 * The issue mentioned above has been resolved in Tizen.
-	 * @endif
-         */
+	 */
 
 	/**
 	 * Gets the phone number.
@@ -174,14 +157,7 @@ public:
 	/**
 	 * Sets the specified phone number.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-	 *                            For more information, see @ref CompPhoneNumberSetPhoneNumberPage "here".
-	 * @endif
 	 *
 	 * @return	An error code
 	 * @param[in]	number		The phone number to set
@@ -191,16 +167,6 @@ public:
 	result SetPhoneNumber(const Tizen::Base::String& number);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page		CompPhoneNumberSetPhoneNumberPage		Compatibility for SetPhoneNumber()
-	 * @section		CompPhoneNumberSetPhoneNumberPageIssueSection		Issues
-	 * Implementing this method in OSP compatible applications has the following issue: @n
-	 * -# If the length of the phone number to be set is greater than 50 characters, E_INVALID_ARG is returned.
-	 * -# Only alphabets (a~z, A~Z), numbers, plus (+), asterisk (*), pound (#), and comma (,) are allowed.
-	 *
-	 * @section		CompPhoneNumberSetPhoneNumberPageSolutionSection		Resolutions
-	 * The issue mentioned above has been resolved in Tizen.
-	 * @endif
 	 */
 
 	/**

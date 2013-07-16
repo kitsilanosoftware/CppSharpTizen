@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -36,7 +35,7 @@ namespace Tizen { namespace Social
  * @brief <i> [Deprecated] </i>
  * @deprecated	This constant is deprecated because there is no limitation any more.
  * @since	2.0
- @ endif
+ * @endif
  */
 static const int MAX_IM_ADDRESS_LENGTH = 100;
 
@@ -48,8 +47,8 @@ static const int MAX_IM_ADDRESS_LENGTH = 100;
  * @deprecated 	This object is provided only for backward compatibility and will be deleted in the near future.
  *				Use IM_ADDRESS_MSN instead of this object.
  * @since	2.0
- @ endif
-*/
+ * @endif
+ */
 _OSP_EXPORT_ extern const Tizen::Base::String IM_MSN;
 
 /**
@@ -60,7 +59,7 @@ _OSP_EXPORT_ extern const Tizen::Base::String IM_MSN;
  * @deprecated 	This object is provided only for backward compatibility and will be deleted in the near future.
  *				Use IM_ADDRESS_ICQ instead of this object.
  * @since	2.0
- @ endif
+ * @endif
  */
 _OSP_EXPORT_ extern const Tizen::Base::String IM_ICQ;
 
@@ -72,7 +71,7 @@ _OSP_EXPORT_ extern const Tizen::Base::String IM_ICQ;
  * @deprecated 	This object is provided only for backward compatibility and will be deleted in the near future.
  *				Use IM_ADDRESS_AIM instead of this object.
  * @since	2.0
- @ endif
+ * @endif
  */
 _OSP_EXPORT_ extern const Tizen::Base::String IM_AIM;
 
@@ -84,7 +83,7 @@ _OSP_EXPORT_ extern const Tizen::Base::String IM_AIM;
  * @deprecated 	This object is provided only for backward compatibility and will be deleted in the near future.
  *				Use IM_ADDRESS_YAHOO instead of this object.
  * @since	2.0
- @ endif
+ * @endif
  */
 _OSP_EXPORT_ extern const Tizen::Base::String IM_YAHOO;
 
@@ -96,7 +95,7 @@ _OSP_EXPORT_ extern const Tizen::Base::String IM_YAHOO;
  * @deprecated 	This object is provided only for backward compatibility and will be deleted in the near future.
  *				Use IM_ADDRESS_JABBER instead of this object.
  * @since	2.0
- @ endif
+ * @endif
  */
 _OSP_EXPORT_ extern const Tizen::Base::String IM_JABBER;
 
@@ -108,7 +107,7 @@ _OSP_EXPORT_ extern const Tizen::Base::String IM_JABBER;
  * @deprecated 	This object is provided only for backward compatibility and will be deleted in the near future.
  *				Use IM_ADDRESS_GTALK instead of this object.
  * @since	2.0
- @ endif
+ * @endif
  */
 _OSP_EXPORT_ extern const Tizen::Base::String IM_GTALK;
 
@@ -120,7 +119,7 @@ _OSP_EXPORT_ extern const Tizen::Base::String IM_GTALK;
  * @deprecated 	This object is provided only for backward compatibility and will be deleted in the near future.
  *				Use IM_ADDRESS_SKYPE instead of this object.
  * @since	2.0
- @ endif
+ * @endif
  */
 _OSP_EXPORT_ extern const Tizen::Base::String IM_SKYPE;
 
@@ -132,7 +131,7 @@ _OSP_EXPORT_ extern const Tizen::Base::String IM_SKYPE;
  * @deprecated 	This object is provided only for backward compatibility and will be deleted in the near future.
  *				Use IM_ADDRESS_QQ instead of this object.
  * @since	2.0
- @ endif
+ * @endif
  */
 _OSP_EXPORT_ extern const Tizen::Base::String IM_QQ;
 
@@ -307,14 +306,7 @@ public:
 	/**
 	 * Sets the IM address of the current instance of %ImAddress.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-	 *				For more information, see @ref CompImAddressSetImAddressPage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	imAddress			The IM address
@@ -324,15 +316,6 @@ public:
 	result SetImAddress(const Tizen::Base::String& imAddress);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page		CompImAddressSetImAddressPage		Compatibility for SetImAddress()
-	 * @section		CompImAddressSetImAddressPageIssueSection		Issues
-	 * Implementing this method in OSP compatible applications has the following issue: @n
-	 * -# If the length of an IM address to be set is greater than 100 characters, E_INVALID_ARG is returned.
-	 *
-	 * @section		CompImAddressSetImAddressPageSolutionSection		Resolutions
-	 * The issue mentioned above has been resolved in Tizen.
-	 * @endif
 	 */
 
 	/**

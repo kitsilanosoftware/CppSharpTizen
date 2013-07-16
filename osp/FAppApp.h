@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -42,7 +41,7 @@ class AppResource;
 
 /**
  * @class	App
- * @brief	This class is the base class of a Tizen native application.
+ * @brief	This class is the base class of a %Tizen native application.
  *
  * @since	2.0
  *
@@ -114,14 +113,7 @@ public:
 	/**
 	 * Gets the locale-independent name of the application.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 * 					For more information, see @ref CompGetAppNamePage "here".
-	 * @endif
 	 * @return	The name of the application
 	 */
 	Tizen::Base::String GetAppName(void) const;
@@ -129,14 +121,14 @@ public:
 	/**
 	 * @page	CompGetAppNamePage Compatibility for GetAppName()
 	 * @section	CompGetAppNamePageIssue Issues
-	 * Implementing this method in OSP compatible applications has the following issues:   @n
+	 * Implementation of this method in %Tizen API versions prior to 2.1 has the following issue: @n
 	 *
 	 * -# GetAppName() returns the localized name of the application while the meaning of the application name is ambiguous.
 	 *  There are different use cases for locale-dependent name and localized name and the platform does not provide
 	 *  a method for obtaining language-neutral name.
 	 *
 	 * @section	CompGetAppNamePageResolution Resolutions
-	 * This issue has been resolved in Tizen.  @n 
+	 * The issue mentioned above is resolved in %Tizen API version 2.1 as follows: @n
 	 *
 	 * -# GetAppDisplayName() is introduced to acquire localized name and GetAppName() returns locale-independent application name.
 	 */
@@ -199,6 +191,15 @@ public:
 	Tizen::Base::String GetAppResourcePath(void) const;
 
 	/**
+	* Gets the path of the application's shared directory to export data to other applications.
+	*
+	* @since	2.1
+	*
+	* @return	The application's shared directory path
+	*/
+	Tizen::Base::String GetAppSharedPath(void) const;
+
+	/**
 	 * Terminates the application while it is running. @n
 	 * The OnAppTerminating() method is called after the %Terminate() method is executed successfully.
 	 *
@@ -253,17 +254,27 @@ public:
 	/**
 	 * Called when the application's state changes to App::TERMINATING. @n
 	 * All the activities involved in terminating the application, including saving the application's states, must be done in the %OnAppTerminating() method.
-	 * After this method, the application code cannot be executed. The application is destroyed subsequently.
+	 * After this method, the application code cannot be executed. The application is destroyed subsequently. @n
+	 *
+	 * An application can be terminated by either system, such as power-off and OOM, or others, such as self and other applications. @n
+	 * When the termination by system, called an “urgent termination”, occurs, the method, %OnAppTerminating(), cannot be executed properly.
+	 * For more details, while power-off, even if %OnAppTerminating() is called, it has a short time for executing. If the application is killed by OOM, %OnAppTerminating() is not called. @n
+	 * Because %OnAppTerminating() is not likely to be called due to urgent termination, the application should save the critical data as they can do.
+	 * For example, the application can set the check point or use the callback for low memory. @n
+	 * When the termination by self or other applications, called a “normal termination”, occurs, the method, %OnAppTerminating(), can be executed properly.
+	 * It provides more time for executing than urgent termination, but limits to the time to 3 or 5 seconds. @n
+	 * The main loop is already quitted when %OnAppTerminating() is called.
+	 * Thus, the application should not use a kind of asynchronous API of which the callback is triggered by the main loop.
 	 *
 	 * @since	2.0
 	 *
 	 * @return	@c true if the method is successful, @n
 	 *			else @c false
 	 * @param[in]	appRegistry         The instance that manages the application's states
-	 * @param[in]	forcedTermination   Set to @c true if the application is terminated by the system or another application, @n
+	 * @param[in]	urgentTermination   Set to @c true if the application is terminated by the system, @n
 	 *									else @c false
 	 */
-	virtual bool OnAppTerminating(AppRegistry& appRegistry, bool forcedTermination = false) = 0;
+	virtual bool OnAppTerminating(AppRegistry& appRegistry, bool urgentTermination = false) = 0;
 
 	/**
 	 * Called when the system detects that the system wide memory or application heap memory is insufficient to run the application any further. @n

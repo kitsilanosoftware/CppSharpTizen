@@ -26,7 +26,6 @@
 #define _FMEDIA_IMAGEBUFFER_H_
 
 #include <FMediaImage.h>
-#include <FMediaTypes.h>
 
 namespace Tizen { namespace Media
 {
@@ -35,9 +34,9 @@ namespace Tizen { namespace Media
  * @brief  This class is used for handling decoded image data.
  *
  * @since 2.0
+ * @remarks The minimum dimension is 16x16 for JPEG encoding and 8x8 for PNG encoding.
  *
  * The %ImageBuffer class is used for handling decoded image data, including image decoding and encoding.
- * @remarks The minimum dimension is 16x16 for JPEG encoding and 8x8 for PNG encoding.
  *
  * The following example demonstrates how to use the %ImageBuffer class to decode and encode image.
  *
@@ -100,19 +99,19 @@ public:
 	* @since 2.0
 	*
 	* @return     An error code
-	* @param[in]  width                 The width of image
-	* @param[in]  height                The height of image
-	* @param[in]  pixelFormat           The pixel format of image should be one of values returned from GetSupportedPixelFormatListN()
-	* @param[in]  data                  The raw pixel data of image @n If @c data is not @c null then it will be copied into internal buffer of this instance.
-	*                                   If @c null then default color data will be filled.
-	* @param[in]  length                The size of data
+	* @param[in]  width                 The width of the image
+	* @param[in]  height                The height of the image
+	* @param[in]  pixelFormat           The pixel format of the image should be one of the values returned by GetSupportedPixelFormatListN()
+	* @param[in]  pData                  The raw pixel data of the image @n If @c pData is not @c null, then it is copied into the internal buffer of this instance.
+	*                                   If @c null, then the default color data is filled.
+	* @param[in]  length                The size of the data
 	* @exception  E_SUCCESS             The method is successful.
 	* @exception  E_INVALID_ARG         A specified input parameter is invalid.
 	* @exception  E_UNSUPPORTED_FORMAT  The specified @c pixelFormat is not supported.
 	* @exception  E_OUT_OF_MEMORY       The memory is insufficient.
+	* @remarks    There is a high probability for an occurrence of an out-of-memory exception. If possible, check whether the exception is @c E_OUT_OF_MEMORY or not.
+	*             For more information on how to handle the out-of-memory exception, refer <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">here</a>.
 	* @see GetSupportedPixelFormatListN()
-	* @remarks    It’s a high probability that the out-of-memory exception occurs. Check the exception as possible if it is E_OUT_OF_MEMORY.
-	*             Refer to <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">Exception Check</a> and handle the out-of-memory.
 	*/
 	result Construct(int width, int height, MediaPixelFormat pixelFormat, const byte* pData = null, int length = 0);
 
@@ -123,17 +122,17 @@ public:
 	*
 	* @return     An error code
 	* @param[in]  srcImagePath          The source image path
-	* @param[in]  pDecodingRegion       The region that will be decoded @n If this is @c null, then the whole image will be decoded.
-	* @param[in]  autoRotate            If @c true then the image will be rotated automatically based on EXIF orientation tag
-	*                                   If @c false then the image will be decoded without rotation.
+	* @param[in]  pDecodingRegion       The region that is decoded @n If this is @c null, then the whole image is decoded.
+	* @param[in]  autoRotate            If @c true the image is rotated automatically based on the EXIF orientation tag before decoding @n
+	*                                   If @c false the image is decoded without rotation.
 	* @exception  E_SUCCESS             The method is successful.
 	* @exception  E_INVALID_ARG         A specified input parameter is invalid.
 	* @exception  E_UNSUPPORTED_FORMAT  The specified format is not supported.
 	* @exception  E_OVERFLOW            The specified input instance exceeds the supported maximum file size or dimension.
 	* @exception  E_OUT_OF_MEMORY       The memory is insufficient.
 	* @exception  E_FILE_NOT_FOUND      The specified file cannot be found or accessed.
-	* @remarks    It’s a high probability that the out-of-memory exception occurs. Check the exception as possible if it is E_OUT_OF_MEMORY.
-	*             Refer to <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">Exception Check</a> and handle the out-of-memory.
+	* @remarks    There is a high probability for an occurrence of an out-of-memory exception. If possible, check whether the exception is @c E_OUT_OF_MEMORY or not.
+	*             For more information on how to handle the out-of-memory exception, refer <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">here</a>.
 	*/
 	result Construct(const Tizen::Base::String &srcImagePath, const Tizen::Graphics::Rectangle *pDecodingRegion = null, bool autoRotate = true);
 
@@ -143,17 +142,17 @@ public:
 	* @since 2.0
 	*
 	* @return     An error code
-	* @param[in]  srcImageBuf           The buffer that contains compressed image data
-	* @param[in]  pDecodingRegion       The region that will be decoded @n If this is @c null, then the whole image will be decoded.
-	* @param[in]  autoRotate            If @c true then the image will be rotated automatically based on EXIF orientation tag
-	*                                   If @c false then the image will be decoded without rotation.
+	* @param[in]  srcImageBuf           The buffer that contains the compressed image data
+	* @param[in]  pDecodingRegion       The region that is decoded @n If this is @c null, then the whole image is decoded.
+	* @param[in]  autoRotate            If @c true the image is rotated automatically based on the EXIF orientation tag before decoding @n
+	*                                   If @c false the image is decoded without rotation.
 	* @exception  E_SUCCESS             The method is successful.
 	* @exception  E_INVALID_ARG         A specified input parameter is invalid.
 	* @exception  E_UNSUPPORTED_FORMAT  The specified format is not supported.
 	* @exception  E_OVERFLOW            The specified input instance exceeds the supported maximum file size or dimension.
 	* @exception  E_OUT_OF_MEMORY       The memory is insufficient.
-	* @remarks    It’s a high probability that the out-of-memory exception occurs. Check the exception as possible if it is E_OUT_OF_MEMORY.
-	*             Refer to <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">Exception Check</a> and handle the out-of-memory.
+	* @remarks    There is a high probability for an occurrence of an out-of-memory exception. If possible, check whether the exception is @c E_OUT_OF_MEMORY or not.
+	*             For more information on how to handle the out-of-memory exception, refer <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">here</a>.
 	*/
 	result Construct(const Tizen::Base::ByteBuffer &srcImageBuf, const Tizen::Graphics::Rectangle *pDecodingRegion = null, bool autoRotate = true);
 
@@ -172,6 +171,64 @@ public:
 	* @exception  E_OUT_OF_MEMORY       The memory is insufficient.
 	*/
 	result Construct(const Tizen::Graphics::Bitmap &srcBitmap);
+
+	/**
+	* Initializes this instance of %ImageBuffer that is decoded with the data of the given image path with the specified parameters.
+	*
+	* @since 2.1
+	*
+	* @return     An error code
+	* @param[in]  srcImagePath          The source image path
+	* @param[in]  destWidth             The intended width of the image
+	* @param[in]  destHeight            The intended height of the image
+	* @param[in]  scalingMethod         The scaling method
+	* @exception  E_SUCCESS             The method is successful.
+	* @exception  E_INVALID_ARG         A specified input parameter is invalid.
+	* @exception  E_UNSUPPORTED_FORMAT  The specified format is not supported.
+	* @exception  E_OUT_OF_MEMORY       The memory is insufficient.
+	* @exception  E_FILE_NOT_FOUND      The specified file cannot be found or accessed.
+	* @remarks
+	*           - There is a high probability for an occurrence of an out-of-memory exception.
+	*             If possible, check whether the exception is @c E_OUT_OF_MEMORY or not. @n
+	*             For more information on how to handle the out-of-memory exception, refer 
+	*             <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">here</a>.
+	*           - This method does not retain the aspect ratio of the original image.
+	*/
+	result Construct(const Tizen::Base::String &srcImagePath, int destWidth, int destHeight, ImageScalingMethod scalingMethod);
+
+	/**
+	* Initializes this instance of %ImageBuffer that is decoded with the data of the given image buffer with the specified parameters.
+	*
+	* @since 2.1
+	*
+	* @return     An error code
+	* @param[in]  srcImageBuf           The buffer that contains the compressed image data
+	* @param[in]  destWidth             The intended width of the image
+	* @param[in]  destHeight            The intended height of the image
+	* @param[in]  scalingMethod         The scaling method
+	* @exception  E_SUCCESS             The method is successful.
+	* @exception  E_INVALID_ARG         A specified input parameter is invalid.
+	* @exception  E_UNSUPPORTED_FORMAT  The specified format is not supported.
+	* @exception  E_OUT_OF_MEMORY       The memory is insufficient.
+	* @remarks
+	*           - There is a high probability for an occurrence of an out-of-memory exception.
+	*             If possible, check whether the exception is @c E_OUT_OF_MEMORY or not. @n
+	*             For more information on how to handle the out-of-memory exception, refer
+	*             <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">here</a>.
+	*           - This method does not retain the aspect ratio of the original image.
+	*/
+	result Construct(const Tizen::Base::ByteBuffer &srcImageBuf, int destWidth, int destHeight, ImageScalingMethod scalingMethod);
+
+	/**
+	* Gets the current exif orientation of the image data. @n
+	* If automatic rotation is enabled during Construct() then the orientation is reset to the default value.
+	*
+	* @since 2.1
+	*
+	* @return The orientation information of the current image data
+	*/
+	ExifOrientation GetExifOrientation(void) const;
+
 
 	/**
 	* Converts an instance of the Tizen::Base::Object class to an instance of %ImageBuffer and then
@@ -247,7 +304,7 @@ public:
 	* @since 2.0
 	*
 	* @return     An error code
-	* @param[in]  destImagePath         The intended name of encoded image file
+	* @param[in]  destImagePath         The intended name of the encoded image file
 	* @param[in]  destImageFormat       The intended image format
 	* @param[in]  overwrite             Set to @c true to overwrite the file, @n
 	*                                   else @c false
@@ -279,6 +336,26 @@ public:
 	* @remarks    The specific error code can be accessed using the GetLastResult() method.
 	*/
 	Tizen::Graphics::Bitmap* GetBitmapN(Tizen::Graphics::BitmapPixelFormat pixelFormat, Tizen::Graphics::BufferScaling bufferScaling) const;
+
+	/**
+	* Gets an instance of Tizen::Graphics::Bitmap with the data of this instance after resizing it as per a specified width and height.
+	*
+	* @since 2.1
+	*
+	* @return     A pointer to the Tizen::Graphics::Bitmap instance with the specified destination width and height
+	* @param[in]  pixelFormat           The bitmap pixel format
+	* @param[in]  destWidth             The intended width of the image
+	* @param[in]  destHeight            The intended height of the image
+	* @exception  E_SUCCESS             The method is successful.
+	* @exception  E_INVALID_ARG         A specified input parameter is invalid.
+	* @exception  E_UNSUPPORTED_FORMAT  The specified format is not supported.
+	* @exception  E_OUT_OF_MEMORY       The memory is insufficient.
+	* @remarks
+	*           - The specific error code can be accessed using the GetLastResult() method.
+	*           - This method returns an auto-scaled bitmap to support logical coordinate system,
+	*             so the actual dimension of the returned bitmap can vary depending on the physical dimension of the target device.
+	*/
+	Tizen::Graphics::Bitmap* GetBitmapN(Tizen::Graphics::BitmapPixelFormat pixelFormat, float destWidth, float destHeight) const;
 
 	/**
 	* Gets an instance of Tizen::Base::ByteBuffer with the data of this instance.
@@ -313,16 +390,17 @@ public:
 	*
 	* @since 2.0
 	*
-	* @return     A pointer to the %ImageBuffer instance containing the converted %ImageBuffer by specified MediaPixelFormat
+	* @return     A pointer to the %ImageBuffer instance containing the converted %ImageBuffer by the specified MediaPixelFormat
 	* @param[in]  pixelFormat           The pixel format for returned %ImageBuffer
 	* @exception  E_SUCCESS             The method is successful.
 	* @exception  E_UNSUPPORTED_FORMAT  The specified format is not supported.
 	* @exception  E_INVALID_DATA        The current data is invalid for this operation. @n
 	*                                   This will happen when the width or height is not even value,
-	*                                   and the requested pixel format is sub-sampled pixel format like MEDIA_PIXEL_FORMAT_YUV420P.
-	* @remarks    The specific error code can be accessed using the GetLastResult() method.
-	* @remarks    It’s a high probability that the out-of-memory exception occurs. Check the exception as possible if it is E_OUT_OF_MEMORY.
-	*             Refer to <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">Exception Check</a> and handle the out-of-memory.
+	*                                   and the requested pixel format is sub-sampled pixel format like @c MEDIA_PIXEL_FORMAT_YUV420P.
+	* @remarks
+	*           - The specific error code can be accessed using the GetLastResult() method.
+	*           - There is a high probability for an occurrence of an out-of-memory exception. If possible, check whether the exception is @c E_OUT_OF_MEMORY or not.
+	*             For more information on how to handle the out-of-memory exception, refer <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">here</a>.
 	*/
 	ImageBuffer* ConvertPixelFormatN(MediaPixelFormat pixelFormat) const;
 
@@ -341,14 +419,15 @@ public:
 	* @exception  E_INVALID_DATA        The current data is invalid for this operation. @n
 	*                                   This will happen when the current pixel format is sub-sampled pixel format like @c MEDIA_PIXEL_FORMAT_YUV420P
 	*                                   and the requested @c width or @c height is not even value.
-	* @remarks    The specific error code can be accessed using the GetLastResult() method.
-	* @remarks    It’s a high probability that the out-of-memory exception occurs. Check the exception as possible if it is E_OUT_OF_MEMORY.
-	*             Refer to <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">Exception Check</a> and handle the out-of-memory.
+	* @remarks
+	*           - The specific error code can be accessed using the GetLastResult() method.
+	*           - There is a high probability for an occurrence of an out-of-memory exception. If possible, check whether the exception is @c E_OUT_OF_MEMORY or not.
+	*             For more information on how to handle the out-of-memory exception, refer <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">here</a>.
 	*/
 	ImageBuffer* ResizeN(int width, int height) const;
 
 	/**
-	* Gets a horizontally or vertically flipped image from current instance.
+	* Gets a horizontally or vertically flipped image from the current instance.
 	*
 	* @since 2.0
 	*
@@ -357,14 +436,15 @@ public:
 	* @exception  E_SUCCESS             The method is successful.
 	* @exception  E_INVALID_ARG         The specified input parameter is invalid.
 	* @exception  E_OUT_OF_MEMORY       The memory is insufficient.
-	* @remarks    The specific error code can be accessed using the GetLastResult() method.
-	* @remarks    It’s a high probability that the out-of-memory exception occurs. Check the exception as possible if it is E_OUT_OF_MEMORY.
-	*             Refer to <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">Exception Check</a> and handle the out-of-memory.
+	* @remarks
+	*           - The specific error code can be accessed using the GetLastResult() method.
+	*           - There is a high probability for an occurrence of an out-of-memory exception. If possible, check whether the exception is @c E_OUT_OF_MEMORY or not.
+	*             For more information on how to handle the out-of-memory exception, refer <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">here</a>.
 	*/
 	ImageBuffer* FlipN(ImageFlipType flipType) const;
 
 	/**
-	* Gets a rotated image in clockwise direction from current image.
+	* Gets a rotated image in clockwise direction from the current image.
 	*
 	* @since 2.0
 	*
@@ -376,14 +456,15 @@ public:
 	*                                   This will happen when the current pixel format is sub-sampled pixel format like @c MEDIA_PIXEL_FORMAT_YUYV422
 	*                                   and the height is odd value and the requested rotation type is @c IMAGE_ROTATION_90 or @c IMAGE_ROTATION_270.
 	* @exception  E_OUT_OF_MEMORY    The memory is insufficient.
-	* @remarks    The specific error code can be accessed using the GetLastResult() method.
-	* @remarks    It’s a high probability that the out-of-memory exception occurs. Check the exception as possible if it is E_OUT_OF_MEMORY.
-	*             Refer to <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">Exception Check</a> and handle the out-of-memory.
+	* @remarks
+	*           - The specific error code can be accessed using the GetLastResult() method.
+	*           - There is a high probability for an occurrence of an out-of-memory exception. If possible, check whether the exception is @c E_OUT_OF_MEMORY or not.
+	*             For more information on how to handle the out-of-memory exception, refer <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">here</a>.
 	*/
 	ImageBuffer* RotateN(ImageRotationType rotateType) const;
 
 	/**
-	* Crops the region of the current %ImageBuffer.
+	* Crops the region of the current %ImageBuffer instance.
 	*
 	* @since 2.0
 	*
@@ -395,11 +476,12 @@ public:
 	* @exception  E_SUCCESS             The method is successful.
 	* @exception  E_OUT_OF_RANGE        A specified input parameter is out of range.
 	* @exception  E_INVALID_DATA        The current data is invalid for this operation. @n
-	*                                   This will happen when the current pixel format is sub-sampled pixel format like MEDIA_PIXEL_FORMAT_YUV420P
-	*                                   and the requested x, y, width, or height is not even value.
-	* @remarks    The specific error code can be accessed using the GetLastResult() method.
-	* @remarks    It’s a high probability that the out-of-memory exception occurs. Check the exception as possible if it is E_OUT_OF_MEMORY.
-	              Refer to <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">Exception Check</a> and handle the out-of-memory.
+	*                                   This will happen when the current pixel format is sub-sampled pixel format like @c MEDIA_PIXEL_FORMAT_YUV420P
+	*                                   and the requested @c x, @c y, @c width, or @c height is not even value.
+	* @remarks
+	*           - The specific error code can be accessed using the GetLastResult() method.
+	*           - There is a high probability for an occurrence of an out-of-memory exception. If possible, check whether the exception is @c E_OUT_OF_MEMORY or not.
+	*             For more information on how to handle the out-of-memory exception, refer <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">here</a>.
 	*/
 	ImageBuffer* CropN(int x, int y, int width, int height) const;
 
@@ -410,9 +492,9 @@ public:
 	*
 	* @return  An error code
 	* @param[in]  srcImagePath          The source image path
-	* @param[out] imageFormat           The format of image
-	* @param[out] width                 The width of image
-	* @param[out] height                The height of image
+	* @param[out] imageFormat           The format of the image
+	* @param[out] width                 The width of the image
+	* @param[out] height                The height of the image
 	* @exception  E_SUCCESS             The method is successful.
 	* @exception  E_UNSUPPORTED_FORMAT  The specified format is not supported.
 	* @exception  E_OUT_OF_MEMORY       The memory is insufficient.
@@ -427,10 +509,10 @@ public:
 	* @since 2.0
 	*
 	* @return  An error code
-	* @param[in]  srcImageBuf          The buffer that contains compressed image data
-	* @param[out]  imageFormat          The format of image
-	* @param[out]  width                The width of image
-	* @param[out]  height               The height of image
+	* @param[in]  srcImageBuf          The buffer that contains the compressed image data
+	* @param[out]  imageFormat          The format of the image
+	* @param[out]  width                The width of the image
+	* @param[out]  height               The height of the image
 	* @exception  E_SUCCESS             The method is successful.
 	* @exception  E_UNSUPPORTED_FORMAT  The specified format is not supported.
 	* @exception  E_OUT_OF_MEMORY       The memory is insufficient.

@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -163,7 +163,7 @@ GroupedListSample::OnInitializing(void)
 	}
 
 	// Adds the grouped list to the form
-	AddControl(*__pGroupedList);
+	AddControl(__pGroupedList);
 
 	// Deallocates bitmaps
 	delete pBitmapNormal;
@@ -254,7 +254,8 @@ class _OSP_EXPORT_ GroupedList
 public:
 	/**
 	 * @if OSPDEPREC
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the GroupedList::Construct() method must be called right after calling this constructor.
 	 *
 	 * @brief       <i> [Deprecated] </i>
 	 * @deprecated	This class is deprecated. Instead of using this class, use GroupedListView class.
@@ -265,7 +266,8 @@ public:
 
 	/**
 	 * @if OSPDEPREC
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required. @n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @brief       <i> [Deprecated] </i>
 	 * @deprecated	This class is deprecated. Instead of using this class, use GroupedListView class.
@@ -284,7 +286,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	rect			An instance of the Graphics::Rectangle class @n
-	 *								This instance represents the X, Y coordinates of the top-left corner of the created %GroupedList along with the width and
+	 *					This instance represents the X, Y coordinates of the top-left corner of the created %GroupedList along with the width and
 	 *								height.
 	 * @param[in]	style			The style of the %GroupedList control
 	 * @param[in]	itemDivider		Set to @c true to display an item divider, @n
@@ -294,8 +296,9 @@ public:
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_INVALID_ARG	A specified input parameter is invalid.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks    The size of the control must be within the range as defined by the minimum and maximum size.
-	 * @remarks    The minimum size of this control is 274 x 148 on a WVGA screen, 180 x 96 on a HVGA screen and 137 x 74 on a WQVGA screen.
+	 * @remarks
+	 *			- The size of the control must be within the range as defined by the minimum and maximum size.
+	 *			- The minimum size of this control is 274 x 148 on a WVGA screen, 180 x 96 on a HVGA screen and 137 x 74 on a WQVGA screen.
 	 * @endif
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, CustomListStyle style, bool itemDivider = true, bool fastScroll = false);
@@ -309,7 +312,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	text				The string of the group to be appended
+	 * @param[in]	text				The string of the group to append
 	 * @param[in]	pBackgroundBitmap	The background bitmap of the group
 	 * @param[in]	groupId				The ID of the group
 	 * @exception	E_SUCCESS			The method is successful.
@@ -348,7 +351,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]   groupIndex		    The group index
-	 * @param[in]   text			    The string of the group to be appended
+	 * @param[in]   text			    The string of the group to append
 	 * @param[in]   pBackgroundBitmap	The bitmap of the group
 	 * @param[in]   groupId				The ID of the group
 	 * @exception	E_SUCCESS		    The method is successful.
@@ -371,8 +374,9 @@ public:
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_INVALID_ARG	The specified @c groupIndex is invalid.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		When the specified group is removed, all the items in the group are also removed. @n
-	 *				The removed list items are deleted from the memory.
+	 * @remarks
+	 *			- When the specified group is removed, all the items in the group are also removed.
+	 *			- The removed list items are deleted from the memory.
 	 * @endif
 	 */
 	result RemoveGroupAt(int groupIndex);
@@ -388,8 +392,9 @@ public:
 	 * @return		An error code
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		When the specified group is removed, all the items in the group are also removed. @n
-	 *				The removed list items are deleted from the memory.
+	 * @remarks
+	 *			- When the specified group is removed, all the items in the group are also removed.
+	 *			- The removed list items are deleted from the memory.
 	 * @endif
 	 */
 	result RemoveAllGroups(void);
@@ -417,13 +422,14 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	groupIndex		The group index
-	 * @param[in]	item			The custom list item object to be added
+	 * @param[in]	item			The custom list item object to add
 	 * @param[in]	itemId			The specified item ID for this item
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_INVALID_ARG	The specified @c groupIndex or @c itemId is invalid.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks     The added item is deleted automatically when the list is destroyed. @n
-	 *				Do not add, insert, or set an item that already belongs to a %GroupedList control.
+	 * @remarks
+	 *			- The added item is deleted automatically when the list is destroyed.
+	 *			- Do not add, insert, or set an item that already belongs to a %GroupedList control.
 	 * @endif
 	 */
 	result AddItem(int groupIndex, const CustomListItem& item, int itemId = LIST_ITEM_UNSPECIFIED_ID);
@@ -439,13 +445,14 @@ public:
 	 * @return		An error code
 	 * @param[in]   groupIndex		The group index
 	 * @param[in]   itemIndex		The item index in the specified group
-	 * @param[in]	item	        The custom list item to be inserted
+	 * @param[in]	item	        The custom list item to insert
 	 * @param[in]	itemId			The item ID for this item
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_INVALID_ARG	The specified @c groupIndex or @c itemId is invalid.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks     The inserted item is deleted automatically when the list is destroyed.
-	 *				Do not add, insert, or set an item that already belongs to a %GroupedList control.
+	 * @remarks
+	 *			- The inserted item is deleted automatically when the list is destroyed.
+	 *			- Do not add, insert, or set an item that already belongs to a %GroupedList control.
 	 * @endif
 	 */
 	result InsertItemAt(int groupIndex, int itemIndex, const CustomListItem& item, int itemId = LIST_ITEM_UNSPECIFIED_ID);
@@ -461,7 +468,7 @@ public:
 	 * @return		An error code
 	 * @param[in]   groupIndex		The group index
 	 * @param[in]   itemIndex		The item index in the specified group
-	 * @param[in]	item			The custom list item to be set
+	 * @param[in]	item			The custom list item to set
 	 * @param[in]	itemId			The item ID for this item
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_INVALID_ARG	The specified @c groupIndex or @c itemId is invalid.
@@ -545,7 +552,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use GroupedListView class.
 	 * @since     2.0
 	 *
-	 * @param[in]	color	The color of the text to be displayed
+	 * @param[in]	color	The color of the text to display
 	 * @endif
 	 */
 	void SetTextColorOfEmptyList(const Tizen::Graphics::Color& color);
@@ -960,31 +967,13 @@ public:
 
 	/**
 	 * @if OSPDEPREC
-	 * Sets the second index list of scroll by text.
-	 *
-	 * @brief       <i> [Deprecated] </i>
-	 * @deprecated	This class is deprecated. Instead of using this class, use GroupedListView class.
-	 * @since		2.0
-	 *
-	 * @return		An error code
-	 * @param[in]   text			The text of the second index @n
-	 *                              Separate each second index of the first index by ',';.
-	 * @param[in]   indexDigit		The index digit count
-	 * @exception	E_SUCCESS	    The method is successful.
-	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @endif
-	 */
-	result SetFastScrollSubIndex(const Tizen::Base::String& text, FastScrollIndexDigit indexDigit = SCROLL_INDEX_DIGIT_NUM_1);
-
-	/**
-	 * @if OSPDEPREC
 	 * Adds the fast scroll event listener.
 	 *
 	 * @brief       <i> [Deprecated] </i>
 	 * @deprecated	This class is deprecated. Instead of using this class, use GroupedListView class.
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The listener to be added
+	 * @param[in]	listener	The listener to add
 	 * @endif
 	 */
 	void AddFastScrollEventListener(Tizen::Ui::IFastScrollEventListener& listener);
@@ -997,7 +986,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use GroupedListView class.
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The listener to be removed
+	 * @param[in]	listener	The listener to remove
 	 * @endif
 	 */
 	void RemoveFastScrollEventListener(Tizen::Ui::IFastScrollEventListener& listener);
@@ -1010,7 +999,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use GroupedListView class.
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The listener to be added
+	 * @param[in]	listener	The listener to add
 	 * @endif
 	 */
 	void AddGroupedItemEventListener(Tizen::Ui::IGroupedItemEventListener& listener);
@@ -1023,7 +1012,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use GroupedListView class.
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The listener to be removed
+	 * @param[in]	listener	The listener to remove
 	 * @endif
 	 */
 	void RemoveGroupedItemEventListener(Tizen::Ui::IGroupedItemEventListener& listener);

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -97,14 +96,7 @@ public:
 	/**
 	 * Initializes this instance of %NumberSymbols with the specified @c locale.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief                               <i> [Compatibility] </i> 
-	 * @endif
 	 * @since				2.0
-	 * @if OSPCOMPAT
-	 * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	*                              For more information, see @ref CompNumberSymbolsConstructPage "here".
-	 * @endif
 	 *
 	 * @return				An error code
 	 * @param[in]			locale						An instance of Locale
@@ -115,18 +107,7 @@ public:
 	result Construct(const Locale& locale);
 
 	/**
-	 * @if OSPCOMPAT
-         * @page                    CompNumberSymbolsConstructPage Compatibility for Construct()
-         * @section                   CompNumberSymbolsConstructIssueSection Issues
-         * Implementation of this method in OSP compatible applications has the following issue: @n
-         * -# The method returns E_UNSUPPORTED_OPERATION if the @c locale is invalid.
-         *
-         * @section                 CompNumberSymbolsConstructSolutionSection Resolutions
-         * This issue has been resolved in Tizen.
-	 * @par When working in Tizen:
-         * -# The method returns E_INVALID_ARG if the @c locale is invalid.
-	 * @endif
-         */
+	 */
 
 	/**
 	 * Gets the character used for number format.

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -97,14 +96,7 @@ public:
 	 * Initializes this instance of %FileUnzipper with the specified filepath. @n
 	 * This method opens a zip file in the read mode.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since 2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 *					For more information, see @ref CompIoPathPage "here".
-	 * @endif
 	 *
 	 * @return			An error code
 	 * @param [in] 		filePath  		The path of the file to open or create
@@ -113,7 +105,7 @@ public:
 	 *										- The length of the specified path is @c 0 or exceeds system limitations. @n
 	 *										- The specified path contains prohibited character(s). @n
 	 *										- The specified path is invalid.
-	 * @exception 		E_ILLEGAL_ACCESS 	The specified file path is inaccessible as per the Tizen platform policy.
+	 * @exception 		E_ILLEGAL_ACCESS 	The specified file path is inaccessible as per the %Tizen platform policy.
 	 * @exception		E_FILE_NOT_FOUND  	The specified file cannot be found or accessed.
 	 * @exception		E_IO 			An unexpected device failure has occurred.
 	 * @remarks			The paths for @b Tizen::App::AppManager::GetAppSharedPath(appId) + L"data" and @b Tizen::App::AppManager::GetAppSharedPath(appId) + L"trusted" are not supported.
@@ -124,14 +116,7 @@ public:
 	/**
 	 * Unzips a zip file at the specified path or destination.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since 2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 *					For more information, see @ref CompIoPathPage "here".
-	 * @endif
 	 *
 	 * @return			An error code
 	 * @param [in] 		dirPath   			A directory path to unzip
@@ -154,14 +139,7 @@ public:
 	/**
 	 * Unzips a zip entry from a zip-archive to the specified path.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since 2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 *					For more information, see @ref CompIoPathPage "here".
-	 * @endif
 	 *
 	 * @return			An error code
 	 * @param [in] 		dirPath  			A directory path to unzip

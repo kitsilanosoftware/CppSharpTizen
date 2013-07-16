@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -176,7 +175,25 @@ public:
 	Tizen::Base::String GetGenre(void) const;
 
 	/**
-	 * Gets the album art of the video.
+	 * Gets a comment of a video file.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		A comment of a video file
+	 */
+	Tizen::Base::String GetComment(void) const;
+
+	/**
+	 * Gets the description of a video file.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		The description of a video file
+	 */
+	Tizen::Base::String GetDescription(void) const;
+
+	/**
+	 * Gets the album art of a video.
 	 *
 	 * @since			2.0
 	 *

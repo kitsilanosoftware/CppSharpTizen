@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -166,10 +165,11 @@ public:
 	 *
 	 * @since	2.0
 	 *
-	 * @return		The account ID list
-	 * @exception	E_SUCCESS              The method is successful.
-	 * @exception   E_SYSTEM      The method cannot proceed due to a severe system error.
-	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
+	 * @return     The account ID list
+	 * @exception  E_SUCCESS              The method is successful.
+	 * @exception  E_OUT_OF_MEMORY        The memory is insufficient.
+	 * @exception  E_SYSTEM     	The method cannot proceed due to a severe system error.
+	 * @remarks    The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Tizen::Base::Collection::IListT<AccountId>* GetAccountIdsN(void) const;
 
@@ -186,6 +186,7 @@ public:
 	 * Sets whether this person is a favorite or not.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.write
 	 *
 	 * @return      An error code
@@ -193,6 +194,7 @@ public:
 	 *                            else @c false to set this person as non-favorite
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SYSTEM      The method cannot proceed due to a severe system error.
 	 * @see IsFavorite()
 	 * @see	AddressbookManager::GetFavoritePersonsN()
@@ -202,79 +204,37 @@ public:
 
 	/**
 	 * Sets the specified phone number as the primary phone number of this person.
-	 * The phone number must be one of the instances returned by calling Contact::GetValuesN(CONTACT_MPROPERTY_ID_PHONE_NUMBERS) on the instance of the contacts of this person.@n
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.write
 	 *
 	 * @return     An error code
 	 * @param[in]  phoneNumber    The phone number
 	 * @exception  E_SUCCESS      The method is successful.
 	 * @exception  E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception  E_INVALID_ARG          The specified @c phoneNumber is invalid.
 	 * @exception  E_SYSTEM     The method cannot proceed due to a severe system error.
 	 * @see	GetPrimaryPhoneNumber()
-	 *
-	 * The following example demonstractes how to use %SetAsPrimaryPhoneNumber() method
-	 * @code
-	 * void
-	 * MyApplication::SetPrimaryPhoneNumber(void)
-	 * {
-	 *        IList* pContacts = pAddressbookManager->GetContactsByPersonN(pPerson->GetId());
-	 *        Contact* pContact = static_cast<Contact*>(pContacts->GetAt(0));
-	 *        IList* pPhoneNumbers = pContact->GetValuesN(CONTACT_MPROPERTY_ID_PHONE_NUMBERS);
-	 *
-	 *        PhoneNumber* pPhoneNumber = static_cast<PhoneNumber*>(pPhoneNumbers->GetAt(0));
-	 *
-	 *        // Set the first phone number of the first contact of the person as the primary phone number
-	 *        pPerson->SetAsPrimaryPhoneNumber(*pPhoneNumber);
-	 *        
-	 *	  pPhoneNumbers->RemoveAll(true);
-	 *	  delete pPhoneNumbers;
-	 *
-	 *	  pContacts->RemoveAll(true);
-	 *	  delete pContacts;
-	 * }
-	 * @endcode
 	 */
 	result SetAsPrimaryPhoneNumber(const PhoneNumber& phoneNumber);
 
 	/**
 	 * Sets the specified email as the primary email of this person.
-	 * The email must be one of the instances returned by calling Contact::GetValuesN(CONTACT_MPROPERTY_ID_EMAILS) on the instance of the contacts of this person.@n
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.write
 	 *
 	 * @return     An error code
 	 * @param[in]  email          The email
 	 * @exception  E_SUCCESS      The method is successful.
 	 * @exception  E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception  E_INVALID_ARG          The specified @c phoneNumber is invalid.
 	 * @exception  E_SYSTEM     The method cannot proceed due to a severe system error.
 	 * @see	GetPrimaryEmail()
-	 * The following example demonstractes how to use %SetAsPrimaryEmail() method
-	 * @code
-	 * void
-	 * MyApplication::SetPrimaryEmail(void)
-	 * {
-	 *        IList* pContacts = pAddressbookManager->GetContactsByPersonN(pPerson->GetId());
-	 *        Contact* pContact = static_cast<Contact*>(pContacts->GetAt(0));
-	 *        IList* pEmails = pContact->GetValuesN(CONTACT_MPROPERTY_ID_EMAILS);
-	 *
-	 *        Email* pEmail = static_cast<Email*>(pEmails->GetAt(0));
-	 *
-	 *        // Set the first email of the first contact of the person as the primary email
-	 *        pPerson->SetAsPrimaryEmail(*pEmail);
-	 *        
-	 *	  pEmails->RemoveAll(true);
-	 *	  delete pEmails;
-	 *
-	 *	  pContacts->RemoveAll(true);
-	 *	  delete pContacts;
-	 * }
-	 * @endcode
-
 	 */
 	result SetAsPrimaryEmail(const Email& email);
 
@@ -282,11 +242,13 @@ public:
 	 * Gets the primary phone number of this person.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.read
 	 *
 	 * @return	The primary phone number @n If this instance does not have the primary email, an empty PhoneNumber instance is returned.
 	 * @exception  E_SUCCESS      		The method is successful.
 	 * @exception  E_PRIVILEGE_DENIED      	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception  E_SYSTEM     The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @see SetAsPrimaryPhoneNumber()
@@ -297,11 +259,13 @@ public:
 	 * Gets the primary email of this person.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.read
 	 *
 	 * @return	The primary email @n If this instance does not have the primary email, an empty Email instance is returned.
 	 * @exception  E_SUCCESS      		The method is successful.
 	 * @exception  E_PRIVILEGE_DENIED      	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception  E_SYSTEM     The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @see SetAsPrimaryEmail()

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -17,7 +16,7 @@
 
 /*
  * @file	FSysISettingInfoSetValueAsyncResultListener.h
- * @brief	This is the header file of the %ISettingInfoSetValueAsyncResultListener interface.
+ * @brief	This is the header file for the %ISettingInfoSetValueAsyncResultListener interface.
  *
  * This header file contains the declarations of the %ISettingInfoSetValueAsyncResultListener interface.
  */
@@ -52,7 +51,7 @@ public:
 	virtual ~ISettingInfoSetValueAsyncResultListener(void) {}
 	
 	/**
-	 *Called when a result is received for an asynchronous setting change method call.
+	 * Called when a result is received for an asynchronous setting change method call.
 	 *
 	 * @since 2.0
 	 *

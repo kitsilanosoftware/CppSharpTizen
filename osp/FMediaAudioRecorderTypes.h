@@ -48,13 +48,14 @@ namespace Tizen { namespace Media
  *
  * @since		2.0
  *
- * @see		AudioRecorder::SetFormat(), AudioRecorder::GetFormat()
+ * @see		AudioRecorder::SetFormat()
+ * @see		AudioRecorder::GetFormat()
  * @endif
  */
 enum AudioRecordingFormat
 {
 	AUDIORECORDING_FORMAT_DEFAULT,              /**< @if OSPDEPREC The default format @endif */
-	AUDIORECORDING_FORMAT_AMR,                  /**< @if OSPDEPREC The AMR format  @endif */
+	AUDIORECORDING_FORMAT_AMR,                  /**< @if OSPDEPREC The AMR format @endif */
 	AUDIORECORDING_FORMAT_WAVE,                 /**< @if OSPDEPREC The WAVE format @endif */
 };
 

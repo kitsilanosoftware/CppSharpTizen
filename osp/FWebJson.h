@@ -42,7 +42,7 @@
  *				@b Library : @b osp-web
  *
  * The %Json namespace contains interfaces to manipulate the JSON documents.
- * @n
+ * 
  * For more information on the %Json namespace features, see <a href="../org.tizen.native.appprogramming/html/guide/web/json_namespace.htm">JSON Guide</a>.
  *
  * The following diagram illustrates the relationships between the classes belonging to the %Json namespace. 

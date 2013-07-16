@@ -34,6 +34,7 @@ namespace Tizen { namespace Media
 {
 
 class _VideoRecorderImpl;
+class IAudioStreamFilter;
 
 /**
  * @class	VideoRecorder
@@ -186,19 +187,19 @@ class _OSP_EXPORT_ VideoRecorder
 {
 public:
 	/**
-	 * This is the default constructor for this class.
+	 * This is the default constructor for this class. @n
+	 * The object is not fully constructed after this constructor is called. @n For full construction,
+	 * the Construct() method must be called right after calling this constructor.
 	 *
 	 * @since		2.0
 	 *
-	 * @remarks	The object is not fully constructed after this constructor is called. For full construction,
-	 * the Construct() method must be called right after calling this constructor.
 	 */
 	VideoRecorder(void);
 
 	/**
 	 * This is the destructor for this class. @n
 	 * All allocated resources are deallocated by this method. This method must be called in the same thread in
-	 * which the Construct() method is called.This polymorphic destructor should be overridden if required. This way,
+	 * which the Construct() method is called. @n This polymorphic destructor should be overridden if required. This way,
 	 * the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @since		2.0
@@ -225,14 +226,8 @@ public:
 	/**
 	* Creates a video file for a recording.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since		2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
+	* @privlevel        public
 	* @privilege	%http://tizen.org/privilege/videorecorder
 	*
 	* @return		An error code
@@ -257,9 +252,10 @@ public:
 
 	/**
 	* Closes the video file. @n
-	* This is a synchronous method.
+	* The %Close() method is a synchronous method.
 	*
 	* @since		2.0
+	* @privlevel        public
 	* @privilege    %http://tizen.org/privilege/videorecorder
 	*
 	* @return		An error code
@@ -277,6 +273,7 @@ public:
 	* Resumes the recording if Pause() has been called.
 	*
 	* @since		2.0
+	* @privlevel        public
 	* @privilege    %http://tizen.org/privilege/videorecorder
 	*
 	* @return		An error code
@@ -295,6 +292,7 @@ public:
 	* Stops the recording.
 	*
 	* @since		2.0
+	* @privlevel        public
 	* @privilege    %http://tizen.org/privilege/videorecorder
 	*
 	* @return		An error code
@@ -313,6 +311,7 @@ public:
 	* To resume the recording after the %Pause() method is called, Record() must be called.
 	*
 	* @since		2.0
+	* @privlevel        public
 	* @privilege    %http://tizen.org/privilege/videorecorder
 	*
 	* @return		An error code
@@ -329,6 +328,7 @@ public:
 	* Cancels the recording operation without saving the data.
 	*
 	* @since		2.0
+	* @privlevel        public
 	* @privilege	%http://tizen.org/privilege/videorecorder
 	*
 	* @return		An error code
@@ -337,9 +337,10 @@ public:
 	* @exception	E_SYSTEM				A system error has occurred.
 	* @exception	E_OUT_OF_MEMORY			The memory is insufficient.
 	* @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
-	* @remarks		When this method is called, the state is changed to ::RECORDER_STATE_STOPPING. @n
-	*				After IVideoRecorderEventListener::OnVideoRecorderCanceled() is called, the state is changed to
-	*				@c RECORDER_STATE_STOPPED.
+	* @remarks		
+	*			- When this method is called, the state is changed to ::RECORDER_STATE_STOPPING.
+	*			- After IVideoRecorderEventListener::OnVideoRecorderCanceled() is called, the state is changed to
+	*			::RECORDER_STATE_STOPPED.
 	* @see			Record()
 	* @see			Stop()
 	*/
@@ -384,6 +385,7 @@ public:
 	* Sets the time limit for the recording in milliseconds.
 	*
 	* @since		2.0
+	* @privlevel        public
 	* @privilege    %http://tizen.org/privilege/videorecorder
 	*
 	* @return		An error code
@@ -420,6 +422,7 @@ public:
 	* Instead of using this method, use the SetFormat(CodecType audioCodec, CodecType videoCodec, MediaContainerType container) method that
 	* sets the audio/video codec and container together.
 	* @since		2.0
+	* @privlevel        public
 	* @privilege    %http://tizen.org/privilege/videorecorder
 	*
 	* @return		An error code
@@ -475,9 +478,10 @@ public:
 	* @exception	E_SUCCESS					The method is successful.
 	* @exception	E_SYSTEM					A system error has occurred.
 	* @exception	E_OUT_OF_MEMORY				The memory is insufficient.
-	* @remarks		The specific error code can be accessed using the GetLastResult() method. @n
-	*               The return value must be released by the caller. @n
-	*               All items in the list must be released by the caller.
+	* @remarks		
+	*			- The specific error code can be accessed using the GetLastResult() method.
+	*               	- The return value must be released by the caller. @n
+	*        	      All items in the list must be released by the caller.
 	* @see			SetCodec()
 	* @see			GetCodec()
 	* @endif
@@ -495,8 +499,9 @@ public:
 	* @exception	E_SUCCESS			The method is successful.
 	* @exception	E_SYSTEM			A system error has occurred.
 	* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
-	* @remarks		The specific error code can be accessed using the GetLastResult() method. @n
-	*               The return value must be released by the caller.
+	* @remarks		
+	*			- The specific error code can be accessed using the GetLastResult() method.
+	*               	- The return value must be released by the caller.
 	* @see			SetFormat( CodecType audioCodec, CodecType videoCodec, MediaContainerType container )
 	* @see			GetFormat( CodecType& audioCodec, CodecType& videoCodec, MediaContainerType& container ) const
 	*/
@@ -513,8 +518,9 @@ public:
 	* @exception	E_SUCCESS				The method is successful.
 	* @exception	E_SYSTEM				A system error has occurred.
 	* @exception	E_OUT_OF_MEMORY			The memory is insufficient.
-	* @remarks		The specific error code can be accessed using the GetLastResult() method. @n
-	*               The return value must be released by the caller.
+	* @remarks		
+	*			- The specific error code can be accessed using the GetLastResult() method.
+	*			- The return value must be released by the caller.
 	* @see			SetFormat( CodecType audioCodec, CodecType videoCodec, MediaContainerType container )
 	* @see			GetFormat( CodecType& audioCodec, CodecType& videoCodec, MediaContainerType& container ) const
 	*/
@@ -531,8 +537,9 @@ public:
 	* @exception	E_SUCCESS				The method is successful.
 	* @exception	E_SYSTEM				A system error has occurred.
 	* @exception	E_OUT_OF_MEMORY			The memory is insufficient.
-	* @remarks		The specific error code can be accessed using the GetLastResult() method. @n
-	*               The return value must be released by the caller.
+	* @remarks		
+	*			- The specific error code can be accessed using the GetLastResult() method.
+	*			- The return value must be released by the caller.
 	* @see			SetFormat( CodecType audioCodec, CodecType videoCodec, MediaContainerType container )
 	* @see			GetFormat( CodecType& audioCodec, CodecType& videoCodec, MediaContainerType& container ) const
 	*/
@@ -548,6 +555,7 @@ public:
 	* Instead of using this method, use the SetFormat(CodecType audioCodec, CodecType videoCodec, MediaContainerType container) method that sets
 	* the audio/video codec and container together.
 	* @since		2.0
+	* @privlevel        public
 	* @privilege    %http://tizen.org/privilege/videorecorder
 	*
 	* @return		An error code
@@ -589,6 +597,7 @@ public:
 	* Instead of using this method, use the SetFormat(CodecType audioCodec, CodecType videoCodec, MediaContainerType container) method that
 	* determines whether the video recorder includes the audio codec.
 	* @since		2.0
+	* @privlevel        public
 	* @privilege    %http://tizen.org/privilege/videorecorder
 	*
 	* @return		An error code
@@ -625,6 +634,7 @@ public:
 	* Initially, the default codec and container format are set with the internal configuration.
 	*
 	* @since		2.0
+	* @privlevel        public
 	* @privilege    %http://tizen.org/privilege/videorecorder
 	*
 	* @return		An error code
@@ -640,8 +650,9 @@ public:
 	* @exception	E_SYSTEM				A system error has occurred.
 	* @exception	E_OUT_OF_MEMORY			The memory is insufficient.
 	* @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
-	* @remarks		If the audio codec is ::CODEC_NONE, the audio will be ignored, and only the video stream will be recorded. @n
-	*				If the specified container does not support the specified codec, @c E_UNSUPPORTED_FORMAT may be returned.
+	* @remarks		
+	*				- If the audio codec is @c CODEC_NONE, the audio will be ignored, and only the video stream will be recorded.
+	*				- If the specified container does not support the specified codec, @c E_UNSUPPORTED_FORMAT may be returned.
 	* @see			GetFormat( CodecType& audioCodec, CodecType& videoCodec, MediaContainerType& container ) const
 	*/
 	result SetFormat(CodecType audioCodec, CodecType videoCodec, MediaContainerType container);
@@ -656,9 +667,10 @@ public:
 	* @param[out]	videoCodec			The retrieved video codec
 	* @param[out]	container			The retrieved container
 	* @exception	E_SUCCESS			The method is successful.
-	* @remarks		The default codecs and container are retrieved, if SetFormat( CodecType audioCodec, CodecType
-	*				videoCodec, MediaContainerType container) is not called before calling this method. @n
-	*				This method always returns E_SUCCESS.
+	* @remarks		
+	*				- The default codecs and container are retrieved, if SetFormat( CodecType audioCodec, CodecType
+	*				videoCodec, MediaContainerType container) is not called before calling this method.
+	*				- This method always returns @c E_SUCCESS.
 	* @see			SetFormat( CodecType audioCodec, CodecType videoCodec, MediaContainerType container )
 	*/
 	result GetFormat(CodecType& audioCodec, CodecType& videoCodec, MediaContainerType& container) const;
@@ -667,6 +679,7 @@ public:
 	* Sets the quality of the recorder.
 	*
 	* @since		2.0
+	* @privlevel        public
 	* @privilege    %http://tizen.org/privilege/videorecorder
 	*
 	* @return		An error code
@@ -696,6 +709,7 @@ public:
 	* Initially, the default resolution from the internal configuration is set.
 	*
 	* @since		2.0
+	* @privlevel        public
 	* @privilege	%http://tizen.org/privilege/videorecorder
 	*
 	* @return		An error code
@@ -735,8 +749,9 @@ public:
 	* @exception	E_SUCCESS				The method is successful.
 	* @exception	E_SYSTEM				A system error has occurred.
 	* @exception	E_OUT_OF_MEMORY			The memory is insufficient.
-	* @remarks		The specific error code can be accessed using the GetLastResult() method. @n
-	*				The return value must be released by the calling method. @n
+	* @remarks		
+	*				- The specific error code can be accessed using the GetLastResult() method.
+	*				- The return value must be released by the calling method. @n
 	*				All items in the list must be released by the calling method.
 	* @see			SetRecordingResolution()
 	* @see			GetRecordingResolution()
@@ -762,6 +777,7 @@ public:
 	* Sets the mute state of a recorder.
 	*
 	* @since		2.0
+	* @privlevel        public
 	* @privilege    %http://tizen.org/privilege/videorecorder
 	*
 	* @return		An error code
@@ -791,6 +807,7 @@ public:
 	* Sets the recording rotation of the recorder.
 	*
 	* @since		2.0
+	* @privlevel        public
 	* @privilege	%http://tizen.org/privilege/videorecorder
 	*
 	* @return		An error code
@@ -814,6 +831,38 @@ public:
 	* @see			SetRecordingRotation()
 	*/
 	RecordingRotation GetRecordingRotation(void) const;
+
+	/**
+	* Adds a stream filter to process the audio stream data while recording.
+	*
+	* @since		2.1
+	* @privlevel	public
+	* @privilege    %http://tizen.org/privilege/videorecorder
+	*
+	* @return		An error code
+	* @param[in]	filter			An instance of IAudioStreamFilter
+	* @exception	E_SUCCESS			The method is successful.
+	* @exception	E_OBJ_ALREADY_EXIST     The filter already exists.
+	* @exception	E_OUT_OF_MEMORY	    The memory is insufficient.
+	* @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	* @remarks IAudioStreamFilter::ProcessAudioStream() is called when the audio frame is ready.
+	*/
+	result AddAudioStreamFilter(IAudioStreamFilter& filter);
+
+	/**
+	* Removes a stream filter to stop processing the audio stream data.
+	*
+	* @since		2.1
+	* @privlevel	public
+	* @privilege    %http://tizen.org/privilege/videorecorder
+	*
+	* @return		An error code
+	* @param[in]	filter			An instance of IAudioStreamFilter
+	* @exception	E_SUCCESS			The method is successful.
+	* @exception	E_OBJ_NOT_FOUND        The filter is not found.
+	* @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	*/
+	result RemoveAudioStreamFilter(IAudioStreamFilter& filter);
 
 private:
 	/**

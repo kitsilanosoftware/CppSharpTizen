@@ -37,7 +37,7 @@ namespace Tizen { namespace Web { namespace Controls
  * @class	AuthenticationChallenge
  * @brief		This class handles the HyperText Transfer Protocol (HTTP) authentication requests.
  *
- * @since	2.0
+ * @since		2.0
  *
  * The %AuthenticationChallenge class sends the user ID and password to the server requesting user authentication.
  * @n
@@ -50,21 +50,22 @@ public:
 	/**
 	 * This destructor overrides Tizen::Base::Object::~Object().
 	 *
-	 * @since	2.0
+	 * @since		2.0
 	 */
 	virtual ~AuthenticationChallenge(void);
 
 	/**
 	 * Sends the user ID and password to the host.
 	 *
-	 * @since				2.0
-	 *
-	 * @privilege		%http://tizen.org/privilege/web.privacy
+	 * @since		2.0
+	 * @privlevel		public
+	 * @privilege		%http://tizen.org/privilege/web.service
 	 *
 	 * @param[in]		userId			The user ID for authentication
-	 * @param[in]		password			The password for authentication
+	 * @param[in]		password		The password for authentication
 	 * @exception		E_SUCCESS		The method is successful.
 	 * @exception		E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception		E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @remarks	The specific error code can be accessed using the GetLastResult() method.
 	 */
 	void Process(const UserId& userId, const Tizen::Base::String& password);
@@ -72,12 +73,13 @@ public:
 	/**
 	 * Cancels the authentication request.
 	 *
-	 * @since	2.0
-	 *
-	 * @privilege		%http://tizen.org/privilege/web.privacy
+	 * @since		2.0
+	 * @privlevel		public
+	 * @privilege		%http://tizen.org/privilege/web.service
 	 *
 	 * @exception		E_SUCCESS		The method is successful.
 	 * @exception		E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception		E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @remarks	The specific error code can be accessed using the GetLastResult() method.
 	 */
 	void Cancel(void);

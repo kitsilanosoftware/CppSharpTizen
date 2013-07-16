@@ -56,7 +56,8 @@ class _OSP_EXPORT_ LocationProvider
 {
 public:
 	/**
-	* The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after
+	* The object is not fully constructed after this constructor is called. @n
+	* For full construction, the Construct() method must be called right after
 	* calling this constructor.
 	*
 	* @since 2.0
@@ -71,49 +72,49 @@ public:
 	virtual ~LocationProvider(void);
 
 	/**
-	* Initializes this instance of %LocationProvider with the specified @c criteria and @c listener.
-	*
+	* Initializes this instance of %LocationProvider with the specified @c criteria and @c listener. @n
 	* An application chooses the desired service quality based on its scenario and constructs the location provider with the specified
-	* @c criteria. The desired accuracy for locations is a configurable property of LocationCriteria.
-	* The location provider tries to provides locations and services based on the specified @c criteria.
-	*
+	* @c criteria. The desired accuracy for locations is a configurable property of LocationCriteria. @n
+	* The location provider tries to provides locations and services based on the specified @c criteria. @n
 	* The @c listener is notified on asynchronous location updates or region monitoring events.
 	*
 	* @since 2.0
 	*
+	* @feature	%http://tizen.org/feature/location
 	* @return	An error code
 	* @param[in]	criteria	The desired location criteria
 	* @param[in]	listener	The listener to register
 	* @exception	E_SUCCESS	The method is successful.
 	* @exception	E_SYSTEM	A system error has occurred.
+	* @exception	E_UNSUPPORTED_OPERATION   The Emulator or target device does not support the required feature. @b Since: @b 2.1
+	* For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+	* @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	*/
 	result Construct(const LocationCriteria& criteria, ILocationProviderListener& listener);
 
 	/**
-	* Requests the location updates service with the specific @c interval.
-	*
+	* Requests the location updates service with the specific @c interval. @n
 	* Once the location updates have started and the location provider has fixed the current location, the location is delivered
-	* to the listener by calling the ILocationProviderListener::OnLocationUpdated() method.
+	* to the listener by calling the ILocationProviderListener::OnLocationUpdated() method. @n
 	* The location provider is trying to provide accurate locations as requested in the criteria, but locations updated by the location provider
 	* do not always fall into the requested accuracy level. It provides locations in low-grade accuracy if that is all it can offer
-	* or can not even provide locations when it hardly fixes the current location. The location provider notifies the listener whenever the accuracy
-	* level of ongoing updates are changed by calling the ILocationProviderListener::OnAccuracyChanged() method.
-	*
+	* or can not even provide locations when it hardly fixes the current location.  @n The location provider notifies the listener whenever the accuracy
+	* level of ongoing updates are changed by calling the ILocationProviderListener::OnAccuracyChanged() method. @n
 	* The location updates can be paused by the location provider when the application is unable to point locations out to the user
-	* for the moment. This is possible for the following situations:
+	* for the moment. @n This is possible for the following situations:
 	*  - The application is not running in foreground.
 	*  - The screen is off.
-	* In this case, the location provider notifies the status @c LOC_SVC_STATUS_PAUSED to the listener.
-	* It resumes the paused location updates when the application gets out of the situations.
-	* To get the location updates all the time, the application should use the KeepLocationUpdateAwake() method.
 	*
+	* In this case, the location provider notifies the status @c LOC_SVC_STATUS_PAUSED to the listener. @n
+	* It resumes the paused location updates when the application gets out of the situations. @n
+	* To get the location updates all the time, the application should use the KeepLocationUpdateAwake() method. @n
 	* The change in the service status that the location provider is providing are notified to the listener
-	* by calling the ILocationProviderListener::OnLocationUpdateStatusChanged() method.
-	*
+	* by calling the ILocationProviderListener::OnLocationUpdateStatusChanged() method. @n
 	* If the location updates are already started by calling the StartLocationUpdatesByInterval() or StartLocationUpdatesByDistance() methods,
 	* the location provider cancels the prior request and restarts the updates with the specified parameter.
 	*
 	* @since 2.0
+	* @privlevel	public
 	* @privilege %http://tizen.org/privilege/location
 	*
 	* @return	An error code
@@ -127,28 +128,26 @@ public:
 	result StartLocationUpdatesByInterval(int interval);
 
 	/**
-	* Requests the location updates service with the specific @c distance filter.
-	*
+	* Requests the location updates service with the specific @c distance filter. @n
 	* Once the location updates have started, the initial location is delivered soon after it becomes available to the listener
-	* by calling the ILocationProviderListener::OnLocationUpdated() method. Then the location provider updates subsequent locations
-	* when it changes over the specified @c distance.
-	*
+	* by calling the ILocationProviderListener::OnLocationUpdated() method. @n Then the location provider updates subsequent locations
+	* when it changes over the specified @c distance. @n
 	* The location updates can be paused by the location provider when the application is unable to point locations out to the user
-	* for the moment. This is possible for the following situations:
+	* for the moment. @n This is possible for the following situations:
 	*  - The application is not running in foreground.
 	*  - The screen is off.
-	* In this case, the location provider notifies the status @c LOC_SVC_STATUS_PAUSED to the listener.
-	* It resumes the paused location updates when the application gets out of the situations.
-	* To get the location updates all the time, the application should use the KeepLocationUpdateAwake() method.
 	*
+	* In this case, the location provider notifies the status @c LOC_SVC_STATUS_PAUSED to the listener. @n
+	* It resumes the paused location updates when the application gets out of the situations. @n
+	* To get the location updates all the time, the application should use the KeepLocationUpdateAwake() method. @n
 	* Along with the service status, the accuracy level that the location provider is currently providing
 	* is notified to the listener on changes by calling the ILocationProviderListener::OnLocationUpdateStatusChanged()
-	* and ILocationProviderListener::OnAccuracyChanged() methods respectively.
-	*
+	* and ILocationProviderListener::OnAccuracyChanged() methods respectively. @n
 	* If the location updates are already started by calling the StartLocationUpdatesByInterval() or StartLocationUpdatesByDistance() methods,
 	* the location provider cancels the prior request and restarts the updates with the specified parameter.
 	*
 	* @since 2.0
+	* @privlevel	public
 	* @privilege %http://tizen.org/privilege/location
 	*
 	* @return	An error code
@@ -175,19 +174,19 @@ public:
 	result StopLocationUpdates(void);
 
 	/**
-	* Keeps the location updates awake or not.
-	*
+	* Keeps the location updates awake or not. @n
 	* The location provider can pause the ongoing location updates when the application is unable to point locations out to the user
-	* for the moment. This is possible for the following situations:
+	* for the moment. @n This is possible for the following situations:
 	*  - The application is not running in foreground.
 	*  - The screen is off.
 	*
 	* To get the location updates all the time, the application should use the StartLocationUpdatesByInterval() or
-	* StartLocationUpdatesByDistance() methods together with the %KeepLocationUpdateAwake() method turning the flag @c enable on.
+	* StartLocationUpdatesByDistance() methods together with the %KeepLocationUpdateAwake() method turning the flag @c enable on. @n
 	* The application should be cautious about doing so since it can make the system awake
 	* during the location updates.
 	*
 	* @since 2.0
+	* @privlevel	public
 	* @privilege %http://tizen.org/privilege/location and %http://tizen.org/privilege/power @n
 	*				Both privileges are required.
 	*
@@ -196,6 +195,7 @@ public:
 	*							else @c false
 	* @exception	E_SUCCESS	The method is successful.
 	* @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	* @exception	E_USER_NOT_CONSENTED	The user blocks an application from using the location information. @b Since: @b 2.1
 	* @see		StartLocationUpdatesByInterval()
 	* @see		StartLocationUpdatesByDistance()
 	* @see		StopLocationUpdates()
@@ -203,21 +203,19 @@ public:
 	result KeepLocationUpdateAwake(bool enable);
 
 	/**
-	* Adds a region for monitoring.
-	*
-	* A region is defined by a center point and a radius.
+	* Adds a region for monitoring. @n
+	* A region is defined by a center point and a radius. @n
 	* The location provider starts the region monitoring service until all regions are removed. When it detects a movement that crosses the
 	* boundary of a registered region, it notifies the application by calling ILocationProviderListener::OnRegionEntered() or
-	* ILocationProviderListener::OnRegionLeft() with the region identifier that is returned by the %AddMonitoringRegion() method.
-	* The altitude of @c regionCenter is not considered in monitoring.
-	*
+	* ILocationProviderListener::OnRegionLeft() with the region identifier that is returned by the %AddMonitoringRegion() method. @n
+	* The altitude of @c regionCenter is not considered in monitoring. @n
 	* Along with the service status, the accuracy level that the location provider is currently providing
 	* is notified to the listener on changes by calling the ILocationProviderListener::OnRegionMonitoringStatusChanged()
-	* and ILocationProviderListener::OnAccuracyChanged() methods respectively.
-	*
+	* and ILocationProviderListener::OnAccuracyChanged() methods respectively. @n
 	* Note that, the monitoring service can sometimes makes the system awake by running costly positioning devices.
 	*
 	* @since 2.0
+	* @privlevel	public
 	* @privilege %http://tizen.org/privilege/location and %http://tizen.org/privilege/power @n
 	*				Both privileges are required.
 	*
@@ -226,7 +224,7 @@ public:
 	* @param[in]	radius	The monitoring radius in meters
 	* @param[out]	regionId	The ID for the registered region
 	* @exception	E_SUCCESS	The method is successful.
-	* @exception	E_INVALID_ARG	The @c radius is not in the supported monitoring raidus range, which currently is [50, 100000] meters, @n
+	* @exception	E_INVALID_ARG	The @c radius is not in the supported monitoring radius range, which currently is [50, 100000] meters, @n
 	*								else the @c radius or the latitude or the longitude of @c regionCenter is @c NaN
 	* @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
 	* @exception	E_USER_NOT_CONSENTED	The user blocks an application from using the location information.
@@ -258,10 +256,9 @@ public:
 	void RemoveAllMonitoringRegions(void);
 
 	/**
-	* Gets the current service status of the location updates.
-	*
+	* Gets the current service status of the location updates. @n
 	* The location updates service is started by calling the StartLocationUpdatesByInterval() or StartLocationUpdatesByDistance()
-	* method. If an application has not made valid requests for the service, the %GetLocationUpdateStatus() method returns @c LOC_SVC_STATUS_IDLE.
+	* method. If an application has not made valid requests for the service, the %GetLocationUpdateStatus() method returns @c LOC_SVC_STATUS_IDLE. @n
 	* Otherwise, it returns the service status notified last by the ILocationProviderListener::OnLocationUpdateStatusChanged() listener method.
 	*
 	* @since 2.0
@@ -270,10 +267,9 @@ public:
 	LocationServiceStatus GetLocationUpdateStatus(void) const;
 
 	/**
-	* Gets the current service status of the region monitoring.
-	*
-	* The region monitoring service is started by calling the AddMonitoringRegion() method.
-	* If an application has not made valid requests for the service, the %GetRegionMonitoringStatus() method returns @c LOC_SVC_STATUS_IDLE.
+	* Gets the current service status of the region monitoring. @n
+	* The region monitoring service is started by calling the AddMonitoringRegion() method. @n
+	* If an application has not made valid requests for the service, the %GetRegionMonitoringStatus() method returns @c LOC_SVC_STATUS_IDLE. @n
 	* Otherwise, it returns the service status notified last by the ILocationProviderListener::OnRegionMonitoringStatusChanged() listener method.
 	*
 	* @since 2.0
@@ -282,10 +278,9 @@ public:
 	LocationServiceStatus GetRegionMonitoringStatus(void) const;
 
 	/**
-	* Gets the accuracy level that the location provider is currently providing.
-	*
+	* Gets the accuracy level that the location provider is currently providing. @n
 	* If an application has not made valid requests for location updates and region monitoring, the %GetCurrentAccuracy() method
-	* returns @c LOC_ACCURACY_INVALID.
+	* returns @c LOC_ACCURACY_INVALID. @n
 	* Otherwise, it returns the accuracy level last notified by the ILocationProviderListener::OnAccuracyChanged() listener method.
 	*
 	* @since 2.0
@@ -294,49 +289,56 @@ public:
 	LocationAccuracy GetCurrentAccuracy(void) const;
 
 	/**
-	* Gets a current location.
-	*
-	* An application can simply get the current location with the %GetLocation() method.
-	*
-	* The location provider runs and waits for positioning systems to fix the current location as requested in the criteria.
+	* Gets a current location. @n
+	* An application can simply get the current location with the %GetLocation() method. @n
+	* The location provider runs and waits for positioning systems to fix the current location as requested in the criteria. @n
 	* If it is not fixed in some time, this method call is aborted and returns a location in low-grade accuracy or even
 	* an invalid location with an @c E_LOCATION_UNAVAILABLE error.
 	*
 	* @since 2.0
+	* @privlevel	public
 	* @privilege %http://tizen.org/privilege/location
 	*
+	* @feature	%http://tizen.org/feature/location
 	* @return	The current location
 	* @param[in]	criteria	The desired location criteria
 	* @exception	E_SUCCESS	The method is successful.
 	* @exception	E_LOCATION_UNAVAILABLE	The location provider fails to fix the current location.
 	* @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	* @exception	E_UNSUPPORTED_OPERATION   The Emulator or target device does not support the required feature.  @b Since: @b 2.1
+	* 										For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
 	* @exception	E_USER_NOT_CONSENTED	The user blocks an application from using the location information.
 	* @exception	E_SYSTEM	A system error has occurred.
-	* @remarks	This method call takes time as the location provider runs and waits for positioning system.
-	*			If the method is called from the application's main thread, it makes the application unresponsive until it returns.
-	*			If an application wants to be responsive, especially within the user interaction, it should use this method
-	*			in a separated thread using Tizen::Base::Runtime::Thread class,
-	*			rather than in the application's main thread which handles the ui events.
-	* @remarks	The specific error code can be accessed using the GetLastResult() method.
+	* @remarks	
+	*			- This method call takes time as the location provider runs and waits for positioning system.
+	*			- The specific error code can be accessed using the GetLastResult() method.
+	*			- Before calling this method, check whether the feature is supported by 
+	*			Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	*/
 	static Location GetLocation(const LocationCriteria& criteria);
 
 	/**
-	* Gets the last known location.
-	*
-	* The %GetLastKnownLocation() method returns the last location the system keeps.
+	* Gets the last known location. @n
+	* The %GetLastKnownLocation() method returns the last location the system keeps. @n
 	* It is always a good idea to prefer using this method than requesting current locations
 	* since using the last location preserves the location provider from running costly positioning systems.
 	*
 	* @since 2.0
+	* @privlevel	public
 	* @privilege %http://tizen.org/privilege/location
 	*
+	* @feature	%http://tizen.org/feature/location
 	* @return	The last location
 	* @exception	E_SUCCESS	The method is successful.
 	* @exception    E_LOCATION_UNAVAILABLE  The last location is unavailable.
 	* @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	* @exception	E_UNSUPPORTED_OPERATION   The Emulator or target device does not support the required feature.  @b Since: @b 2.1
+	* 										For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
 	* @exception	E_USER_NOT_CONSENTED	The user blocks an application from using the location information.
-	* @remarks     The specific error code can be accessed using the GetLastResult() method.
+	* @remarks     
+	*			- The specific error code can be accessed using the GetLastResult() method.
+	*			- Before calling this method, check whether the feature is supported by 
+	*			Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	*/
 	static Location GetLastKnownLocation(void);
 

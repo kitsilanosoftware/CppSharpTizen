@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -16,9 +15,9 @@
 //
 /**
  * @file			FCntTypes.h
- * @brief		This is the header file for the definitions of constants and enumerators in the Tizen::Content namespace.
+ * @brief		This is the header file for the definitions of constants and enumerators in the Content namespace.
  *
- * This header file contains definitions for the constants and enumerators in the Tizen::Content namespace.
+ * This header file contains definitions for the constants and enumerators in the Content namespace.
  */
 
 #ifndef _FCNT_TYPES_H_
@@ -57,14 +56,14 @@ enum ContentType
 	CONTENT_TYPE_IMAGE,		/**< An Image */
 	CONTENT_TYPE_AUDIO,		/**< An Audio */
 	CONTENT_TYPE_VIDEO,		/**< A Video */
-	CONTENT_TYPE_ALL,			/**< @if OSPDEPREC The content type: all types @endif */ /**< @if OSPDEPREC @deprecated This enumeration field is deprecated as unified search will not be supported. @endif */
+	CONTENT_TYPE_ALL,			/**< @if OSPDEPREC The content type: all types @endif */ /**< @if OSPDEPREC @deprecated This enum field is deprecated as unified search will not be supported. @endif */
 	CONTENT_TYPE_UNKNOWN		/**< An Unknown type */
 };
 
 /**
  * @enum ImageOrientationType
  *
- * Defines the orientation type of an image
+ * Defines the orientation type of an image.
  *
  * @since 2.0
  */
@@ -82,6 +81,18 @@ enum ImageOrientationType
 };
 
 /**
+ * @enum DownloadNetworkType
+ * Defines the download network type.
+ * @since 2.1
+ */
+enum DownloadNetworkType
+{
+	DOWNLOAD_NETWORK_DATA_NETWORK = 1,	/**< The data network is allowed */
+	DOWNLOAD_NETWORK_WIFI,			/*< The wifi network is allowed */
+	DOWNLOAD_NETWORK_ALL = 100		/*< The all network types are allowed */
+};
+
+/**
  * @enum DownloadState
  *
  * Defines the download state.
@@ -96,13 +107,13 @@ enum DownloadState
 	DOWNLOAD_STATE_PAUSED, 			/**< The download request is in a paused state by user request */
 	DOWNLOAD_STATE_CANCELLED, 		/**< The download request is cancelled by user request */
 	DOWNLOAD_STATE_COMPLETED, 		/**< The download request is in a completed state */
-	DOWNLOAD_STATE_FAILED, 			/**< The download request failed */
+	DOWNLOAD_STATE_FAILED 			/**< The download request has failed */
 };
 
-extern const Tizen::Base::String OSP_HOME;
-extern const Tizen::Base::String OSP_HOME_EXT;
-extern const Tizen::Base::String OSP_MEDIA_PHONE;
-extern const Tizen::Base::String OSP_MEDIA_MMC;
+_OSP_EXPORT_ extern const wchar_t OSP_HOME[];
+_OSP_EXPORT_ extern const wchar_t OSP_HOME_EXT[];
+_OSP_EXPORT_ extern const wchar_t OSP_MEDIA_PHONE[];
+_OSP_EXPORT_ extern const wchar_t OSP_MEDIA_MMC[];
 
 } } // Tizen::Content
 

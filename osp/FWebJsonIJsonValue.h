@@ -49,19 +49,20 @@ enum JsonType
 
 /**
  * @interface	IJsonValue
- * @brief	This interface represents a Json value.
+ * @brief	This interface represents a JSON value.
  *
  * @since	2.0
  *
- * The %IJsonValue interface abstracts a Json value class of a Json value type (string, bool, number, array, object, and null type).
- * @n
+ * The %IJsonValue interface abstracts a JSON value class of a JSON value type (string, bool, number, array, object, and null type).
+ * 
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/web/json_namespace.htm">JSON Guide</a>.
  */
 class _OSP_EXPORT_ IJsonValue
 {
 public:
 	/**
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required. @n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @since	2.0
 	 */

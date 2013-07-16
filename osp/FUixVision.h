@@ -19,7 +19,7 @@
  * @file	FUixVision.h
  * @brief	This is the header file for the %Vision namespace.
  *
- * This header file contains the declarations and descriptions of the %Tizen::Uix::Vision namespace.
+ * This header file contains the declarations and descriptions of the %Vision namespace.
  */
 
 #ifndef _FUIX_VISION_H_
@@ -30,18 +30,26 @@
 #include <FUixVisionFaceRecognizer.h>
 #include <FUixVisionFaceBuffer.h>
 #include <FUixVisionFaceComponentsPosition.h>
+#include <FUixVisionImageFeatureInfo.h>
+#include <FUixVisionImageObject.h>
+#include <FUixVisionImageFeatureManager.h>
+#include <FUixVisionImageRecognizer.h>
+#include <FUixVisionQrCodeGenerator.h>
+#include <FUixVisionQrCodeObject.h>
+#include <FUixVisionQrCodeRecognizer.h>
+#include <FUixVisionQrCodeTypes.h>
 
 /**
  * @namespace Tizen::Uix::Vision
- * @brief	This namespace contains the classes for the face and its related functions.
+ * @brief	This namespace contains the classes for the vision and its related functions.
  * @since	2.0
  *
  * @remarks	@b Header @b %file: @b \#include @b <FUix.h> @n
- *          @b Library : @b osp-face
+ *          @b Library : @b osp-face @b osp-vision
  *
- * The %Vision namespace provides the ability to automatically detect and trace faces in a still image or a video stream.
+ * The %Vision namespace provides the ability to automatically detect and trace natural objects including faces, image and QR Code in a still image or a video stream.
  * @n
- * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/uix/face_detector_recognizer.htm">Face Detector and Recognizer</a>.
+ * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/uix/face_detector_recognizer.htm">Face Detector and Recognizer</a>, <a href="../org.tizen.native.appprogramming/html/guide/uix/recognize_2d_image.htm">Image recognizer and feature manager</a> and <a href="../org.tizen.native.appprogramming/html/guide/uix/recognize_qr_code.htm">QR code recognizer and generator</a>
  *
  * The following diagram illustrates the relationships between the classes belonging to the %Vision namespace.
  * @image html uix_vision_namespace_classdiagram.png

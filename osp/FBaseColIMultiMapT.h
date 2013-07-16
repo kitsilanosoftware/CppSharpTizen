@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -120,16 +119,15 @@ public:
 	virtual IEnumeratorT< ValueType >* GetValuesN(const KeyType& key) const = 0;
 
 	/**
-	 * Gets a list of all the keys in the map.
+	 * Gets a list of all unique keys in the map.
 	 *
 	 * @since 2.0
 	 *
-	 * @return		A pointer to a list of all the keys in the map, @n
+	 * @return		A pointer to a list of all unique keys in the map, @n
 	 *				else @c null if an exception occurs
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_OUT_OF_MEMORY	The memory is insufficient.
-	 * @remarks		The order of the keys is the same as the corresponding values in the IListT interface returned by the GetValuesN() method.
-	 *           	The specific error code can be accessed using the GetLastResult() method.
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @see			GetValuesN()
 	 */
 	virtual IListT< KeyType >* GetKeysN(void) const = 0;

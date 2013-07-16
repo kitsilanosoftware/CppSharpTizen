@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -88,13 +87,6 @@ public:
 	 *
 	 * @return	An error code
 	 * @param[in]	key	The <a href="../org.tizen.native.appprogramming/html/guide/system/settings_info.htm">key name</a> of the setting information @n
-	 * @if OSPCOMPAT
-	 *			The following key values are updated: @n
-	 *			- @b Since: @b 2.0 Refer <a href="../org.tizen.native.appprogramming/html/guide/system/settings_info.htm">here</a>.
-	 *			  @xmlonly <pcheck kind="value" since="2.0">locale.country, locale.time.format, locale.date.format, locale.datetime.format, font.type, locale.language, theme, sound.ringtone, screen.wallpaper, screen.wallpaper.lock, usbmode</pcheck> @endxmlonly
-	 *			- @b Deprecated All the key values provided prior to %Tizen 2.0 are deprecated. For more detailed information, refer 
-	 *			 <a href="../org.tizen.native.appprogramming/html/guide/system/settings_info_deprecated.htm">here</a>.
-	 * @endif
 	 * @param[out]	value		The setting information of type Tizen::Base::String
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_OBJ_NOT_FOUND	The specified @c key is not found.
@@ -111,13 +103,6 @@ public:
 	 *
 	 * @return	An error code
 	 * @param[in]	key	The <a href="../org.tizen.native.appprogramming/html/guide/system/settings_info.htm">key name</a> of the setting information @n
-	 * @if OSPCOMPAT
-	 *			The following key values are updated: @n
-	 *			- @b Since: @b 2.0 Refer <a href="../org.tizen.native.appprogramming/html/guide/system/settings_info.htm">here</a>.
-	 *			  @xmlonly <pcheck kind="value" since="2.0">font.size, sound.media.volume, sound.notification.volume, sound.ringtone.volume, sound.system.volume, vibrator.level </pcheck> @endxmlonly
-	 *			- @b Deprecated All the key values provided prior to %Tizen 2.0 are deprecated. For more detailed information, refer 
-	 *			 <a href="../org.tizen.native.appprogramming/html/guide/system/settings_info_deprecated.htm">here</a>.
-	 * @endif
 	 * @param[out]	value		The setting information of type integer
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_OBJ_NOT_FOUND	The specified @c key is not found.
@@ -166,13 +151,6 @@ public:
 	 *
 	 * @return	An error code
 	 * @param[in]	key	The <a href="../org.tizen.native.appprogramming/html/guide/system/settings_info.htm">key name</a> of the setting information @n
-	 * @if OSPCOMPAT
-	 *			The following key values are updated: @n
-	 *			- @b Since: @b 2.0 Refer <a href="../org.tizen.native.appprogramming/html/guide/system/settings_info.htm">here</a>.
-	 *			  @xmlonly <pcheck kind="value" since="2.0">network.roaming, network.flightmode, network.packetservice, locale.time.format.24hour, location.gps, location.wps, sound.silentmode, motion </pcheck> @endxmlonly
-	 *			- @b Deprecated All the key values provided prior to %Tizen 2.0 are deprecated. For more detailed information, refer 
-	 *			 <a href="../org.tizen.native.appprogramming/html/guide/system/settings_info_deprecated.htm">here</a>.
-	 * @endif
 	 * @param[out]	value		The setting information of type bool
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_OBJ_NOT_FOUND	The specified @c key is not found.
@@ -214,6 +192,7 @@ public:
 	 *
 	 * @since 2.0
 	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/setting
 	 *
 	 * @return	An error code
@@ -225,7 +204,7 @@ public:
 	 * @exception	E_OBJ_NOT_FOUND		The specified @c key is not found.
 	 * @exception	E_UNSUPPORTED_OPERATION	The specified @c key exists. However, it is not supported by this device.
 	 * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
-	 */	
+	 */
 	static result SetValue(const Tizen::Base::String& key, bool value);
 
 	/**
@@ -233,6 +212,7 @@ public:
 	 *
 	 * @since 2.0
 	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/setting
 	 *
 	 * @return	An error code
@@ -252,6 +232,7 @@ public:
 	 *
 	 * @since 2.0
 	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/setting
 	 *
 	 * @return	An error code
@@ -271,6 +252,7 @@ public:
 	 *
 	 * @since	2.0
 	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/setting
 	 *
 	 * @return	An error code
@@ -279,7 +261,6 @@ public:
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
 	 * @exception	E_FILE_NOT_FOUND	The entry for the specified wallpaper file or the file path cannot be found.
 	 * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
-	 * @remarks	The specified wallpaper file is copied to the managed folder by the system, while the previously set wallpaper is removed. <br> This parameter is compatible with "Wallpaper".
 	 */
 
 	static result SetWallpaper(const Tizen::Base::String& filePath);
@@ -289,6 +270,7 @@ public:
 	 *
 	 * @since	2.0
 	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/setting
 	 *
 	 * @return	An error code
@@ -297,7 +279,6 @@ public:
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
 	 * @exception	E_FILE_NOT_FOUND	The entry for the specified wallpaper file or the file path cannot be found.
 	 * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
-	 * @remarks	The specified ringtone file has to exist in the media directory.
 	 */
 	static result SetRingtone(const Tizen::Base::String& filePath);
 
@@ -306,6 +287,7 @@ public:
 	 *
 	 * @since	2.0
 	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/setting
 	 *
 	 * @return	An error code
@@ -349,20 +331,133 @@ public:
 	static result RemoveSettingEventListener(ISettingEventListener& listener);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @if OSPDEPREC
-	 * Sets the setting event listener.
+	 * Gets the specific @c bool type setting information based on the specified designators (key).
 	 *
-	 * @deprecated This method is provided only for backward compatibility and will be deleted in the near future. Instead of using this method, it is recommended to use AddSettingEventListener() and RemoveSettingEventListener().
-	 * @since	2.0
+	 * @since 2.0
+	 *
+	 * @privlevel	platform
+	 * @privilege	%http://tizen.org/privilege/settingmanager.read @n
+	 *		(%http://tizen.org/privilege/systemsetting.read is deprecated.)
 	 *
 	 * @return	An error code
-	 * @param[in]	pListener	The setting event listener
-	 * @exception	E_SUCCESS	The method is successful.
-	 * @exception	E_SYSTEM	The method cannot proceed due to a severe system error.
-	 * @remarks	If the value of the listener object (pListener) is @c null, the setting event listener is not called.
-	 * @endif
-	 * @endif
+	 * @param[in]	key	The <a href="../org.tizen.native.appprogramming/html/guide/system/settings_info.htm">key name</a> of the setting information
+	 * @param[out]	value			The setting information of type bool
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_PRIVILEGED_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_OBJ_NOT_FOUND		The specified @c key is not found.
+	 * @exception	E_UNSUPPORTED_OPERATION	The specified @c key exists. However, it is not supported by this device.
+	 * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
+	 */
+	static result GetValueForPrivilegedKey(const Tizen::Base::String& key, bool& value);
+
+	/**
+	 * Sets the specific @c bool type setting information based on the specified designators (key).
+	 *
+	 * @since 2.0
+	 *
+	 * @privlevel	platform
+	 * @privilege	%http://tizen.org/privilege/settingmanager.write @n
+	 *		(%http://tizen.org/privilege/systemsetting.write is deprecated.)
+	 *
+	 * @return	An error code
+	 * @param[in]	key	The <a href="../org.tizen.native.appprogramming/html/guide/system/settings_info.htm">key name</a> of the setting information
+	 * @param[in]	value			The setting information of type bool
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_PRIVILEGED_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_INVALID_ARG		The specified @c value is invalid value.
+	 * @exception	E_OBJ_NOT_FOUND		The specified @c key is not found.
+	 * @exception	E_UNSUPPORTED_OPERATION	The specified @c key exists. However, it is not supported by this device.
+	 * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
+	 */
+	static result SetValueForPrivilegedKey(const Tizen::Base::String& key, bool value);
+
+	/**
+	 * Sets the specific @c bool type setting information based on the specified designators (key) asynchronously.
+	 *
+	 * @since 2.0
+	 * @privlevel	platform
+	 * @privilege	%http://tizen.org/privilege/settingmanager.write @n
+	 *		(%http://tizen.org/privilege/systemsetting.write is deprecated.)
+	 *
+	 * @return	An error code
+	 * @param[in]	key			The <a href="../org.tizen.native.appprogramming/html/guide/system/settings_info.htm">key name</a> of the setting information
+	 * @param[in]	value			The setting information of type bool
+	 * @param[in]	listener 		The result listener.
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_PRIVILEGED_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_INVALID_ARG		The specified @c value is invalid value.
+	 * @exception	E_OBJ_NOT_FOUND		The specified @c key is not found.
+	 * @exception	E_UNSUPPORTED_OPERATION	The specified @c key is existed, However it is not supported by this device.
+	 * @exception	E_IN_PROGRESS		The specified key is under processing or invalid state.
+	 * @exception	E_SYSTEM		Either of the following conditions has occured:
+	 *					- The method cannot proceed due to a severe system error.
+	 *					- This error can occur and Wi-Fi Direct™ is not activated if the @c key is %http://tizen.org/setting/network.wifi.direct and Wi-Fi is activated.-
+Direct™ is not activated if the @c key is %http://tizen.org/setting/network.wifi.direct and Wi-Fi is activated.
+
+	 */
+	static result SetValueAsyncForPrivilegedKey(const Tizen::Base::String& key, bool value, ISettingInfoSetValueAsyncResultListener* listener);
+
+	/**
+	 * Sets the specific @c bool type setting information based on the specified designators (key) asynchronously.
+	 *
+	 * @since 2.0
+	 * @privlevel	platform
+	 * @privilege	%http://tizen.org/privilege/setting
+	 *
+	 * @return	An error code
+	 * @param[in]	key			The <a href="../org.tizen.native.appprogramming/html/guide/system/settings_info.htm">key name</a> of the setting information
+	 * @param[in]	value			The setting information of type bool
+	 * @param[in]	listener 		The result listener.
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_PRIVILEGED_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_INVALID_ARG		The specified @c value is invalid value.
+	 * @exception	E_OBJ_NOT_FOUND		The specified @c key is not found.
+	 * @exception	E_UNSUPPORTED_OPERATION	The specified @c key is existed, However it is not supported by this device.
+	 * @exception	E_IN_PROGRESS		The specified key is under processing or invalid state.
+	 * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
+	 */
+	static result SetValueAsync(const Tizen::Base::String& key, bool value, ISettingInfoSetValueAsyncResultListener* listener);
+
+
+	/**
+	 * Sets the specific Tizen::Base::String type setting information based on the specified designators (key).
+	 *
+	 * @since 2.0
+	 *
+	 * @privlevel	platform
+	 * @privilege	%http://tizen.org/privilege/settingmanager.write @n
+	 *		(%http://tizen.org/privilege/systemsetting.write is deprecated.)
+	 *
+	 * @return	An error code
+	 * @param[in]	key			The <a href="../org.tizen.native.appprogramming/html/guide/system/settings_info.htm">key name</a> of the setting information
+	 * @param[in]	value			The setting information of type Tizen::Base::String
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_PRIVILEGED_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_INVALID_ARG		The specified @c value is invalid value.
+	 * @exception	E_OBJ_NOT_FOUND		The specified @c key is not found.
+	 * @exception	E_UNSUPPORTED_OPERATION	The specified @c key exists. However, it is not supported by this device.
+	 * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
+	 */
+	static result SetValueForPrivilegedKey(const Tizen::Base::String& key, Tizen::Base::String value);
+
+	/**
+	 * Resets current device. @n
+	 * All data is removed and device is initialized.
+	 *
+	 * @since 2.0
+	 *
+	 * @privlevel	platform
+	 * @privilege	%http://tizen.org/privilege/settingmanager.write @n
+	 *		(%http://tizen.org/privilege/systemsetting.write is deprecated.)
+	 *
+	 * @return	An error code
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_PRIVILEGED_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
+	 */
+	static result ResetToFactoryDefault(void);
+
+	/**
 	 */
 	static result SetSettingEventListener(ISettingEventListener* pListener);
 
@@ -379,8 +474,8 @@ private:
 	 */
 	virtual ~SettingInfo(void);
 
-	/**		
-	 * The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.		
+	/**
+	 * The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
 	 */
 	SettingInfo(const SettingInfo& value);
 

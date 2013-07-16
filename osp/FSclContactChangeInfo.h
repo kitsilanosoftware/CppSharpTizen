@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -122,6 +121,16 @@ public:
 	 * @return	The change type
 	 */
 	RecordChangeType GetChangeType(void) const;
+
+	/**
+	 * Checks whether the thumbnail has been changed or not.
+	 *
+	 * @since       2.1
+	 *
+	 * @return     @c true if the thumbnail has been changed, @n
+	 *              else @c false
+	 */
+	bool IsThumbnailChanged(void) const;
 
 	/**
 	 * Copying of objects using this copy assignment operator is allowed.

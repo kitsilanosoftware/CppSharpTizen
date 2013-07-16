@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -167,7 +166,7 @@ public:
 	 *
 	 * @return		The @c Tizen::Graphics::Bitmap object of the thumbnail image
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @see	SetThumbnail()
 	 * @endif
@@ -175,7 +174,7 @@ public:
 	Tizen::Graphics::Bitmap* GetThumbnailN(void) const;
 
 	/**
-	 * Gets the thumbnail path
+	 * Gets the thumbnail path.
 	 *
 	 * @since	2.0
 	 *
@@ -188,23 +187,14 @@ public:
 	 * Sets the thumbnail image. @n
 	 * If the specified @c filePath is an empty string, the current thumbnail image is removed.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-	 *					For more information, see @ref CompIoPathPage "here".
-	 * @endif
 	 *
 	 * @return	An error code
 	 * @param[in]	filePath		The file path of the thumbnail image
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_INVALID_ARG		The length of the specified @c filePath exceeds system limitations.
 	 * @exception	E_FILE_NOT_FOUND	The specified file cannot be found or accessed.
-	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks	The thumbnail is copied to the specific directory for thumbnails by the system when the contact is added or updated.@n
-	 * 		Therefore, GetThumbnailPath() returns the file path to which the thumbnail copied.
+	 * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
 	 * @see	GetThumbnailPath()
 	 */
 	result SetThumbnail(const Tizen::Base::String& filePath);
@@ -212,24 +202,19 @@ public:
 	/**
 	 * Sets the value of the property having the specified ID to the specified value.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-	 *                            For more information, see @ref CompContactSetValuePage "here".
-	 * @endif
 	 *
 	 * @return	An error code
 	 * @param[in]	id			The ID of the property whose value is to set
 	 * @param[in]	value			A new string value to set
 	 * @exception	E_SUCCESS		    The method is successful.
-	 * @exception	E_INVALID_ARG		The @c id is #CONTACT_PROPERTY_ID_DISPLAY_NAME or #CONTACT_PROPERTY_ID_THUMBNAIL, or
+	 * @exception	E_INVALID_ARG		The @c id is #CONTACT_PROPERTY_ID_DISPLAY_NAME or @if OSPDEPREC #CONTACT_PROPERTY_ID_THUMBNAIL, or @endif
 	 *									the ringtone file path (value) is invalid if @c id is #CONTACT_PROPERTY_ID_RINGTONE.
 	 * @remarks		
-	 *		- The #CONTACT_PROPERTY_ID_DISPLAY_NAME and #CONTACT_PROPERTY_ID_THUMBNAIL properties cannot be set. @n
+	 *		- The #CONTACT_PROPERTY_ID_DISPLAY_NAME property cannot be set. @n
 	 *		- The #CONTACT_PROPERTY_ID_RINGTONE can be set to the path string of the ringtone file. @n
+	 * @if OSPDEPREC
+	 *		- The The #CONTACT_PROPERTY_ID_THUMBNAIL property cannot be set. @n
 	 *		- In case @c id is set to #CONTACT_PROPERTY_ID_NICK_NAME, @n
 	 *                         	- If this contact has nicknames, the first nickname among them is set to the @c value. @n
 	 *                         	- If not, a new nickname is added to this contact. @n
@@ -242,32 +227,11 @@ public:
 	 *		- In case @c id is set to #CONTACT_PROPERTY_ID_JOB_TITLE, @n
 	 *                         	- If this contact has organizations, the job title value of the first organization among them is set to the @c value. @n
 	 *                         	- If not, a new organization is added to this contact. @n
+	 * @endif
 	 */
 	result SetValue(ContactPropertyId id, const Tizen::Base::String& value);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page		CompContactSetValuePage		Compatibility for SetValue()
-	 * @section		CompContactSetValuePageIssueSection		Issues
-	 * Implementing this method in OSP compatible applications has the following issues: @n
-	 * -# If the length of the value is greater than the maximum length of the specified property, E_INVALID_ARG is returned.
-	 * -# The path should begin with an allowed path prefix such as @b '/Home', @b '/Home/Share', @b '/Res', @b '/Share/[@e appid]',
-	 * @b '/Media', and @b '/Storagecard/Media'.
-	 *
-	 * @section		CompContactSetValuePageSolutionSection		Resolutions
-	 * -# The first issue mentioned above has been resolved in Tizen.
-	 * -# There are no specific allowed path prefixes. Applications can obtain accessible directory path using the following methods. @n
-	 *  - For accessing its own data directory, use Tizen::App::App::GetInstance()->GetAppRootPath() + L"data" @n
-	 *    or Tizen::App::App::GetInstance()->GetAppDataPath().
-	 *  - For accessing its own resource directory, use Tizen::App::App::GetInstance()->GetAppRootPath() + L"res". @n
-	 *    or Tizen::App::App::GetInstance()->GetAppResourcePath().
-	 *  - For accessing its own share directory, use Tizen::App::App::GetInstance()->GetAppRootPath() + L"share".
-	 *  - For accessing the media directory, use Tizen::System::Environment::GetMediaPath().
-	 *  - For accessing the external storage, use Tizen::System::Environment::GetExternalStoragePath().
-	 *
-	 * For more information on the path,
-	 * see <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/io_overview.htm">I/O Overview</a>.
-	 * @endif
 	 */
 
 	/**
@@ -281,6 +245,7 @@ public:
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_INVALID_ARG		The property with the specified contact property ID is not of Tizen::Base::DateTime type, or
 	 *									the property is read-only.
+	 * @if OSPDEPREC
 	 * @remarks    
 	 *		- In case @c id is set to #CONTACT_PROPERTY_ID_BIRTHDAY, @n
 	 *                         -	If this contact has events whose types are #CONTACT_EVENT_TYPE_BIRTHDAY, the date value of the first event among them is set to the @c value. @n
@@ -288,6 +253,7 @@ public:
 	 *		- In case @c id is set to #CONTACT_PROPERTY_ID_ANNIVERSARY, @n
 	 *                         -	If this contact has events whose types are #CONTACT_EVENT_TYPE_ANNIVERSARY, the date value of the first event among them is set to the @c value. @n
 	 *                         -	If not, a new event whose type is #CONTACT_EVENT_TYPE_ANNIVERSARY is added to this contact. @n        
+	 * @endif
 	 */
 	result SetValue(ContactPropertyId id, const Tizen::Base::DateTime& value);
 
@@ -426,7 +392,7 @@ public:
 	 * @param[in]	index			An index to set the value
 	 * @param[in]	event			The event to set
 	 * @exception	E_SUCCESS		The method is successful.
-	 * @exception	E_INVALID_ARG		The specified @c event is empty.
+	 * @exception	E_INVALID_ARG		The date of the specified @c event has not been set.
 	 * @exception	E_OUT_OF_RANGE		The specified @c index is outside the bounds of the properties.
 	 */
 	result SetEventAt(int index, const ContactEvent& event);
@@ -444,6 +410,20 @@ public:
 	 * @exception	E_OUT_OF_RANGE		The specified @c index is outside the bounds of the properties.
 	 */
 	result SetOrganizationAt(int index, const Organization& organization);
+
+	/**
+	 * Sets the specified @c relationship corresponding to the specified @c index.
+	 *
+	 * @since	2.1
+	 *
+	 * @return	An error code
+	 * @param[in]	index			An index to set the value
+	 * @param[in]	relationship		The relationship to set
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_INVALID_ARG		The specified @c relationship is empty.
+	 * @exception	E_OUT_OF_RANGE		The specified @c index is outside the bounds of the properties.
+	 */
+	result SetRelationshipAt(int index, const Relationship& relationship);
 
 	/**
 	 * Gets the addressbook ID.
@@ -567,7 +547,7 @@ public:
 	 * @return	An error code
 	 * @param[in]	event			The event to add
 	 * @exception	E_SUCCESS		The method is successful.
-	 * @exception	E_INVALID_ARG		The specified @c event is empty.
+	 * @exception	E_INVALID_ARG		The date of the specified @c event has not been set.
 	 */
 	result AddEvent(const ContactEvent& event);
 
@@ -608,6 +588,25 @@ public:
 	 * @exception	E_OUT_OF_RANGE		The specified @c index is outside the bounds of the properties.
 	 */
 	result RemoveAt(ContactMultiPropertyId id, int index);
+
+	/**
+	 * Checks whether this contact is a favorite or not.
+	 *
+	 * @since	2.1
+	 *
+	 * @return     @c true if this contact is a favorite, @n
+	 *              else @c false
+	 * @see	SetAsFavorite()
+	 */
+	bool IsFavorite(void) const;
+
+	/**
+	 * Sets whether this contact is a favorite or not.
+	 *
+	 * @since	2.1
+	 * @see IsFavorite()
+	 */
+	void SetAsFavorite(bool isFavorite = true);
 
 	/**
 	 * Copying of objects using this copy assignment operator is allowed.

@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -55,12 +55,12 @@
 #include <FUiCtrlGallery.h>
 #include <FUiCtrlGalleryItem.h>
 #include <FUiCtrlGalleryTypes.h>
+#include <FUiCtrlGroupContainer.h>
 #include <FUiCtrlGroupedList.h>
 #include <FUiCtrlGroupedListView.h>
 #include <FUiCtrlGroupedListViewTypes.h>
 #include <FUiCtrlGroupedTableView.h>
 #include <FUiCtrlGroupItem.h>
-#include <FUiCtrlGroupTypes.h>
 #include <FUiCtrlHeader.h>
 #include <FUiCtrlHeaderItem.h>
 #include <FUiCtrlIconList.h>
@@ -69,7 +69,9 @@
 #include <FUiCtrlIconListViewItem.h>
 #include <FUiCtrlIconListViewTypes.h>
 #include <FUiCtrlICustomElement.h>
+#include <FUiCtrlICustomElementF.h>
 #include <FUiCtrlICustomListElement.h>
+#include <FUiCtrlIEditTextFilter.h>
 #include <FUiCtrlIExpandableEditAreaEventListener.h>
 #include <FUiCtrlIFastScrollListener.h>
 #include <FUiCtrlIFormBackEventListener.h>
@@ -78,22 +80,29 @@
 #include <FUiCtrlIGalleryItemProvider.h>
 #include <FUiCtrlIGroupedListViewItemEventListener.h>
 #include <FUiCtrlIGroupedListViewItemProvider.h>
+#include <FUiCtrlIGroupedListViewItemProviderF.h>
 #include <FUiCtrlIGroupedTableViewItemEventListener.h>
 #include <FUiCtrlIGroupedTableViewItemProvider.h>
+#include <FUiCtrlIGroupedTableViewItemProviderF.h>
 #include <FUiCtrlIIconListViewItemEventListener.h>
 #include <FUiCtrlIIconListViewItemProvider.h>
 #include <FUiCtrlIListViewItemEventListener.h>
 #include <FUiCtrlIListViewItemProvider.h>
+#include <FUiCtrlIListViewItemProviderF.h>
 #include <FUiCtrlInputTypes.h>
 #include <FUiCtrlIProgressPopupEventListener.h>
 #include <FUiCtrlIScrollEventListener.h>
+#include <FUiCtrlIScrollEventListenerF.h>
 #include <FUiCtrlISearchBarEventListener.h>
 #include <FUiCtrlISectionTableViewItemEventListener.h>
 #include <FUiCtrlISectionTableViewItemProvider.h>
+#include <FUiCtrlISectionTableViewItemProviderF.h>
 #include <FUiCtrlISliderEventListener.h>
 #include <FUiCtrlISplitPanelEventListener.h>
+#include <FUiCtrlISplitPanelEventListenerF.h>
 #include <FUiCtrlITableViewItemEventListener.h>
 #include <FUiCtrlITableViewItemProvider.h>
+#include <FUiCtrlITableViewItemProviderF.h>
 #include <FUiCtrlITokenFilter.h>
 #include <FUiCtrlKeypad.h>
 #include <FUiCtrlLabel.h>
@@ -146,7 +155,7 @@ namespace Tizen
  * @brief		This namespace contains the classes and interfaces for creating rich user interface components for the applications.
  * @since		2.0
  *
- * @remarks		@b %Header @b %file: @b \#include @b <FUi.h> @n
+ * @remarks		@b Header @b %file: @b \#include @b <FUi.h> @n
  *				@b Library : @b osp-uifw
  *
  * The %Ui::Controls namespace contains classes that have graphical representations that can be displayed on the screen as UI elements and with
@@ -173,18 +182,7 @@ namespace Controls
  * @remarks      Different color values can be defined for different device models.
  * @endif
  */
-/**
- * @if OSPDEPREC
- * @htmlonly
- * <!--
- */
-_OSP_EXPORT_
-/**
- * -->
- * @endhtmlonly
- * @endif
- */
-extern const Tizen::Graphics::Color SYSTEM_COLOR_TITLE_TEXT;
+_OSP_EXPORT_ extern const Tizen::Graphics::Color SYSTEM_COLOR_TITLE_TEXT;
 
 /**
  * @if OSPDEPREC
@@ -197,18 +195,7 @@ extern const Tizen::Graphics::Color SYSTEM_COLOR_TITLE_TEXT;
  * @remarks      Different color values can be defined for different device models.
  * @endif
  */
-/**
- * @if OSPDEPREC
- * @htmlonly
- * <!--
- */
-_OSP_EXPORT_
-/**
- * -->
- * @endhtmlonly
- * @endif
- */
-extern const Tizen::Graphics::Color SYSTEM_COLOR_BODY_TEXT;
+_OSP_EXPORT_ extern const Tizen::Graphics::Color SYSTEM_COLOR_BODY_TEXT;
 
 /**
  * @if OSPDEPREC
@@ -221,18 +208,7 @@ extern const Tizen::Graphics::Color SYSTEM_COLOR_BODY_TEXT;
  * @remarks      Different color values can be defined for different device models.
  * @endif
  */
-/**
- * @if OSPDEPREC
- * @htmlonly
- * <!--
- */
-_OSP_EXPORT_
-/**
- * -->
- * @endhtmlonly
- * @endif
- */
-extern const Tizen::Graphics::Color SYSTEM_COLOR_FOREGROUND;
+_OSP_EXPORT_ extern const Tizen::Graphics::Color SYSTEM_COLOR_FOREGROUND;
 
 /**
  * @if OSPDEPREC
@@ -245,18 +221,7 @@ extern const Tizen::Graphics::Color SYSTEM_COLOR_FOREGROUND;
  * @remarks      Different color values can be defined for different device models.
  * @endif
  */
-/**
- * @if OSPDEPREC
- * @htmlonly
- * <!--
- */
-_OSP_EXPORT_
-/**
- * -->
- * @endhtmlonly
- * @endif
- */
-extern const Tizen::Graphics::Color SYSTEM_COLOR_BACKGROUND;
+_OSP_EXPORT_ extern const Tizen::Graphics::Color SYSTEM_COLOR_BACKGROUND;
 
 /**
  * @if OSPDEPREC
@@ -269,18 +234,7 @@ extern const Tizen::Graphics::Color SYSTEM_COLOR_BACKGROUND;
  * @remarks      Different color values can be defined for different device models.
  * @endif
  */
-/**
- * @if OSPDEPREC
- * @htmlonly
- * <!--
- */
-_OSP_EXPORT_
-/**
- * -->
- * @endhtmlonly
- * @endif
- */
-extern const Tizen::Graphics::Color SYSTEM_COLOR_LIST_BACKGROUND;
+_OSP_EXPORT_ extern const Tizen::Graphics::Color SYSTEM_COLOR_LIST_BACKGROUND;
 
 /**
  * @if OSPDEPREC
@@ -293,18 +247,7 @@ extern const Tizen::Graphics::Color SYSTEM_COLOR_LIST_BACKGROUND;
  * @remarks      Different color values can be defined for different device models.
  * @endif
  */
-/**
- * @if OSPDEPREC
- * @htmlonly
- * <!--
- */
-_OSP_EXPORT_
-/**
- * -->
- * @endhtmlonly
- * @endif
- */
-extern const Tizen::Graphics::Color SYSTEM_COLOR_FORM_BACKGROUND;
+_OSP_EXPORT_ extern const Tizen::Graphics::Color SYSTEM_COLOR_FORM_BACKGROUND;
 
 /**
  * @if OSPDEPREC
@@ -317,18 +260,7 @@ extern const Tizen::Graphics::Color SYSTEM_COLOR_FORM_BACKGROUND;
  * @remarks      Different color values can be defined for different device models.
  * @endif
  */
-/**
- * @if OSPDEPREC
- * @htmlonly
- * <!--
- */
-_OSP_EXPORT_
-/**
- * -->
- * @endhtmlonly
- * @endif
- */
-extern const Tizen::Graphics::Color SYSTEM_COLOR_FORM_GROUP_BACKGROUND;
+_OSP_EXPORT_ extern const Tizen::Graphics::Color SYSTEM_COLOR_FORM_GROUP_BACKGROUND;
 
 /**
  * @if OSPDEPREC
@@ -341,18 +273,7 @@ extern const Tizen::Graphics::Color SYSTEM_COLOR_FORM_GROUP_BACKGROUND;
  * @remarks      Different color values can be defined for different device models.
  * @endif
  */
-/**
- * @if OSPDEPREC
- * @htmlonly
- * <!--
- */
-_OSP_EXPORT_
-/**
- * -->
- * @endhtmlonly
- * @endif
- */
-extern const Tizen::Graphics::Color SYSTEM_COLOR_POPUP_BACKGROUND;
+_OSP_EXPORT_ extern const Tizen::Graphics::Color SYSTEM_COLOR_POPUP_BACKGROUND;
 
 /**
  * @if OSPDEPREC
@@ -365,18 +286,7 @@ extern const Tizen::Graphics::Color SYSTEM_COLOR_POPUP_BACKGROUND;
  * @remarks      Different color values can be defined for different device models.
  * @endif
  */
-/**
- * @if OSPDEPREC
- * @htmlonly
- * <!--
- */
-_OSP_EXPORT_
-/**
- * -->
- * @endhtmlonly
- * @endif
- */
-extern const Tizen::Graphics::Color SYSTEM_COLOR_GROUP_ITEM_TEXT;
+_OSP_EXPORT_ extern const Tizen::Graphics::Color SYSTEM_COLOR_GROUP_ITEM_TEXT;
 
 /**
  * @if OSPDEPREC
@@ -389,18 +299,7 @@ extern const Tizen::Graphics::Color SYSTEM_COLOR_GROUP_ITEM_TEXT;
  * @remarks      Different color values can be defined for different device models.
  * @endif
  */
-/**
- * @if OSPDEPREC
- * @htmlonly
- * <!--
- */
-_OSP_EXPORT_
-/**
- * -->
- * @endhtmlonly
- * @endif
- */
-extern const Tizen::Graphics::Color SYSTEM_COLOR_LIST_ITEM_TEXT;
+_OSP_EXPORT_ extern const Tizen::Graphics::Color SYSTEM_COLOR_LIST_ITEM_TEXT;
 
 /**
  * @if OSPDEPREC
@@ -413,18 +312,7 @@ extern const Tizen::Graphics::Color SYSTEM_COLOR_LIST_ITEM_TEXT;
  * @remarks      Different color values can be defined for different device models.
  * @endif
  */
-/**
- * @if OSPDEPREC
- * @htmlonly
- * <!--
- */
-_OSP_EXPORT_
-/**
- * -->
- * @endhtmlonly
- * @endif
- */
-extern const Tizen::Graphics::Color SYSTEM_COLOR_LIST_ITEM_PRESSED_TEXT;
+_OSP_EXPORT_ extern const Tizen::Graphics::Color SYSTEM_COLOR_LIST_ITEM_PRESSED_TEXT;
 
 /**
  * @if OSPDEPREC
@@ -437,18 +325,7 @@ extern const Tizen::Graphics::Color SYSTEM_COLOR_LIST_ITEM_PRESSED_TEXT;
  * @remarks      Different color values can be defined for different device models.
  * @endif
  */
-/**
- * @if OSPDEPREC
- * @htmlonly
- * <!--
- */
-_OSP_EXPORT_
-/**
- * -->
- * @endhtmlonly
- *  @endif
- */
-extern const Tizen::Graphics::Color SYSTEM_COLOR_LIST_ITEM_HIGHLIGHTED_TEXT;
+_OSP_EXPORT_ extern const Tizen::Graphics::Color SYSTEM_COLOR_LIST_ITEM_HIGHLIGHTED_TEXT;
 
 }; // Tizen::Ui::Controls
 }; // Tizen::Ui

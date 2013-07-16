@@ -1,12 +1,11 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-// http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -78,6 +77,9 @@
 /** The server certificate verification has failed. */
 #define E_CERTIFICATE_VERIFICATION_FAILED	(ERR_SRC_FRAMEWORK + SET_E_CAUSE(1305))
 
+/** Thrown when the context data is not available. */
+#define E_CONTEXT_UNAVAILABLE           (ERR_SRC_FRAMEWORK + SET_E_CAUSE(1306))
+
 //----------------------------------------------------------------------------D
 /** Thrown when the requested data does not exist. */
 #define E_DATA_NOT_FOUND                (ERR_SRC_FRAMEWORK + SET_E_CAUSE(1400))
@@ -115,6 +117,9 @@
 
 /** Thrown when the data is not enough to generate the processing result. */
 #define E_DATA_NOT_ENOUGH               (ERR_SRC_FRAMEWORK + SET_E_CAUSE(1411))
+
+/** Thrown when the display right is violated. */
+#define E_DISPLAY_RIGHT_VIOLATED		(ERR_SRC_FRAMEWORK + SET_E_CAUSE(1412))
 
 //----------------------------------------------------------------------------E
 /** Thrown when effects being played on the current haptic device are disabled. */
@@ -435,7 +440,6 @@
 /** Thrown when the right is for future use. */
 #define E_RIGHT_FUTURE_USE			(ERR_SRC_FRAMEWORK + SET_E_CAUSE(2807))
 
-
 //----------------------------------------------------------------------------S
 /** Thrown when the specified section already exists. */
 #define E_SECTION_ALREADY_EXIST         (ERR_SRC_FRAMEWORK + SET_E_CAUSE(2900))
@@ -569,6 +573,10 @@
 /** (specialized) Thrown when non-blocking socket operation could not be
  * completed immediately. */
 #define E_WOULD_BLOCK                   (ERR_SRC_FRAMEWORK + SET_E_CAUSE(3300))
+
+/** Thrown when the specified object would cause a deadlock. */
+#define E_WOULD_DEADLOCK                (ERR_SRC_FRAMEWORK + SET_E_CAUSE(3301))
+
 
 //----------------------------------------------------------------------------X
 

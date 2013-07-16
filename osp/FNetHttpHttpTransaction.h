@@ -102,27 +102,29 @@ public:
 	/**
 	 * Submits the HTTP request.
 	 *
-	 * @since           2.0
+	 * @since			2.0
+	 * @privlevel		public
 	 * @privilege		%http://tizen.org/privilege/http
 	 *
 	 * @return			An error code
-	 * @exception		E_SUCCESS			The method is successful.
+	 * @exception		E_SUCCESS				The method is successful.
 	 * @exception		E_OUT_OF_MEMORY		The memory is insufficient.
-	 * @exception		E_INVALID_ARG		A specified input parameter is invalid. @n
-	 *									    At least one of Uri, Method, Header, and Body is invalid.
-	 * @exception		E_INVALID_HEADER	The header is @c null.
-	 * @exception       E_INVALID_STATE		The method invoked is invalid.
+	 * @exception		E_INVALID_ARG			A specified input parameter is invalid. @n
+	 *									    	At least one of Uri, Method, Header, and Body is invalid.
+	 * @exception		E_INVALID_HEADER		The header is @c null.
+	 * @exception       E_INVALID_STATE	The method invoked is invalid.
 	 * @exception		E_OUT_OF_RANGE		The submitted data is out of range.
 	 * @exception		E_MAX_EXCEEDED		The number of active transactions has exceeded the maximum limit.
 	 * @exception		E_INVALID_PROXY		The proxy server address is invalid.
-	 * @exception		E_DNS				The DNS query has failed.
+	 * @exception		E_DNS					The DNS query has failed.
 	 * @exception		E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation.
-	 * @exception		E_EMPTY_BODY		The body is empty in a POST method case.
-	 * @exception		E_INVALID_SESSION	The session is invalid.
-	 * @exception		E_AUTHENTICATION	The authentication has failed.
-	 * @exception		E_UNKNOWN			An unknown error has occurred.
-	 * @exception		E_SYSTEM			A system error has occurred.
+	 * @exception		E_EMPTY_BODY			The body is empty in a POST method case.
+	 * @exception		E_INVALID_SESSION		The session is invalid.
+	 * @exception		E_AUTHENTICATION		The authentication has failed.
+	 * @exception		E_UNKNOWN				An unknown error has occurred.
+	 * @exception		E_SYSTEM				A system error has occurred.
 	 * @exception		E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @remarks			The appropriate request header and body must be set using HttpRequest before using this method.
 	 *					If the session is in a non-pipeline mode, be sure not to submit a transaction before the previous transaction is completed.
 	 * @see				HttpHeader
@@ -132,8 +134,9 @@ public:
 	/**
 	 * Gets the authentication information.
 	 *
-	 * @since       2.0
-	 * @privilege	%http://tizen.org/privilege/http
+	 * @since			2.0
+	 * @privlevel		public
+	 * @privilege		%http://tizen.org/privilege/http
 	 *
 	 * @return		A pointer to HttpAuthentication
 	 * @exception	E_SUCCESS				The method is successful.
@@ -142,6 +145,7 @@ public:
 	 * @exception	E_INVALID_OPERATION		The current state of the instance prohibits the execution of the specified operation.
 	 * @exception	E_SYSTEM				A system error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	HttpAuthentication* OpenAuthenticationInfoN(void);
@@ -305,6 +309,19 @@ public:
 	 *                                      the transaction is already closed.
 	 */
 	result SetTimeout(int timeout);
+
+	/**
+	* Sets the flag to verify server certificate. (By default, the flag is @c HTTP_CV_FLAG_AUTOMATIC.)
+	*
+	* @since		2.1
+	*
+	* @return       An error code
+	* @param[in]	flag					Set the flag for certificate verification
+	* @exception    E_SUCCESS               The method is successful.
+	* @exception    E_INVALID_STATE			The method invoked is invalid.
+	* @exception    E_SYSTEM                A system error has occurred.
+	*/
+	result SetServerCertificateVerification(NetHttpCertificateVerificationFlag flag = HTTP_CV_FLAG_AUTOMATIC);
 
 private:
 	/**

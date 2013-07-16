@@ -32,7 +32,7 @@ namespace Tizen { namespace Messaging
 {
 	/**
 	* @interface	ISmsListener
-	* @brief		This is the listener interface for receiving SMS sent status.
+	* @brief		This interface is the listener interface for receiving SMS sent status.
 	*
 	* @since		2.0
 	*

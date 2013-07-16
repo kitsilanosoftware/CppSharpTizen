@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -56,7 +55,7 @@ template< class Type > class __QueueEnumeratorT;
  *	void
  *	MyClass::QueueTSample(void)
  *	{
- *		QueueT<String> queue;
+ *		QueueT< String > queue;
  *		queue.Construct();
  *
  *		String str1(L"First");

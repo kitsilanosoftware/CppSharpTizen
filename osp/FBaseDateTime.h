@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -38,8 +37,8 @@ namespace Tizen { namespace Base
  *
  *	@since 2.0
  *
- *	The %DateTime class represents dates and times with values ranging from 12:00:00 midnight,
- *	January 1, 1 to 11:59:59 P.M., December 31, 9999 in the Gregorian calendar. It
+ *	The %DateTime class represents dates and times with values ranging from 12:00:00.000 midnight,
+ *	January 1, 1 to 11:59:59.999 P.M., December 31, 9999 in the Gregorian calendar. It
  *	provides methods for conversion between the time formats.
  *
  *	For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/base/datetime_timespan.htm">DateTime and TimeSpan</a>.
@@ -51,7 +50,7 @@ namespace Tizen { namespace Base
  *	#include <FBase.h>
  *
  *	using namespace Tizen::Base;
- *	
+ *
  *	// This method sets both current local time and UTC time.
  *	void
  *	MyClass::DateTimeSample(void)
@@ -106,7 +105,7 @@ public:
 	 *
 	 *	@since 2.0
 	 *
-	 *	@param[in]	value	The instance of TimeSpan
+	 *	@param[in]	value	An instance of TimeSpan
 	 *	@exception	E_SUCCESS			The method is successful.
 	 *	@exception	E_OUT_OF_RANGE		The value of the argument is outside the valid range defined by the method. @n
 	 *									The resulting value of %DateTime is greater than the value returned by GetMaxValue() or @n
@@ -124,7 +123,7 @@ public:
 	void SetValue(const DateTime& value);
 
 	/**
-	 *	Sets the current instance of %DateTime to the specified year, month, day, hour, minute, and second.
+	 *	Sets the current instance of %DateTime to the specified @c year, @c month, @c day, @c hour, @c minute, and @c second.
 	 *
 	 *	@since 2.0
 	 *
@@ -138,11 +137,50 @@ public:
 	 *	@exception	E_SUCCESS			The method is successful.
 	 *	@exception	E_OUT_OF_RANGE		The value of the argument is outside the valid range defined by the method. @n
 	 *									 Either the arguments are greater than the value returned by GetMaxValue() or
-	 *									are less than the value returned by GetMinValue(), or 
+	 *									are less than the value returned by GetMinValue(), or
 	 *									 the arguments contain invalid values.
 	 *									For example, day is 31 when month is 2.
 	 */
 	result SetValue(int year, int month, int day, int hour = 0, int minute = 0, int second = 0);
+
+	/**
+	 *	Sets the current instance of %DateTime to the specified @c year, @c month, @c day, @c hour, @c minute, @c second, and @c millisecond.
+	 *
+	 *	@since 2.1
+	 *
+	 *	@return			An error code
+	 *	@param[in]	year				The year to set
+	 *	@param[in]	month				The month to set
+	 *	@param[in]	day					The day to set
+	 *	@param[in]	hour				The hour to set
+	 *	@param[in]	minute				The minute set
+	 *	@param[in]	second				The second to set
+	 *	@param[in]	millisecond			The millisecond to set
+	 *	@exception	E_SUCCESS			The method is successful.
+	 *	@exception	E_OUT_OF_RANGE		The value of the argument is outside the valid range defined by the method. @n
+	 *									Either the arguments are greater than the value returned by GetMaxValue() or
+	 *									are less than the value returned by GetMinValue(), or
+	 *									the arguments contain invalid values.
+	 *									For example, day is 31 when month is 2.
+	 */
+	result SetValue(int year, int month, int day, int hour, int minute, int second, int millisecond);
+
+	/**
+	 *	Sets the current instance of %DateTime with the specified number of %ticks.
+	 *	The tick value of type @c long @c long represents dates and times ranging from January 1, 1 A.D. 00:00:00.000 am.
+	 *
+	 *	@since	2.1
+	 *
+	 *	@return			An error code
+	 *	@param[in]	ticks	The number of ticks
+	 *	@exception	E_SUCCESS			The method is successful.
+	 *	@exception	E_OUT_OF_RANGE		The value of the argument is outside the valid range defined by the method.
+	 *									Either the arguments are greater than the value returned by GetMaxValue() or
+	 *									are less than the value returned by GetMinValue(), or
+	 *									the arguments contain invalid values.
+	 *									For example, day is 31 when month is 2.
+	 */
+	result SetValue(long long ticks);
 
 	/**
 	 *	Copying of objects using this copy assignment operator is allowed.
@@ -305,6 +343,34 @@ public:
 	result AddSeconds(int seconds);
 
 	/**
+	 *	Adds a specified number of milliseconds to the instance of %DateTime.
+	 *
+	 *	@since 2.1
+	 *
+	 *	@return	An error code
+	 *	@param[in]	milliseconds		The number of milliseconds to add
+	 *	@exception	E_SUCCESS			The method is successful.
+	 *	@exception	E_OUT_OF_RANGE		The value of the argument is outside the valid range defined by the method. @n
+	 *									The resulting value of %DateTime is greater than the value returned by GetMaxValue() or @n
+	 *									is less than the value returned by GetMinValue().
+	 */
+	result AddMilliseconds(long long milliseconds);
+
+	/**
+	 *	Adds a specified number of ticks to the instance of %DateTime.
+	 *
+	 *	@since 2.1
+	 *
+	 *	@return	An error code
+	 *	@param[in]	ticks				The number of ticks to add
+	 *	@exception	E_SUCCESS			The method is successful.
+	 *	@exception	E_OUT_OF_RANGE		The value of the argument is outside the valid range defined by the method. @n
+	 *									The resulting value of %DateTime is greater than the value returned by GetMaxValue() or @n
+	 *									is less than the value returned by GetMinValue().
+	 */
+	result AddTicks(long long ticks);
+
+	/**
 	 *	Adds the specified number of years to the instance of %DateTime.
 	 *
 	 *	@since 2.0
@@ -356,7 +422,7 @@ public:
 	 *	@since 2.0
 	 *
 	 *	@return		@c true if the specified instance of Object is equivalent to the current instance of %DateTime, @n
-	                else @c false
+	 *               else @c false
 	 *	@param[in]	obj The object to compare with the current instance of %DateTime
 	 *	@see			Tizen::Base::Object::GetHashCode()
 	 */
@@ -383,7 +449,7 @@ public:
 	TimeSpan GetTimeOfDay(void) const;
 
 	/**
-	 *	Gets the number of days in the specified month of the specified year.
+	 *	Gets the number of @c days in the specified @c month of the specified @c year.
 	 *
 	 *	@since 2.0
 	 *
@@ -438,7 +504,9 @@ public:
 	 *									    or is less than the value returned by GetMinValue(). @n
 	 *									     2) The specified string contains an invalid value.
 	 *									    For example, day is 31 when the month is 2.
-	 * @remarks		The format of the string is "mm/dd/yyyy hh:mm:ss".
+	 * @remarks
+	 *				- The format of the string is "mm/dd/yyyy hh:mm:ss".
+	 *				- This method guarantees that the original value of out-parameter is not changed when the method returns error.
 	 */
 	static result Parse(const String& str, DateTime& dt);
 
@@ -497,6 +565,34 @@ public:
 	int GetSecond(void) const;
 
 	/**
+	 *	Gets the millisecond of the current instance of %DateTime.
+	 *
+	 *	@since	2.1
+	 *
+	 *	@return		An integer value indicating the millisecond of the current instance of %DateTime
+	 */
+	int GetMillisecond(void) const;
+
+	/**
+	 *	Gets the number of ticks in 1 second.
+	 *
+	 *	@since	2.1
+	 *
+	 *	@return		The number of ticks in 1 second.
+	 */
+	static int GetTicksPerSecond(void);
+
+	/**
+	 *	Gets the tick of the current instance of %DateTime.
+	 *	The tick value of type @c long @c long represents dates and times ranging from January 1, 1 A.D. 00:00:00.000 am.
+	 *
+	 *	@since	2.1
+	 *
+	 *	@return		A @c long @c long value indicating the tick of the current instance of %DateTime
+	 */
+	long long GetTicks(void) const;
+
+	/**
 	 *	Gets the number of milliseconds (in TimeSpan) since the minimum date (GetMinValue()).
 	 *
 	 *	@since 2.0
@@ -507,7 +603,7 @@ public:
 	TimeSpan GetTime(void) const;
 
 	/**
-	 *	Gets the maximum allowable value of %DateTime (that is, "December 31 9999 23:59:59").
+	 *	Gets the maximum allowable value of %DateTime (that is, "December 31 9999 23:59:59.999").
 	 *
 	 *	@since 2.0
 	 *
@@ -516,7 +612,7 @@ public:
 	static const DateTime& GetMaxValue(void);
 
 	/**
-	 *	Gets the minimum allowable value of %DateTime (that is, "January 1 1 00:00:00").
+	 *	Gets the minimum allowable value of %DateTime (that is, "January 1 1 00:00:00.000").
 	 *
 	 *	@since 2.0
 	 *
@@ -535,7 +631,7 @@ public:
 	bool IsLeapYear(void) const;
 
 	/**
-	 *	Checks whether the specified year is a leap year.
+	 *	Checks whether the specified @c year is a leap year.
 	 *
 	 *	@since 2.0
 	 *
@@ -545,19 +641,18 @@ public:
 	 */
 	static bool IsLeapYear(int year);
 
-
 private:
-	DateTime(int year, int month, int day, int hour, int minute, int second);
+	DateTime(int year, int month, int day, int hour, int minute, int second, int tick);
 
 	int CountLeapYear(int year) const
 	{
-		return (int) ((year - 1) / 4 - (year - 1) / 100 + (year - 1) / 400);
+		return static_cast< int >((year - 1) / 4 - (year - 1) / 100 + (year - 1) / 400);
 
 	}
 
 	int CountDays(int year) const
 	{
-		return (int) ((year - 1) * 365 + CountLeapYear(year));
+		return static_cast< int >((year - 1) * 365 + CountLeapYear(year));
 	}
 
 	int CountYears(int day) const
@@ -572,25 +667,46 @@ private:
 		}
 		else
 		{
-			return(year != (int) year ? 1 + (int) year : (int) year);
+			year = (year != static_cast< int >(year) ? 1 + static_cast< int >(year) : static_cast< int >(year));
+			int tempDays = day - CountDays(year);
+
+			// Check the boundary of days
+			if (IsLeapYear(year))
+			{
+				if (tempDays > 366)
+				{
+					year += 1;
+				}
+			}
+			else
+			{
+				if (tempDays > 365)
+				{
+					year += 1;
+				}
+			}
+
+			return year;
 		}
 	}
 
 	typedef struct
 	{
-		int year;       /**<The year (1 ~ 9999)*/
-		int month;      /**<The month (-12)*/
+		int year;       /**<The year (1-9999)*/
+		int month;      /**<The month (1-12)*/
 		int day;        /**<The day (1-31)*/
 		int hour;       /**<The hour (0-23)*/
 		int minute;     /**<The minute (0-59)*/
-		int second;     /**<The second (0-59)*/
+		int second;     /**<The first 16 bits store tick (0-999) and the last 16 bits store second (0-59)*/
 	} TmDateTime;
+
+	result ConvertTicksToDate(long long ticks, TmDateTime* pDateTime);
+	long long ConvertDateToTicks(const TmDateTime* pDateTime) const;
 
 	result ConvertSecondsToDate(long long seconds, TmDateTime* pDateTime);
 	long long ConvertDateToSeconds(const TmDateTime* pDateTime) const;
 
 	TmDateTime __dateTime;
-
 
 	friend class _DateTimeImpl;
 	class _DateTimeImpl * __pDateTimeImpl;
@@ -600,3 +716,4 @@ private:
 }}  // Tizen::Base
 
 #endif // _FBASE_DATE_TIME_H_
+

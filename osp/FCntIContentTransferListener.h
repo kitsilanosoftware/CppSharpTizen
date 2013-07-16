@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -50,7 +49,8 @@ class _OSP_EXPORT_ IContentTransferListener
 {
 public:
 	/**
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required. @n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @brief	<i> [Deprecated] </i>
 	 * @deprecated	This class is deprecated. Instead of using this class, use DownloadManager class.

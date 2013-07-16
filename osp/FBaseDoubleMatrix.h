@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -168,7 +167,7 @@ public:
 	result Add(const DoubleMatrix& matrix);
 
 	/**
-	 * Adds the value to each matrix members of current instance of %DoubleMatrix.
+	 * Adds the value to each matrix members of the current instance of %DoubleMatrix.
 	 *
 	 * @since 2.0
 	 *
@@ -310,7 +309,7 @@ public:
 	result Multiply(const DoubleMatrix& matrix);
 
 	/**
-	 * Multiplies the value to each matrix members of current instance of %DoubleMatrix.
+	 * Multiplies the value with each matrix members of the current instance of %DoubleMatrix.
 	 *
 	 * @since 2.0
 	 *
@@ -319,7 +318,7 @@ public:
 	void Multiply(double value);
 
 	/**
-	 * Negates the matrix members of current instance of %DoubleMatrix.
+	 * Negates the matrix members of the current instance of %DoubleMatrix.
 	 *
 	 * @since 2.0
 	 */
@@ -433,7 +432,7 @@ public:
 	result Subtract(const DoubleMatrix& matrix);
 
 	/**
-	 * Subtracts the value from each matrix members of current instance of %DoubleMatrix.
+	 * Subtracts the value from each matrix members of the current instance of %DoubleMatrix.
 	 *
 	 * @since 2.0
 	 *

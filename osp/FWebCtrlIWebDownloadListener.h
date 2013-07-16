@@ -35,7 +35,7 @@ namespace Tizen { namespace Web { namespace Controls
  * @interface	IWebDownloadListener
  * @brief		This interface downloads data from the internet.
  *
- * @since	2.0
+ * @since		2.0
  *
  * The %IWebDownloadListener interface downloads data from the internet.
  * An application receives content from a network incrementally
@@ -60,7 +60,7 @@ namespace Tizen { namespace Web { namespace Controls
  *
  *		pWeb = new Web();
  *		r = pWeb->Construct( pParentForm->GetClientAreaBounds());
- *		r = pParentForm->AddControl(*pWeb);
+ *		r = pParentForm->AddControl(pWeb);
  *
  *		// Sets a loading listener and a Web downloading listener
  *		pWeb->SetDownloadListener(pMyDownloadListener);
@@ -71,7 +71,7 @@ namespace Tizen { namespace Web { namespace Controls
  *	@endcode
  *
  *	As soon as the first chunk of data is received, OnWebDataReceived() is fired with the MIME type.
- *	If you want to download the data, return WEB_DECISION_DOWNLOAD.
+ *	If you want to download the data, return @c WEB_DECISION_DOWNLOAD.
  *
  *	@code
  *	DecisionPolicy
@@ -98,33 +98,33 @@ public:
 	/**
 	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
-	 * @since	2.0
+	 * @since		2.0
 	 */
 	virtual ~IWebDownloadListener(void) {}
 
 	/**
 	* Called when the HyperText Transfer Protocol (HTTP) protocol receives the next chunked data.
 	 *
-	 * @since				2.0
+	 * @since		2.0
 	 *
-	 * @param[in]		chunk		The chunked data
-	 * @remarks     The received data size is less than the capacity of the specified Tizen::Base::ByteBuffer by @c 1.
+	 * @param[in]	chunk			The chunked data
+	 * @remarks		The received data size is less than the capacity of the specified Tizen::Base::ByteBuffer by @c 1.
 	 */
 	virtual void OnWebChunkedDataReceived(const Tizen::Base::ByteBuffer& chunk) = 0;
 
 	/**
 	  * Called when the downloading of the content is completed.
 	  *
-	  * @since	2.0
+	  * @since		2.0
 	  */
 	virtual void OnWebDataDownloadCompleted(void) = 0;
 
 	/**
 	* Called when an error has occurred while downloading content.
 	*
-	* @since                  2.0
+	* @since		2.0
 	*
-	* @param[in]          error                           The type of error that occurred while downloading data
+	* @param[in]	error			The type of error that occurred while downloading data
 	*/
 	virtual void OnWebDownloadFailed(LoadingErrorType error) = 0;
 
@@ -134,7 +134,7 @@ protected:
 	//
 	// Gets the Impl instance.
 	//
-	// @since 2.0
+	// @since		2.0
 	//
 	virtual void IWebDownloadListener_Reserved1(void) {}
 
@@ -143,7 +143,7 @@ protected:
 	//
 	// Gets the Impl instance.
 	//
-	// @since 2.0
+	// @since		2.0
 	//
 	virtual void IWebDownloadListener_Reserved2(void) {}
 

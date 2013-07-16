@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -35,14 +34,18 @@ namespace Tizen { namespace Social
 {
 
 /**
+ * @if OSPDEPREC
  * @interface	IRecordListener
- * @brief		This interface represents a listener to asynchronously retrieve the records from the Calendarbook or Addressbook.
+ * @brief		<i> [Deprecated] </i> This interface represents a listener to asynchronously retrieve the records from the Calendarbook or Addressbook.
+ *
+ * @deprecated		This interface is deprecated because the @ref Calendarbook::GetEventInstances method is deprecated.
  *
  * @since	2.0
  *
  * The %IRecordListener interface represents a listener to asynchronously retrieve the records from the Calendarbook or Addressbook.
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/social/social_records.htm">Social Records</a>.
+ * @endif
  */
 class _OSP_EXPORT_ IRecordListener
 	: virtual public Tizen::Base::Runtime::IEventListener
@@ -50,27 +53,37 @@ class _OSP_EXPORT_ IRecordListener
 public:
 
 	/**
+	 * @if OSPDEPREC
 	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes @n
 	 * are called when the destructor of this interface is called.
 	 *
+	 * @brief		<i> [Deprecated] </i>
+	 * @deprecated		This method is deprecated because the %IRecordListener interface is deprecated.
+	 *
 	 * @since	2.0
+	 * @endif
 	 */
 	virtual ~IRecordListener(void) {}
 
 	/**
+	 * @if OSPDEPREC
 	 * Called when the requested records are retrieved.
+	 *
+	 * @brief		<i> [Deprecated] </i>
+	 * @deprecated		This method is deprecated because the %IRecordListener interface is deprecated.
 	 *
 	 * @since	2.0
 	 *
 	 * @param[in]	reqId				The request ID
 	 * @param[in]	pRecords			The result of a specific asynchronous method @n
 	 *									A list containing all of the retrieved Record instances, @n
-	 *									else an empty list if there are no retrieved records or @c null if an exception occurs
+	 *									else an empty list if there are no retrieved records, or @c null if an exception occurs
 	 * @param[in]	r					The result of the request
 	 * @exception	E_SUCCESS			The request is successful.
-	 * @exception	E_SYSTEM			An error has occurred on the local storage side.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks		After using @c pRecords, the application must delete it.
 	 * @see			Calendarbook::GetEventInstances()
+	 * @endif
 	 */
 	virtual void OnRecordsReceivedN(RequestId reqId, Tizen::Base::Collection::IList* pRecords, result r) = 0;
 

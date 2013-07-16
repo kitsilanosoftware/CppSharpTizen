@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -32,7 +32,6 @@
 #include <FUiContainer.h>
 #include <FUiCtrlButton.h>
 #include <FUiCtrlControlsTypes.h>
-#include <FUiCtrlGroupTypes.h>
 
 namespace Tizen { namespace Ui { namespace Controls
 {
@@ -61,17 +60,18 @@ enum CheckButtonStatus
 enum CheckButtonStyle
 {
 	CHECK_BUTTON_STYLE_MARK,                        /**< The mark style for multiple selection */
-	CHECK_BUTTON_STYLE_MARK_WITH_DIVIDER,           /**< @if OSPDEPREC @deprecated This enumeration field is deprecated because the use of the divider style is no longer recommended @n
+	CHECK_BUTTON_STYLE_MARK_WITH_DIVIDER,           /**< @if OSPDEPREC @deprecated This enum value is deprecated because the use of the divider style is no longer recommended @n
 				                                             Instead of using the divider style, use the detailed button style. @endif */
-	CHECK_BUTTON_STYLE_ONOFF,                       /**< @if OSPDEPREC @deprecated This enumeration field is deprecated because the use of the on-off style is no longer recommended @n
-				                                             Instead of using the on-off style, use the on-off sliding style @endif */
-	CHECK_BUTTON_STYLE_ONOFF_WITH_DIVIDER,          /**< @if OSPDEPREC @deprecated This enumeration field is deprecated because the use of the on-off style is no longer recommended @endif */
+	CHECK_BUTTON_STYLE_ONOFF,                       /**< @if OSPDEPREC @deprecated This enum value is deprecated because the use of the on-off style is no longer recommended @n
+				                                             Instead of using the on-off style, use the on-off sliding style @endif*/
+	CHECK_BUTTON_STYLE_ONOFF_WITH_DIVIDER,          /**< @if OSPDEPREC @deprecated This enum value is deprecated because the use of the on-off style is no longer recommended @endif */
 	CHECK_BUTTON_STYLE_RADIO,                       /**< The radio style for single selection */
-	CHECK_BUTTON_STYLE_RADIO_WITH_DIVIDER,          /**< @if OSPDEPREC @deprecated This enumeration field is deprecated because the use of the divider style is no longer recommended @n
-				                                             Instead of using the divider style, use the detailed button style @endif */
+	CHECK_BUTTON_STYLE_RADIO_WITH_DIVIDER,          /**< @if OSPDEPREC @deprecated This enum value is deprecated because the use of the divider style is no longer recommended @n
+				                                             Instead of using the divider style, use the detailed button style @endif*/
 	CHECK_BUTTON_STYLE_ONOFF_SLIDING,               /**< The slider style on/off */
 	CHECK_BUTTON_STYLE_MARK_WITH_DETAILED_BUTTON,   /**< The mark style with detail button */
 	CHECK_BUTTON_STYLE_RADIO_WITH_DETAILED_BUTTON,  /**< The radio style with detail button */
+	CHECK_BUTTON_STYLE_ONOFF_SLIDING_WITH_DIVIDER,  /**< The slider style On/Off with divider @b Since: @b 2.1 */
 };
 
 /**
@@ -144,7 +144,7 @@ CheckButtonSample::OnInitializing(void)
 	__pCheckButton->AddActionEventListener(*this);
 
 	// Add a CheckButton to the Form
-	AddControl(*__pCheckButton);
+	AddControl(__pCheckButton);
 
 	return r;
 }
@@ -196,9 +196,11 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	rect			An instance of the Rectangle class @n
+	 * @param[in]	rect			An instance of the Tizen::Graphics::Rectangle class @n
 	 *									This instance represents the x and y coordinates of the top-left corner of the created window
-	 *									along with the width and height of the window.
+	 *									along with the width and height of the window.@n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @param[in]	style				The style of the %CheckButton control
 	 * @param[in]	backgroundStyle		The background style set of the %CheckButton control
 	 * @param[in]   showTitle		Set to @c true to enable the title, @n
@@ -209,12 +211,40 @@ public:
 	 * @exception   E_INVALID_ARG       A specified input parameter is invalid.@n
 	 *									The specified size is less than the minimum size of the control.
 	 * @exception   E_INVALID_OPERATION The current state of the instance prohibits the execution of the specified operation. @n
-	 *                                  The background style of BACKGROUND_STYLE_NONE does not work with group styles except GROUP_STYLE_NONE.
+	 *                                  The background style of @c BACKGROUND_STYLE_NONE does not work with group styles except ::GROUP_STYLE_NONE.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks		A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier. @n
+	 * @remarks		A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier.
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, CheckButtonStyle style, BackgroundStyle backgroundStyle =
 						 BACKGROUND_STYLE_DEFAULT, bool showTitle = false, const Tizen::Base::String& text = L"", GroupStyle groupStyle = GROUP_STYLE_NONE);
+
+	/**
+	 * Initializes this instance of %CheckButton with the specified parameters.
+	 *
+     * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	rect			An instance of the Tizen::Graphics::FloatRectangle class @n
+	 *									This instance represents the x and y coordinates of the top-left corner of the created window
+	 *									along with the width and height of the window.@n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]	style				The style of the %CheckButton control
+	 * @param[in]	backgroundStyle		The background style set of the %CheckButton control
+	 * @param[in]   showTitle		Set to @c true to enable the title, @n
+	 *								else @c false
+	 * @param[in]   text				The text of the %CheckButton control
+	 * @param[in]   groupStyle			The group style of the %CheckButton control
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception   E_INVALID_ARG       A specified input parameter is invalid.@n
+	 *									The specified size is less than the minimum size of the control.
+	 * @exception   E_INVALID_OPERATION The current state of the instance prohibits the execution of the specified operation. @n
+	 *                                  The background style of @c BACKGROUND_STYLE_NONE does not work with group styles except ::GROUP_STYLE_NONE.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @remarks		A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier.
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, CheckButtonStyle style, BackgroundStyle backgroundStyle =
+							 BACKGROUND_STYLE_DEFAULT, bool showTitle = false, const Tizen::Base::String& text = L"", GroupStyle groupStyle = GROUP_STYLE_NONE);
 
 	/**
 	 * Sets the selected status of the %CheckButton control.
@@ -243,7 +273,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 */
 	void AddActionEventListener(Tizen::Ui::IActionEventListener& listener);
 
@@ -253,7 +283,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 */
 	void RemoveActionEventListener(Tizen::Ui::IActionEventListener& listener);
 
@@ -354,7 +384,7 @@ public:
 	 *
 	 * @since		2.0
 	 * @return		An error code
-	 * @param[in]   title				The title text to be set
+	 * @param[in]   title				The title text to set
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 */
@@ -374,7 +404,7 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in]	color   The text color to be set
+	 * @param[in]	color   The text color to set
 	 */
 	void SetTextColor(const Tizen::Graphics::Color& color);
 
@@ -393,7 +423,7 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in]	color   The text color to be set
+	 * @param[in]	color   The text color to set
 	 */
 	void SetTitleTextColor(const Tizen::Graphics::Color& color);
 
@@ -411,11 +441,11 @@ public:
 	 *
 	 * @since       2.0
 	 * @return      An error code
-	 * @param[in]	color					The color to be set
+	 * @param[in]	color					The color to set
 	 * @param[in]   status                  The status
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_INVALID_OPERATION		The current state of the instance prohibits the execution of the specified operation.@n
-	 *										The operation is not supported if the background style is BACKGROUND_STYLE_NONE.
+	 *										The operation is not supported if the background style is ::BACKGROUND_STYLE_NONE.
 	 * @exception   E_SYSTEM                A system error has occurred.
 	 */
 	result SetColor(CheckButtonStatus status, const Tizen::Graphics::Color& color);
@@ -439,7 +469,7 @@ public:
 	 * @since     2.0
 	 *
 	 * @return    An error code
-	 * @param[in]	color				The text color to be set
+	 * @param[in]	color				The text color to set
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 */
@@ -486,7 +516,7 @@ public:
 	 * @since     2.0
 	 *
 	 * @return    An error code
-	 * @param[in]	color				The text color to be set
+	 * @param[in]	color				The text color to set
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 */
@@ -534,7 +564,7 @@ public:
 	 * @since     2.0
 	 *
 	 * @return    An error code
-	 * @param[in]	color				The text color to be set
+	 * @param[in]	color				The text color to set
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 */

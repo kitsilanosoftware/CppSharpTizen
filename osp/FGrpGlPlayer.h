@@ -2,15 +2,15 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
@@ -101,20 +101,20 @@ public:
 	 *
 	 * @since 2.0
 	 * @return	An error code
-	 * @param[in]   version	EGL Context Client Version.
-	 * @param[in]   control	Target control
+	 * @param[in]   version	EGL Context Client Version @n
+	 *					The version must be 1(OpenGL-ES 1.x) or 2(OpenGL-ES 2.x).
+	 * @param[in]   pControl	A pointer of the target control @n
+	 *					Only Tizen::Ui::Controls::Frame and Tizen::Ui::Controls::Form are allowed as the target control.
 	 * @exception	E_SUCCESS	The method is successful.
-	 * @exception	E_INVALID_ARG	The specified input parameter is invalid.
+	 * @exception	E_INVALID_ARG	Either the @c pControl is not Form or Frame, or
+	 *							the @c version is not @c EGL_CONTEXT_CLIENT_VERSION_1_X or @c EGL_CONTEXT_CLIENT_VERSION_2_X.
 	 * @exception	E_INVALID_OPERATION	The operation has failed, because of the duplicate call of Construct().
-	 *
-	 * @remarks Currently, version must be 1(OpenGL-ES 1.x) or 2(OpenGL-ES 2.x)
-	 * @remarks Currently, only Tizen::Ui::Controls::Frame and Tizen::Ui::Controls::Form are allowed as the target control, therefore, when the input Target control is not Form or Frame then E_INVALID_ARG exception is occurred.
 	 *
 	 */
 	result Construct(EglContextClientVersion version, Tizen::Ui::Control* pControl);
 
 	/**
-	 * Start the %GlPlayer, and initialzie EGL status.
+	 * Starts the %GlPlayer, and initializes EGL status.
 	 *
 	 * @since 2.0
 	 * @return	An error code
@@ -123,7 +123,7 @@ public:
 	 * @exception	E_INVALID_STATE	The state of player is not suitable for start. For example, it is not allowable to start player when its state is pause.
 	 * @exception	E_OPENGL_ERROR	There occurs an EGL error during performing EGL function.
 	 *
-	 * @remarks	In the case that this returns E_OPENGL_ERROR exception, developers can use eglGetError() to query which EGL error is raised.
+	 * @remarks	In the case that this returns @c E_OPENGL_ERROR exception, developers can use eglGetError() to query which EGL error is raised.
 	 *
 	 */
 	result Start(void);
@@ -135,7 +135,7 @@ public:
 	 * @return	An error code
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_SYSTEM	Player cannot be paused properly due to a severe system error.
-	 * @exception	E_INVALID_OPERATION	Fail to perform IGlRenderer::Pause function which is implemented by developers.
+	 * @exception	E_INVALID_OPERATION	Fail to perform the IGlRenderer::Pause() method which is implemented by developers.
 	 * @exception	E_INVALID_STATE	The state of player is not suitable for pause. For example, it is not allowable to pause player when it does not start after the initialization yet.
 	 *
 	 */
@@ -148,7 +148,7 @@ public:
 	 * @return	An error code
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_SYSTEM	Player cannot be resumed properly due to a severe system error.
-	 * @exception	E_INVALID_OPERATION	Fail to perform IGlRenderer::Resume function which is implemented by developers.
+	 * @exception	E_INVALID_OPERATION	Fail to perform the IGlRenderer::Resume() method which is implemented by developers.
 	 * @exception	E_INVALID_STATE	The state of player is not suitable for resume. For example, it is not allowable to resume player when its state is stop.
 	 *
 	 */
@@ -161,9 +161,9 @@ public:
 	 * @return	An error code
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_SYSTEM	Player cannot be stopped properly due to a severe system error.
-	 * @exception	E_INVALID_OPERATION	Fail to perform IGlRenderer::Pause function which is implemented by developers.
+	 * @exception	E_INVALID_OPERATION	Fail to perform the IGlRenderer::Pause() method which is implemented by developers.
 	 *
-	 * @remarks Before starting to reset the EGL status, this function calls IGlRenderer::Pause() to prevent unexpected behavior.
+	 * @remarks Before starting to reset the EGL status, this method calls IGlRenderer::Pause() to prevent unexpected behavior.
 	 *
 	 */
 	result Stop(void);
@@ -177,7 +177,7 @@ public:
 	 * @exception	E_OPENGL_ERROR	There occurs an EGL error during performing EGL function.
 	 * @exception	E_INVALID_STATE	The state of player is invalid and fails to pause properly.
 	 *
-	 * @remarks	In the case that this returns E_OPENGL_ERROR exception, developers can use eglGetError() to query which EGL error is raised.
+	 * @remarks	In the case that this returns @c E_OPENGL_ERROR exception, developers can use eglGetError() to query which EGL error is raised.
 	 *
 	 */
 	result Redraw(void);
@@ -198,12 +198,12 @@ public:
 	 *
 	 * @since 2.0
 	 * @return	An error code
-	 * @param[in]   eglConfigList	a list of EGL attributes and their values.
+	 * @param[in]   pEglConfigList	A list of EGL attributes and their values
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_INVALID_ARG	The specified input parameter is invalid.
 	 *
 	 * @remarks %GlPlayer initializes the EGL status with the given EGL attributes, which means that system does not guarantees to set EGL configurations with the given attributes but prefers them.
-	 * @remarks	The format of eglConfigList is the same with the attribute list as the second input parameter of eglChooseConfig function. To know about the detailed description, refer the reference page of eglChooseConfig: http://www.khronos.org/opengles/documentation/opengles1_0/html/eglChooseConfig.html
+	 * @remarks	The format of eglConfigList is the same with the attribute list as the second input parameter of eglChooseConfig function. For detailed description, refer  <a href="http://www.khronos.org/opengles/documentation/opengles1_0/html/eglChooseConfig.html">here</a>.
 	 *
 	 */
 	result SetEglAttributeList(const EGLint* pEglConfigList);
@@ -242,14 +242,14 @@ public:
 	 *
 	 * @since 2.0
 	 * @return		An error code
-	 * @param[in]   renderer	%IGlRenderer defines how to render the scene.
+	 * @param[in]   pRenderer	%IGlRenderer defines how to render the scene.
 	 * @exception	E_SUCCESS	The method is successful.
-	 * @exception	E_INVALID_OPERATION	Fail to perform IGlRenderer::InitializeGl function which is implemented by developers.
+	 * @exception	E_INVALID_OPERATION	Fail to perform the IGlRenderer::InitializeGl() method which is implemented by developers.
 	 * @see	%IGlRenderer
 	 *
 	 * @remarks If %GlPlayer already has a renderer, then the previous renderer is replaced by the new one.
 	 * @remarks If input parameter is null, then the current renderer of %GlPlayer is detached and %GlPlayer does nothing.
-	 * @remarks When the %IGlRenderer is replaced with the input, the GL status have to be initialized for the input %IGlRenderer. For such purpose, when the input %IGlRenderer is attached, the overrided IGlRenderer::InitializedGl() function is called. On the other hands, the previous %IGlRenderer of %GlPlayer is detached after calling the overrided %IGlRenderer::TerminateGL() function.
+	 * @remarks When the %IGlRenderer is replaced with the input, the GL status have to be initialized for the input %IGlRenderer. For such purpose, when the input %IGlRenderer is attached, the overrided IGlRenderer::InitializedGl() method is called. On the other hand, the previous %IGlRenderer of %GlPlayer is detached after calling the overrided %IGlRenderer::TerminateGL() method.
 	 *
 	 */
 	result SetIGlRenderer(IGlRenderer* pRenderer);

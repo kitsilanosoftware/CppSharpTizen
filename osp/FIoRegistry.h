@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -31,6 +30,7 @@
 #include <FBaseColArrayList.h>
 #include <FBaseResult.h>
 #include <FBaseColIMap.h>
+#include <FIoFileLock.h>
 
 namespace Tizen {namespace Base
 {
@@ -162,21 +162,14 @@ public:
 	virtual ~Registry(void);
 
 	/**
-	* @if OSPDEPREC
 	* @{
+	* @if OSPDEPREC
 	* Initializes this instance of %Registry with the specified parameters. @n
 	* This method loads a registry file in the read-write mode.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Deprecated] [Compatibility] </i>
-	* @endif
 	* @deprecated		This method is deprecated. Instead of using this method, use Directory::Create(const Tizen::Base::String &dirPath,
 	*					bool createParentDirectories=false) and Registry::Construct(const Tizen::Base::String& regPath, const Tizen::Base::String& openMode).
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	regPath					The path of the registry file to open or create
@@ -201,27 +194,20 @@ public:
 	* @exception	E_PARSING_FAILED		The method has failed to parse the registry file.
 	* @remarks		To load the registry in read-only mode, use the Registry::Construct(const Tizen::Base::String& regPath,
 	*               long openMode, long option) method with REG_OPEN_READ_ONLY as a value for the open mode flag.
-	* @}
 	* @endif
+	* @}
 	*/
 	result Construct(const Tizen::Base::String& regPath, bool createIfNotExist);
 
 	/**
-	* @if OSPDEPREC
 	* @{
+	* @if OSPDEPREC
 	* Initializes this instance of %Registry with the specified parameters. @n
 	* This method loads a registry file in the read-only or the read-write mode.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Deprecated] [Compatibility] </i>
-	* @endif
 	* @deprecated		This method is deprecated. Instead of using this method, use Directory::Create(const Tizen::Base::String &dirPath,
 	*					bool createParentDirectories=false) and Registry::Construct(const Tizen::Base::String& regPath, const Tizen::Base::String& openMode).
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	regPath					The path of the registry file to open or create
@@ -249,8 +235,8 @@ public:
 	*										- %File corruption is detected.
 	* @exception	E_INVALID_FORMAT		The input registry file contains '0x00' in the middle of the file.
 	* @exception	E_PARSING_FAILED		The method has failed to parse the registry file.
-	* @}
 	* @endif
+	* @}
 	*/
 	result Construct(const Tizen::Base::String& regPath, long openMode, long option);
 
@@ -272,8 +258,8 @@ public:
 	*										  otherwise it is truncated to zero length.
 	*									- w+: Open for writing and reading. The registry file is created if it does not exist,
 	*										  otherwise it is truncated to zero length.
-	*									- a : Open for appending. The registry file is created if it does not exist.
-	*									- a+: Open for appending and reading. The registry file is created if it does not exist.
+	*									- a : Open for writing. The registry file is created if it does not exist.
+	*									- a+: Open for writing and reading. The registry file is created if it does not exist.
 	* @exception	E_SUCCESS			The method is successful.
 	* @exception	E_INVALID_ARG		Either of the following conditions has occurred: @n
 	*									- The overall length of the specified @c regPath is equal to @c 0 or
@@ -317,8 +303,8 @@ public:
 	*										  otherwise it is truncated to zero length.
 	*									- w+: Open for writing and reading. The registry file is created if it does not exist,
 	*										  otherwise it is truncated to zero length.
-	*									- a : Open for appending. The registry file is created if it does not exist.
-	*									- a+: Open for appending and reading. The registry file is created if it does not exist.
+	*									- a : Open for writing. The registry file is created if it does not exist.
+	*									- a+: Open for writing and reading. The registry file is created if it does not exist.
 	* @param[in]	secretKey			A key used to encrypt data of a registry file or decrypt a secure registry file @n
 	*									If a secure registry file is created with a specific key value,
 	*									other applications can access the same secure registry file with the identical key value.
@@ -345,7 +331,7 @@ public:
 	result Construct(const Tizen::Base::String& regPath, const char* pOpenMode, const Tizen::Base::ByteBuffer& secretKey);
 
 	/**
-	* Writes the current contents of a registry in memory to the non-volatile storage. @n
+	* Flushes the current contents of a registry in memory. @n
 	* If the secure mode is set to be @c true, the contents of the registry are automatically encrypted
 	* and saved by the platform.
 	*
@@ -360,7 +346,6 @@ public:
 	* @exception	E_IO					Either of the following conditions has occurred: @n
 	*										- An unexpected device failure has occurred as the media ejected suddenly. @n
 	*										- %File corruption is detected. @n
-	*										- The memory is insufficient.
 	*/
 	result Flush(void);
 
@@ -467,6 +452,8 @@ public:
 	*										synchronization.
 	* @exception	E_SECTION_NOT_FOUND		The specified @c sectionName is not found within the registry.
 	* @exception	E_KEY_ALREADY_EXIST		The specified @c entryName already exists in this section.
+	* @remarks		This method converts the specified double type @c value to string value using "%lg" format specifier. @n
+	*				Also, it does not depend on system locale.
 	*/
 	result AddValue(const Tizen::Base::String& sectionName, const Tizen::Base::String& entryName, double value);
 
@@ -488,6 +475,8 @@ public:
 	*										synchronization.
 	* @exception	E_SECTION_NOT_FOUND		The specified @c sectionName is not found within the registry.
 	* @exception	E_KEY_ALREADY_EXIST		The specified @c entryName already exists in this section.
+	* @remarks		This method converts the specified float type @c value to string value using "%g" format specifier. @n
+	*				Also, it does not depend on system locale.
 	*/
 	result AddValue(const Tizen::Base::String& sectionName, const Tizen::Base::String& entryName, float value);
 
@@ -600,6 +589,7 @@ public:
 	* @exception	E_KEY_NOT_FOUND			The specified @c entryName is not found within the registry.
 	* @exception	E_PARSING_FAILED		The method has failed to parse the encoded entry value string, or the value is retrieved by using an incorrect data type.
 	* @exception	E_DATA_NOT_FOUND		The name-value pair has no value assigned (if the value is retrieved using the REGTYPE_STRING type, an empty string is returned even if no value is assigned).
+	* @remarks		This method does not depend on system locale.
 	*/
 	result GetValue(const Tizen::Base::String& sectionName, const Tizen::Base::String& entryName, double& retVal) const;
 
@@ -623,6 +613,7 @@ public:
 	* @exception	E_KEY_NOT_FOUND			The specified @c entryName is not found within the registry.
 	* @exception	E_PARSING_FAILED		The method has failed to parse the encoded entry value string, or the value is retrieved by using an incorrect data type.
 	* @exception	E_DATA_NOT_FOUND		The name-value pair has no value assigned (if the value is retrieved using the REGTYPE_STRING type, an empty string is returned even if no value is assigned).
+	* @remarks		This method does not depend on system locale.
 	*/
 	result GetValue(const Tizen::Base::String& sectionName, const Tizen::Base::String& entryName, float& retVal) const;
 
@@ -748,6 +739,8 @@ public:
 	* @remarks		This method will not add a name-value pair as an entry of a specific section
 	*               if no entry with the specified name exists.
 	*				In such a case, it returns E_KEY_NOT_FOUND. Use AddValue() to insert a new entry.
+	* @remarks		This method converts the specified double type @c newValue to string value using "%lg" format specifier. @n
+	*				Also, it does not depend on system locale.
 	* @see			AddValue()
 	*/
 	result SetValue(const Tizen::Base::String& sectionName, const Tizen::Base::String& entryName, double newValue);
@@ -773,6 +766,8 @@ public:
 	* @remarks		This method will not add a name-value pair as an entry of a specific section
 	*               if no entry with the specified name exists.
 	*				In such a case, it returns E_KEY_NOT_FOUND. Use AddValue() to insert a new entry.
+	* @remarks		This method converts the specified float type @c newValue to string value using "%g" format specifier. @n
+	*				Also, it does not depend on system locale.
 	* @see			AddValue()
 	*/
 	result SetValue(const Tizen::Base::String& sectionName, const Tizen::Base::String& entryName, float newValue);
@@ -868,16 +863,65 @@ public:
 	result RemoveValue(const Tizen::Base::String& sectionName, const Tizen::Base::String& entryName);
 
 	/**
+	* Acquires the file lock on the current opened whole file if it is not acquired.
+	* If the file lock is already acquired by another process, the current process is blocked until the file lock is
+	* released.
+	*
+	* @since			2.1
+	*
+	* @return           The pointer to %FileLock instance, @n
+	*						else @c null pointer in case of failure
+	* @param[in]		lockType				The type of file lock to be created
+	* @exception		E_SUCCESS				The method is successful.
+	* @exception		E_INVALID_ARG			The specified @c lockType is invalid.
+	* @exception		E_INVALID_OPERATION		Either of the following conditions has occurred: @n
+	*												- The specified @c lockType cannot be FILE_LOCK_SHARED if the current
+	*												  file is not open for reading. @n
+	*												- The specified @c lockType cannot be FILE_LOCK_EXCLUSIVE if the current
+	*												  file is not open for writing. @n
+	* @exception		E_WOULD_DEADLOCK		The method would cause a deadlock. @n
+	*												The lock is blocked by a lock from another process, and putting the
+	*												calling process to sleep to wait for that lock to become free would
+	*												cause a deadlock.
+	* @exception		E_MAX_EXCEEDED			The number of file lock exceeds system limitations.
+	* @exception		E_SYSTEM				The method cannot proceed due to a severe system error.
+	* @remarks			The %FileLock instance is invalid if the associated %File instance is deleted. @n
+	*						The specific error code can be accessed using the GetLastResult() method.
+	* @see				Tizen::Io::File::FileLockType
+	*/
+	FileLock* LockN(FileLockType lockType);
+
+	/**
+	* Tries to acquire the file lock on the current opened whole file.
+	* If the file lock is already acquired by another process, E_OBJECT_LOCKED is returned.
+	*
+	* @since			2.1
+	*
+	* @return			The pointer to %FileLock instance, @n
+	*						else @c null pointer in case of failure
+	* @param[in]		lockType				The type of file lock to be created
+	* @exception		E_SUCCESS				The method is successful.
+	* @exception		E_INVALID_ARG			The specified @c lockType is invalid.
+	* @exception		E_INVALID_OPERATION		Either of the following conditions has occurred: @n
+	*												- The specified @c lockType cannot be FILE_LOCK_SHARED if the current
+	*												  file is not open for reading. @n
+	*												- The specified @c lockType cannot be FILE_LOCK_EXCLUSIVE if the current
+	*												  file is not open for writing. @n
+	* @exception		E_OBJECT_LOCKED			Either of the following conditions has occurred: @n
+	*												- The file lock is already held by another process. @n
+	*												- The file to be locked has been memory-mapped by another process.
+	* @exception		E_MAX_EXCEEDED			The number of file lock exceeds system limitations.
+	* @exception		E_SYSTEM				The method cannot proceed due to a severe system error.
+	* @remarks			The %FileLock instance is invalid if the associated %File instance is deleted. @n
+	*						The specific error code can be accessed using the GetLastResult() method.
+	* @see				Tizen::Io::File::FileLockType
+	*/
+	FileLock* TryToLockN(FileLockType lockType);
+
+	/**
 	* Removes the specified registry file.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since		2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	regPath					The path of the registry file to remove
@@ -900,14 +944,7 @@ public:
 	* Converts a normal registry file to a secure registry file. @n
 	* A secure registry file that is converted by this method can be shared among applications with the same key value.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since 2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	plainRegPath			The normal (non-encrypted) registry file path

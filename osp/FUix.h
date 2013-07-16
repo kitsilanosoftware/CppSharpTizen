@@ -35,16 +35,13 @@
  * @since        2.0
  *
  * @remarks    @b Header @b %file: @b \#include @b <FUix.h> @n
- *             @b Library : @b osp-face, @b osp-uix
  *
  * The %Uix namespace contains classes and interfaces for the UI extension services, which cover unconventional user interface
- * features not included in the basic UI namespace, such as face detection and recognition, device sensor input and motion
+ * features not included in the basic UI namespace, such as vision based recognition, device sensor input and motion
  * detection, and speech recognition and synthesis.
  * @n
  * For more information on the %Uix namespace features, see <a href="../org.tizen.native.appprogramming/html/guide/uix/uix_namespace.htm">Uix Guide</a>.
  *
- * The following diagram illustrates the relationships between the classes belonging to the %Uix namespace.
- * @image html uix_namespace_classdiagram.png 
  */
 namespace Tizen { namespace Uix
 {

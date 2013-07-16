@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -133,14 +132,7 @@ public:
 	/**
 	 * Sets the name.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-     *					For more information, see @ref CompAttendeeSetNamePage "here".
-     * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	name			The common name of the attendee
@@ -150,31 +142,13 @@ public:
 	result SetName(const Tizen::Base::String& name);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page	CompAttendeeSetNamePage Compatibility for SetName()
-	 * @section	CompAttendeeSetNamePageIssueSection Issues
-	 *          Implementing this method in OSP compatible applications has the following issues:   @n
-	 *			-# If the length of the name to be set is greater than 100 characters, E_INVALID_ARG is returned.
-	 *
-	 * @section	CompAttendeeSetNamePageSolutionSection Resolutions
-	 * 			This issue has been resolved in Tizen.  @n
-	 * 			-# There is no limit for the length of the name.
-	 *
-	 * @endif
 	 */
 
 	/**
 	 * Sets the email address of the attendee. @n
 	 * This is the identifier of an attendee.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-     *					For more information, see @ref CompAttendeeSetEmailPage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	email			The email address
@@ -184,16 +158,6 @@ public:
 	result SetEmail(const Tizen::Base::String& email);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page	CompAttendeeSetEmailPage Compatibility for SetEmail()
-	 * @section	CompAttendeeSetEmailPageIssueSection Issues
-	 *          Implementing this method in OSP compatible applications has the following issues:   @n
-	 *			-# If the length of the email to be set is greater than 320 characters, E_INVALID_ARG is returned.
-	 *
-	 * @section	CompAttendeeSetEmailPageSolutionSection Resolutions
-	 * 			This issue has been resolved in Tizen.  @n
-	 * 			-# There is no limit for the length of the email.
-	 * @endif
 	 */
 
 	/**

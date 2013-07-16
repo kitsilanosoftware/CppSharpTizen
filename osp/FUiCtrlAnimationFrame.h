@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -39,7 +39,7 @@ class _AnimationFrameImpl;
  *
  * @since	2.0
  *
- * The %AnimationFrame class defines the common behavior of an %AnimationFrame control.
+ * The %AnimationFrame class defines the common behavior of an %AnimationFrame control. @n
  * An animation frame includes an image to be displayed and its duration.
  * The duration indicates how long the image is displayed when the animation is playing.
  *
@@ -59,12 +59,11 @@ public:
 	AnimationFrame(void);
 
 	/**
-	 * Initializes this instance of %AnimationFrame with the specified parameters. @n
-	 * It creates an instance of %AnimationFrame with the specified image and duration.
+	 * Initializes this instance of %AnimationFrame with the specified image and duration.
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]   frame		The bitmap to be displayed
+	 * @param[in]   frame		The bitmap to display
 	 * @param[in]   duration	The duration in milliseconds for which the bitmap is displayed
 	 */
 	AnimationFrame(const Tizen::Graphics::Bitmap& frame, long duration);
@@ -81,7 +80,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	frame		The bitmap to be displayed
+	 * @param[in]	frame		The bitmap to display
 	 */
 	void SetFrame(const Tizen::Graphics::Bitmap& frame);
 

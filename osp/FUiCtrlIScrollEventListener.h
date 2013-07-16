@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -39,16 +39,18 @@ namespace Tizen {namespace Ui { namespace Controls
 
 /**
  * @interface	IScrollEventListener
- * @brief	This interface implements a listener for ScrollPanel events.
+ * @brief	This interface implements a listener for scroll events.
  *
  * @since	2.0
  *
  * The %IScrollEventListener interface is the listener interface for receiving scroll events.
  * The class that processes a scroll event implements this interface, and the instance created with that class is registered with
- * a UI control, using the control's AddScrollEventListener() method. When the scroll event occurs, the OnScrollEndReached()
+ * a UI control, using the control(GroupedListView, GroupedTableView, IconListView,  ListView, ScrollPanel, SectionTableView, TableView)'s AddScrollEventListener() method.
+ * When the scroll event occurs, the OnScrollEndReached()
  * method of that instance is invoked.
  *
- * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_panels.htm">Panels</a> and <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_listviews.htm">ListViews</a>.
+ * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_panels.htm">Panels</a> and
+ * <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_listviews.htm">ListViews</a>.
  */
 class _OSP_EXPORT_ IScrollEventListener
 	: public Tizen::Base::Runtime::IEventListener
@@ -56,7 +58,8 @@ class _OSP_EXPORT_ IScrollEventListener
 // Operation
 public:
 	/**
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required.@n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @since 2.0
 	 *
@@ -79,9 +82,9 @@ public:
 	 * @since 2.0
 	 *
 	 *@param[in]               source        The control being scrolled
-	 *@param[in]               scrollPos     The scrolled position
+	 *@param[in]               scrollPosition     The scrolled position
 	 */
-	virtual void OnScrollPositionChanged(Tizen::Ui::Control& source, int scrollPos) {};
+	virtual void OnScrollPositionChanged(Tizen::Ui::Control& source, int scrollPosition) {};
 
 	/**
 	 * Called when the control's scroll movement has come to a stop.
@@ -109,7 +112,6 @@ protected:
 	//
 	virtual void ScrollEventListener_Reserved2(void) {}
 
-	//
 	//
 	// This method is for internal use only.
 	// Using this method can cause behavioral, security-related, and consistency-related issues in the application.

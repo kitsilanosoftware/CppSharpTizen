@@ -59,19 +59,18 @@ public:
 	CallInfo(const CallInfo& rhs);
 
 	/**
-     * This destructor overrides Tizen::Base::Object::~Object().	 
+     * This destructor overrides Tizen::Base::Object::~Object().
      *
      * @since   2.0
      */
 	virtual ~CallInfo(void);
 
 	/**
-     * Gets the call type of a call.
+     * Gets the call type.
      *
      * @since   2.0
      *
      * @return  The current call type
-     * @see Tizen::Telephony::CallType
      */
 	CallType GetCallType(void) const;
 
@@ -93,7 +92,7 @@ public:
     * @return   @c true if the specified instance equals the current instance, @n
     *           else @c false
     * @param[in]    obj An instance of %CallInfo
-    * @remarks The method returns @c false if the specified object is not %CallInfo.
+    * @remarks This method returns @c false if the specified object is not %CallInfo.
     */
 	virtual bool Equals(const Tizen::Base::Object& obj) const;
 
@@ -107,7 +106,7 @@ public:
 	virtual int GetHashCode(void) const;
 
 	/**
-     * Copying of objects using this copy assignment operator is allowed.	 
+     * Copying of objects using this copy assignment operator is allowed.
      *
      * @since 2.0
      *

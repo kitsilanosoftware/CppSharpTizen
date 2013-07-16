@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -175,29 +174,13 @@ public:
 	/**
 	 * Gets the type of the address.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-	 *                           For more information, see @ref CompAddressGetTypePage "here".
-	 * @endif
 	 *
 	 * @return      The type of the address
 	 */
 	AddressType GetType(void) const;
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page                CompAddressGetTypePage         Compatibility for GetType()
-	 * @section             CompAddressGetTypePageIssueSection             Issues
-	 * Implementing this method in OSP compatible applications has the following issue: @n
-	 * -# ADDRESS_TYPE_CUSTOM is not supported. If the type of the address is ADDRESS_TYPE_CUSTOM, ADDRESS_TYPE_OTHER is returned instead.
-	 *
-	 * @section             CompAddressGetTypePageSolutionSection          Resolutions
-	 * The issue mentioned above has been resolved in Tizen.
-	 * @endif
 	 */
 
 	/**
@@ -276,220 +259,101 @@ public:
 	/**
 	 * Sets the extended field of the address.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-	 *                            For more information, see @ref CompAddressSetExtendedPage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	extended		The new extended value to set
 	 * @exception	E_SUCCESS		The method is successful.
-	 * @exception	E_INVALID_ARG	The length of the specified @c extended exceeds #MAX_ADDR_EXTENDED_LENGTH.
 	 */
 	result SetExtended(const Tizen::Base::String& extended);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page		CompAddressSetExtendedPage		Compatibility for SetExtended()
-	 * @section		CompAddressSetExtendedPageIssueSection		Issues
-	 * Implementing this method in OSP compatible applications has the following issue: @n
-	 * -# If the length of the extended address to be set is greater than @c 50 characters, E_INVALID_ARG is returned.
-	 *
-	 * @section		CompAddressSetExtendedPageSolutionSection		Resolutions
-	 * The issue mentioned above has been resolved in Tizen.
-	 * @endif
 	 */
 
 	/**
 	 * Sets the street of the address.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-	 *                            For more information, see @ref CompAddressSetStreetPage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	street			The new street value to set
 	 * @exception	E_SUCCESS		The method is successful.
-	 * @exception	E_INVALID_ARG	The specified @c street is an empty string.
 	 */
 	result SetStreet(const Tizen::Base::String& street);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page		CompAddressSetStreetPage		Compatibility for SetStreet()
-	 * @section		CompAddressSetStreetPageIssueSection		Issues
-	 * Implementing this method in OSP compatible applications has the following issue: @n
-	 * -# If the length of the street to be set is greater than @c 50 characters, E_INVALID_ARG is returned.
-	 *
-	 * @section		CompAddressSetStreetPageSolutionSection		Resolutions
-	 * The issue mentioned above has been resolved in Tizen.
-	 * @endif
 	 */
 
 	/**
 	 * Sets the city of the address.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-	 *                            For more information, see @ref CompAddressSetCityPage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	city			The new city value to set
 	 * @exception	E_SUCCESS		The method is successful.
-	 * @exception	E_INVALID_ARG	The specified @c city is an empty string.
 	 */
 	result SetCity(const Tizen::Base::String& city);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page		CompAddressSetCityPage		Compatibility for SetCity()
-	 * @section		CompAddressSetCityPageIssueSection		Issues
-	 * Implementing this method in OSP compatible applications has the following issue: @n
-	 * -# If the length of the city to be set is greater than @c 50 characters, E_INVALID_ARG is returned.
-	 *
-	 * @section		CompAddressSetCityPageSolutionSection		Resolutions
-	 * The issue mentioned above has been resolved in Tizen.
-	 * @endif
 	 */
 
 	/**
 	 * Sets the state of the address.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-	 *                            For more information, see @ref CompAddressSetStatePage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	state			The new state value to set
 	 * @exception	E_SUCCESS		The method is successful.
-	 * @exception	E_INVALID_ARG	The specified @c state is an empty string.
 	 */
 	result SetState(const Tizen::Base::String& state);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page		CompAddressSetStatePage		Compatibility for SetState()
-	 * @section		CompAddressSetStatePageIssueSection		Issues
-	 * Implementing this method in OSP compatible applications has the following issue: @n
-	 * -# If the length of the state to be set is greater than @c 50 characters, E_INVALID_ARG is returned.
-	 *
-	 * @section		CompAddressSetStatePageSolutionSection		Resolutions
-	 * The issue mentioned above has been resolved in Tizen.
-	 * @endif
 	 */
 
 	/**
 	 * Sets the postal code of the address.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
 	 *
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-	 *                            For more information, see @ref CompAddressSetPostalCodePage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	postalCode		The new postal code value to set
 	 * @exception	E_SUCCESS		The method is successful.
-	 * @exception	E_INVALID_ARG	The specified @c postalCode is an empty string.
 	 */
 	result SetPostalCode(const Tizen::Base::String& postalCode);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page		CompAddressSetPostalCodePage		Compatibility for SetPostalCode()
-	 * @section		CompAddressSetPostalCodePageIssueSection		Issues
-	 * Implementing this method in OSP compatible applications has the following issue: @n
-	 * -# If the length of the postal code to be set is greater than @c 20 characters, E_INVALID_ARG is returned.
-	 *
-	 * @section		CompAddressSetPostalCodePageSolutionSection		Resolutions
-	 * The issue mentioned above has been resolved in Tizen.
-	 * @endif
 	 */
 
 	/**
 	 * Sets the country of the address.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
 	 *
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-	 *                            For more information, see @ref CompAddressSetCountryCodePage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	country			The new country value to set
 	 * @exception	E_SUCCESS		The method is successful.
-	 * @exception	E_INVALID_ARG	The specified @c country is an empty string.
 	 */
 	result SetCountry(const Tizen::Base::String& country);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page		CompAddressSetCountryCodePage		Compatibility for SetCountry()
-	 * @section		CompAddressSetCountryCodePageIssueSection		Issues
-	 * Implementing this method in OSP compatible applications has the following issue: @n
-	 * -# If the length of the country to be set is greater than @c 20 characters, E_INVALID_ARG is returned.
-	 *
-	 * @section		CompAddressSetCountryCodePageSolutionSection		Resolutions
-	 * The issue mentioned above has been resolved in Tizen.
-	 * @endif
 	 */
 
 	/**
 	 * Sets the post office box number of the address.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-	 *                            For more information, see @ref CompAddressSetPostOfficeBoxNumberPage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	postOfficeBoxNumber		The new post office box number value to set
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_INVALID_ARG			The specified @c postOfficeBoxNumber is an empty string.
 	 */
 	result SetPostOfficeBoxNumber(const Tizen::Base::String& postOfficeBoxNumber);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page		CompAddressSetPostOfficeBoxNumberPage		Compatibility for SetPostOfficeBoxNumber()
-	 * @section		CompAddressSetPostOfficeBoxNumberPageIssueSection		Issues
-	 * Implementing this method in OSP compatible applications has the following issue: @n
-	 * -# If the length of the post office box number to be set is greater than @c 20 characters, E_INVALID_ARG is returned.
-	 *
-	 * @section		CompAddressSetPostOfficeBoxNumberPageSolutionSection		Resolutions
-	 * The issue mentioned above has been resolved in Tizen.
-	 * @endif
 	 */
 
 	/**
@@ -503,7 +367,7 @@ public:
 	Tizen::Base::String GetLabel(void) const;
 
 	/**
-	 * Sets the label of an address. 
+	 * Sets the label of an address.
 	 *
 	 * @since	2.0
 	 *

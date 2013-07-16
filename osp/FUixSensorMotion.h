@@ -16,7 +16,7 @@
 //
 
 /**
- * @file	FUixMotion.h
+ * @file	FUixSensorMotion.h
  * @brief	This is the header file for the %Motion class.
  *
  * This header file contains the declarations of the %Motion class.
@@ -117,7 +117,7 @@ public:
 //Operation
 public:
 	/**
-	 * Initializes this instance of %Motion with the specified listener.
+	 * Initializes this instance of %Motion with the specified @c listener.
 	 *
 	 * @since       2.0
 	 *
@@ -133,7 +133,7 @@ public:
 
 	/**
 	 * Sets the motion event type. @n
-	 * If this method is not called, then by default all the motion event types will be captured by the listener.
+	 * If the %SetEnabled() method is not called, then by default all the motion event types will be captured by the listener.
 	 * If the motion events are not be captured, this method can be called with @c type set to @c MOTION_TYPE_NONE.
 	 *
 	 * @since       2.0
@@ -142,7 +142,7 @@ public:
 	 *                                  Multiple motion types of type Tizen::Uix::Sensor::MotionType can be combined using the logical OR operator.
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_INVALID_STATE     This instance has not been constructed as yet.
-	 * @exception   E_INVALID_ARG       A specified input parameter is invalid.  @if OSPCOMPAT @b Since: @b 2.0 @endif
+	 * @exception   E_INVALID_ARG       A specified input parameter is invalid.
 	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
 	 */
 	void SetEnabled(unsigned long type);

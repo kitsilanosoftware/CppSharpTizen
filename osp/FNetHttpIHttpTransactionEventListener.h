@@ -25,8 +25,10 @@
 #ifndef _FNET_HTTP_IHTTP_TRANSACTION_EVENT_LISTENER_H_
 #define _FNET_HTTP_IHTTP_TRANSACTION_EVENT_LISTENER_H_
 
+#include <unique_ptr.h>
 #include <FBaseTypes.h>
 #include <FBaseString.h>
+#include <FBaseColIList.h>
 #include <FBaseRtIEventListener.h>
 
 namespace Tizen { namespace Net { namespace Http
@@ -154,6 +156,25 @@ public:
 	 */
 	virtual void OnTransactionCertVerificationRequiredN(HttpSession& httpSession, HttpTransaction& httpTransaction, Tizen::Base::String* pCert) = 0;
 
+	/**
+	 * Called to notify when the server certificate verification has been requested.
+	 *
+	 * @since           2.1
+	 *
+	 * @return			The result for certificate verification
+	 * @param[in]		httpSession				The session information of the %Http transaction event
+	 * @param[in]		httpTransaction			The transaction information of the %Http transaction event
+	 * @param[in]		pCertList				The server certificate chain @n A Tizen::Base::Collection::IList whose element is of the type Tizen::Security::Cert::X509Certificate *.
+	 *
+	 * @remarks			Do not delete the instance of @c httpSession or @c httpTransaction in this listener before the IHttpTransactionEventListener::OnTransactionCompleted() or IHttpTransactionEventListener::OnTransactionAborted() method is called.
+	 * @see				HttpTransaction::SetServerCertificateVerification()
+	 */
+	virtual bool OnTransactionCertVerificationRequestedN(HttpSession& httpSession, HttpTransaction& httpTransaction, Tizen::Base::Collection::IList* pCertList)
+	{
+		std::unique_ptr<Tizen::Base::Collection::IList> upCertList(pCertList);
+		return false;
+	}
+
 protected:
 	//
 	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
@@ -163,15 +184,6 @@ protected:
 	// @since       2.0
 	//
 	virtual void IHttpTransactionEventListener_Reserved1(void) {}
-
-	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
-	//
-	// This method is reserved and may change its name at any time without prior notice.
-	//
-	// @since       2.0
-	//
-	virtual void IHttpTransactionEventListener_Reserved2(void) {}
 
 };
 

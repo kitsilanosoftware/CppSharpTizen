@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -17,9 +17,9 @@
 
 /**
  * @file		FUiIInputConnectionEventListener.h
- * @brief	This is the header file for the %IInputConnectionEventListener class.
+ * @brief	This is the header file for the %IInputConnectionEventListener interface.
  *
- * This header file contains the declarations of the %IInputConnectionEventListener class.
+ * This header file contains the declarations of the %IInputConnectionEventListener interface.
  *
  *
  */
@@ -32,11 +32,11 @@
 #include <FUiInputConnectionTypes.h>
 
 namespace Tizen { namespace Base {
-class String;
+	class String;
 }} // Tizen::Base
 
 namespace Tizen { namespace Graphics {
-class Rectangle;
+	class Rectangle;
 }} // Tizen::Graphics
 
 
@@ -45,13 +45,12 @@ namespace Tizen { namespace Ui {
 class InputConnection;
 
 /**
- * @class	IInputConnectionEventListener
- * @brief	This is the header file for the %IInputConnectionEventListener class.
- * This header file contains the declarations of the %IInputConnectionEventListener class.
- * It's possible to not work the callback depending on the current InputMethod.
+ * @interface	IInputConnectionEventListener
+ * @brief	This interface defines methods for processing between the InputConnection and the input method.
+ *
  * @since 2.0
  *
- * The %IInputConnectionEventListener interface defines methods for processing between the InputConnection and the input method.
+ * The %IInputConnectionEventListener interface defines methods for processing between the InputConnection and the input method. It is possible to not work the callback depending on the current InputMethod.
  */
 class _OSP_EXPORT_ IInputConnectionEventListener
 	: virtual public Tizen::Base::Runtime::IEventListener
@@ -65,66 +64,73 @@ public:
 	virtual ~IInputConnectionEventListener(void) {}
 
 	/**
-	 * Notifies when the show state of the InputPanel is changed.
+	 * Called when the show state of the InputPanel is changed.
 	 *
 	 * @since 2.0
+	 *
 	 * @param[in] 	source		The source of the event
 	 * @param[in] 	showState	The state
 	 */
 	virtual void OnInputConnectionPanelShowStateChanged(Tizen::Ui::InputConnection& source, Tizen::Ui::InputPanelShowState showState) = 0;
 
 	/**
-	 * Notifies when the language of the InputPanel is changed.
+	 * Called when the language of the InputPanel is changed.
 	 *
 	 * @since 2.0
+	 *
 	 * @param[in] 	source		The source of the event
 	 * @param[in] 	language	The language code
 	 */
 	virtual void OnInputConnectionPanelLanguageChanged(Tizen::Ui::InputConnection& source, Tizen::Locales::LanguageCode language) = 0;
 
 	/**
-	 * Notifies when the size of the InputPanel is changed.
+	 * Called when the size of the InputPanel is changed.
 	 *
 	 * @since 2.0
+	 *
 	 * @param[in] 	source		The source of the event
 	 * @param[in] 	bounds		The size
 	 */
 	virtual void OnInputConnectionPanelBoundsChanged(Tizen::Ui::InputConnection& source, const Tizen::Graphics::Rectangle& bounds) = 0;
 
 	/**
-	 * Notifies when the show state of the Text-Prediction is changed.
+	 * Called when the show state of the Text-Prediction is changed.
 	 *
 	 * @since 2.0
+	 *
 	 * @param[in] 	source		The source of the event
 	 * @param[in] 	isShown		The state
 	 */
 	virtual void OnInputConnectionTextPredictionShowStateChanged(Tizen::Ui::InputConnection& source, bool isShown) = 0;
 
 	/**
-	 * Notifies when the size of the Text-Prediction is changed.
+	 * Called when the size of the Text-Prediction is changed.
 	 *
 	 * @since 2.0
+	 *
 	 * @param[in] 	source		The source of the event
 	 * @param[in] 	bounds		The size
 	 */
 	virtual void OnInputConnectionTextPredictionBoundsChanged(Tizen::Ui::InputConnection& source, const Tizen::Graphics::Rectangle& bounds) = 0;
 
 	/**
-	 * Notifies when the key of the InputPanel is selected.
+	 * Called when the key of the InputPanel is selected.
 	 *
 	 * @since 2.0
+	 *
 	 * @param[in] 	source		The source of the event
-	 * @param[in] 	committedText		The committed text.
+	 * @param[in] 	committedText		The committed text
 	 */
 	virtual void OnInputConnectionTextCommitted(Tizen::Ui::InputConnection& source, const Tizen::Base::String& committedText) = 0;
 
 	/**
-	 * Notifies when the key of the InputPanel is selected during the composing.
+	 * Called when the key of the InputPanel is selected during the composing.
 	 *
 	 * @since 2.0
+	 *
 	 * @param[in] 	source		The source of the event
-	 * @param[in] 	composingText		The composing text.
-	 * @param[in] 	cursorPosition	the current cursor position.
+	 * @param[in] 	composingText		The composing text
+	 * @param[in] 	cursorPosition	The current cursor position
 	 */
 	virtual void OnInputConnectionComposingTextChanged(Tizen::Ui::InputConnection& source, const Tizen::Base::String& composingText, int cursorPosition) = 0;
 

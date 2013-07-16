@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -65,6 +64,7 @@ public:
 	* @exception     E_SUCCESS           The method is successful.
 	* @exception     E_INVALID_ARG       The @c localMessagePortName is empty.
 	* @exception     E_SYSTEM            The method has failed due to a severe system error.
+	* @remarks       It is not recommended to use the message port names that start with "http://tizen.org/messageport". @c E_INVALID_ARG may be returned because they are reserved by platform.
 	* @remarks       The specific error code can be accessed using the GetLastResult() method.
 	*/
 	static LocalMessagePort* RequestLocalMessagePort(const Tizen::Base::String& localMessagePortName);
@@ -100,6 +100,7 @@ public:
 	* @exception     E_SUCCESS           The method is successful.
 	* @exception     E_INVALID_ARG       The @c localMessagePortName is empty.
 	* @exception     E_SYSTEM            The method has failed due to a severe system error.
+	* @remarks       It is not recommended to use the message port names that start with "http://tizen.org/messageport". @c E_INVALID_ARG may be returned because they are reserved by platform.
 	* @remarks       The specific error code can be accessed using the GetLastResult() method.
 	*/
 	static LocalMessagePort* RequestTrustedLocalMessagePort(const Tizen::Base::String& localMessagePortName);

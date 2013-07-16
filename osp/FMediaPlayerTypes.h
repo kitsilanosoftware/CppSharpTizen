@@ -17,7 +17,7 @@
 
 /**
  * @file			FMediaPlayerTypes.h
- * @brief			This is the header file for the Player class.
+ * @brief			This is the header file for the enumerations of the Player class.
  *
  * This header file contains the declarations of the enumerations of the Player class.
  */
@@ -46,7 +46,7 @@ enum PlayerState
 	PLAYER_STATE_INITIALIZED,       /**< The player is initialized */
 	PLAYER_STATE_OPENING,           /**< The player opening behavior is processed */
 	PLAYER_STATE_OPENED,            /**< The source is opened */
-	PLAYER_STATE_ENDOFCLIP,         /**< The player has reached to the end of the clip */
+	PLAYER_STATE_ENDOFCLIP,         /**< The player has reached the end of the clip */
 	PLAYER_STATE_STOPPED,           /**< The player has stopped and has no current play-time, but the media content is still opened and initialized */
 	PLAYER_STATE_PAUSED,            /**< The player playback is paused */
 	PLAYER_STATE_PLAYING,           /**< The player is playing the media content */
@@ -72,6 +72,11 @@ enum PlayerErrorReason
 	PLAYER_ERROR_SERVER,                    /**< The server has failed */
 	PLAYER_ERROR_OUT_OF_MEMORY,             /**< The memory is insufficient*/
 	PLAYER_ERROR_DEVICE_FAILED,             /**< The player device has failed */
+	PLAYER_ERROR_RIGHT_EXPIRED,          	   /**< The content right has expired */
+	PLAYER_ERROR_RIGHT_NO_LICENSE,          	/**< The content has no license */
+	PLAYER_ERROR_RIGHT_FUTURE_USE,          	/**< The content right is for future use */
+	PLAYER_ERROR_DISPLAY_RIGHT_VIOLATED,			/**< The display right is not valid for the specific output device @b Since: @b 2.1*/
+
 };
 
 }} // Tizen::Media

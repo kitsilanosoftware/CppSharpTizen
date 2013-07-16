@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -27,11 +26,9 @@
 
 #include <FBaseObject.h>
 #include <FBaseString.h>
-#include <FBaseColHashMap.h>
 #include <FAppTypes.h>
 #include <FGrpBitmapCommon.h>
 
-namespace Tizen { namespace Locales { class Locale; } }
 namespace Tizen { namespace Graphics { class Bitmap; } }
 
 namespace Tizen { namespace App
@@ -117,14 +114,18 @@ public:
 	* To load the bitmap image from a file, give the name of the file as the input parameter and not the file path (For example: "img.png").
 	* Then, the system will first look for the image file in the folder specific to the current device resolution, such as
 	* '720x1280' and if the file does not exist, it will then search the folder that corresponds to the current screen density,
-    * such as 'screen-density-xhigh'. After searching the density folder, all the other density folders are searched in the order high to low.
+	* such as 'screen-density-xhigh'. After searching the density folder, all the other density folders are searched in the order high to low.
+	* If the requested image file is found in a density-specific folder that is different from the current screen density, the bitmap returned from this method is pre-scaled.
+	* But in case of requested image file is saved as ".#.png" (For example : "img.#.png"), then a bitmap instance which is value of returned pointer is not pre-scaled.
+	* So, it is recommended to use ".#.png" as extension (For example : "ninePatchImg.#.png") for nine-patch image file.
 	* Currently supported image formats are: JPEG, GIF, PNG, BMP, TIFF, and WBMP.
+	* For more information on the features, see <a href="../org.tizen.native.appprogramming/html/multiple_screen/autoscale_resource_fallback.htm">Resource Fallback and Prescaling.</a>
 	*
 	* @since	2.0
 	*
-	* @return		A pointer to the Bitmap instance generated from the specified file
+	* @return	A pointer to the Bitmap instance generated from the specified file
 	* @param[in]	imagePath				The relative path starting from the directory @b "res/screen-density-XXX/" or @b "res/AxB", @n
-	*										where A and B represent the screen width and height of the supported device models, respectively.
+	*									where A and B represent the screen width and height of the supported device models, respectively.
 	* @param[in]	pixelFormat				The pixel format of the resulting bitmap
 	* @exception	E_SUCCESS				The method is successful.
 	* @exception	E_INVALID_ARG			A specified input parameter is invalid.
@@ -143,16 +144,17 @@ public:
 	* Then, the system will first look for the image file in the folder specific to the current device resolution, such as
 	* '720x1280' and if the file does not exist, it will then search the folder that corresponds to the current screen density,
 	* such as 'screen-density-xhigh'. After searching the density folder, all the other density folders are searched in the order high to low.
+	* If the requested image file is found in a density-specific folder that is different from the current screen density, the bitmap returned from this method is pre-scaled.
+	* But in case of requested image file is saved as ".#.png" (For example : "img.#.png"), then a bitmap instance which is value of returned pointer is not pre-scaled.
+	* So, it is recommended to use ".#.png" as extension (For example : "ninePatchImg.#.png") for nine-patch image file.
 	* Currently supported image formats are: JPEG, GIF, PNG, BMP, TIFF, and WBMP.
-	*
-	* In this method, the system decides the proper pixel format.
-	* Currently supported image formats are: JPEG, GIF, PNG, BMP, TIFF, and WBMP.
+	* For more information on the features, see <a href="../org.tizen.native.appprogramming/html/multiple_screen/autoscale_resource_fallback.htm">Resource Fallback and Prescaling.</a>
 	*
 	* @since	2.0
 	*
-	* @return		A pointer to the Tizen::Graphics::Bitmap instance generated from the specified file
+	* @return	A pointer to the Tizen::Graphics::Bitmap instance generated from the specified file
 	* @param[in]	imagePath				The relative path starting from the density directory @b "res/screen-density-XXX/" or @b "res/AxB", @n
-	*										where A and B represent the width and height of the screen of the supported device models, respectively
+	*									where A and B represent the width and height of the screen of the supported device models, respectively
 	* @exception	E_SUCCESS				The method is successful.
 	* @exception	E_INVALID_ARG			The specified input parameter is invalid.
 	* @exception	E_UNSUPPORTED_FORMAT	The image file format is not supported.
@@ -172,6 +174,59 @@ public:
 	*		  else @c null if it fails
 	*/
 	static AppResource* GetInstance(void);
+
+	/**
+	 * Gets the resource instance of the specified resource path.
+	 * @since	2.0
+	 * @return		A pointer to the %AppResource instance, @n
+	 *				else @c null if it fails
+	 * @param[in]	resourcePath		The relative path starting from the resource directory path of the current application
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_FILE_NOT_FOUND	The specified resource path does not exist.
+	 * @exception	E_INVALID_ARG		The length of the specified path is @c 0 or exceeds system limitations.
+	 * @exception	E_SYSTEM			Initializing string and bitmap resource is failed due to system error.
+	 * @remarks	The specific error code can be accessed using the GetLastResult() method.
+	 */
+    static AppResource* LoadAppResource(const Tizen::Base::String& resourcePath);
+
+	/**
+	* Gets the application resource instance of the specified @c appId.
+	*
+	* @since	2.0
+	*
+	* @privlevel	platform
+	* @privilege   %http://tizen.org/privilege/appsetting
+	*
+	* @return       A pointer to the %AppResource instance, @n
+	*               else @c null if it fails
+	* @param[in]    appId                The AppId of the installed application
+	* @exception    E_SUCCESS            The method is successful.
+	* @exception    E_DATA_NOT_FOUND      The instance of specified @c appId does not provide the string resource.
+	* @exception    E_OUT_OF_MEMORY      The memory is insufficient.
+	* @exception    E_APP_NOT_INSTALLED  The specified @c appId is not found in the list of installed applications.
+	* @exception    E_SYSTEM        Initializing string and bitmap resource has failed due to a system error.
+	* @exception    E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
+	* @remarks The specific error code can be accessed using the GetLastResult() method.
+	*/
+	static AppResource* GetInstanceByAppId(const AppId& appId);
+
+	/**
+	* Releases the application resource instance of the specified @c appId.
+	*
+	* @since	2.0
+	*
+	* @privlevel	platform
+	* @privilege   %http://tizen.org/privilege/appsetting
+	*
+	* @return       An error code
+	* @param[in]    appId                The AppId of the installed application
+	* @exception    E_SUCCESS            The method is successful.
+	* @exception    E_OBJ_NOT_FOUND      The application resource instance of the specified @c appId is not found.
+	* @exception    E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
+	* @remarks     Individual instances are managed by the platform. @n
+	*              It is recommended to release instances to reduce memory usage.
+	*/
+	static result ReleaseInstanceByAppId(const AppId& appId);
 
 private:
 	/**
@@ -202,26 +257,9 @@ private:
 	 */
 	virtual ~AppResource(void);
 
-	/**
-	 * Initializes this instance.
-	 *
-	 * @since	2.0
-	 *
-	 * @return	An error code
-	 * @exception	E_SUCCESS	The method is successful.
-	 * @exception	E_OUT_OF_MEMORY	The memory is insufficient.
-	 * @exception	E_SYSTEM	A system error has occurred.
-	 */
-	result Construct(void);
-	result Construct(const AppId& appId);
-	static void Reinitialize(void);
-	void Reinitialize(const AppId& appId);
-
 private:
-	class _AppResourceImpl* __pAppResourceImpl;
-
 	friend class _AppResourceImpl;
-	static Tizen::Base::Collection::HashMap* pContainer;
+	class _AppResourceImpl* __pAppResourceImpl;
 }; // AppResource
 
 } } // Tizen::App

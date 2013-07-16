@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -55,7 +54,7 @@ template< class Type > class __ArrayListEnumeratorT;
  *	void
  *	MyClass::ArrayListTSample(void)
  *	{
- *		ArrayListT<int> list;
+ *		ArrayListT< int > list;
  *
  *		list.Construct();
  *
@@ -76,7 +75,7 @@ template< class Type > class __ArrayListEnumeratorT;
  *
  *		list.InsertAt(int4, 1);		// 1,4,2,3
  *
- *		ComparerT<int>* pIntComparer = new ComparerT<int>();
+ *		ComparerT< int >* pIntComparer = new ComparerT<int>();
  *		list.Sort(*pIntComparer);	// 1,2,3,4
  *
  *		delete pIntComparer;
@@ -86,7 +85,7 @@ template< class Type > class __ArrayListEnumeratorT;
  *		list.RemoveAt(0);			// 2,4
  *
  *		// Uses an enumerator to access elements in the list
- *		IEnumeratorT<int>* pEnum = list.GetEnumeratorN();
+ *		IEnumeratorT< int >* pEnum = list.GetEnumeratorN();
  *		while (pEnum->MoveNext() == E_SUCCESS)
  *		{
  *			pEnum->GetCurrent(temp);
@@ -321,7 +320,7 @@ CATCH:
 	}
 
 	/**
-	 * Gets the object at the specified index of the list.
+	 * Gets the object at the specified @c index of the list.
 	 *
 	 * @since 2.0
 	 *
@@ -329,7 +328,7 @@ CATCH:
 	 * @param[in]	index The index of the object to read
 	 * @param[out]	obj An object to get from this list
 	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_OUT_OF_RANGE			The specified index is outside the bounds of the data structure, or
+	 * @exception	E_OUT_OF_RANGE			The specified @c index is outside the bounds of the data structure, or
 	 *										the specified @c index is either equal to or greater than the number of elements or less than @c 0.
 	 * @see			SetAt()
 	 */
@@ -344,7 +343,7 @@ CATCH:
 	}
 
 	/**
-	 * Gets the object at the specified index of the list.
+	 * Gets the object at the specified @c index of the list.
 	 *
 	 * @since 2.0
 	 *
@@ -352,7 +351,7 @@ CATCH:
 	 * @param[in]	index The index of the object to read
 	 * @param[out]	obj An object to get from this list
 	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_OUT_OF_RANGE			The specified index is outside the bounds of the data structure, or
+	 * @exception	E_OUT_OF_RANGE			The specified @c index is outside the bounds of the data structure, or
 	 *										the specified @c index is either equal to or greater than the number of elements or less than @c 0.
 	 * @see			SetAt()
 	 */
@@ -435,7 +434,7 @@ CATCH:
 	}
 
 	/**
-	 * Searches for an object starting from the specified index. @n
+	 * Searches for an object starting from the specified @c index. @n
 	 * Gets the index of the object if found.
 	 *
 	 * @since 2.0
@@ -446,7 +445,7 @@ CATCH:
 	 *							It must be less than the number of elements.
 	 * @param[out]	index		The index of the object
 	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_OUT_OF_RANGE			The specified index is outside the bounds of the data structure, or
+	 * @exception	E_OUT_OF_RANGE			The specified @c index is outside the bounds of the data structure, or
 	 *										the specified @c startIndex is either equal to or greater than the number of elements or less than @c 0.
 	 * @exception	E_OBJ_NOT_FOUND			The specified @c obj is not found.
 	 * @see			LastIndexOf()
@@ -473,7 +472,7 @@ CATCH:
 	 * @param[out]	index		The index of the object
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_OUT_OF_RANGE			Either of the following conditions has occurred: @n
-	 *										- The specified index is outside the bounds of the data structure. @n
+	 *										- The specified @c index is outside the bounds of the data structure. @n
 	 *										- The specified @c startIndex is either greater than or equal to the number of elements or less than @c 0. @n
 	 *										- The specified @c count is either greater than the number of elements starting from @c startIndex or less than @c 0.
 	 * @exception	E_OBJ_NOT_FOUND			The specified @c obj is not found.
@@ -511,7 +510,7 @@ CATCH:
 	 * @param[in]	obj		The object to insert
 	 * @param[in]	index	The index at which the object must be inserted
 	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_OUT_OF_RANGE			The specified index is outside the bounds of the data structure, or
+	 * @exception	E_OUT_OF_RANGE			The specified @c index is outside the bounds of the data structure, or
 	 *										the @c index is greater than the number of elements or less than @c 0.
 	 * @remarks		The elements that follow the insertion point move down to accommodate the new element.
 	 *				If the @c index equals the number of elements in the list, the new element
@@ -726,7 +725,7 @@ CATCH:
 	 * @return		An error code
 	 * @param[in]	index The index of the object that is to remove
 	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_OUT_OF_RANGE			The specified index is outside the bounds of the data structure, or
+	 * @exception	E_OUT_OF_RANGE			The specified @c index is outside the bounds of the data structure, or
 	 *										the specified @c index is greater than or equal to the number of elements or less than @c 0.
 	 * @remarks		The elements that follow the deleted object move up the list to occupy the empty location.
 	 * @see			InsertAt()
@@ -823,7 +822,7 @@ CATCH:
 	}
 
 	/**
-	 * Sets the object at a specified index of the current instance of ByteBuffer with the specified object.
+	 * Sets the object at a specified @c index of the current instance of ByteBuffer with the specified object.
 	 *
 	 * @since 2.0
 	 *
@@ -831,7 +830,7 @@ CATCH:
 	 * @param[in]	obj		The object to set
 	 * @param[in]	index	The index at which the object must be set
 	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_OUT_OF_RANGE			The specified index is outside the bounds of the data structure, or
+	 * @exception	E_OUT_OF_RANGE			The specified @c index is outside the bounds of the data structure, or
 	 *										the specified @c index is either equal to or greater than the number of elements or less than @c 0.
 	 * @see			GetAt()
 	 */
@@ -1014,13 +1013,13 @@ CATCH:
 	}
 
 	/**
-	 * Checks whether the list contains all the elements of the specified collection.
+	 * Checks whether the list contains all the elements of the specified @c collection.
 	 *
 	 * @since 2.0
 	 *
 	 * @return		An error code
 	 * @param[in]	collection	The collection to check for in the list
-	 * @param[out]	out			@c true if the list contains all the elements of the specified collection, @n
+	 * @param[out]	out			@c true if the list contains all the elements of the specified @c collection, @n
 	 *							else @c false
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation, or

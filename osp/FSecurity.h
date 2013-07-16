@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -47,8 +46,14 @@
 #include "FSecCryptoDhKeyExchange.h"
 #include "FSecKeaKeyParameters.h"
 #include "FSecDhKeyParameters.h"
+#include "FSecRsaKeyConverter.h"
 #include "FSecCrypto.h"
 #include "FSecCert.h"
+#include "FSecPkcs.h"
+#include "FSecPrivacyManager.h"
+#include "FSecPrivacyInfo.h"
+#include "FSecPrivilegeInfo.h"
+#include "FSecAccessController.h"
 
 
 /**

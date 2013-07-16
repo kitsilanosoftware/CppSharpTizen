@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -43,7 +42,7 @@ namespace Tizen { namespace Base { namespace Collection
  * deleting elements, the enumerator is irrecoverably invalidated. The next call to GetCurrent(), MoveNext(), MovePrevious(), Reset(), or ResetLast() fails (E_INVALID_OPERATION).
  *
  * The %IBidirectionalEnumeratorT interface supports a bidirectional iteration over a collection.
- *	One can only access the elements in a collection through %IBidirectionalEnumeratorT. The elements cannot be modified through this interface.
+ * One can only access the elements in a collection through %IBidirectionalEnumeratorT. The elements cannot be modified through this interface.
  *
  */
 template< class Type >
@@ -61,7 +60,7 @@ public:
 
 	/**
 	 * Moves %IBidirectionalEnumeratorT to the previous element of the collection. @n
-	 * A call to the MovePrevious() method after the ResetLast() method positions the enumerator to the last element in the collection.
+	 * A call to the %MovePrevious() method after the ResetLast() method positions the enumerator to the last element in the collection.
 	 *
 	 * @since 2.0
 	 *

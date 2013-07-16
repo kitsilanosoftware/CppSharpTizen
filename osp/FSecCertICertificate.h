@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -274,7 +273,7 @@ public:
 	 * The serial number is an integer assigned by the Certification Authority (CA) to each certificate. It is unique for each certificate issued by a
 	 * given CA (that is, the issuer name and serial number must identify a unique certificate). @n
 	 *
-	 * The ASN.1 definition for this is as follows:
+	 * This is defined in ASN.1 as demonstrated in the following code:
 	 *
 	 *	@code
 	 *	serialNumber		 CertificateSerialNumber.
@@ -300,7 +299,7 @@ public:
 	 * It is valid if the current date and time are within the validity period given in the certificate. @n
 	 * The validity period consists of two date and time values: the initial date and time, and the final date and time until the validity of the certificate. @n
 	 *
-	 * It is defined in ASN.1 as:
+	 * This is defined in ASN.1 as demonstrated in the following code:
 	 *
 	 * @code
 	 * validity             Validity

@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -116,7 +116,7 @@ GallerySample::OnInitializing(void)
 	__pGallery->SetItemProvider(*this);
 	__pGallery->AddGalleryEventListener(*this);
 
-	AddControl(*__pGallery);
+	AddControl(__pGallery);
 
 	return r;
 }
@@ -184,7 +184,8 @@ class _OSP_EXPORT_ Gallery
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the %Construct() method must be called right after calling this constructor.
 	 *
 	 * @since 2.0
 	 */
@@ -205,13 +206,32 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	rect	        An instance of the Graphics::Rectangle class @n
-	 *						        	This instance represents the x and y coordinates of the top-left corner of the created %Gallery control along with the
-	 *									width and height.
+	 *					This instance represents the x and y coordinates of the top-left corner of the created %Gallery control along with the
+	 *					width and height. @n
+	 *					The optimal size of the control is defined in
+	 *					<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG	The specified input parameter is invalid.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect);
+
+	/**
+	 * Initializes this instance of %Gallery with the specified parameter.
+	 *
+	 * @since 		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	rect	        An instance of the Tizen::Graphics::FloatRectangle class @n
+	 *					This instance represents the x and y coordinates of the top-left corner of the created %Gallery control along with the
+	 *					width and height.@n
+	 *					The optimal size of the control is defined in
+	 *					<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG	The specified input parameter is invalid.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect);
 
 	/**
 	 * Sets the item provider that creates and deletes the items from the %Gallery control.
@@ -232,7 +252,7 @@ public:
 	 *
 	 * @since 		2.0
 	 *
-	 * @param[in]	listener 		The listener to be added
+	 * @param[in]	listener 		The listener to add
 	 */
 	void AddGalleryEventListener(IGalleryEventListener& listener);
 
@@ -242,7 +262,7 @@ public:
 	 *
 	 * @since 		2.0
 	 *
-	 * @param[in]	listener 		The listener to be removed
+	 * @param[in]	listener 		The listener to remove
 	 */
 	void RemoveGalleryEventListener(IGalleryEventListener& listener);
 
@@ -286,7 +306,7 @@ public:
 	 * @since 		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	itemIndex    			The index of the item to be refreshed
+	 * @param[in]	itemIndex    			The index of the item to refresh
 	 * @param[in]	type			The type of change for an item
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_OUT_OF_RANGE	The specified @c index is out of range.
@@ -340,9 +360,11 @@ public:
 	 * @param[in] 	pBitmap				The bitmap of the empty %Gallery control
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks		When @c pBitmap is @c null, the %Gallery control does not have a background bitmap. The default value for the background bitmap is @c null.
-	 * @remarks		The background bitmap has a priority over the background color. When both the background bitmap and the background color are specified,
-	 *				only the bitmap is displayed.
+	 * @remarks
+	 *				- When @c pBitmap is @c null, the %Gallery control does not have a background bitmap. @n
+	 *				The default value for the background bitmap is @c null.
+	 *				- The background bitmap has a priority over the background color. When both the background bitmap and
+	 *				the background color are specified, only the bitmap is displayed.
 	 */
 	result SetBitmapOfEmptyGallery(const Tizen::Graphics::Bitmap* pBitmap);
 
@@ -368,8 +390,9 @@ public:
 	 * @exception E_SUCCESS                The method is successful.
 	 * @exception E_UNSUPPORTED_OPERATION  This operation is not supported.
 	 * @exception E_SYSTEM                 A system error has occurred.
-	 * @remarks   The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks   The method is not supported in 16-bit devices.
+	 * @remarks
+	 *				- The specific error code can be accessed using the GetLastResult() method.
+	 *				- The method is not supported in 16-bit devices.
 	 */
 	GalleryAnimation GetSlideShowAnimation(void) const;
 
@@ -381,10 +404,11 @@ public:
 	 * @param[in] 	duration	The animation duration
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_OUT_OF_RANGE		The specified @c duration is out of the possible duration range. @n
-	 * 				The specified duration should be greater than or equal to 300 or less than or equals to 20000.
+	 * 									The specified duration should be greater than or equal to 300 or less than or equals to @c 20000.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks     The unit of the duration is in milliseconds.@n
-	 * 				The default animation duration is different for each slide show animation type.
+	 * @remarks
+	 *				- The unit of the duration is in milliseconds.
+	 *				- The default animation duration is different for each slide show animation type.
 	 */
 	result SetSlideShowAnimationDuration(int duration);
 
@@ -409,10 +433,11 @@ public:
 	 * @param[in]	duration		The item view duration
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_OUT_OF_RANGE  The specified @c duration is out of possible duration range. @n
-	 *								- The specified @c duration should be greater than 10.
+	 *								- The specified @c duration should be greater than @c 10.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks     The unit of the duration is in milliseconds.@n
-	 * 				The default animation duration is different for each slide show animation type.
+	 * @remarks
+	 *				- The unit of the duration is in milliseconds.
+	 *				- The default animation duration is different for each slide show animation type.
 	 */
 	result SetSlideShowViewDuration(int duration);
 
@@ -503,7 +528,7 @@ public:
 	 * @param[in]   color   The background color
 	 * @exception   E_SUCCESS              	The method is successful.
 	 * @exception   E_SYSTEM              	A system error has occurred.
-	 * @remarks     The method ignores the alpha value of the @c color parameter and sets the alpha value to 255.
+	 * @remarks     The method ignores the alpha value of the @c color parameter and sets the alpha value to @c 255.
 	 */
 	result SetBackgroundColor(const Tizen::Graphics::Color& color);
 

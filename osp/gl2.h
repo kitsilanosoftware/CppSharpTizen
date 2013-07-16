@@ -6,9 +6,9 @@
 
 /**
  * @file		gl2.h
- * @brief		This is the header file for the OpenGL(R) ES 2.0.
+ * @brief		This is the header file for the OpenGL&reg; ES 2.0.
  *
- * This header file contains the declarations of the OpenGL(R) ES 2.0.
+ * This header file contains the declarations of the OpenGL&reg; ES 2.0.
  */
 
 #include "gl2platform.h"
@@ -25,8 +25,8 @@ extern "C" {
  */
 
 /**
- * @addtogroup opengles
- *
+ * @defgroup opengles_2_0 OpenGL&reg; ES 2.0
+ * @brief	The list of OpenGL&reg;ES 2.0 functions.
  * @{
  */
 
@@ -491,855 +491,1139 @@ typedef khronos_ssize_t GLsizeiptr;
  *-----------------------------------------------------------------------*/
 
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glActiveTexture(GLenum texture);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glAttachShader(GLuint program, GLuint shader);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glBindAttribLocation(GLuint program, GLuint index, const char* name);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glBindBuffer(GLenum target, GLuint buffer);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glBindFramebuffer(GLenum target, GLuint framebuffer);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glBindRenderbuffer(GLenum target, GLuint renderbuffer);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glBindTexture(GLenum target, GLuint texture);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glBlendColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glBlendEquation(GLenum mode);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glBlendEquationSeparate(GLenum modeRGB, GLenum modeAlpha);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glBlendFunc(GLenum sfactor, GLenum dfactor);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glBlendFuncSeparate(GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glBufferData(GLenum target, GLsizeiptr size, const void* data, GLenum usage);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, const void* data);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL GLenum GL_APIENTRY glCheckFramebufferStatus(GLenum target);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glClear(GLbitfield mask);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glClearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glClearDepthf(GLclampf depth);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glClearStencil(GLint s);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glColorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glCompileShader(GLuint shader);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glCompressedTexImage2D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void* data);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glCompressedTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void* data);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glCopyTexImage2D(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glCopyTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL GLuint GL_APIENTRY glCreateProgram(void);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL GLuint GL_APIENTRY glCreateShader(GLenum type);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glCullFace(GLenum mode);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glDeleteBuffers(GLsizei n, const GLuint* buffers);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glDeleteFramebuffers(GLsizei n, const GLuint* framebuffers);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glDeleteProgram(GLuint program);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glDeleteRenderbuffers(GLsizei n, const GLuint* renderbuffers);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glDeleteShader(GLuint shader);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glDeleteTextures(GLsizei n, const GLuint* textures);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glDepthFunc(GLenum func);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glDepthMask(GLboolean flag);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glDepthRangef(GLclampf zNear, GLclampf zFar);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glDetachShader(GLuint program, GLuint shader);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glDisable(GLenum cap);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glDisableVertexAttribArray(GLuint index);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glDrawArrays(GLenum mode, GLint first, GLsizei count);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glDrawElements(GLenum mode, GLsizei count, GLenum type, const void* indices);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glEnable(GLenum cap);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glEnableVertexAttribArray(GLuint index);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glFinish(void);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glFlush(void);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glFramebufferRenderbuffer(GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glFramebufferTexture2D(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glFrontFace(GLenum mode);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGenBuffers(GLsizei n, GLuint* buffers);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGenerateMipmap(GLenum target);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGenFramebuffers(GLsizei n, GLuint* framebuffers);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGenRenderbuffers(GLsizei n, GLuint* renderbuffers);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGenTextures(GLsizei n, GLuint* textures);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetActiveAttrib(GLuint program, GLuint index, GLsizei bufsize, GLsizei* length, GLint* size, GLenum* type, char* name);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetActiveUniform(GLuint program, GLuint index, GLsizei bufsize, GLsizei* length, GLint* size, GLenum* type, char* name);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetAttachedShaders(GLuint program, GLsizei maxcount, GLsizei* count, GLuint* shaders);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL int GL_APIENTRY glGetAttribLocation(GLuint program, const char* name);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetBooleanv(GLenum pname, GLboolean* params);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetBufferParameteriv(GLenum target, GLenum pname, GLint* params);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL GLenum GL_APIENTRY glGetError(void);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetFloatv(GLenum pname, GLfloat* params);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetFramebufferAttachmentParameteriv(GLenum target, GLenum attachment, GLenum pname, GLint* params);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetIntegerv(GLenum pname, GLint* params);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetProgramiv(GLuint program, GLenum pname, GLint* params);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetProgramInfoLog(GLuint program, GLsizei bufsize, GLsizei* length, char* infolog);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetRenderbufferParameteriv(GLenum target, GLenum pname, GLint* params);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetShaderiv(GLuint shader, GLenum pname, GLint* params);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetShaderInfoLog(GLuint shader, GLsizei bufsize, GLsizei* length, char* infolog);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype, GLint* range, GLint* precision);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetShaderSource(GLuint shader, GLsizei bufsize, GLsizei* length, char* source);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL const GLubyte* GL_APIENTRY glGetString(GLenum name);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetTexParameterfv(GLenum target, GLenum pname, GLfloat* params);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetTexParameteriv(GLenum target, GLenum pname, GLint* params);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetUniformfv(GLuint program, GLint location, GLfloat* params);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetUniformiv(GLuint program, GLint location, GLint* params);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL int GL_APIENTRY glGetUniformLocation(GLuint program, const char* name);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetVertexAttribfv(GLuint index, GLenum pname, GLfloat* params);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetVertexAttribiv(GLuint index, GLenum pname, GLint* params);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glGetVertexAttribPointerv(GLuint index, GLenum pname, void** pointer);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glHint(GLenum target, GLenum mode);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL GLboolean GL_APIENTRY glIsBuffer(GLuint buffer);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL GLboolean GL_APIENTRY glIsEnabled(GLenum cap);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL GLboolean GL_APIENTRY glIsFramebuffer(GLuint framebuffer);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL GLboolean GL_APIENTRY glIsProgram(GLuint program);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL GLboolean GL_APIENTRY glIsRenderbuffer(GLuint renderbuffer);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL GLboolean GL_APIENTRY glIsShader(GLuint shader);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL GLboolean GL_APIENTRY glIsTexture(GLuint texture);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glLineWidth(GLfloat width);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glLinkProgram(GLuint program);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glPixelStorei(GLenum pname, GLint param);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glPolygonOffset(GLfloat factor, GLfloat units);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glReadPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, void* pixels);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glReleaseShaderCompiler(void);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glRenderbufferStorage(GLenum target, GLenum internalformat, GLsizei width, GLsizei height);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glSampleCoverage(GLclampf value, GLboolean invert);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glScissor(GLint x, GLint y, GLsizei width, GLsizei height);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glShaderBinary(GLsizei n, const GLuint* shaders, GLenum binaryformat, const void* binary, GLsizei length);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glShaderSource(GLuint shader, GLsizei count, const char** string, const GLint* length);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glStencilFunc(GLenum func, GLint ref, GLuint mask);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glStencilFuncSeparate(GLenum face, GLenum func, GLint ref, GLuint mask);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glStencilMask(GLuint mask);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glStencilMaskSeparate(GLenum face, GLuint mask);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glStencilOp(GLenum fail, GLenum zfail, GLenum zpass);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glStencilOpSeparate(GLenum face, GLenum fail, GLenum zfail, GLenum zpass);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glTexImage2D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void* pixels);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glTexParameterf(GLenum target, GLenum pname, GLfloat param);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glTexParameterfv(GLenum target, GLenum pname, const GLfloat* params);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glTexParameteri(GLenum target, GLenum pname, GLint param);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glTexParameteriv(GLenum target, GLenum pname, const GLint* params);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniform1f(GLint location, GLfloat x);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniform1fv(GLint location, GLsizei count, const GLfloat* v);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniform1i(GLint location, GLint x);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniform1iv(GLint location, GLsizei count, const GLint* v);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniform2f(GLint location, GLfloat x, GLfloat y);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniform2fv(GLint location, GLsizei count, const GLfloat* v);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniform2i(GLint location, GLint x, GLint y);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniform2iv(GLint location, GLsizei count, const GLint* v);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniform3f(GLint location, GLfloat x, GLfloat y, GLfloat z);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniform3fv(GLint location, GLsizei count, const GLfloat* v);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniform3i(GLint location, GLint x, GLint y, GLint z);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniform3iv(GLint location, GLsizei count, const GLint* v);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniform4f(GLint location, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniform4fv(GLint location, GLsizei count, const GLfloat* v);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniform4i(GLint location, GLint x, GLint y, GLint z, GLint w);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniform4iv(GLint location, GLsizei count, const GLint* v);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniformMatrix2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniformMatrix3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glUseProgram(GLuint program);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glValidateProgram(GLuint program);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glVertexAttrib1f(GLuint indx, GLfloat x);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glVertexAttrib1fv(GLuint indx, const GLfloat* values);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glVertexAttrib2f(GLuint indx, GLfloat x, GLfloat y);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glVertexAttrib2fv(GLuint indx, const GLfloat* values);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glVertexAttrib3f(GLuint indx, GLfloat x, GLfloat y, GLfloat z);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glVertexAttrib3fv(GLuint indx, const GLfloat* values);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glVertexAttrib4f(GLuint indx, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glVertexAttrib4fv(GLuint indx, const GLfloat* values);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glVertexAttribPointer(GLuint indx, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* ptr);
 /**
- * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL(R) ES 2.0</a>.
+ * You can find more details at the Khronos Group site: <a href="#" onClick="window.open('http://www.khronos.org/opengles/sdk/2.0/docs/man')" target="_blank">Khronos Group site - OpenGL&reg; ES 2.0</a>.
  *
  * @since 2.0
+ * @feature	%http://tizen.org/feature/opengles or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 GL_APICALL void GL_APIENTRY glViewport(GLint x, GLint y, GLsizei width, GLsizei height);
 

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -71,14 +70,7 @@ public:
 	/**
 	* Moves the enumerator to the next position.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompDatabaseExceptionPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @exception	E_SUCCESS			The method is successful.
@@ -88,12 +80,12 @@ public:
 	*									  (the query did not yield any result). @n
 	*									- The Database or DbStatement instance associated with this instance is deleted.
 	* @exception	E_OUT_OF_RANGE		The enumerator has reached out of the result set returned by the SELECT query.
-	* @exception	E_OBJECT_LOCKED		The database instance is locked. 
-	* @exception	E_INVALID_FORMAT 	The database file is malformed. 
+	* @exception	E_OBJECT_LOCKED		The database instance is locked.
+	* @exception	E_INVALID_FORMAT 	The database file is malformed.
 	* @exception	E_IO				Either of the following conditions has occurred:  @n
 	*									- An unexpected device failure has occurred as the media ejected suddenly. @n
 	*									- %File corruption is detected.
-	* @exception	E_SYSTEM			The method cannot proceed due to a severe system error. 
+	* @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	* @see		Tizen::Io::Database::ExecuteStatementN()
 	* @see	       Tizen::Io::Database::QueryN()
 	* @see		Tizen::Io::DbEnumerator::MovePrevious()
@@ -184,14 +176,7 @@ public:
 	/**
 	* Resets the calling %DbEnumerator instance back to its initial state.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompDatabaseExceptionPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @exception	E_SUCCESS			The method is successful.
@@ -200,7 +185,7 @@ public:
 	*									- The method has tried to reset the enumerator of the result set that is not activated
 	*									  (the query did not yield any result). @n
 	*									- The Database or DbStatement instance associated with this instance is deleted.
-	* @exception	E_OBJECT_LOCKED		The database instance is locked. 
+	* @exception	E_OBJECT_LOCKED		The database instance is locked.
 	* @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	* @remarks		After this method is called, if MoveNext() is called the cursor goes to the first position.
 	*/
@@ -348,9 +333,8 @@ public:
 	* @exception		E_TYPE_MISMATCH		The operation has attempted to access columns of different types.
 	* @exception		E_INVALID_FORMAT	The date is not correctly formatted, or the method is trying to access column of type String. @n
 	*										The date format should be 'mm/dd/yyyy hh:mm:ss'.
-	* @exception		E_OUT_OF_RANGE		Either the year(%d), month(%d), day(%d), hour(%d), minute(%d), or second(%d) value is out of range,
+	* @exception		E_OUT_OF_RANGE		Either the year, month, day, hour, minute, or second value is out of range,
 	*										or the method is trying to access a column of type String.
-	* @remarks			Note that the DateTime is constructed inside the method.
 	*/
 	virtual result GetDateTimeAt(int columnIndex, Tizen::Base::DateTime& value) const;
 
@@ -387,7 +371,7 @@ public:
 	*									  (the query did not yield any result). @n
 	*									- The Database or DbStatement instance associated with this instance is deleted.
 	* @exception	E_INVALID_ARG		The specified @c columnIndex is out of range.
-	* @remarks		The method must be called after MoveNext(), MoveFirst(), or MoveLast(). @n
+	* @remarks		This method must be called after MoveNext(), MoveFirst(), or MoveLast(). @n
 	*				Currently, DB_COLUMNTYPE_INT is returned for a 64-bit integer. @n
 	*				The specific error code can be accessed using the GetLastResult() method.
 	*/
@@ -410,7 +394,7 @@ public:
 	* @exception	E_INVALID_ARG				The specified @c columnIndex is out of range.
 	* @exception	E_INVALID_ENCODING_RANGE	The string conversion has failed due to invalid encoding range, or
 	*											it is possible if the database file is corrupted.
-	* @remarks		The method must be called after MoveNext(), MoveFirst(), or MoveLast(). @n
+	* @remarks		This method must be called after MoveNext(), MoveFirst(), or MoveLast(). @n
 	*				The specific error code can be accessed using the GetLastResult() method.
 	*/
 	virtual Tizen::Base::String GetColumnName(int columnIndex) const;
@@ -430,7 +414,7 @@ public:
 	*									  (the query did not yield any result). @n
 	*									- The Database or DbStatement instance associated with this instance is deleted.
 	* @exception	E_INVALID_ARG		The specified @c columnIndex is out of range.
-	* @remarks		The method must be called after MoveNext(), MoveFirst(), or MoveLast(). @n
+	* @remarks		This method must be called after MoveNext(), MoveFirst(), or MoveLast(). @n
 	*				If the destination column is of type String, this method returns the @c byte length excluding the @c null terminator character. @n
 	*				The specific error code can be accessed using the GetLastResult() method.
 	*/

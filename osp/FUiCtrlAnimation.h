@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -146,7 +146,7 @@ AnimationSample::OnInitializing(void)
 	pAnimation->AddAnimationEventListener(*this);
 
 	// Adds the animation to the form
-	AddControl(*pAnimation);
+	AddControl(pAnimation);
 
 	// Plays the animation
 	pAnimation->Play();
@@ -184,7 +184,8 @@ class _OSP_EXPORT_ Animation
 
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the %Construct() method must be called right after calling this constructor.
 	 *
 	 * @since		2.0
 	 */
@@ -192,7 +193,8 @@ public:
 
 
 	/**
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required. @n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @since		2.0
 	 */
@@ -201,24 +203,47 @@ public:
 
 	/**
 	 * Initializes this instance of %Animation with the specified parameters. @n
-	 * The input list of the AnimationFrame instances (@c aniFrames) should be deleted explicitly after use.
+	 * The @c aniFrames list of the AnimationFrame instances should be deleted explicitly after use.
 	 *
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	rect			An instance of the Rectangle class @n
+	 * @param[in]	rect			An instance of the Tizen::Graphics::Rectangle class @n
 	 *								This instance represents the x and y coordinates of the top-left corner of the created window along with
-	 *								its width and height.
+	 *								its width and height.@n
+	 *								The optimal size of the control is defined in
+	 *								<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @param[in]	aniFrames		An IList of %AnimationFrames used in the animation
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
 	 * @exception   E_INVALID_ARG           A specified input parameter is invalid.
-	 * @remarks	A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier. @n
-	 * @remarks	The size of the control must be within the range defined by the minimum size and the maximum size.
-	 * @see         AnimationFrame
+	 * @remarks
+	 *			- A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier.
+	 *			- The size of the control must be within the range defined by the minimum size and the maximum size.
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, const Tizen::Base::Collection::IList& aniFrames);
 
+	/**
+	 * Initializes this instance of %Animation with the specified parameters. @n
+	 * The @c aniFrames list of the AnimationFrame instances should be deleted explicitly after use.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	rect			An instance of the Tizen::Graphics::FloatRectangle class @n
+	 *								This instance represents the x and y coordinates of the top-left corner of the created window along with
+	 *								its width and height.@n
+	 *								The optimal size of the control is defined in
+	 *								<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]	aniFrames		An IList of %AnimationFrames used in the animation
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @exception   E_INVALID_ARG           A specified input parameter is invalid.
+	 * @remarks
+	 *			- A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier.
+	 *			- The size of the control must be within the range defined by the minimum size and the maximum size.
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, const Tizen::Base::Collection::IList& aniFrames);
 
 public:
 	/**
@@ -228,7 +253,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The listener to be added
+	 * @param[in]	listener	The listener to add
 	 */
 	void AddAnimationEventListener(Tizen::Ui::IAnimationEventListener& listener);
 
@@ -239,7 +264,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The listener to be removed
+	 * @param[in]	listener	The listener to remove
 	 */
 	void RemoveAnimationEventListener(Tizen::Ui::IAnimationEventListener& listener);
 
@@ -260,8 +285,9 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The total repeat count, @n
-	 *              else @c -1 if the %Animation instance is not constructed
+	 * @return		The total repeat count
+	 *
+	 * @remarks		The default repeat count is @c 1.
 	 */
 	int GetRepeatCount(void) const;
 
@@ -271,8 +297,9 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The current repeated count, @n
-	 *              else @c -1 if the %Animation instance is not constructed
+	 * @return		The current repeated count
+	 *
+	 * @remarks		The default current repeated count is @c 0.
 	 */
 	int GetCurrentRepeatedCount(void) const;
 
@@ -282,8 +309,9 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The total image count, @n
-	 *				else @c -1 if the %Animation instance is not constructed
+	 * @return		The total image count
+	 *
+	 * @remarks		The default image count is @c 0.
 	 */
 	int GetImageCount(void) const;
 
@@ -317,8 +345,9 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The status of animation, @n
-	 *				else ANIMATION_STOPPED if the %Animation control is not constructed
+	 * @return		The status of animation
+	 *
+	 * @remarks		The default animation status is @c ANIMATION_STOPPED.
 	 */
 	AnimationStatus GetStatus(void) const;
 

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -246,7 +245,9 @@ public:
 	 * @param[out]	uuid		An instance of %UuId
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_INVALID_ARG			The string does not contain an %UuId that can be parsed.
-	 * @remarks	The format of a string representing a %UuId value is xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (For example, 130DF2EC-8233-4975-B03D-F0AD99E3449D).
+	 * @remarks
+	 *				- The format of a string representing a %UuId value is xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (For example, 130DF2EC-8233-4975-B03D-F0AD99E3449D).
+	 *				- This method guarantees that the original value of out-parameter is not changed when the method returns error.
 	 */
 	static result Parse(const String& str, UuId& uuid);
 

@@ -66,7 +66,7 @@ enum RecorderState
  * @see	AudioRecorder::GetQuality()
  * @see	VideoRecorder::SetQuality()
  * @see	VideoRecorder::GetQuality()
-
+ *
  */
 enum RecordingQuality
 {

@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -112,6 +112,8 @@ enum TextBoxTextStyle
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_textbox.htm">TextBox</a>.
  *
+ * The following example demonstrates how to use the %TextBox class.
+ *
  * @code
 // Sample code for TextBoxSample.h
 #include <FUi.h>
@@ -163,19 +165,20 @@ TextBoxSample::OnInitializing(void)
 	__pTextBox->AppendText(L"\nTizen SDK");
 
 	// Adds the text box to the form
-	AddControl(*__pTextBox);
+	AddControl(__pTextBox);
 
 	return r;
 }
- * @endcode
- */
+* @endcode
+*/
 class _OSP_EXPORT_ TextBox
 	: public Tizen::Ui::Control
 {
 // Lifecycle
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the %Construct() method must be called right after calling this constructor.
 	 *
 	 * @since	2.0
 	 *
@@ -183,7 +186,8 @@ public:
 	TextBox(void);
 
 	/**
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required.@n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @since	2.0
 	 */
@@ -197,12 +201,31 @@ public:
 	 * @return		An error code
 	 * @param[in]	rect	            An instance of the Graphics::Rectangle class @n
 	 *									This instance represents the x and y coordinates of the top-left corner of the created window along with
-	 *									the width and height of the control.
+	 *									the width and height of the control.@n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @param[in]	border	            The border style
 	 * @exception	E_SUCCESS           The method is successful.
 	 * @exception	E_SYSTEM            A system error has occurred.
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, TextBoxBorder border = TEXT_BOX_BORDER_ROUNDED);
+
+	/**
+	 * Initializes this instance of %TextBox with the specified parameters.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	rect				An instance of the Tizen::Graphics::FloatRectangle class @n
+	 *									This instance represents the x and y coordinates of the top-left corner of the created window along with
+	 *									the width and height of the control.@n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]	border				The border style
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, TextBoxBorder border = TEXT_BOX_BORDER_ROUNDED);
 
 // Operation
 public:
@@ -213,8 +236,8 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	autoLinks		The auto-link mask @n
-	 *								Multiple link types can be combined using the bitwise OR operator (see Tizen::Base::Utility::LinkType). @n
-	 *								For more information, see <a href="../org.tizen.native.appprogramming/html/guide/ui/auto_link_detection.htm">AutoLink Detection</a>.
+	 *						Multiple link types can be combined using the bitwise OR operator (see Tizen::Base::Utility::LinkType). @n For more information,
+	 *						see <a href="../org.tizen.native.appprogramming/html/guide/ui/auto_link_detection.htm">AutoLink Detection</a>.
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
 	 * @remarks		When @c autoLinks is set to @c 0, the auto-link detection is disabled.
@@ -241,7 +264,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener    The event listener to be added
+	 * @param[in]	listener    The event listener to add
 	 * @see			RemoveUiLinkEventListener()
 	 */
 	void AddUiLinkEventListener(Tizen::Ui::IUiLinkEventListener& listener);
@@ -252,7 +275,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener    The event listener to be removed
+	 * @param[in]	listener    The event listener to remove
 	 * @see			AddUiLinkEventListener()
 	 */
 	void RemoveUiLinkEventListener(Tizen::Ui::IUiLinkEventListener& listener);
@@ -264,11 +287,12 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	character		The character to be added
+	 * @param[in]	character		The character to add
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		The method modifies the text buffer that is managed by the %TextBox control. @n
-	 *              To display the changes, the control must be drawn again.
+	 * @remarks
+	 *			- The method modifies the text buffer that is managed by the %TextBox control.
+	 *			-To display the changes, the control must be drawn again.
 	 */
 	result AppendCharacter(const Tizen::Base::Character& character);
 
@@ -278,12 +302,13 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	text			The text to be appended
+	 * @param[in]	text			The text to append
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM        A system error has occurred.
-	 * @remarks		To denote the end of a line use '\\n'. @n
-	 *              The method modifies the text buffer that is managed by the %TextBox control. @n
-	 *              To display the changes, the control must be drawn again.
+	 * @remarks
+	 *			-To denote the end of a line use '\\n'.
+	 *			-The method modifies the text buffer that is managed by the %TextBox control.
+	 *			-To display the changes, the control must be drawn again.
 	 */
 	result AppendText(const Tizen::Base::String& text);
 
@@ -295,8 +320,9 @@ public:
 	 * @return		An error code
 	 * @exception	E_SUCCESS           The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks		The method modifies the text buffer that is managed by the %TextBox control. @n
-	 *              To display the changes, the control must be drawn again.
+	 * @remarks
+	 *			-The method modifies the text buffer that is managed by the %TextBox control.
+	 *			-To display the changes, the control must be drawn again.
 	 */
 	result Clear(void);
 
@@ -364,7 +390,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	index		    The position at which to insert the character
-	 * @param[in]	character	    The character to be inserted
+	 * @param[in]	character	    The character to insert
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_OUT_OF_RANGE  The specified @c index is outside the bounds of the data structure. @n
 	 *								The specified @c index is greater than the number of elements or less than @c 0.
@@ -379,7 +405,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	index		    The position at which to insert the text
-	 * @param[in]	text		    The text to be inserted
+	 * @param[in]	text		    The text to insert
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_OUT_OF_RANGE  The specified @c index is outside the bounds of the data structure. @n
 	 *								The specified @c index is greater than the number of elements or less than @c 0.
@@ -393,12 +419,13 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	text            The text to be displayed
+	 * @param[in]	text            The text to display
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_SYSTEM        A system error has occurred.
-	 * @remarks     To denote the end of a line use '\\n'. @n
-	 *              The method modifies the text buffer that is managed by the %TextBox control. @n
-	 *              To display the changes, the control must be drawn again.
+	 * @remarks
+	 *			-To denote the end of a line use '\\n'.
+	 *			-The method modifies the text buffer that is managed by the %TextBox control.
+	 *			-To display the changes, the control must be drawn again.
 	 */
 	result SetText(const Tizen::Base::String& text);
 
@@ -415,6 +442,19 @@ public:
 	 * @see			SetLineSpacing()
 	 */
 	int GetLineSpacing(void) const;
+
+	/**
+	 * Gets the line spacing.
+	 *
+	 * @since		2.1
+	 *
+	 * @return      The line spacing,  @n
+	 *              else @c -1 if an error occurs
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
+	 * @see			SetLineSpacing()
+	 */
+	float GetLineSpacingF(void) const;
 
 	/**
 	 * Sets the line spacing. @n
@@ -436,6 +476,27 @@ public:
 	 * @see            GetLineSpacing()
 	 */
 	result SetLineSpacing(int multiplier, int extra);
+
+	/**
+	 * Sets the line spacing. @n
+	 * The line spacing is determined by multiplying @c multiplier to the default line spacing and adding @c extra. @n
+	 *
+	 * @code
+	 * The line spacing = (default line spacing) * multiplier + extra
+	 * @endcode
+	 *
+	 * @since          2.1
+	 *
+	 * @return         An error code
+	 * @param[in]      multiplier			The line spacing multiplier
+	 * @param[in]      extra				The extra line spacing
+	 * @exception      E_SUCCESS			The method is successful.
+	 * @exception      E_INVALID_ARG		A specified input parameter is invalid. @n
+	 *										The specified line spacing value cannot be supported.
+	 * @exception      E_SYSTEM				A system error has occurred.
+	 * @see            GetLineSpacingF()
+	 */
+	result SetLineSpacing(int multiplier, float extra);
 
 	// Text Alignment
 	/**
@@ -480,6 +541,20 @@ public:
 	int GetTextSize(void) const;
 
 	/**
+	 * Gets the text size of the %TextBox control.
+	 *
+	 * @since		2.1
+	 *
+	 * @return      The size of the text, @n
+	 *              else @c -1 if an error occurs
+	 * @exception	E_SUCCESS          The method is successful.
+	 * @exception	E_SYSTEM           A system error has occurred.
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
+	 * @see			SetTextSize()
+	 */
+	float GetTextSizeF(void) const;
+
+	/**
 	 * Sets the text size.
 	 *
 	 * @since		2.0
@@ -493,6 +568,21 @@ public:
 	 * @see			GetTextSize()
 	 */
 	result SetTextSize(int size);
+
+	/**
+	 * Sets the text size.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	size                The text size
+	 * @exception	E_SUCCESS           The method is successful.
+	 * @exception	E_INVALID_ARG       The specified input parameter is invalid. @n
+	 *									The specified @c size cannot be a negative integer.
+	 * @exception	E_SYSTEM            A system error has occurred.
+	 * @see			GetTextSizeF()
+	 */
+	result SetTextSize(float size);
 
 	// Text Font
 	/**
@@ -517,14 +607,14 @@ public:
 	result GetFontType(Tizen::Base::String& typefaceName, unsigned long& style) const;
 
 	/**
-	 * Gets the text style mask of the %TextBox control.
-	 *
-	 * @since 2.0
-	 *
-	 * @return                  A bitwise combination of Tizen::Ui::Controls::TextBoxTextStyle
-	 * @see                      SetTextStyle()
-	 * @see                      TextBoxTextStyle
-	 */
+	* Gets the text style mask of the %TextBox control.
+	*
+	* @since 2.0
+	*
+	* @return                  A bitwise combination of Tizen::Ui::Controls::TextBoxTextStyle
+	* @see                      SetTextStyle()
+	* @see                      TextBoxTextStyle
+	*/
 	unsigned long GetTextStyle(void) const;
 
 	/**
@@ -553,18 +643,18 @@ public:
 	result SetFontType(const Tizen::Base::String& typefaceName, unsigned long style);
 
 	/**
-	 * Sets the text style mask of the %TextBox control.
-	 *
-	 * @since 2.0
-	 *
-	 * @return                  An error code
-	 * @param[in]    style               The text style @n
-	 *                      Multiple styles can be combined using the bitwise OR operator (see Tizen::Ui::Controls::TextBoxTextStyle).
-	 * @exception    E_SUCCESS           The method is successful.
-	 * @exception    E_OUT_OF_MEMORY  The memory is insufficient.
-	 * @see                      GetTextStyle()
-	 * @see                      TextBoxTextStyle
-	 */
+	* Sets the text style mask of the %TextBox control.
+	*
+	* @since 2.0
+	*
+	* @return                  An error code
+	* @param[in]    style               The text style @n
+	*                      Multiple styles can be combined using the bitwise OR operator (see Tizen::Ui::Controls::TextBoxTextStyle).
+	* @exception    E_SUCCESS           The method is successful.
+	* @exception    E_OUT_OF_MEMORY  The memory is insufficient.
+	* @see                      GetTextStyle()
+	* @see                      TextBoxTextStyle
+	*/
 	result SetTextStyle(unsigned long style);
 
 	using Control::SetFont;
@@ -683,7 +773,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	status          The state of the %TextBox control
-	 * @param[in]	color           The color to be set
+	 * @param[in]	color           The color to set
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_SYSTEM        A system error has occurred.
 	 * @see			GetColor()
@@ -697,7 +787,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	type             The text color type
-	 * @param[in]	color            The text color to be set
+	 * @param[in]	color            The text color to set
 	 * @exception	E_SUCCESS        The method is successful.
 	 * @exception	E_SYSTEM         A system error has occurred.
 	 * @see			GetTextColor()
@@ -709,7 +799,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @remarks		Programmatically modifying the text selection does not cause the text block selection event to fire.
 	 * @see			RemoveTextBlockEventListener()
 	 */
@@ -721,7 +811,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 * @see			AddTextBlockEventListener()
 	 */
 	void RemoveTextBlockEventListener(Tizen::Ui::ITextBlockEventListener& listener);

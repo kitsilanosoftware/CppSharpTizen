@@ -32,6 +32,8 @@
 
 #include "FMediaAudioEqualizer.h"
 
+#include "FMediaAudioFrame.h"
+
 #include "FMediaAudioIn.h"
 
 #include "FMediaAudioOut.h"
@@ -42,19 +44,21 @@
 
 #include "FMediaAudioRouteManager.h"
 
-#include "FMediaAudioSessionManager.h"
-
 #include "FMediaCapability.h"
 
 #include "FMediaCamera.h"
 
 #include "FMediaGifDecoder.h"
 
+#include "FMediaIAudioStreamFilter.h"
+
 #include "FMediaImage.h"
 
 #include "FMediaImageBuffer.h"
 
 #include "FMediaImageUtil.h"
+
+#include "FMediaIVideoStreamFilter.h"
 
 #include "FMediaMediaStreamInfo.h"
 
@@ -64,11 +68,11 @@
 
 #include "FMediaTypes.h"
 
-#include "FMediaVoipAudioSessionManager.h"
-
 #include "FMediaVideoDecoder.h"
 
 #include "FMediaVideoEncoder.h"
+
+#include "FMediaVideoFrame.h"
 
 #include "FMediaVideoFrameExtractor.h"
 

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -105,13 +104,6 @@ public:
 	 *
 	 * @return	An error code
 	 * @param[in]	key	The <a href="../org.tizen.native.appprogramming/html/guide/system/sysinfo.htm">key name</a> of the system information @n
-	 * @if OSPCOMPAT
-	 *			The following key values are updated: @n
-	 *			- @b Since: @b 2.0 Refer <a href="../org.tizen.native.appprogramming/html/guide/system/sysinfo.htm">here</a>.
-	 *				@xmlonly <pcheck kind="value" since="2.0">telephony, input.keyboard.layout, screen.size, screen.coordinatesystem.physical, screen.coordinatesystem.logical, platform.core.cpu.arch, platform.core.fpu.arch, platform.name, modelname, duid, map.provider</pcheck> @endxmlonly
-	 *			- @b Deprecated All the key values provided prior to %Tizen 2.0 are deprecated. For more detailed information, refer 
-	 *			 <a href="../org.tizen.native.appprogramming/html/guide/system/sysinfo_deprecated.htm">here</a>.
-	 * @endif
 	 * @param[out]	value			The system information of type Tizen::Base::String
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_OBJ_NOT_FOUND		The specified @c key is not found.
@@ -126,13 +118,6 @@ public:
 	 *
 	 * @return	An error code
 	 * @param[in]	key	The <a href="../org.tizen.native.appprogramming/html/guide/system/sysinfo.htm">key name</a> of the system information @n
-	 * @if OSPCOMPAT
-	 *			The following key values are updated: @n
-	 *			- @b Since: @b 2.0 Refer <a href="../org.tizen.native.appprogramming/html/guide/system/sysinfo.htm">here</a>.
-	 *				@xmlonly <pcheck kind="value" since="2.0">multipointtouch.pointcount, sound.media.volume.max, sound.notification.volume.max, sound.ringtone.volume.max, sound.system.volume.max, screen.bpp, screen.height, screen.width, screen.dpi</pcheck> @endxmlonly 
-	 *			- @b Deprecated All the key values provided prior to %Tizen 2.0 are deprecated. For more detailed information, refer 
-	 *			 <a href="../org.tizen.native.appprogramming/html/guide/system/sysinfo_deprecated.htm">here</a>.
-	 * @endif
 	 * @param[out]	value			The integer type system information
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_OBJ_NOT_FOUND		The specified @c key is not found.
@@ -175,11 +160,6 @@ public:
 	 *
 	 * @return	A system information list
 	 * @param[in]	key	The <a href="../org.tizen.native.appprogramming/html/guide/system/sysinfo.htm">key name</a> of the system information @n
-	 * @if OSPCOMPAT
-	 *		The following key values are updated @n
-	 *			- @b Deprecated All the key values provided prior to %Tizen 2.0 are deprecated. For more detailed information, refer 
-	 *			 <a href="../org.tizen.native.appprogramming/html/guide/system/sysinfo_deprecated.htm">here</a>.
-	 * @endif
 	 * @param[in]	type			The data type of the information
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_OBJ_NOT_FOUND		The specified @c key is not found.
@@ -195,13 +175,6 @@ public:
 	 *
 	 * @return	An error code
 	 * @param[in]	key	The <a href="../org.tizen.native.appprogramming/html/guide/system/sysinfo.htm">key name</a> of the system information @n
-	 * @if OSPCOMPAT
-	 *			The following key values are updated: @n
-	 *			- @b Since: @b 2.0 Refer <a href="../org.tizen.native.appprogramming/html/guide/system/sysinfo.htm">here</a>.
-	 *				@xmlonly <pcheck kind="value" since="2.0">bluetooth, camera, camera.front, camera.front.flash, camera.back, camera.back.flash, location, location.wps, location.gps, microphone, nfc, sensor.barometer, sensor.barometer.wakeup, sensor.accelerometer, sensor.accelerometer.wakeup, sensor.magnetometer, sensor.magnetometer.wakeup, sensor.gyroscope, sensor.gyroscope.wakeup, sensor.photometer, sensor.photometer.wakeup, sensor.tiltmeter, sensor.tiltmeter.wakeup, sensor.proximity, sensor.proximity.wakeup, usb.host, usb.accessory, input.keyboard, wifi, wifi.direct, opengles.version.1_1, opengles.version.2_0, screen.desktopmode, screen.output.rca, screen.output.hdmi, fmradio, speech.recognition, sip.voip</pcheck> @endxmlonly 
-	 *			- @b Deprecated All the key values provided prior to %Tizen 2.0 are deprecated. For more detailed information, refer 
-	 *			 <a href="../org.tizen.native.appprogramming/html/guide/system/sysinfo_deprecated.htm">here</a>.
-	 * @endif
 	 * @param[out]	value			The @c bool type system information
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_OBJ_NOT_FOUND		The specified @c key is not found.
@@ -210,11 +183,13 @@ public:
 	static result GetValue(const Tizen::Base::String& key, bool& value);
 
 	/**
-	 * Gets the platform version in the "[Major].[Minor].[Build Version]" format.
+	 * Gets the platform version in the "[Major].[Minor].[Patch Version]" format.
 	 *
 	 * @since 2.0
 	 *
-	 * @privilege	%http://tizen.org/privilege/platforminfo
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/system @n
+	 *		(%http://tizen.org/privilege/platforminfo is deprecated.)
 	 *
 	 * @return	An error code
 	 * @param[out]	platformVersion		The platform version
@@ -229,7 +204,9 @@ public:
 	 *
 	 * @since 2.0
 	 *
-	 * @privilege	%http://tizen.org/privilege/platforminfo
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/system @n
+	 *		(%http://tizen.org/privilege/platforminfo is deprecated.)
 	 *
 	 * @return	An error code
 	 * @param[out]	nativeApiVersion	The Native API version
@@ -244,7 +221,9 @@ public:
 	 *
 	 * @since 2.0
 	 *
-	 * @privilege	%http://tizen.org/privilege/platforminfo
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/system @n
+	 *		(%http://tizen.org/privilege/platforminfo is deprecated.)
 	 *
 	 * @return	An error code
 	 * @param[out]	webApiVersion		The %Tizen API version
@@ -253,6 +232,40 @@ public:
 	 * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
 	 */
 	static result GetWebApiVersion(Tizen::Base::String& webApiVersion);
+
+	/**
+	 * Gets the platform build information.
+	 *
+	 * @since 2.1
+	 *
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/system @n
+	 *		(%http://tizen.org/privilege/platforminfo is deprecated.)
+	 *
+	 * @return	An error code
+	 * @param[out]	buildInfo		The %Tizen build information
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
+	 */
+	static result GetBuildInfo(Tizen::Base::String& buildInfo);
+
+	/**
+	 * Gets the International Mobile Equipment Identity (IMEI) of the device.
+	 *
+	 * @since	2.0
+	 *
+	 * @privlevel	partner
+	 * @privilege	%http://tizen.org/privilege/systemmanager @n
+	 *		(%http://tizen.org/privilege/useridentity is deprecated.)
+	 *
+	 * @return	An error code
+	 * @param[out]	imei			The IMEI of the device
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
+	 */
+	static result GetImei(Tizen::Base::String& imei);
 
 private:
 	/**

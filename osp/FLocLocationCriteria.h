@@ -64,8 +64,7 @@ public:
 	LocationCriteria(void);
 
 	/**
-	* This is the copy constructor for the %LocationCriteria class.
-	*
+	* This is the copy constructor for the %LocationCriteria class. @n
 	* Copying of objects using this copy constructor is allowed.
 	*
 	* @since 2.0

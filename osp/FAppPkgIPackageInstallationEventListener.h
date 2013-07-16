@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -103,7 +102,7 @@ protected:
 	// This method is for internal use only.
 	// Using this method can cause behavioral, security-related, and consistency-related issues in the application.
 	//
-	// The following methods are reserved and the name of the methods can be changed at any time without prior notice.
+	// This method is reserved and may change its name at any time without prior notice.
 	//
 	// @since	2.0
 	//
@@ -113,7 +112,7 @@ protected:
 	// This method is for internal use only.
 	// Using this method can cause behavioral, security-related, and consistency-related issues in the application.
 	//
-	// The following methods are reserved and the name of the methods can be changed at any time without prior notice.
+	// This method is reserved and may change its name at any time without prior notice.
 	//
 	// @since	2.0
 	//
@@ -123,7 +122,7 @@ protected:
 	// This method is for internal use only.
 	// Using this method can cause behavioral, security-related, and consistency-related issues in the application.
 	//
-	// The following methods are reserved and the name of the methods can be changed at any time without prior notice.
+	// This method is reserved and may change its name at any time without prior notice.
 	//
 	// @since	2.0
 	//

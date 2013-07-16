@@ -276,7 +276,8 @@ public:
 
 protected:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the Construct() method must be called right after calling this constructor.
 	 *
 	 * @since       2.0
 	 *

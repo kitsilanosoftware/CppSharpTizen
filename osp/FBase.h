@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -50,6 +49,7 @@
 #include <FBaseFloatComparer.h>
 #include <FBaseDoubleComparer.h>
 #include <FBaseStringComparer.h>
+#include <FBaseStringHashCodeProvider.h>
 #include <FBaseComparerT.h>
 #include <FBaseDateTime.h>
 #include <FBaseTimeSpan.h>
@@ -75,7 +75,7 @@
  *  @remarks  @b Header @b %file: @b \#include @b <FBase.h> @n
  *				@b Library : @b osp-appfw
  *
- * The %Base namespace contains classes and interfaces around which the entire Tizen platform is built.
+ * The %Base namespace contains classes and interfaces around which the entire %Tizen platform is built.
  * The main features of the namespace include basic data types, collections, runtime libraries, and various utilities.
  *
  * For more information on the %Base namespace features, see <a href="../org.tizen.native.appprogramming/html/guide/base/base_namespace.htm">Base Guide</a>.

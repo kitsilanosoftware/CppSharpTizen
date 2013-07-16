@@ -17,32 +17,38 @@
 
 /**
  * @file FUiIme.h
- * @brief This is the header file for the %Tizen::Ui::Ime namespace.
+ * @brief This is the header file for the %Ime namespace.
  *
- * This header file contains the declarations and descriptions of the %Tizen::Ui::Ime namespace.
+ * This header file contains the declarations and descriptions of the %Ime namespace.
  */
 
 #ifndef _FUI_IME_H_
 #define _FUI_IME_H_
 
+#include <FUiImeIInputMethodListener.h>
+#include <FUiImeIInputMethodProvider.h>
+#include <FUiImeIInputMethodProviderF.h>
+#include <FUiImeInputMethod.h>
 #include <FUiImeInputMethodInfo.h>
 #include <FUiImeInputMethodManager.h>
+#include <FUiImeTypes.h>
 
 /**
  * @namespace Tizen::Ui::Ime
  * @brief This namespace contains the classes and interfaces for an input method.
- * @since 2.0
+ * @since 2.1
  *
  * @remarks @b Header @b %file: @b \#include @b <FUiIme.h> @n
  * @b Library : @b osp-ime
  *
- * The %Ui::Ime namespace provides a way to input a language in the associated text input UI control.
+ * The %Ime namespace provides a way to input a language in the associated text input UI control.
  *
- * For more information on the %Ui::Ime namespace features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/input.htm">Input Guide</a>.
+ * For more information on the %Ime namespace features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/input.htm">Input Guide</a>.
  *
  * The following diagram illustrates the relationships between the classes belonging to the %Ime namespace.
  *
  * @image html ui_ime_namespace_classdiagram.png
+ *
  */
 namespace Tizen { namespace Ui { namespace Ime {
 

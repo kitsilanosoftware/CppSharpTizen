@@ -24,7 +24,6 @@
 #ifndef _FMESSAGING_H_
 #define _FMESSAGING_H_
 
-//include
 #include <FMsgTypes.h>
 #include <FMsgSmsMessage.h>
 #include <FMsgMmsMessage.h>
@@ -35,13 +34,16 @@
 #include <FMsgEmailManager.h>
 #include <FMsgPushManager.h>
 #include <FMsgRecipientList.h>
+#include <FMsgCbsMessage.h>
+#include <FMsgEtwsPrimaryNotification.h>
 #include <FMsgISmsListener.h>
 #include <FMsgIMmsListener.h>
 #include <FMsgIEmailListener.h>
-
+#include <FMsgISmsEventListener.h>
 #include <FMsgISmsMessageEventListener.h>
 #include <FMsgIPushEventListener.h>
 #include <FMsgIPushManagerListener.h>
+#include <FMsgIEtwsPrimaryNotificationEventListener.h>
 
 /**
  * @namespace	Tizen::Messaging

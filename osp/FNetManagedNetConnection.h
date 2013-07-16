@@ -2,7 +2,7 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Flora License, Version 1.1 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -102,10 +102,10 @@ public:
 	 * @return		A pointer to an instance of NetConnectionInfo specifying the information about this network connection
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_INVALID_STATE			The network connection is inactive.
-	 * @remarks		This method requires a %NetConnectionInfo instance reference.
+	 * @remarks		This method requires a NetConnectionInfo instance reference.
 	 *				%NetConnectionInfo is only available when the network connection managed by the system is active. In other states, this returns null.
 	 *				The specific error code can be accessed using the GetLastResult() method.
-	 * @warning 	Do not delete the returned %NetConnectionInfo instance. This instance is directly referencing the internal connectionInfo of 
+	 * @warning 	Do not delete the returned NetConnectionInfo instance. This instance is directly referencing the internal connectionInfo of 
 	 *				%ManagedNetConnection.
 	 */
 	const NetConnectionInfo* GetNetConnectionInfo(void) const;

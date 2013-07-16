@@ -1,15 +1,14 @@
 //
-// Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Flora License, Version 1.1 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
 //     http://floralicense.org/license/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -63,7 +62,7 @@ public:
 
 private:
 	static const int QUICK_PANEL_FRAME_HEIGHT = 102;
-	Tizen::Shell QuickPanelFrame *__pQuickPanelFrame;
+	Tizen::Shell::QuickPanelFrame *__pQuickPanelFrame;
 };
 
 // Sample code for QuickPanelFrameSample.cpp
@@ -96,7 +95,7 @@ QuickPanelFrameSample::OnInitializing(void)
 	pButton->Construct(Rectangle(10,10,200,80), L"Button");
 
 	// Adds the button to the QuickPanelFrame
-	__pQuickPanelFrame->AddControl(*pButton);
+	__pQuickPanelFrame->AddControl(pButton);
 	__pQuickPanelFrame->Show();
 
 	return r;
@@ -119,8 +118,8 @@ class _OSP_EXPORT_ QuickPanelFrame
 {
 public:
         /**
-        * The object is not fully constructed after this constructor is called.
-        * Hence, the Construct() method must be called after calling this constructor.
+        * The object is not fully constructed after this constructor is called. @n
+        * For full construction, the Construct() method must be called right after calling this constructor.
         *
         * @since	2.0
         */
@@ -134,10 +133,10 @@ public:
         virtual ~QuickPanelFrame(void);
 
         /**
-        * Initializes this instance of %QuickPanelFrame with the specified parameter.
+        * Initializes this instance of %QuickPanelFrame with a specified parameter.
         *
         * @since	2.0
-        *
+        * @privlevel        public
         * @privilege   %http://tizen.org/privilege/notification
         *
         * @return      An error code
@@ -149,22 +148,22 @@ public:
         result Construct(int height);
 
         /**
-        * Initializes this instance of %QuickPanelFrame and child controls with the specified resource ID @n
+        * Initializes this instance of %QuickPanelFrame and child controls with a specified resource ID. @n
         *
         * The %Construct() method first attempts to find the resource file in the folder that corresponds to the current screen resolution. @n
         * If it fails to find the resource file, it searches in other folders in the following order when CoordinateSystem is Logical in the application manifest file @n
-        * the density folder that corresponds to the current screen size category  "res/screen-size-normal/" folder.
+        * the density folder that corresponds to the current screen size category @b "res/screen-size-normal/" folder.
         *
         * @since	2.0
-        *
+        * @privlevel        public
         * @privilege   %http://tizen.org/privilege/notification
         *
         * @return             An error code
         * @param[in]  resourceId                    The resource ID describing the %QuickPanelFrame control
         * @exception  E_SUCCESS                     The method is successful.
         * @exception  E_PRIVILEGE_DENIED     The application does not have the privilege to call this method.
-        * @exception  E_FILE_NOT_FOUND       The file corresponding to specified @c resourceId cannot be found.
-        * @exception  E_INVALID_FORMAT       The file format corresponding to specified @c resourceId is invalid.
+        * @exception  E_FILE_NOT_FOUND       The file corresponding to the specified @c resourceId cannot be found.
+        * @exception  E_INVALID_FORMAT       The file format corresponding to the specified @c resourceId is invalid.
         * @exception  E_OPERATION_FAILED     The operation has failed.
         */
         result Construct(const Tizen::Base::String& resourceId);
@@ -173,7 +172,7 @@ public:
         * Initializes this instance of %QuickPanelFrame with the specified parameters.
         *
         * @since	2.0
-        *
+        * @privlevel        public
         * @privilege   %http://tizen.org/privilege/notification
         *
         * @return      An error code
@@ -189,7 +188,7 @@ public:
         * Constructs and initializes an instance of %QuickPanelFrame with the specified parameters.
         *
         * @since	2.0
-        *
+        * @privlevel        public
         * @privilege   %http://tizen.org/privilege/notification
         *
         * @return      An error code
@@ -201,6 +200,57 @@ public:
         * @exception  E_INVALID_ARG          The @c height is less than or equal to @c 0.
         */
         result Construct(const Tizen::Ui::Layout& portraitLayout, const Tizen::Ui::Layout& landscapeLayout, int height);
+
+        /*
+        * Initializes this instance of %QuickPanelFrame with the specified parameter.
+        *
+        * @since	2.1
+        *
+        * @privlevel        public
+        * @privilege   %http://tizen.org/privilege/notification
+        *
+        * @return      An error code
+        * @param[in]  height                        The height of %QuickPanelFrame
+        * @exception  E_SUCCESS           The method is successful.
+        * @exception  E_PRIVILEGE_DENIED     The application does not have the privilege to call this method.
+        * @exception  E_INVALID_ARG          The @c height is less than or equal to @c 0.0f.
+        */
+        result Construct(float height);
+
+        /*
+        * Initializes this instance of %QuickPanelFrame with the specified parameters.
+        *
+        * @since	2.1
+        *
+        * @privlevel        public
+        * @privilege   %http://tizen.org/privilege/notification
+        *
+        * @return      An error code
+        * @param[in]  layout                        The layout for both the portrait and landscape mode
+        * @param[in]  height                        The height of %QuickPanelFrame
+        * @exception  E_SUCCESS           The method is successful.
+        * @exception  E_PRIVILEGE_DENIED     The application does not have the privilege to call this method.
+        * @exception  E_INVALID_ARG          The @c height is less than or equal to @c 0.0f.
+        */
+        result Construct(const Tizen::Ui::Layout& layout, float height);
+
+        /*
+        * Constructs and initializes an instance of %QuickPanelFrame with the specified parameters.
+        *
+        * @since	2.1
+        *
+        * @privlevel        public
+        * @privilege   %http://tizen.org/privilege/notification
+        *
+        * @return      An error code
+        * @param[in]  portraitLayout         The layout for the portrait mode
+        * @param[in]  landscapeLayout               The layout for the landscape mode
+        * @param[in]  height                        The height of %QuickPanelFrame
+        * @exception  E_SUCCESS           The method is successful.
+        * @exception  E_PRIVILEGE_DENIED     The application does not have the privilege to call this method.
+        * @exception  E_INVALID_ARG          The @c height is less than or equal to @c 0.0f.
+        */
+        result Construct(const Tizen::Ui::Layout& portraitLayout, const Tizen::Ui::Layout& landscapeLayout, float height);
 
         /**
         * Adds an IOrientationEventListener instance. @n
@@ -223,7 +273,7 @@ public:
         * @since	2.0
         *
         * @param[in]  listener                      The listener to remove @n
-        *                                           The listener should be referring to previously allocated instance which is passed as an argument to AddOrientationEventListener().
+        *                                           The listener should be referring to previously allocated instance that is passed as an argument to AddOrientationEventListener().
         * @exception  E_SUCCESS                     The method is successful.
         * @exception  E_OBJ_NOT_FOUND               The specified @c listener is not found.
         * @see                AddOrientationEventListener()
@@ -231,9 +281,10 @@ public:
         result RemoveOrientationEventListener(Tizen::Ui::IOrientationEventListener& listener);
 
         /**
-        * Sets the height of the %QuickPanelFrame.
+        * Sets the height of %QuickPanelFrame.
         *
         * @since	2.0
+		*
         * @return             An error code
         * @param[in]  height                        The height of %QuickPanelFrame
         * @exception  E_SUCCESS                     The method was successful.
@@ -241,13 +292,23 @@ public:
         */
         result SetHeight(int height);
 
+        /*
+        * Sets the height of the %QuickPanelFrame.
+        *
+        * @since	2.1
+        * @return             An error code
+        * @param[in]  height                        The height of %QuickPanelFrame
+        * @exception  E_SUCCESS                     The method was successful.
+        * @exception  E_INVALID_ARG          The @c height is less than or equal to @c 0.0f.
+        */
+        result SetHeight(float height);
+
 protected:
         //
         // This method is for internal use only. Using this method can cause behavioral, security-related,
         // and consistency-related issues in the application.
         //
-        // Following method is reserved and may change its name at any time without
-        // prior notice.
+        // This method is reserved and may change its name at any time without prior notice.
         //
         // @since	2.0
         //
@@ -257,8 +318,7 @@ protected:
         // This method is for internal use only. Using this method can cause behavioral, security-related,
         // and consistency-related issues in the application.
         //
-        // Following method is reserved and may change its name at any time without
-        // prior notice.
+        // This method is reserved and may change its name at any time without prior notice.
         //
         // @since	2.0
         //
@@ -268,8 +328,7 @@ protected:
         // This method is for internal use only. Using this method can cause behavioral, security-related,
         // and consistency-related issues in the application.
         //
-        // Following method is reserved and may change its name at any time without
-        // prior notice.
+        // This method is reserved and may change its name at any time without prior notice.
         //
         // @since	2.0
         //
@@ -279,8 +338,7 @@ protected:
         // This method is for internal use only. Using this method can cause behavioral, security-related,
         // and consistency-related issues in the application.
         //
-        // Following method is reserved and may change its name at any time without
-        // prior notice.
+        // This method is reserved and may change its name at any time without prior notice.
         //
         // @since	2.0
         //
@@ -290,8 +348,7 @@ protected:
         // This method is for internal use only. Using this method can cause behavioral, security-related,
         // and consistency-related issues in the application.
         //
-        // Following method is reserved and may change its name at any time without
-        // prior notice.
+        // This method is reserved and may change its name at any time without prior notice.
         //
         // @since	2.0
         //

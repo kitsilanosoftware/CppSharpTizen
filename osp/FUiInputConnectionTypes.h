@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -18,7 +18,7 @@
  * @file		FUiInputConnectionTypes.h
  * @brief	This is the header file for the data types.
  *
- * This header file contains the declarations of commonly used types.
+ * This header file contains the declarations of the commonly used data types.
  *
  */
 
@@ -31,7 +31,7 @@ namespace Tizen { namespace Ui {
 
 /**
  *	@enum	InputPanelStyle
- *	Defines the style of the InputPanel.
+ *	Defines the style of the input panel.
  *
  *	@since 2.0
  */
@@ -48,7 +48,7 @@ enum InputPanelStyle
 
 /**
  *	@enum	InputPanelShowState
- *	Defines the state  of the InputPanel
+ *	Defines the state of the input panel.
  *
  *	@since 2.0
  */
@@ -60,16 +60,16 @@ enum InputPanelShowState
 
 /**
  *	@enum	AutoCapitalizationMode
- *	Defines the type of the AutoCapitalization
+ *	Defines the type of auto-capitalization mode.
  *
  *	@since 2.0
  */
 enum AutoCapitalizationMode
 {
-	AUTO_CAPITALIZATION_MODE_NONE,					/**< AutoCapitalization None Mode  */
-	AUTO_CAPITALIZATION_MODE_WORD,					/**< AutoCapitalization WORD Mode  */
-	AUTO_CAPITALIZATION_MODE_SENTENCE,				/**< AutoCapitalization Sentence Mode  */
-	AUTO_CAPITALIZATION_MODE_ALL						/**< AutoCapitalization All Mode  */
+	AUTO_CAPITALIZATION_MODE_NONE,					/**< Auto-capitalization mode is set to None */
+	AUTO_CAPITALIZATION_MODE_WORD,					/**< Auto-capitalization mode is Word */
+	AUTO_CAPITALIZATION_MODE_SENTENCE,				/**< Auto-capitalization mode is Sentence */
+	AUTO_CAPITALIZATION_MODE_ALL						/**< Auto-capitalization mode is set to All */
 };
 
 /**

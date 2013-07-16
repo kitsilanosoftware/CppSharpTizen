@@ -70,7 +70,7 @@ enum NetHttpSessionMode
 /**
  * @enum	HttpVersion
  *
- * Defines the HTTP version
+ * Defines the HTTP version.
  *
  * @since 2.0
  */
@@ -93,47 +93,47 @@ enum HttpVersion
  */
 enum NetHttpStatusCode
 {
-	NET_HTTP_STATUS_UNDEFINED = 0,                                          /**< @if OSPDEPREC The undefined status @endf */
-	NET_HTTP_STATUS_CONTINUE = 100,                                         /**< @if OSPDEPREC The status code: 100 Continue @endf */
-	NET_HTTP_STATUS_SWITCHING_PROTOCOLS = 101,                              /**< @if OSPDEPREC The status code: 101 Switching Protocols @endf */
-	NET_HTTP_STATUS_OK = 200,                                               /**< @if OSPDEPREC The status code: 200 OK @endf */
-	NET_HTTP_STATUS_CREATED = 201,                                          /**< @if OSPDEPREC The status code: 201 Created @endf */
-	NET_HTTP_STATUS_ACCEPTED = 202,                                         /**< @if OSPDEPREC The status code: 202 Accepted @endf */
-	NET_HTTP_STATUS_NON_AUTHORITATIVE_INFORMATION = 203,                    /**< @if OSPDEPREC The status code: 203 Non-Authoritative Information @endf */
-	NET_HTTP_STATUS_NO_CONTENT = 204,                                       /**< @if OSPDEPREC The status code: 204 No %Content @endf */
-	NET_HTTP_STATUS_RESET_CONTENT = 205,                                    /**< @if OSPDEPREC The status code: 205 Reset %Content @endf */
-	NET_HTTP_STATUS_PARTIAL_CONTENT = 206,                                  /**< @if OSPDEPREC The status code: 206 Partial %Content @endf */
+	NET_HTTP_STATUS_UNDEFINED = 0,                                          /**< @if OSPDEPREC The undefined status @endif */
+	NET_HTTP_STATUS_CONTINUE = 100,                                         /**< @if OSPDEPREC The status code: 100 Continue @endif */
+	NET_HTTP_STATUS_SWITCHING_PROTOCOLS = 101,                              /**< @if OSPDEPREC The status code: 101 Switching Protocols @endif */
+	NET_HTTP_STATUS_OK = 200,                                               /**< @if OSPDEPREC The status code: 200 OK @endif */
+	NET_HTTP_STATUS_CREATED = 201,                                          /**< @if OSPDEPREC The status code: 201 Created @endif */
+	NET_HTTP_STATUS_ACCEPTED = 202,                                         /**< @if OSPDEPREC The status code: 202 Accepted @endif */
+	NET_HTTP_STATUS_NON_AUTHORITATIVE_INFORMATION = 203,                    /**< @if OSPDEPREC The status code: 203 Non-Authoritative Information @endif */
+	NET_HTTP_STATUS_NO_CONTENT = 204,                                       /**< @if OSPDEPREC The status code: 204 No %Content @endif */
+	NET_HTTP_STATUS_RESET_CONTENT = 205,                                    /**< @if OSPDEPREC The status code: 205 Reset %Content @endif */
+	NET_HTTP_STATUS_PARTIAL_CONTENT = 206,                                  /**< @if OSPDEPREC The status code: 206 Partial %Content @endif */
 
-	NET_HTTP_STATUS_MULTIPLE_CHOICE = 300,                                  /**< @if OSPDEPREC The status code: 300 Multiple Choices @endf */
-	NET_HTTP_STATUS_MOVED_PERMANENTLY = 301,                                /**< @if OSPDEPREC The status code: 301 Moved Permanently @endf */
-	NET_HTTP_STATUS_MOVED_TEMPORARILY = 302,                                /**< @if OSPDEPREC The status code: 302 Found @endf */
-	NET_HTTP_STATUS_SEE_OTHER = 303,                                        /**< @if OSPDEPREC The status code: 303 See Other @endf */
-	NET_HTTP_STATUS_NOT_MODIFIED = 304,                                     /**< @if OSPDEPREC The status code: 304 Not Modified @endf */
-	NET_HTTP_STATUS_USE_PROXY = 305,                                        /**< @if OSPDEPREC The status code: 305 Use Proxy @endf */
+	NET_HTTP_STATUS_MULTIPLE_CHOICE = 300,                                  /**< @if OSPDEPREC The status code: 300 Multiple Choices @endif */
+	NET_HTTP_STATUS_MOVED_PERMANENTLY = 301,                                /**< @if OSPDEPREC The status code: 301 Moved Permanently @endif */
+	NET_HTTP_STATUS_MOVED_TEMPORARILY = 302,                                /**< @if OSPDEPREC The status code: 302 Found @endif */
+	NET_HTTP_STATUS_SEE_OTHER = 303,                                        /**< @if OSPDEPREC The status code: 303 See Other @endif */
+	NET_HTTP_STATUS_NOT_MODIFIED = 304,                                     /**< @if OSPDEPREC The status code: 304 Not Modified @endif */
+	NET_HTTP_STATUS_USE_PROXY = 305,                                        /**< @if OSPDEPREC The status code: 305 Use Proxy @endif */
 
-	NET_HTTP_STATUS_BAD_REQUEST = 400,                                      /**< @if OSPDEPREC The status code: 400 Bad Request @endf */
-	NET_HTTP_STATUS_UNAUTHORIZED = 401,                                     /**< @if OSPDEPREC The status code: 401 Unauthorized @endf */
-	NET_HTTP_STATUS_PAYMENT_REQUIRED = 402,                                 /**< @if OSPDEPREC The status code: 402 Payment Required @endf */
-	NET_HTTP_STATUS_FORBIDDEN = 403,                                        /**< @if OSPDEPREC The status code: 403 Forbidden @endf */
-	NET_HTTP_STATUS_NOT_FOUND = 404,                                        /**< @if OSPDEPREC The status code: 404 Not Found @endf */
-	NET_HTTP_STATUS_METHOD_NOT_ALLOWED = 405,                               /**< @if OSPDEPREC The status code: 405 Method Not Allowed @endf */
-	NET_HTTP_STATUS_NOT_ACCEPTABLE = 406,                                   /**< @if OSPDEPREC The status code: 406 Not Acceptable @endf */
-	NET_HTTP_STATUS_PROXY_AUTHENTICATION_REQUIRED = 407,                    /**< @if OSPDEPREC The status code: 407 Proxy Authentication Required @endf */
-	NET_HTTP_STATUS_REQUEST_TIME_OUT = 408,                                 /**< @if OSPDEPREC The status code: 408 Request Timeout (not used) @endf */
-	NET_HTTP_STATUS_CONFLICT = 409,                                         /**< @if OSPDEPREC The status code: 409 Conflict @endf */
-	NET_HTTP_STATUS_GONE = 410,                                             /**< @if OSPDEPREC The status code: 410 Gone @endf */
-	NET_HTTP_STATUS_LENGTH_REQUIRED = 411,                                  /**< @if OSPDEPREC The status code: 411 Length Required @endf */
-	NET_HTTP_STATUS_PRECONDITION_FAILED = 412,                              /**< @if OSPDEPREC  The status code: 412 Precondition Failed @endf */
-	NET_HTTP_STATUS_REQUEST_ENTITY_TOO_LARGE = 413,                         /**< @if OSPDEPREC The status code: 413 Request Entity Too Large (not used) @endf */
-	NET_HTTP_STATUS_REQUEST_URI_TOO_LARGE = 414,                            /**< @if OSPDEPREC The status code: 414 Request-URI Too Long (not used) @endf */
-	NET_HTTP_STATUS_UNSUPPORTED_MEDIA_TYPE = 415,                           /**< @if OSPDEPREC The status code: 415 Unsupported %Media Type @endf */
+	NET_HTTP_STATUS_BAD_REQUEST = 400,                                      /**< @if OSPDEPREC The status code: 400 Bad Request @endif */
+	NET_HTTP_STATUS_UNAUTHORIZED = 401,                                     /**< @if OSPDEPREC The status code: 401 Unauthorized @endif */
+	NET_HTTP_STATUS_PAYMENT_REQUIRED = 402,                                 /**< @if OSPDEPREC The status code: 402 Payment Required @endif */
+	NET_HTTP_STATUS_FORBIDDEN = 403,                                        /**< @if OSPDEPREC The status code: 403 Forbidden @endif */
+	NET_HTTP_STATUS_NOT_FOUND = 404,                                        /**<@if OSPDEPREC  The status code: 404 Not Found @endif */
+	NET_HTTP_STATUS_METHOD_NOT_ALLOWED = 405,                               /**< @if OSPDEPREC The status code: 405 Method Not Allowed @endif */
+	NET_HTTP_STATUS_NOT_ACCEPTABLE = 406,                                   /**< @if OSPDEPREC The status code: 406 Not Acceptable @endif */
+	NET_HTTP_STATUS_PROXY_AUTHENTICATION_REQUIRED = 407,                    /**< @if OSPDEPREC The status code: 407 Proxy Authentication Required @endif */
+	NET_HTTP_STATUS_REQUEST_TIME_OUT = 408,                                 /**< @if OSPDEPREC The status code: 408 Request Timeout (not used) @endif */
+	NET_HTTP_STATUS_CONFLICT = 409,                                         /**<@if OSPDEPREC  The status code: 409 Conflict @endif */
+	NET_HTTP_STATUS_GONE = 410,                                             /**< @if OSPDEPREC The status code: 410 Gone @endif */
+	NET_HTTP_STATUS_LENGTH_REQUIRED = 411,                                  /**< @if OSPDEPREC The status code: 411 Length Required @endif */
+	NET_HTTP_STATUS_PRECONDITION_FAILED = 412,                              /**<@if OSPDEPREC  The status code: 412 Precondition Failed @endif */
+	NET_HTTP_STATUS_REQUEST_ENTITY_TOO_LARGE = 413,                         /**< @if OSPDEPREC The status code: 413 Request Entity Too Large (not used) @endif */
+	NET_HTTP_STATUS_REQUEST_URI_TOO_LARGE = 414,                            /**< @if OSPDEPREC The status code: 414 Request-URI Too Long (not used) @endif */
+	NET_HTTP_STATUS_UNSUPPORTED_MEDIA_TYPE = 415,                           /**< @if OSPDEPREC The status code: 415 Unsupported %Media Type @endif */
 
-	NET_HTTP_STATUS_INTERNAL_SERVER_ERROR = 500,                            /**< @if OSPDEPREC The status code: 500 Internal Server Error @endf */
-	NET_HTTP_STATUS_NOT_IMPLEMENTED = 501,                                  /**< @if OSPDEPREC The status code: 501 Not Implemented @endf */
-	NET_HTTP_STATUS_BAD_GATEWAY = 502,                                      /**< @if OSPDEPREC The status code: 502 Bad Gateway @endf */
-	NET_HTTP_STATUS_SERVICE_UNAVAILABLE = 503,                              /**< @if OSPDEPREC The status code: 503 Service Unavailable @endf */
-	NET_HTTP_STATUS_GATEWAY_TIME_OUT = 504,                                 /**< @if OSPDEPREC The status code: 504 Gateway Timeout @endf */
-	NET_HTTP_STATUS_HTTP_VERSION_NOT_SUPPORTED = 505                        /**< @if OSPDEPREC The status code: 505 HTTP Version Not Supported @endf */
+	NET_HTTP_STATUS_INTERNAL_SERVER_ERROR = 500,                            /**< @if OSPDEPREC The status code: 500 Internal Server Error @endif */
+	NET_HTTP_STATUS_NOT_IMPLEMENTED = 501,                                  /**< @if OSPDEPREC The status code: 501 Not Implemented @endif */
+	NET_HTTP_STATUS_BAD_GATEWAY = 502,                                      /**< @if OSPDEPREC The status code: 502 Bad Gateway @endif */
+	NET_HTTP_STATUS_SERVICE_UNAVAILABLE = 503,                              /**< @if OSPDEPREC The status code: 503 Service Unavailable @endif */
+	NET_HTTP_STATUS_GATEWAY_TIME_OUT = 504,                                 /**< @if OSPDEPREC The status code: 504 Gateway Timeout @endif */
+	NET_HTTP_STATUS_HTTP_VERSION_NOT_SUPPORTED = 505                        /**< @if OSPDEPREC The status code: 505 HTTP Version Not Supported @endif */
 };
 
 /**
@@ -418,6 +418,20 @@ enum  NetHttpCookieFlag
 	NET_HTTP_COOKIE_FLAG_NONE,              /**< The mode is not defined */
 	NET_HTTP_COOKIE_FLAG_ALWAYS_AUTOMATIC,  /**< The cookie will be parsed and saved, and also attached to request automatically */
 	NET_HTTP_COOKIE_FLAG_ALWAYS_MANUAL      /**< The cookie will be handled by the user action with Tizen::Net::Http::HttpRequest::SetCookie() and Tizen::Net::Http::HttpCookieStorageManager::GetCookies() */
+};
+
+/**
+ * @enum    NetHttpCertificateVerificationFlag
+ *
+ * Defines the certificate verification mode.
+ *
+ * @since 2.1
+ */
+enum  NetHttpCertificateVerificationFlag
+{
+	HTTP_CV_FLAG_AUTOMATIC,  	/**< The certificate is verified by the system @n If server certificate is invalid, the IHttpTransactionEventListener::OnTransactionCertVerificationRequiredN() listener is received.  */
+	HTTP_CV_FLAG_MANUAL,      /**< The certificate verification is handled by user action when the IHttpTransactionEventListener::OnTransactionCertVerificationRequestedN() listener is received */
+	HTTP_CV_FLAG_IGNORED, 	/**< The certificate verification is ignored */
 };
 
 } } } //Tizen::Net::Http

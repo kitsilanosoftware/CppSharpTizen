@@ -43,6 +43,7 @@ enum MotionType
 	MOTION_TYPE_SNAP = 0x0001,      /**< The motion type: Snap */
 	MOTION_TYPE_SHAKE = 0x0002,     /**< The motion type: Shake */
 	MOTION_TYPE_DOUBLETAP = 0x0004, /**< The motion type: Tap */
+	MOTION_TYPE_MOVE_TO_EAR = 0x0008, /**< The motion type: Move to ear @b Since: @b 2.1 */
 	MOTION_TYPE_ALL = 0xFFFF,       /**< The motion type: All */
 };
 
@@ -61,7 +62,7 @@ enum MotionState
 	MOTION_STARTED,     /**< The specified motion has just started */
 	MOTION_INPROGRESS,  /**< The specified motion is happening */
 	MOTION_ENDED,       /**< The specified motion has just ended */
-	MOTION_CANCELLED,   /**< Reserved */
+	MOTION_CANCELLED,   /**< The specified motion has just canceled */
 };
 
 /**

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -68,7 +67,7 @@ template< class KeyType > class __HashMapDefaultProviderT;
  *	void
  *	MyClass::HashMapTSample(void)
  *	{
- *		HashMapT<int, int> map;
+ *		HashMapT< int, int > map;
  *
  *		// Constructs a %HashMapT instance with default capacity, load factor, hash code provider, and comparer
  *		map.Construct();
@@ -88,7 +87,7 @@ template< class KeyType > class __HashMapDefaultProviderT;
  *		map.Remove(key);
  *
  *		// Uses an enumerator to access elements in the map
- *		IMapEnumeratorT<int, int>*	pMapEnum = map.GetMapEnumeratorN();
+ *		IMapEnumeratorT< int, int >*	pMapEnum = map.GetMapEnumeratorN();
  *		while (pMapEnum->MoveNext() == E_SUCCESS)
  *		{
  *			pMapEnum->GetKey(key);
@@ -214,7 +213,7 @@ CATCH:
 	}
 
 	/**
-	 * Initializes this instance of %HashMapT by copying the elements of a specified map.
+	 * Initializes this instance of %HashMapT by copying the elements of the specified @c map.
 	 *
 	 * @since 2.0
 	 *
@@ -338,8 +337,8 @@ CATCH:
 	}
 
 	/**
-	 * Initializes this instance of %HashMapT by copying the elements of a specified map,
-	 * with a specified load factor, hash code provider, and comparer.
+	 * Initializes this instance of %HashMapT by copying the elements of the specified @c map,
+	 * with the specified load factor, hash code provider, and comparer.
 	 *
 	 * @since 2.0
 	 *
@@ -481,7 +480,7 @@ CATCH:
 	}
 
 	/**
-	 * Gets the value associated with a specified key.
+	 * Gets the value associated with the specified @c key.
 	 *
 	 * @since 2.0
 	 *
@@ -522,7 +521,7 @@ CATCH:
 	}
 
 	/**
-	 * Gets the value associated with a specified key.
+	 * Gets the value associated with the specified @c key.
 	 *
 	 * @since 2.0
 	 *
@@ -625,7 +624,7 @@ CATCH:
 	}
 
 	/**
-	 * Removes the value associated with a specified key.
+	 * Removes the value associated with the specified @c key.
 	 *
 	 * @since 2.0
 	 *
@@ -692,7 +691,7 @@ CATCH:
 	}
 
 	/**
-	 * Replaces the value associated with a specified key with a new value.
+	 * Replaces the value associated with the specified @c key with the specified new @c value.
 	 *
 	 * @since 2.0
 	 *
@@ -751,13 +750,13 @@ CATCH:
 	}
 
 	/**
-	 * Checks whether a map contains the specified key.
+	 * Checks whether a map contains the specified @c key.
 	 *
 	 * @since 2.0
 	 *
 	 * @return		An error code
 	 * @param[in]	key	The key to locate
-	 * @param[out]	out 	Set to @c true if the map contains the specified key, @n
+	 * @param[out]	out 	Set to @c true if the map contains the specified @c key, @n
 	 *						else @c false
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid, or
@@ -792,11 +791,11 @@ CATCH:
 	}
 
 	/**
-	 * Checks whether a map contains the specified value.
+	 * Checks whether a map contains the specified @c value.
 	 *
 	 * @since 2.0
 	 *
-	 * @return		@c true if the map contains the specified value, @n
+	 * @return		@c true if the map contains the specified @c value, @n
 	 *				else @c false
 	 * @param[in]	value	The value to locate
 	 *
@@ -905,12 +904,12 @@ private:
 	HashMapT< KeyType, ValueType >& operator =(const HashMapT< KeyType, ValueType >& map);
 
 	/**
-	 * Copies all the pairs from a specified map to this map.
+	 * Copies all the pairs from a specified @c map to this map.
 	 *
 	 * @return		An error code
 	 * @param[in]	map The map to copy
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation.@n
+	 * @exception	E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
 	 *									The @c map is modified during the operation of this method.
 	 */
 	result AddAll(const IMapT< KeyType, ValueType >& map)
@@ -961,7 +960,7 @@ CATCH:
 	}
 
 	/**
-	 * Gets the hash value for a specified object.
+	 * Gets the hash value for the specified object.
 	 *
 	 * @return		The hash value for the specified object
 	 * @param[in]	obj		The object to get hash value
@@ -1178,7 +1177,7 @@ public:
 
 	/**
 	 * Moves this enumerator to the next elements of the map.
-	 * When this enumerator is first created, or when the Reset() method is called, or when the MoveNext() method is first called, the enumerator positions itself to the first element in the map.
+	 * When this enumerator is first created, or when the Reset() method is called, or when the %MoveNext() method is first called, the enumerator positions itself to the first element in the map.
 	 *
 	 * @since 2.0
 	 *

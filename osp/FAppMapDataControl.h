@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -53,6 +52,48 @@ class IMapDataControlResponseListener;
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/app/data_controls.htm">Data Controls</a>.
  *
  * @see	Tizen::App::AppManager
+ *
+ * @code
+ *
+ * #include <FBase.h>
+ * #include <FApp.h>
+ *
+ * using namespace Tizen::Base;
+ * using namespace Tizen::App;
+ *
+ * class MyMapDataControlResponseListener:
+ *	: public Tizen::App::IMapDataControlResponseListener
+ * {
+ * public:
+ * 	void OnMapDataControlGetValueResponseReceived(RequestId reqId, const String& providerId, const String& dataId, IList& resultValueList, bool providerResult, const String* pErrorMsg)
+ *	{
+ *		int count = resultValueList.GetCount();
+ *		for (int i = 0; i < count; i++)
+ *		{
+ *			String pPerson = static_cast< String* >(resultValueList.GetAt(i));
+ *			AppLog("%dth person: %ls", i, pPerson->GetPointer());
+ *		}
+ *	}
+ * };
+ *
+ * void
+ * MyClass::Execute(void)
+ * {
+ *		String providerId(L"http://tizen.org/datacontrol/provider/example");
+ *		MapDataControl* pDc = AppManager::GetMapDataControlN(providerId);
+ *
+ *		MyMapDataControlResponseListener* pResponseListener = new MyMapDataControlResponseListener();
+ *
+ *		pDc->SetMapDataControlResponseListener(pResponseListener);
+ *
+ *		String dataId(L"test");
+ *		String person(L"person");
+ *		RequestId reqId;
+ *
+ *		pDc->GetValue(dataId, person, reqId);
+ * }
+ *
+ * @endcode
  */
 
 class _OSP_EXPORT_ MapDataControl
@@ -90,9 +131,14 @@ public:
 	* @exception	E_INVALID_ARG		Either of the following conditions has occurred: @n
 	*									- The specified @c pageNo parameter is less than @c 1.
 	*									- The specified @c countPerPage parameter is less than @c 1.
-	* @exception	E_ILLEGAL_ACCESS	Access is denied due to insufficient permission.
-	* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
+	* @exception	E_ILLEGAL_ACCESS	Either of the following conditions has occurred: @n
+	*									- Access is denied due to insufficient permission.
+	*									- The application using this method is not signed with the same certificate of provider application. @b Since: @b 2.1
+	* @exception	E_MAX_EXCEEDED		Either of the following conditions has occurred: @n
+	* 									- The size of sending buffer has exceeded the maximum limit.
+	* 									- The number of sending requests has exceeded the maximum limit.
 	* @exception	E_SYSTEM			A system error has occurred.
+	* @remarks		The recommended data size is under 16KB because severe system performance degradation may occur for large messages. @c E_MAX_EXCEEDED may be returned for messages over 16KB size.
 	*/
 	result GetValue(const Tizen::Base::String& dataId, const Tizen::Base::String& key, RequestId& reqId, int pageNo = 1, int countPerPage = 20);
 
@@ -114,9 +160,14 @@ public:
 	* @param[out]   reqId		The ID of the request
 	* @exception	E_SUCCESS			The method is successful.
 	* @exception	E_INVALID_STATE		This instance has not been properly constructed as yet.
-	* @exception	E_ILLEGAL_ACCESS	Access is denied due to insufficient permission.
-	* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
+	* @exception	E_ILLEGAL_ACCESS	Either of the following conditions has occurred: @n
+	*									- Access is denied due to insufficient permission.
+	*									- The application using this method is not signed with the same certificate of provider application. @b Since: @b 2.1
+	* @exception	E_MAX_EXCEEDED		Either of the following conditions has occurred: @n
+	* 									- The size of sending buffer has exceeded the maximum limit.
+	* 									- The number of sending requests has exceeded the maximum limit.
 	* @exception	E_SYSTEM			A system error has occurred.
+	* @remarks		The recommended data size is under 16KB because severe system performance degradation may occur for large messages. @c E_MAX_EXCEEDED may be returned for messages over 16KB size.
 	*/
 	result AddValue(const Tizen::Base::String& dataId, const Tizen::Base::String& key, const Tizen::Base::String& value, RequestId& reqId);
 
@@ -140,14 +191,19 @@ public:
 	* @param[out]   reqId		The ID of the request
 	* @exception	E_SUCCESS			The method is successful.
 	* @exception	E_INVALID_STATE		This instance has not been properly constructed as yet.
-	* @exception	E_ILLEGAL_ACCESS	Access is denied due to insufficient permission.
-	* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
+	* @exception	E_ILLEGAL_ACCESS	Either of the following conditions has occurred: @n
+	*									- Access is denied due to insufficient permission.
+	*									- The application using this method is not signed with the same certificate of provider application. @b Since: @b 2.1
+	* @exception	E_MAX_EXCEEDED		Either of the following conditions has occurred: @n
+	* 									- The size of sending buffer has exceeded the maximum limit.
+	* 									- The number of sending requests has exceeded the maximum limit.
 	* @exception	E_SYSTEM			A system error has occurred.
+	* @remarks		The recommended data size is under 16KB because severe system performance degradation may occur for large messages. @c E_MAX_EXCEEDED may be returned for messages over 16KB size.
 	*/
 	result SetValue(const Tizen::Base::String& dataId, const Tizen::Base::String& key, const Tizen::Base::String& oldValue, const Tizen::Base::String& newValue, RequestId& reqId);
 
 	/**
-	* Removes the value associated with the specified @c key, from a key-values map owned by MAP-type data control provider.
+	* Removes the value associated with the specified @c key, from a key-values map owned by MAP-type data control provider. @n
 	* The %RemoveValue() method is asynchronous.
 	* For receiving the response from data control provider, set the listener
 	* with MapDataControl::SetMapDataControlResponseListener(). @n
@@ -159,14 +215,19 @@ public:
 	* @return		An error code
 	* @param[in]	dataId		A string for identifying specific data, usually a registry section to remove from @n
 	*							The string consists of one or more components, separated by a slash('/').
-	* @param[in]	key			A key of the value to removed
-	* @param[in]	value       A value to removed
+	* @param[in]	key			A key of the value to remove
+	* @param[in]	value       A value to remove
 	* @param[out]   reqId		The ID of the request
 	* @exception	E_SUCCESS			The method is successful.
 	* @exception	E_INVALID_STATE		This instance has not been properly constructed as yet.
-	* @exception	E_ILLEGAL_ACCESS	Access is denied due to insufficient permission.
-	* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
+	* @exception	E_ILLEGAL_ACCESS	Either of the following conditions has occurred: @n
+	*									- Access is denied due to insufficient permission.
+	*									- The application using this method is not signed with the same certificate of provider application. @b Since: @b 2.1
+	* @exception	E_MAX_EXCEEDED		Either of the following conditions has occurred: @n
+	* 									- The size of sending buffer has exceeded the maximum limit.
+	* 									- The number of sending requests has exceeded the maximum limit.
 	* @exception	E_SYSTEM			A system error has occurred.
+	* @remarks		The recommended data size is under 16KB because severe system performance degradation may occur for large messages. @c E_MAX_EXCEEDED may be returned for messages over 16KB size.
 	*/
 	result RemoveValue(const Tizen::Base::String& dataId, const Tizen::Base::String& key, const Tizen::Base::String& value, RequestId& reqId);
 

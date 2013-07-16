@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -59,6 +58,54 @@ class ISqlDataControlResponseListener;
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/app/data_controls.htm">Data Controls</a>.
  *
  * @see	Tizen::App::AppManager
+ *
+ * @code
+ *
+ * #include <FBase.h>
+ * #include <FIo.h>
+ *
+ * using namespace Tizen::Base;
+ * using namespace Tizen::Io;
+ *
+ * class MySqlDataControlResponseListener:
+ *	: public Tizen::App::ISqlDataControlResponseListener
+ * {
+ * public:
+ * 	void OnSqlDataControlInsertResponseReceived(RequestId reqId, const String& providerId, const String& dataId, long long insertRowId, bool providerResult, const String* pErrorMsg)
+ *	{
+ *		AppLog("Row Id = %d", insertRowId);
+ *	}
+ * };
+ *
+ * void
+ * MyClass::Execute(void)
+ * {
+ *		String providerId(L"http://tizen.org/datacontrol/provider/example");
+ *		SqlDataControl* pDc = AppManager::GetSqlDataControlN(providerId);
+ *
+ *		MySqlDataControlResponseListener* pResponseListener = new MySqlDataControlResponseListener();
+ *
+ *		pDc->SetSqlDataControlResponseListener(pResponseListener);
+ *
+ *		String dataId(L"test");
+ *		String person(L"person");
+ *		String number(L"number");
+ *		RequestId reqId;
+ *
+ *		ArrayList columnList(SingleObjectDeleter);
+ *		columnList.Construct();
+ *
+ *		columnList.Add(person);
+ *		columnList.Add(number);
+ *
+ *		String where(L"group = 'friend'");
+ *		String order(L"person ASC");
+ *
+ *		pDc->Select(dataId, &columnList, &where, &order, reqId);
+ * }
+ *
+ * @endcode
+
  */
 
 class _OSP_EXPORT_ SqlDataControl
@@ -101,16 +148,21 @@ public:
 	* @param[in]	countPerPage		The desired maximum count of rows on a page
 	* @exception	E_SUCCESS			The method is successful.
 	* @exception	E_INVALID_STATE		This instance has not been properly constructed.
-	* @exception	E_INVALID_ARG		Either of the following conditions has occurred:
+	* @exception	E_INVALID_ARG		Either of the following conditions has occurred: @n
 	*									- The specified @c pColumnList is empty.
 	*									- The specified @c pageNo parameter is less than @c 1.
 	*									- The specified @c countPerPage parameter is less than @c 1.
-	* @exception	E_ILLEGAL_ACCESS	Access is denied due to insufficient permission.
-	* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
+	* @exception	E_ILLEGAL_ACCESS	Either of the following conditions has occurred: @n
+	*									- Access is denied due to insufficient permission.
+	*									- The application using this method is not signed with the same certificate of provider application. @b Since: @b 2.1
+	* @exception	E_MAX_EXCEEDED		Either of the following conditions has occurred:
+	* 									- The size of sending buffer has exceeded the maximum limit.
+	* 									- The number of sending requests has exceeded the maximum limit.
 	* @exception	E_SYSTEM			A system error has occurred.
 	* @remarks		If the value specified in the @c pWhere is string, the value must be wrapped in
 	*				single quotes. Otherwise it is not needed to wrap the numeric value in single quotes.
 	*				For more information on the SQL statement, see SQLite SQL documents.
+	* @remarks		The recommended data size is under 16KB because severe system performance degradation may occur for large messages. @c E_MAX_EXCEEDED may be returned for messages over 16KB size.
 	*/
 	result Select(const Tizen::Base::String& dataId, const Tizen::Base::Collection::IList* pColumnList,
 			const Tizen::Base::String* pWhere, const Tizen::Base::String *pOrder, RequestId& reqId,
@@ -136,12 +188,17 @@ public:
 	* @exception	E_SUCCESS			The method is successful.
 	* @exception	E_INVALID_STATE		This instance has not been properly constructed.
 	* @exception	E_INVALID_ARG		The specified @c insertMap is empty.
-	* @exception	E_ILLEGAL_ACCESS	Access is denied due to insufficient permission.
-	* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
+	* @exception	E_ILLEGAL_ACCESS	Either of the following conditions has occurred: @n
+	*									- Access is denied due to insufficient permission.
+	*									- The application using this method is not signed with the same certificate of provider application. @b Since: @b 2.1
+	* @exception	E_MAX_EXCEEDED		Either of the following conditions has occurred:
+	* 									- The size of sending buffer has exceeded the maximum limit.
+	* 									- The number of sending requests has exceeded the maximum limit.
 	* @exception	E_SYSTEM			A system error has occurred.
 	* @remarks		If the value specified in the @c insertMap is string, the value must be wrapped in
 	*				single quotes. Otherwise it is not needed to wrap the numeric value in single quotes.
 	*				For more information on the SQL statement, see SQLite SQL documents.
+	* @remarks		The recommended data size is under 1MB because severe system performance degradation may occur for large messages. @c E_MAX_EXCEEDED may be returned for messages over 1MB size.
 	*/
 	result Insert(const Tizen::Base::String& dataId, const Tizen::Base::Collection::IMap& insertMap, RequestId& reqId);
 
@@ -160,7 +217,7 @@ public:
 	*									The string consists of one or more components, separated by a slash('/').
 	* @param[in]	updateMap			The column-value pairs to update @n
 	*									The type of objects contained in the specified @c updateMap must be
-	*									Tizen::Base::String class. @n
+	*									Tizen::Base::String class.
 	* @param[in]	pWhere				A filter to select desired rows to update @n
 	*									It is an SQL 'WHERE' clause excluding the 'WHERE' itself such as
 	*									column1 = 'stringValue' AND column2 = numericValue.
@@ -168,12 +225,17 @@ public:
 	* @exception	E_SUCCESS			The method is successful.
 	* @exception	E_INVALID_STATE		This instance has not been properly constructed.
 	* @exception	E_INVALID_ARG		The specified @c updateMap is empty.
-	* @exception	E_ILLEGAL_ACCESS	Access is denied due to insufficient permission.
-	* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
+	* @exception	E_ILLEGAL_ACCESS	Either of the following conditions has occurred: @n
+	*									- Access is denied due to insufficient permission.
+	*									- The application using this method is not signed with the same certificate of provider application. @b Since: @b 2.1
+	* @exception	E_MAX_EXCEEDED		Either of the following conditions has occurred:
+	* 									- The size of sending buffer has exceeded the maximum limit.
+	* 									- The number of sending requests has exceeded the maximum limit.
 	* @exception	E_SYSTEM			A system error has occurred.
 	* @remarks		If the value specified in the @c pWhere or @c updateMap is string, the value must be wrapped in
 	*				single quotes. Otherwise it is not needed to wrap the numeric value in single quotes.
 	*				For more information on the SQL statement, see SQLITE SQL documents.
+	* @remarks		The recommended data size is under 1MB because severe system performance degradation may occur for large messages. @c E_MAX_EXCEEDED may be returned for messages over 1MB size.
 	*/
 	result Update(const Tizen::Base::String& dataId, const Tizen::Base::Collection::IMap& updateMap,
 			const Tizen::Base::String* pWhere, RequestId& reqId);
@@ -199,12 +261,17 @@ public:
 	* @exception	E_SUCCESS			The method is successful.
 	* @exception	E_INVALID_STATE		This instance has not been properly constructed.
 	* @exception	E_INVALID_ARG		A specified parameter is invalid.
-	* @exception	E_ILLEGAL_ACCESS	Access is denied due to insufficient permission.
-	* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
+	* @exception	E_ILLEGAL_ACCESS	Either of the following conditions has occurred: @n
+	*									- Access is denied due to insufficient permission.
+	*									- The application using this method is not signed with the same certificate of provider application. @b Since: @b 2.1
+	* @exception	E_MAX_EXCEEDED		Either of the following conditions has occurred:
+	* 									- The size of sending buffer has exceeded the maximum limit.
+	* 									- The number of sending requests has exceeded the maximum limit.
 	* @exception	E_SYSTEM			A system error has occurred.
 	* @remarks		If the value specified in the @c pWhere is string, the value must be wrapped in
 	*				single quotes. Otherwise it is not needed to wrap the numeric value in single quotes.
 	*				For more information on the SQL statement, see SQLITE SQL documents.
+	* @remarks		The recommended data size is under 16KB because severe system performance degradation may occur for large messages. @c E_MAX_EXCEEDED may be returned for messages over 16KB size.
 	*/
 	result Delete(const Tizen::Base::String& dataId, const Tizen::Base::String* pWhere, RequestId& reqId);
 

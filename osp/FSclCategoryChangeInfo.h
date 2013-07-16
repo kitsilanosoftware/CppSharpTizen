@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -62,7 +61,7 @@ public:
 	CategoryChangeInfo(const CategoryChangeInfo& rhs);
 
 	/**
-	 * This destructor overrides Osp::Base::Object::~Object().
+	 * This destructor overrides Tizen::Base::Object::~Object().
 	 *
 	 * @since	2.0
 	 */

@@ -65,8 +65,9 @@ public:
 	/**
 	 * Removes all the cookies corresponding to the requested URL from the cookie storage.
 	 *
-	 * @since		2.0
-	 * @privilege	%http://tizen.org/privilege/http
+	 * @since			2.0
+	 * @privlevel		public
+	 * @privilege		%http://tizen.org/privilege/http
 	 *
 	 * @return		An error code
 	 * @param[in]	url						The requested URL
@@ -76,21 +77,24 @@ public:
 	 * @exception	E_OUT_OF_MEMORY			The memory is insufficient.
 	 * @exception	E_SYSTEM				A system error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 */
 	result RemoveCookies(const Tizen::Base::String& url);
 
 	/**
 	 * Removes all the cookies from the cookie storage.
 	 *
-	 * @since		2.0
-	 * @privilege	%http://tizen.org/privilege/http
+	 * @since			2.0
+	 * @privlevel		public
+	 * @privilege		%http://tizen.org/privilege/http
 	 *
 	 * @return		An error code
 	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_INVALID_STATE			The method invoked is invalid.
-	 * @exception	E_OUT_OF_MEMORY			The memory is insufficient.
+	 * @exception	E_INVALID_STATE		The method invoked is invalid.
+	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 	 * @exception	E_SYSTEM				A system error has occurred.
-	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 */
 	result RemoveAllCookies();
 

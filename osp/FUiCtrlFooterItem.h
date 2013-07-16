@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -156,8 +156,9 @@ public:
 	 * @param[in]   pIcon               The icon to set, @n
 	 *			                        else @c null if no bitmap is displayed
 	 * @exception   E_SUCCESS           The method is successful.
-	 * @remarks     If the size of the bitmap is greater than the default icon size, the bitmap is scaled down. @n
-	 *              The bitmap specified for the @c FOOTER_ITEM_STATUS_NORMAL will be applied for all other statues unless different bitmaps are explicitly
+	 * @remarks
+	 *			- If the size of the bitmap is greater than the default icon size, the bitmap is scaled down.
+	 *			- The bitmap specified for the @c FOOTER_ITEM_STATUS_NORMAL will be applied for all other statues unless different bitmaps are explicitly
 	 *				set for those by using this method. @n
 	 *              Furthermore, the icon button does not support @c FOOTER_ITEM_STATUS_SELECTED status and the bitmap for the status is also ignored.
 	 */
@@ -170,11 +171,12 @@ public:
 	 * @since		2.0
 	 *
 	 * @return	    An error code
-	 * @param[in]   text		        The text to be set
+	 * @param[in]   text		        The text to set
 	 * @exception   E_SUCCESS           The method is successful.
-	 * @remarks	    If the text cannot be displayed in a line, then the text is automatically displayed in two lines and the ellipsis is applied if the text
+	 * @remarks
+	 *			- If the text cannot be displayed in a line, then the text is automatically displayed in two lines and the ellipsis is applied if the text
 	 *				is longer than two lines. @n
-	 *				Use @htmlonly '\n' @endhtmlonly to denote the end of the first line.
+	 *			- Use @htmlonly '\n' @endhtmlonly to denote the end of the first line.
 	 */
 	result SetText(const Tizen::Base::String& text);
 

@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -67,10 +67,12 @@ public:
 	/**
 	 * Adds the control at the end of the list maintained by the container.
 	 *
+	 * @brief       <i> [Deprecated] </i>
+	 * @deprecated  This API is deprecated.
 	 * @since			2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	control         The control to be added to the container
+	 * @param[in]	control         The control to add to the container
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_INVALID_ARG   The specified input parameter is invalid. @n
 	 *                              The specified @c control is an instance of Window, or this control's parent container.
@@ -103,6 +105,47 @@ public:
 	result AddControl(const Control& control);
 
 	/**
+	 * Adds a control at the end of the list maintained by a container.
+	 *
+	 * @since                              2.1
+	 *
+	 * @return        An error code
+	 * @param[in]    control         The control to add to the container
+	 * @param[in]    pControl         A pointer to the control to add to the container
+	 * @exception    E_SUCCESS       The method is successful.
+	 * @exception    E_INVALID_ARG   The specified @c pControl is @c null.
+	 *                              The specified @c control is an instance of Window or the control's parent container.
+	 * @exception    E_MAX_EXCEEDED          The number of child controls has exceeded the maximum limit.
+	 * @exception    E_INVALID_ARG
+	 * @exception    E_SYSTEM        A system error has occurred.
+	 * @remarks
+	 *        			- When a control is added, it is placed at the top of the drawing stack maintained by the container.@n
+	 *                This means the control that is added last is drawn last.
+	 *              - A control becomes displayable only after it has been added to a displayable container.
+	 *                Some methods may not work normally if the methods of the control are called before adding the control to a container. After the control is added to a %Container, the OnInitializing()
+	 *                                        method of the control are called before adding the control to a container. After the control is added to a %Container, the
+	 *                                        OnInitializing() method of the control is invoked for the initialization of the control such as creating and adding child controls.
+	 * @see                      Tizen::Ui::Control::OnInitializing()
+	 * @see                      Tizen::Ui::Control::OnTerminating()
+	 * @code
+	 *        {
+	 *                   // Uses Panel instead of Container, because Container is an abstract class.
+	 *                   Panel* pPanel = new Panel();
+	 *                   pPanel->Construct(Rectangle(100, 250, 300, 300));
+	 *
+	 *                   Form* pForm = new Form();
+	 *                   pForm->Construct(FORM_STYLE_NORMAL|FORM_STYLE_TITLE|FORM_STYLE_INDICATOR);
+	 *                   pForm->AddControl(pPanel);
+	 *
+	 *                   //...
+	 *                   pForm->Invalidate(true);
+	 *                   //...
+	 *        }
+	 * @endcode
+	 */
+	result AddControl(Control* pControl);
+
+	/**
 	 * Before the system calls OnDraw() method to allow the user to do custom drawing, this method is called to clear the canvas. The user can override this method to change this default behavior.
 	 *
 	 * @since 2.0
@@ -116,15 +159,8 @@ public:
 	 * Users can override this method to display user-specific drawings. @n
 	 * This method is called after the container has drawn itself, but just before the container draws its child controls.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since                              2.0
 	 *
-	 * @if OSPCOMPAT
-	 * @compatibility This method has compatibility issues with OSP compatible applications. @n
-	 *                       For more information, see @ref CompOnDrawPage "here".
-	 * @endif
 	 *
 	 * @return                  An error code
 	 * @exception    E_SUCCESS        The method is successful.
@@ -133,16 +169,6 @@ public:
 	virtual result OnDraw(void);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page               CompOnDrawPage        Compatibility for OnDraw()
-	 * @section            CompOnDrawPage IssueSection          Issues
-	 * Implementing this method in OSP compatible applications has the following issues:   @n
-	 * -# The platform draws the control by calling the parent's OnDraw() callback before invoking the control's OnDraw() callback. So, the users can't control the control's drawing behavior by overriding the OnDraw() callback.
-	 *
-	 * @section            CompOnDrawPage SolutionSection               Resolutions
-	 * This issue has been resolved in Tizen.  @n
-	 * -# The platform does not call the parent's OnDraw() callback before invoking the control's OnDraw() callback. Therefore, you needs to call 	the parent container's OnDraw() callback in the OnDraw() callback if you override this method.
-	 * @endif
 	 */
 
 	/**
@@ -151,7 +177,7 @@ public:
 	 * @since       2.0
 	 *
 	 * @param[in]   showState  The new show state of the control
-	 * @see         Osp::Ui::Control::SetShowState()
+	 * @see         Tizen::Ui::Control::SetShowState()
 	 */
 	virtual void OnShowStateChanging(bool showState);
 
@@ -201,26 +227,44 @@ public:
 	 *
 	 * @since           2.0
 	 *
-	 * @return          A Boolean flag that indicates whether the specified @c width
-	 *                  and @ height are supported.
-	 * @param[in, out]  evaluatedSize  The width and the height that need to be evaluated.
+	 * @param[in, out]  evaluatedSize  The width and the height to evaluate
 	 */
 	virtual void OnEvaluateSize(Tizen::Graphics::Dimension& evaluatedSize);
 
 	/**
 	 * Removes the specified control from the container.
 	 *
+	 * @brief       <i> [Deprecated] </i>
+	 * @deprecated  This API is deprecated.
 	 * @since			2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	control         	The child control to be removed
+	 * @param[in]	control         	The child control to remove
 	 * @exception	E_SUCCESS       	The method is successful.
 	 * @exception	E_OBJ_NOT_FOUND		The specified instance is not found within the indicated range (that is, the @c control is not found).
 	 * @exception	E_SYSTEM        	A system error has occurred.
 	 * @remarks		The removed child control is deleted from the memory. Before deletion, OnTerminating() of the child control is called.
+	 *				If OnTerminating() method is overridden and returns an exception, that exception is propagated.
 	 * @see			Tizen::Ui::Control::OnTerminating()
 	 */
 	result RemoveControl(const Control& control);
+
+	 /**
+	 * Removes a specified control from the container.
+	 *
+	 * @since                             2.1
+	 *
+	 * @return                 An error code
+	 * @param[in]	pControl		A pointer to the child control to remove
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_OBJ_NOT_FOUND	The specified instance is not found within the indicated range (that is, the @c control is not found).
+	 * @exception	E_INVALID_ARG	The specified @c pControl is @c null.
+	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @remarks		The removed child control is deleted from the memory. Before deletion, OnTerminating() of the child control is called.
+	 *				If OnTerminating() method is overridden and returns an exception, that exception is propagated.
+	 * @see                               Tizen::Ui::Control::OnTerminating()
+	 */
+	result RemoveControl(Control* pControl);
 
 	/**
 	 * Removes the specified control from the container.
@@ -228,11 +272,12 @@ public:
 	 * @since			2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	index           	The index of the control to be removed
+	 * @param[in]	index           	The index of the control to remove
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_OUT_OF_RANGE  	The specified @c index is out of range.
 	 * @exception	E_SYSTEM        	A system error has occurred.
 	 * @remarks		The removed child control is deleted from the memory. Before deletion, OnTerminating() of the child control is called.
+	 *				If OnTerminating() method is overridden and returns an exception, that exception is propagated.
 	 * @see			Tizen::Ui::Control::OnTerminating()
 	 */
 	result RemoveControl(int index);
@@ -262,15 +307,8 @@ public:
 	 * Gets the control with the specified name. @n
 	 * If there are multiple matches of the name, the first match is returned.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since			2.0
 	 *
-	 * @if OSPCOMPAT
-	 * @compatibility This method has compatibility issues with OSP compatible applications. @n
-	 *                       For more information, see @ref CompGetControlPage "here".
-	 * @endif
 	 *
 	 * @return		The control having the specified name, @n
 	 *				else @c null if the name is not valid
@@ -281,16 +319,6 @@ public:
 	Control* GetControl(const Tizen::Base::String& name, bool recursive = false) const;
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page               CompGetControlPage        Compatibility for GetControl()
-	 * @section            CompGetControlPage IssueSection          Issues
-	 * Implementing this method in OSP compatible applications has the following issues:   @n
-	 * -# GetControl() method searches for itself first and then child controls in OSP, whereas only @n
-	 * child controls are searched for from Tizen.
-	 *
-	 * @section            CompGetControlPage SolutionSection               Resolutions
-	 * This issue has been resolved in Tizen.  @n
-	 * @endif
 	 */
 
 	/**
@@ -353,6 +381,8 @@ public:
 	/**
 	 * Checks whether the specified control is a child or descendant of the container.
 	 *
+	 * @brief       <i> [Deprecated] </i>
+	 * @deprecated  This API is deprecated.
 	 * @since				2.0
 	 *
 	 * @return      @c true if the specified control is within the containment hierarchy of the container, @n
@@ -360,6 +390,20 @@ public:
 	 * @param[in]	control		The control
 	 */
 	bool IsAncestorOf(const Control& control) const;
+
+	 /**
+	 * Checks whether a specified control is a child or descendant of the container.
+	 *
+	 * @since                                       2.1
+	 *
+	 * @return      @c true if a specified control is within the containment hierarchy of the container, @n
+	 *              else @c false
+	 * @param[in] pControl                   A pointer to the control
+	 * @exception E_SUCCESS The method is successful.
+	 * @exception     E_INVALID_ARG  The specified @c pControl is null.
+	 * @remarks       The specific error code can be accessed using the GetLastResult() method.
+	 */
+	bool IsAncestorOf(const Control* pControl) const;
 
 	/**
 	 * Sets whether the specified child control must always be above other children.
@@ -413,6 +457,8 @@ public:
 	 * Checks whether the specified child control is always at the bottom of
 	 * the drawing stack.
 	 *
+	 * @brief       <i> [Deprecated] </i>
+	 * @deprecated  This API is deprecated.
 	 * @since       2.0
 	 *
 	 * @return       @c true if the specified child control is set as always at the bottom, @n
@@ -429,9 +475,28 @@ public:
 	bool IsControlAlwaysAtBottom(const Tizen::Ui::Control& control) const;
 
 	/**
+	 * Checks whether a specified child control is always at the bottom of the drawing stack.
+	 *
+	 * @since       2.1
+	 *
+	 * @return       @c true if a specified child control is set as always at the bottom, @n
+	 *                 else @c false
+	 * @param[in]   pControl          A pointer to child control
+	 * @exception    E_SUCCESS        The method is successful.
+	 * @exception    E_INVALID_ARG    A specified input parameter is invalid.@n
+	 *                                The specified control is not a child of this
+	 *                                container or @c pControl is @c null .
+	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
+	 * @see          SetControlAlwaysAtBottom()
+	 */
+	bool IsControlAlwaysAtBottom(const Tizen::Ui::Control* pControl) const;
+
+	/**
 	 * Checks whether the specified child control is always on the top of
 	 * the drawing stack.
 	 *
+	 * @brief       <i> [Deprecated] </i>
+	 * @deprecated  This API is deprecated.
 	 * @since        2.0
 	 *
 	 * @return       @c true if the specified child control is set as always on the top, @n
@@ -446,6 +511,23 @@ public:
 	 * @see          SetControlAlwaysOnTop()
 	 */
 	bool IsControlAlwaysOnTop(const Tizen::Ui::Control& control) const;
+
+	/**
+	 * Checks whether a specified child control is always at the top of the drawing stack.
+	 *
+	 * @since        2.1
+	 *
+	 * @return       @c true if a specified child control is set as always at the top, @n
+	 *               else @c false
+	 * @param[in]   pControl          A pointer to child control
+	 * @exception    E_SUCCESS        The method is successful.
+	 * @exception    E_INVALID_ARG    A specified input parameter is invalid. @n
+	 *                                The specified control is not a child of this
+	 *                                container. or @c pControl is @c null
+	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
+	 * @see          SetControlAlwaysOnTop()
+	 */
+	bool IsControlAlwaysOnTop(const Tizen::Ui::Control* pControl) const;
 
 protected:
 	/**
@@ -472,7 +554,7 @@ protected:
 	 * @since 2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   rect                                      The rectangle bounds to be set
+	 * @param[in]   rect                                      The rectangle bounds to set
 	 * @param[in]   resizable                                Set to @c true to make the container resizable, @n
 	 *                                  else @c false
 	 * @param[in]   movable                                          Set to @c true to make the container movable, @n
@@ -484,6 +566,25 @@ protected:
 	 * @see IsResizable()
 	*/
 	result Construct(const Tizen::Graphics::Rectangle& rect, bool resizable = true, bool movable = true);
+
+	/**
+	 * Initializes this instance of %Container.
+	 *
+	 * @since 2.1
+	 *
+	 * @return      An error code
+	 * @param[in]   rect                                      The rectangle bounds to set
+	 * @param[in]   resizable                                Set to @c true to make the container resizable, @n
+	 *                                  else @c false
+	 * @param[in]   movable                                          Set to @c true to make the container movable, @n
+	 *                                  else @c false
+	 * @exception   E_SUCCESS           The method is successful.
+	 * @exception   E_INVALID_ARG            A specified input parameter is invalid.
+	 * @remarks     This method must be called from the derived classes's construct methods.
+	 * @remarks     If the @c resizable is @c false, IsResizable() returns @c false.
+	 * @see IsResizable()
+	*/
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, bool resizable = true, bool movable = true);
 
 	/**
 	 * Initializes this instance of %Container with the specified layout and rectangular region.
@@ -506,6 +607,28 @@ protected:
 	 * @see Tizen::Ui::Container::GetLayoutN()
 	*/
 	result Construct(const Tizen::Ui::Layout& layout, const Tizen::Graphics::Rectangle& rect, bool resizable = true, bool movable = true);
+
+	/**
+	 * Initializes this instance of %Container with the specified layout and rectangular region.
+	 *
+	 * @since 2.1
+	 *
+	 * @return                  An error code
+	 * @param[in]   layout                                   The layout for both the portrait and landscape mode
+	 * @param[in]   rect                                      The location and size of the %Container
+	 * @param[in]   resizable                                Set to @c true to make the container resizable, @n
+	 *                                  else @c false
+	 * @param[in]   movable                                          Set to @c true to make the container movable, @n
+	 *                                  else @c false
+	 * @exception   E_SUCCESS                The method is successful.
+	 * @exception   E_INVALID_ARG            A specified input parameter is invalid.
+	 * @remarks     This method must be called from the derived classes's construct methods.
+	 * @remarks     If the @c resizable is @c false, IsResizable() returns @c false.
+	 * @see IsResizable()
+	 * @see Tizen::Ui::Layout
+	 * @see Tizen::Ui::Container::GetLayoutN()
+	*/
+	result Construct(const Tizen::Ui::Layout& layout, const Tizen::Graphics::FloatRectangle& rect, bool resizable = true, bool movable = true);
 
 	/**
 	 * Initializes this instance of %Container with the specified layouts and rectangular region.
@@ -533,8 +656,35 @@ protected:
 	result Construct(const Tizen::Ui::Layout& portraitLayout, const Tizen::Ui::Layout& landscapeLayout, const Tizen::Graphics::Rectangle& rect, bool resizable = true, bool movable = true);
 
 	/**
+	 * Initializes this instance of %Container with the specified layouts and rectangular region.
+	 *
+	 * @since 2.1
+	 *
+	 * @return                  An error code
+	 * @param[in]   portraitLayout              The layout for the portrait mode
+	 * @param[in]   landscapeLayout           The layout for the landscape mode
+	 * @param[in]   rect                                      The location and size of the %Container
+	 * @param[in]   resizable                                Set to @c true to make the container resizable, @n
+	 *                                  else @c false
+	 * @param[in]   movable                                          Set to @c true to make the container movable, @n
+	 *                                  else @c false
+	 * @exception   E_SUCCESS                The method is successful.
+	 * @exception   E_INVALID_ARG            A specified input parameter is invalid.
+	 * @remarks     If the @c resizable is @c false, IsResizable() returns @c false.
+	 * @see IsResizable()
+	 * @see Tizen::Ui::Layout
+	 * @see Tizen::Ui::Layout
+	 * @see Tizen::Ui::Container::GetLayoutN()
+	 * @see Tizen::Ui::Container::GetPortraitLayoutN()
+	 * @see Tizen::Ui::Container::GetLandscapeLayoutN()
+	*/
+	result Construct(const Tizen::Ui::Layout& portraitLayout, const Tizen::Ui::Layout& landscapeLayout, const Tizen::Graphics::FloatRectangle& rect, bool resizable = true, bool movable = true);
+
+	/**
 	 * Gets the index of the specified control.
 	 *
+	 * @brief       <i> [Deprecated] </i>
+	 * @deprecated  This API is deprecated.
 	 * @since			2.0
 	 * @return		An error code
 	 * @param[in]	control			The control
@@ -547,8 +697,25 @@ protected:
 	result GetControlAt(const Control& control, int& index) const;
 
 	/**
+	 * Gets the index of a specified control.
+	 *
+	 * @since                             2.1
+	 * @return                 An error code
+	 * @param[in] pControl                   A pointer to the control
+	 * @param[out]          index                        The index of the control
+	 * @exception E_SUCCESS                           The method is successful.
+	 * @exception    E_INVALID_ARG   The specified @c pControl is @c null.
+	 * @exception E_OBJ_NOT_FOUND               The specified instance of Control is not found.
+	 * @see                               SetControlAt()
+	 *
+	 */
+	result GetControlAt(const Control* pControl, int& index) const;
+
+	/**
 	 * Sets the control at the specified index.
 	 *
+	 * @brief       <i> [Deprecated] </i>
+	 * @deprecated  This API is deprecated.
 	 * @since			2.0
 	 *
 	 * @return		An error code
@@ -559,48 +726,74 @@ protected:
 	 * @exception	E_SYSTEM        A system error has occurred.
 	 * @remarks	    The @c control must be first added to this container. @n
 	 *				Call the Invalidate() method after this, to apply the change to be shown.
-	 * @see         Invalidate(), GetControlAt()
+	 * @see         Invalidate()
+	 * @see		GetControlAt()
 	 *
 	 */
 	result SetControlAt(const Control& control, int index);
 
-private:
-	//
-	// The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
-	//
-	Container(const Container& rhs);
-
-	//
-	// The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit copying of objects.
-	//
-	Container& operator =(const Container& rhs);
+	/**
+	 * Sets the control at a specified index.
+	 *
+	 * @since                             2.1
+	 *
+	 * @return                    An error code
+	 * @param[in] pControl        A pointer to the control
+	 * @param[in] index           The index
+	 * @exception E_SUCCESS       The method is successful.
+	 * @exception E_OUT_OF_RANGE  The specified @c index is out of range.
+	 * @exception E_INVALID_ARG   The specified @c pControl is @c null.
+	 * @exception E_SYSTEM        A system error has occurred.
+	 * @remarks					  The @c control must be first added to this container. @n
+	 *                            Then the Invalidate() method is called to show the applied changes.
+	 * @see						  Invalidate()
+	 * @see                       GetControlAt()
+	 *
+	 */
+	result SetControlAt(Control* pControl, int index);
 
 protected:
-	friend class _ContainerImpl;
+	/**
+	 * Called to notify that the bounds of the control is changing.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      An error code
+	 * @param[in]   oldRect  The old position and size values of the control
+	 * @param[in]   newRect  The new position and size values of the control
+	 * @remarks     If the method returns an exception, the resulting exception
+	 *              is propagated and the control's size is unchanged.@n
+	 *              Provide control specific exceptions.
+	 * @see         Tizen::Ui::Control::SetBounds()
+	 * @see         Tizen::Ui::Control::SetSize()
+	 */
+	virtual result OnBoundsChanging(const Tizen::Graphics::FloatRectangle& oldRect, const Tizen::Graphics::FloatRectangle& newRect);
 
-	//
-	// This method is for internal use only.
-	// Using this method can cause behavioral, security-related, and consistency-related issues in the application.
-	//
-	// This method is reserved and may change its name at any time without prior notice.
-	//
-	virtual void Container_Reserved1(void) {}
+	/**
+	 * Called to notify that the bounds of the control is changed.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      An error code
+	 * @param[in]   oldRect  The old position and size values of the control
+	 * @param[in]   newRect  The new position and size values of the control
+	 * @see         Tizen::Ui::Control::SetBounds()
+	 * @see         Tizen::Ui::Control::SetSize()
+	 */
+	virtual void OnBoundsChanged(const Tizen::Graphics::FloatRectangle& oldRect, const Tizen::Graphics::FloatRectangle& newRect);
 
-	//
-	// This method is for internal use only.
-	// Using this method can cause behavioral, security-related, and consistency-related issues in the application.
-	//
-	// This method is reserved and may change its name at any time without prior notice.
-	//
-	virtual void Container_Reserved2(void) {}
-
-	//
-	// This method is for internal use only.
-	// Using this method can cause behavioral, security-related, and consistency-related issues in the application.
-	//
-	// This method is reserved and may change its name at any time without prior notice.
-	//
-	virtual void Container_Reserved3(void) {}
+	/**
+	 * Overrides this method to indicate that the specified @c width and @c height
+	 * can be supported or a new @c width and @c height should be applied instead
+	 * of the specified values.
+	 *
+	 * @since           2.1
+	 *
+	 * @return          A Boolean flag that indicates whether the specified @c evaluatedSize
+	 *                  is modified.
+	 * @param[in, out]  evaluatedSize  The width and the height to evaluate
+	 */
+	virtual bool OnEvaluateSize(Tizen::Graphics::FloatDimension& evaluatedSize);
 
 	//
 	// This method is for internal use only.
@@ -618,6 +811,19 @@ protected:
 	//
 	virtual void Container_Reserved5(void) {}
 
+private:
+	//
+	// The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
+	//
+	Container(const Container& rhs);
+
+	//
+	// The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit copying of objects.
+	//
+	Container& operator =(const Container& rhs);
+
+private:
+	friend class _ContainerImpl;
 }; // Container
 
 }}  //Tizen::Ui

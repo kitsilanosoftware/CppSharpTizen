@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -45,7 +45,8 @@ namespace Tizen { namespace Ui { namespace Controls
  * The %Popup class displays messages to alert the user of important changes, to request confirmation for a significant task, or to
  * serve as a warning. It is an implementation of the Window class.
  *
- * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_popup_messagebox.htm">Popup and MessageBox</a>.
+ * For more information on the class features,
+ * see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_popup_messagebox.htm">Popup and MessageBox</a>.
  *
  * @see Tizen::Ui::Window
  *
@@ -111,7 +112,7 @@ PopupSample::OnInitializing(void)
 	pCloseButton->AddActionEventListener(*this);
 
 	// Adds the button to the popup
-	__pPopup->AddControl(*pCloseButton);
+	__pPopup->AddControl(pCloseButton);
 
 	// Creates an instance of Button to open the popup.
 	Button* pOpenButton = new Button();
@@ -120,7 +121,7 @@ PopupSample::OnInitializing(void)
 	pOpenButton->AddActionEventListener(*this);
 
 	// Adds the button to the form
-	AddControl(*pOpenButton);
+	AddControl(pOpenButton);
 
 	return r;
 }
@@ -145,7 +146,7 @@ PopupSample::OnTerminating(void)
 	result r = E_SUCCESS;
 
 	// Deallocates the __pPopup
-	delete __pPopup;
+	__pPopup->Destroy();
 
 	return r;
 }
@@ -169,15 +170,16 @@ PopupSample::OnActionPerformed(const Control& source, int actionId)
 		break;
 	}
 }
- * @endcode
- */
+* @endcode
+*/
 
 class _OSP_EXPORT_ Popup
 	: public Tizen::Ui::Window
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called.  @n
+	 * For full construction, the %Construct() method must be called right after calling this constructor.
 	 *
 	 * @since	2.0
 	 */
@@ -198,18 +200,40 @@ public:
 	 * @return		An error code
 	 * @param[in]	hasTitle			Set to @c true if the %Popup control has a title, @n
 	 *									else @c false
-	 * @param[in]	dim			    	The size of the %Popup control
+	 * @param[in]	dim			    	The size of the %Popup control @n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @exception	E_SUCCESS	    	The method is successful.
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
 	 * @exception	E_SYSTEM	    	A system error has occurred.
+	 * @remarks		The default owner will be the current Form (or Frame). It is possible that this control may not be visible
+	 * due to this ownership relationship. @n In this case, use the SetOwner() method to change the ownership to the top-most window.
 	 */
 	result Construct(bool hasTitle, const Tizen::Graphics::Dimension& dim);
 
 	/**
-	 * Initializes this instance of %Popup and child controls with the specified resource ID @n
+	 * Initializes this instance of %Popup with the specified dimensions.
 	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	hasTitle			Set to @c true if the %Popup control has a title, @n
+	 *									else @c false
+	 * @param[in]	dim			    	The size of the %Popup control @n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @exception	E_SUCCESS	    	The method is successful.
+	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
+	 * @exception	E_SYSTEM	    	A system error has occurred.
+	 * @remarks		The default owner will be the current Form (or Frame). It is possible that this control may not be visible
+	 * due to this ownership relationship. @n In this case, use the SetOwner() method to change the ownership to the top-most window.
+	 */
+	result Construct(bool hasTitle, const Tizen::Graphics::FloatDimension& dim);
+
+	/**
+	 * Initializes this instance of %Popup and child controls with the specified resource ID @n
 	 * This method first attempts to find the resource file in the folder that corresponds to the current screen resolution. @n
-	 * If it fails to find the resource file, it searches in other folders in the following order when CoordinateSystem is Logical in the application manifest file @n
+	 * If it fails to find the resource file, it searches in other folders in the following order when CoordinateSystem is Logical in the application manifest file
 	 * the density folder that corresponds to the current screen size category  "res/screen-size-normal/" folder.
 	 *
 	 * @since	  2.0
@@ -220,6 +244,10 @@ public:
 	 * @exception  E_FILE_NOT_FOUND        The specified file cannot be found.
 	 * @exception  E_INVALID_FORMAT        The specified XML format is invalid.
 	 * @exception  E_OPERATION_FAILED      The operation has failed.
+	 * @remarks		The default owner will be the current Form (or Frame). It is possible that this control may not be visible
+	 * due to this ownership relationship. @n In this case, use the SetOwner() method to change the ownership to the top-most window.
+	 * @remarks	If SetBounds(), SetSize(), SetPosition() methods are called before Show(), then the new value is applied to both orientations 
+	 *			because the current orientation is not known. After Show() is called, then the values are applied only to the current orientation.
 	 */
 	result Construct(const Tizen::Base::String& resourceId);
 
@@ -232,13 +260,38 @@ public:
 	 * @param[in]	layout				The layout for both the portrait and landscape mode
 	 * @param[in]	hasTitle	    	Set to @c true if the %Popup control should have a title, @n
 	 *							    	else @c false
-	 * @param[in]	dim			    	The size of the %Popup control
+	 * @param[in]	dim			    	The size of the %Popup control @n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @exception	E_SUCCESS	    	The method is successful.
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid, or
 	 *									the specified layout is already bound to another container.
 	 * @exception	E_SYSTEM	    	A system error has occurred.
+	 * @remarks		The default owner will be the current Form (or Frame). It is possible that this control may not be visible
+	 * due to this ownership relationship. @n In this case, use the SetOwner() method to change the ownership to the top-most window.
 	 */
 	result Construct(const Tizen::Ui::Layout& layout, bool hasTitle, const Tizen::Graphics::Dimension& dim);
+
+	/**
+	 * Initializes this instance of %Popup with the specified layout and dimensions.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	layout				The layout for both the portrait and landscape mode
+	 * @param[in]	hasTitle	    	Set to @c true if the %Popup control should have a title, @n
+	 *							    	else @c false
+	 * @param[in]	dim			    	The size of the %Popup control @n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @exception	E_SUCCESS	    	The method is successful.
+	 * @exception	E_INVALID_ARG		A specified input parameter is invalid, or
+	 *									the specified layout is already bound to another container.
+	 * @exception	E_SYSTEM	    	A system error has occurred.
+	 * @remarks		The default owner will be the current Form (or Frame). It is possible that this control may not be visible
+	 * due to this ownership relationship. @n In this case, use the SetOwner() method to change the ownership to the top-most window.
+	 */
+	result Construct(const Tizen::Ui::Layout& layout, bool hasTitle, const Tizen::Graphics::FloatDimension& dim);
 
 	/**
 	 * Initializes this instance of %Popup with the specified layouts and dimensions.
@@ -250,13 +303,39 @@ public:
 	 * @param[in]	landscapeLayout		The layout for the landscape mode
 	 * @param[in]	hasTitle			Set to @c true if this %Popup control should have a title, @n
 	 * 									else @c false
-	 * @param[in]	dim			    	The size of the %Popup control
+	 * @param[in]	dim			    	The size of the %Popup control @n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @exception	E_SUCCESS	    	The method is successful.
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid, or
 	 *									the specified layout is already bound to another container.
 	 * @exception	E_SYSTEM	    	A system error has occurred.
+	 * @remarks		The default owner will be the current Form (or Frame). It is possible that this control may not be visible
+	 * due to this ownership relationship. @n In this case, use the SetOwner() method to change the ownership to the top-most window.
 	 */
 	result Construct(const Tizen::Ui::Layout& portraitLayout, const Tizen::Ui::Layout& landscapeLayout, bool hasTitle, const Tizen::Graphics::Dimension& dim);
+
+	/**
+	 * Initializes this instance of %Popup with the specified layouts and dimensions.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	portraitLayout		The layout for the portrait mode
+	 * @param[in]	landscapeLayout		The layout for the landscape mode
+	 * @param[in]	hasTitle			Set to @c true if this %Popup control should have a title, @n
+	 * 									else @c false
+	 * @param[in]	dim			    	The size of the %Popup control @n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @exception	E_SUCCESS	    	The method is successful.
+	 * @exception	E_INVALID_ARG		A specified input parameter is invalid, or
+	 *									the specified layout is already bound to another container.
+	 * @exception	E_SYSTEM	    	A system error has occurred.
+	 * @remarks		The default owner will be the current Form (or Frame). It is possible that this control may not be visible
+	 * due to this ownership relationship. @n In this case, use the SetOwner() method to change the ownership to the top-most window.
+	 */
+	result Construct(const Tizen::Ui::Layout& portraitLayout, const Tizen::Ui::Layout& landscapeLayout, bool hasTitle, const Tizen::Graphics::FloatDimension& dim);
 
 	/**
 	 * Shows the modal window. @n
@@ -264,12 +343,13 @@ public:
 	 * @since 2.0
 	 * @return                   An error code
 	 * @param[out]   modalResult           The %Popup's notification. @n
-	 *                                     This value is the 'modalResult' parameter of the EndModal() method
+	 *                                              This value is the 'modalResult' parameter of the EndModal() method
 	 * @exception     E_SUCCESS            The method is successful.
 	 * @exception     E_INVALID_STATE    The %Popup is not visible. The visible state of the %Popup should be set @c true.
-	 * @remarks      Do not call this method from Tizen::App::App::OnAppInitializing(). @n
-	 *                   To show a %Popup properly from Tizen::Ui::Controls::Form::OnInitializing(), theForm must
-	 *                   have been successfully drawn before the DoModal() method.
+	 * @remarks
+	 *				- Do not call this method from Tizen::App::App::OnAppInitializing().
+	 *				- To show a %Popup properly from Tizen::Ui::Controls::Form::OnInitializing(), theForm must
+	 *				have been successfully drawn before the DoModal() method.
 	 */
 	result DoModal(int& modalResult);
 
@@ -279,7 +359,8 @@ public:
 	 * @since 2.0
 	 * @return                  An error code
 	 * @param[in]     modalResult                           The result value of the modal window. @n
-	 *                                                                 The value which needs to be returned as the output parameter of DoModal() method should be passed as the input argument
+	 *										The value which needs to be returned as the output parameter of DoModal() method
+	 *										should be passed as the input argument
 	 * @exception     E_SUCCESS                            The method is successful.
 	 * @exception     E_INVALID_STATE                    The method is not supported because this popup isn't running as a modal window.
 	 */
@@ -291,7 +372,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	title		The title to be set
+	 * @param[in]	title		The title to set
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_SYSTEM	A system error has occurred.
 	 */
@@ -311,9 +392,18 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The bounds of the client area in a Rectangle instance
+	 * @return		The bounds of the client area in a Tizen::Graphics::Rectangle instance
 	 */
 	Tizen::Graphics::Rectangle GetClientAreaBounds(void) const;
+
+	/**
+	 * Gets the bounds of the client area.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		The bounds of the client area in a Tizen::Graphics::FloatRectangle instance
+	 */
+	Tizen::Graphics::FloatRectangle GetClientAreaBoundsF(void) const;
 
 	/**
 	 * Creates and returns a graphics canvas whose bounds (position and size) are equal to the bounds of the client area of the %Popup control.
@@ -324,12 +414,13 @@ public:
 	 *				else @c null if an error occurs
 	 * @exception	E_SUCCESS					The method is successful.
 	 * @exception	E_RESOURCE_UNAVAILABLE		The required resource is currently unavailable.
-	 * @remarks		The method allocates a Tizen::Graphics::Canvas whose bounds are equal to that of the client area of the %Popup control. @n
-	 *				It is the responsibility of the developers to deallocate the canvas after use.
-	 * @remarks		The canvas is valid only if the properties of the parent control of the canvas remain unchanged. @n
-	 *				Therefore, delete the previously allocated canvas and create a new canvas using the GetCanvasN() method if the size or position of the
+	 * @remarks
+	 *				- The method allocates a Tizen::Graphics::Canvas whose bounds are equal to that of the client area of the %Popup control.
+	 *				- It is the responsibility of the developers to deallocate the canvas after use.
+	 *				- The canvas is valid only if the properties of the parent control of the canvas remain unchanged. @n
+	 *				Therefore, delete the previously allocated canvas and create a new canvas using this method if the size or position of the
 	 *				control is changed.
-	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
+	 *				- The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Tizen::Graphics::Canvas* GetClientAreaCanvasN(void) const;
 
@@ -346,6 +437,18 @@ public:
 	Tizen::Graphics::Point TranslateToClientAreaPosition(const Tizen::Graphics::Point& position) const;
 
 	/**
+	 * Translates the specified position to the client coordinates.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      The position in relative to the top-left corner of the client-area, @n
+	 *				else @c (-1.0f,-1.0f) if the instance is invalid
+	 * @param[in]   position	The position relative to the top-left corner of the %Popup control
+	 * @see         TranslateFromClientAreaPositionF()
+	 */
+	Tizen::Graphics::FloatPoint TranslateToClientAreaPosition(const Tizen::Graphics::FloatPoint& position) const;
+
+	/**
 	 * Translates the specified client position to the control coordinate.
 	 *
 	 * @since       2.0
@@ -356,6 +459,18 @@ public:
 	 * @see         TranslateToClientAreaPosition()
 	 */
 	Tizen::Graphics::Point TranslateFromClientAreaPosition(const Tizen::Graphics::Point& clientPosition) const;
+
+	/**
+	 * Translates the specified client position to the control coordinate.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      The position in relative to the top-left corner of the %Popup control, @n
+	 *				else @c (-1.0f,-1.0f) if the instance is invalid
+	 * @param[in]   clientPosition		The position relative to the top-left corner of the client area
+	 * @see         TranslateToClientAreaPositionF()
+	 */
+	Tizen::Graphics::FloatPoint TranslateFromClientAreaPosition(const Tizen::Graphics::FloatPoint& clientPosition) const;
 
 	/**
 	 * Gets the color of the %Popup control.
@@ -375,7 +490,7 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   color               The color to be set
+	 * @param[in]   color               The color to set
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_SYSTEM            A system error has occurred.
 	 */
@@ -420,10 +535,10 @@ public:
 protected:
 	friend class _PopupImpl;
 
-	//
-	// The following methods are reserved and may change its name at any time without
-	// prior notice.
-	//
+	/**
+	 * The following methods are reserved and may change its name at any time without
+	 * prior notice.
+	 */
 	virtual void Popup_Reserved1(void) { }
 	virtual void Popup_Reserved2(void) { }
 	virtual void Popup_Reserved3(void) { }

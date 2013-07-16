@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -45,7 +44,7 @@ namespace Tizen { namespace Social
  * @final          This class is not intended for extension.
  *
  * The %AddressbookFilter class represents the condition for searching the specific item on addressbook.
- * The type of the filter decides which item will be searched. (such as addressbook, contacts, persons, categories) @n
+ * The type of the filter decides which item will be searched (such as addressbook, contacts, persons, categories). @n
  * The filter can consist of multiple filtering expressions and conjunctive operators.
  * A filtering expression consists of a filter property, comparison operator and value.
  * The filter property must be an element of the enumerator that corresponds with the type of the filter. @n
@@ -109,7 +108,7 @@ class _OSP_EXPORT_ AddressbookFilter
 {
 public:
 	/**
-	 * Initializes an instance of %AddressbookFilter with the specified type.
+	 * Initializes an instance of %AddressbookFilter with the specified @c type.
 	 *
 	 * @since	2.0
 	 *
@@ -183,10 +182,10 @@ public:
 	 * @param[in]	comparisonOperator  	The comparison operator #FI_CMP_OP_EQUAL is only permitted
 	 * @param[in]	value   		The @c bool value for comparison 
 	 * @exception   E_SUCCESS               The method is successful.
-	 * @exception   E_INVALID_ARG        	Either of the following conditions has occurred: @n
-	 *                                     		- The @c filterProperty is not an element of the enumerator that corresponds with the type of this filter. @n
-	 *                                     		- The type of the @c filterProperty is not @c bool. @n
-	 *						- The @c comparisonOperator is no #FI_CMP_OP_EQUAL. @n
+	 * @exception   E_INVALID_ARG        	Either of the following conditions has occurred:
+	 *                                     		- The @c filterProperty is not an element of the enumerator that corresponds with the type of this filter.
+	 *                                     		- The type of the @c filterProperty is not @c bool.
+	 *						- The @c comparisonOperator is no #FI_CMP_OP_EQUAL.
 	 *                                     		- The specified @c conjuctiveOperator is invalid.
 	 * @remarks  If the filtering expression is appended firstly, the @c conjunctiveOperator is ignored.
 	 */

@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -41,7 +41,7 @@ namespace Tizen {namespace Ui
  * @interface		IGroupedItemEventListener
  * @brief			<i> [Deprecated] </i> This interface implements the listener for the events on the items of GroupedList.
  *
- * @deprecated     This class is deprecated. Instead of using this class, use IGroupedListViewItemEventListener class.
+ * @deprecated     This interface is deprecated. Instead of using this interface, use the IGroupedListViewItemEventListener interface.
  * @since			2.0
  *
  *
@@ -54,34 +54,34 @@ class _OSP_EXPORT_ IGroupedItemEventListener
 {
 public:
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * This is the default constructor for this class.
 	 *
 	 * @brief		<i> [Deprecated] </i>
-	 * @deprecated	This class is deprecated. Instead of using this class, use IGroupedListViewItemEventListener class.
+	 * @deprecated	This interface is deprecated. Instead of using this interface, use the IGroupedListViewItemEventListener interface.
 	 * @since		2.0
-	 * @endif
+         * @endif
 	 */
 	IGroupedItemEventListener(void) {};
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * This is the destructor for this class.
 	 *
 	 * @brief		<i> [Deprecated] </i>
-	 * @deprecated	This class is deprecated. Instead of using this class, use IGroupedListViewItemEventListener class.
+	 * @deprecated	This interface is deprecated. Instead of using this interface, use the IGroupedListViewItemEventListener interface.
 	 * @since		2.0
-	 * @endif
+         * @endif
 	 */
 	virtual ~IGroupedItemEventListener(void) {};
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Called when the state of an element in the CustomListItem instance in the GroupedList instance is changed. @n
-	 * For example, this method is called when an element of %CustomListItem in %GroupedList is checked, unchecked, or selected.
+	 * For example, the %OnItemStateChanged() method is called when an element of %CustomListItem in %GroupedList is checked, unchecked, or selected.
 	 *
 	 * @brief		<i> [Deprecated] </i>
-	 * @deprecated	This class is deprecated. Instead of using this class, use IGroupedListViewItemEventListener class.
+	 * @deprecated	This interface is deprecated. Instead of using this interface, use the IGroupedListViewItemEventListener interface.
 	 * @since		2.0
 	 *
 	 * @param[in]   source			The source of the event
@@ -93,17 +93,17 @@ public:
 	 * @remarks     If GroupedList or SlidableGroupedList is constructed with CUSTOM_LIST_STYLE_RADIO_WITH_DIVIDER, this method is not called when the
 	 *				radio button is selected. Instead, OnItemStateChanged(const Tizen::Ui::Control &source, int groupIndex, int itemIndex, int itemId,
 	 *				Tizen::Ui::ItemStatus status) is called.
-	 * @endif
-	 */
+         * @endif
+     	 */
 	virtual void OnItemStateChanged(const Tizen::Ui::Control& source, int groupIndex, int itemIndex, int itemId, int elementId, Tizen::Ui::ItemStatus status) = 0;
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Called when the state of an item in the grouped list is changed. @n
-	 * For example, this method is called when an item of the GroupedList control is checked, unchecked, or selected.
+	 * For example, the %OnItemStateChanged() method is called when an item of the GroupedList control is checked, unchecked, or selected.
 	 *
 	 * @brief		<i> [Deprecated] </i>
-	 * @deprecated	This class is deprecated. Instead of using this class, use IGroupedListViewItemEventListener class.
+	 * @deprecated	This interface is deprecated. Instead of using this interface, use the IGroupedListViewItemEventListener interface.
 	 * @since		2.0
 	 *
 	 * @param[in]   source			The source of the event
@@ -113,7 +113,7 @@ public:
 	 * @param[in]   status          The state of the item
 	 * @remarks		If GroupedList or SlidableGroupedList is constructed with CUSTOM_LIST_STYLE_RADIO_WITH_DIVIDER, this method is called when the radio
 	 *				button is selected.
-	 * @endif
+         * @endif
 	 */
 	virtual void OnItemStateChanged(const Tizen::Ui::Control& source, int groupIndex, int itemIndex, int itemId, Tizen::Ui::ItemStatus status) = 0;
 }; //IGroupedItemEventListener

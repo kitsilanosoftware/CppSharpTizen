@@ -26,16 +26,18 @@
 
 #include <FWebCtrlAuthenticationChallenge.h>
 #include <FWebCtrlHitElementResult.h>
-
+#include <FWebCtrlGeolocationPermissionManager.h>
 #include <FWebCtrlIJavaScriptBridge.h>
 #include <FWebCtrlILoadingListener.h>
 #include <FWebCtrlITextSearchListener.h>
 #include <FWebCtrlIWebDownloadListener.h>
 #include <FWebCtrlIWebKeypadEventListener.h>
 #include <FWebCtrlIWebUiEventListener.h>
+#include <FWebCtrlIWebUiEventListenerF.h>
 #include <FWebCtrlPageNavigationList.h>
 #include <FWebCtrlWeb.h>
 #include <FWebCtrlWebSetting.h>
+#include <FWebCtrlWebStorageManager.h>
 
 /**
  * @namespace	Tizen::Web::Controls
@@ -45,7 +47,7 @@
  *  @remarks    @b Header @b %file: @b \#include @b <FWeb.h> @n
  *				@b Library : @b osp-web
  *
- * The %Web::Controls namespace allows you to embed the %Web browser as a control within an application, to upload and download content, and retrieve the HyperText Markup Language (HTML) element and history details.
+ * The %Controls namespace allows you to embed the %Web browser as a control within an application, to upload and download content, and retrieve the HyperText Markup Language (HTML) element and history details.
  * @n
  * For more information on the %Controls namespace features, see <a href="../org.tizen.native.appprogramming/html/guide/web/controls_namespace.htm">Web Controls Guide</a>.
  *

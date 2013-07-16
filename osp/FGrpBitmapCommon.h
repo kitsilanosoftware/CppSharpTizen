@@ -1,12 +1,11 @@
 //
-// Open Service Platform
-// Copyright (c) 2012 Samsung Electronics Co., Ltd.
+// Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -67,7 +66,7 @@ enum BufferScaling
  *
  * @since 2.0
  *
- * @remarks Bitmap::Scale() function performs the operation according to the given BitmapScalingQuality value. \n
+ * @remarks The Bitmap::Scale() method performs the operation according to the given BitmapScalingQuality value. @n
  *          Bitmap scaling with BITMAP_SCALING_QUALITY_HIGH provides better results than others, but it takes longer.
  *          On the other hand, bitmap scaling with BITMAP_SCALING_QUALITY_LOW runs faster than others, but the results are poorer.
  *          When you scale bitmaps with a masking color then you have to select BITMAP_SCALING_QUALITY_LOW,

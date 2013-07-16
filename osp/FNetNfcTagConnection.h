@@ -35,7 +35,6 @@ class ByteBuffer;
 namespace Tizen { namespace Net { namespace Nfc
 {
 
-// Forward declaration
 class NfcTag;
 class _TagConnectionImpl;
 class ITagConnectionListener;
@@ -47,8 +46,8 @@ class ITagConnectionListener;
  *
  * @since   2.0
  *
- * The %TagConnection class represents the connection with an NFC tag. It provides the mechanism to communicate with the NFC tag
- * through ISO14443 or a general Radio Frequency Identification (RFID) manner. @n
+ * The %TagConnection class represents the connection with an NFC tag. It provides the mechanism to communicate with
+ * the NFC tag through ISO14443 or a general Radio Frequency Identification (RFID) manner. @n
  * The class has an NfcTag instance that represents the target tag. This class can be inherited by the
  * NdefTagConnection class if the target tag supports the NFC Data Exchange Format (NDEF) operations.
  *
@@ -175,7 +174,7 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   pListener           The listener to be added
+	 * @param[in]   pListener           The listener to add
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_SYSTEM            A system error has occurred.
 	 * @remarks     Only one event listener can be registered. If the input parameter is @c null, the listener that is
@@ -184,12 +183,12 @@ public:
 	result SetTagConnectionListener(ITagConnectionListener* pListener);
 
 	/**
-	 * Sends the specified command to the target tag.
+	 * Sends the specified @c command to the target tag.
 	 *
 	 * @since       2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   command             The command to be sent
+	 * @param[in]   command             The command to send
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_INVALID_ARG       The input @c command is invalid.
 	 * @exception   E_IN_PROGRESS       The previous send request is in progress.
@@ -249,19 +248,14 @@ protected:
 	virtual void TagConnection_Reserved3(void) {}
 
 private:
-	/*
-	 * The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
-	 *
-	 * @param[in]   value					An instance of %TagConnection
-	 */
+	//
+	// The implementation of this copy constructor is intentionally blank to prohibit copying of objects.
+	//
 	TagConnection(const TagConnection& value);
 
-	/*
-	 * The implementation of this copy assignment operator is intentionally blank
-	 * and declared as private to prohibit copying of objects.
-	 *
-	 * @param[in]   value					An instance of %TagConnection
-	 */
+	//
+	// The implementation of this copy assignment operator is intentionally blank to prohibit copying of objects.
+	//
 	TagConnection& operator =(const TagConnection& value);
 
 protected:

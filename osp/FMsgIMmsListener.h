@@ -34,7 +34,7 @@ namespace Tizen { namespace Messaging
 
 	/**
 	* @interface	IMmsListener
-	* @brief		This is the listener interface for receiving MMS sent status.
+	* @brief		This interface is the listener interface for receiving MMS sent status.
 	*
 	* @since		2.0
 	*

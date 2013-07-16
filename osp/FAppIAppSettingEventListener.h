@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -52,6 +51,8 @@ public:
 	 * the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @since	2.0
+	 *
+	 * @remarks	This method is invoked only in the main thread
 	 */
 	virtual ~IAppSettingEventListener(void) {}
 
@@ -61,6 +62,8 @@ public:
 	 * @since	2.0
 	 *
 	 * @param[in]	id		The ID of the application setting whose value is changed
+	 *
+	 * @remarks	This method is invoked only in the main thread
 	 */
 	virtual void OnAppSettingChanged(const Tizen::Base::String& id) = 0;
 

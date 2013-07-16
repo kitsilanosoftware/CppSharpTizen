@@ -108,14 +108,7 @@ public:
 	/**
 	 * Initializes this instance of %GifDecoder with the specified file path and pixel format.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 *					For more information, see @ref CompIoPathPage "here".
-	 * @endif
 	 *
 	 * @return	An error code
 	 * @param[in]  filePath	The file path of the source image
@@ -126,7 +119,7 @@ public:
 	 * @exception  E_INVALID_ARG	 The specified pixel format is not supported.
 	 * @exception  E_OUT_OF_MEMORY	 The memory is insufficient.
 	 * @exception  E_SYSTEM			 A system error has occurred.
-	 * @remarks	Supported pixel formats are @c MEDIA_PIXEL_FORMAT_RGB565LE, and @c MEDIA_PIXEL_FORMAT_BGRA8888.
+	 * @remarks	The supported pixel formats are @c MEDIA_PIXEL_FORMAT_RGB565LE, and @c MEDIA_PIXEL_FORMAT_BGRA8888.
 	 */
 	result Construct(const Tizen::Base::String& filePath, MediaPixelFormat pixelFormat);
 
@@ -143,7 +136,7 @@ public:
 	 * @exception	E_INVALID_ARG	  The specified pixel format is not supported.
 	 * @exception	E_OUT_OF_MEMORY	  The memory is insufficient.
 	 * @exception	E_SYSTEM		  A system error has occurred.
-	 * @remarks	Supported pixel formats are @c MEDIA_PIXEL_FORMAT_RGB565LE, and @c MEDIA_PIXEL_FORMAT_BGRA8888.
+	 * @remarks	The supported pixel formats are @c MEDIA_PIXEL_FORMAT_RGB565LE, and @c MEDIA_PIXEL_FORMAT_BGRA8888.
 	 */
 	result Construct(const Tizen::Base::ByteBuffer& srcBuf, MediaPixelFormat pixelFormat);
 
@@ -191,7 +184,7 @@ public:
 	 * @return	The next decoded frame, @n
 	 *		  else @c null if no frame is left or an error occurs
 	 * @param[out]	duration			The duration of returned frame in milliseconds
-	 * @param[in]	bufferScaling	   The buffer scaling type of Bitmap
+	 * @param[in]	bufferScaling	   The buffer scaling type of Tizen::Graphics::Bitmap
 	 * @exception	E_SUCCESS		  The method is successful.
 	 * @exception   E_INVALID_DATA	 The data of the next frame is invalid.
 	 * @exception	E_OUT_OF_MEMORY	   The memory is insufficient.

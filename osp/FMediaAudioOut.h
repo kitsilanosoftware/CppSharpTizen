@@ -163,8 +163,6 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @remarks		After creating an instance of this class, the Construct() method must be called explicitly to initialize this instance.
-	 * @see			Construct()
 	 */
 	AudioOut(void);
 
@@ -190,7 +188,7 @@ public:
 	* @exception	E_SUCCESS										The method is successful.
 	* @exception	E_SYSTEM											A system error has occurred.
 	* @exception	E_OUT_OF_MEMORY         The memory is insufficient. 
-	* @exception	E_RESOURCE_UNAVAILABLE		The AudioOut's resources are unavailable.
+	* @exception	E_RESOURCE_UNAVAILABLE		The %AudioOut's resources are unavailable.
 	*/
 	result Construct(IAudioOutEventListener& listener);
 
@@ -202,7 +200,7 @@ public:
 	* @return		An error code
 	* @param[in]	audioSampleType					The type of the audio sample
 	* @param[in]	audioChannelType					The type of the audio channel
-	* @param[in]	audioSampleRate					The audio sample rate in hertz (Hz)
+	* @param[in]	audioSampleRate					The audio sample rate in Hertz (Hz)
 	* @exception	E_SUCCESS									The method is successful.
 	* @exception	E_INVALID_STATE					This instance is in an invalid state for this method.
 	* @exception	E_SYSTEM										A system error has occurred.
@@ -221,7 +219,7 @@ public:
 	* @param[in]	audioStreamType					The type of the audio stream
 	* @param[in]	audioSampleType					The type of the audio sample
 	* @param[in]	audioChannelType					The type of the audio channel
-	* @param[in]	audioSampleRate					The audio sample rate in hertz (Hz)
+	* @param[in]	audioSampleRate					The audio sample rate in Hertz (Hz)
 	* @exception	E_SUCCESS								The method is successful.
 	* @exception	E_INVALID_STATE					This instance is in an invalid state for this method.
 	* @exception   E_DEVICE_FAILED              		The device failed with unknown reason.
@@ -246,7 +244,7 @@ public:
 
 	/**
 	* Writes into the data buffer containing the audio data to be played to this audio output device. @n
-	* When the end of the buffer is reached, the application gets the notification through %IAudioOutEventListener.
+	* When the end of the buffer is reached, the application gets the notification through IAudioOutEventListener.
 	*
 	* @since		2.0
 	*
@@ -257,7 +255,8 @@ public:
 	* @exception	E_SYSTEM							A system error has occurred.
 	* @exception	E_INVALID_ARG				The specified input parameter is invalid.
 	* @exception	E_OVERFLOW						The specified input instance has overflowed.
-	* @see			Start(), IAudioOutEventListener::OnAudioOutBufferEndReached()
+	* @see			Start()
+    * @see	        IAudioOutEventListener::OnAudioOutBufferEndReached()
 	*/
 	result WriteBuffer(const Tizen::Base::ByteBuffer& userData);
 
@@ -287,14 +286,14 @@ public:
 	* @exception	E_INVALID_STATE		This instance is in an invalid state for this method.
 	* @exception	E_SYSTEM							A system error has occurred.
 	* @remarks		Use Start() to resume the playback from the current playback position.
-	* @see			Start(), IAudioOutEventListener::OnAudioOutBufferEndReached()
+    * @see	        IAudioOutEventListener::OnAudioOutBufferEndReached()
 	*/
 	result Stop(void);
 
 	/**
 	* Resets the audio output device. @n
 	* All pending and current data buffers in the queue are removed immediately without any notification. The
-	* state is changed to AUDIOOUT_STATE_PREPARED.
+	* state is changed to ::AUDIOOUT_STATE_PREPARED.
 	*
 	* @since		2.0
 	*
@@ -328,8 +327,9 @@ public:
 	* @exception	E_SUCCESS						The method is successful.
 	* @exception	E_INVALID_STATE		This instance is in an invalid state for this method.
 	* @exception	E_SYSTEM							A system error has occurred.
-	* @remarks		The return value is available after calling the Prepare() method.
-	* @remarks		The specific error code can be accessed using the GetLastResult() method.
+	* @remarks		
+	*				- The return value is available after calling the Prepare() method.
+	* 				- The specific error code can be accessed using the GetLastResult() method.
 	*/
 	int GetMaxBufferSize(void) const;
 
@@ -344,8 +344,9 @@ public:
 	* @exception	E_SUCCESS						The method is successful.
 	* @exception	E_INVALID_STATE		This instance is in an invalid state for this method.
 	* @exception	E_SYSTEM							A system error has occurred.
-	* @remarks		The return value is available after calling the Prepare() method.
-	* @remarks		The specific error code can be accessed using the GetLastResult() method.
+	* @remarks		
+	*				- The return value is available after calling the Prepare() method.
+	* 				- The specific error code can be accessed using the GetLastResult() method.
 	*/
 	int GetMinBufferSize(void) const;
 
@@ -378,7 +379,7 @@ public:
 	*
 	* @since		2.0
 	*
-	* @return		The sample rate in hertz (Hz)
+	* @return		The sample rate in Hertz (Hz)
 	* @exception	E_SUCCESS						The method is successful.
 	* @exception	E_SYSTEM							A system error has occurred.
 	* @remarks		The specific error code can be accessed using the GetLastResult() method.
@@ -411,8 +412,9 @@ public:
 	*				This return value ranges from @c 0 to @c 100.
 	* @exception	E_SUCCESS						The method is successful.
 	* @exception	E_INVALID_STATE	 	This instance is in an invalid state for this method.
-	* @remarks		The specific error code can be accessed using the GetLastResult() method.
-	* @remarks		This method must be called after calling the Prepare() method.
+	* @remarks		
+	*				- The specific error code can be accessed using the GetLastResult() method.
+	* 				- This method must be called after calling the Prepare() method.
 	* @see			SetVolume()
 	*/
 	int GetVolume(void) const;

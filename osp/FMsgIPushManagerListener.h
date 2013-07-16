@@ -30,7 +30,7 @@ namespace Tizen { namespace Messaging
 {
 /**
 * @interface	IPushManagerListener
-* @brief		This listener interface receives the registration result.
+* @brief		This interface is the listener interface that receives the registration result.
 *
 * @since		2.0
 *
@@ -94,7 +94,7 @@ public:
 	* @param[in]	reqId						The request ID
 	* @param[in]	registrationId				The registration ID of the recipient
 	* @param[in]	r							The result of the request, @n
-	* 															Exception code may be given through this parameter.
+	* 															The following exceptions may be given through this parameter.
 	* @param[in]	errorCode					The error code from the server
 	* @param[in]	errorMsg					The error message from the server
 	* @exception	E_SUCCESS					The method is successful.

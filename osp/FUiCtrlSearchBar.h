@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -30,6 +30,7 @@
 #include <FBaseString.h>
 #include <FUiControl.h>
 #include <FUiCtrlEditTypes.h>
+#include <FUiCtrlIEditTextFilter.h>
 #include <FUiIActionEventListener.h>
 #include <FUiIKeypadEventListener.h>
 #include <FUiILanguageEventListener.h>
@@ -186,7 +187,7 @@ SearchBarSample::OnInitializing(void)
 	__pSearchBar->SetContent(__pSearchBarListView);
 
 	// Adds controls to the form
-	AddControl(*__pSearchBar);
+	AddControl(__pSearchBar);
 
 	return r;
 }
@@ -341,14 +342,16 @@ class _OSP_EXPORT_ SearchBar
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called.  @n
+	 * For full construction, the %Construct() method must be called right after calling this constructor.
 	 *
 	 * @since	2.0
 	 */
 	SearchBar(void);
 
 	/**
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required.@n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @since	2.0
 	 */
@@ -362,7 +365,9 @@ public:
 	 * @return		An error code
 	 * @param[in]	rect			An instance of the Graphics::Rectangle class @n
 	 *								This instance represents the x and y coordinates of the top-left corner of the created window along with
-	 *								the width and height of the control.
+	 *								the width and height of the control. @n
+	 *								The optimal size of the control is defined in
+	 *								<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @param[in]	searchBarButton	Set to @c true to display the search bar button, @n
 	 *                              else @c false
 	 * @param[in]	keypadAction	The keypad action
@@ -370,18 +375,44 @@ public:
 	 * @exception   E_INVALID_ARG	A specified input parameter is invalid, or @n
 	 *								the action ID of the specified item must be a positive integer.
 	 * @exception   E_SYSTEM		A system error has occurred.
-	 * @remarks     It is recommended that %SearchBar should be placed at the top-left corner of Form's client area.
-	 * @remarks     By default, a "Cancel" button is displayed if @c searchBarButton is set to @c true. When the user presses the cancel button,
-	 *              the %SearchBar control returns to SEARCH_BAR_MODE_NORMAL automatically.
+	 * @remarks
+	 *				- It is recommended that %SearchBar should be placed at the top-left corner of Form's client area.
+	 *				- By default, a "Cancel" button is displayed if @c searchBarButton is set to @c true. When the user presses the cancel button,
+	 *				the %SearchBar control returns to ::SEARCH_BAR_MODE_NORMAL automatically.
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, bool searchBarButton = true, KeypadAction keypadAction = KEYPAD_ACTION_SEARCH);
+
+	/**
+	 * Initializes this instance of the %SearchBar control with the specified parameters.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	rect			An instance of the Tizen::Graphics::FloatRectangle class @n
+	 *								This instance represents the x and y coordinates of the top-left corner of the created window along with
+	 *								the width and height of the control. @n
+	 *								The optimal size of the control is defined in
+	 *								<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]	searchBarButton	Set to @c true to display the search bar button, @n
+	 *                              else @c false
+	 * @param[in]	keypadAction	The keypad action
+	 * @exception   E_SUCCESS		The method is successful.
+	 * @exception   E_INVALID_ARG	A specified input parameter is invalid, or @n
+	 *								the action ID of the specified item must be a positive integer.
+	 * @exception   E_SYSTEM		A system error has occurred.
+	 * @remarks
+	 *				- It is recommended that %SearchBar should be placed at the top-left corner of Form's client area.
+	 *				- By default, a "Cancel" button is displayed if @c searchBarButton is set to @c true. When the user presses the cancel button,
+	 *				the %SearchBar control returns to ::SEARCH_BAR_MODE_NORMAL automatically.
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, bool searchBarButton = true, KeypadAction keypadAction = KEYPAD_ACTION_SEARCH);
 
 	/**
 	 * Gets the content of Control.
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The control that is displayed in the content area of %SearchBar in the SEARCH_BAR_MODE_INPUT mode, @n
+	 * @return		The control that is displayed in the content area of %SearchBar in the ::SEARCH_BAR_MODE_INPUT mode, @n
 	 *				else @c null if an error occurs
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
@@ -391,16 +422,9 @@ public:
 	/**
 	 * Sets the content control.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since		2.0
-	 * @if OSPCOMPAT
-	 * @compatibility This method has compatibility issues with OSP compatible applications. @n
-	 *						For more information, see @ref CompSetContentPage "here"
-	 * @endif
 	 * @return      An error code
-	 * @param[in]   pContent			The control that is to be displayed in the content area of the search bar
+	 * @param[in]   pContent			The control to display in the content area of the search bar
 	 * @exception   E_SUCCESS			The method is successful.
 	 * @exception   E_INVALID_ARG		A specified input parameter is invalid. @n
 	 *									The following controls cannot be set as the content: @n
@@ -433,7 +457,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	show					Set to @c true to perform show on the content area, @n
+	 * @param[in]	invalidate					Set to @c true to perform invalidate on the content area, @n
 	 *										else @c false
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_INVALID_OPERATION		The current state of the instance prohibits the execution of the specified operation. @n
@@ -485,6 +509,21 @@ public:
 	result SetContentAreaSize(const Tizen::Graphics::Dimension& size);
 
 	/**
+	 * Sets the size of the content area of the %SearchBar control.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	size				The size of the content area
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		The specified input parameter is invalid. @n
+	 *                                  The width and height of @c size must be greater than or equal to @c 0.
+	 * @remarks		The content area must be resized when the orientation of the form is changed once the size of the content area is changed.
+	 * @see         GetContentAreaSizeF()
+	 */
+	result SetContentAreaSize(const Tizen::Graphics::FloatDimension& size);
+
+	/**
 	 * Gets the size of the content area of the %SearchBar control.
 	 *
 	 * @since		2.0
@@ -496,6 +535,19 @@ public:
 	 * @see         ISearchBarEventListener
 	 */
 	Tizen::Graphics::Dimension GetContentAreaSize(void) const;
+
+	/**
+	 * Gets the size of the content area of the %SearchBar control.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		The size of the content area
+	 * @remarks		The content area is the area where the 'content' of the %SearchBar control is displayed. The size of the content areas can
+	 *              be changed at runtime.
+	 * @see         AddSearchBarEventListener()
+	 * @see         ISearchBarEventListener
+	 */
+	Tizen::Graphics::FloatDimension GetContentAreaSizeF(void) const;
 
 // Modes
 	/**
@@ -564,8 +616,9 @@ public:
 	 *				else @c -1 if an error occurs
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_SYSTEM            A system error has occurred.
-	 * @remarks     The specific error code can be accessed using the GetLastResult() method. @n
-	 *				By default, the method returns @c -1 if no user defined search bar button is set.
+	 * @remarks
+	 *				- The specific error code can be accessed using the GetLastResult() method.
+	 *				- By default, the method returns @c -1 if no user defined search bar button is set.
 	 */
 	int GetButtonActionId(void) const;
 
@@ -645,7 +698,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	status          The button status
-	 * @param[in]	color           The button color to be set
+	 * @param[in]	color           The button color to set
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
 	 * @see			GetButtonColor()
@@ -671,11 +724,12 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	character		The character to be added
+	 * @param[in]	character		The character to add
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		The method modifies the text buffer that is managed by the %SearchBar control. @n
-	 *              To display the changes, the control must be drawn again.
+	 * @remarks
+	 *				- The method modifies the text buffer that is managed by the %SearchBar control.
+	 *				- To display the changes, the control must be drawn again.
 	 */
 	result AppendCharacter(const Tizen::Base::Character& character);
 
@@ -685,12 +739,13 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	text		The text to be appended
+	 * @param[in]	text		The text to append
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_SYSTEM    A system error has occurred.
-	 * @remarks		To denote the end of a line use '\\n'. @n
-	 *              The method modifies the text buffer that is managed by the %SearchBar control. @n
-	 *              To display the changes, the control must be drawn again.
+	 * @remarks
+	 *				- To denote the end of a line use '\\n'.
+	 *				- The method modifies the text buffer that is managed by the %SearchBar control.
+	 *				- To display the changes, the control must be drawn again.
 	 */
 	result AppendText(const Tizen::Base::String& text);
 
@@ -701,12 +756,13 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	text			The text to be displayed
+	 * @param[in]	text			The text to display
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_SYSTEM        A system error has occurred.
-	 * @remarks		To denote the end of a line use '\\n'. @n
-	 *              The method modifies the text buffer that is managed by the %SearchBar control. @n
-	 *              To display the changes, the control must be drawn again.
+	 * @remarks
+	 *				- To denote the end of a line use '\\n'.
+	 *				- The method modifies the text buffer that is managed by the %SearchBar control.
+	 *				- To display the changes, the control must be drawn again.
 	 */
 	result SetText(const Tizen::Base::String& text);
 
@@ -717,14 +773,15 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	index			The position to insert the character
-	 * @param[in]	character		The character to be inserted
+	 * @param[in]	character		The character to insert
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_OUT_OF_RANGE	The specified @c index is outside the bounds of the data structure. @n
 	 *                              The specified @c index is greater than the number of elements or less than @c 0.
 	 * @exception	E_MAX_EXCEEDED	The length of the specified @c text exceeds the system limitation.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		The method modifies the text buffer that is managed by the %SearchBar control. @n
-	 *				To display the changes, the control must be drawn again.
+	 * @remarks
+	 *				- The method modifies the text buffer that is managed by the %SearchBar control.
+	 *				- To display the changes, the control must be drawn again.
 	 */
 	result InsertCharacterAt(int index, const Tizen::Base::Character& character);
 
@@ -735,14 +792,15 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	index			The position at which to insert
-	 * @param[in]	text			The text to be inserted
+	 * @param[in]	text			The text to insert
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_OUT_OF_RANGE  The specified @c index is outside the bounds of the data structure. @n
 	 *								The specified @c index is greater than the number of elements or less than @c 0.
 	 * @exception	E_MAX_EXCEEDED  The length of the specified @c text exceeds the system limitation.
 	 * @exception	E_SYSTEM	    A system error has occurred.
-	 * @remarks		The method modifies the text buffer that is managed by the %SearchBar control.
-	 *				To display the changes, the control must be drawn again.
+	 * @remarks
+	 *				- The method modifies the text buffer that is managed by the %SearchBar control.
+	 *				- To display the changes, the control must be drawn again.
 	 */
 	result InsertTextAt(int index, const Tizen::Base::String& text);
 
@@ -758,8 +816,9 @@ public:
 	 * @exception	E_OUT_OF_RANGE	The specified @c index is outside the bounds of the data structure. @n
 	 *                              The specified @c index is greater than the number of elements or less than @c 0.
 	 * @exception   E_SYSTEM		A system error has occurred.
-	 * @remarks     The method modifies the text buffer that is managed by the %SearchBar control. @n
-	 *              To display the changes, the control must be drawn again.
+	 * @remarks
+	 *				- The method modifies the text buffer that is managed by the %SearchBar control.
+	 *				- To display the changes, the control must be drawn again.
 	 */
 	result DeleteCharacterAt(int index);
 
@@ -771,8 +830,9 @@ public:
 	 * @return		An error code
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		The method modifies the text buffer that is managed by the %SearchBar control. @n
-	 *				To display the changes, the control must be drawn again.
+	 * @remarks
+	 *				- The method modifies the text buffer that is managed by the %SearchBar control.
+	 *				- To display the changes, the control must be drawn again.
 	 */
 	result Clear(void);
 
@@ -830,8 +890,9 @@ public:
 	 *				else @c -1 if an error occurs
 	 * @exception   E_SUCCESS		The method is successful.
 	 * @exception   E_SYSTEM		A system error has occurred.
-	 * @remarks     The specific error code can be accessed using the GetLastResult() method. @n
-	 *				The default limit length is @c 500.
+	 * @remarks
+	 *				- The specific error code can be accessed using the GetLastResult() method.
+	 *				- The default limit length is @c 500.
 	 * @see         SetLimitLength()
 	 */
 	int GetLimitLength(void) const;
@@ -842,7 +903,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	limitLength		The limit text length to be set
+	 * @param[in]	limitLength		The limit text length to set
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_INVALID_ARG	The specified input parameter is invalid, or @n
 	 *								the specified limit length cannot be @c 0 or negative.
@@ -891,6 +952,20 @@ public:
 	int GetSearchFieldTextSize(void) const;
 
 	/**
+	 * Gets the text size of the search field.
+	 *
+	 * @since		2.1
+	 *
+	 * @return      The size of the text, @n
+	 *              else @c -1 if an error occurs
+	 * @exception   E_SUCCESS		The method is successful.
+	 * @exception   E_SYSTEM		A system error has occurred.
+	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
+	 * @see         SetSearchFieldTextSize()
+	 */
+	float GetSearchFieldTextSizeF(void) const;
+
+	/**
 	 * Sets the text size of the text field of the %SearchBar control.
 	 *
 	 * @since		2.0
@@ -904,6 +979,21 @@ public:
 	 * @see			GetSearchFieldTextSize()
 	 */
 	result SetSearchFieldTextSize(int size);
+
+	/**
+	 * Sets the text size of the text field of the %SearchBar control.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	size			The text size
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_INVALID_ARG	The specified input parameter is invalid, or @n
+	 *								the specified @c size cannot be a negative value.
+	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @see			GetSearchFieldTextSizeF()
+	 */
+	result SetSearchFieldTextSize(float size);
 
 	/**
 	 * Gets the start and the end index of the currently selected text block.
@@ -1199,30 +1289,31 @@ public:
 	result SetEllipsisPosition(EllipsisPosition position);
 
 	/**
-	 * Sets the input language.
-	 *
-	 * @since 2.0
-	 *
-	 * @return     An error code
-	 * @param[in]  languageCode               The language to set
-	 * @exception  E_SUCCESS              The method is successful.
-	 * @exception  E_OUT_OF_MEMORY                   The memory is insufficient.
-	 * @remarks    The application can set the language of the current keypad that is associated with the current %SearchBar. @n
-	 *             This method only works if the language to set is supported by the current preloaded keypad.
-	 */
+	* Sets the input language.
+	*
+	* @since 2.0
+	*
+	* @return     An error code
+	* @param[in]  languageCode               The language to set
+	* @exception  E_SUCCESS              The method is successful.
+	* @exception  E_OUT_OF_MEMORY                   The memory is insufficient.
+	* @remarks
+	*				- The application can set the language of the current keypad that is associated with the current %SearchBar.
+	*				- This method only works if the language to set is supported by the current preloaded keypad.
+	*/
 
 	result SetCurrentLanguage(Tizen::Locales::LanguageCode languageCode);
 
 	/**
-	 * Gets the current input language.
-	 *
-	 * @since 2.0
-	 *
-	 * @return     An error code
-	 * @param[out] language               The current input language
-	 * @exception     E_SUCCESS                             The method is successful.
-	 * @remarks   The application can get the current language of the keypad that is associated with the current %SearchBar.
-	 */
+	* Gets the current input language.
+	*
+	* @since 2.0
+	*
+	* @return     An error code
+	* @param[out] language               The current input language
+	* @exception     E_SUCCESS                             The method is successful.
+	* @remarks   The application can get the current language of the keypad that is associated with the current %SearchBar.
+	*/
 
 	result GetCurrentLanguage(Tizen::Locales::LanguageCode& language) const;
 
@@ -1239,27 +1330,27 @@ public:
 	KeypadAction GetKeypadAction(void) const;
 
 	/**
-	 * Checks whether the text prediction is enabled.
-	 *
-	 * @since 2.0
-	 * @return                @c true if the text prediction is enabled, @n
-	 *                                 else @c false
-	 * @exception          E_SUCCESS                The method is successful.
-	 * @see                      SetTextPredictionEnabled()
-	 */
+	* Checks whether the text prediction is enabled.
+	*
+	* @since 2.0
+	* @return                @c true if the text prediction is enabled, @n
+	*                                 else @c false
+	* @exception          E_SUCCESS                The method is successful.
+	* @see                      SetTextPredictionEnabled()
+	*/
 	bool IsTextPredictionEnabled(void) const;
 
 	/**
-	 * Enables or disables the text prediction.
-	 *
-	 * @since 2.0
-	 * @param[in]           enable                       Set to @c true to enable the text prediction, @n
-	 *                                                                    else @c false
-	 * @return                An error code
-	 * @exception           E_SUCCESS                The method is successful.
-	 * @exception		E_UNSUPPORTED_OPERATION     This operation is not supported.
-	 * @see                      IsTextPredictionEnabled()
-	 */
+	* Enables or disables the text prediction.
+	*
+	* @since 2.0
+	* @param[in]           enable                       Set to @c true to enable the text prediction, @n
+	*                                                                    else @c false
+	* @return                An error code
+	* @exception           E_SUCCESS                The method is successful.
+	* @exception		E_UNSUPPORTED_OPERATION     This operation is not supported.
+	* @see                      IsTextPredictionEnabled()
+	*/
 	result SetTextPredictionEnabled(bool enable);
 
 	/**
@@ -1268,7 +1359,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @see			RemoveActionEventListener()
 	 */
 	void AddActionEventListener(Tizen::Ui::IActionEventListener& listener);
@@ -1279,7 +1370,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 * @see			AddActionEventListener()
 	 */
 	void RemoveActionEventListener(Tizen::Ui::IActionEventListener& listener);
@@ -1290,7 +1381,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener		The event listener to be added
+	 * @param[in]	listener		The event listener to add
 	 * @remarks		The added listener is notified when: @n
 	 *              @li The user presses a key on the software keypad.
 	 *              @li The user selects a word in the candidate list.
@@ -1305,7 +1396,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 * @see			AddTextEventListener()
 	 */
 	void RemoveTextEventListener(Tizen::Ui::ITextEventListener& listener);
@@ -1316,7 +1407,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @remarks		The added listener is notified when: @n
 	 *              @li The user presses a key on the software keypad.
 	 *              @li The user selects a word in the candidate list.
@@ -1331,7 +1422,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 * @see         RemoveTextEventListener()
 	 */
 	void RemoveSearchBarEventListener(ISearchBarEventListener& listener);
@@ -1341,7 +1432,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @remarks		Programmatically, modification of the text selection does not cause the text block selection event to fire.
 	 * @see			RemoveTextBlockEventListener()
 	 */
@@ -1353,7 +1444,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 * @see			AddTextBlockEventListener()
 	 */
 	void RemoveTextBlockEventListener(Tizen::Ui::ITextBlockEventListener& listener);
@@ -1364,7 +1455,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @see         RemoveKeypadEventListener()
 	 */
 	void AddKeypadEventListener(Tizen::Ui::IKeypadEventListener& listener);
@@ -1375,36 +1466,57 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 * @see			AddKeypadEventListener()
 	 */
 	void RemoveKeypadEventListener(Tizen::Ui::IKeypadEventListener& listener);
 
 	/**
-	 * Adds a listener instance for language events. @n
-	 * The added listener is notified when the input language is changed.
-	 *
-	 * @since 2.0
-	 *
-	 * @param[in]  listener               The listener to add
-	 * @remarks    The application can recognize when the language is changed from the keypad by adding Tizen::Ui::ILanguageEventListener.
-	 * @see            RemoveLanguageEventListener()
-	 */
+	* Adds a listener instance for language events. @n
+	* The added listener is notified when the input language is changed.
+	*
+	* @since 2.0
+	*
+	* @param[in]  listener               The listener to add
+	* @remarks    The application can recognize when the language is changed from the keypad by adding Tizen::Ui::ILanguageEventListener.
+	* @see            RemoveLanguageEventListener()
+	*/
 
 	void AddLanguageEventListener(Tizen::Ui::ILanguageEventListener& listener);
 
 	/**
-	 * Removes the specified listener instance. @n
-	 * The removed listener cannot listen to events when they are fired.
-	 *
-	 * @since 2.0
-	 *
-	 * @param[in]  listener               The listener to remove
-	 * @see             AddLanguageEventListener()
-	 */
+	* Removes the specified listener instance. @n
+	* The removed listener cannot listen to events when they are fired.
+	*
+	* @since 2.0
+	*
+	* @param[in]  listener               The listener to remove
+	* @see             AddLanguageEventListener()
+	*/
 
 	void RemoveLanguageEventListener(Tizen::Ui::ILanguageEventListener& listener);
 
+	/**
+	 * Sets the text filter.
+	 *
+	 * @since		2.1
+	 *
+	 * @param[in]		pFilter The filter
+	 * @remarks 	The %SearchBar control checks with the registered filter to decide whether the user-entered text should be replaced.
+	 */
+	void  SetEditTextFilter(IEditTextFilter* pFilter);
+
+	/**
+	* Sends opaque command to the input method.
+	*
+	* @since     2.1
+	*
+	* @param[in] command            The opaque command
+	* @remarks
+	*				- This method can be used to provide domain-specific features that are only known between certain input methods and their clients.
+	*				- This method may not work, depending on the active Input Method.
+	*/
+	void SendOpaqueCommand (const Tizen::Base::String& command);
 
 protected:
 	friend class _SearchBarImpl;

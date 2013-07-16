@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -1244,6 +1243,16 @@ public:
 	 * @return		A pointer to the raw array of the calling buffer
 	 */
 	const byte* GetPointer(void) const;
+
+	/**
+	 * Gets the pointer to the raw array of the calling buffer. @n
+	 * If the capacity is zero, it returns @c null.
+	 *
+	 * @since 2.1
+	 *
+	 * @return		A pointer(non-const) to the raw array of the calling buffer
+	 */
+	byte* GetPointer(void);
 
 	/**
 	 * Compares the input Object with the calling %ByteBuffer instance.

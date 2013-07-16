@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -34,22 +33,12 @@ class IContentTransferListener;
 
 /**
  * @if OSPDEPREC
- * @class	ContentTransferInfo
- * @brief	<i> [Deprecated] </i> This class contains methods that provide information about the content transfer.
- *
- * @deprecated	This class is deprecated. Instead of using this class, use DownloadManager class.
- * @since	2.0
- *
- * The %ContentTransferInfo class provides information about the transfer of content between the device and servers.
- * @endif
- */
-
-/**
  * @enum ContentTransferStatus
  *
  * Defines the content transfer status.
  *
  * @since	2.0
+ * #endif
  */
 enum  ContentTransferStatus
 {
@@ -59,6 +48,17 @@ enum  ContentTransferStatus
 	CONTENT_TRANSFER_STATUS_DOWNLOAD_READY,				/**<  The Download ready status */
 };
 
+/**
+ * @if OSPDEPREC
+ * @class	ContentTransferInfo
+ * @brief	<i> [Deprecated] </i> This class contains methods that provide information about the content transfer.
+ *
+ * @deprecated	This class is deprecated. Instead of using this class, use DownloadManager class.
+ * @since	2.0
+ *
+ * The %ContentTransferInfo class provides information about the transfer of content between the device and servers.
+ * @endif
+ */
 class _OSP_EXPORT_ ContentTransferInfo
 	: virtual public Tizen::Base::Object
 {

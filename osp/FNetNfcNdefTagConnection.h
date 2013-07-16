@@ -30,7 +30,6 @@
 namespace Tizen { namespace Net { namespace Nfc
 {
 
-// Forward declaration
 class _NdefTagConnectionImpl;
 class NdefMessage;
 class INdefTagConnectionListener;
@@ -41,8 +40,8 @@ class INdefTagConnectionListener;
  *
  * @since    2.0
  *
- * The %NdefTagConnection class provides the mechanism to communicate with the tag that has NFC Data Exchange Format (NDEF) data and
- * supports the NDEF message operations. @n
+ * The %NdefTagConnection class provides the mechanism to communicate with the tag that has NFC Data Exchange Format
+ * (NDEF) data and supports the NDEF message operations. @n
  * This class can be derived from the TagConnection class. Use the IsNdefConnection() method to check the availability
  * of the derivation. @n
  * Use the Read() and Write() methods to read and write the NDEF data. After the completion of the read and write
@@ -163,7 +162,7 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   pListener           The listener to be added
+	 * @param[in]   pListener           The listener to add
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_SYSTEM            A system error has occurred.
 	 * @remarks     At the most, one event listener can be registered. If the input parameter is @c null, the listener
@@ -192,7 +191,7 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   message             The NDEF message to be written to the target
+	 * @param[in]   message             The NDEF message to write to the target
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_INVALID_ARG       The input @c message is invalid. @n
 	 *                                  For example, it does not contain any NDEF records.
@@ -212,21 +211,19 @@ public:
 	virtual ~NdefTagConnection(void);
 
 private:
+	//
+	// This default constructor is intentionally declared as private so that only the platform can create an instance.
+	//
 	NdefTagConnection(void);
 
-	/*
-	 * The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
-	 *
-	 * @param[in]   value					An instance of %NdefTagConnection
-	 */
+	//
+	// The implementation of this copy constructor is intentionally blank to prohibit copying of objects.
+	//
 	NdefTagConnection(const NdefTagConnection& value);
 
-	/*
-	 * The implementation of this copy assignment operator is intentionally blank
-	 * and declared as private to prohibit copying of objects.
-	 *
-	 * @param[in]   value					An instance of %NdefTagConnection
-	 */
+	//
+	// The implementation of this copy assignment operator is intentionally blank to prohibit copying of objects.
+	//
 	NdefTagConnection& operator =(const NdefTagConnection& value);
 
 private:

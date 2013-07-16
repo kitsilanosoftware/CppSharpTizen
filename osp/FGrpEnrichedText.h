@@ -1,15 +1,16 @@
 //
+//
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+// http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -105,13 +106,12 @@ using namespace Tizen::App;
 using namespace Tizen::Graphics;
 
 bool
-MyClass::EnrichedTextSample(void)
+MyClass::EnrichedTextSample(Canvas& canvas)
 {
     result r = E_SUCCESS;
     EnrichedText* pEnrichedText = null;
     TextElement* pTextElement1 = null;
     TextElement* pTextElement2 = null;
-    Bitmap* pBitmap = null;
 
     // Creates an EnrichedText instance and sets the attributes
     pEnrichedText = new EnrichedText();
@@ -148,23 +148,12 @@ MyClass::EnrichedTextSample(void)
     }
     pTextElement2->SetTextColor(Color::GetColor(COLOR_ID_VIOLET));
 
-    // Creates a bitmap and scales the size
-    pBitmap = App::GetInstance()->GetAppResource()->GetBitmapN(L"example.bmp");
-    pBitmap->Scale(Dimension(40, 40));
-
     // Adds the TextElement and the bitmap to the EnrichedText
     pEnrichedText->Add(*pTextElement1);
     pEnrichedText->Add(*pTextElement2);
-    pEnrichedText->Add(*pBitmap);
 
     // Draws
     {
-        Canvas canvas;
-        r = canvas.Construct();
-        if (IsFailed(r))
-        {
-            goto CATCH;
-        }
         canvas.SetBackgroundColor(Color::GetColor(COLOR_ID_BLACK));
         canvas.Clear();
         canvas.FillRectangle(Color::GetColor(COLOR_ID_WHITE), Rectangle(50, 50, 380, 380));
@@ -235,6 +224,20 @@ public:
 	 * @exception	E_INVALID_ARG		The specified input parameter is invalid.
 	 */
 	result Construct(const Tizen::Graphics::Dimension& dim);
+
+	/**
+	 * Initializes this instance of %EnrichedText with a specified parameter.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	dim					The FloatDimension to set for %EnrichedText @n
+	 *									The width and height must be greater than @c 0.0f.
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
+	 * @exception	E_INVALID_ARG		The specified input parameter is invalid.
+	 */
+	result Construct(const Tizen::Graphics::FloatDimension& dim);
 
 	/**
 	 * Inserts the TextElement instance in the %EnrichedText instance at the specified index.
@@ -315,7 +318,7 @@ public:
 	 * @since          2.0
 	 *
 	 * @return         An error code
-	 * @param[in]      deallocate			Set to @c true to deallocate the elements to be removed, @n
+	 * @param[in]      deallocate			Set to @c true to deallocate the elements to remove, @n
 	 *										else @c false
 	 * @exception      E_SUCCESS            The method is successful.
 	 * @exception      E_SYSTEM             An unknown operating system error has occurred.
@@ -352,12 +355,25 @@ public:
 	 * @since		2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   size                The new size of the %EnrichedText @n
+	 * @param[in]   size                The new size of the %EnrichedText instance @n
 	 *                                  The width and height must be greater than @c 0.
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_OUT_OF_RANGE      The value of the parameter is outside the valid range defined by the method.
 	 */
 	result SetSize(const Tizen::Graphics::Dimension& size);
+
+	/**
+	 * Sets the text size.
+	 *
+	 * @since		2.1
+	 *
+	 * @return      An error code
+	 * @param[in]   size                The new size of the %EnrichedText instance @n
+	 *                                  The width and height must be greater than @c 0.0f.
+	 * @exception   E_SUCCESS           The method is successful.
+	 * @exception   E_OUT_OF_RANGE      The value of the parameter is outside the valid range defined by the method.
+	 */
+	result SetSize(const Tizen::Graphics::FloatDimension& size);
 
 	/**
 	 * Sets the text size.
@@ -375,6 +391,21 @@ public:
 	result SetSize(int width, int height);
 
 	/**
+	 * Sets the text size.
+	 *
+	 * @since		2.1
+	 *
+	 * @return      An error code
+	 * @param[in]   width	The new width of %EnrichedText @n
+	 *					It must be greater than @c 0.0f.
+	 * @param[in]   height	The new height of %EnrichedText @n
+	 *					It must be greater than @c 0.0f.
+	 * @exception   E_SUCCESS           The method is successful.
+	 * @exception   E_OUT_OF_RANGE      The value of the argument is outside the valid range defined by the method.
+	 */
+	result SetSize(float width, float height);
+
+	/**
 	 * Gets the size.
 	 *
 	 * @since		2.0
@@ -383,6 +414,16 @@ public:
 	 *
 	 */
 	Tizen::Graphics::Dimension GetSize(void) const;
+
+	/**
+	 * Gets the size.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An instance of FloatDimension containing the width and the height of the %EnrichedText instance
+	 *
+	 */
+	Tizen::Graphics::FloatDimension GetSizeF(void) const;
 
 	/**
 	 * Gets the size of the %EnrichedText instance.
@@ -395,6 +436,16 @@ public:
 	void GetSize(int& width, int& height) const;
 
 	/**
+	 * Gets the size of the %EnrichedText instance.
+	 *
+	 * @since		2.1
+	 *
+	 * @param[out]	width		The width of the control
+	 * @param[out]	height		The height of the control
+	 */
+	void GetSize(float& width, float& height) const;
+
+	/**
 	 * Gets the width of the %EnrichedText instance.
 	 *
 	 * @since		2.0
@@ -402,6 +453,15 @@ public:
 	 * @return		The width
 	 */
 	int GetWidth(void) const;
+
+	/**
+	 * Gets the width of the %EnrichedText instance.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		The width
+	 */
+	float GetWidthF(void) const;
 
 	/**
 	 * Gets the height of the %EnrichedText instance.
@@ -412,6 +472,14 @@ public:
 	 */
 	int GetHeight(void) const;
 
+	/**
+	 * Gets the height of the %EnrichedText instance.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		The height
+	 */
+	float GetHeightF(void) const;
 
 	/**
 	 * Sets the vertical alignment.
@@ -512,6 +580,19 @@ public:
 	result SetLineSpace(int lineSpace);
 
 	/**
+	 * Sets the line spacing.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	lineSpace			The space between lines
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		The specified input parameter is invalid.
+	 *
+	 */
+	result SetLineSpace(float lineSpace);
+
+	/**
 	 * Gets the line spacing.
 	 *
 	 * @since		2.0
@@ -519,6 +600,15 @@ public:
 	 * @return		space		The space between lines
 	 */
 	int GetLineSpace(void) const;
+
+	/**
+	 * Gets the line spacing.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		space		The space between lines
+	 */
+	float GetLineSpaceF(void) const;
 
 	/**
 	 * Refreshes the texts and bitmap according to the %EnrichedText instance's attributes. @n
@@ -548,7 +638,16 @@ public:
 	int GetTotalLineHeight(void) const;
 
 	/**
-	 * Gets the displayed line count of the text in the %EnrichedText instance. @n
+	 * Gets the height of the text in the %EnrichedText instance.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		The line height
+	 */
+	float GetTotalLineHeightF(void) const;
+
+	/**
+	 * Gets the displayed line count of the text in the %EnrichedText instance.
 	 *
 	 * @since		2.0
 	 *
@@ -613,6 +712,20 @@ public:
 	int GetLineHeight(int lineIndex) const;
 
 	/**
+	 * Gets the line height of a specified line.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		The line height, @n
+	 *				else @c -1.0f if the method fails
+	 * @param[in]	lineIndex			The line index
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		The specified input parameter is invalid.
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
+	 */
+	float GetLineHeightF(int lineIndex) const;
+
+	/**
 	 * Gets the text length of the %EnrichedText object.
 	 *
 	 * @since		2.0
@@ -628,7 +741,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	startTextIndex		The starting text index of the %EnrichedText
+	 * @param[in]	startTextIndex		The starting text index of the %EnrichedText instance
 	 * @param[in]	textLength			The length of the specified text @n
 	 *									It must be greater than or equal to @c 0.
 	 * @param[out]  width				The width of the specified text
@@ -641,10 +754,30 @@ public:
 	result GetTextExtent(int startTextIndex, int textLength, int& width, int& height, int& actualLength) const;
 
 	/**
-	 * Gets the extent of the %EnrichedText instance on the assumption that all %TextElements are
+	 * Gets the extent of the %EnrichedText instance on the assumption that all TextElements are
+	 * expanded to one line.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	startTextIndex		The starting text index of the %EnrichedText instance
+	 * @param[in]	textLength			The length of the specified text @n
+	 *									It must be greater than or equal to @c 0.
+	 * @param[out]  width				The width of the specified text
+	 * @param[out]  height				The height of the specified text
+	 * @param[out]  actualLength		The actual text length measured
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_OUT_OF_RANGE		The value of the argument is outside the valid range defined by the method.
+	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
+	 */
+	result GetTextExtent(int startTextIndex, int textLength, float& width, float& height, int& actualLength) const;
+
+	/**
+	 * Gets the extent of the %EnrichedText instance on the assumption that all TextElements are
 	 * expanded to one line.
 	 *
 	 * @since 2.0
+	 *
 	 * @return		An error code
 	 * @param[in]	startTextIndex		The starting text index of the EnrichedText
 	 * @param[in]	textLength			The length of the specified text @n
@@ -658,14 +791,42 @@ public:
 	result GetTextExtent(int startTextIndex, int textLength, Tizen::Graphics::Dimension& size, int& actualLength) const;
 
 	/**
-	 * Gets the extent of the %EnrichedText instance on the assumption that all %TextElements are
-	 * not expanded to one line. This function is useful for finding the extent of EnrichedText spanning multiple lines.
+	 * Gets the extent of the %EnrichedText instance on the assumption that all TextElements are
+	 * expanded to one line.
+	 *
+	 * @since 2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	startTextIndex		The starting text index of the %EnrichedText instance
+	 * @param[in]	textLength			The length of the specified text @n
+	 *									It must be greater than or equal to @c 0.
+	 * @param[out]  size				The extent of the specified text
+	 * @param[out]  actualLength		The actual text length measured
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_OUT_OF_RANGE		The value of the argument is outside the valid range defined by the method.
+	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
+	 */
+	result GetTextExtent(int startTextIndex, int textLength, Tizen::Graphics::FloatDimension& size, int& actualLength) const;
+
+	/**
+	 * Gets the extent of the %EnrichedText instance on the assumption that all TextElements are
+	 * not expanded to one line. @n The %GetTextExtent() method is useful for finding the extent of %EnrichedText spanning multiple lines.
 	 *
 	 * @since 2.0
-	 * @return		An instance of %Dimension containing the extent of the %EnrichedText instance, @n
+	 * @return		An instance of Dimension containing the extent of the %EnrichedText instance, @n
 	 * 				else (-1, -1) if the method fails
 	 */
 	Tizen::Graphics::Dimension GetTextExtent(void) const;
+
+	/**
+	 * Gets the extent of the %EnrichedText instance on the assumption that all TextElements are
+	 * not expanded to one line. @n The %GetTextExtentF() method is useful for finding the extent of %EnrichedText spanning multiple lines.
+	 *
+	 * @since 2.1
+	 * @return		An instance of FloatDimension containing the extent of the %EnrichedText instance, @n
+	 * 				else (-1.0f, -1.0f) if the method fails
+	 */
+	Tizen::Graphics::FloatDimension GetTextExtentF(void) const;
 
 	/**
 	 * Adds the specified bitmap image to the %EnrichedText instance.
@@ -710,11 +871,26 @@ public:
 	 * @exception  E_SUCCESS          The method is successful.
 	 * @exception  E_INVALID_ARG      A specified input parameter is invalid.
 	 * @exception  E_OBJ_NOT_FOUND    The required instance is not found.
-	 * @remarks    The method throws @c E_OBJ_NOT_FOUND if there is no linked text at the specified position.
+	 * @remarks    This method throws @c E_OBJ_NOT_FOUND if there is no linked text at the specified position.
 	 * @see        Tizen::Base::Utility::LinkInfo
 	 */
 	result GetLinkInfoFromPosition(const Point& point, Tizen::Base::Utility::LinkInfo& linkInfo) const;
 
+	/*
+	 * Gets the information about the link at the specified position.
+	 *
+	 * @since      2.1
+	 *
+	 * @return     An error code
+	 * @param[in]  point              A point that is within the %EnrichedText object
+	 * @param[out] linkInfo           The LinkInfo object that represents the link at the specified position
+	 * @exception  E_SUCCESS          The method is successful.
+	 * @exception  E_INVALID_ARG      A specified input parameter is invalid.
+	 * @exception  E_OBJ_NOT_FOUND    The required instance is not found.
+	 * @remarks    This method throws @c E_OBJ_NOT_FOUND if there is no linked text at the specified position.
+	 * @see        Tizen::Base::Utility::LinkInfo
+	 */
+	result GetLinkInfoFromPosition(const FloatPoint& point, Tizen::Base::Utility::LinkInfo& linkInfo) const;
 
 	/**
 	 * Gets the information about the link at the specified position.
@@ -728,10 +904,27 @@ public:
 	 * @exception  E_SUCCESS          The method is successful.
 	 * @exception  E_INVALID_ARG      A specified input parameter is invalid.
 	 * @exception  E_OBJ_NOT_FOUND    The required instance is not found.
-	 * @remarks    The method throws @c E_OBJ_NOT_FOUND if there is no linked text at the specified position.
+	 * @remarks    This method throws @c E_OBJ_NOT_FOUND if there is no linked text at the specified position.
 	 * @see        Tizen::Base::Utility::LinkInfo
 	 */
 	result GetLinkInfoFromPosition(int x, int y, Tizen::Base::Utility::LinkInfo& linkInfo) const;
+
+	/**
+	 * Gets the information about the link at a specified position.
+	 *
+	 * @since      2.1
+	 *
+	 * @return     An error code
+	 * @param[in]  x                  The x-coordinate of a point that is within the %EnrichedText object
+	 * @param[in]  y                  The y-coordinate of a point that is within the %EnrichedText object
+	 * @param[out] linkInfo           The LinkInfo object that represents the link at the specified position
+	 * @exception  E_SUCCESS          The method is successful.
+	 * @exception  E_INVALID_ARG      A specified input parameter is invalid.
+	 * @exception  E_OBJ_NOT_FOUND    The required instance is not found.
+	 * @remarks    This method throws @c E_OBJ_NOT_FOUND if there is no linked text at the specified position.
+	 * @see        Tizen::Base::Utility::LinkInfo
+	 */
+	result GetLinkInfoFromPosition(float x, float y, Tizen::Base::Utility::LinkInfo& linkInfo) const;
 
 	/**
 	 * Gets the vertical alignment among text and bitmap element.
@@ -753,7 +946,7 @@ public:
 	 * @exception	E_INVALID_ARG		The specified input parameter is invalid.
 	 * @remarks		This method sets how one element is positioned relative to the other elements. @n
 	 *				The vertical alignment of text and bitmap elements are decided based on the maximum height among elements.
-	 * @remarks		The default alignment TEXT_ALIGNMENT_BOTTOM.
+	 * @remarks		The default alignment @c TEXT_ALIGNMENT_BOTTOM.
 	 */
 	result SetElementVerticalAlignment(TextVerticalAlignment alignment);
 
@@ -764,19 +957,16 @@ private:
 	// This value is for internal use only. Using this value can cause behavioral, security-related,
 	// and consistency-related issues in the application.
 	//
+	/**
+	 * @since 2.0
+	 */
 	class _EnrichedTextImpl * __pImpl;
 
-	//
-	// The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
-	//
 	EnrichedText(const EnrichedText& font);
-
-	//
-	// The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit copying of objects.
-	//
 	EnrichedText& operator =(const EnrichedText& rhs);
+
 }; // EnrichedText
 
-}} // Tizen::Graphics
+} } // Tizen::Graphics
 
-#endif // _FGRP_ENRICHED_TEXT_H_
+#endif  //  _FGRP_ENRICHED_TEXT_H_

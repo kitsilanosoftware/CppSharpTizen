@@ -50,8 +50,8 @@ namespace Tizen { namespace Net
  * @remarks     @b Header @b %file: @b \#include @b <FNet.h> @n
  *              @b Library : @b osp-nfc @n
  *
- * The %Nfc namespace contains the various classes and interfaces for the Near Field Communication (NFC) programming that
- * enables the devices to share information within a distance of less than @c 4 centimeters.
+ * The %Nfc namespace contains the various classes and interfaces for the Near Field Communication (NFC) programming
+ * that enables the devices to share information within a distance of less than @c 4 centimeters.
  *
  * For more information on the NFC namespace features, see
  * <a href="../org.tizen.native.appprogramming/html/guide/net/nfc.htm">NFC Guide</a>.

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -14,21 +13,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-
 /**
-* @file			FMediaIAudioSessionEventListener.h
-* @brief		This is the header file for the AudioSessionEventListener interface.
-*
-* This header files contains all the commons things required for IAudioSessionEventListener and associated classes
-*
-*/
-#ifndef _FMEDIA_IAUDIO_SESSION_EVENT_LISTENER_H_
-#define _FMEDIA_IAUDIO_SESSION_EVENT_LISTENER_H_
+ * @file			FShellTypes.h
+ * @brief		This is the header file for the definitions of constants and enumerators in the %Shell namespace.
+ *
+ * This header file contains definitions for the constants and enumerators in the %Shell namespace.
+ */
 
-#include <FMediaAudioManagerTypes.h>
-#include "FBaseRtIEventListener.h"
+#ifndef _FSHELL_TYPES_H_
+#define _FSHELL_TYPES_H_
 
-namespace Tizen { namespace Media
+namespace Tizen { namespace Shell
 {
-}}	//Tizen::Media
-#endif
+
+_OSP_EXPORT_ extern const wchar_t FEATURE_STRING[];
+
+}} // Tizen::Shell
+
+#endif  // _FSHELL_TYPES_H_

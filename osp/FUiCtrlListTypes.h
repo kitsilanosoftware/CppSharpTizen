@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -46,7 +46,7 @@ static const int LIST_ITEM_UNSPECIFIED_ID = -1;
  * Defines the list style.
  *
  * @brief <i> [Deprecated]  </i>
- * @deprecated  This enumeration is deprecated. Instead of using this enumeration, use ListAnnexStyle enumeration for CustomItem or SimpleItem class. @n
+ * @deprecated  This enum is deprecated. Instead of using this enum, use ListAnnexStyle enumeration for CustomItem or SimpleItem class. @n
  * @since 2.0
  * @endif
  */
@@ -69,7 +69,7 @@ enum ListStyle
  * Defines the list item format.
  *
  * @brief <i> [Deprecated]  </i>
- * @deprecated This enumeration is deprecated. There is no need to use this enumeration. @n
+ * @deprecated This enum is deprecated. There is no need to use this enum.
  * @since 2.0
  * @endif
  */
@@ -95,7 +95,7 @@ enum ListItemFormat
  * Defines the option of text slide.
  *
  * @brief <i> [Deprecated]  </i>
- * @deprecated This enumeration is deprecated. There is no need to use this enumeration. @n
+ * @deprecated This enum is deprecated. There is no need to use this enum.
  * @since 2.0
  * @endif
  */
@@ -112,7 +112,7 @@ enum ListItemText
  * Defines the number of digits or characters of the fast scroll index.
  *
  * @brief <i> [Deprecated]  </i>
- * @deprecated This enumeration is deprecated. There is no need to use this enumeration. @n
+ * @deprecated This enum is deprecated. There is no need to use this enum.
  * @since 2.0
  * @endif
  */

@@ -31,7 +31,7 @@ namespace Tizen { namespace Uix { namespace Speech
 /**
 * @enum SpeechToTextStatus
 *
-* Defines the %SpeechToText status.
+* Defines the SpeechToText status.
 *
 * @since 2.0
 *
@@ -48,11 +48,11 @@ enum SpeechToTextStatus
 /**
 * @enum SpeechToTextGrammar
 *
-* Defines the %SpeechToText grammar.
+* Defines the SpeechToText grammar.
 *
 * @since 2.0
 *
-* @see SetGrammar()
+* @see SpeechToText::SetGrammar()
 */
 enum SpeechToTextGrammar
 {
@@ -63,7 +63,7 @@ enum SpeechToTextGrammar
 /**
 * @enum SpeechToTextError
 *
-* Defines the errors in %SpeechToText. @n
+* Defines the errors in SpeechToText. @n
 * When an error occurs, the user can not receive any %SpeechToText result.
 *
 * @since 2.0

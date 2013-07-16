@@ -1,5 +1,4 @@
 // 
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd. 
 // 
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -135,7 +134,7 @@ public:
 	 * @since	2.0
 	 *
 	 * @return		@c true if the input object equals the calling %CalEvent instance, @n
-					else @c false
+	 *				else @c false
 	 * @param[in]	rhs	The object instance to compare with the calling object
 	 * @see			GetHashCode()
 	 */
@@ -224,7 +223,7 @@ public:
 	 * UID: globally Unique Identifier (vCalendar 1.0)
 	 *
 	 * @brief <i> [Deprecated] </i>
-	 * @deprecated	This method is deprecated because string value can’t be handled. @n
+	 * @deprecated	This method is deprecated because string value cannot be handled. @n
 	 * Instead of using this method, it is recommended to use GetUid().
 	 * @since	2.0
 	 *
@@ -242,7 +241,7 @@ public:
 	 * UID: globally Unique Identifier (vCalendar 1.0)
 	 *
 	 * @brief <i> [Deprecated] </i>
-	 * @deprecated	This method is deprecated because string value can’t be handled. @n
+	 * @deprecated	This method is deprecated because string value cannot be handled. @n
 	 * Instead of using this method, it is recommended to use SetUid().
 	 * @since	2.0
 	 *
@@ -340,16 +339,30 @@ public:
 	/**
 	 * Adds an attendee.
 	 *
+	 * @brief <i> [Compatibility] </i>
 	 * @since	2.0
+	 * @compatibility	This method has compatibility issues with Tizen API versions @b prior @b to @b 2.1. @n
+	 *					For more information, see @ref CompCalEventAddAttendeePage "here".
 	 *
 	 * @return		An error code
 	 * @param[in]	attendee			The attendee to add @n
 	 *									The specified @c attendee must have an email address.
 	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		The specified @c attendee is invalid. @b Since @b 2.1
 	 * @exception	E_OBJ_ALREADY_EXIST	An attendee with the same email address already exists.
-	 * @remarks		The attendee values may be lost if an anniversary event including the attendee is modified in the base application.
 	 */
 	result AddAttendee(const Attendee& attendee);
+
+	/**
+	 * @page	CompCalEventAddAttendeePage Compatibility for AddAttendee()
+	 * @section	CompCalEventAddAttendeePageIssueSection Issues
+	 * 			Implementation of this method in Tizen API versions prior to 2.1 has the following issue: @n
+	 *			-# If the email of @c attendee is empty, the @c E_OBJ_ALREADY_EXIST is returned.
+	 *
+	 * @section	CompCalEventAddAttendeePageSolutionSection Resolutions
+	 * 			The issue mentioned above is resolved in Tizen API version 2.1.
+	 *			-# If the email of @c attendee is empty, the @c E_INVALID_ARG is returned.
+	 */
 
 	/**
 	 * Removes an attendee.
@@ -404,7 +417,7 @@ public:
 	/**
 	 * @if OSPDEPREC
 	 * Gets the recurrence ID. @n
-	 * This method works only for the %CalEvent instances.
+	 * The %GetRecurrenceId() method works only for the %CalEvent instances.
 	 *
 	 * @brief <i> [Deprecated] </i>
 	 * @deprecated	This method is deprecated because %CalEvent class is not used for event instance any more. @n
@@ -525,14 +538,7 @@ public:
 	/**
 	 * Sets the subject of the calendar event.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 *					For more information, see @ref CompCalEventSetSubjectPage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	subject				The subject of the calendar event
@@ -541,29 +547,12 @@ public:
 	result SetSubject(const Tizen::Base::String& subject);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page	CompCalEventSetSubjectPage Compatibility for SetSubject()
-	 * @section	CompCalEventSetSubjectPageIssueSection Issues
-	 *          Implementing this method in OSP compatible applications has the following issues:   @n
-	 *			-# If the length of the subject to be set is greater than 100 characters, E_INVALID_ARG is returned.
-	 *
-	 * @section	CompCalEventSetSubjectPageSolutionSection Resolutions
-	 * 			This issue has been resolved in Tizen.  @n
-	 * 			-# There is no limit for the length of the subject.
-	 * @endif
 	 */
 
 	/**
 	 * Sets the description of the current calendar event.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 *					For more information, see @ref CompCalEventSetDescriptionPage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	description			The description of the event
@@ -572,16 +561,6 @@ public:
 	result SetDescription(const Tizen::Base::String& description);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page	CompCalEventSetDescriptionPage Compatibility for SetDescription()
-	 * @section	CompCalEventSetDescriptionPageIssueSection Issues
-	 *          Implementing this method in OSP compatible applications has the following issues:   @n
-	 *			-# If the length of the description to be set is greater than 1000 characters, E_INVALID_ARG is returned.
-	 *
-	 * @section	CompCalEventSetDescriptionPageSolutionSection Resolutions
-	 * 			This issue has been resolved in Tizen.  @n
-	 * 			-# There is no limit for the length of the description.
-	 * @endif
 	 */
 
 	/**
@@ -594,12 +573,12 @@ public:
 	 * @since	2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	startDateTime				The start date and time
-	 * @param[in]	endDateTime					The end date and time
+	 * @param[in]	startDateTime				The start date and time. @n Any value with a unit that is less than a second is ignored.
+	 * @param[in]	endDateTime					The end date and time. @n Any value with a unit that is less than a second is ignored.
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG			Either of the following conditions has occurred: @n
 	 *										- The specified @c endDateTime value is earlier than the specified @c startDateTime value.
-	 *										- The @c startDateTime or @c endDateTime is not in a valid range. @n
+	 *										- The @c startDateTime or @c endDateTime is out of the valid range. @n
 	 *										The valid range of the date can be referenced from GetMaxDateTime() and GetMinDateTime().
 	 * @exception	E_INVALID_CONDITION	The recurrence date is already set.
 	 * @remarks		The start and end time of all day events created from the base applications is the local time of the location where
@@ -614,14 +593,7 @@ public:
 	/**
 	 * Sets the location of the current calendar event.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 *					For more information, see @ref CompCalEventSetLocationPage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	location			The location of the event
@@ -630,59 +602,28 @@ public:
 	result SetLocation(const Tizen::Base::String& location);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page	CompCalEventSetLocationPage Compatibility for SetLocation()
-	 * @section	CompCalEventSetLocationPageIssueSection Issues
-	 *          Implementing this method in OSP compatible applications has the following issues:   @n
-	 *			-# If the length of the location to be set is greater than 100 characters, E_INVALID_ARG is returned.
-	 *
-	 * @section	CompCalEventSetLocationPageSolutionSection Resolutions
-	 * 			This issue has been resolved in Tizen.  @n
-	 * 			-# There is no limit for the length of the location.
-	 * @endif
 	 */
 
 	/**
-	 * @if OSPDEPREC
 	 * @{
-	 * Sets the category of the calendar event. @n
+	 * @if OSPDEPREC
+ 	 * Sets the category of the calendar event. @n
 	 * If the category is not set, the default category (#EVENT_CATEGORY_APPOINTMENT) is set.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Deprecated] [Compatibility] </i>
-	 * @endif
 	 * @deprecated	This method is deprecated because the category of event is not used any more.
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 * 					For more information, see @ref CompCalEventSetCategoryPage "here".
-	 * @endif
 	 *
 	 * @param[in]	category			The category of the event
 	 * @remarks		The start and end time of the anniversary and all day events created from the base applications, is the local time of the location where
 	 *				they are added.
 	 *				All the other events are Coordinated Universal Time (UTC).
 	 *				In order to integrate it with the base applications, set the start and end time properly according to the above guidelines.
-	 * @}
 	 * @endif
+	 * @}
 	 */
 	void SetCategory(EventCategory category);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page		CompCalEventSetCategoryPage		Compatibility for SetCategory()
-	 * @section		CompCalEventSetCategoryPageIssueSection Issues
-	 * 				Implementing this method in OSP compatible applications has the following issues:   @n
-	 *
-	 *	-# When the anniversary category is set to the event, it's handled as all day event even though the all day event property is not set.
-	 *
-	 * @section		CompCalEventSetCategoryPageSolutionSection Resolutions
-	 *
-	 * This issue has been resolved in Tizen.  @n
-	 *  -# The category property is deprecated and it's not used any more.
-	 *  In Tizen, the all day event property will be set simultaneously when the anniversary category is set to the event.
-	 *  If an application tries to change the all day event property of the anniversary event to @c false, it will not be changed.
-	 * @endif
 	 */
 
 	/**
@@ -743,14 +684,7 @@ public:
 	 * the event start date changes to 18/02/2010, after this method is called. @n
 	 * Note that the start/end date and the time zone must be set before setting a recurrence.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility This method has compatibility issues with OSP compatible applications. @n
-	 *                For more information, see @ref CompCalEventSetRecurrencePage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	pRecurrence				The recurrence to set, @n
@@ -767,10 +701,10 @@ public:
 	 *										- When the frequency is #FREQ_MONTHLY, neither DayOfMonth nor DayOfWeek and WeekOfMonth are not set. @n
 	 *										- When the frequency is #FREQ_YEARLY, neither DayOfMonth and MonthOfYear nor DayOfWeek,
 	 *										WeekOfMonth and MonthOfYear are not set. @n
-	 *										- When the frequency is #FREQ_YEARLY and MonthOfYear is 2, DayOfMonth is greater than 29 ( > 29 ). @n
+	 *										- When the frequency is #FREQ_YEARLY and MonthOfYear is 2, DayOfMonth is greater than 29 (> 29). @n
 	 *										- When the frequency is #FREQ_YEARLY and MonthOfYear is 4 or 6 or 9 or 11,
-	 *										DayOfMonth is greater than 30 ( > 30 ).
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 *										DayOfMonth is greater than 30 (> 30).
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 * @remarks		If the until property of the recurrence is set with too distant future from the event's start date, @n
 	 * 				too many recurring events are generated. It is the same when the value of recurrence count is big. @n
 	 * 				The system limits the count of the recurring events that are generated by recurrence rule of an event. @n
@@ -795,17 +729,6 @@ public:
 	result SetRecurrence(const Recurrence* pRecurrence);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page	CompCalEventSetRecurrencePage Compatibility for SetRecurrence()
-	 * @section	CompCalEventSetRecurrencePageIssueSection Issues
-	 *           Implementing this method in OSP compatible applications has the following issues:   @n
-	 *			- If the category is anniversary and the frequency of recurrence is not yearly, E_TYPE_MISMATCH exception is occurred. @n
-	 *			Yearly frequency is only accepted for anniversary category.
-	 *
-	 * @section	CompCalEventSetRecurrencePageSolutionSection Resolutions
-	 * 			This issue has been resolved in Tizen.  @n
-	 *			-# All recurrence frequency will be accepted because the category of event is not used any more.
-	 * @endif
 	 */
 
 	/**
@@ -850,6 +773,17 @@ public:
 	 * @return		The calendar Id
 	 */
 	RecordId GetCalendarId(void) const;
+
+	/**
+	 * Gets the base event ID.
+	 * This method return the ID of the base recurring event for which this event is a recurrence exception.
+	 *
+	 * @since	2.1
+	 *
+	 * @return		The base event ID, if this event is an exception
+	 *				else #INVALID_RECORD_ID
+	 */
+	RecordId GetBaseEventId(void) const;
 
 	/**
 	 * Copying of objects using this copy assignment operator is allowed.

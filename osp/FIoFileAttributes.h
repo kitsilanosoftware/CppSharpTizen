@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -218,11 +217,11 @@ public:
 	bool IsReadOnly(void) const;
 
 	/**
-	* Gets the date and time of the file creation.
+	* Gets the date and time of the last modification to the file.
 	*
 	* @since		2.0
 	*
-	* @return		The date and time of the file creation
+	* @return		The date and time of the last modification to the file
 	*/
 	Tizen::Base::DateTime GetDateTime(void) const;
 

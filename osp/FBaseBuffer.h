@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -19,7 +18,7 @@
  * @file		FBaseBuffer.h
  * @brief		This is the header file for the %Buffer class.
  *
- * This header file contains the declarations of the %Buffer<Type> classes.
+ * This header file contains the declarations of the %Buffer classes.
  */
 
 #ifndef _FBASE_BUFFER_H_
@@ -147,7 +146,7 @@ public:
 
 
 	/**
-	 * Initializes this instance of %Buffer which is a view of the specified buffer. @n
+	 * Initializes this instance of %Buffer which is a view of the specified @c buffer. @n
 	 * This is similar to a copy constructor.
 	 *
 	 * @since 2.0
@@ -175,7 +174,7 @@ public:
 	}
 
 	/**
-	 * Initializes this instance of %Buffer with the specified capacity.
+	 * Initializes this instance of %Buffer with the specified @c capacity.
 	 *
 	 * @since 2.0
 	 *
@@ -203,7 +202,7 @@ public:
 	* @exception       E_SUCCESS           The method is successful.
 	* @exception       E_INVALID_ARG     A specified input parameter is invalid, or
 	*                                               the @c pBuffer is @c null.
-	* @exception       E_OUT_OF_RANGE  The specified index is outside the bounds of the data structure, or
+	* @exception       E_OUT_OF_RANGE  The specified @c index is outside the bounds of the data structure, or
 	*                                               the @c index is larger than the @c length.
 	*/
 	result Construct(const Type* pBuffer, int index, int length, int capacity)
@@ -238,7 +237,7 @@ public:
 	}
 
 	/**
-	 * This subscript operator returns the reference to the element indicated by the given index.
+	 * This subscript operator returns the reference to the element indicated by the given @c index.
 	 *
 	 * @since 2.0
 	 *
@@ -260,7 +259,7 @@ public:
 	 * @since 2.0
 	 *
 	 * @return		@c true if the buffers being compared are equal, @n
-	                else @c false
+	 *               else @c false
 	 * @param[in]	buffer The buffer to compare with the current instance of %Buffer
 	 * @remarks		This method returns @c true only if the two buffers have the same number of remaining elements @n
 	 *				and the two sequences of remaining elements are equal (considered independently of their starting positions).
@@ -296,7 +295,7 @@ public:
 	 * @since 2.0
 	 *
 	 * @return		@c true if the buffers are not equal, @n
-	                else @c false
+	 *               else @c false
 	 * @param[in]	buffer The buffer to compare with the current instance of %Buffer
 	 * @remarks		This method returns @c false only if the two buffers being compared have the same @n
 	 *				number of remaining elements and the two sequences of remaining elements are equal @n
@@ -422,7 +421,7 @@ public:
 	}
 
 	/**
-	 * Reads the value at the given index. @n
+	 * Reads the value at the given @c index. @n
 	 * Provides a way for absolute indexing and reading.
 	 *
 	 * @since 2.0
@@ -447,7 +446,7 @@ public:
 
 
 	/**
-	 * Copies the specified range of values from the calling buffer to the specified destination array as per the given index of the array.
+	 * Copies the specified range of values from the calling buffer to the specified destination array as per the given @c index of the array.
 	 *
 	 * @since 2.0
 	 *
@@ -487,7 +486,7 @@ public:
 	 * @since 2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	buffer	The source buffer from which bytes are read @n
+	 * @param[in]	buffer	The source buffer from where the bytes are read @n
 	 *						It must not be this buffer.
  	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_INVALID_ARG	The specified input parameter is invalid. @n
@@ -497,7 +496,7 @@ public:
 	 *				between the number of elements remaining in the calling buffer and the source buffer). @n
 	 *				If there are more elements remaining in the calling buffer than elements remaining in the input instance,
 	 *				this method is equivalent to CopyFrom() method. If there are less remaining elements in the
-	 *				calling buffer, the CopyFrom() method returns E_OVERFLOW and does not transfer
+	 *				calling buffer, the %CopyFrom() method returns @c E_OVERFLOW and does not transfer
 	 *				while this method copies the number of remaining elements of the current instance.
 	 * @see			CopyFrom()
 	 *
@@ -575,7 +574,7 @@ public:
 
 
 	/**
-	 * Writes the specified value into the current buffer instance at the current position,
+	 * Writes the specified @c value into the current buffer instance at the current position,
 	 * and then increments the position. @n
 	 * Provides a way for relative indexing and writing.
 	 *
@@ -597,7 +596,7 @@ public:
 	}
 
 	/**
-	 * Writes the specified value into the current instance of buffer at the given index. @n
+	 * Writes the specified @c value into the current instance of buffer at the given @c index. @n
 	 * Provides a way for absolute indexing and writing.
 	 *
 	 * @since 2.0
@@ -626,7 +625,7 @@ public:
 	 * @since 2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	pArray		A pointer to the array from which values are read
+	 * @param[in]	pArray		A pointer to the array from where the values are read
 	 * @param[in]	index		The starting index of the array
 	 * @param[in]	length		The number of values read from the given array
 	 * @exception	E_SUCCESS			The method is successful.
@@ -637,7 +636,7 @@ public:
 	 * @exception	E_OVERFLOW			The operation (arithmetic/casting/conversion) has caused an overflow. @n
 	 *									The remainder of this buffer is smaller than @c length.
 	 * @remarks		This method copies @c length number of values from the source array,
-	 *				starting from the given index in the array,  into the calling
+	 *				starting from the given @c index in the array, into the calling
 	 *				buffer, starting at the current position.
 	 *				After the copy operation, the position is incremented by @c length.
 	 * @see			GetArray()

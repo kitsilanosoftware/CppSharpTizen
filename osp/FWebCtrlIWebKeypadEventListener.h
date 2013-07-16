@@ -36,9 +36,9 @@ namespace Tizen { namespace Web { namespace Controls
 
 /**
  * @interface	IWebKeypadEventListener
- * @brief	    This interface provides a listener for keypad events invoked by the <textarea> or <input> tag, which has "text" or "password" value as its attribute.
+ * @brief		This interface provides a listener for keypad events invoked by the <textarea> or <input> tag, which has "text" or "password" value as its attribute.
  *
- * @since	    2.0
+ * @since		2.0
  *
  * The %IWebKeypadEventListener interface provides a listener for keypad events invoked by the <textarea> or <input> tag, which has "text" or "password" value as its attribute.
  * It also enables the implementer class to receive the overlay keypad related events.
@@ -57,24 +57,24 @@ public:
 	/**
 	 * Called when the keypad is about to be shown on the screen.
 	 *
-	 * @since	        2.0
+	 * @since		2.0
 	 *
-	 * @param[in]		source		The source of the event
+	 * @param[in]	source			The source of the event
 	 * @remarks		When the overlay keypad appears on the screen, the current Form's
 	 *			area is adjusted to account for the space that is taken up by the overlay keypad.
-	 * @see			Tizen::Ui::Controls::Form::GetClientAreaBounds()
+	 * @see	Tizen::Ui::Controls::Form::GetClientAreaBounds()
 	 */
 	virtual void OnWebKeypadWillOpen(Tizen::Web::Controls::Web& source) = 0;
 
 	/**
 	 * Called when the keypad is shown on the screen.
 	 *
-	 * @since	        2.0
+	 * @since		2.0
 	 *
-	 * @param[in]   	source		The source of the event
+	 * @param[in]	source			The source of the event
 	 * @remarks		When the overlay keypad appears on the screen, the current Form's
 	 *			area is adjusted to account for the space that is taken up by the overlay keypad.
-	 * @see			Tizen::Ui::Controls::Form::GetClientAreaBounds()
+	 * @see	Tizen::Ui::Controls::Form::GetClientAreaBounds()
 	 */
 	virtual void OnWebKeypadOpened(Tizen::Web::Controls::Web& source) = 0;
 
@@ -83,18 +83,18 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]		source		The source of the event
-	 * @see			Tizen::Ui::Controls::Form::GetClientAreaBounds()
+	 * @param[in]	source			The source of the event
+	 * @see	Tizen::Ui::Controls::Form::GetClientAreaBounds()
 	 */
 	virtual void OnWebKeypadClosed(Tizen::Web::Controls::Web& source) = 0;
 
 	/**
 	 * Called when the keypad bounds are changed, for instance when the predictive text window which is located in the upper side of the keypad is shown.
 	 *
-	 * @since 2.0
+	 * @since		2.0
 	 *
-	 * @param[in]		source		The source of the event
-	 * @see			Tizen::Ui::Controls::Form::GetClientAreaBounds()
+	 * @param[in]	source			The source of the event
+	 * @see	Tizen::Ui::Controls::Form::GetClientAreaBounds()
 	 */
 	virtual void OnWebKeypadBoundsChanged(Tizen::Web::Controls::Web& source) {};
 

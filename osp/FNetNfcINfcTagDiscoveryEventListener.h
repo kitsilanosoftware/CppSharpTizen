@@ -29,7 +29,6 @@
 namespace Tizen { namespace Net { namespace Nfc
 {
 
-// Forward declaration
 class TagConnection;
 
 /**
@@ -38,7 +37,8 @@ class TagConnection;
  *
  * @since       2.0
  *
- * The %INfcTagDiscoveryEventListener interface specifies the methods used for creating the notifications about detecting the target tag.
+ * The %INfcTagDiscoveryEventListener interface specifies the methods used for creating the notifications about
+ * detecting the target tag.
  *
  * For more information on the class features, see
  * <a href="../org.tizen.native.appprogramming/html/guide/net/nfc.htm">NFC Guide</a>.
@@ -80,7 +80,8 @@ public:
 
 protected:
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
 	// This method is reserved and may change its name at any time without prior notice.
 	//
@@ -89,7 +90,8 @@ protected:
 	virtual void INfcTagDiscoveryEventListener_Reserved1(void) {}
 
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
 	// This method is reserved and may change its name at any time without prior notice.
 	//
@@ -98,7 +100,8 @@ protected:
 	virtual void INfcTagDiscoveryEventListener_Reserved2(void) {}
 
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
 	// This method is reserved and may change its name at any time without prior notice.
 	//

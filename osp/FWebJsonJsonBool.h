@@ -46,7 +46,7 @@ namespace Tizen { namespace Web { namespace Json
  * @final	This class is not intended for extension.
  *
  * The %JsonBool class represents the JSON value of type @c bool.
- * @n
+ * 
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/web/json_namespace.htm">JSON Guide</a>.
  *
  *
@@ -66,13 +66,13 @@ public:
 	JsonBool(bool value);
 
 	/**
-	 *	Initializes a new boolean object to the input string represented by the @c value. @n
+	 * Initializes a new boolean object to the input string represented by @c value. @n
 	 * If the input string is "true" (value is case insensitive), the object is initialized to @c true,
-	 *	else, the value is initialized to @c false.
+	 * else, the value is initialized to @c false.
 	 *
 	 * @since	2.0
 	 *
-	 *  @param[in]	value   An instance of String
+	 *  @param[in]	value   An instance of Tizen::Base::String
 	 */
 	JsonBool(const Tizen::Base::String& value);
 
@@ -103,7 +103,7 @@ public:
 	virtual ~JsonBool(void);
 
 	/**
-	 * Gets the type of this class (always JSON_BOOL).
+	 * Gets the type of this class (always @c JSON_BOOL).
 	 *
 	 * @since		2.0
 	 *

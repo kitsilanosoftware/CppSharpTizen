@@ -114,8 +114,9 @@ namespace Tizen { namespace Messaging
 		* @since		2.0
 		*
 		* @return		The hash value of the current instance
-		* @remarks 		Two equal instances should return the same hash value. @n
-		*				For better performance, the used hash function must generate a random distribution for all inputs.
+		* @remarks 		
+		*				- Two equal instances should return the same hash value.
+		*				- For better performance, the used hash function must generate a random distribution for all inputs.
 		*/
 		virtual int GetHashCode(void) const;
 
@@ -145,6 +146,11 @@ namespace Tizen { namespace Messaging
 		* @exception	E_OBJ_ALREADY_EXIST	The specified @c recipient is already added.
 		* @exception	E_INVALID_ARG		The specified @c recipient string length is too short (< 3) or too long (> 320), or
 		* 									the specified @c type is invalid.
+		* @remarks		
+		*				- The limit of the number of recipients is not checked in this method. This is done in the SmsManager::Send(), 
+		*				MmsManager::Send(), and EmailManager::Send() methods.
+		* 				- The minimum length of a recipient is @c 3 for a phone number and @c 5 for an email address.
+		* 				- The maximum length of a recipient is @c 41 for a phone number and @c 320 for an email address.
 		* @see			Set()
         * @see  		GetListN()
         * @see  		SmsManager::Send()
@@ -183,8 +189,9 @@ namespace Tizen { namespace Messaging
 		* 									the specified @c type is invalid.
 		* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 		* @exception	E_OBJ_ALREADY_EXIST	A duplicate recipient in the recipient list already exists.
-		* @remarks		The limit of recipients is not checked in this method. @n
-		*				This is done in the SmsManager::Send(), MmsManager::Send(), and EmailManager::Send() methods.
+		* @remarks		
+		*				- The limit of recipients is not checked in this method.
+		*				- This is done in the SmsManager::Send(), MmsManager::Send(), and EmailManager::Send() methods.
 		* @see			Add()
 		* @see			GetListN()
 		*/
@@ -200,9 +207,10 @@ namespace Tizen { namespace Messaging
 		* @exception	E_SUCCESS			The method is successful.
 		* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 		* @exception	E_INVALID_ARG		The specified @c type is invalid.
-		* @remarks		The recipient is an email address for an email message or a telephone number for an SMS or MMS message. @n
-		* 				The specified @c type contains RECIPIENT_TYPE_TO, RECIPIENT_TYPE_CC, RECIPIENT_TYPE_BCC. @n
-		* 				The specific error code can be accessed using the GetLastResult() method.
+		* @remarks		
+		*				- The recipient is an email address for an email message or a telephone number for an SMS or MMS message.
+		* 				- The specified @c type contains @c RECIPIENT_TYPE_TO, @c RECIPIENT_TYPE_CC, @c RECIPIENT_TYPE_BCC. @n
+		* 				- The specific error code can be accessed using the GetLastResult() method.
 		* @see			Add()
         * @see  		Set()
 		*/

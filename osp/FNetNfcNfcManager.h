@@ -30,7 +30,6 @@
 namespace Tizen { namespace Net { namespace Nfc
 {
 
-// Forward declaration
 class INfcManagerEventListener;
 class INfcTransactionEventListener;
 class INfcTagDiscoveryEventListener;
@@ -47,9 +46,9 @@ class _NfcManagerImpl;
  *
  * @since    2.0
  *
- * The %NfcManager class is the manager class for NFC features that includes the methods for enabling and disabling the NFC feature of
- * the device and the mechanism for establishing a connection with the detected tag. It is also used to detect the NFC
- * tags and NDEF messages. @n
+ * The %NfcManager class is the manager class for NFC features that includes the methods for enabling and disabling the
+ * NFC feature of the device and the mechanism for establishing a connection with the detected tag. It is also used to
+ * detect the NFC tags and NDEF messages. @n
  * There are two ways to get the TagConnection instance established with the detected tag. @n
  * @li Use the INfcTagDiscoveryEventListener::OnNfcTagDetectedN() method that is invoked immediately when the target
  *     tag is detected.
@@ -180,16 +179,22 @@ public:
 	virtual ~NfcManager(void);
 
 	/**
-	 * Initializes this instance of %NfcManager with the specified listener.
+	 * Initializes this instance of %NfcManager with the specified @c listener.
 	 *
 	 * @since       2.0
+	 * @feature     %http://tizen.org/feature/network.nfc
 	 *
 	 * @return      An error code
-	 * @param[in]   listener                The %INfcManagerEventListener instance to be added
+	 * @param[in]   listener                The INfcManagerEventListener instance to add
 	 * @exception   E_SUCCESS               The method is successful.
-	 * @exception   E_UNSUPPORTED_OPERATION The device does not support the NFC feature.
+	 * @exception   E_UNSUPPORTED_OPERATION The Emulator or target device does not support the required feature.
+	 *                                      For more information, see
+	 *                                      <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">
+	 *                                      Application Filtering</a>.
 	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
 	 * @exception   E_SYSTEM                A system error has occurred.
+	 * @remarks     Before calling this method, check whether the feature is supported by 
+	 *              Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	 */
 	result Construct(INfcManagerEventListener& listener);
 
@@ -197,6 +202,7 @@ public:
 	 * Activates the NFC feature of the device.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/nfc.admin
 	 *
 	 * @return      An error code
@@ -206,6 +212,7 @@ public:
 	 *                                      operation. @n
 	 *                                      For example, the NFC feature is already activated.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SYSTEM                A system error has occurred.
 	 * @see         INfcManagerEventListener::OnNfcActivated()
 	 */
@@ -215,6 +222,7 @@ public:
 	 * Deactivates the NFC feature of the device.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/nfc.admin
 	 *
 	 * @return      An error code
@@ -224,6 +232,7 @@ public:
 	 *                                      operation. @n
 	 *                                      For example, the NFC feature is already deactivated.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SYSTEM                A system error has occurred.
 	 * @see         INfcManagerEventListener::OnNfcDeactivated()
 	 */
@@ -253,6 +262,7 @@ public:
 	 * Gets the tag connection with the currently detected tag.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/nfc.tag
 	 *
 	 * @return      The tag connection with the currently detected tag, @n
@@ -264,11 +274,13 @@ public:
 	 * @exception   E_CONNECTION_FAILED     The connection to the tag is closed or has failed.
 	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SYSTEM                A system error has occurred.
-	 * @remarks     The NdefTagConnection class can inherit the TagConnection class if the currently detected tag
-	 *              supports the NDEF operations. To check whether the TagConnection class is inherited, use the
-	 *              TagConnection::IsNdefConnection() method.
-	 *              The specific error code can be accessed using the GetLastResult() method.
+	 * @remarks
+	 *              - The NdefTagConnection class can inherit the TagConnection class if the currently detected tag
+	 *                supports the NDEF operations. To check whether the %TagConnection class is inherited, use the
+	 *                TagConnection::IsNdefConnection() method.
+	 *              - The specific error code can be accessed using the GetLastResult() method.
 	 */
 	TagConnection* GetCurrentTagConnectionN(void) const;
 
@@ -276,14 +288,16 @@ public:
 	 * Adds the specified %INfcTagDiscoveryEventListener instance for the tag events with the specified tag type.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/nfc.tag
 	 *
 	 * @return      An error code
-	 * @param[in]   listener                The listener to be added
+	 * @param[in]   listener                The listener to add
 	 * @param[in]   type                    The tag type for which the listener is added
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_OBJ_ALREADY_EXIST     The listener with the specified type is already added.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SYSTEM                A system error has occurred.
 	 * @remarks     This method can be invoked several times with different Tizen::Net::Nfc::NfcTagType values for the
 	 *              same listener instance. In this case, the listener is called if the specified type of the target
@@ -296,14 +310,16 @@ public:
 	 * The removed listener cannot listen to the events that are fired.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/nfc.tag
 	 *
 	 * @return      An error code
-	 * @param[in]   listener                The listener to be removed
+	 * @param[in]   listener                The listener to remove
 	 * @param[in]   type                    The tag type for which the listener is removed
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_OBJ_NOT_FOUND         The listener with the specified type is not found.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SYSTEM                A system error has occurred.
 	 */
 	result RemoveTagDiscoveryEventListener(INfcTagDiscoveryEventListener& listener, NfcTagType type);
@@ -313,10 +329,11 @@ public:
 	 * includes the NDEF record with the specified type.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/nfc.common
 	 *
 	 * @return      An error code
-	 * @param[in]   listener                The listener to be added
+	 * @param[in]   listener                The listener to add
 	 * @param[in]   type                    The type of the NDEF record for which the listener is added
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_INVALID_ARG           The specified @c type is invalid. @n
@@ -325,12 +342,14 @@ public:
 	 *                                      or NDEF_TNF_EXTERNAL.
 	 * @exception   E_OBJ_ALREADY_EXIST     The listener with the specified type is already added.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SYSTEM                A system error has occurred.
-	 * @remarks     This method can be invoked several times with different NdefRecordType values for the same listener
-	 *              instance. In this case, the listener is called if the record type in the detected NDEF records
-	 *              matches with one of the registered types.
-	 *              In case of the MIME %Media type as Type Name Format (TNF), asterisks can be used in the type name
-	 *              for wildcard matching, such as @htmlonly "image&#47;*" @endhtmlonly.
+	 * @remarks
+	 *              - This method can be invoked several times with different NdefRecordType values for the same
+	 *                listener instance. In this case, the listener is called if the record type in the detected NDEF
+	 *                records matches with one of the registered types.
+	 *              - In case of the MIME %Media type as Type Name Format (TNF), asterisks can be used in the type name
+	 *                for wildcard matching, such as @htmlonly "image&#47;*" @endhtmlonly.
 	 */
 	result AddNdefMessageDiscoveryEventListener(INdefMessageDiscoveryEventListener& listener, const NdefRecordType& type);
 
@@ -339,10 +358,11 @@ public:
 	 * The removed listener cannot listen to the events that are fired.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/nfc.common
 	 *
 	 * @return      An error code
-	 * @param[in]   listener                The listener to be removed
+	 * @param[in]   listener                The listener to remove
 	 * @param[in]   type                    The type of the NDEF record for which the listener is removed
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_INVALID_ARG           The specified @c type is invalid. @n
@@ -351,6 +371,7 @@ public:
 	 *                                      or NDEF_TNF_EXTERNAL.
 	 * @exception   E_OBJ_NOT_FOUND         The listener with the specified type is not found.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SYSTEM                A system error has occurred.
 	 */
 	result RemoveNdefMessageDiscoveryEventListener(INdefMessageDiscoveryEventListener& listener, const NdefRecordType& type);
@@ -358,15 +379,17 @@ public:
 	/**
 	 * Adds the specified %INfcDeviceDiscoveryEventListener instance for the device discovery events.
 	 *
-	 * @since 2.0
+	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/nfc.p2p
 	 *
 	 * @return      An error code
-	 * @param[in]   listener                The listener to be added
+	 * @param[in]   listener                The listener to add
 	 * @exception   E_SUCCESS               The method is successful.
-	 * @exception   E_OBJ_ALREADY_EXIST     The listener was already added.
+	 * @exception   E_OBJ_ALREADY_EXIST     The listener has already been added.
 	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SYSTEM                A system error has occurred.
 	 */
 	result AddDeviceDiscoveryEventListener(INfcDeviceDiscoveryEventListener& listener);
@@ -375,14 +398,16 @@ public:
 	 * Removes the specified %INfcDeviceDiscoveryEventListener instance. @n
 	 * The removed listener cannot listen to the events that are fired.
 	 *
-	 * @since 2.0
+	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/nfc.p2p
 	 *
 	 * @return      An error code
-	 * @param[in]   listener                The listener to be removed
+	 * @param[in]   listener                The listener to remove
 	 * @exception   E_SUCCESS               The method is successful.
-	 * @exception   E_OBJ_NOT_FOUND         The listener was not found.
+	 * @exception   E_OBJ_NOT_FOUND         The listener is not found.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SYSTEM                A system error has occurred.
 	 */
 	result RemoveDeviceDiscoveryEventListener(INfcDeviceDiscoveryEventListener& listener);
@@ -390,7 +415,7 @@ public:
 	/**
 	 * Checks whether peer device has been detected.
 	 *
-	 * @since 2.0
+	 * @since       2.0
 	 *
 	 * @return      @c true if peer device has been detected, @n
 	 *              else @c false
@@ -402,24 +427,31 @@ public:
 	 * Gets the NDEF message cached when the tag is detected.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/nfc.common
+	 * @feature     %http://tizen.org/feature/network.nfc
 	 *
 	 * @return      The cached %NdefMessage instance, @n
 	 *              else @c null if the method is not successful
 	 * @exception   E_SUCCESS               The method is successful.
-	 * @exception   E_UNSUPPORTED_OPERATION The method has failed because the device does not support the NFC feature.
-	 * @exception   E_ILLEGAL_ACCESS        This operation is not allowed because the application is not launched by
-	 *                                      Conditional %App Launch.
+	 * @exception   E_UNSUPPORTED_OPERATION The Emulator or target device does not support the required feature.
+	 *                                      For more information, see
+	 *                                      <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">
+	 *                                      Application Filtering</a>.
+	 * @exception   E_ILLEGAL_ACCESS        This operation is not allowed. @n
+	 *                                      This exception is currently not in use.
 	 * @exception   E_INVALID_FORMAT        The cached data cannot be converted to the NDEF message.
 	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SYSTEM                A system error has occurred.
-	 * @remarks     This method is available only to the application that is launched by Conditional %App Launch until
-	 *              the application is terminated or another tag is detected.
-	 *              The input NdefMessage instance should be deleted by the application after it is used, even outside
-	 *              this method. The NdefMessage::RemoveAllRecords() method should be called with @c true as the input
-	 *              value immediately before the NdefMessage instance is deleted.
-	 *              The specific error code can be accessed using the GetLastResult() method.
+	 * @remarks
+	 *              - The input NdefMessage instance should be deleted by the application after it is used, even
+	 *                outside this method. The NdefMessage::RemoveAllRecords() method should be called with @c true as
+	 *                the input value immediately before the NdefMessage instance is deleted.
+	 *              - The specific error code can be accessed using the GetLastResult() method.
+	 *              - Before calling this method, check whether the feature is supported by 
+	 *                Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	 * @see         <a href="../org.tizen.native.appprogramming/html/guide/net/conditional_nfc_app_launch.htm">
 	 *              The Conditional NFC App Launch guide</a>
 	 * @see         Tizen::App::AppManager::RegisterAppLaunch
@@ -432,38 +464,42 @@ public:
 	 * selecting the launching application when a tag is detected.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/nfc.common
+	 * @feature     %http://tizen.org/feature/network.nfc
 	 *
 	 * @return      An error code
 	 * @param[in]   enable                  Set to @c true to enable the Conditional NFC %App Launch pop-up, @n
 	 *                                      else @c false
 	 * @exception   E_SUCCESS               The method is successful.
-	 * @exception   E_UNSUPPORTED_OPERATION The method has failed because the device does not support the NFC feature.
+	 * @exception   E_UNSUPPORTED_OPERATION The Emulator or target device does not support the required feature.
+	 *                                      For more information, see
+	 *                                      <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">
+	 *                                      Application Filtering</a>.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SYSTEM                A system error has occurred.
-	 * @remarks     Note that this method is used to enable or disable the launch pop-up when the application is in the
-	 *              foreground. Although the application disables the launch pop-up by invoking this method, it is
-	 *              automatically enabled when the application goes to the background. The launch pop-up is enabled by
-	 *              default.
+	 * @remarks
+	 *              - Note that this method is used to enable or disable the launch pop-up when the application is in
+	 *                the foreground. Although the application disables the launch pop-up by invoking this method, it
+	 *                is automatically enabled when the application goes to the background. The launch pop-up is
+	 *                enabled by default.
+	 *              - Before calling this method, check whether the feature is supported by 
+	 *                Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	 * @see         <a href="../org.tizen.native.appprogramming/html/guide/net/conditional_nfc_app_launch.htm">
 	 *              The Conditional NFC App Launch guide</a>
 	 */
 	static result SetLaunchPopupEnabled(bool enable);
 
 private:
-	/*
-	 * The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
-	 *
-	 * @param[in]   value					An instance of %NfcManager
-	 */
+	//
+	// The implementation of this copy constructor is intentionally blank to prohibit copying of objects.
+	//
 	NfcManager(const NfcManager& value);
 
-	/*
-	 * The implementation of this copy assignment operator is intentionally blank
-	 * and declared as private to prohibit copying of objects.
-	 *
-	 * @param[in]   value					An instance of %NfcManager
-	 */
+	//
+	// The implementation of this copy assignment operator is intentionally blank to prohibit copying of objects.
+	//
 	NfcManager& operator =(const NfcManager& value);
 
 private:

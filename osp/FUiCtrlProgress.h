@@ -2,18 +2,19 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
+
 /**
  * @file	FUiCtrlProgress.h
  * @brief	This is the header file for the %Progress class.
@@ -103,8 +104,8 @@ ProgressSample::OnInitializing(void)
 	pButton->AddActionEventListener(*this);
 
 	// Adds the __pProgress and the pButton to the form
-	AddControl(*__pProgress);
-	AddControl(*pButton);
+	AddControl(__pProgress);
+	AddControl(pButton);
 
 	return r;
 }
@@ -140,7 +141,8 @@ class _OSP_EXPORT_ Progress
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called.  @n
+	 * For full construction, the %Construct() method must be called right after calling this constructor.
 	 *
 	 * @since	2.0
 	 */
@@ -148,7 +150,8 @@ public:
 
 
 	/**
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required.@n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @since	2.0
 	 */
@@ -161,9 +164,11 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	rect				An instance of the Rectangle class @n
+	 * @param[in]	rect				An instance of the Tizen::Graphics::Rectangle class @n
 	 *						            This instance represents the x and y coordinates of the top-left corner of the created window along with
-	 *                                  its width and height.
+	 *                                  its width and height. @n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @param[in]   minValue			The minimum value of the current instance of %Progress
 	 * @param[in]   maxValue			The maximum value of the current instance of %Progress
 	 * @exception	E_SUCCESS			The method is successful.
@@ -171,10 +176,35 @@ public:
 	 * @exception	E_OUT_OF_RANGE		The value of an argument is outside the valid range defined by the method. @n
 	 *									The specified values should be positive and @c minValue should be less than @c maxValue.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks	A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier. @n
-	 * @remarks	The size of the control must be within the range defined by the minimum size and the maximum size.
+	 * @remarks
+	 *				- A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier.
+	 *				- The size of the control must be within the range defined by the minimum size and the maximum size.
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, int minValue, int maxValue);
+
+	/**
+	 * Initializes this instance of %Progress with the specified parameters.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	rect				An instance of the Tizen::Graphics::FloatRectangle class @n
+	 *						            This instance represents the x and y coordinates of the top-left corner of the created window along with
+	 *                                  its width and height. @n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]   minValue			The minimum value of the current instance of %Progress
+	 * @param[in]   maxValue			The maximum value of the current instance of %Progress
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
+	 * @exception	E_OUT_OF_RANGE		The value of an argument is outside the valid range defined by the method. @n
+	 *									The specified values should be positive and @c minValue should be less than @c maxValue.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @remarks
+	 *				- A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier.
+	 *				- The size of the control must be within the range defined by the minimum size and the maximum size.
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, int minValue, int maxValue);
 
 public:
 	/**
@@ -244,7 +274,7 @@ public:
 	 * @since     2.0
 	 *
 	 * @return    An error code
-	 * @param[in] color             The color to be set
+	 * @param[in] color             The color to set
 	 * @exception E_SUCCESS         The method is successful.
 	 * @exception E_SYSTEM          A system error has occurred.
 	 * @remarks   The method ignores the alpha value of the @c color parameter and sets the alpha value to @c 255.
@@ -263,6 +293,31 @@ public:
 	 * @remarks   The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Tizen::Graphics::Color GetBarColor(void) const;
+
+
+	/**
+	 * Sets the background color of the bar.
+	 *
+	 * @since     2.1
+	 *
+	 * @param[in] barBackgroundColor             The color to set
+	 * @remarks   The method ignores the alpha value of the @c color parameter and sets the alpha value to @c 255.
+	 * @see GetBarBackgroundColor()
+	 */
+	void SetBarBackgroundColor(const Tizen::Graphics::Color& barBackgroundColor);
+
+	/**
+	 * Gets the background color of the bar.
+	 *
+	 * @since     2.1
+	 *
+	 * @return    The background color of the bar, @n
+	 *			  else RGBA(0, 0, 0, 0) if an error occurs
+	 * @remarks   The specific error code can be accessed using the GetLastResult() method.
+	 * @see SetBarBackgroundColor()
+	 */
+	Tizen::Graphics::Color GetBarBackgroundColor(void) const;
+
 
 private:
 	//

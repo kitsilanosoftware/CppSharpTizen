@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -208,13 +207,14 @@ public:
 	 *
 	 *	@since 2.0
 	 *
-	 *  @return		An error code
-	 *  @param[in]	s				A string representing a numeric value
-	 *  @param[out]	ret				The result of the operation
-	 *  @exception	E_SUCCESS		The method is successful.
-	 *  @exception	E_NUM_FORMAT	The specified string does not contain a number that can be parsed.
-	 *  @remarks	This method assumes that the string representing the numeric value
-	 *				uses a radix 10.
+	 *	@return		An error code
+	 *	@param[in]	s				A string representing a numeric value
+	 *	@param[out]	ret				The result of the operation
+	 *	@exception	E_SUCCESS		The method is successful.
+	 *	@exception	E_NUM_FORMAT	The specified string does not contain a number that can be parsed.
+	 *	@remarks
+	 *				- This method assumes that the string representing the numeric value uses a radix 10.
+	 *				- This method guarantees that the original value of out-parameter is not changed when the method returns error.
 	 */
 	static result Parse(const String& s, long& ret);
 
@@ -225,12 +225,13 @@ public:
 	 *
 	 *	@return		An error code
 	 *	@param[in]	s			A string representing a numeric value
-	 *  @param[in]	radix		The radix of the string representing a numeric value @n
+	 *	@param[in]	radix		The radix of the string representing a numeric value @n
 	 *							It must be either 2, 8, 10, or 16.
 	 *	@param[out]	ret				The result of the operation
 	 *	@exception	E_SUCCESS		The method is successful.
 	 *	@exception	E_NUM_FORMAT	The specified string does not contain a number that can be parsed.
-	 *  @exception	E_OUT_OF_RANGE The specified @c radix is invalid.
+	 *	@exception	E_OUT_OF_RANGE The specified @c radix is invalid.
+	 *	@remarks	This method guarantees that the original value of out-parameter is not changed when the method returns error.
 	 */
 	static result Parse(const String& s, int radix, long& ret);
 

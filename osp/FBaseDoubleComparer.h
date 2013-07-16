@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -92,8 +91,8 @@ public:
 	 *	@since 2.0
 	 *
 	 *	@return		An error code
-	 *	@param[in]	obj1 	The first instance of type %Double
-	 *	@param[in]	obj2 	The second instance of type %Double
+	 *	@param[in]	obj1 	The first instance of type Double
+	 *	@param[in]	obj2 	The second instance of type Double
 	 *	@param[out] cmp		The result of comparison
 	 *  @exception	E_SUCCESS		The method is successful.
 	 *  @exception	E_INVALID_ARG	The specified object instances are not of the expected type.

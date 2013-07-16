@@ -1,7 +1,6 @@
-// 
-// Open Service Platform
-// Copyright (c) 2012 Samsung Electronics Co., Ltd. 
-// 
+//
+// Copyright (c) 2012 Samsung Electronics Co., Ltd.
+//
 // Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -69,9 +68,6 @@ class CalendarbookFilter;
  * The users must be notified of changes in the calendar book as multiple applications can share, change, or remove the data.
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/social/calendarbook_namespace.htm">Calendar book</a>.
- *
- * The following diagram illustrates the relationships between %Calendarbook and related classes.
- * @image html social_calendarbook_using_the_apis_classdiagram.png
  *
  * The following example demonstrates how to use the %Calendarbook class to add calendarbook event.
  * @code
@@ -317,8 +313,8 @@ class _OSP_EXPORT_ Calendarbook
 public:
 
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, @n
-	 * the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the Construct() method must be called right after calling this constructor.
 	 *
 	 * @since	2.0
 	 */
@@ -343,7 +339,7 @@ public:
 	 * @param[in]	pListener				The event listener to register, @n
 	 *										else @c null if an event listener need not be registered
 	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 * @endif
 	 */
 	result Construct(IRecordEventListener* pListener);
@@ -355,7 +351,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 */
 	result Construct(void);
 
@@ -367,7 +363,7 @@ public:
 	 * @return		An error code
 	 * @param[in]	listener				The event listener to register
 	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 */
 	result Construct(ICalendarbookEventListener& listener);
 
@@ -376,15 +372,17 @@ public:
 	 * After adding the event successfully, the event has a valid record ID.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.write
 	 *
 	 * @return		An error code
 	 * @param[in,out]	event					The event to add
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			The specified @c event is invalid.
 	 * @exception	E_STORAGE_FULL			The storage is insufficient.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 */
 	result AddEvent(CalEvent& event);
 
@@ -393,6 +391,7 @@ public:
 	 * After adding the event successfully, the event has a valid record ID.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.write
 	 *
 	 * @return		An error code
@@ -400,13 +399,14 @@ public:
 	 * @param[in]	calendarId				The calendar ID
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			Either of the following conditions has occurred: @n
 	 *										- The specified @c event is invalid. @n
-	 *									- The specified @c calendarId is invalid. @n
-	 *									- The specified calendar is created for CALENDAR_ITEM_TYPE_TODO.
+	 *										- The specified @c calendarId is invalid. @n
+	 *										- The specified calendar is created for CALENDAR_ITEM_TYPE_TODO.
 	 * @exception	E_OBJ_NOT_FOUND			The specified calendar is not found.
 	 * @exception	E_STORAGE_FULL			The storage is insufficient.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 */
 	result AddEvent(CalEvent& event, RecordId calendarId);
 
@@ -415,15 +415,17 @@ public:
 	 * After adding the to-do item successfully, the item has a valid record ID.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.write
 	 *
 	 * @return		An error code
 	 * @param[in,out]	todo					The to-do to add
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			The specified @c todo is invalid.
 	 * @exception	E_STORAGE_FULL			The storage is insufficient.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 */
 	result AddTodo(CalTodo& todo);
 
@@ -432,6 +434,7 @@ public:
 	 * After adding the to-do item successfully, the item has a valid record ID.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.write
 	 *
 	 * @return		An error code
@@ -439,13 +442,14 @@ public:
 	 * @param[in]	calendarId				The calendar ID
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			Either of the following conditions has occurred: @n
-	 * 									- The specified @c todo is invalid. @n
-	 * 									- The specified @c calendarId is invalid. @n
-	 * 									- The specified calendar is created for CALENDAR_ITEM_TYPE_EVENT.
+	 * 										- The specified @c todo is invalid. @n
+	 * 										- The specified @c calendarId is invalid. @n
+	 * 										- The specified calendar is created for CALENDAR_ITEM_TYPE_EVENT.
 	 * @exception	E_OBJ_NOT_FOUND			The specified calendar is not found.
 	 * @exception	E_STORAGE_FULL			The storage is insufficient.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 */
 	result AddTodo(CalTodo& todo, RecordId calendarId);
 
@@ -454,15 +458,19 @@ public:
 	 * After removing the event successfully, the event has #INVALID_RECORD_ID.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.write
 	 *
 	 * @return		An error code
 	 * @param[in]	event				The calendar event to remove
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			The specified @c recordId is #INVALID_RECORD_ID.
 	 * @exception	E_OBJ_NOT_FOUND			The specified record is not found.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception   E_INVALID_OPERATION		This method cannot be used for the recurrence exception of the recurring event. @n
+	 * 										RemoveEventInstance() should be used instead of this method. @b Since: @b 2.1
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 */
 	result RemoveEvent(CalEvent& event);
 
@@ -470,15 +478,19 @@ public:
 	 * Removes the specified calendar event from this calendar book.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.write
 	 *
 	 * @return		An error code
 	 * @param[in]	eventId					The calendar event ID to remove
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			The specified @c eventId is #INVALID_RECORD_ID.
 	 * @exception	E_OBJ_NOT_FOUND			The specified record is not found.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception   E_INVALID_OPERATION		This method cannot be used for the recurrence exception of the recurring event. @n
+	 * 										RemoveEventInstance() should be used instead of this method. @b Since: @b 2.1
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 */
 	result RemoveEvent(RecordId eventId);
 
@@ -487,15 +499,17 @@ public:
 	 * After removing the to-do item successfully, the item has #INVALID_RECORD_ID.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.write
 	 *
 	 * @return		An error code
 	 * @param[in]	todo					The CalTodo ID to remove
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			The specified @c recordId is #INVALID_RECORD_ID.
 	 * @exception	E_OBJ_NOT_FOUND			The specified record is not found.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 */
 	result RemoveTodo(CalTodo& todo);
 
@@ -503,15 +517,17 @@ public:
 	 * Removes the specified CalTodo instance from the calendar book.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.write
 	 *
 	 * @return		An error code
 	 * @param[in]	todoId					The CalTodo ID to remove
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			The specified input parameter is invalid.
 	 * @exception	E_OBJ_NOT_FOUND			The specified record is not found.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 */
 	result RemoveTodo(RecordId todoId);
 
@@ -519,20 +535,24 @@ public:
 	 * Updates the specified calendar event to the internal data storage.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.write
 	 *
 	 * @return		An error code
 	 * @param[in]	event				The CalEvent instance to update
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			Either of the following conditions has occurred: @n
 	 *										- The specified @c recordId is #INVALID_RECORD_ID. @n
 	 *										- The specified @c event is not #RECORD_TYPE_EVENT. @n
 	 *										- The specified @c event is not an entry type instance. @n
 	 *										- The date of the event is invalid. @n
-	 *										 The valid range of the date can be referenced from GetMaxDateTime() and GetMinDateTime().
+	 *										The valid range of the date can be referenced from GetMaxDateTime() and GetMinDateTime().
 	 * @exception	E_OBJ_NOT_FOUND			The specified record is not found.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception   E_INVALID_OPERATION		This method cannot be used for the recurrence exception of the recurring event. @n
+	 * 										UpdateEventInstance() should be used instead of this method. @b Since: @b 2.1
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 */
 	result UpdateEvent(const CalEvent& event);
 
@@ -540,16 +560,18 @@ public:
 	 * Updates the specified CalTodo instance on the internal data storage.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.write
 	 *
 	 * @return		An error code
 	 * @param[in]	todo					The CalTodo instance to update
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			The specified @c recordId is #INVALID_RECORD_ID, or the date of the to-do item is invalid. @n
 	 *										The valid range of the date can be referenced from GetMaxDateTime() and GetMinDateTime().
 	 * @exception	E_OBJ_NOT_FOUND			The specified record is not found.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 */
 	result UpdateTodo(const CalTodo& todo);
 
@@ -557,15 +579,17 @@ public:
 	 * Gets the specified event ID that is matched with the RecordId.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.read
 	 *
 	 * @return		The matched event
 	 * @param[in]	eventId					The event ID to find
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			The specified @c eventId is invalid.
 	 * @exception	E_OBJ_NOT_FOUND			The specified record is not found.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 * @remarks			The specific error code can be accessed using the GetLastResult() method.
 	 */
 	CalEvent* GetEventN(RecordId eventId) const;
@@ -574,15 +598,17 @@ public:
 	 * Gets the specified to-do after matching it with the specified record ID.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.read
 	 *
 	 * @return		The matched to-do
 	 * @param[in]	todoId					The ID of the to-do to find
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			The specified @c todoId is invalid.
 	 * @exception	E_OBJ_NOT_FOUND			The specified record is not found.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 *
 	 */
@@ -592,21 +618,15 @@ public:
 	 * Gets all the to-do items in the specified time range. @n
 	 * To-do items, whose due date is within the retrieving range, is retrieved.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility This method has compatibility issues with OSP compatible applications. @n
-	 *                For more information, see @ref CompCalendarbookGetTodosNPage "here".
-	 * @endif
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.read
 	 *
 	 * @return		A list of all the matched CalTodo instances, @n
 	 *				else an empty list if there is no matched to-do item @n
 	 *				The items are sorted by due date.
-	 * @param[in]	start					The start of the time range
-	 * @param[in]	end						The end of the time range
+	 * @param[in]	start					The start of the time range. @n Any value with a unit that is less than a second is ignored.
+	 * @param[in]	end						The end of the time range. @n Any value with a unit that is less than a second is ignored.
 	 * @param[in]	pageNo					The page number of the result list @n
 	 *										It starts from @c 1.
 	 * @param[in]	countPerPage			The desired maximum count of the result items per page
@@ -618,49 +638,33 @@ public:
 	 *										The default priority value is #TODO_PRIORITY_ALL that means all the priorities are returned.
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			Either of the following conditions has occurred: @n
 	 *										- The specified @c pageNo or @c countPerPage is less than @c 1. @n
 	 *										- The start time is later than the end date. @n
-	 *										- The start or end time is not in a valid range. @n
+	 *										- The start or end time is out of the valid range. @n
 	 *										 The valid range of the date can be referenced from GetMaxDateTime() and GetMinDateTime().
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Tizen::Base::Collection::IList* GetTodosN(const Tizen::Base::DateTime& start, const Tizen::Base::DateTime& end, int pageNo, int countPerPage, unsigned long status = TODO_STATUS_ALL,
 							unsigned long priority = TODO_PRIORITY_ALL) const;
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page	CompCalendarbookGetTodosNPage Compatibility for GetTodosN()
-	 * @section	CompCalendarbookGetTodosNPageIssueSection Issues
-	 *           Implementing this method in OSP compatible applications has the following issues:   @n
-	 *			-# If the start date of a to-do is not in the time range of start/end parameters, @n
-	 *			the to-do is not retrieved even though the due date is in the time range.
-	 *
-	 * @section	CompCalendarbookGetTodosNPageSolutionSection Resolutions
-	 * 			This issue has been resolved in Tizen.  @n
-	 *			-# The to-do will be retrieved if the due date is in the range of start/end parameters.
-	 * @endif
 	 */
 
 	/**
 	 * Gets the total number of to-do items in the specified time range. @n
 	 * To-do items, whose due date is within the retrieving range, is counted.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility This method has compatibility issues with OSP compatible applications. @n
-	 *                For more information, see @ref CompCalendarbookGetTodoCountPage "here".
-	 * @endif
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.read
 	 *
 	 * @return		The total number of to-dos, @n
 	 *										else @c -1 if an exception occurs
-	 * @param[in]	start					The start of the time range
-	 * @param[in]	end						The end of the time range
+	 * @param[in]	start					The start of the time range. @n Any value with a unit that is less than a second is ignored.
+	 * @param[in]	end						The end of the time range. @n Any value with a unit that is less than a second is ignored.
 	 * @param[in]	status					The to-do status @n
 	 *										If a specific status is set, the to-dos that have the specified status are returned. @n
 	 *										The default status value is #TODO_STATUS_ALL, which means all the statuses are returned.
@@ -669,27 +673,17 @@ public:
 	 *										The default priority value is #TODO_PRIORITY_ALL that means all the priorities are returned.
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			Either of the following conditions has occurred: @n
 	 * 										- The start time is later than the end date. @n
-	 *										- The start or end time is not in a valid range. @n
+	 *										- The start or end time is out of the valid range. @n
 	 *										The valid range of the date can be referenced from GetMaxDateTime() and GetMinDateTime().
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	int GetTodoCount(const Tizen::Base::DateTime& start, const Tizen::Base::DateTime& end, unsigned long status = TODO_STATUS_ALL, unsigned long priority = TODO_PRIORITY_ALL) const;
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page	CompCalendarbookGetTodoCountPage Compatibility for GetTodoCount()
-	 * @section	CompCalendarbookGetTodoCountPageIssueSection Issues
-	 *           Implementing this method in OSP compatible applications has the following issues:   @n
-	 *			-# If the start date of a to-do is not in the time range of start/end parameters, @n
-	 *			the to-do is not counted even though the due date is in the time range.
-	 *
-	 * @section	CompCalendarbookGetTodoCountPageSolutionSection Resolutions
-	 * 			This issue has been resolved in Tizen.  @n
-	 *			-# The to-do will be counted if the due date is in the range of start/end parameters.
-	 * @endif
 	 */
 
 	/**
@@ -701,14 +695,15 @@ public:
 	 * @brief <i> [Deprecated] </i>
 	 * @deprecated	This method is deprecated. Instead of using this method, it is recommended to use GetInstancesOfAllDayEventsN() or GetInstancesOfNonAllDayEventsN().
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.read
 	 *
 	 * @return		A list containing all of the matched CalEvent instances, @n
-	 *				else an empty list if there are no matched instances or @c null if an exception occurs @n
+	 *				else an empty list if there are no matched instances, or @c null if an exception occurs @n
 	 *				The results are listed in the following order: all day events, and other events. @n
 	 *				The results with the same property of all day event are ordered by their start time.
-	 * @param[in]	start				The start of the time range
-	 * @param[in]	end					The end of the time range
+	 * @param[in]	start				The start of the time range. @n Any value with a unit that is less than a second is ignored.
+	 * @param[in]	end					The end of the time range. @n Any value with a unit that is less than a second is ignored.
 	 * @param[in]	timeZone			The time zone of the specified start and end times
 	 * @param[in]	pageNo				The page number of the result list @n
 	 *									It starts from @c 1.
@@ -718,13 +713,14 @@ public:
 	 *									The default category value is #EVENT_CATEGORY_ALL, which means all the categories are returned.
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		Either of the following conditions has occurred: @n
 	 *									- The specified @c pageNo or @c countPerPage is less than @c 1. @n
 	 *									- The specified @c category is invalid. @n
 	 *									- The start time is later than the end date. @n
-	 *									- The start or end time is not in a valid range. @n
+	 *									- The start or end time is out of the valid range. @n
 	 *									The valid range of the date can be referenced from GetMaxDateTime() and GetMinDateTime().
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @endif
 	 */
@@ -745,11 +741,12 @@ public:
 	 * @brief <i> [Deprecated] </i>
 	 * @deprecated	This method is deprecated. Instead of using this method, it is recommended to use GetInstancesOfAllDayEventsN() or GetInstancesOfNonAllDayEventsN().
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.read
 	 *
 	 * @return		An error code
-	 * @param[in]	start					The start of the time range
-	 * @param[in]	end					The end of the time range
+	 * @param[in]	start					The start of the time range. @n Any value with a unit that is less than a second is ignored.
+	 * @param[in]	end					The end of the time range. @n Any value with a unit that is less than a second is ignored.
 	 * @param[in]	timeZone				The time zone of the specified start and end times
 	 * @param[in]	pageNo					The page number of the result list @n
 	 *									It starts from @c 1.
@@ -761,13 +758,14 @@ public:
 	 * @param[in]	listener				The listener for receiving the responses of the request
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			Either of the following conditions has occurred: @n
 	 *									- The specified @c pageNo or @c countPerPage is less than @c 1. @n
 	 *									- The specified @c category is invalid. @n
 	 *									- The start time is later than the end date. @n
-	 *									- The start or end time is not in a valid range. @n
+	 *									- The start or end time is out of the valid range. @n
 	 *									The valid range of the date can be referenced from GetMaxDateTime() and GetMinDateTime().
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 * @remarks		IRecordListener::OnRecordsReceivedN(), Calendarbook::GetEventInstancesN()
 	 * @endif
 	 */
@@ -780,14 +778,16 @@ public:
 	 * Gets all events.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.read
 	 *
 	 * @return		A list containing all the CalEvent instances, @n
-	 *				else an empty list if there are no events or @c null if an exception occurs @n
+	 *				else an empty list if there are no events, or @c null if an exception occurs @n
 	 *				The results are listed in the order of their event ID.
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @remarks There is a high probability for an occurrence of an out-of-memory exception. If possible, check whether the exception is
 	 *					E_OUT_OF_MEMORY or not. For more information on how to handle the out-of-memory exception, refer
@@ -799,13 +799,15 @@ public:
 	 * Gets all to-dos.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.read
 	 *
 	 * @return		A list containing all the CalTodo instances, @n
-	 *				else an empty list if there are no to-dos or @c null if an exception occurs @n
+	 *				else an empty list if there are no to-dos, or @c null if an exception occurs @n
 	 *				The results are listed in the order of their to-do ID.
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @remarks There is a high probability for an occurrence of an out-of-memory exception. If possible, check whether the exception is
@@ -818,13 +820,15 @@ public:
 	 * Gets all calendars.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.read
 	 *
 	 * @return		A list containing all the Calendar instances, @n
-	 *				else an empty list if there are no calendars or @c null if an exception occurs @n
+	 *				else an empty list if there are no calendars, or @c null if an exception occurs @n
 	 *				The results are listed in the order of their calendar ID.
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @remarks There is a high probability for an occurrence of an out-of-memory exception. If possible, check whether the exception is
@@ -837,17 +841,19 @@ public:
 	 * Gets information of all the changed events since the version.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.read
 	 *
 	 * @return		A list containing the CalEventChangeInfo instances, @n
-	 *				else an empty list if there are no events or @c null if an exception occurs @n
+	 *				else an empty list if there are no events, or @c null if an exception occurs @n
 	 *				The results are listed in the order of their version.
 	 * @param[in]	version					The version
 	 * @param[out]	latestVersion			The latest change version among the changed events
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			The specified @c version is invalid.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @remarks There is a high probability for an occurrence of an out-of-memory exception. If possible, check whether the exception is
 	 *					E_OUT_OF_MEMORY or not. For more information on how to handle the out-of-memory exception, refer
@@ -859,17 +865,19 @@ public:
 	 * Gets information of all the changed to-dos since the version.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.read
 	 *
 	 * @return		A list containing the CalTodoChangeInfo instances, @n
-	 *				else an empty list if there are no to-dos or @c null if an exception occurs @n
+	 *				else an empty list if there are no to-dos, or @c null if an exception occurs @n
 	 *				The results are listed in the order of their version.
 	 * @param[in]	version					The version
 	 * @param[out]	latestVersion			The latest change version among the changed to-dos
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			The specified @c version is invalid.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @remarks There is a high probability for an occurrence of an out-of-memory exception. If possible, check whether the exception is
 	 *					E_OUT_OF_MEMORY or not. For more information on how to handle the out-of-memory exception, refer
@@ -882,37 +890,40 @@ public:
 	 * After adding the calendar to the database successfully, the calendar has a valid calendar ID.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.write
 	 *
 	 * @return		An error code
 	 * @param[in,out]	calendar				The calendar to add
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			The record ID of the calendar is not #INVALID_RECORD_ID.
 	 * @exception	E_STORAGE_FULL			The storage is insufficient.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 */
 	result AddCalendar(Calendar& calendar);
 
-	/*
+	/**
 	 * Adds a calendar that is associated with the specified account. @n
 	 * After adding the calendar to the database successfully, the calendar has a valid calendar ID.
 	 *
 	 * @since	2.0
-	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.write
 	 *
 	 * @return		An error code
-	 * @param[in,out]	calendar				The calendar to add
+	 * @param[in,out]	calendar			The calendar to add
 	 * @param[in]	accountId				The account Id
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
-	 * @exception	E_INVALID_ARG				Either of the following conditions has occurred: @n
-	 * 														- The record ID of the calendar is not #INVALID_RECORD_ID. @n
-	 *															- The specified @c accountId is invalid.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception	E_INVALID_ARG			Either of the following conditions has occurred: @n
+	 * 										- The record ID of the calendar is not #INVALID_RECORD_ID. @n
+	 *										- The specified @c accountId is invalid.
 	 * @exception	E_OBJ_NOT_FOUND			The specified account is not found.
 	 * @exception	E_STORAGE_FULL			The storage is insufficient.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 */
 	result AddCalendar(Calendar& calendar, AccountId accountId);
 
@@ -920,16 +931,18 @@ public:
 	 * Removes the specified calendar.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.write
 	 *
 	 * @return		An error code
 	 * @param[in]	calendarId				The calendar ID to remove
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			The specified @c calendarId is invalid, or
 	 *											the calendar represents default calendar.
 	 * @exception	E_OBJ_NOT_FOUND			The specified calendar is not found.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 */
 	result RemoveCalendar(RecordId calendarId);
 
@@ -937,16 +950,18 @@ public:
 	 * Updates the specified calendar.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.write
 	 *
 	 * @return		An error code
 	 * @param[in]	calendar				The Calendar instance to update
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG			The calendar's recordId is #INVALID_RECORD_ID, or
 	 * 										the calendar represents default calendar.
 	 * @exception	E_OBJ_NOT_FOUND			The specified calendar is not found.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 */
 	result UpdateCalendar(const Calendar& calendar);
 
@@ -954,6 +969,7 @@ public:
 	 * Gets the calendar with the specified calendar ID.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.read
 	 *
 	 * @return		The matched calendar, @n 
@@ -961,9 +977,10 @@ public:
 	 * @param[in]	calendarId				The calendar ID
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG					The specified @c calendarId is invalid.
 	 * @exception	E_OBJ_NOT_FOUND			The specified calendar is not found.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 * @remarks			The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Calendar* GetCalendarN(RecordId calendarId) const;
@@ -973,30 +990,94 @@ public:
 	 * If the event instance has been removed successfully, its start date is added as an exception date to the recurrence of its original event.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.write
 	 *
 	 * @return		An error code
-	 * @param[in]	eventInstance					The event instance to remove @n
-	 * 														The @c eventInstance must be an instance of the recurring event.
+	 * @param[in]	eventInstance			The event instance to remove @n
+	 * 										The @c eventInstance must be an instance of the recurring event.
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
-	 * @exception	E_INVALID_ARG				The instance is invalid.
-	 * @exception	E_OBJ_NOT_FOUND			The instance is not found.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception	E_INVALID_ARG			The instance is invalid.
+	 * @exception	E_OBJ_NOT_FOUND			The original event of the @c eventInstance is not found.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 * @remarks		The instance's start time is added to the recurrence of original event as exception date.
 	 */
 	result RemoveEventInstance(const CalEventInstance& eventInstance);
 
 	/**
+	 * Update the specified recurring event instance(@ref CalEventInstance). This method can be used for defining exception of the recurring event. @n
+	 * In order to update an event instance, you should use copy of its original event(@ref CalEventInstance::GetOriginalEventId()). @n
+	 * You can modify the properties of copy of the original event and use it as the second parameter of this method. @n
+	 * (The start/end time of the original event should be set with the start/end time of the event instance.) @n
+	 * This method adds the modified copy of the original event as a new event. Therefore the new event ID will be assigned to it through @c event's record ID @n
+	 * and its existing event ID inside the modified copy of the original event will become the base event ID of the new event. @n
+	 * However this method only updates the properties of the event, does not add a new event that is already added.
+	 *
+	 * @since	2.1
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/calendar.write
+	 *
+	 * @return		An error code
+	 * @param[in]	eventInstance			The event instance to update @n
+	 * 										The @c eventInstance must be an instance of the recurring event.
+	 * @param[in,out]	event				The modified copy of the original event @n
+	 * @exception	E_SUCCESS				The method is successful.
+	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method.
+	 * @exception	E_INVALID_ARG			Either of the following conditions has occurred: @n
+	 * 										- The instance is invalid. @n
+	 * 										- @c event is not referring to the original event.
+	 * @exception	E_OBJ_NOT_FOUND			The original event of the @c eventInstance is not found.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
+	 *
+	 * @code
+
+		void UpdateRecurringEventInstance(const CalEventInstance& eventInstance)
+		{
+			CalEvent* pEvent = pCalendarbook->GetEventN(eventInstance.GetOriginalEventId());
+			if (pEvent == null)
+			{
+				AppLogException("GetEventN() has failed");
+				return;
+			}
+
+			// Sets the start time and end time
+			pEvent->SetRecurrence(null);
+			pEvent->SetStartAndEndTime(eventInstance.GetStartTime(), eventInstance.GetEndTime());
+
+			// Modifies the properties
+			pEvent->SetLocation(L"Meeting room on 11th floor");
+
+			// Updates the instance
+			result r = pCalendarbook->UpdateEventInstance(eventInstance, *pEvent);
+			if (IsFailed(r))
+			{
+				AppLogException("UpdateEventInstance() has failed");
+				delete pEvent;
+				return;
+			}
+
+			delete pEvent;
+		}
+
+	 * @endcode
+	 */
+	result UpdateEventInstance(const CalEventInstance& eventInstance, CalEvent& event);
+
+	/**
 	 * Gets the latest version of calendarbook.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.read
 	 *
 	 * @return		The latest version
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
-	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
 	 * @remarks			The specific error code can be accessed using the GetLastResult() method.
 	 */
 	int GetLatestVersion(void) const;
@@ -1008,10 +1089,11 @@ public:
 	 * If the @c offset is M and the @c maxCount are N, then the first M items are omitted from the result set returned by the searching operation and the next N items are returned.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.read
 	 *
 	 * @return		A list of searched results (the list of CalEvent, CalTodo, Calendar, or CalEventInstance), @n
-	 *						else an empty list if there is no searched result or @c null if an exception occurs
+	 *						else an empty list if there is no searched result, or @c null if an exception occurs
 	 * @param[in]	filter		The filter that specifies the search condition @n If the filter is empty, all items that are specified by the type of this filter will be searched.
 	 * @param[in]	propertySortedBy		The property for sorting @n The searched results are ordered by the values of this property.
 	 * @param[in]	sortOrder		The order for sorting
@@ -1019,6 +1101,7 @@ public:
 	 * @param[in]	maxCount		The maximum count of the searched results @n If this value is @c 0, it will be ignored.
 	 * @exception	E_SUCCESS						The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED				The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG				The specified @c offset or @c maxCount is less than 0, or the @c propertySortedBy is not an element of the enumerator that corresponds with the type of the specified @c filter.
 	 * @exception	E_SYSTEM					The method cannot proceed due to a severe system error.
 	 * @remarks				The specific error code can be accessed using the GetLastResult() method.
@@ -1038,12 +1121,14 @@ public:
 	 * The filter specifies the item type and condition for searching.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/calendar.read
 	 *
 	 * @return		The count of the searched results
 	 * @param[in]	filter 	The filter that specifies the search condition @n If the filter is empty, all items that are specified by the type of this filter will be searched.
 	 * @exception	E_SUCCESS						The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED				The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_SYSTEM						The method cannot proceed due to a severe system error.
 	 * @remarks			The specific error code can be accessed using the GetLastResult() method.
 	 */
@@ -1051,12 +1136,12 @@ public:
 
 	/**
 	 * Parses the events from specific vCalendar file. @n
-	 * This method supports to parse for vCalendar version 1.0 and 2.0 (iCalendar).
+	 * The %ParseEventsFromVcalendarN() method supports to parse for vCalendar version 1.0 and 2.0 (iCalendar).
 	 *
 	 * @since	2.0
 	 *
 	 * @return		A list containing the CalEvent instances, @n
-	 *				else an empty list if there are no events or @c null if an exception occurs
+	 *				else an empty list if there are no events, or @c null if an exception occurs
 	 * @param[in]	vCalFilePath			The path of the vCalendar file
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_INVALID_ARG			The specified @c vCalFilePath is invalid.
@@ -1072,12 +1157,12 @@ public:
 
 	/**
 	 * Parses the to-dos from specific vCalendar file. @n
-	 * This method supports to parse for vCalendar version 1.0 and 2.0 (iCalendar).
+	 * The %ParseTodosFromVcalendarN() method supports to parse for vCalendar version 1.0 and 2.0 (iCalendar).
 	 *
 	 * @since	2.0
 	 *
 	 * @return		A list containing the CalTodo instances, @n
-	 *				else an empty list if there are no to-dos or @c null if an exception occurs
+	 *				else an empty list if there are no to-dos, or @c null if an exception occurs
 	 * @param[in]	vCalFilePath			The path of the vCalendar file
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_INVALID_ARG			The specified @c vCalFilePath is invalid.

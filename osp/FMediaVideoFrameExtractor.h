@@ -27,6 +27,7 @@
 
 #include <FBaseObject.h>
 #include <FMediaImageBuffer.h>
+#include <FMediaRecorderTypes.h>
 
 namespace Tizen { namespace Media {
 
@@ -138,30 +139,31 @@ public:
 	long GetDuration(void) const;
 
 	/**
-	 * Extract video frame at the specified position.
+	 * Extracts video frame at the specified position.
 	 *
 	 * @since		2.0
 	 *
-	 * @return     A pointer to the ImageBuffer containing extracted video frame.
+	 * @return     A pointer to ImageBuffer containing the extracted video frame
 	 * @param[in]  timestamp             The timestamp of video frame to extract
 	 * @exception  E_SUCCESS             The method is successful.
 	 * @exception  E_OUT_OF_RANGE        The specified @c timestamp is out of range.
 	 * @exception  E_OUT_OF_MEMORY       The memory is insufficient.
 	 * @exception  E_OPERATION_FAILED    Video frame at given position is not found or extraction is failed.
 	 * @exception  E_UNSUPPORTED_FORMAT  The specified pixel format is not supported.
-	 * @remarks    The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks    The extracted frame may not be exact frame of given timestamp,
+	 * @remarks
+	 *           - The specific error code can be accessed using the GetLastResult() method.
+	 *           - The extracted frame may not be exact frame of given timestamp,
 	 *             so that the same frame can be returned even if the timestamp is different.
-	 * @remarks    Frames near the end of contents may not be extracted if no key-frame is found after timestamp.
+	 *           - Frames near the end of contents may not be extracted if no key-frame is found after timestamp.
 	 */
 	ImageBuffer* GetFrameN(long timestamp);
 
 	/**
-	 * Extract video thumbnail from the specified position.
+	 * Extracts video thumbnail from the specified position.
 	 *
 	 * @since		2.0
 	 *
-	 * @return     A pointer to the ImageBuffer containing the extracted video frame.
+	 * @return     A pointer to ImageBuffer containing the extracted video frame
 	 * @param[in]  path                  The video file path
 	 * @param[in]  timestamp             The timestamp of video frame that want to extract
 	 * @param[in]  pixelFormat           The pixel format of output image data.
@@ -171,12 +173,23 @@ public:
 	 * @exception  E_OUT_OF_MEMORY       The memory is insufficient.
 	 * @exception  E_OPERATION_FAILED    Video frame at given position is not found or extraction is failed.
 	 * @exception  E_UNSUPPORTED_FORMAT  The specified pixel format is not supported.
-	 * @remarks    The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks    The extracted frame may not be exact frame of given timestamp,
+	 * @remarks
+	 *           - The specific error code can be accessed using the GetLastResult() method.
+	 *           - The extracted frame may not be exact frame of given timestamp,
 	 *             so that the same frame can be returned even if the timestamp is different.
-	 * @remarks    Frames near the end of contents may not be extracted if no key-frame is found after timestamp.
+	 *           - Frames near the end of contents may not be extracted if no key-frame is found after timestamp.
 	 */
 	static ImageBuffer* GetFrameN(const Tizen::Base::String& path, MediaPixelFormat pixelFormat, long timestamp);
+
+	/**
+	* Gets the current recording rotation of the video data.
+	*
+	* @since 2.1
+	*
+	* @return The recording rotation information of the current video data
+	*/
+	RecordingRotation GetRecordingRotation(void) const;
+
 
 private:
 	/**

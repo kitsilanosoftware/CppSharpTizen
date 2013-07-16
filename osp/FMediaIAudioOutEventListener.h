@@ -36,6 +36,10 @@ class AudioOut;
  *
  * @since		2.0
  *
+ * @remarks			OnAudioOutInterrupted() is called when the application is interrupted by another application and OnAudioOutReleased() event can be called at the end of interruption.
+ *			OnAudioOutAudioFocusChanged() is called when the application is interrupted by another application but the end of interruption is not notified.
+ *			So, the application should handle both events to work properly on various sound scenarios between applications.
+ *
  *  The %IAudioOutEventListener interface represents a listener that receives the AudioOut related events. The %AudioOut class works in asynchronous mode, and when the application plays audio data with the %AudioOut class,
  *  the caller must implement this interface to receive an event from %AudioOut.
  *
@@ -59,7 +63,7 @@ public:
 	*
 	* @since		2.0
 	*
-	*	@param[in]	src	A pointer to the AudioOut instance that fired the event
+	*	@param[in]	src	An instance of AudioOut that fires the event
 	*/
 	virtual void OnAudioOutBufferEndReached(Tizen::Media::AudioOut& src) = 0;
 
@@ -68,7 +72,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 *	@param[in]	src							A pointer to the AudioOut instance that fired the event
+	 *	@param[in]	src							An instance of AudioOut that fires the event
 	 */
 	virtual void OnAudioOutInterrupted(Tizen::Media::AudioOut& src) = 0;
 
@@ -77,7 +81,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 *	@param[in]	src							A pointer to the AudioOut instance that fired the event
+	 *	@param[in]	src							An instance of AudioOut that fires the event
 	 */
 	virtual void OnAudioOutReleased(Tizen::Media::AudioOut& src) = 0;
 
@@ -86,10 +90,12 @@ public:
 	*
 	*  @since		2.0
 	*
-	*  @param[in]	src		A pointer to the AudioOut instance that fired the event
-	*  @remarks		After the audio focus is being changed, the playback is stopped and the state of this instance is changed to AUDIOOUT_STATE_STOPPED.
-	*  @remarks		An application can start playback again in the state of AUDIOOUT_STATE_STOPPED but the interaction between device and user needs for starting again. Because there is a possibility of a race condition between applications which try to start without the interaction
-	*		@remarks		An application cannot start playback again even in the state of AUDIOOUT_STATE_STOPPED due to other applications which have a higher priority.
+	*  @param[in]	src		An instance of AudioOut that fires the event
+	*  @remarks		
+	*				- After the audio focus is being changed, the playback is stopped and the state of this instance is changed to ::AUDIOOUT_STATE_STOPPED.
+	*  				- User interaction with the device is required for an application in @c AUDIOOUT_STATE_STOPPED state to resume playing. 
+	*				This is to avoid the occurrence of a race condition among applications that try to start without user interaction.
+	*				- An application cannot start playback again even in the state of @c AUDIOOUT_STATE_STOPPED due to other applications which have a higher priority.
 	*/
 	virtual void OnAudioOutAudioFocusChanged(Tizen::Media::AudioOut& src) {}
 protected:

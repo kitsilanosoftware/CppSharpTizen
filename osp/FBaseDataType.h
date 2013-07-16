@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -32,7 +31,7 @@
 typedef unsigned char byte;
 
 /**
- * @c result is a @c unsigned @c long type and indicates the result of the method execution.
+ * @c result is an @c unsigned @c long type and indicates the result of the method execution.
  * @since 2.0
  */
 typedef unsigned long result;

@@ -56,8 +56,7 @@ class _OSP_EXPORT_ Coordinates
 {
 public:
 	/**
-	* Initializes an instance of %Coordinates with the values of latitude, longitude, and altitude to Not-a-Number.
-	*
+	* Initializes an instance of %Coordinates with the values of latitude, longitude, and altitude to Not-a-Number. @n
 	* An application should set values of the coordinates using Set() method to specify it.
 	*
 	* @since 2.0
@@ -101,9 +100,8 @@ public:
 	virtual int GetHashCode(void) const;
 
 	/**
-	* Sets the latitude, longitude, and altitude values of the coordinates.
-	*
-	* An application should specify latitude and longitude values in the valid ranges of [-90.0, +90.0] and [-180.0, +180.0], respectively.
+	* Sets the latitude, longitude, and altitude values of the coordinates. @n
+	* An application should specify latitude and longitude values in the valid ranges of [-90.0, +90.0] and [-180.0, +180.0], respectively. @n
 	* Otherwise, the %Set() method returns an @c E_INVALID_ARG exception.
 	*
 	* @since 2.0
@@ -121,9 +119,8 @@ public:
 	result Set(double latitude, double longitude, double altitude);
 
 	/**
-	* Sets the latitude value of the coordinates.
-	*
-	* An application should specify latitude value in the valid range of [-90.0, +90.0].
+	* Sets the latitude value of the coordinates. @n
+	* An application should specify latitude value in the valid range of [-90.0, +90.0]. @n
 	* Otherwise, the %SetLatitude() method returns an @c E_INVALID_ARG exception.
 	*
 	* @since 2.0
@@ -137,9 +134,8 @@ public:
 	result SetLatitude(double latitude);
 
 	/**
-	* Sets the longitude value of the coordinates.
-	*
-	* An application should specify longitude value in the valid range of [-180.0, +180.0].
+	* Sets the longitude value of the coordinates. @n
+	* An application should specify longitude value in the valid range of [-180.0, +180.0]. @n
 	* Otherwise, the %SetLongitude() method returns an @c E_INVALID_ARG exception.
 	*
 	* @since 2.0
@@ -196,11 +192,9 @@ public:
 	double GetAltitude(void) const;
 
 	/**
-	* Calculates the azimuth value.
-	*
-	* The coordinates are the starting point and @c dest is the destination for the azimuth calculation.
-	* The azimuth is measured clockwise from true north based on the WGS84 ellipsoid model.
-	*
+	* Calculates the azimuth value. @n
+	* The coordinates are the starting point and @c dest is the destination for the azimuth calculation. @n
+	* The azimuth is measured clockwise from true north based on the WGS84 ellipsoid model. @n
 	* The altitude value is not considered in calculation.
 	*
 	* @since 2.0
@@ -212,23 +206,20 @@ public:
 	double GetAzimuth(const Coordinates& dest) const;
 
 	/**
-	* Calculates the geodetic distance to the given coordinates.
-	*
-	* The distance calculation is based on the WGS84 ellipsoid model.
-	*
+	* Calculates the geodetic distance for the given coordinates. @n
+	* The distance calculation is based on the WGS84 ellipsoid model. @n
 	* The altitude value is not considered in calculation.
 	*
 	* @since 2.0
 	*
-	* @return	The distance to the given coordinates in meters, @n
+	* @return	The distance for the given coordinates in meters, @n
 	*			else @c NaN if the latitude or the longitude of two points has an @c NaN value
 	* @param[in]	to The destination coordinates
 	*/
 	double GetDistanceTo(const Coordinates& to) const;
 
 	/**
-	* Converts the coordinate value into string.
-	*
+	* Converts the coordinate value into string. @n
 	* An application specifies formats like @c COORDINATE_FORMAT_DEGREE_MINUTE or @c COORDINATE_FORMAT_DEGREE_MINUTE_SECOND for the result string.
 	*
 	* @since 2.0
@@ -244,8 +235,7 @@ public:
 	static result ToString(double degree, CoordinateFormat format, Tizen::Base::String& string);
 
 	/**
-	* Converts a string into coordinate degree.
-	*
+	* Converts a string into coordinate degree. @n
 	* The @c string should be in @c COORDINATE_FORMAT_DEGREE_MINUTE or @c COORDINATE_FORMAT_DEGREE_MINUTE_SECOND format.
 	*
 	* @since 2.0

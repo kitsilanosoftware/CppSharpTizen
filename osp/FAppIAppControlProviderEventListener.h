@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -70,7 +69,7 @@ public:
 	 * @param[in]	operationId	The application control operation ID
 	 * @param[in]	pUriData	A pointer to the URI data
 	 * @param[in]	pMimeType	A pointer to the MIME type (RFC 2046) data
-	 * @param[in]	pExtraData	A pointer to an argument map of key and value pair where the key is of type String and the value is of type String
+	 * @param[in]	pExtraData	A pointer to an argument map of key and value pair where the key is of type String and the value is of type Tizen::Base::String or of type Tizen::Base::Collection::ArrayList of %Tizen::Base::String
 	 * @remarks	To reply to the application control request, use AppControlProviderManager::SendAppControlResult() with the given request ID.
 	 * @remarks	When the application receives the AppControl request on the background,
 	 * 			%OnAppControlRequestReceived() is invoked before UiApp::OnForeground().

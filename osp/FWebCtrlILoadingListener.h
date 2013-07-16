@@ -27,6 +27,11 @@
 #include <FBaseRtIEventListener.h>
 #include <FBaseString.h>
 
+namespace Tizen { namespace Graphics
+{
+class Bitmap;
+}} // Tizen::Graphics
+
 namespace Tizen { namespace Net { namespace Http
 {
 class HttpHeader;
@@ -73,7 +78,7 @@ enum LoadingErrorType
 	WEB_BAD_URL,                                /**< The URL is invalid */
 	WEB_HTTP_RESPONSE,                      /**< The hypertext transfer protocol (HTTP) response */
 	WEB_OUT_OF_MEMORY,                      /**< The memory is not enough to load the page */
-	WEB_FILE_ACCESS_FAILED,                 /**< The file access failed  */
+	WEB_FILE_ACCESS_FAILED,                 /**< The file access has failed */
 	WEB_REQUEST_MAX_EXCEEDED,               /**< The request has failed because the total number of requests have exceeded the maximum limit */
 	WEB_INVALID_CERTIFICATE                 /**< The hypertext transfer protocol secure (HTTPS) request has failed due to an invalid certificate or CA */
 };
@@ -111,7 +116,7 @@ public:
 	/**
 	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
-	 * @since	2.0
+	 * @since		2.0
 	 */
 	virtual ~ILoadingListener(void) {}
 
@@ -125,7 +130,7 @@ public:
 	 *				If this method returns @c true, the application must delete the AuthenticationChallenge instance.
 	 * @param[in]	host			The host requiring the authentication
 	 * @param[in]	realm			The description to help save the user credentials for future visits
-	 * @param[in]		authentication	The handler to send a user response to the server that requested the authentication
+	 * @param[in]	authentication		The handler to send a user response to the server that requested the authentication
 	 */
 	virtual bool OnHttpAuthenticationRequestedN(const Tizen::Base::String& host, const Tizen::Base::String& realm, const Tizen::Web::Controls::AuthenticationChallenge& authentication) = 0;
 
@@ -153,13 +158,13 @@ public:
 	/**
 	* Called when the loading operation fails.
 	*
-	* @since                  2.0
+	* @since	2.0
 	*
-	* @param[in]          error                                            The error that occurred during loading
-	* @param[in]          reason                                        The reason for the loading failure, @n
-	*                               - WEB_HTTP_RESPONSE: The HTTP state code such as "404" @n
-	*                               - WEB_MIME_NOT_SUPPORTED: The Multipurpose Internet Mail Extensions (MIME) type such as "application/rdf+xml" is not supported @n
-	*                               - WEB_BAD_URL: The URL is incorrect
+	* @param[in]		error			The error that occurred during loading
+	* @param[in]		reason			The reason for the loading failure:
+	*				- @c WEB_HTTP_RESPONSE: The HTTP state code such as "404"
+	*				- @c WEB_MIME_NOT_SUPPORTED: The Multipurpose Internet Mail Extensions (MIME) type such as "application/rdf+xml" is not supported.
+	*				- @c WEB_BAD_URL: The URL is incorrect.
 	*/
 	virtual void OnLoadingErrorOccurred(LoadingErrorType error, const Tizen::Base::String& reason) = 0;
 
@@ -174,14 +179,14 @@ public:
 	 * Called when the loading progress for the current page is requested. @n
 	 * The progress rate is displayed as a percentage.
 	 *
-	 * @since				2.0
+	 * @since	2.0
 	 *
-	 * @param[in]		progress			The progress rate ranging from [0~100]
+	 * @param[in]	progress		The progress rate ranging from [@c 0 to @c 100]
 	 */
 	virtual void OnEstimatedProgress(int progress) = 0;
 
 	/**
-	 * Called when the title of the new page has been received.
+	 * Called when the title of the new page is received.
 	 *
 	 * @since	2.0
 	 */
@@ -192,28 +197,38 @@ public:
 	 * If an application wants to handle the URL, it must return @c true. If an application returns @c false, the request of the URL continues with the
 	 * browser engine.
 	 *
-	 * @since					2.0
+	 * @since		2.0
 	 *
-	 * @return			@c true if the application handles the URL after the request is canceled in the browser engine, @n
+	 * @return		@c true if the application handles the URL after the request is canceled in the browser engine, @n
 	 *                  else @c false if the browser engine proceeds with the requested URL
-	 * @param[in]		url			The URL that is requested
-	 * @param[in]		type		The type indicating how the URL is triggered
+	 * @param[in]	url				The URL that is requested
+	 * @param[in]	type			The type indicating how the URL is triggered
 	 */
 	virtual bool OnLoadingRequested(const Tizen::Base::String& url, WebNavigationType type) = 0;
 
 	/**
 	 * Called to notify an application of the content type of the data to be downloaded. @n
-	 * - To handle data by itself, the application must return WEB_DECISION_DOWNLOAD. The data is routed to IWebDownloadListener to be downloaded incrementally. @n
-	 * - If an application returns WEB_DECISION_CONTINUE, the browser engine continues the downloading and tries to parse the data. @n
-	 * - If an application returns WEB_DECISION_IGNORE, the browser engine cancels the downloading of the data.
+	 * - To handle data by itself, the application must return @c WEB_DECISION_DOWNLOAD. The data is routed to IWebDownloadListener to be downloaded incrementally. @n
+	 * - If an application returns @c WEB_DECISION_CONTINUE, the browser engine continues the downloading and tries to parse the data. @n
+	 * - If an application returns @c WEB_DECISION_IGNORE, the browser engine cancels the downloading of the data.
 	 *
-	 * @since				2.0
+	 * @since		2.0
 	 *
-	 * @return			DecisionPolicy			A value of the enumerator DecisionPolicy
-	 * @param[in]		mime				The content type of the data that is downloaded
-	 * @param[in]		httpHeader			The HTTP header string
+	 * @return			A value of the enumerator DecisionPolicy
+	 * @param[in]	mime			The content type of the data that is downloaded
+	 * @param[in]	httpHeader		The HTTP header string
 	 */
 	virtual DecisionPolicy OnWebDataReceived(const Tizen::Base::String& mime, const Tizen::Net::Http::HttpHeader& httpHeader) = 0;
+
+	/**
+	 * Called when the favicon of the new page is received. @n
+	 * If this callback is received once, an application can get favicon by using Tizen::Web::Controls::Web::GetFaviconN().
+	 *
+	 * @since		2.1
+	 *
+	 * @param[in]	favicon			The favicon image
+	 */
+	virtual void OnFaviconReceived(const Tizen::Graphics::Bitmap& favicon) {}
 
 protected:
 	//
@@ -221,7 +236,7 @@ protected:
 	//
 	// Gets the Impl instance.
 	//
-	// @since 2.0
+	// @since		2.0
 	//
 	virtual void ILoadingListener_Reserved1(void) {}
 
@@ -230,7 +245,7 @@ protected:
 	//
 	// Gets the Impl instance.
 	//
-	// @since 2.0
+	// @since		2.0
 	//
 	virtual void ILoadingListener_Reserved2(void) {}
 
@@ -239,7 +254,7 @@ protected:
 	//
 	// Gets the Impl instance.
 	//
-	// @since 2.0
+	// @since		2.0
 	//
 	virtual void ILoadingListener_Reserved3(void) {}
 
@@ -248,18 +263,9 @@ protected:
 	//
 	// Gets the Impl instance.
 	//
-	// @since 2.0
+	// @since		2.0
 	//
 	virtual void ILoadingListener_Reserved4(void) {}
-
-	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
-	//
-	// Gets the Impl instance.
-	//
-	// @since 2.0
-	//
-	virtual void ILoadingListener_Reserved5(void) {}
 
 }; // ILoadingListener
 

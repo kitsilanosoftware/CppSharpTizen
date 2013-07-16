@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -35,7 +35,7 @@
 #include <FUiContainer.h>
 #include <FUiCtrlControlsTypes.h>
 #include <FUiCtrlEditTypes.h>
-#include <FUiCtrlGroupTypes.h>
+#include <FUiCtrlIEditTextFilter.h>
 #include <FUiCtrlInputTypes.h>
 #include <FUiIActionEventListener.h>
 #include <FUiIKeypadEventListener.h>
@@ -59,9 +59,10 @@ namespace Tizen { namespace Ui { namespace Controls
  *
  * @since		2.0
  *
- * The %EditField  class displays a single-line text editor.
+ * The %EditField class displays a single-line text editor.
  *
- * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_editfield_editarea.htm">EditArea and EditField</a>.
+ * For more information on the class features,
+ * see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_editfield_editarea.htm">EditArea and EditField</a>.
  *
  * The following example demonstrates how to use the %EditField class.
  *
@@ -116,7 +117,7 @@ EditFieldSample::OnInitializing(void)
 	__pEditField->AddTextEventListener(*this);
 
 	//Adds the edit field to the Form
-	AddControl(*__pEditField);
+	AddControl(__pEditField);
 
 	return r;
 }
@@ -142,17 +143,19 @@ class _OSP_EXPORT_ EditField
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the %Construct() method must be called right after calling this constructor.
 	 *
 	 * @since		2.0
 	 */
 	EditField(void);
 
 	/**
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
-	 *
-	 * @since		2.0
-	 */
+	* This polymorphic destructor should be overridden if required.@n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	*
+	* @since		2.0
+	*/
 	virtual ~EditField(void);
 
 	/**
@@ -163,7 +166,9 @@ public:
 	 * @return			An error code
 	 * @param[in]		rect		An instance of the Graphics::Rectangle class @n
 	 *										This instance represents the x and y coordinates of the top-left corner of the created window along with
-	 *										the width and height of the control.
+	 *										the width and height of the control. @n
+	 *										The optimal size of the control is defined in
+	 *										<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @param[in]   style			The style of the %EditField control
 	 * @param[in]   inputStyle		The input style of the %EditField control
 	 * @param[in]   showTitle				Set to @c true to display the title, @n
@@ -176,14 +181,48 @@ public:
 	 * @exception   E_UNSUPPORTED_OPTION    The specified option is not supported. @n
 	 *										The title is not supported by small style %EditField.
 	 * @exception	E_SYSTEM				A system error has occurred.
-	 * @remarks		A control is fully usable only after it has been added to a container. Therefore, some methods may fail if the control has been used
+	 * @remarks
+	 *			- A control is fully usable only after it has been added to a container. Therefore, some methods may fail if the control has been used
 	 *				earlier. The %EditField style of SMALL property cannot be used together with group styles. @n
-	 *				If the specified size is less than the minimum size, %EditField is constructed with the minimum size.
-	 * @remarks		Following are the input styles used for creating the different orientations of a keypad: @n
-	 *              -	INPUT_STYLE_FULLSCREEN: The orientation is decided by the G-sensor value. @n
-	 *              -	INPUT_STYLE_OVERLAY: The orientation is the same as that of a parent form.
+	 *			- If the specified size is less than the minimum size, %EditField is constructed with the minimum size.
+	 *			- Following are the input styles used for creating the different orientations of a keypad: @n
+	 *			@c INPUT_STYLE_FULLSCREEN: The orientation is decided by the G-sensor value. @n
+	 *			@c INPUT_STYLE_OVERLAY: The orientation is the same as that of a parent form.
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, EditFieldStyle style = EDIT_FIELD_STYLE_NORMAL, InputStyle inputStyle = INPUT_STYLE_FULLSCREEN, bool showTitle = false, int limitLength = 100, GroupStyle groupStyle = GROUP_STYLE_NONE);
+
+	/**
+	 * Initializes this instance of the %EditField control with the specified parameters.
+	 *
+	 * @since			2.1
+	 *
+	 * @return			An error code
+	 * @param[in]		rect		An instance of the Tizen::Graphics::FloatRectangle class @n
+	 *										This instance represents the x and y coordinates of the top-left corner of the created window along with
+	 *										the width and height of the control. @n
+	 *										The optimal size of the control is defined in
+	 *										<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]	style			The style of the %EditField control
+	 * @param[in]	inputStyle		The input style of the %EditField control
+	 * @param[in]	showTitle				Set to @c true to display the title, @n
+	 *								else @c false
+	 * @param[in]	limitLength 	The limit for the length of the text in the %EditField control
+	 * @param[in]	groupStyle		The table view style of the %EditField control
+	 * @exception	E_SUCCESS				The method is successful.
+	 * @exception	E_INVALID_ARG			The specified @c limitLength is less than or equal to @c 0, or @n
+	 *										either the @c rect.width or the @c rect.height is less than @c 0.
+	 * @exception	E_UNSUPPORTED_OPTION	The specified option is not supported. @n
+	 *										The title is not supported by small style %EditField.
+	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @remarks
+	 *			- A control is fully usable only after it has been added to a container. Therefore, some methods may fail if the control has been used
+	 *			earlier. The %EditField style of SMALL property cannot be used together with group styles.
+	 *			- If the specified size is less than the minimum size, %EditField is constructed with the minimum size.
+	 *			- Following are the input styles used for creating the different orientations of a keypad: @n
+	 *			@c INPUT_STYLE_FULLSCREEN: The orientation is decided by the G-sensor value. @n
+	 *			@c INPUT_STYLE_OVERLAY: The orientation is the same as that of a parent form.
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, EditFieldStyle style = EDIT_FIELD_STYLE_NORMAL, InputStyle inputStyle = INPUT_STYLE_FULLSCREEN, bool showTitle = false, int limitLength = 100, GroupStyle groupStyle = GROUP_STYLE_NONE);
 
 	/**
 	 * Initializes this instance of the %EditField control.
@@ -191,7 +230,11 @@ public:
 	 * @since        2.0
 	 *
 	 * @return       An error code
-	 * @param[in]	rect                    The bounds of %EditField
+	 * @param[in]	rect			An instance of the Tizen::Graphics::FloatRectangle class @n
+	 *								This instance represents the x and y coordinates of the top-left corner of the created window along with
+	 *								the width and height of the control. @n
+	 *								The optimal size of the control is defined in
+	 *								<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @param[in]    style           The style of the %EditField control
 	 * @param[in]    inputStyle      The input style of the %EditField control
 	 * @param[in]    titleStyle      The title style
@@ -206,14 +249,50 @@ public:
 	 * @exception	E_UNSUPPORTED_OPTION	The specified option is not supported. @n
 	 *										Title is not supported in small style %EditField.
 	 * @exception	E_SYSTEM				A system error has occurred.
-	 * @remarks		 A control is fully usable only after it has been added to a container. Therefore, some methods may fail if the control is used earlier.
-	 *				The %EditField style of SMALL property cannot be used together with group styles. @n
-	 *               If the specified size is less than the minimum size, EditFied() is constructed with the minimum size.
-	 * @remarks      Following are the input styles used for creating different orientations of a keypad: @n
-	 *										-   INPUT_STYLE_FULLSCREEN: The orientation is decided by the G-sensor value.@n
-	 *										-   INPUT_STYLE_OVERLAY: The orientation is similar to the parent Form.
+	 * @remarks
+	 *			- A control is fully usable only after it has been added to a container. Therefore, some methods may fail if the control is used earlier.
+	 *			The %EditField style of SMALL property cannot be used together with group styles.
+	 *			- If the specified size is less than the minimum size, EditFied() is constructed with the minimum size.
+	 *			- Following are the input styles used for creating different orientations of a keypad: @n
+	 *			@c INPUT_STYLE_FULLSCREEN: The orientation is decided by the G-sensor value.@n
+	 *			@c INPUT_STYLE_OVERLAY: The orientation is similar to the parent form.
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, EditFieldStyle style, InputStyle inputStyle, EditFieldTitleStyle titleStyle, bool enableClear = false, int limitLength = 100, GroupStyle groupStyle = GROUP_STYLE_NONE);
+
+	/**
+	 * Initializes this instance of the %EditField control.
+	 *
+	 * @since		 2.1
+	 *
+	 * @return		 An error code
+	 * @param[in]	rect			An instance of the Tizen::Graphics::FloatRectangle class @n
+	 *								This instance represents the x and y coordinates of the top-left corner of the created window along with
+	 *								the width and height of the control. @n
+	 *								The optimal size of the control is defined in
+	 *								<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]	 style			 The style of the %EditField control
+	 * @param[in]	 inputStyle 	 The input style of the %EditField control
+	 * @param[in]	 titleStyle 	 The title style
+	 * @param[in]	enableClear 			Set to @c true to enable the clear button, @n
+	 *										else @c false
+	 * @param[in]	 limitLength	 The limit of the length of text in the %EditField control
+	 * @param[in]	 groupStyle 	 The table view style of the %EditField control
+	 * @exception	E_SUCCESS				The method is successful.
+	 * @exception	E_INVALID_ARG			A specified input parameter is invalid. @n
+	 *										The specified @c limitLength is less than or equal to @c 0. @n
+	 *										The specified @c rect.width or the @c rect.height is less than @c 0.
+	 * @exception	E_UNSUPPORTED_OPTION	The specified option is not supported. @n
+	 *										Title is not supported in small style %EditField.
+	 * @exception	E_SYSTEM				A system error has occurred.
+	 * @remarks
+	 *			- A control is fully usable only after it has been added to a container. Therefore, some methods may fail if the control is used earlier.
+	 *				The %EditField style of SMALL property cannot be used together with group styles. @n
+	 *			- If the specified size is less than the minimum size, EditFied() is constructed with the minimum size.
+	 *			- Following are the input styles used for creating different orientations of a keypad: @n
+	 *			@c INPUT_STYLE_FULLSCREEN: The orientation is decided by the G-sensor value.@n
+	 *			@c INPUT_STYLE_OVERLAY: The orientation is similar to the parent form.
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, EditFieldStyle style, InputStyle inputStyle, EditFieldTitleStyle titleStyle, bool enableClear = false, int limitLength = 100, GroupStyle groupStyle = GROUP_STYLE_NONE);
 
 public:
 	/**
@@ -250,8 +329,9 @@ public:
 	 *              else @c false
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks     The specific error code can be accessed using the GetLastResult() method. @n
-	 *				In the view mode, the auto-detected links are displayed as linked text.
+	 * @remarks
+	 *			- The specific error code can be accessed using the GetLastResult() method.
+	 *			- In the view mode, the auto-detected links are displayed as linked text.
 	 * @see   SetViewModeEnabled()
 	 */
 	bool IsViewModeEnabled(void) const;
@@ -282,7 +362,7 @@ public:
 	 *										For more information, see <a href="../org.tizen.native.appprogramming/html/guide/ui/auto_link_detection.htm">AutoLink Detection</a>.
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation @n
-	 *										The input style is not @c INPUT_STYLE_OVERLAY.
+	 *										The input style is not ::INPUT_STYLE_OVERLAY.
 	 * @exception	E_SYSTEM				A system error has occurred.
 	 * @remarks		When @c autoLinks is set to @c 0, the auto-link detection is disabled.
 	 * @see			Tizen::Base::Utility::LinkType
@@ -300,7 +380,7 @@ public:
 	 * @return		The auto-link mask
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation @n
-	 *										The input style is not @c INPUT_STYLE_OVERLAY.
+	 *										The input style is not ::INPUT_STYLE_OVERLAY.
 	 * @exception	E_SYSTEM				A system error has occurred.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @see			SetAutoLinkMask()
@@ -312,8 +392,8 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
-	 * @remarks		This method is supported when the input style is @c INPUT_STYLE_OVERLAY. @n
+	 * @param[in]	listener	The event listener to add
+	 * @remarks		This method is supported when the input style is ::INPUT_STYLE_OVERLAY. @n
 	 *				The added listener is notified when the links are selected by the user.
 	 * @see			RemoveUiLinkEventListener()
 	 */
@@ -325,8 +405,8 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
-	 * @remarks		This method is supported when the input style is @c INPUT_STYLE_OVERLAY.
+	 * @param[in]	listener	The event listener to remove
+	 * @remarks		This method is supported when the input style is ::INPUT_STYLE_OVERLAY.
 	 * @see			AddUiLinkEventListener()
 	 */
 	void RemoveUiLinkEventListener(Tizen::Ui::IUiLinkEventListener& listener);
@@ -347,6 +427,21 @@ public:
 	int GetMargin(EditMarginType marginType) const;
 
 	/**
+	 * Gets the margin value of the specified margin type.
+	 *
+	 * @since       2.1
+	 *
+	 * @return	    The margin value of the specified margin type, @n
+	 *				else @c -1 if an error occurs
+	 * @param[in]   marginType		The margin type
+	 * @exception   E_SUCCESS		The method is successful.
+	 * @exception   E_SYSTEM		A system error has occurred.
+	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
+	 * @see         SetMargin()
+	 */
+	float GetMarginF(EditMarginType marginType) const;
+
+	/**
 	 * Sets the margin for the specified margin type.
 	 *
 	 * @since       2.0
@@ -361,6 +456,22 @@ public:
 	 * @see         GetMargin()
 	 */
 	result SetMargin(EditMarginType marginType, int margin);
+
+	/**
+	 * Sets the margin for the specified margin type.
+	 *
+	 * @since       2.1
+	 *
+	 * @return	    An error code
+	 * @param[in]   marginType		The margin type
+	 * @param[in]   margin			The margin to set
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception   E_INVALID_ARG	A specified input parameter is invalid. @n
+	 *								The specified @c margin cannot be a negative integer.
+	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @see         GetMarginF()
+	 */
+	result SetMargin(EditMarginType marginType, float margin);
 
 	/**
 	 * Enables or disables the keypad action.
@@ -392,7 +503,7 @@ public:
 	 * @return      The keypad action
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *										The input style is not @c INPUT_STYLE_OVERLAY.
+	 *										The input style is not ::INPUT_STYLE_OVERLAY.
 	 * @exception	E_SYSTEM                A system error has occurred.
 	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
 	 * @see         SetKeypadAction()
@@ -408,7 +519,7 @@ public:
 	 * @param[in]   keypadAction			The keypad action
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *										The input style is not @c INPUT_STYLE_OVERLAY.
+	 *										The input style is not ::INPUT_STYLE_OVERLAY.
 	 * @exception	E_SYSTEM				A system error has occurred.
 	 * @remarks		Based on the specified value of @c keypadAction, the enter key label of the keypad changes accordingly.
 	 * @see         GetKeypadAction()
@@ -425,7 +536,7 @@ public:
 	 *                                      else @c false
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *										The input style is not @c INPUT_STYLE_OVERLAY.
+	 *										The input style is not ::INPUT_STYLE_OVERLAY.
 	 * @exception	E_SYSTEM				A system error has occurred.
 	 */
 	result SetOverlayKeypadCommandButtonVisible(bool visible);
@@ -439,7 +550,7 @@ public:
 	 *              else @c false
 	 * @exception   E_SUCCESS                   The method is successful.
 	 * @exception	E_UNSUPPORTED_OPERATION		The current state of the instance prohibits the execution of the specified operation. @n
-	 *											The input style is not @c INPUT_STYLE_OVERLAY.
+	 *											The input style is not ::INPUT_STYLE_OVERLAY.
 	 * @exception   E_SYSTEM                    A system error has occurred.
 	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
 	 */
@@ -453,7 +564,7 @@ public:
 	 * @return      An error code
 	 * @exception   E_SUCCESS				The method is successful.
 	 * @exception	E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *										The input style is not @c INPUT_STYLE_OVERLAY.
+	 *										The input style is not ::INPUT_STYLE_OVERLAY.
 	 * @exception   E_SYSTEM				A system error has occurred.
 	 * @see         ShowKeypad()
 	 */
@@ -500,6 +611,20 @@ public:
 	int GetTextSize(void) const;
 
 	/**
+	 * Gets the text size.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      The size of the text, @n
+	 *              else @c -1 if an error occurs
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
+	 * @see         SetTextSize()
+	 */
+	float GetTextSizeF(void) const;
+
+	/**
 	 * Sets the text size.
 	 *
 	 * @since		2.0
@@ -513,6 +638,21 @@ public:
 	 * @see			GetTextSize()
 	 */
 	result SetTextSize(int size);
+
+	/**
+	 * Sets the text size.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	size			The text size
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_INVALID_ARG	The specified input parameter is invalid. @n
+	 *								The @c size cannot be a negative integer.
+	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @see			GetTextSizeF()
+	 */
+	result SetTextSize(float size);
 
 	/**
 	 * Gets the color of the %EditField control for the specified status.
@@ -608,7 +748,7 @@ public:
 	 *
 	 * @since       2.0
 	 *
-	 * @param[in]   listener	The event listener to be added
+	 * @param[in]   listener	The event listener to add
 	 * @see         RemoveKeypadEventListener()
 	 */
 	void AddKeypadEventListener(IKeypadEventListener& listener);
@@ -619,7 +759,7 @@ public:
 	 *
 	 * @since       2.0
 	 *
-	 * @param[in]   listener	The event listener to be removed
+	 * @param[in]   listener	The event listener to remove
 	 * @see         AddKeypadEventListener()
 	 */
 	void RemoveKeypadEventListener(IKeypadEventListener& listener);
@@ -630,7 +770,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @remarks		Programmatically modifying the text block does not cause the text block selection event to fire.
 	 * @see			RemoveTextBlockEventListener()
 	 */
@@ -642,7 +782,7 @@ public:
 	 *
 	 * @since       2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 * @see			AddTextBlockEventListener()
 	 */
 	void RemoveTextBlockEventListener(Tizen::Ui::ITextBlockEventListener& listener);
@@ -653,18 +793,18 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener    The listener to be added
+	 * @param[in]	listener    The listener to add
 	 */
 	void AddTextEventListener(Tizen::Ui::ITextEventListener& listener);
 
 	/**
-	 * Removes the ITextEventListener instance. @n
-	 * The removed listener cannot listen to events when they are fired.
-	 *
-	 * @since		2.0
-	 *
-	 * @param[in]	listener    The listener to be removed
-	 */
+	* Removes the ITextEventListener instance. @n
+	* The removed listener cannot listen to events when they are fired.
+	*
+	* @since		2.0
+	*
+	* @param[in]	listener    The listener to remove
+	*/
 	void RemoveTextEventListener(Tizen::Ui::ITextEventListener& listener);
 
 	/**
@@ -672,22 +812,24 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The listener to be added
-	 * @remarks     To listen to the scroll panel events, the parent of EditArea must be an instance of ScrollPanel. @n
-	 *              When OnOverlayControlCreated() or OnOvelayControlClosed() is called, the application resets the bounds of the controls placed
-	 *              within the ScrollPanel control. ScrollPanel is automatically drawn again after this method is called.
+	 * @param[in]	listener	The listener to add
+	 * @remarks
+	 *			- To listen to the scroll panel events, the parent of EditArea must be an instance of ScrollPanel.
+	 *			- When IScrollPanelEventListener::OnOverlayControlCreated() or IScrollPanelEventListener::OnOvelayControlClosed() is called,
+	 *			the application resets the bounds of the controls placed within the ScrollPanel control. %ScrollPanel is automatically
+	 *			drawn again after this method is called.
 	 * @see			RemoveScrollPanelEventListener()
 	 */
 	void AddScrollPanelEventListener(Tizen::Ui::IScrollPanelEventListener& listener);
 
 	/**
-	 * Removes the specified scroll panel event listener instance. @n
-	 * The removed listener cannot listen to events when they are fired.
-	 *
-	 * @since		2.0
-	 *
-	 * @param[in]	listener	The listener to be removed
-	 */
+	* Removes the specified scroll panel event listener instance. @n
+	* The removed listener cannot listen to events when they are fired.
+	*
+	* @since		2.0
+	*
+	* @param[in]	listener	The listener to remove
+	*/
 	void RemoveScrollPanelEventListener(Tizen::Ui::IScrollPanelEventListener& listener);
 
 	/**
@@ -696,7 +838,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 */
 	void AddActionEventListener(Tizen::Ui::IActionEventListener& listener);
 
@@ -716,7 +858,7 @@ public:
 	 *
 	 * @since      2.0
 	 *
-	 * @param[in]  listener				The listener to be added
+	 * @param[in]  listener				The listener to add
 	 * @remarks    The application can recognize when the language is changed from the keypad by adding Tizen::Ui::ILanguageEventListener.
 	 * @see            RemoveLanguageEventListener()
 	 */
@@ -728,7 +870,7 @@ public:
 	 *
 	 * @since      2.0
 	 *
-	 * @param[in]  listener				The listener to be removed
+	 * @param[in]  listener				The listener to remove
 	 * @see            AddLanguageEventListener()
 	 */
 	void RemoveLanguageEventListener(Tizen::Ui::ILanguageEventListener& listener);
@@ -773,7 +915,7 @@ public:
 	 * @since        2.0
 	 *
 	 * @return       An error code
-	 * @param[in]    categories             The categories to be set @n
+	 * @param[in]    categories             The categories to set @n
 	 *                              Multiple input categories can be combined using bitwise OR operator (see Tizen::Ui::Controls::EditInputModeCategory).
 	 * @param[in]    enable			The category value to set
 	 * @exception    E_SUCCESS				The method is successful.
@@ -835,7 +977,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	position		The cursor position that is to be set
+	 * @param[in]	position		The cursor position to set
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_OUT_OF_RANGE	The specified @c position is less than @c 0 or greater than the maximum length.
 	 * @exception	E_SYSTEM		A system error has occurred.
@@ -877,7 +1019,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	text			The text to be displayed by the %EditField control
+	 * @param[in]	text			The text to display by the %EditField control
 	 * @exception   E_SUCCESS		The method is successful.
 	 * @exception   E_INVALID_ARG   The specified input parameter is invalid. @n
 	 *								The length of the specified @c text exceeds the system limitation or the limit length.
@@ -892,7 +1034,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	text        The text to be inserted
+	 * @param[in]	text        The text to insert
 	 * @exception	E_SUCCESS   The method is successful.
 	 * @exception   E_SYSTEM    A system error has occurred.
 	 * @remarks     Use @htmlonly '\n' @endhtmlonly to denote the end of the line.
@@ -905,7 +1047,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	text        The text to be appended
+	 * @param[in]	text        The text to append
 	 * @exception	E_SUCCESS   The method is successful.
 	 * @exception   E_SYSTEM    A system error has occurred.
 	 * @remarks     Use @htmlonly '\n' @endhtmlonly to denote the end of the line.
@@ -918,7 +1060,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return      An error code
-	 * @param[in]	character		The character to be appended
+	 * @param[in]	character		The character to append
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
 	 * @remarks		The method modifies the text buffer that is managed by the %EditField control. To display the
@@ -1063,26 +1205,26 @@ public:
 	bool IsKeypadEnabled(void) const;
 
 	/**
-	 * Checks whether the text prediction is enabled.
-	 *
-	 * @since 2.0
-	 * @return                @c true if the text prediction is enabled, @n
-	 *                                 else @c false
-	 * @see                      SetTextPredictionEnabled()
-	 */
+	* Checks whether the text prediction is enabled.
+	*
+	* @since 2.0
+	* @return                @c true if the text prediction is enabled, @n
+	*                                 else @c false
+	* @see                      SetTextPredictionEnabled()
+	*/
 	bool IsTextPredictionEnabled(void) const;
 
 	/**
-	 * Enables or disables the text prediction.
-	 *
-	 * @since 2.0
-	 * @param[in]           enable                       Set to @c true to enable the text prediction, @n
-	 *                                                                    else @c false
-	 * @return                An error code
-	 * @exception           E_SUCCESS                The method is successful.
-	 * @exception		E_UNSUPPORTED_OPERATION     This operation is not supported.
-	 * @see                      IsTextPredictionEnabled()
-	 */
+	* Enables or disables the text prediction.
+	*
+	* @since 2.0
+	* @param[in]           enable                       Set to @c true to enable the text prediction, @n
+	*                                                                    else @c false
+	* @return                An error code
+	* @exception           E_SUCCESS                The method is successful.
+	* @exception		E_UNSUPPORTED_OPERATION     This operation is not supported.
+	* @see                      IsTextPredictionEnabled()
+	*/
 	result SetTextPredictionEnabled(bool enable);
 
 	/**
@@ -1094,7 +1236,7 @@ public:
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_INVALID_STATE	This instance is in an invalid state.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		This method is supported only when the input style is INPUT_STYLE_OVERLAY.
+	 * @remarks		This method is supported only when the input style is ::INPUT_STYLE_OVERLAY.
 	 */
 	result ShowKeypad(void);
 
@@ -1156,7 +1298,9 @@ public:
 	 * @return		An error code
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_SYSTEM	A system error has occurred.
-	 * @see         Cut(), Paste(), Remove()
+	 * @see         Cut()
+	 * @see		Paste()
+	 * @see		Remove()
 	 */
 	result Copy(void);
 
@@ -1168,7 +1312,9 @@ public:
 	 * @return		An error code
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @see			Copy(), Remove(), Paste()
+	 * @see			Copy()
+	 * @see			Remove()
+	 * @see			Paste()
 	 */
 	result Cut(void);
 
@@ -1180,7 +1326,9 @@ public:
 	 * @return		An error code
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_SYSTEM        A system error has occurred.
-	 * @see			Copy(), Cut(), Remove()
+	 * @see			Copy()
+	 * @see			Cut()
+	 * @see			Remove()
 	 */
 	result Paste(void);
 
@@ -1192,7 +1340,9 @@ public:
 	 * @return		An error code
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @see			Copy(), Cut(), Paste()
+	 * @see			Copy()
+	 * @see			Cut()
+	 * @see			Paste()
 	 */
 	result Remove(void);
 
@@ -1204,7 +1354,10 @@ public:
 	 * @return	@c true if the text is clipped, @n
 	 *			else @c false
 	 * @remarks	'clipped' means that the text is copied to the clipboard.
-	 * @see		Copy(), Cut(), Paste(), Remove()
+	 * @see		Copy()
+	 * @see		Cut()
+	 * @see		Paste()
+	 * @see		Remove()
 	 */
 	bool IsClipped(void) const;
 
@@ -1214,7 +1367,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]   title			The title to be set
+	 * @param[in]   title			The title to set
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
 	 */
@@ -1241,7 +1394,7 @@ public:
 	 * @param[in]	actionId			The action ID
 	 * @exception	E_SUCCESS           The method is successful.
 	 * @exception	E_SYSTEM            A system error has occurred.
-	 * @remarks		This method is supported only when the input style is INPUT_STYLE_OVERLAY.
+	 * @remarks		This method is supported only when the input style is ::INPUT_STYLE_OVERLAY.
 	 */
 	result SetOverlayKeypadCommandButton(CommandButtonPosition position, const Tizen::Base::String& text, int actionId);
 
@@ -1252,7 +1405,7 @@ public:
 	 *
 	 * @return		The text of the specified command button
 	 * @param[in]	position    The position of the command button
-	 * @remarks		This method is supported only when the input style is INPUT_STYLE_OVERLAY.
+	 * @remarks		This method is supported only when the input style is ::INPUT_STYLE_OVERLAY.
 	 */
 	Tizen::Base::String GetOverlayKeypadCommandButtonText(CommandButtonPosition position) const;
 
@@ -1263,35 +1416,58 @@ public:
 	 *
 	 * @return		The action ID of the specified command button
 	 * @param[in]	position    The position of the command button
-	 * @remarks		This method is supported only when the input style is INPUT_STYLE_OVERLAY.
+	 * @remarks		This method is supported only when the input style is ::INPUT_STYLE_OVERLAY.
 	 */
 	int GetOverlayKeypadCommandButtonActionId(CommandButtonPosition position) const;
 
 	/**
-	 * Sets the input language.
-	 *
-	 * @since      2.0
-	 *
-	 * @return     An error code
-	 * @param[in]  languageCode				The language to be set
-	 * @exception  E_SUCCESS				The method is successful.
-	 * @exception  E_OUT_OF_MEMORY                   The memory is insufficient.
-	 * @remarks     The application can set the language of the current keypad that is associated with the current %EditField. @n
-	 *             This method only works if the language to set is supported by the current preloaded keypad.
-	 */
+	  * Sets the input language.
+	  *
+	  * @since      2.0
+	  *
+	  * @return     An error code
+	  * @param[in]  languageCode				The language to set
+	  * @exception  E_SUCCESS				The method is successful.
+	  * @exception  E_OUT_OF_MEMORY                   The memory is insufficient.
+	  * @remarks
+	  *			- The application can set the language of the current keypad that is associated with the current %EditField.
+	  *			- This method only works if the language to set is supported by the current preloaded keypad.
+	  */
 	result SetCurrentLanguage(Tizen::Locales::LanguageCode languageCode);
 
 	/**
-	 * Gets the current input language.
-	 *
-	 * @since      2.0
-	 *
-	 * @return     An error code
-	 * @param[out] language               The current input language
-	 * @exception  E_SUCCESS				The method is successful.
-	 * @remarks     The application can get the current language of the keypad that is associated with the current %EditField.
-	 */
+	  * Gets the current input language.
+	  *
+	  * @since      2.0
+	  *
+	  * @return     An error code
+	  * @param[out] language               The current input language
+	  * @exception  E_SUCCESS				The method is successful.
+	  * @remarks     The application can get the current language of the keypad that is associated with the current %EditField.
+	  */
 	result GetCurrentLanguage(Tizen::Locales::LanguageCode& language) const;
+
+	/**
+	 * Sets the text filter.
+	 *
+	 * @since		2.1
+	 *
+	 * @param[in]		pFilter	The filter to set
+ 	 * @remarks		The %EditField control checks with the registered filter to decide whether the user-entered text should be replaced or not.
+	 */
+	void  SetEditTextFilter(IEditTextFilter* pFilter);
+
+	/**
+	* Sends opaque command to the input method.
+	*
+	* @since     2.1
+	*
+	* @param[in] command            The opaque command to send
+	* @remarks
+	*			- This method can be used to provide domain-specific features that are only known between certain input methods and their clients.
+	*			- This method may not work, depending on the active Input Method.
+	*/
+	void SendOpaqueCommand (const Tizen::Base::String& command);
 
 protected:
 	friend class _EditFieldImpl;

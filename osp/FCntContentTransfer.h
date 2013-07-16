@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -119,7 +118,8 @@ class _OSP_EXPORT_ ContentTransfer
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct(IContentTransferListener&) method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the Construct(IContentTransferListener&) method must be called right after calling this constructor.
 	 *
 	 * @brief	<i> [Deprecated] </i>
 	 * @deprecated	This class is deprecated. Instead of using this class, use DownloadManager class.
@@ -141,7 +141,7 @@ public:
 
 	/**
 	 * Initializes this instance of %ContentTransfer with the specified parameter. @n
-	 * This method should be called after every instance of %ContentTransfer is constructed.
+	 * The %Construct() method should be called after every instance of %ContentTransfer is constructed.
 	 *
 	 * @brief	<i> [Deprecated] </i>
 	 * @deprecated	This class is deprecated. Instead of using this class, use DownloadManager class.
@@ -157,7 +157,7 @@ public:
 
 	/**
 	* Downloads a content file from the content provider's server. @n
-	* The @c filesize parameter is used to check the limitation of the local volume. If this parameter is set to @c 0, this method will not check the volume. @n
+	* The @c filesize parameter is used to check the limitation of the local volume. If this parameter is set to @c 0, the %Download() method will not check the volume. @n
 	* An application should set the full destination path for the downloaded contents. When the content is downloaded to one of the following paths, this method internally registers the content using ContentManager.
 	* - /Media/
 	* - /Storagecard/Media/ @n
@@ -169,6 +169,7 @@ public:
 	* @deprecated This method is deprecated due to the operation policy of the Tizen Server.
 	* When downloading the contents from a third party server, it is recommended to use the Download(const Tizen::Base::Utility::Uri&, const Tizen::Base::String&, RequestId&, bool, int, int) method.
 	* @since				 2.0
+	* @privlevel	public
 	* @privilege 	%http://tizen.org/privilege/download
 	*
 	* @return	An error code
@@ -190,6 +191,7 @@ public:
 	* @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
 	* @exception 	E_IN_PROGRESS			A previous request is in progress.
 	* @exception	E_OUT_OF_MEMORY	The memory is insufficient.
+	* @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	* @see	IContentTransferListener::OnContentDownloadCompleted()
 	* @see	IContentTransferListener::OnContentTransferInProgress()
 	*/
@@ -200,20 +202,14 @@ public:
 	 * An application should set the destination path for the downloaded contents.
 	 * The path of the downloaded file should use Tizen::System::Environment::GetMediaPath() or Tizen::System::Environment::GetExternalStoragePath().
 	 *
-	 * When the content is downloaded to the path using Tizen::System::Environment::GetMediaPath() or Tizen::System::Environment::GetExternalStoragePath(), this method internally registers the content in the content database. @n
+	 * When the content is downloaded to the path using Tizen::System::Environment::GetMediaPath() or Tizen::System::Environment::GetExternalStoragePath(), the %Download() method internally registers the content in the content database. @n
 	 * When the download is completed, the application is notified using the IContentTransferListener::OnContentDownloadCompleted() method. @n
 	 * When the data is being downloaded, the application is notified of the progress using the IContentTransferListener::OnContentTransferInProgress() method.
 	 *
 	 * @brief	<i> [Deprecated] </i>
 	 * @deprecated	This class is deprecated. Instead of using this class, use DownloadManager class.
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility This method has compatibility issues with OSP compatible applications. @n
-	 *                       For more information, see @ref CompContentTransferDownloadPage3 "here".
-	 * @endif
+	 * @privlevel		public
 	 * @privilege		%http://tizen.org/privilege/download
 	 *
 	 * @return			An error code
@@ -235,35 +231,21 @@ public:
 	 * @exception	E_IN_PROGRESS			A previous request is in progress.
 	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 	 * @exception	E_SYSTEM				A system error has occurred.
-	 * @remarks		The @c progressInterval is the interval of the progress for each download request. If the value of the @c progressInterval is @c 0, the @c progressInterval uses the value set by the ContentTransfer::SetProgressIntervalByPercent(int). The @c progressInterval is a percentage value between @c 0 and @c 100.
-	 *				The @c timeout is the value of the response timeout for each download request. If the value of the @c timeout is @c 0, the value for the @c timeout uses the value set by the ContentTransfer::SetDefaultTimeout(int).
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @remarks
+	 * 				- The @c progressInterval is the interval of the progress for each download request. If the value of the @c progressInterval is @c 0, the @c progressInterval uses the value set by the ContentTransfer::SetProgressIntervalByPercent(int). The @c progressInterval is a percentage value between @c 0 and @c 100.
+	 *				- The @c timeout is the value of the response timeout for each download request. If the value of the @c timeout is @c 0, the value for the @c timeout uses the value set by the ContentTransfer::SetDefaultTimeout(int).
 	 * @see  IContentTransferListener::OnContentDownloadCompleted()
 	 * @see  IContentTransferListener::OnContentTransferInProgress()
 	 */
 	result Download(const Tizen::Base::Utility::Uri& uri, const Tizen::Base::String& filePath, RequestId& reqId, bool replace = false, int timeout = 0, int progressInterval = 0);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page		CompContentTransferDownloadPage3 Compatibility for the file path.
-	 * @section	CompContentTransferDownloadPageIssueSection Issues
-	 *                 The content path argument of this method in OSP compatible applications has the following issues: @n
-	 *                 -# The content path should be a path that begins with an allowed path prefix. @n
-	 *                    For example, L"/Media/Images/flower.jpg", "/Storagecard/Media/Images/flower.jpg".
-	 *
-	 * @section	CompImageContentInfoConstructPageSolutionSection Resolutions
-	 *                 This issue has been resolved in Tizen. @n
-	 *                 -# The content path can be a path without a specific allowed path prefix. @n
-	 *                 Application do not need to know the specific allowed path prefixes. @n
-	 *                 To get the directory path, use the following methods: @n
-	 *                 - For accessing the media directory, use Tizen::System::Environment::GetMediaPath().
-	 *                 - For accessing the external storage, use Tizen::System::Environment::GetExternalStoragePath().
-	 *
-	 * @endif
 	 */
 
 	/**
 	* Downloads a content file to a buffer from the content provider's servers. @n
-	* This method does not register the content. @n
+	* The %DownloadToBuffer() method does not register the content. @n
 	* When the download is completed, the application is notified using the IContentTransferListener::OnContentDownloadToBufferCompleted() method. @n
 	* When the data is being downloaded, the application is notified of the progress using the IContentTransferListener::OnContentTransferInProgress() method.
 	*
@@ -271,6 +253,7 @@ public:
 	* @deprecated This method is deprecated due to the operation policy of the Tizen Server.
 	* When downloading the contents to a buffer from a third party server, it is recommended to use the DownloadToBuffer(const Tizen::Base::Utility::Uri&, RequestId&, int, int) method.
 	* @since				 2.0
+	* @privlevel	public
 	* @privilege 	%http://tizen.org/privilege/download
 	*
 	* @return	An error code
@@ -285,6 +268,7 @@ public:
 	* @exception	E_INVALID_STATE		This method is invalid for the current state of this instance.
 	* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 	* @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	* @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	* @see	IContentTransferListener::OnContentDownloadToBufferCompleted()
 	* @see	IContentTransferListener::OnContentTransferInProgress()
 	*/
@@ -292,13 +276,14 @@ public:
 
 	/**
 	 * Downloads a content file to a buffer from the content provider's servers. @n
-	 * This method does not register the content. @n
+	 * The %DownloadToBuffer() method does not register the content. @n
 	 * When the download is completed, the application is notified using the IContentTransferListener::OnContentDownloadToBufferCompleted() method. @n
 	 * When the data is being downloaded, the application is notified of the progress using the IContentTransferListener::OnContentTransferInProgress() method.
 	 *
 	 * @brief	<i> [Deprecated] </i>
 	 * @deprecated	This class is deprecated. Instead of using this class, use DownloadManager class.
 	 * @since			2.0
+	 * @privlevel		public
 	 * @privilege		%http://tizen.org/privilege/download
 	 *
 	 * @return			An error code
@@ -313,8 +298,10 @@ public:
 	 * @exception	E_ILLEGAL_ACCESS		Access is denied due to insufficient permission.
 	 * @exception	E_IN_PROGRESS			A previous request is in progress.
 	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
-	 * @remarks		The @c progressInterval is the interval of the progress for each download request. If the value of the @c progressInterval is @c 0, the @c progressInterval uses the value set by the ContentTransfer::SetProgressIntervalByPercent(int). The @c progressInterval is a percentage value between @c 0 and @c 100.
-	 *				The @c timeout is the value of the response timeout for each download request. If the value of the @c timeout is @c 0, the value for the @c timeout uses the value set by the ContentTransfer::SetDefaultTimeout(int).
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @remarks
+	 * 				- The @c progressInterval is the interval of the progress for each download request. If the value of the @c progressInterval is @c 0, the @c progressInterval uses the value set by the ContentTransfer::SetProgressIntervalByPercent(int). The @c progressInterval is a percentage value between @c 0 and @c 100.
+	 *				- The @c timeout is the value of the response timeout for each download request. If the value of the @c timeout is @c 0, the value for the @c timeout uses the value set by the ContentTransfer::SetDefaultTimeout(int).
 	 * @see  IContentTransferListener::OnContentDownloadToBufferCompleted()
 	 * @see  IContentTransferListener::OnContentTransferInProgress()
 	 */

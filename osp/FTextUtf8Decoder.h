@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -182,7 +181,7 @@ public:
 	 * @exception	E_UNDERFLOW	             This operation has caused the memory to underflow, or
 	 *										  the sum of the length of the specified @c byteIndex and @c byteCount is greater than the length of the specified @c bytes.
 	 * @exception	E_INVALID_ENCODING_RANGE The specified string contains code points that are outside the bounds of the character encoding scheme.
-	 * @remarks     The GetCharsN() method maintains state consistency between conversions.
+	 * @remarks     This method maintains state consistency between conversions.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @remarks		The pointer to the Tizen::Base::ByteBuffer instance is not terminated by a @c null character.
 	 *

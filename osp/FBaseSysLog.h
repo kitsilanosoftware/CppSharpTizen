@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -75,7 +74,7 @@ extern "C" {
  * The following example demonstrates how to use the SysLog macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   SysLog(NID, "Initialization successful.");
@@ -100,7 +99,7 @@ extern "C" {
  * The following example demonstrates how to use the SysLogException macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   //...
@@ -132,7 +131,7 @@ extern "C" {
  * The following example demonstrates how to use the SysLogTag macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   SysLogTag(NID, "MyTag", "Initialization successful.");
@@ -158,7 +157,7 @@ extern "C" {
  * The following example demonstrates how to use the SysLogTagException macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   SysLogExceptionTag(NID, "MyTag", E_INVALID_ARG, "Initialization successful.");
@@ -185,7 +184,7 @@ extern "C" {
  * The following example demonstrates how to use the SysTryLog macro.
  *
  * @code
- *	Bool
+ *	void
  *	MyEngine::Init(int value)
  *	{
  *	   //...
@@ -220,7 +219,7 @@ extern "C" {
  * The following example demonstrates how to use the SysTryLogCatch macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   //...
@@ -258,7 +257,7 @@ extern "C" {
  * The following example demonstrates how to use the SysTryLogReturn macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   //...
@@ -296,7 +295,7 @@ extern "C" {
  * The following example demonstrates how to use the SysTryReturn macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   //...
@@ -334,7 +333,7 @@ extern "C" {
  *
  * @code
  * #define E_UNKNOWN_ERROR 1
- *	Bool
+ *	result
  *	MyEngine::Init(int value)
  *	{
  *	   //...
@@ -342,7 +341,7 @@ extern "C" {
  *	   SysTryReturnResult(NID, condition, E_UNKNOWN_ERROR, "An unexpected error has occurred.");
  *
  *	   //...
- *	   return true;
+ *	   return E_SUCCESS;
  *	}
  * @endcode
  * @hideinitializer
@@ -370,7 +369,7 @@ extern "C" {
  * The following example demonstrates how to use the SysTryReturnVoidResult macro.
  *
  * @code
- *	Bool
+ *	void
  *	MyEngine::Init(int value)
  *	{
  *	   //...
@@ -378,7 +377,7 @@ extern "C" {
  *	   SysTryReturnVoidResult(NID, condition,  E_INVALID_ARG, "An unexpected error has occurred.");
  *
  *	   //...
- *	   return true;
+ *	   return;
  *	}
  * @endcode
  * @hideinitializer
@@ -408,7 +407,7 @@ extern "C" {
  * The following example demonstrates how to use the SysTryCatch macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   //...
@@ -449,7 +448,7 @@ extern "C" {
  * The following example demonstrates how to use the SysTryCatchLabel macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   //...
@@ -485,7 +484,7 @@ extern "C" {
  * The following example demonstrates how to use the SysAssert macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   //...
@@ -517,7 +516,7 @@ extern "C" {
  * The following example demonstrates how to use the SysAssertf macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   //...
@@ -549,7 +548,7 @@ extern "C" {
  * The following example demonstrates how to use the SysStaticAssert macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   //...
@@ -580,7 +579,7 @@ case condition: \
  * The following example demonstrates how to use the SysPropagate macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   //...
@@ -593,6 +592,353 @@ case condition: \
  * @hideinitializer
  */
 #define SysPropagate(NID, r)        SysPropagateInternal(__PRETTY_FUNCTION__, __LINE__, NID, r)
+
+// Secure Macros
+#if defined(_SECURE_LOG)
+
+#define SysSecureLog(NID, ...)				SysLogInternal(NID, __PRETTY_FUNCTION__, __LINE__, "[SECURE_LOG] "__VA_ARGS__)
+#define SysSecureLogException(NID, r,...)		SysLogExceptionInternal(NID, r, __PRETTY_FUNCTION__, __LINE__, "[SECURE_LOG] "__VA_ARGS__)
+
+#define SysSecureLogTag(NID, tag, ...)			SysLogTagInternal(NID, tag, __PRETTY_FUNCTION__, __LINE__, "[SECURE_LOG] "__VA_ARGS__)
+#define SysSecureLogExceptionTag(NID, tag, r, ...)	SysLogExceptionTagInternal(NID, tag, r, __PRETTY_FUNCTION__, __LINE__, "[SECURE_LOG] "__VA_ARGS__)
+
+#else
+
+/**
+ * This macro is to protect informative log messages which needs to keep security.
+ * It allows display of informative log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, it will be removed in the compile time.
+ * This system log macro is for the platform modules.
+ *
+ * @since 2.1
+ *
+ * @param[in]	NID			The Tizen namespace ID
+ * @param[in]	...			The message to display
+ *
+ * The following example demonstrates how to use the SysSecureLog macro.
+ *
+ * @code
+ *        bool
+ *        MyEngine::Init(int value)
+ *        {
+ *           SysSecureLog(NID, "User ID : 'JoneDoe'");
+ *
+ *           return true;
+ *        }
+ * @endcode
+ * @hideinitializer
+ */
+#define SysSecureLog(NID, ...)
+
+/**
+ * This macro is to protect exception log messages which needs to keep security, and sets the last result.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ * This system log macro is for the platform modules.
+ *
+ * @since 2.1
+ *
+ * @param[in]	NID			The Tizen namespace ID
+ * @param[in]	r			The last result to set
+ * @param[in]	...			The message to display
+ *
+ * The following example demonstrates how to use the SysSecureLogException macro.
+ *
+ * @code
+ *        bool
+ *        MyEngine::Init(int value)
+ *        {
+ *           //...
+ *           if (something_wrong)
+ *           {
+ *              SysSecureLogException(NID,  E_INVALID_ARG, "User ID : 'JoneDoe' mismatch.");
+ *
+ *              return false;
+ *           }
+ *   //...
+ *
+ *           return true;
+ *        }
+ * @endcode
+ * @hideinitializer
+ */
+#define SysSecureLogException(NID, r,...)			SetLastResult(r);
+
+/**
+ * This macro is to protect informative log messages which needs to keep security, with a tag.
+ * It allows display of informative log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, it will be removed in the compile time.
+ * This system log macro is for the platform modules.
+ *
+ * @since 2.1
+ *
+ * @param[in]	NID			The Tizen namespace ID
+ * @param[in]	tag			The user defined tag
+ * @param[in]	...			The message to display
+ *
+ * The following example demonstrates how to use the SysSecureLogTag macro.
+ *
+ * @code
+ *        bool
+ *        MyEngine::Init(int value)
+ *        {
+ *           SysSecureLogTag(NID, "MyTag", "User ID : 'JoneDoe'");
+ *
+ *           return true;
+ *        }
+ * @endcode
+ * @hideinitializer
+ */
+#define SysSecureLogTag(NID, tag, ...)
+
+/**
+ * This macro is to protect exception log messages which needs to keep security, with a tag and sets the last result.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ * This system log macro is for the platform modules.
+ *
+ * @since 2.1
+ *
+ * @param[in]	NID			The Tizen namespace ID
+ * @param[in]	tag			The user defined tag
+ * @param[in]	r			The last result to set
+ * @param[in]	...			The message to display
+ *
+ * The following example demonstrates how to use the SysSecureLogExceptionTag macro.
+ *
+ * @code
+ *        bool
+ *        MyEngine::Init(int value)
+ *        {
+ *           SysSecureLogExceptionTag(NID, "MyTag", E_INVALID_ARG, "User ID : 'JoneDoe' mismatch.");
+ *
+ *           return true;
+ *        }
+ * @endcode
+ * @hideinitializer
+ */
+#define SysSecureLogExceptionTag(NID, tag, r, ...)		SetLastResult(r);
+
+#endif
+
+/**
+ * This macro allows display of informative log message with a tag, when the condition is @c false.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ * This system log macro is for the platform modules.
+ *
+ * @since 2.1
+ *
+ * @param[in]	NID			The Tizen namespace
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]  	...			The message to display
+ *
+ * The following example demonstrates how to use the SysSecureTry macro.
+ *
+ * @code
+ *	bool
+ *	MyEngine::Init(int value)
+ *	{
+ *	   //...
+ *
+ *	   SysSecureTryLog(NID, condition, "Password mismatch : %s", password );
+ *
+ *	   //...
+ *	}
+ * @endcode
+ * @hideinitializer
+ */
+#define SysSecureTryLog(NID, condition, ...) \
+	do \
+	{ \
+		if (unlikely(!(condition))) {	\
+			SysSecureLog(NID, __VA_ARGS__); \
+		} \
+	} while (0);
+
+/**
+ * This macro allows display of informative log message, when the condition is @c false.
+ * Executes statements and goes to label.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ * This system log macro is for the platform modules.
+ *
+ * @since 2.1
+ *
+ * @param[in]	NID			The Tizen namespace
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	expr			Expressions that are evaluated before going to CATCH label
+ * @param[in]   ...			The message to display
+ * @hideinitializer
+ */
+#define SysSecureTryLogCatch(NID, condition, expr, ...)	\
+	do \
+	{ \
+		if (unlikely(!(condition))) { \
+			SysSecureLog(NID, __VA_ARGS__); \
+			expr; \
+			goto CATCH;	\
+		} \
+	} while (0);
+
+/**
+ * This macro allows display of informative log message and returns returnValue, when the condition is @c false.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ * This system log macro is for the platform modules.
+ *
+ * @since 2.1
+ *
+ * @param[in]	NID			The Tizen namespace
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	returnValue        	The value to return when the condition is @c false
+ * @param[in]   ...			The message to display
+ * @hideinitializer
+ */
+#define SysSecureTryLogReturn(NID, condition, returnValue, ...) \
+	do \
+	{ \
+		if (unlikely(!(condition))) { \
+			SysSecureLog(NID, __VA_ARGS__); \
+			return returnValue;	\
+		} \
+	} while (0);
+
+/**
+ * This macro allows display of exception log message with a tag and sets the last result, when the condition is @c false.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ * This system log macro is for the platform modules.
+ *
+ * @since 2.1
+ *
+ * @param[in]	NID			The Tizen namespace
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	returnValue       	The value to return when the condition is @c false
+ * @param[in]	r			The last result to set
+ * @param[in]   ...			The message to display
+ * @hideinitializer
+ */
+#define SysSecureTryReturn(NID, condition, returnValue, r, ...) \
+	do \
+	{ \
+		if (unlikely(!(condition))) {	\
+			SysSecureLogException(NID, r, __VA_ARGS__); \
+			return returnValue;	\
+		} \
+	} while (0);
+
+#if defined(_SECURE_LOG)
+/**
+ * This macro allows display of exception log message with a tag and sets the last result, when the condition is @c false.
+ * This is a shorthand macro for SysSecureTryReturn(NID, condition, r, r, "[" # r "] " ...).
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ * This system log macro is for the platform modules.
+ *
+ * @since 2.1
+ *
+ * @param[in]	NID			The Tizen namespace
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	r			The last result to set
+ * @param[in]   ...			The message to display
+ * @hideinitializer
+ */
+#define SysSecureTryReturnResult(NID, condition, r, ...) \
+	do \
+	{ \
+		if (unlikely(!(condition))) {	\
+			SysTryReturnResultInternal(NID, r, __PRETTY_FUNCTION__, __LINE__, "[SECURE_LOG] "__VA_ARGS__); \
+			return r;	\
+		} \
+	} while (0);
+
+#else
+#define SysSecureTryReturnResult(NID, condition, r, ...) \
+	do \
+	{ \
+		if (unlikely(!(condition))) {	\
+			SetLastResult(r); \
+			return r;	\
+		} \
+	} while (0);
+#endif
+
+/**
+ * This macro allows display of exception log message with a tag and sets the last result, when the condition is @c false.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ * This system log macro is for the platform modules.
+ *
+ * @since 2.1
+ *
+ * @param[in]	NID			The Tizen namespace
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	r			The last result to set
+ * @param[in]   ...			The message to display
+ * @hideinitializer
+ */
+#define SysSecureTryReturnVoidResult(NID, condition, r, ...)	\
+	do \
+	{ \
+		if (unlikely(!(condition))) {	\
+			SysSecureLogException(NID, r, __VA_ARGS__); \
+			return;	\
+		} \
+	} while (0);
+
+/**
+ * This macro allows display of exception log message with a tag, when the condition is @c false.
+ * Executes statements, sets the last result and goes to label.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ * This system log macro is for the platform modules.
+ *
+ * @since 2.1
+ *
+ * @param[in]	NID			The Tizen namespace
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	expr			Expressions that are evaluated before going to CATCH label
+ * @param[in]	r			The last result to set
+ * @param[in]   ...			The message to display
+ * @hideinitializer
+ */
+#define SysSecureTryCatch(NID, condition, expr, r, ...) \
+	do \
+	{ \
+		if (unlikely(!(condition))) {	\
+			SysSecureLogException(NID, r, __VA_ARGS__); \
+			expr; \
+			goto CATCH;	\
+		} \
+	} while (0);
+
+/**
+ * This macro allows display of exception log message with a tag, when the condition is @c false.
+ * Executes statements, sets the last result and goes to label.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ * This system log macro is for the platform modules.
+ *
+ * @since 2.1
+ *
+ * @param[in]	NID			The Tizen namespace
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	expr			Expressions that are evaluated before going to catchLabel label
+ * @param[in]	catchLabel		The label for goto operation
+ * @param[in]	r			The last result to set
+ * @param[in]   ...			The message to display
+ * @hideinitializer
+ */
+#define SysSecureTryCatchLabel(NID, condition, expr, catchLabel, r, ...) \
+	do \
+	{ \
+		if (unlikely(!(condition))) {	\
+			SysSecureLogException(NID, r, __VA_ARGS__); \
+			expr; \
+			goto catchLabel; \
+		} \
+	} while (0);
 
 
 /**
@@ -657,7 +1003,9 @@ enum LogID
 
 	NID_WEB = 180,
 	NID_WEB_CTRL = 181,
-	NID_WEB_JSON = 182
+	NID_WEB_JSON = 182,
+
+	NID_SHELL = 190
 };
 
 /**

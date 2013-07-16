@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -81,7 +80,8 @@ LocaleApp::LocaleExample1(void)
 
     // Gets the formatted date/time that is localized.
     DateTimeFormatter* pDateTimeFormatter = DateTimeFormatter::CreateDateTimeFormatterN(systemLocale);
-    DateTime dateTime(2009, 2, 24, 15, 22, 00);
+    DateTime dateTime;
+    dateTime.SetValue(2009, 2, 24, 15, 22, 00);
     pDateTimeFormatter->Format(dateTime, formattedString);
 
     // Gets the currency symbol that is localized.

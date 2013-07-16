@@ -77,7 +77,7 @@ public:
 	*
 	* @since		2.0
 	*
-	* @return			 The audio sampling rate in hertz (Hz)
+	* @return			 The audio sampling rate in Hertz (Hz)
 	*/
 	int GetSampleRate(void) const;
 
@@ -136,7 +136,7 @@ private:
 	*
 	* @param [in]	codecType	The value of encoding type @n
 	* @param [in]	bitrate		The audio bit rate in bits per second (bps) @n
-	* @param [in]	sampleRate	The audio sample rate in hertz (Hz) @n
+	* @param [in]	sampleRate	The audio sample rate in Hertz (Hz) @n
 	* @param [in]	channel		The audio channel type @n
 	*/
 	AudioStreamInfo(CodecType codecType, int bitrate, int sampleRate, AudioChannelType channel);

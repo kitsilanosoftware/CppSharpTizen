@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -19,7 +18,7 @@
  * @file	FAppApplication.h
  * @brief	This is the header file for the deprecated %Application class.
  *
- *This header file is for the deprecated %Application class.
+ * This header file is for the deprecated %Application class.
  */
 
 #ifndef _FAPP_APPLICATION_H_

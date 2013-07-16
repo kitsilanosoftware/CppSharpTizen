@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -37,7 +36,7 @@ namespace Tizen { namespace System
  *
  * @since	2.0
  *
- * The %IBatteryEventListener interface must be registered and implemented by an application to receive Battery events from the system.
+ * The %IBatteryEventListener interface must be registered and implemented by an application to receive battery events from the system.
  */
 
 class _OSP_EXPORT_ IBatteryEventListener

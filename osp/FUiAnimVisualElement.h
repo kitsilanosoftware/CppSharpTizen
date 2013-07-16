@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -29,6 +29,7 @@
 #include <FBaseString.h>
 #include <FGrpFloatMatrix4.h>
 #include <FGrpFloatPoint.h>
+#include <FGrpFloatPoint3.h>
 #include <FGrpFloatRectangle.h>
 #include <FUiVariant.h>
 #include <FUiAnimTypes.h>
@@ -59,6 +60,7 @@ class _VisualElementImpl;
  * It also provides infrastructure necessary for animations (AddAnimation(), RemoveAnimation() and so on).
  * A %VisualElement object instantiated by applications works as a model object and may have a cloned counter part for presentation on screen which has a separated life-cycle.
  * The presentation object is managed by system and applications must not change properties of it.
+ * Use the presentation instance only to get the current state of a visual element in a tree. Calling the setter methods of a presentation instance can cause unexpected behavior to occur.
  * Most animations of %VisualElement are applied on presentation objects. Properties set by applications are stored in model objects while properties of presentation objects
  * are changing during implicit or explicit animations.
  *
@@ -182,6 +184,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
+	 * @return		An error code
 	 * @param[in] 	pProvider			The content provider to customize information on content
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_OPERATION	This instance does not allow to set a content provider. @n
@@ -210,6 +213,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
+	 * @return		An error code
 	 * @param[in] 	pListener			The %VisualElement event listener
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_OPERATION	This instance does not allow to set an event listener. @n
@@ -388,6 +392,20 @@ public:
 	bool IsChildOf(const VisualElement& other) const;
 
 	/**
+	 * Checks whether an instance is a child or descendant of a specified one.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		@c true if this instance is a child or descendant of a specified one, @n
+	 * 				else @c false
+	 * @param[in]		pOther				A pointer to %VisualElement instance to check its relationship
+	 * @exception     	E_SUCCESS The method is successful.
+        * @exception     	E_INVALID_ARG  The specified @c pOther is @c null.
+        * @remarks       	The specific error code can be accessed using the GetLastResult() method.
+	 */
+	bool IsChildOf(const VisualElement* pOther) const;
+
+	/**
 	 * Attaches a child to this instance. @n
 	 * The %AttachChild() method attaches the specified @c child at the highest position in the Z order group of the @c child.
 	 * If you need to change Z-Order group, you can change it using the SetZOrderGroup() method.
@@ -407,6 +425,28 @@ public:
 	 * @see		ChangeZOrder()
 	 */
 	result AttachChild(const VisualElement& child);
+
+	/**
+	 * Attaches a child to an instance. @n
+	 * The %AttachChild() method attaches the specified @c pChild at the highest position in the Z order group of the @c pChild.
+	 * Z-Order group can be changed using the SetZOrderGroup() method.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in] 	pChild				A pointer to %VisualElement instance to attach to this instance
+	 * @exception	 	E_SUCCESS			The method is successful.
+	 * @exception	 	E_INVALID_ARG		The input parameter is incorrect. Either of the following conditions has occurred: @n
+	 *									- The specified @c pChild is not instantiated successfully. @n
+	 *									- The specified @c pChild is this instance. @n
+	 *									- The specified @c pChild is already an ancestor of this instance.@n
+	 *									- The specified @c pChild is @c null.
+	 * @see		SetZOrderGroup()
+	 * @see		InsertChild()
+	 * @see		DetachChild()
+	 * @see		ChangeZOrder()
+	 */
+	result AttachChild(VisualElement* pChild);
 
 	/**
 	 * Inserts a child to this instance. @n
@@ -438,10 +478,41 @@ public:
 	result InsertChild(const VisualElement& child, const VisualElement* pReference, bool above);
 
 	/**
+	 * Inserts a child to an instance. @n
+	 * If @c pReference is not @c null, the Z order group of @c pChild will be changed into that of @c pReference and @c child will be
+	 * placed right above or below the @c pReference instance according to the @c above parameter.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in] 	pChild				A pointer to %VisualElement instance to insert
+	 * @param[in] 	pReference			A pointer to the %VisualElement instance to refer
+	 * @param[in] 	above				The position of @c pChild relative to @c pReference
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		The input parameter is incorrect. Either of the following conditions has occurred: @n
+	 *									- The specified @c pChild is not instantiated successfully. @n
+	 *									- The specified @c pChild is this instance. @n
+	 *									- The specified @c pChild and @c pReference are same. @n
+	 *									- The specified @c pChild is already an ancestor of this instance. @n
+	 *									- The parent of @c pReference is not this instance if @c pReference is not @c null. @n
+	 *									- The specified @c pChild is @c null.
+	 * @remarks		If @c above is @c true, the @c pChild is attached above @c pReference in Z order,
+	 *				else it is attached below the @c pReference %VisualElement. @n
+	 *				If @c pReference is @c null, the @c pChild is attached at the highest position in the @c pChild's Z order group,
+	 *				else the child is attached at the lowest position in the @c pChild's Z order group.
+	 * @see		SetZOrderGroup()
+	 * @see		AttachChild()
+	 * @see		DetachChild()
+	 * @see		ChangeZOrder()
+	 */
+	result InsertChild(VisualElement* pChild, const VisualElement* pReference, bool above);
+
+	/**
 	 * Detaches a child from this instance.
 	 *
 	 * @since		2.0
 	 *
+	 * @return		An error code
 	 * @param[in] 	child				The %VisualElement instance to detach from this instance
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_OBJ_NOT_FOUND		The specified @c child is not a child of this instance.
@@ -452,10 +523,27 @@ public:
 	result DetachChild(const VisualElement& child);
 
 	/**
+	 * Detaches a child from an instance.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in] 	pChild				A pointer to %VisualElement instance to detach
+	 * @exception	   	E_SUCCESS			The method is successful.
+	 * @exception	   	E_OBJ_NOT_FOUND	The specified @c pChild is not a child of this instance.
+	 * @exception   	E_INVALID_ARG		The specified @c pChild is @c null.
+	 * @remarks		This method detaches @c pChild from this instance. To deallocate %VisualElement, call Destroy() method, and not C++ delete.
+	 * @see 	       InsertChild()
+	 * @see		AttachChild()
+	 */
+	result DetachChild(VisualElement* pChild);
+
+	/**
 	 * Changes Z order of this instance.
 	 *
 	 * @since		2.0
 	 *
+	 * @return		An error code
 	 * @param[in] 	pReference			A pointer to the %VisualElement instance that is referenced
 	 * @param[in] 	above				Specifies the position of this instance relative to the @c pReference
 	 * @exception	E_SUCCESS			The method is successful.
@@ -613,8 +701,6 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		The rectangle to update
-	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks		If an exception occurs, this method returns FloatRectangle(0.0, 0.0, -1.0, -1.0).
 	 * @see			InvalidateRectangle()
 	 */
 	Tizen::Graphics::FloatRectangle GetUpdateRectangle(void) const;
@@ -656,8 +742,8 @@ public:
 	 *				else @c null if an exception occurs
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_STATE		This instance is in an invalid state.
-	 * @exception	E_INVALID_OPERATION	The contents of this instance is set by the SetSurface() method.
-	 * @exception	E_OUT_OF_RANGE		The size of the %VisualElement instance is @c 0 or smaller.
+	 * @exception	E_INVALID_OPERATION	The contents of this instance is set by the SetSurface() method. @n
+	 									The canvas can be created for the model instance only.
 	 * @remarks		This method allocates a Tizen::Graphics::Canvas whose bounds are equal to that of the %VisualElement.
 	 *				It is the developer's responsibility to deallocate the canvas after use.
 	 *				The canvas is guaranteed to be valid only if the properties of the parent %VisualElement of the canvas remain unchanged.
@@ -666,9 +752,9 @@ public:
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @remarks		If an exception occurs, this method returns @c null.
 	 * @see			GetCanvasN(const Tizen::Graphics::Rectangle& bounds)
+	 * @see			GetCanvasN(const Tizen::Graphics::FloatRectangle& bounds)
 	 */
 	Tizen::Graphics::Canvas* GetCanvasN(void) const;
-
 
 	/**
 	 * Creates and returns a graphic canvas of the specified area.
@@ -680,9 +766,10 @@ public:
 	 * @param[in]	bounds  			The position relative to the top-left corner of the %VisualElement and size
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_STATE		This instance is in an invalid state.
-	 * @exception	E_INVALID_OPERATION	The contents of this instance is set by the SetSurface() method.
+	 * @exception	E_INVALID_OPERATION	The contents of this instance is set by the SetSurface() method. @n
+	 	 								The canvas can be created for the model instance only.
 	 * @exception	E_OUT_OF_RANGE		The specified @c bounds do not intersect with the bounds of the %VisualElement. @n
-	 *									The width and height must be greater than @c 0.
+	 *									The width and height must be greater than or equal to @c 0.
 	 * @remarks		Only the graphic canvas of displayable %VisualElement can be obtained.
 	 *				If the specified area is not inside the %VisualElement,
 	 *				the graphics canvas of overlapped area between the %VisualElement and the specified @c bound is returned. @n
@@ -694,8 +781,38 @@ public:
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @remarks		If an exception occurs, this method returns @c null.
 	 * @see			GetCanvasN()
+	 * @see			GetCanvasN(const Tizen::Graphics::FloatRectangle& bounds)
 	 */
 	Tizen::Graphics::Canvas* GetCanvasN(const Tizen::Graphics::Rectangle& bounds) const;
+
+	/**
+	 * Creates and returns a graphic canvas of the specified area.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		The graphic canvas of %VisualElement, @n
+	 *				else @c null if an exception occurs
+	 * @param[in]	bounds  			The position relative to the top-left corner of %VisualElement and size
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_STATE		This instance is in an invalid state.
+	 * @exception	E_INVALID_OPERATION	The contents of this instance is set by the SetSurface() method. @n
+	 									The canvas can be created for the model instance only.
+	 * @exception	E_OUT_OF_RANGE		The specified @c bounds do not intersect with the bounds of %VisualElement. @n
+	 *									The width and height must be greater than or equal to @c 0.
+	 * @remarks		Only the graphic canvas of displayable %VisualElement can be obtained.
+	 *				If the specified area is not inside %VisualElement,
+	 *				the graphics canvas of overlapped area between %VisualElement and the specified @c bound is returned. @n
+	 * 				This method allocates a Tizen::Graphics::Canvas whose bounds are equal to that of %VisualElement.
+	 *				It is the developer's responsibility to deallocate the canvas after use.
+	 *				The canvas is guaranteed to be valid only if the properties of the parent %VisualElement of the canvas remain unchanged.
+	 *				Therefore, one must delete previously allocated canvas and create a new canvas using this method,
+	 *				if the size or position of the control is changed.
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
+	 * @remarks		If an exception occurs, this method returns @c null.
+	 * @see			GetCanvasN()
+	 * @see			GetCanvasN(const Tizen::Graphics::Rectangle& bounds)
+	 */
+	Tizen::Graphics::Canvas* GetCanvasN(const Tizen::Graphics::FloatRectangle& bounds) const;
 
 	/**
 	 * Gets the name of this instance.
@@ -738,7 +855,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The property's value
+	 * @return		An error code
 	 * @param[in]	property			The %VisualElement's property
 	 * @param[in]	value				The value of the %VisualElement's property to set
 	 * @exception	E_SUCCESS			The method is successful.
@@ -950,8 +1067,7 @@ public:
 	 * @return		An error code
 	 * @param[in]	transform			The transform matrix
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_INVALID_ARG		The input parameter is incorrect. @n
-	 * 				The E_INVALID_ARG exception occurs when the specified @c transform is not invertible.
+	 * @exception	E_INVALID_ARG		The input parameter is incorrect.
 	 * @see			GetTransformMatrix()
 	 */
 	result SetTransformMatrix(const Tizen::Graphics::FloatMatrix4& transform);
@@ -975,8 +1091,7 @@ public:
 	 * @return		An error code
 	 * @param[in]	transform			The transform matrix
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_INVALID_ARG		The input parameter is incorrect. @n
-	 * 				The E_INVALID_ARG exception occurs when the specified @c transform is not invertible.
+	 * @exception	E_INVALID_ARG		The input parameter is incorrect.
 	 * @see			GetChildrenTransformMatrix()
 	 */
 	result SetChildrenTransformMatrix(const Tizen::Graphics::FloatMatrix4& transform);
@@ -1122,7 +1237,8 @@ public:
 	void SetClipChildrenEnabled(bool clipChildren);
 
 	/**
-	 * Converts the specified @c point in @c pFromVisualElement coordinate space to this instance's coordinate space.
+	 * Converts the specified @c point in @c pFromVisualElement coordinate space to this instance's coordinate space. @n
+	 * The coordinate is converted by projecting it on the root coordinate space.
 	 *
 	 * @since			2.0
 	 *
@@ -1131,14 +1247,17 @@ public:
 	 * @param[in]		pFromVisualElement	The %VisualElement instance with @c point in its coordinate space
 	 * @exception		E_SUCCESS			The method is successful.
 	 * @exception		E_INVALID_ARG		The input parameter is incorrect.
+	 * @exception		E_INVALID_OPERATION		The current state of the instance prohibits the execution of the specified operation. @n
+	 *											The matrix for this conversion is singular that has a zero determinant.
 	 * @remarks			This instance and @c pFromVisualElement must share a common ancestor. @n
-	 *					If @c null, it is regarded that @c point is in the screen coordinate space.
+	 *					If @c null, it is regarded that @c point is in the root coordinate space.
 	 * @see				ConvertCoordinates(Tizen::Graphics::FloatRectangle& rectangle, const VisualElement* pFromVisualElement)
 	 */
 	result ConvertCoordinates(Tizen::Graphics::FloatPoint& point, const VisualElement* pFromVisualElement) const;
 
 	/**
-	 * Converts the specified @c rectangle in @c pFromVisualElement coordinate space to this instance's coordinate space.
+	 * Converts the specified @c rectangle in @c pFromVisualElement coordinate space to this instance's coordinate space. @n
+	 * The coordinate is converted by projecting it on the root coordinate space.
 	 *
 	 * @since			2.0
 	 *
@@ -1147,12 +1266,30 @@ public:
 	 * @param[in]		pFromVisualElement	The %VisualElement instance with @c rectangle in its coordinate space
 	 * @exception		E_SUCCESS			The method is successful.
 	 * @exception		E_INVALID_ARG		The input parameter is incorrect.
-	 * @exception		E_SYSTEM			A system error has occurred.
-	 * @remarks			This instance and @c pFromVisualElement must share a common parent. @n
-	 *					If @c null, it is regarded that @c rectangle is in the screen coordinate space.
+	 * @exception		E_INVALID_OPERATION		The current state of the instance prohibits the execution of the specified operation. @n
+	 *											The matrix for this conversion is singular that has a zero determinant.
+	 * @remarks			This instance and @c pFromVisualElement must share a common ancestor. @n
+	 *					If @c null, it is regarded that @c rectangle is in the root coordinate space.
 	 * @see				ConvertCoordinates(Tizen::Graphics::FloatPoint& point, const VisualElement* pFromVisualElement)
 	 */
 	result ConvertCoordinates(Tizen::Graphics::FloatRectangle& rectangle, const VisualElement* pFromVisualElement) const;
+
+	/**
+	 * Transforms a point in @c pOriginVisualElement coordinate space into a specified vector in calling instance's coordinate space.
+	 *
+	 * @since			2.1
+	 *
+	 * @return			The transformed vector
+	 * @param[in]		originPoint			The point in @c pOriginVisualElement coordinate space
+	 * @param[in]		pOriginVisualElement	The %VisualElement instance with @c originPoint in its coordinate space
+	 * @exception		E_SUCCESS			The method is successful.
+	 * @exception		E_INVALID_ARG		The input parameter is incorrect.
+	 * @exception		E_INVALID_OPERATION			The current state of the instance prohibits the execution of the specified operation. @n
+	 											The matrix for this conversion is singular which has zero determinant.
+	 * @remarks			- This instance and @c pOriginVisualElement must share a common ancestor.
+	 *       			- The specific error code can be accessed using the GetLastResult() method.
+	 */
+	Tizen::Graphics::FloatPoint3 TransformVectorFromOrigin(const Tizen::Graphics::FloatPoint3& originPoint, const VisualElement* pOriginVisualElement) const;
 
 	/**
 	 * Sets the sub-rectangle of contents which this instance must display.

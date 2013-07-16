@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -20,7 +19,7 @@
  * @brief		This is the header file for the %GsmEncoding class.
  *
  * This header file contains the declarations of the %GsmEncoding class.
- * The %GsmEncoding class is derived from the Encoding class.
+ * This class is derived from the Encoding class.
  */
 #ifndef _FTEXT_GSM_ENCODING_H_
 #define _FTEXT_GSM_ENCODING_H_
@@ -104,7 +103,7 @@ public:
 	virtual ~GsmEncoding(void);
 
 	/**
-	 * Gets the total number of bytes that are required to encode a specified Tizen::Base::String instance.
+	 * Gets the total number of bytes that are required to encode the specified Tizen::Base::String instance.
 	 *
 	 * @since			2.0
 	 *
@@ -121,7 +120,7 @@ public:
 	virtual result GetByteCount(const Tizen::Base::String& str, int& byteCount) const;
 
 	/**
-	 * Gets the total number of bytes that are required to encode a specified Tizen::Base::WcharBuffer instance.
+	 * Gets the total number of bytes that are required to encode the specified Tizen::Base::WcharBuffer instance.
 	 *
 	 * @since			2.0
 	 *

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -73,7 +72,7 @@ class _MultiHashMapEntry;
  *		IEnumerator *pValueEnum = map.GetValuesN(String(L"Two"));
  *		while(pValueEnum->MoveNext() == E_SUCCESS)
  *		{
- *			pValue = static_cast<Integer*> (pValueEnum->GetCurrent());
+ *			pValue = static_cast< Integer* > (pValueEnum->GetCurrent());
  *		}
  *
  *		delete pValueEnum;
@@ -93,8 +92,8 @@ class _MultiHashMapEntry;
  *		delete pMapEnum;
  *
  *		// Deallocates all objects
- *		// Because the destructor calls RemoveAll() internally, you don't need to call RemoveAll() to destroy all elements at the end.
- *		map.RemoveAll();
+ *		// Because the destructor calls RemoveAll() internally, you do not need to call RemoveAll() to destroy all elements at the end.
+ *		// map.RemoveAll();
  *	}
  * @endcode
  */
@@ -118,8 +117,8 @@ public:
 	 *
 	 * @param[in]	deleter	The function pointer to type of the element deleter
 	 * @remarks	To create an owing collection, set the element deleter value as @c SingleObjectDeleter. This gives the collection the ownership of elements and the collection will destroy elements. @n
-	 *			On the other hand, to create a non-owning collection, you don't need to set the element deleter value, as @c NoOpDeleter is the default element deleter.
-	 *			It means that you don't transfer the ownership of elements to the collection.
+	 *			On the other hand, to create a non-owning collection, you do not need to set the element deleter value, as @c NoOpDeleter is the default element deleter.
+	 *			It means that you do not transfer the ownership of elements to the collection.
 	 * @see		NoOpDeleter()
 	 * @see		SingleObjectDeleter()
 	 * @see		ArrayDeleter()
@@ -277,14 +276,13 @@ public:
 	virtual IEnumerator* GetValuesN(const Object& key) const;
 
 	/**
-	 * Gets a list of all the keys in this map.
+	 * Gets a list of all unique keys in this map.
 	 *
 	 * @since 2.0
 	 *
-	 * @return		A list of all the keys in this map
-	 * @remarks		The order of the keys is the same as the corresponding values in the IList interface returned by the GetValuesN() method.
-	 *          	The %IList stores just the pointers to the elements in the map, not the elements themselves.
-	 *          	The specific error code can be accessed using the GetLastResult() method.
+	 * @return		A list of all unique keys in this map
+	 * @remarks		The %IList stores just the pointers to the elements in the map, not the elements themselves.
+	 *          		The specific error code can be accessed using the GetLastResult() method.
 	 * @see			GetValuesN()
 	 */
 	virtual IList* GetKeysN(void) const;
@@ -463,7 +461,7 @@ public:
 	 *
 	 * @since 2.0
 	 *
-	 * @return		An function pointer to the existing element deleter
+	 * @return		A function pointer to the existing element deleter
 	 */
 	virtual DeleterFunctionType GetDeleter(void) const;
 
@@ -503,7 +501,7 @@ private:
 
 	/**
 	 * Rehashes the contents of this map into a new array with a
-	 * larger capacity.@n
+	 * larger capacity. @n
 	 * This method is called automatically when the number of keys in this map reaches its threshold.
 	 *
 	 * @return		An error code
@@ -523,7 +521,7 @@ private:
 	 *
 	 * @since 2.0
 	 *
-	 * @param[in]	deleter	An function pointer to the element deleter to set
+	 * @param[in]	deleter	A function pointer to the element deleter to set
 	 */
 	virtual void SetDeleter(DeleterFunctionType deleter);
 

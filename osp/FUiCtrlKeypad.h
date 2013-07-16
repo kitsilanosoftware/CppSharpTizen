@@ -2,69 +2,71 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
+
 /**
- * @file		FUiCtrlKeypad.h
- * @brief	This is the header file for the %Keypad class.
- *
- * This header file contains the declarations of the %Keypad class.
- */
+* @file		FUiCtrlKeypad.h
+* @brief	This is the header file for the %Keypad class.
+*
+* This header file contains the declarations of the %Keypad class.
+*/
 
 #ifndef _FUI_CTRL_KEYPAD_H_
 #define _FUI_CTRL_KEYPAD_H_
 
 #include <FUiCtrlInputTypes.h>
 #include <FUiCtrlEditTypes.h>
+#include <FUiCtrlIEditTextFilter.h>
 #include <FUiITextEventListener.h>
 #include <FUiWindow.h>
 
-namespace Tizen { namespace  Ui { namespace Controls
+namespace Tizen { namespace Ui { namespace Controls
 {
 
 /**
- * @if OSPDEPREC
- * @enum     KeypadInputModeCategory
- *
- * Defines the keypad input mode.
- *
- * @brief	<i> [Deprecated] </i>
- * @deprecated We no longer provide a method to specify the list of styles which the user can set the keypad to, @n
- *			  or the current mode to initially set the keypad to, from this list. It is recommended to use the styles offered KeypadStyle enumeration instead.
- * @since		2.0
- * @endif
- */
+* @if OSPDEPREC
+* @enum     KeypadInputModeCategory
+*
+* Defines the keypad input mode.
+*
+* @brief	<i> [Deprecated] </i>
+* @deprecated We no longer provide a method to specify the list of styles which the user can set the keypad to, @n
+*			  or the current mode to initially set the keypad to, from this list. It is recommended to use the styles offered KeypadStyle enumeration instead.
+* @since		2.0
+* @endif
+*/
 enum KeypadInputModeCategory
 {
 	KEYPAD_MODE_ALPHA = 0x0001,                             /**< @if OSPDEPREC The alphabetic input mode @endif */
-	KEYPAD_MODE_PREDICTIVE = 0x0002,                        /**< @if OSPDEPREC The predictive input mode @endif*/
+	KEYPAD_MODE_PREDICTIVE = 0x0002,                        /**< @if OSPDEPREC The predictive input mode @endif */
 	KEYPAD_MODE_NUMERIC = 0x0004,                           /**< @if OSPDEPREC The numeric input mode @endif */
 	KEYPAD_MODE_SYMBOL = 0x0008                             /**< @if OSPDEPREC The symbolic input mode @endif */
 };
 
 /**
- * @class	Keypad
- * @brief	This class displays a keypad on top of the screen.
- *
- * @since	2.0
- *
- * The %Keypad class displays the full screen keypad without using an EditField or EditArea.
- *
- * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_keypad.htm">Keypad</a>.
- *
- * The following example demonstrates how to use the %Keypad class.
- *
- * @code
+* @class	Keypad
+* @brief	This class displays a keypad on top of the screen.
+*
+* @since	2.0
+*
+* The %Keypad class displays the full screen keypad without using an EditField or EditArea.
+*
+* For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_keypad.htm">Keypad</a>.
+*
+* The following example demonstrates how to use the %Keypad class.
+*
+* @code
 // Sample code for KeypadSample.h
 #include <FUi.h>
 
@@ -119,7 +121,7 @@ KeypadSample::OnInitializing(void)
 	pButton->Construct(Rectangle(50, 50, 150, 150), L"Show Keypad");
 	pButton->SetActionId(ID_BUTTON);
 	pButton->AddActionEventListener(*this);
-	AddControl(*pButton);
+	AddControl(pButton);
 
 	// Creates an instance of Keypad
 	__pKeypad = new Keypad();
@@ -155,7 +157,7 @@ KeypadSample::OnTerminating(void)
 	result r = E_SUCCESS;
 
 	// Deallocates the keypad
-	delete __pKeypad;
+	__pKeypad->Destroy();
 
 	return r;
 }
@@ -189,8 +191,8 @@ KeypadSample::OnTextValueChangeCanceled(const Tizen::Ui::Control& source)
 {
 	// ....
 }
- * @endcode
- */
+* @endcode
+*/
 
 class _OSP_EXPORT_ Keypad
 	: public Tizen::Ui::Window
@@ -223,8 +225,11 @@ public:
 	 * @exception   E_INVALID_ARG       A specified input parameter is invalid, or @n
 	 *									the specified @c limitLength is less than or equal to @c 0.
 	 * @exception   E_SYSTEM            A system error has occurred.
-	 * @remarks     If the keypad style is set to password, the input mode category is ignored.
-	 * @remarks     The orientation mode of the keypad is decided based on the G-sensor value.
+	 * @remarks
+	 *			- If the keypad style is set to password, the input mode category is ignored.
+	 *			- The orientation mode of the keypad is decided based on the G-sensor value.
+	 *			- The default owner will be the current Form (or Frame). It is possible that this control may not be visible
+	 * due to this ownership relationship. @n In this case, use the SetOwner() method to change the ownership to the top-most window.
 	 */
 	result Construct(KeypadStyle keypadStyle, int limitLength);
 
@@ -245,33 +250,34 @@ public:
 	 * @exception	E_INVALID_ARG	    A specified input parameter is invalid, or @n
 	 *									the specified @c limitLength is less than or equal to @c 0.
 	 * @exception	E_SYSTEM	        A system error has occurred.
-	 * @remarks		If the keypad style is set to password, the input mode category is ignored.
-	 * @remarks		The orientation mode of the keypad is decided based on the G-sensor value.
+	 * @remarks
+	 *			- If the keypad style is set to password, the input mode category is ignored.
+	 *			- The orientation mode of the keypad is decided based on the G-sensor value.
 	 * @endif
 	 */
 	result Construct(KeypadStyle keypadStyle, KeypadInputModeCategory category, int limitLength = 100);
 
 	/**
-	 * Checks whether the text prediction is enabled.
-	 *
-	 * @since 2.0
-	 * @return                @c true if the text prediction is enabled, @n
-	 *                                 else @c false
-	 * @see                      SetTextPredictionEnabled()
-	 */
+	* Checks whether the text prediction is enabled.
+	*
+	* @since 2.0
+	* @return                @c true if the text prediction is enabled, @n
+	*                                 else @c false
+	* @see                      SetTextPredictionEnabled()
+	*/
 	bool IsTextPredictionEnabled(void) const;
 
 	/**
-	 * Enables or disables the text prediction.
-	 *
-	 * @since 2.0
-	 * @param[in]           enable                       Set to @c true to enable the text prediction, @n
-	 *                                                                    else @c false
-	 * @return                An error code
-	 * @exception           E_SUCCESS                The method is successful.
-	 * @exception		E_UNSUPPORTED_OPERATION     This operation is not supported.
-	 * @see                      IsTextPredictionEnabled()
-	 */
+	* Enables or disables the text prediction.
+	*
+	* @since 2.0
+	* @param[in]           enable                       Set to @c true to enable the text prediction, @n
+	*                                                                    else @c false
+	* @return                An error code
+	* @exception           E_SUCCESS                The method is successful.
+	* @exception		E_UNSUPPORTED_OPERATION     This operation is not supported.
+	* @see                      IsTextPredictionEnabled()
+	*/
 	result SetTextPredictionEnabled(bool enable);
 
 	/**
@@ -308,7 +314,7 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in]	listener    The listener to be added
+	 * @param[in]	listener    The listener to add
 	 */
 	void AddTextEventListener(Tizen::Ui::ITextEventListener& listener);
 
@@ -318,7 +324,7 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in]	listener    The listener to be removed
+	 * @param[in]	listener    The listener to remove
 	 */
 	void RemoveTextEventListener(Tizen::Ui::ITextEventListener& listener);
 
@@ -336,9 +342,31 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	text	The text to be set
+	 * @param[in]	text	The text to set
 	 */
 	void SetText(Tizen::Base::String text);
+
+	/**
+	 * Sets the text filter.
+	 *
+	 * @since		2.1
+	 *
+	 * @param[in]		pFilter The filter
+	 * @remarks 	The %Keypad control checks with the registered filter to decide whether the user-entered text should be replaced.
+	 */
+	void  SetEditTextFilter(IEditTextFilter* pFilter);
+
+	/**
+	* Sends opaque command to the input method.
+	*
+	* @since     2.1
+	*
+	* @param[in] command            The opaque command
+	* @remarks
+	*			- This method can be used to provide domain-specific features that are only known between certain input methods and their clients.
+	*			- This method may not work, depending on the active Input Method.
+	*/
+	void SendOpaqueCommand (const Tizen::Base::String& command);
 
 protected:
 	friend class _KeypadImpl;

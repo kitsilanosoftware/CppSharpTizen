@@ -43,66 +43,6 @@ class IpHostEntry;
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/net/domain_name_system_access.htm">Domain Name System Access</a>.
  *
  * @see	Tizen::Net::IpHostEntry
- *
- * The following example demonstrates how to use the %IDnsEventListener interface.
- *
- * @code
- *
- *	using namespace Tizen::Net;
- *
- *	class MyDnsListener
- *		: public IDnsEventListener
- *	{
- *	public:
- *		void OnDnsResolutionCompletedN(IpHostEntry* ipHostEntry, result r);
- *	};
- *
- *	void
- *	MyDnsListener::OnDnsResolutionCompletedN(IpHostEntry* ipHostEntry, result r)
- *	{
- *		if (ipHostEntry == null)
- *		{
- *			AppLog("error case no.%d \n", r);
- *		}
- *		else
- *		{
- *			Tizen::Base::Collection::IList* addressList = ipHostEntry->GetAddressList();
- *
- *			if (addressList != null)
- *			{
- *				int count = addressList->GetCount();
- *
- *				for (int i = 0; i < count; i++)
- *				{
- *					IpAddress* pIpAddress = (IpAddress*)(addressList->GetAt(i));
- *					Tizen::Base::ByteBuffer*_pbb = Tizen::Base::Utility::StringUtil::StringToUtf8N(pIpAddress->ToString());
- *
- *					AppLog("IpAddress no.%d : %s\n", i, (char*)(_pbb->GetPointer()));
- *					delete _pbb;
- *				}
- *			}
- *
- *			Tizen::Base::Collection::IList* aliasList = ipHostEntry->GetAliasList();
- *
- *			if (aliasList != null)
- *			{
- *				int count = aliasList->GetCount();
- *
- *				for (int i = 0; i < count; i++)
- *				{
- *					String* alias = (String*)(aliasList->GetAt(i));
- *					Tizen::Base::ByteBuffer*_pbb = Tizen::Base::Utility::StringUtil::StringToUtf8N(*alias);
- *
- *					AppLog("alias no.%d : %s\n", i, (char*)(_pbb->GetPointer()));
- *					delete _pbb;
- *				}
- *			}
- *			delete ipHostEntry;
- *		}
- *	}
- *
- * @endcode
- *
  */
 class _OSP_EXPORT_ IDnsEventListener
 	: virtual public Tizen::Base::Runtime::IEventListener

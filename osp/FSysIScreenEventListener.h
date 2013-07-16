@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -17,7 +16,7 @@
 
 /**
  * @file	FSysIScreenEventListener.h
- * @brief	This is the header file of the %IScreenEventListener interface.
+ * @brief	This is the header file for the %IScreenEventListener interface.
  *
  * This header file contains the declarations of the %IScreenEventListener interface.
  */
@@ -55,12 +54,22 @@ public:
 	/**
 	 * Called when the screen turns off. @n
 	 * Unless there is a strong reason to do otherwise, release resources (such as 3D, media, and sensors) to allow the device to enter the sleep mode to save the battery.
-	 *Invoking a lengthy asynchronous method within this listener method can be risky, because it is not guaranteed to invoke a callback before the device enters the sleep mode.
-	 *Similarly, do not perform lengthy operations in this listener method. All operations must be quick ones.
+	 * Invoking a lengthy asynchronous method within this listener method can be risky, because it is not guaranteed to invoke a callback before the device enters the sleep mode.
+	 * Similarly, do not perform lengthy operations in this listener method. All operations must be quick ones.
 	 *
 	*@since 2.0
 	 */
 	virtual void OnScreenOff(void) = 0;
+
+	/**
+	 * Called when the screen brightness is changed.
+	 *
+	 * @since 2.1
+	 *
+	 * @param[in]   brightness         The screen brightness between @c 0 to @c 10
+	 */
+	virtual void OnScreenBrightnessChanged(int brightness) {}
+
 
 protected:
 	//
@@ -76,13 +85,6 @@ protected:
 	//
 	// @since 2.0
 	virtual void OnIScreenEventListener_Reserved2(void) {}
-
-	//
-	// This method is for internal use only.
-	// Using this method can cause behavioral, security-related, and consistency-related issues in the application.
-	//
-	// @since 2.0
-	virtual void OnIScreenEventListener_Reserved3(void) {}
 
 }; // IScreenEventListener
 

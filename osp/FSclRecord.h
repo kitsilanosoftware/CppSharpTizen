@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -55,8 +54,6 @@ enum RecordType
  *
  * The %Record class defines the general behavior of records used in the Social namespace. Users cannot create an instance directly from this
  *	class. Instead, instantiate the classes derived from %Record.
- *
- * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/social/social_records.htm">Social Records</a>.
  */
 class _OSP_EXPORT_ Record
 	: public Tizen::Base::Object
@@ -87,7 +84,7 @@ protected:
 	// This method is for internal use only. Using this method can cause behavioral, security-related,
 	// and consistency-related issues in the application.
 	//
-	// Initializes this instance of %Record with the specified type.
+	// Initializes this instance of %Record with the specified @c type.
 	//
 	// @since	2.0
 	//

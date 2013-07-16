@@ -2,25 +2,26 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
+
 /**
  * @file		FUiIDateTimeChangeEventListener.h
  * @brief		This is the header file for the %IDateTimeChangeEventListener interface.
  *
  * This header file contains the declarations of the %IDateTimeChangeEventListener interface. @n
- * If a change event is generated, a method of this class is called. @n
- * So, if applications perform jobs related to change events, they use the methods of this class.
+ * If a change event is generated, a method of this class is interface. @n
+ * So, if applications perform jobs related to change events, they use the methods of this interface.
  *
  */
 #ifndef _FUI_IDATETIME_CHANGE_EVENT_LISTENER_H_
@@ -46,7 +47,7 @@ namespace Tizen {namespace Ui
  *
  * The %IDateTimeChangeEventListener interface is the listener interface for receiving date and time change events.
  * The class that processes a date and time change event implements this interface, and the instance created with that class is
- * registered with a UI control, using the control's AddDateTimeChangeEventListener() method. When the date and time change event
+ * registered with a UI control, using the DateTimePicker::AddDateTimeChangeEventListener() method. When the date and time change event
  * occurs, the OnDateTimeChanged() method of that instance is invoked.
  * @n
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_datepicker.htm">DatePicker, TimePicker, and DateTimePicker</a>.

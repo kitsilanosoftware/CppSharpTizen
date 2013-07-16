@@ -20,7 +20,7 @@
  * @brief		This is the header file for the %JsonString class.
  *
  * This header file contains the declarations of the %JsonString class.
- * The class represents the JSON value of type string.
+ * This class represents the JSON value of type string.
  */
 #ifndef _FWEB_JSON_JSON_STRING_H_
 #define _FWEB_JSON_JSON_STRING_H_
@@ -45,7 +45,7 @@ namespace Tizen { namespace Web { namespace Json
  * @final	This class is not intended for extension.
  *
  * The %JsonString class represents the JSON value of type string.
- * @n
+ * 
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/web/json_namespace.htm">JSON Guide</a>.
 
  *
@@ -69,7 +69,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	value	A reference to %String
+	 * @param[in]	value	A reference to Tizen::Base::String
 	 */
 	JsonString(const Tizen::Base::String& value);
 
@@ -104,7 +104,6 @@ public:
 	 * @since		2.0
 	 *
 	 * @return      The type of the JSON string
-	 * @see         JsonType
 	 */
 	JsonType GetType(void) const;
 

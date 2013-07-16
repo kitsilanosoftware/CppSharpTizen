@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -92,89 +92,43 @@ using namespace Tizen::Base;
 using namespace Tizen::Graphics;
 
 bool
-MyClass::GraphicsSample(void)
+MyClass::GraphicsSample(Canvas& canvas)
 {
     result r = E_SUCCESS;
 
-    // Creates a canvas instance.
-    Canvas* pCanvas = new Canvas();
-    r = pCanvas->Construct();
-    if (IsFailed(r))
-    {
-        goto CATCH;
-    }
+    // Sets the background color of the canvas and then clears it
+    canvas.SetBackgroundColor(Color(0xFF, 0xFF, 0xFF));
+    canvas.Clear();
 
-    // Clears
-    pCanvas->SetBackgroundColor(Color(0xFF, 0xFF, 0xFF));
-    r = pCanvas->Clear();
-    if (IsFailed(r))
-    {
-        goto CATCH;
-    }
+    // Sets the foreground color of this canvas
+    canvas.SetForegroundColor(Color::GetColor(COLOR_ID_GREEN));
 
-    // Sets the foreground color of this canvas.
-    pCanvas->SetForegroundColor(Color::GetColor(COLOR_ID_GREEN));
-
-    // Draws an ellipse.
-    r = pCanvas->DrawEllipse(Rectangle(50, 50, 50, 80));
-    if (IsFailed(r))
-    {
-        goto CATCH;
-    }
-
-    r = pCanvas->DrawLine(Point(100, 100), Point(150, 150));
-    if (IsFailed(r))
-    {
-        goto CATCH;
-    }
-
-    // Draws a circular arc.
-    r = pCanvas->DrawArc(Rectangle(10, 200, 50, 50), 30, 60, ARC_STYLE_PIE);
-    if (IsFailed(r))
-    {
-        goto CATCH;
-    }
+    // Draws shapes
+    canvas.DrawEllipse(Rectangle(50, 50, 50, 80));
+    canvas.DrawLine(Point(100, 100), Point(150, 150));
+    canvas.DrawArc(Rectangle(10, 200, 50, 50), 30, 60, ARC_STYLE_PIE);
 
     {
-        // Creates a font instance.
+        // Creates an instance of Font
         Font font;
         r = font.Construct(FONT_STYLE_PLAIN, 32);
         if (IsFailed(r))
         {
-            goto CATCH;
+            return false;
         }
 
-        // Sets the font to canvas.
-        r = pCanvas->SetFont(font);
-        if (IsFailed(r))
-        {
-            goto CATCH;
-        }
+        // Sets the canvas font
+        canvas.SetFont(font);
     }
 
-    // Draws text at the specified location.
-    r = pCanvas->DrawText(Point(50, 50), String(L"Hello World"));
-    if (IsFailed(r))
-    {
-        goto CATCH;
-    }
+    // Draws text at the specified location
+    canvas.DrawText(Point(50, 50), String(L"Hello World"));
 
-    // Shows the drawing result on the device screen.
-    r = pCanvas->Show();
-    if (IsFailed(r))
-    {
-        goto CATCH;
-    }
-
-    // Cleans up.
-    delete pCanvas;
+    // Shows the drawing as a result on the device screen
+    canvas.Show();
 
     return true;
 
-CATCH:
-    delete pCanvas;
-
-    return false;
 }
  *	@endcode
  *

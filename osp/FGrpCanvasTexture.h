@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+// 	http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -44,7 +44,8 @@ namespace Tizen { namespace Graphics { namespace Opengl
  *
  * @final	This class is not intended for extension.
  *
- * The %CanvasTexture class provides a canvas by which you can draw 2D primitives on OpenGL-ES texture.
+ * The %CanvasTexture class provides a method to bind 2D Canvas and OpenGL-ES Texture.
+ *		With this feature, you can easily draw 2D primitives on OpenGL-ES Textures with consistency.
  *
  */
 class _OSP_EXPORT_ CanvasTexture
@@ -69,17 +70,21 @@ public:
 	/**
 	 * Initializes this instance of %CanvasTexture with the specified parameters.
 	 *
-	 * @since 2.0
+	 * @since		2.0
+	 * @feature		%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
 	 *
 	 * @return		An error code
-	 * @param[in]	textureId	Texture ID which points to the texture associated with the 2D canvas. The testure ID must be generated from glGenTextures().
+	 * @param[in]	textureId	Texture ID which points to the texture associated with the 2D canvas @n The texture ID must be generated from glGenTextures().
 	 * @param[in]	width	The width of the input texture. The width must be greater than @c 0, and smaller or equal than GL_MAX_TEXTURE_SIZE.
 	 * @param[in]	height	The height of the input texture. The height must be greater than @c 0, and smaller or equal than GL_MAX_TEXTURE_SIZE
 	 * @exception	E_SUCCESS	Construction is successfully done.
 	 * @exception	E_INVALID_ARG	Input parameter is invalid.
-	 * @exception	E_UNSUPPORTED_OPERATION The target device does not support full features for %CanvasTexture.
-	 * @exception	E_INVALID_STATE	Getting egl information failed. It is necessary to bind egl context by using eglMakeCurrent funtion.
-	 * @remarks 	There is a high probability for an occurrence of an out-of-memory exception. If possible, check whether the exception is E_OUT_OF_MEMORY or not. For more information on how to handle the out-of-memory exception, refer <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">here</a>.
+	 * @exception	E_UNSUPPORTED_OPERATION The Emulator or target device does not support the required feature.
+	 * For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+ 	 * @exception	E_INVALID_STATE	Getting egl information failed. It is necessary to bind egl context by using the eglMakeCurrent() method.
+	 * @remarks
+	 * 				- Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
+	 * 				- There is a high probability for an occurrence of an out-of-memory exception. If possible, check whether the exception is @c E_OUT_OF_MEMORY or not. For more information on how to handle the out-of-memory exception, refer <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">here</a>.
 	 */
 	result Construct(int textureId, int width, int height);
 
@@ -89,9 +94,9 @@ public:
 	 * @since 2.0
 	 *
 	 * @return	The 2D canvas of the %CanvasTexture, @n
-	 *		else @c null if an exception occurs.
+	 *		else @c null if an exception occurs
 	 * @exception	E_SUCCESS	The method is successful.
-	 * @exception	E_OPERATION_FAILED	Fail to construct the canvas properly, due to some reason of system.
+	 * @exception	E_OPERATION_FAILED	The method fails to construct the canvas properly due to some system error.
 	 */
 	Tizen::Graphics::Canvas* GetCanvasN(void) const;
 

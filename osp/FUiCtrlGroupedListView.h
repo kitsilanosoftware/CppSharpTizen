@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -27,6 +27,7 @@
 
 #include <FBaseObject.h>
 #include <FBaseTypes.h>
+#include <FGrpFloatRectangle.h>
 #include <FGrpRectangle.h>
 #include <FUiControl.h>
 #include <FUiContainer.h>
@@ -34,8 +35,11 @@
 #include <FUiCtrlIFastScrollListener.h>
 #include <FUiCtrlIGroupedListViewItemEventListener.h>
 #include <FUiCtrlIGroupedListViewItemProvider.h>
+#include <FUiCtrlIGroupedListViewItemProviderF.h>
 #include <FUiCtrlIScrollEventListener.h>
+#include <FUiCtrlIScrollEventListenerF.h>
 #include <FUiCtrlListViewTypes.h>
+#include <FUiCtrlScrollPanelTypes.h>
 #include <FUiIUiLinkEventListener.h>
 
 namespace Tizen { namespace Ui { namespace Controls
@@ -168,7 +172,7 @@ GroupedListViewSample::OnInitializing(void)
 	__pGroupedListView->AddGroupedListViewItemEventListener(*this);
 
 	// Adds the icon list view to the form
-	AddControl(*__pGroupedListView);
+	AddControl(__pGroupedListView);
 
 	// Creates an instance of ListContextItem
 	__pItemContext = new ListContextItem();
@@ -374,7 +378,7 @@ class _OSP_EXPORT_ GroupedListView
 public:
 	/**
 	 * The object is not fully constructed after this constructor is
-	 * called. For full construction, the Construct() method must be
+	 * called. @n For full construction, the %Construct() method must be
 	 * called right after calling this constructor.
 	 *
 	 * @since	2.0
@@ -399,7 +403,9 @@ public:
 	 * @return  An error code
 	 * @param[in]   rect				An instance of the Graphics::Rectangle class
 	 *                                  This instance represents the x and y coordinates of the top-left corner of the created
-	 *									%GroupedListView control along with the width and height.
+	 *									%GroupedListView control along with the width and height.@n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @param[in]   style				The style of the %GroupedListView control
 	 * @param[in]   itemDivider			Set to @c true to display an item divider, @n
 	 *									else @c false
@@ -421,7 +427,9 @@ public:
 	 * @return  An error code
 	 * @param[in]   rect				An instance of the Graphics::Rectangle class
 	 *                                  This instance represents the x and y coordinates of the top-left corner of the created
-	 *									%GroupedListView control along with the width and height.
+	 *									%GroupedListView control along with the width and height.@n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @param[in]   style				The style of the %GroupedListView control
 	 * @param[in]   itemDivider			Set to @c true to display an item divider, @n
 	 *									else @c false
@@ -434,6 +442,28 @@ public:
 	result Construct(const Tizen::Graphics::Rectangle& rect, GroupedListViewStyle style, bool itemDivider, ListScrollStyle scrollStyle);
 
 	/**
+	 * Initializes this instance of %GroupedListView with the specified parameters.
+	 *
+	 * @since 2.1
+	 *
+	 * @return  An error code
+	 * @param[in]   rect				An instance of the Graphics::Rectangle class
+	 *                                  This instance represents the x and y coordinates of the top-left corner of the created
+	 *									%GroupedListView control along with the width and height.@n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]   style				The style of the %GroupedListView control
+	 * @param[in]   itemDivider			Set to @c true to display an item divider, @n
+	 *									else @c false
+	 * @param[in]   scrollStyle			Set to scroll style
+	 * @exception   E_SUCCESS			The method is successful.
+	 * @exception   E_INVALID_ARG		A specified input parameter is invalid. @n
+	 *  								Either the @c rect.width or @c rect.height parameter has a negative value.
+	 * @exception   E_SYSTEM			A system error has occurred.
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, GroupedListViewStyle style, bool itemDivider, ListScrollStyle scrollStyle);
+
+	/**
 	 * Sets the item provider that creates and deletes items from the list.
 	 *
 	 * @since	2.0
@@ -442,10 +472,25 @@ public:
 	 * @param[in]	provider			The item provider to create and delete items
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @remarks
+	 *			- If an item provider is not set for the list, the list does not work.
+	 *			- A provider should be allocated on a heap memory.
+	 */
+	result SetItemProvider(IGroupedListViewItemProvider& provider);
+
+	/**
+	 * Sets the item provider that creates and deletes items from the list.
+	 *
+	 * @since	2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	provider			The item provider to create and delete items
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_SYSTEM			A system error has occurred.
 	 * @remarks	If an item provider is not set for the list, the list does not work. @n
 	 *			A provider should be allocated on a heap memory.
 	 */
-	result SetItemProvider(IGroupedListViewItemProvider& provider);
+	result SetItemProvider(IGroupedListViewItemProviderF& provider);
 
 	/**
 	 * Adds an IGroupedListViewItemEventListener instance that listens to the state changes of the list view items. @n
@@ -453,7 +498,7 @@ public:
 	 *
 	 * @since	2.0
 	 *
-	 * @param[in]	listener			The event listener to be added
+	 * @param[in]	listener			The event listener to add
 	 */
 	void AddGroupedListViewItemEventListener(IGroupedListViewItemEventListener& listener);
 
@@ -463,7 +508,7 @@ public:
 	 *
 	 * @since	2.0
 	 *
-	 * @param[in]	listener			The event listener to be removed
+	 * @param[in]	listener			The event listener to remove
 	 */
 	void RemoveGroupedListViewItemEventListener(IGroupedListViewItemEventListener& listener);
 
@@ -473,7 +518,7 @@ public:
 	 *
 	 * @since	2.0
 	 *
-	 * @param[in]	listener			The event listener to be added
+	 * @param[in]	listener			The event listener to add
 	 */
 	void AddFastScrollListener(IFastScrollListener& listener);
 
@@ -483,7 +528,7 @@ public:
 	 *
 	 * @since	2.0
 	 *
-	 * @param[in]	listener			The event listener to be removed
+	 * @param[in]	listener			The event listener to remove
 	 */
 	void RemoveFastScrollListener(IFastScrollListener& listener);
 
@@ -493,11 +538,23 @@ public:
 	 *
 	 * @since	2.0
 	 *
-	 * @param[in]	listener			The event listener to be added
+	 * @param[in]	listener			The event listener to add
 	 * @see       IScrollEventListener::OnScrollEndReached()
 	 * @see       RemoveScrollEventListener()
 	 */
 	void AddScrollEventListener(IScrollEventListener& listener);
+
+	/**
+	 * Adds an IScrollEventListener instance that listens to the state changes of a scroll event. @n
+	 * The added listener can listen to events on the specified event dispatcher's context when they are fired.
+	 *
+	 * @since	2.1
+	 *
+	 * @param[in]	listener			The event listener to add
+	 * @see       IScrollEventListener::OnScrollEndReached()
+	 * @see       RemoveScrollEventListener()
+	 */
+	void AddScrollEventListener(IScrollEventListenerF& listener);
 
 	/**
 	 * Removes an IScrollEventListener instance that listens to the state changes of a scroll event. @n
@@ -505,18 +562,30 @@ public:
 	 *
 	 * @since	2.0
 	 *
-	 * @param[in]	listener			The event listener to be removed
+	 * @param[in]	listener			The event listener to remove
 	 * @see     IScrollEventListener::OnScrollEndReached()
 	 * @see     AddScrollEventListener()
 	 */
 	void RemoveScrollEventListener(IScrollEventListener& listener);
 
 	/**
+	 * Removes an IScrollEventListener instance that listens to the state changes of a scroll event. @n
+	 * The removed listener cannot listen to events when they are fired.
+	 *
+	 * @since	2.1
+	 *
+	 * @param[in]	listener			The event listener to remove
+	 * @see     IScrollEventListener::OnScrollEndReached()
+	 * @see     AddScrollEventListener()
+	 */
+	void RemoveScrollEventListener(IScrollEventListenerF& listener);
+
+	/**
 	 * Adds a link event listener.
 	 *
 	 * @since   2.0
 	 *
-	 * @param[in]	listener			The event listener to be added
+	 * @param[in]	listener			The event listener to add
 	 * @remarks	The added listener is notified when a link is selected by the user.
 	 *
 	 * @see     RemoveUiLinkEventListener()
@@ -529,7 +598,7 @@ public:
 	 *
 	 * @since	2.0
 	 *
-	 * @param[in]	listener			The event listener to be removed
+	 * @param[in]	listener			The event listener to remove
 	 * @see		AddUiLinkEventListener()
 	 */
 	void RemoveUiLinkEventListener(Tizen::Ui::IUiLinkEventListener& listener);
@@ -602,6 +671,9 @@ public:
 	 * @exception E_SUCCESS             The method is successful.
 	 * @exception E_OUT_OF_RANGE        A specified input parameter is invalid.
 	 * @exception E_SYSTEM              A system error has occurred.
+	 * @remarks This method should be called only after list items are created.  @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	result ScrollToItem(int groupIndex, int itemIndex);
 
@@ -618,6 +690,9 @@ public:
 	 * @exception E_SUCCESS             The method is successful.
 	 * @exception E_OUT_OF_RANGE        A specified input parameter is invalid.
 	 * @exception E_SYSTEM              A system error has occurred.
+	 * @remarks This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	result ScrollToItem(int groupIndex, int itemIndex, ListScrollItemAlignment itemAlignment);
 
@@ -635,7 +710,11 @@ public:
 	 * @exception	E_OUT_OF_RANGE		A specified input parameter is invalid.
 	 * @exception	E_INVALID_OPERATION	The item is disabled.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks	This method works only when the annex style of the item allows selection.
+	 * @remarks
+	 *			- This method works only when the annex style of the item allows selection.
+	 *			- This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	result SetItemChecked(int groupIndex, int itemIndex, bool check);
 
@@ -648,7 +727,11 @@ public:
 	 *			else @c false
 	 * @param[in]	groupIndex			The group index
 	 * @param[in]	itemIndex			The item index
-	 * @remarks	This method returns @c false, if the annex style of the item does not allow selection.
+	 * @remarks
+	 *			- This method returns @c false, if the annex style of the item does not allow selection.
+	 *			- This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	bool IsItemChecked(int groupIndex, int itemIndex) const;
 
@@ -665,7 +748,11 @@ public:
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_OUT_OF_RANGE		A specified input parameter is invalid.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks	This method can only be used when the annex style of the list allows selection.
+	 * @remarks
+	 *			- This method can only be used when the annex style of the list allows selection.
+	 *			- This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	result SetItemEnabled(int groupIndex, int itemIndex, bool enable);
 
@@ -678,6 +765,9 @@ public:
 	 *			else @c false
 	 * @param[in]	groupIndex			The group index
 	 * @param[in]	itemIndex			The item index
+	 * @remarks This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	bool IsItemEnabled(int groupIndex, int itemIndex) const;
 
@@ -697,6 +787,9 @@ public:
 	 *
 	 * @return	The total number of items in the specified group
 	 * @param[in]	groupIndex			The group index
+	 * @remarks This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	int GetItemCountAt(int groupIndex) const;
 
@@ -711,7 +804,11 @@ public:
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_OUT_OF_RANGE		A specified input parameter is invalid.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks	If no description text is set for the item at the specified index, it is not displayed.
+	 * @remarks
+	 *			- If no description text is set for the item at the specified index, it is not displayed.
+	 *			- This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 *
 	 */
 	result ShowItemDescriptionText(int groupIndex, int itemIndex);
@@ -727,29 +824,34 @@ public:
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_OUT_OF_RANGE		A specified input parameter is invalid.
 	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @remarks This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	result HideItemDescriptionText(int groupIndex, int itemIndex);
 
 	/**
 	 * Updates the specified item. @n
-	 * For instance, LIST_REFRESH_TYPE_ITEM_ADD is used when a new item needs to be added and LIST_REFRESH_TYPE_ITEM_REMOVE is used when an item is deleted from the
-	 * list. Moreover, LIST_REFRESH_TYPE_ITEM_MODIFY is used when the content of an existing item has changed and it needs to be updated. @n
-	 * Note that calling this method with LIST_REFRESH_TYPE_ITEM_MODIFY invokes item provider's DeleteItem() and CreateItem() for the given index in sequence.
+	 * For instance, @c LIST_REFRESH_TYPE_ITEM_ADD is used when a new item needs to be added and @c LIST_REFRESH_TYPE_ITEM_REMOVE
+	 * is used when an item is deleted from the list. Moreover, @c LIST_REFRESH_TYPE_ITEM_MODIFY is used when the content of an existing item
+	 * has changed and it needs to be updated. @n Note that calling this method with @c LIST_REFRESH_TYPE_ITEM_MODIFY invokes item provider's
+	 * DeleteItem() and CreateItem() for the given index in sequence.
 	 *
 	 * @since	2.0
 	 *
 	 * @return	An error code
 	 * @param[in]	groupIndex			The group index
 	 * @param[in]	itemIndex			The item index
-	 * @param[in]	type                The item to be added, removed, or modified
+	 * @param[in]	type                The item to add, remove, or modify
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_OUT_OF_RANGE		A specified input parameter is invalid.
 	 * @exception	E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation.
 	 * @exception	E_SYSTEM            A system error has occurred.
-	 * @remarks	If the specified itemIndex is -1, then the method is applied to the group item with the given index. @n
-	 *			Note that if LIST_REFRESH_TYPE_ITEM_REMOVE option is used to a group item, all the items in the group (including the group item itself) are
-	 *			removed from the list.
-	 * @remarks	This method internally calls Invalidate(), so you do not need to call them to update the screen.
+	 * @remarks
+	 *			- If the specified itemIndex is @c -1, then the method is applied to the group item with the given index.
+	 *			- Note that if @c LIST_REFRESH_TYPE_ITEM_REMOVE option is used to a group item, all the items in the group
+	 *			(including the group item itself) are removed from the list.
+	 *			- This method internally calls Invalidate(), so you do not need to call them to update the screen.
 	 */
 	result RefreshList(int groupIndex, int itemIndex, ListRefreshType type);
 
@@ -794,8 +896,30 @@ public:
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred, or @n
 	 *									there is no item at the specified position.
+	 * @remarks This method should be called only after list items are created.  @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	result GetItemIndexFromPosition(int x, int y, int& groupIndex, int& itemIndex) const;
+
+	/**
+	 * Gets the index of the item at the specified position.
+	 *
+	 * @since	2.1
+	 *
+	 * @return	An error code
+	 * @param[in]	x					The X position of the item
+	 * @param[in]	y					The Y position of the item
+	 * @param[out]	groupIndex			The index of the group that the item belongs to
+	 * @param[out]	itemIndex			The index of the item
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_SYSTEM			A system error has occurred, or @n
+	 *									there is no item at the specified position.
+	 * @remarks This method should be called only after list items are created.  @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
+	 */
+	result GetItemIndexFromPosition(float x, float y, int& groupIndex, int& itemIndex) const;
 
 	/**
 	 * Gets the index of the item at the specified position.
@@ -809,8 +933,29 @@ public:
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM            A system error has occurred, or @n
 	 *									there is no item at the specified position.
+	 * @remarks This method should be called only after list items are created.  @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	result GetItemIndexFromPosition(const Tizen::Graphics::Point& position, int& groupIndex, int& itemIndex) const;
+
+	/**
+	 * Gets the index of the item at the specified position.
+	 *
+	 * @since	2.1
+	 *
+	 * @return	An error code
+	 * @param[in]	position			The position of the item
+	 * @param[out]	groupIndex			The index of the group that the item belongs to
+	 * @param[out]	itemIndex			The index of the item
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_SYSTEM            A system error has occurred, or @n
+	 *									there is no item at the specified position.
+	 * @remarks This method should be called only after list items are created.  @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
+	 */
+	result GetItemIndexFromPosition(const Tizen::Graphics::FloatPoint& position, int& groupIndex, int& itemIndex) const;
 
 	/**
 	 * Gets the index of the item and ID of the element at the specified position.
@@ -826,10 +971,38 @@ public:
 	 * @exception  E_SUCCESS            The method is successful.
 	 * @exception  E_SYSTEM             A system error has occurred, or
 	 *								    there is no item at the specified position.
-	 * @remarks	@c groupIndex and @c itemIndex are -1 when there is no list item at the specified position.
-	 * @remarks	@c elementId is -1 when there is no element at the specified position
+	 * @remarks
+	 *			- @c groupIndex and @c itemIndex are @c -1 when there is no list item at the specified position.
+	 *			- @c elementId is @c -1 when there is no element at the specified position
+	 * 			- This method should be called only after list items are created.  @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
+
 	 */
 	result GetItemIndexFromPosition(int x, int y, int& groupIndex, int& itemIndex, int& elementId) const;
+
+	/**
+	 * Gets the index of the item and ID of the element at the specified position.
+	 *
+	 * @since	2.1
+	 *
+	 * @return  An error code
+	 * @param[in]  x                    The X position of the item
+	 * @param[in]  y                    The Y position of the item
+	 * @param[out] groupIndex           The index of the group that the item belongs to
+	 * @param[out] itemIndex            The index of the item
+	 * @param[out] elementId            The ID of the element
+	 * @exception  E_SUCCESS            The method is successful.
+	 * @exception  E_SYSTEM             A system error has occurred, or
+	 *								    there is no item at the specified position.
+	 * @remarks
+	 *			- @c groupIndex and @c itemIndex are @c -1 when there is no list item at the specified position.
+	 *			- @c elementId is @c -1 when there is no element at the specified position
+	 * 			- This method should be called only after list items are created.  @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
+	 */
+	result GetItemIndexFromPosition(float x, float y, int& groupIndex, int& itemIndex, int& elementId) const;
 
 	/**
 	 * Gets the index of the item and ID of the element at the specified position.
@@ -844,10 +1017,36 @@ public:
 	 * @exception  E_SUCCESS            The method is successful.
 	 * @exception  E_SYSTEM             A system error has occurred, or
 	 *								    there is no item at the specified position.
-	 * @remarks	@c groupIndex and @c itemIndex are -1 when there is no list item at the specified position.
-	 * @remarks  @c elementId is -1 when there is no element at the specified position
+	 * @remarks
+	 *			- @c groupIndex and @c itemIndex are @c -1 when there is no list item at the specified position.
+	 *			- @c elementId is @c -1 when there is no element at the specified position
+	 *			- This method should be called only after list items are created.  @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	result GetItemIndexFromPosition(const Tizen::Graphics::Point& position, int& groupIndex, int& itemIndex, int& elementId) const;
+
+	/**
+	 * Gets the index of the item and ID of the element at the specified position.
+	 *
+	 * @since	2.1
+	 *
+	 * @return  An error code
+	 * @param[in]  position             The position of the point
+	 * @param[out] groupIndex           The index of the group that the item belongs to
+	 * @param[out] itemIndex            The index of the item
+	 * @param[out] elementId            The ID of the element
+	 * @exception  E_SUCCESS            The method is successful.
+	 * @exception  E_SYSTEM             A system error has occurred, or
+	 *								    there is no item at the specified position.
+	 * @remarks
+	 *			- @c groupIndex and @c itemIndex are @c -1 when there is no list item at the specified position.
+	 *			- @c elementId is @c -1 when there is no element at the specified position
+	 *			- This method should be called only after list items are created.  @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
+	 */
+	result GetItemIndexFromPosition(const Tizen::Graphics::FloatPoint& position, int& groupIndex, int& itemIndex, int& elementId) const;
 
 	/**
 	 * Sets the color of a section.
@@ -857,10 +1056,12 @@ public:
 	 * @return	An error code
 	 * @param[in]	color				The section color
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation (this control cannot be displayed).
+	 * @exception	E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation
+	 *									(this control cannot be displayed).
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks	This method works only when the style of the %GroupedListView control is GROUPED_LIST_VIEW_STYLE_SECTION. @n
-	 *          If the device does not support the 32-bit color space, the method sets the alpha value of the specified color to @c 255.
+	 * @remarks
+	 *			- This method works only when the style of the %GroupedListView control is ::GROUPED_LIST_VIEW_STYLE_SECTION.
+	 *			- If the device does not support the 32-bit color space, the method sets the alpha value of the specified color to @c 255.
 	 */
 	result SetSectionColor(const Tizen::Graphics::Color& color);
 
@@ -904,9 +1105,10 @@ public:
 	 * @return  An error code
 	 * @param[in]	color               The background color
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @remarks	If the device does not support the 32-bit color space, the method sets the alpha value of the specified color to @c 255. @n
-	 *			The background bitmap has priority over the background color. When both the background bitmap and the background color are specified,
-	 *			only the bitmap image is displayed.
+	 * @remarks
+	 *			- If the device does not support the 32-bit color space, the method sets the alpha value of the specified color to @c 255.
+	 *			- The background bitmap has priority over the background color. When both the background bitmap and the background color
+	 *			are specified, only the bitmap image is displayed.
 	 */
 	result SetBackgroundColor(const Tizen::Graphics::Color& color);
 
@@ -972,7 +1174,7 @@ public:
 	 * @since	2.0
 	 *
 	 * @return	An error code
-	 * @param[in]	color				The color of the text to be displayed
+	 * @param[in]	color				The color of the text to display
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 */
@@ -998,6 +1200,9 @@ public:
 	 * @exception E_SUCCESS             The method is successful.
 	 * @exception E_OUT_OF_RANGE        A specified input parameter is invalid.
 	 * @exception E_SYSTEM              A system error has occurred.
+	 * @remarks	This method should be called only after list items are created.  @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	result ExpandGroup(int groupIndex);
 
@@ -1011,6 +1216,9 @@ public:
 	 * @exception E_SUCCESS         The method is successful.
 	 * @exception E_OUT_OF_RANGE    A specified input parameter is invalid.
 	 * @exception E_SYSTEM          A system error has occurred.
+	 * @remarks	This method should be called only after list items are created.  @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	result CollapseGroup(int groupIndex);
 
@@ -1023,8 +1231,35 @@ public:
 	 *			@c else false
 	 *
 	 * @param[in] groupIndex The index of the group
+	 * @remarks	This method should be called only after list items are created.  @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	bool IsGroupExpanded(int groupIndex) const;
+
+	/**
+	 * Expands all groups of list.
+	 *
+	 * @since 2.1
+	 *
+	 * @exception E_SUCCESS             The method is successful.
+	 * @exception E_INVALID_OPERATION   The feature of expanding all groups is only supported when %GroupedListView% is constructed with
+	 *								::GROUPED_LIST_VIEW_STYLE_INDEXED style.
+	 * @see    GroupedListView::Construct()
+	 */
+	result ExpandAllGroups(void);
+
+	/**
+	 * Collapses all groups of list.
+	 *
+	 * @since 2.1
+	 *
+	 * @exception E_SUCCESS             The method is successful.
+	 * @exception E_INVALID_OPERATION   The feature of collapsing all groups is only supported when %GroupedListView% is constructed with
+	 *								::GROUPED_LIST_VIEW_STYLE_INDEXED style.
+	 * @see    GroupedListView::Construct()
+	 */
+	result CollapseAllGroups(void);
 
 	/**
 	 * Begins the reordering mode.
@@ -1033,7 +1268,8 @@ public:
 	 *
 	 * @return  An error code
 	 * @exception E_SUCCESS				The method is successful.
-	 * @exception E_INVALID_OPERATION	The reordering mode is only supported when %GroupedListView% is constructed with GroupedListViewStyle::GROUPED_LIST_VIEW_STYLE_INDEXED style.
+	 * @exception E_INVALID_OPERATION	The reordering mode is only supported when %GroupedListView% is constructed with
+	 *								::GROUPED_LIST_VIEW_STYLE_INDEXED style.
 	 * @see		GroupedListView::Construct()
 	 * @see		IGroupedListViewItemEventListener::OnGroupedListViewItemReordered()
 	 */
@@ -1046,7 +1282,8 @@ public:
 	 *
 	 * @return  An error code
 	 * @exception E_SUCCESS				The method is successful.
-	 * @exception E_INVALID_OPERATION	The reordering mode is only supported when %GroupedListView% is constructed with GroupedListViewStyle::GROUPED_LIST_VIEW_STYLE_INDEXED style.
+	 * @exception E_INVALID_OPERATION	The reordering mode is only supported when %GroupedListView% is constructed with
+	 *								::GROUPED_LIST_VIEW_STYLE_INDEXED style.
 	 * @see		GroupedListView::Construct()
 	 * @see		IGroupedListViewItemEventListener::OnGroupedListViewItemReordered()
 	 */
@@ -1061,6 +1298,68 @@ public:
 	 * 			else @c false
 	 */
 	bool IsInReorderingMode(void) const;
+
+	/**
+	 * Sets the scroll input handling mode.
+	 *
+	 * @since 2.1
+	 *
+	 * @param[in] mode  The scroll input handling mode
+	 * @see         GetScrollInputMode()
+	 */
+	void SetScrollInputMode(ScrollInputMode mode);
+
+	/**
+	 * Gets the scroll input handling mode.
+	 *
+	 * @since 2.1
+	 *
+	 * @return     The scroll input handling mode
+	 * @see         SetScrollInputMode()
+	 */
+	ScrollInputMode GetScrollInputMode(void) const;
+
+	/**
+	 * Opens the context item at a specified index.
+	 *
+	 * @since 2.1
+	 *
+	 * @return	An error code
+	 * @param[in] groupIndex	The group index
+	 * @param[in] itemIndex		The item index
+	 * @exception E_SUCCESS				The method is successful.
+	 * @exception E_OUT_OF_RANGE		A specified input parameter is invalid.
+	 * @exception E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation.
+	 */
+	result OpenContextItem(int groupIndex, int itemIndex);
+
+	/**
+	 * Closes the context item at a specified index.
+	 *
+	 * @since 2.1
+	 *
+	 * @return	An error code
+	 * @param[in] groupIndex	The group index
+	 * @param[in] itemIndex		The item index
+	 * @exception E_SUCCESS				The method is successful.
+	 * @exception E_OUT_OF_RANGE		A specified input parameter is invalid.
+	 * @exception E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation.
+	 */
+	result CloseContextItem(int groupIndex, int itemIndex);
+
+	/**
+	 * Returns whether the context item at a specified index has been opened or not.
+	 *
+	 * @since 2.1
+	 *
+	 * @return	@c true if the context item has been opened, @n
+	 *          else @c false
+	 * @param[in] groupIndex	The group index
+	 * @param[in] itemIndex		The item index
+	 * @exception E_SUCCESS			The method is successful.
+	 * @exception E_OUT_OF_RANGE	A specified input parameter is invalid.
+	 */
+	bool IsContextItemOpened(int groupIndex, int itemIndex) const;
 
 protected:
 	friend class _GroupedListViewImpl;

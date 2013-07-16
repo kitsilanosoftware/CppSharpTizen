@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -75,7 +74,8 @@ public:
 	 *	@since		2.0
 	 *
 	 *	@return		An error code
-	 *	@param[in]	key							An instance of IKey
+	 *	@param[in]	key							An instance of IKey.
+	 *											Key can be in PEM/DER/PKCS8 format only.
 	 *	@exception	E_SUCCESS					The method is successful.
 	 *	@exception	E_INVALID_ARG				The specified @c key is invalid.
 	 *	@exception	E_OUT_OF_MEMORY				The memory is insufficient.
@@ -89,6 +89,7 @@ public:
 	 *
 	 *	@return		An error code
 	 *	@param[in]	key							An instance of IKey
+	 *											Key can be in PEM/DER/X509 public key format only.
 	 *	@exception	E_SUCCESS					The method is successful.
 	 *	@exception	E_INVALID_ARG				The specified @c key is invalid.
 	 *	@exception	E_OUT_OF_MEMORY				The memory is insufficient.
@@ -96,8 +97,8 @@ public:
 	virtual result SetPublicKey(const Tizen::Security::IKey& key);
 
 	/**
-	 *	Signs the data.
-	 *
+	 *	Signs the data. @n
+	 *	The %SignN() method only supports sha1withRsa for signing the data
 	 *	@since		2.0
 	 *
 	 *	@return		A pointer to the Tizen::Base::ByteBuffer class that contains the output, @n
@@ -115,8 +116,32 @@ public:
 	virtual Tizen::Base::ByteBuffer* SignN(const Tizen::Base::ByteBuffer& input);
 
 	/**
+	 *	Signs the data. @n
+	 *	The %SignN() method provides the additional option to developer for setting digest algorithm that is needed for signing the data
+	 *
+	 *	@since		2.0
+	 *
+	 *	@return		A pointer to the Tizen::Base::ByteBuffer class that contains the output, @n
+	 *				else @c null if an error occurs
+	 * @param[in]	input						An instance of Tizen::Base::ByteBuffer
+	 *	@param[in]	algorithm					An instance of Tizen::Base::String that contains the digest algorithm,
+	 *											valid values are MD5, MD5WITHSHA1, SHA1, SHA2/224, SHA2/256, SHA2/384, SHA2/512.
+	 *	@exception	E_SUCCESS					The method is successful.
+	 *	@exception	E_INVALID_ARG				The input Tizen::Base::ByteBuffer is empty or contains invalid data.
+	 *	@exception	E_OUT_OF_MEMORY				The memory is insufficient.
+	 *	@exception	E_KEY_NOT_FOUND				The specified key is not found.
+	 *	@exception	E_UNSUPPORTED_ALGORITHM		The specified algorithm is not supported.
+	 *	@exception	E_SYSTEM					A system error has occurred. @n
+	 *											The method has failed to operate with the OpenSSL library, or
+	 *											the Tizen::Base::ByteBuffer operation has failed.
+	 *  @remarks    The specific error code can be accessed using the GetLastResult() method.
+	 */
+	Tizen::Base::ByteBuffer* SignN(const Tizen::Base::ByteBuffer& input, const Tizen::Base::String& algorithm);
+
+	/**
 	 *	Verifies the data. @n
-	 *	The verification is done by comparing the @c signedData to the signature created by the @c data.
+	 *	The verification is done by comparing the @c signedData to the signature created by the @c data. @
+	 *	The %Verify() method only supports sha1withRsa for verifying the signed data
 	 *
 	 *	@since		2.0
 	 *
@@ -134,6 +159,31 @@ public:
 	 *  @remarks    The specific error code can be accessed using the GetLastResult() method.
 	 */
 	virtual bool Verify(const Tizen::Base::ByteBuffer& data, const Tizen::Base::ByteBuffer& signedData);
+
+	/**
+	 *	Verifies the data. @n
+	 *	The verification is done by comparing the @c signedData to the signature created by the @c data. @n
+	 *	The %Verify() method provides the additional option to developer for setting digest algorithm that is needed for verifying the signed data
+	 *
+	 *	@since		2.0
+	 *
+	 *	@return		@c true if the signed data is correct, @n
+	 *				else @c false
+	 *	@param[in]	data						An instance of Tizen::Base::ByteBuffer that contains the original data
+	 *	@param[in]	signedData					A instance of Tizen::Base::ByteBuffer that contains the signed data
+	 *	@param[in]	algorithm					An instance of Tizen::Base::String that contains the digest algorithm,
+	 *											valid values are MD5, MD5WITHSHA1, SHA1, SHA2/224, SHA2/256, SHA2/384, SHA2/512.
+	 *	@exception	E_SUCCESS					The method is successful.
+	 *	@exception	E_INVALID_ARG				The input Tizen::Base::ByteBuffer is empty or contains invalid data.
+	 *	@exception	E_OUT_OF_MEMORY				The memory is insufficient.
+	 *	@exception	E_KEY_NOT_FOUND				The specified key is not found.
+	 *	@exception	E_UNSUPPORTED_ALGORITHM		The specified algorithm is not supported.
+	 *	@exception	E_SYSTEM					A system error has occurred. @n
+	 *											The method has failed to operate with the OpenSSL library, or
+	 *											the Tizen::Base::ByteBuffer operation has failed.
+	 *  @remarks    The specific error code can be accessed using the GetLastResult() method.
+	 */
+	bool Verify(const Tizen::Base::ByteBuffer& data, const Tizen::Base::ByteBuffer& signedData, const Tizen::Base::String& algorithm);
 
 private:
 

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -40,7 +39,7 @@ class Alarm;
  *
  * @since	2.0
  *
- * The %IAlarmEventListener interface must be registered and implemented by an application to receive Alarm events from the system.
+ * The %IAlarmEventListener interface must be registered and implemented by an application to receive alarm events from the system.
  *
  */
 class _OSP_EXPORT_ IAlarmEventListener
@@ -64,10 +63,11 @@ public:
 	virtual void OnAlarmExpired(Alarm& alarm) = 0;
 
 protected:
-	// The following methods are reserved, and the name of methods can be changed at any time without prior notice.
 	//
 	// This method is for internal use only.
 	// Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	//
+	// This method is reserved and may change its name at any time without prior notice.
 	//
 	// @since 2.0
 	//
@@ -77,12 +77,16 @@ protected:
 	// This method is for internal use only.
 	// Using this method can cause behavioral, security-related, and consistency-related issues in the application.
 	//
+	// This method is reserved and may change its name at any time without prior notice.
+	//
 	// @since 2.0
 	virtual void OnIAlarmEventListener_Reserved2(void) {};
 
 	//
 	// This method is for internal use only.
 	// Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	//
+	// This method is reserved and may change its name at any time without prior notice.
 	//
 	// @since 2.0
 	virtual void OnIAlarmEventListener_Reserved3(void) {};

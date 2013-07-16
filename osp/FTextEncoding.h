@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -20,7 +19,7 @@
  * @brief		This is the header file for the %Encoding class.
  *
  * This header file contains the declarations of the %Encoding class. @n
- * The %Encoding class is the base class for all character encoding classes.
+ * This class is the base class for all character encoding classes.
  */
 #ifndef _FTEXT_ENCODING_H_
 #define _FTEXT_ENCODING_H_
@@ -47,6 +46,8 @@ namespace Tizen { namespace Text
  * The %Encoding class is the base class for all classes that implement character encoding.
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/text/converting_all_text_data.htm">Converting All Text Data at Once</a>.
+ * 
+ * For more information on the supported encoding types, see <a href="../org.tizen.native.appprogramming/html/guide/text/text.htm">Encoding standards in %Tizen</a>.
  *
  * The following example demonstrates how to use the %Encoding class.
  *
@@ -203,7 +204,7 @@ public:
 	virtual Tizen::Base::ByteBuffer* GetBytesN(const Tizen::Base::String& str) const = 0;
 
 	/**
-	 * Encodes an instance of specified Tizen::Base::WcharBuffer into an instance of Tizen::Base::ByteBuffer as per the specified range. @n
+	 * Encodes an instance of the specified Tizen::Base::WcharBuffer into an instance of Tizen::Base::ByteBuffer as per the specified range. @n
 	 * The position and limit of the %Tizen::Base::ByteBuffer instance is not changed.
 	 *
 	 * @since			2.0
@@ -500,13 +501,14 @@ public:
 	 *
 	 * @return    An instance of %Encoding, @n
 	 *                else @c null if the method fails
-	 * @param[in]	encodingType    An encoding type @n
+	 * @param[in]	encodingType    An encoding type
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_UNSUPPORTED_TYPE      The specified encoding type is not supported.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method. @n
 	 *			The supported encoding types are ASCII, GSM, UCS-2, UCS-2LE, UCS-2BE, UCS-4, UCS-4LE, UCS-4BE, UTF-8, UTF-16, UTF-16LE, UTF-16BE, @n
  	 *				UTF-32, UTF-32LE, UTF-32BE, ISO-8859-1~16 (except ISO-8859-12), Windows-874, Windows-1250 ~ Windows-1258, @n
-	 *				KSC5601, BIG5, GB2312, Shift_JIS and ISO-2022-jp.
+	 *				KSC5601, BIG5, GB2312, Shift-JIS and ISO-2022-jp. @n
+	 *				For more information on the supported encoding types, see <a href="../org.tizen.native.appprogramming/html/guide/text/text.htm">Encoding standards in %Tizen</a>.
 	 * @see			Tizen::Text::Encoding::GetAvailableEncodingsN()
 	 */
 	static Encoding* GetEncodingN(const Tizen::Base::String& encodingType);

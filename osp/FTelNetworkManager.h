@@ -48,46 +48,64 @@ class ITelephonyNetworkSettingListener;
  *
  * @code
  *
- *	result
- *	MyClass::GetNetworkManagerInfo(void)
- *	{
- *		NetworkStatus networkStatus;
- *		NetworkInfo networkInfo;
+ *  #include <FBase.h>
+ *  #include <FTelephony.h>
  *
- *		NetworkManager* pNetworkManager = new NetworkManager();
+ *   using namespace Tizen::Base;
+ *   using namespace Tizen::Telephony;
  *
- *		result r = pNetworkManager->Construct(this);
- *		if (IsFailed(r))
- *		{
- *			delete pNetworkManager;
- *			return r;
- *		}
+ *   class MyClass
+ *  	 : public Object
+ *  	 , public ITelephonyNetworkEventListener
+ *   {
+ *     public:
+ *  	 MyClass(void) {}
+ *  	 ~MyClass(void) {}
  *
- *		r = pNetworkManager->GetNetworkStatus(networkStatus);
- *		if (IsFailed(r))
- *		{
- *			delete pNetworkManager;
- *			return r;
- *		}
+ *  	 // ITelephonyNetworkEventListener
+ *  	 void OnTelephonyNetworkStatusChanged(const NetworkStatus& networkStatus);
  *
- *		r = pNetworkManager->GetNetworkInfo(networkInfo);
- *		if (IsFailed(r))
- *		{
- *			delete pNetworkManager;
- *			return r;
- *		}
+ *  	 void GetNetworkManagerInfo(void);
+ *   };
  *
- *		delete pNetworkManager;
- *		return E_SUCCESS;
- *	}
+ *   void
+ *   MyClass::OnTelephonyNetworkStatusChanged(const NetworkStatus& networkStatus)
+ *   {
+ *  	 bool isCallAvailable = networkStatus.IsCallServiceAvailable();
+ *  	 bool isDataAvailable = networkStatus.IsDataServiceAvailable();
+ *  	 bool isRoaming = networkStatus.IsRoaming();
+ *   }
  *
- *	void
- *	MyClass::OnTelephonyNetworkStatusChanged(const NetworkStatus& networkStatus)
- *	{
- *		bool isCallAvail = networkStatus.IsCallServiceAvailable();
- *		bool isDataAvail = networkStatus.IsDataServiceAvailable();
- *		bool isRoaming = networkStatus.IsRoaming();
- *	}
+ *   void
+ *   MyClass::GetNetworkManagerInfo(void)
+ *   {
+ *  	 NetworkStatus networkStatus;
+ *  	 NetworkInfo networkInfo;
+ *
+ *  	 NetworkManager* pNetworkManager = new (std::nothrow) NetworkManager();
+ *  	 result r = pNetworkManager->Construct(this);
+ *  	 if (IsFailed(r))
+ *  	 {
+ *  		 delete pNetworkManager;
+ *  		 return;
+ *  	 }
+ *
+ *  	 r = pNetworkManager->GetNetworkStatus(networkStatus);
+ *  	 if (IsFailed(r))
+ *  	 {
+ *  		 delete pNetworkManager;
+ *  		 return;
+ *  	 }
+ *
+ *  	 r = pNetworkManager->GetNetworkInfo(networkInfo);
+ *  	 if (IsFailed(r))
+ *  	 {
+ *  		 delete pNetworkManager;
+ *  		 return;
+ *  	 }
+ *
+ *  	 delete pNetworkManager;
+ *   }
  *
  * @endcode
  */
@@ -116,11 +134,15 @@ public:
      *	is no listener for telephony network status change callbacks.
      *
      * @since		2.0
-	 *
+	 * @feature 	%http://tizen.org/feature/network.telephony
      * @return		An error code
 	 * @param[in]   pListener   	The listener for change in status of a telephony network
      * @exception	E_SUCCESS		The method is successful.
      * @exception	E_SYSTEM		A system error has occurred.
+	 * @exception   E_UNSUPPORTED_OPERATION	 The Emulator or target device does not support the required feature. @b Since: @b 2.1
+	 * 										 For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+	 * @remarks     Before calling this method, check whether the feature is supported by 
+	 *			Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
      */
 	result Construct(ITelephonyNetworkEventListener* pListener);
 
@@ -128,7 +150,9 @@ public:
      * Gets the network status.
      *
      * @since		2.0
-     * @privilege   %http://tizen.org/privilege/systeminfo
+     * @privlevel	public
+     * @privilege   %http://tizen.org/privilege/telephony @n
+     * 				(%http://tizen.org/privilege/systeminfo is deprecated.)
      *
      * @return		An error code
      * @param[out]	networkStatus	The network status
@@ -144,7 +168,9 @@ public:
      * Gets the network information.
      *
      * @since	2.0
-     * @privilege   %http://tizen.org/privilege/systeminfo
+     * @privlevel	public
+     * @privilege   %http://tizen.org/privilege/telephony @n
+     * 				(%http://tizen.org/privilege/systeminfo is deprecated.)
      *
      * @return	An error code
      * @param[out]	networkInfo	The network information
@@ -155,6 +181,92 @@ public:
      * @exception   E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
      */
 	result GetNetworkInfo(NetworkInfo& networkInfo) const;
+
+    /**
+     * Sets the listener for receiving the responses of the search network and the network selection mode.
+     *
+     * @since 2.0
+     *
+     * @privlevel	platform
+     * @privilege   %http://tizen.org/privilege/telephonymanager
+     *
+     * @return  An error code
+     * @param[in]   pListener           An instance of ITelephonyNetworkSettingListener @n
+     *                                  The parameter can be set to @c null to remove the listener.
+     * @exception   E_SUCCESS           The method is successful.
+     * @exception   E_SYSTEM            A system error has occurred.
+     * @exception   E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
+     */
+    result SetNetworkSettingListener(ITelephonyNetworkSettingListener* pListener);
+
+    /**
+     * Gets the network selection mode.
+     *
+     * @since 2.0
+     *
+     * @privlevel	platform
+     * @privilege   %http://tizen.org/privilege/telephonymanager
+     *
+     * @return  An error code
+     * @exception   E_SUCCESS   The method is successful.
+     * @exception   E_OPERATION_FAILED      This request operation has failed due to an internal error.
+     * @exception   E_SYSTEM                A system error has occurred.
+     * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+     * @see ITelephonyNetworkSettingListener::OnTelephonyNetworkSelectionModeReceived()
+     */
+    result GetNetworkSelectionMode(void);
+
+    /**
+     * Selects the manually searched network.
+     *
+     * @since 2.0
+     *
+     * @privlevel	platform
+     * @privilege   %http://tizen.org/privilege/telephonymanager
+     *
+     * @return  An error code
+     * @param[out]	networkInfo	The network information
+     * @exception   E_SUCCESS   The method is successful.
+     * @exception   E_OPERATION_FAILED      This request operation has failed due to an internal error.
+     * @exception   E_SYSTEM                A system error has occurred.
+     * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+     * @see ITelephonyNetworkSettingListener::OnTelephonyNetworkSelectionCompleted()
+     */
+    result SelectNetwork(const NetworkInfo& networkInfo);
+
+    /**
+     * Selects the network automatically.
+     *
+     * @since 2.0
+     *
+     * @privlevel	platform
+     * @privilege   %http://tizen.org/privilege/telephonymanager
+     *
+     * @return  An error code
+     * @exception   E_SUCCESS   The method is successful.
+     * @exception   E_OPERATION_FAILED      This request operation has failed due to an internal error.
+     * @exception   E_SYSTEM                A system error has occurred.
+     * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+     * @see ITelephonyNetworkSettingListener::OnTelephonyNetworkSelectionCompleted()
+     */
+    result SelectNetwork(void);
+
+    /**
+     * Searches for an available network.
+     *
+     * @since 2.0
+     *
+     * @privlevel	platform
+     * @privilege   %http://tizen.org/privilege/telephonymanager
+     *
+     * @return  An error code
+     * @exception   E_SUCCESS   The method is successful.
+     * @exception   E_OPERATION_FAILED      This request operation has failed due to an internal error.
+     * @exception   E_SYSTEM                A system error has occurred.
+     * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+     * @see ITelephonyNetworkSettingListener::OnTelephonyNetworkSearchCompletedN()
+     */
+    result SearchNetwork(void);
 
 
 private:

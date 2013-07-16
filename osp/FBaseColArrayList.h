@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -91,8 +90,8 @@ namespace Tizen { namespace Base { namespace Collection
  *
  *
  *		// Deallocates all objects
- *		// Because the destructor calls RemoveAll() internally, you don't need to call RemoveAll() to destroy all elements at the end.
- *		list.RemoveAll();
+ *		// Because the destructor calls RemoveAll() internally, you do not need to call RemoveAll() to destroy all elements at the end.
+ *		// list.RemoveAll();
  *	}
  * @endcode
  */
@@ -116,8 +115,8 @@ public:
 	 *
 	 * @param[in]	deleter	The function pointer to type of the element deleter
 	 * @remarks		To create an owing collection, set the element deleter value as @c SingleObjectDeleter. This gives the collection the ownership of elements and the collection will destroy elements. @n
-	 *				On the other hand, to create a non-owning collection, you don't need to set the element deleter value, as @c NoOpDeleter is the default element deleter.
-	 *				It means that you don't transfer the ownership of elements to the collection.
+	 *				On the other hand, to create a non-owning collection, you do not need to set the element deleter value, as @c NoOpDeleter is the default element deleter.
+	 *				It means that you do not transfer the ownership of elements to the collection.
 	 * @remarks		After creating an instance of the %ArrayList class, one of the Construct() methods must be called explicitly to initialize this instance.
 	 * @see			NoOpDeleter()
 	 * @see			SingleObjectDeleter()
@@ -156,7 +155,7 @@ public:
 
 	/**
 	 * Initializes this instance of %ArrayList by copying the elements of the specified
-	 * collection. @n
+	 * @c collection. @n
 	 * The capacity of the list is the same as the number of elements copied.
 	 *
 	 * @since 2.0
@@ -187,7 +186,7 @@ public:
 
 
 	/**
-	 * Adds the elements of the specified collection to the end of this list.
+	 * Adds the elements of the specified @c collection to the end of this list.
 	 *
 	 * @since 2.0
 	 *
@@ -228,11 +227,11 @@ public:
 	virtual IBidirectionalEnumerator* GetBidirectionalEnumeratorN(void) const;
 
 	/**
-	 * Gets the object at the specified index of this list.
+	 * Gets the object at the specified @c index of this list.
 	 *
 	 * @since 2.0
 	 *
-	 * @return		The object at the specified index of this list, @n
+	 * @return		The object at the specified @c index of this list, @n
 	 *				else @c null if the index is not valid
 	 * @param[in]	index	The index of the object in the calling list to read
 	 * @exception	E_SUCCESS				The method is successful.
@@ -245,11 +244,11 @@ public:
 
 
 	/**
-	 * Gets the object at the specified index of this list.
+	 * Gets the object at the specified @c index of this list.
 	 *
 	 * @since 2.0
 	 *
-	 * @return		The object at the specified index of this list, @n
+	 * @return		The object at the specified @c index of this list, @n
 	 *				else @c null if the index is not valid
 	 * @param[in]	index	The index of the object to read
 	 * @exception	E_SUCCESS				The method is successful.
@@ -462,14 +461,14 @@ public:
 
 	/**
 	 * Removes all of the object pointers in the collection and also removes all of the objects depending on the specified element deleter.
-	 * This method can be called before the collection is deleted.
+	 * The %RemoveAll() can be called before the collection is deleted.
 	 *
 	 * @since 2.0
 	 */
 	virtual void RemoveAll(void);
 
 	/**
-	 * Replaces the object at the specified index with the specified object.
+	 * Replaces the object at the specified @c index with the specified object.
 	 *
 	 * @since 2.0
 	 *
@@ -553,11 +552,11 @@ public:
 	virtual bool Contains(const Object& obj) const;
 
 	/**
-	 * Checks whether the list contains all the elements of the specified collection.
+	 * Checks whether the list contains all the elements of the specified @c collection.
 	 *
 	 * @since 2.0
 	 *
-	 * @return		@c true if the list contains all the elements of the specified collection, @n
+	 * @return		@c true if the list contains all the elements of the specified @c collection, @n
 	 *					else @c false
 	 * @param[in]	collection	The collection to check for in the list
 	 * @exception	E_SUCCESS			The method is successful.
@@ -599,7 +598,7 @@ public:
 	 *
 	 * @since 2.0
 	 * @return	@c true if it is an %ArrayList, @n
-	 *			else @c false if it is a LinkedList.
+	 *			else @c false if it is a LinkedList
 	 */
 	virtual bool IsRandomAccessible(void) const
 	{
@@ -611,7 +610,7 @@ public:
 	 *
 	 * @since 2.0
 	 *
-	 * @return	An function pointer to the existing element deleter
+	 * @return	A function pointer to the existing element deleter
 	 */
 	virtual DeleterFunctionType GetDeleter(void) const;
 
@@ -647,7 +646,7 @@ private:
 	 *
 	 * @since 2.0
 	 *
-	 * @param[in]	deleter	An function pointer to the element deleter to set
+	 * @param[in]	deleter	A function pointer to the element deleter to set
 	 */
 	virtual void SetDeleter(DeleterFunctionType deleter);
 

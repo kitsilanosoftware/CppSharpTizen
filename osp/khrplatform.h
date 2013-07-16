@@ -406,6 +406,16 @@ typedef void GLvoid;
 // This method is for internal use only.
 // Using this method can cause behavioral, security-related, and consistency-related issues in the application.
 //
+// \var typedef char GLchar
+// \brief A type definition for GLchar.
+// @since 2.0
+//
+typedef char GLchar;
+
+//
+// This method is for internal use only.
+// Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+//
 // \var typedef unsigned int GLenum
 // \brief A type definition for GLenum.
 // @since 2.0

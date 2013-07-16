@@ -43,6 +43,9 @@ enum SensorType
 	SENSOR_TYPE_TILT,                /**< The tilt sensor type */
 	SENSOR_TYPE_GYRO,                /**< The gyro sensor type */
 	SENSOR_TYPE_LIGHT,               /**< The light sensor type */
+	SENSOR_TYPE_GRAVITY,             /**< The gravity sensor type @b Since: @b 2.1 */
+	SENSOR_TYPE_USER_ACCELERATION,   /**< The user-acceleration sensor type @b Since: @b 2.1 */
+	SENSOR_TYPE_DEVICE_ORIENTATION,  /**< The device-orientation sensor type @b Since: @b 2.1 */
 	SENSOR_TYPE_MAX,                 // This enum value is for internal use only.
 	                                 // Using this enum value can cause behavioral,
 	                                 // security-related, and consistency-related
@@ -60,7 +63,7 @@ enum SensorType
 *
 * @since      2.0
 *
-* @remarks    Use actual key type, such as Tizen::Uix::Sensor::AccelerationDataKey, Tizen::Uix::Sensor::MagneticDataKey, Tizen::Uix::Sensor::ProximityDataKey or Tizen::Uix::Sensor::TiltDataKey with type casting. For example, use Tizen::Uix::Sensor::SensorData::GetValue(static_cast<SensorDataKey>(ACCELERATION_DATA_KEY_X), value) to get the acceleration value in x-axis.
+* @remarks    Use actual key type, such as Tizen::Uix::Sensor::AccelerationDataKey, Tizen::Uix::Sensor::MagneticDataKey, Tizen::Uix::Sensor::ProximityDataKey, or Tizen::Uix::Sensor::TiltDataKey with type casting. For example, use Tizen::Uix::Sensor::SensorData::GetValue(static_cast<SensorDataKey>(ACCELERATION_DATA_KEY_X), value) to get the acceleration value in x-axis.
 */
 enum SensorDataKey
 {

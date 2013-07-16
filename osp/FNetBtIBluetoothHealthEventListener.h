@@ -65,15 +65,16 @@ public:
 	 * Called to notify when a connection with a health device is established.
 	 *
 	 * @since 2.0
+	 *
 	 * @param[in]   channelId           The channel ID of the established connection, @n
-	 *                                  else an invalid ID (-1) if the method is not successful
+	 *                                  else an invalid ID (@c -1) if the method is not successful
 	 * @param[in]   dataType            The type of data used in the established connection which is defined in
 	 *                                  ISO/IEEE 11073-20601 and represents type of health device such as thermometer,
 	 *                                  heart rate monitor, weight scale, and so on
 	 * @param[in]   channelType         The data channel type of the established connection
 	 * @param[in]   pRemoteDevice       The remote health device to connect with the local device, @n
 	 *                                  else @c null if the method is not successful
-	 * @param[in]   r                   The result of the connection request. @n
+	 * @param[in]   r                   The result of the connection request @n
 	 *                                  One of the following exception is thrown.
 	 * @exception   E_SUCCESS           The connection is established successfully.
 	 * @exception   E_OPERATION_FAILED  The connection request has failed.
@@ -87,7 +88,7 @@ public:
 	 * @since 2.0
 	 *
 	 * @param[in]   channelId           The channel ID of the terminated connection
-	 * @param[in]   r                   The disconnection status. @n
+	 * @param[in]   r                   The disconnection status @n
 	 *                                  One of the following exception is thrown.
 	 * @exception   E_SUCCESS           The specified connection (channel) is terminated successfully.
 	 * @exception   E_OPERATION_FAILED  The method has failed to disconnect.

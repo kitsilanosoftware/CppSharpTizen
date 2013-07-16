@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -63,6 +62,9 @@
 
 // LinkInfo
 #include <FBaseUtilLinkInfo.h>
+
+//Scanner
+#include <FBaseUtilScanner.h>
 
 /**
  * @namespace		Tizen::Base::Utility

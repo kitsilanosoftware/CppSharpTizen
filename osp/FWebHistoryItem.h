@@ -26,7 +26,11 @@
 
 #include <FBaseObject.h>
 #include <FBaseString.h>
-#include <FGrpBitmap.h>
+
+namespace Tizen { namespace Graphics
+{
+class Bitmap;
+}} // Tizen::Graphics
 
 namespace Tizen { namespace Web
 {
@@ -81,13 +85,16 @@ public:
 	Tizen::Base::String GetUrl(void) const;
 
 	/**
-	 * Gets the favicon image from HistoryItem
+	 * Gets the favicon image from %HistoryItem.
 	 *
 	 * @since 	2.0
 	 *
 	 * @return		The image
 	 *
 	 * @exception	E_SUCCESS	The method is successful.
+	 * @exception	E_SYSTEM	Either of the following conditions has occurred: @n
+	 *						- The method cannot proceed due to a severe system error. @n
+	 *						- The method has failed because it does not work on a service application.
 	 * @remarks	The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Tizen::Graphics::Bitmap* GetFaviconN(void) const;

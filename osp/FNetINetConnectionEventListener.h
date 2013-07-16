@@ -2,7 +2,7 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Flora License, Version 1.1 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -39,46 +39,9 @@ class NetConnection;
  *
  *  The %INetConnectionEventListener interface specifies the methods for creating the notifications about the different kinds of network
  *	connection events. These events are only sent when %INetConnectionEventListener is added to a NetConnection instance, by invoking the
- *	AddNetConnectionListener() method. When a network connection event is generated, a method of this class is called.
+ *	NetConnection::AddNetConnectionListener() method. When a network connection event is generated, a method of this class is called.
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/net/managing_network_connections.htm">Managing Network Connections</a>.
- *
- * The following example demonstrates how to use the %INetConnectionEventListener interface.
- *
- * @code
-using namespace Tizen::Net;
-using namespace Tizen::Base;
-
-class TestListener
-	: public Object
-	, public virtual INetConnectionEventListener
-{
-public:
-	TestListener() {}
-
-	~TestListener() {}
-
-	void OnNetConnectionStarted(NetConnection& netConnection, result r)
-	{
-		AppLog("OnStarted\n");
-	}
-
-	void OnNetConnectionStopped(NetConnection& netConnection, result r)
-	{
-		AppLog("OnStopped\n");
-	}
-
-	void OnNetConnectionSuspended(NetConnection& netConnection)
-	{
-		AppLog("OnSuspended\n");
-	}
-
-	void OnNetConnectionResumed(NetConnection& netConnection)
-	{
-		AppLog("OnResumed\n");
-	}
-};
- * @endcode
  */
 class _OSP_EXPORT_ INetConnectionEventListener
 	: virtual public Tizen::Base::Runtime::IEventListener

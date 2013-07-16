@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -31,8 +31,8 @@
 #include <FUiCtrlInputTypes.h>
 #include <FUiCtrlPanel.h>
 #include <FUiCtrlIScrollEventListener.h>
+#include <FUiCtrlIScrollEventListenerF.h>
 #include <FUiCtrlScrollPanelTypes.h>
-#include <FUiCtrlTableViewTypes.h>
 
 namespace Tizen { namespace Ui { namespace Controls
 {
@@ -102,11 +102,11 @@ ScrollPanelSample::OnInitializing(void)
 	pEdit->SetText(L"Edit");
 
 	// Adds the button and the edit field to the ScrollPanel
-	__pScrollPanel->AddControl(*pButton);
-	__pScrollPanel->AddControl(*pEdit);
+	__pScrollPanel->AddControl(pButton);
+	__pScrollPanel->AddControl(pEdit);
 
 	// Adds the ScrollPanel to the form
-	AddControl(*__pScrollPanel);
+	AddControl(__pScrollPanel);
 
 	return r;
 }
@@ -120,7 +120,8 @@ class _OSP_EXPORT_ ScrollPanel
 // Lifecycle
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called.  @n
+	 * For full construction, the %Construct() method must be called right after calling this constructor.
 	 *
 	 * @since		2.0
 	 *
@@ -154,10 +155,25 @@ public:
 
 
 	/**
-	 * Initializes this instance of %ScrollPanel and child controls with the specified resource ID @n
+	 * Initializes this instance of %ScrollPanel with the specified rectangular region.
 	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	rect		    	The location and size of the %ScrollPanel control
+	 * @exception	E_SUCCESS	    	The method is successful.
+	 * @exception 	E_INVALID_ARG		The given width or height is less than 0.
+	 * @exception	E_SYSTEM	    	A system error has occurred.
+	 * @remarks 		By default, the scroll direction is vertical and the scroll area is resized automatically.
+	 * @see			Tizen::Ui::Container
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect);
+
+
+	/**
+	 * Initializes this instance of %ScrollPanel and child controls with the specified resource ID @n
 	 * This method first attempts to find the resource file in the folder that corresponds to the current screen resolution. @n
-	 * If it fails to find the resource file, it searches in other folders in the following order when CoordinateSystem is Logical in the application manifest file @n
+	 * If it fails to find the resource file, it searches in other folders in the following order when CoordinateSystem is Logical in the application manifest file
 	 * the density folder that corresponds to the current screen size category  "res/screen-size-normal/" folder.
 	 *
 	 * @since 2.0
@@ -168,8 +184,11 @@ public:
 	 * @exception  E_FILE_NOT_FOUND        The specified file cannot be found.
 	 * @exception  E_INVALID_FORMAT        The specified XML format is invalid.
 	 * @exception  E_OPERATION_FAILED      The operation has failed.
+	 * @remarks	If SetBounds(), SetSize(), SetPosition() methods are called before the control is added to the parent via AddControl(), then the new value is applied
+	 *			to both orientations because the current orientation is not known. After AddControl() is called, then the values are applied only to the current orientation. 
 	 */
 	result Construct(const Tizen::Base::String& resourceId);
+
 
 	/**
 	 * Initializes this instance of %ScrollPanel with the specified rectangular region.
@@ -185,6 +204,22 @@ public:
 	 * @see			Tizen::Ui::Container
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, ScrollPanelScrollDirection scrollDirection, bool autoResizingEnable);
+
+
+	/**
+	 * Initializes this instance of %ScrollPanel with the specified rectangular region.
+	 *
+	 * @since 2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	rect				The location and size of the %ScrollPanel control
+	 * @param[in]	scrollDirection				The scroll direction of %ScrollPanel
+	 * @param[in]	autoResizingEnable				Whether to resize the client area automatically
+	 * @exception	E_SUCCESS	    	The method is successful.
+	 * @exception 	E_INVALID_ARG		The given width or height is less than 0.
+	 * @see			Tizen::Ui::Container
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, ScrollPanelScrollDirection scrollDirection, bool autoResizingEnable);
 
 
 	/**
@@ -207,6 +242,23 @@ public:
 	/**
 	 * Initializes this instance of %ScrollPanel with the specified layout and rectangular region.
 	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	layout				The layout for both the portrait and landscape mode
+	 * @param[in]	rect				The location and size of the %ScrollPanel control
+	 * @exception	E_SUCCESS	    	The method is successful.
+	 * @exception 	E_INVALID_ARG		@c layout is already bound to another container, or the given width or the height is less than 0.
+	 * @exception	E_SYSTEM	    	A system error has occurred.
+	 * @remarks 		By default, the scroll direction is vertical and the scroll area is resized automatically.
+	 * @see			Tizen::Ui::Container
+	 */
+	result Construct(const Tizen::Ui::Layout& layout, const Tizen::Graphics::FloatRectangle& rect);
+
+
+	/**
+	 * Initializes this instance of %ScrollPanel with the specified layout and rectangular region.
+	 *
 	 * @since 2.0
 	 *
 	 * @return		An error code
@@ -222,6 +274,23 @@ public:
 
 
 	/**
+	 * Initializes this instance of %ScrollPanel with the specified layout and rectangular region.
+	 *
+	 * @since 2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	layout				The layout for both the portrait and landscape mode
+	 * @param[in]	rect				The location and size of the %ScrollPanel control
+	 * @param[in]	scrollDirection				The scroll direction of %ScrollPanel
+	 * @param[in]	autoResizingEnable				Whether to resize the client area automatically
+	 * @exception	E_SUCCESS	    	The method is successful.
+	 * @exception 	E_INVALID_ARG		@c layout is already bound to another container, or the given width or height is less than 0.
+	 * @see			Tizen::Ui::Container
+	 */
+	result Construct(const Tizen::Ui::Layout& layout, const Tizen::Graphics::FloatRectangle& rect, ScrollPanelScrollDirection scrollDirection, bool autoResizingEnable);
+
+
+	/**
 	 * Initializes this instance of %ScrollPanel with the specified layouts and rectangular region.
 	 *
 	 * @since		2.0
@@ -231,12 +300,32 @@ public:
 	 * @param[in]	landscapeLayout		The layout for the landscape mode
 	 * @param[in]	rect				The location and size of the %ScrollPanel control
 	 * @exception	E_SUCCESS	    	The method is successful.
-	 * @exception 	E_INVALID_ARG		@c portraitLayout or @c landscapeLayout is already bound to another container, or the given width or height is less than 0.
+	 * @exception 	E_INVALID_ARG		@c portraitLayout or @c landscapeLayout is already bound to another container, or the given width or
+	 *									height is less than @c 0.
 	 * @exception	E_SYSTEM	    	A system error has occurred.
 	 * @remarks 		By default, the scroll direction is vertical and the scroll area is resized automatically.
 	 * @see			Tizen::Ui::Container
 	 */
 	result Construct(const Tizen::Ui::Layout& portraitLayout, const Tizen::Ui::Layout& landscapeLayout, const Tizen::Graphics::Rectangle& rect);
+
+
+	/**
+	 * Initializes this instance of %ScrollPanel with the specified layouts and rectangular region.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	portraitLayout		The layout for the portrait mode
+	 * @param[in]	landscapeLayout		The layout for the landscape mode
+	 * @param[in]	rect				The location and size of the %ScrollPanel control
+	 * @exception	E_SUCCESS	    	The method is successful.
+	 * @exception 	E_INVALID_ARG		@c portraitLayout or @c landscapeLayout is already bound to another container, or the given width or
+	 *									height is less than @c 0.
+	 * @exception	E_SYSTEM	    	A system error has occurred.
+	 * @remarks 		By default, the scroll direction is vertical and the scroll area is resized automatically.
+	 * @see			Tizen::Ui::Container
+	 */
+	result Construct(const Tizen::Ui::Layout& portraitLayout, const Tizen::Ui::Layout& landscapeLayout, const Tizen::Graphics::FloatRectangle& rect);
 
 
 	/**
@@ -251,25 +340,60 @@ public:
 	 * @param[in]	scrollDirection				The scroll direction of %ScrollPanel
 	 * @param[in]	autoResizingEnable				Whether to resize the client area automatically
 	 * @exception	E_SUCCESS	    	The method is successful.
-	 * @exception 	E_INVALID_ARG		@c portraitLayout or @c landscapeLayout is already bound to another container, or the given width or height is less than 0.
+	 * @exception 	E_INVALID_ARG		@c portraitLayout or @c landscapeLayout is already bound to another container, or the given width or
+	 *									height is less than @c 0.
 	 * @see			Tizen::Ui::Container
 	 */
 	result Construct(const Tizen::Ui::Layout& portraitLayout, const Tizen::Ui::Layout& landscapeLayout, const Tizen::Graphics::Rectangle& rect, ScrollPanelScrollDirection scrollDirection, bool autoResizingEnable);
 
 
 	/**
+	 * Initializes this instance of %ScrollPanel with the specified layouts and rectangular region.
+	 *
+	 * @since 2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	portraitLayout		The layout for the portrait mode
+	 * @param[in]	landscapeLayout		The layout for the landscape mode
+	 * @param[in]	rect				The location and size of the %ScrollPanel control
+	 * @param[in]	scrollDirection				The scroll direction of %ScrollPanel
+	 * @param[in]	autoResizingEnable				Whether to resize the client area automatically
+	 * @exception	E_SUCCESS	    	The method is successful.
+	 * @exception 	E_INVALID_ARG		@c portraitLayout or @c landscapeLayout is already bound to another container, or
+	 *									the given width or height is less than 0.
+	 * @see			Tizen::Ui::Container
+	 */
+	result Construct(const Tizen::Ui::Layout& portraitLayout, const Tizen::Ui::Layout& landscapeLayout, const Tizen::Graphics::FloatRectangle& rect, ScrollPanelScrollDirection scrollDirection, bool autoResizingEnable);
+
+
+	/**
 	 * Adds a listener instance that listens to the state changes of a scroll event. @n
 	 * The added listener can listen to the events on the given event dispatcher's context when they are fired.
 	 *
-	 * @since       		2.0
+	 * @since       	2.0
 	 *
 	 * @param[in]	listener The listener to add
 	 * @exception	E_SUCCESS	The method is successful.
- 	 * @exception	E_OUT_OF_MEMORY	The memory is insufficient.
-	 * @see				IScrollEventListener::OnScrollEndReached()
+	 * @exception	E_OUT_OF_MEMORY	The memory is insufficient.
+	 * @see				Tizen::Ui::Controls::IScrollEventListener
 	 * @see				RemoveScrollEventListener()
 	 */
 	void AddScrollEventListener(IScrollEventListener& listener);
+
+
+	/**
+	 * Adds a listener instance that listens to the state changes of a scroll event. @n
+	 * The added listener can listen to the events on the given event dispatcher's context when they are fired.
+	 *
+	 * @since       	2.1
+	 *
+	 * @param[in]	listener The listener to add
+	 * @exception	E_SUCCESS	The method is successful.
+	 * @exception	E_OUT_OF_MEMORY	The memory is insufficient.
+	 * @see				Tizen::Ui::Controls::IScrollEventListenerF
+	 * @see				RemoveScrollEventListener()
+	 */
+	void AddScrollEventListener(IScrollEventListenerF& listener);
 
 
 	/**
@@ -279,10 +403,23 @@ public:
 	 * @since          	2.0
 	 *
 	 * @param[in]  	listener   The listener to remove
-	 * @see			IScrollEventListener::OnScrollEndReached()
+	 * @see			Tizen::Ui::Controls::IScrollEventListener
 	 * @see			AddScrollEventListener()
 	 */
 	void RemoveScrollEventListener(IScrollEventListener& listener);
+
+
+	/**
+	 * Removes a listener instance that listens to the state changes of a scroll event. @n
+	 * The removed listener cannot listen to the events when they are fired.
+	 *
+	 * @since          	2.1
+	 *
+	 * @param[in]  	listener   The listener to remove
+	 * @see			Tizen::Ui::Controls::IScrollEventListenerF
+	 * @see			AddScrollEventListener()
+	 */
+	void RemoveScrollEventListener(IScrollEventListenerF& listener);
 
 
 	/**
@@ -293,6 +430,16 @@ public:
 	 * @return		The scroll position
 	 */
 	int GetScrollPosition(void) const;
+
+
+	/**
+	 * Gets the scroll position.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		The scroll position
+	 */
+	float GetScrollPositionF(void) const;
 
 
 	/**
@@ -308,6 +455,7 @@ public:
 	 */
 	void SetScrollPosition(int position);
 
+
 	/**
 	 * Sets the scroll position.
 	 *
@@ -319,6 +467,20 @@ public:
 	 *
 	 */
 	void SetScrollPosition(int position, bool withAnimation);
+
+
+	/**
+	 * Sets the scroll position.
+	 *
+	 * @since 2.1
+	 *
+	 * @param[in]	position		The scroll position in pixel
+	 * @param[in]	withAnimation		@c true to scroll the %ScrollPanel smoothly. @n
+	 * 													else @c false.
+	 *
+	 */
+	void SetScrollPosition(float position, bool withAnimation);
+
 
 	/**
 	 * Scrolls to the bottom of %ScrollPanel.
@@ -359,6 +521,17 @@ public:
 
 
 	/**
+	 * Gets the bounds of the client area.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		The bounds of the client area
+	 *
+	 */
+	Tizen::Graphics::FloatRectangle GetClientAreaBoundsF(void) const;
+
+
+	/**
 	 * Sets the width of the client area.
 	 *
 	 * @since 2.0
@@ -367,10 +540,27 @@ public:
 	 * @param[in]     width                        The width of the client area to set
 	 * @exception     E_SUCCESS                   The method is successful.
 	 * @exception     E_INVALID_ARG             @c width is less than the width of %ScrollPanel
-	 * @exception     E_INVALID_OPERATION    The width of the client area cannot be set when auto resizing of the client area is off, or the scroll direction is vertical.
+	 * @exception     E_INVALID_OPERATION    The width of the client area cannot be set when auto resizing of the client area is off, or the scroll
+	 *									direction is vertical.
 	 *
 	 */
 	result SetClientAreaWidth(int width);
+
+
+	/**
+	 * Sets the width of the client area.
+	 *
+	 * @since 2.1
+	 *
+	 * @return                   An error code
+	 * @param[in]     width                        The width of the client area to set
+	 * @exception     E_SUCCESS                   The method is successful.
+	 * @exception     E_INVALID_ARG             @c width is less than the width of %ScrollPanel
+	 * @exception     E_INVALID_OPERATION    The width of the client area cannot be set when auto resizing of the client area is off,
+	 *									or the scroll direction is vertical.
+	 *
+	 */
+	result SetClientAreaWidth(float width);
 
 
 	/**
@@ -382,10 +572,27 @@ public:
 	 * @param[in]     height                        The height of the client area to set
 	 * @exception     E_SUCCESS                   The method is successful.
 	 * @exception     E_INVALID_ARG             @c height is less than the height of %ScrollPanel
-	 * @exception     E_INVALID_OPERATION    The height of the client area cannot be set when auto resizing of the client area is off, or the scroll direction is horizontal.
+	 * @exception     E_INVALID_OPERATION    The height of the client area cannot be set when auto resizing of the client area is off,
+	 *									or the scroll direction is horizontal.
 	 *
 	 */
 	result SetClientAreaHeight(int height);
+
+
+	/**
+	 * Sets the height of the client area.
+	 *
+	 * @since 2.1
+	 *
+	 * @return                   An error code
+	 * @param[in]     height                        The height of the client area to set
+	 * @exception     E_SUCCESS                   The method is successful.
+	 * @exception     E_INVALID_ARG             @c height is less than the height of %ScrollPanel
+	 * @exception     E_INVALID_OPERATION    The height of the client area cannot be set when auto resizing of the client area is off,
+	 *									or the scroll direction is horizontal.
+	 *
+	 */
+	result SetClientAreaHeight(float height);
 
 
 	/**

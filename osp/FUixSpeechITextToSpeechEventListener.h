@@ -73,7 +73,6 @@ public:
      * @since 2.0
      *
      * @param[in]   status  The status of the Text-To-Speech service
-     * @see         TextToSpeechStatus
      */
     virtual void OnTextToSpeechStatusChanged(Tizen::Uix::Speech::TextToSpeechStatus status) = 0;
 
@@ -83,7 +82,6 @@ public:
      * @since 2.0
      *
      * @param[in]   error   The reason for an error in the Text-To-Speech service
-     * @see         TextToSpeechError
      */
      virtual void OnTextToSpeechErrorOccurred(Tizen::Uix::Speech::TextToSpeechError error) = 0;
 

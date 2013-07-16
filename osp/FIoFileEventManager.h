@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -79,6 +78,43 @@ static const unsigned long FILE_EVENT_TYPE_ALL = FILE_EVENT_TYPE_ACCESS | FILE_E
  * @final	This class is not intended for extension.
  *
  * The %FileEventManager class can be used to monitor individual files or directories. When a directory is monitored, this class will send an event for the directory or file itself, and for sub-files or sub-directories inside the observed directory.
+ *
+ * @code
+ *
+ * #include <FBase.h>
+ * #include <FIo.h>
+ * #include <FApp.h>
+ *
+ * using namespace Tizen::Base;
+ * using namespace Tizen::Io;
+ * using namespace Tizen::App;
+ *
+ * class MyFileEventListener
+ * : public Tizen::Io::IFileEventListener
+ * {
+ * public:
+ * 	void OnFileEventOccured(const unsigned long events, const Tizen::Base::String &path, const unsigned int eventId)
+ *	{
+ *		if (events & FILE_EVENT_TYPE_DELETE)
+ *		{
+ *			AppLog(“File path (%ls) is deleted.”, path.GetPointer());
+ *		}
+ *	}
+ * };
+ *
+ * void
+ * MyClass::Initialize(void)
+ * {
+ *	MyFileEventListener* pMyFileEventListener = new MyFileEventListener();
+ *
+ *	FileEventManager* pFileEventMgr = new FileEventManager();
+ *	pFileEventMgr->Construct(*pMyFileEventListener);
+ *
+ *	String filePath(App::GetInstance()->GetAppDataPath() + L”myFile.txt”);
+ *	pFileEventMgr->AppPath(filePath, FILE_EVENT_TYPE_DELETE);
+ * }
+ *
+ * @endcode
  */
 class _OSP_EXPORT_ FileEventManager
 	: public Tizen::Base::Object

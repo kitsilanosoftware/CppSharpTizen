@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -88,27 +88,29 @@ public:
 
 	/**
 	 * Registers a form factory. @n
-	 * The IFormFactory::CreateFormN() is called when a new form is required.
+	 * The IFormFactory::CreateFormN() method is called when a new form is required.
 	 *
 	 * @since	2.0
 	 *
 	 * @return		An error code
 	 * @param[in]	formFactory			The user-defined form factory instance
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @see			IFormFactory, IFormFactory::CreateFormN()
+	 * @see			IFormFactory
+	 * @see			IFormFactory::CreateFormN()
 	 */
 	result RegisterFormFactory(const IFormFactory& formFactory);
 
 	/**
 	 * Registers a panel factory. @n
-	 * The IPanelFactory::CreatePanelN() is called when a new panel is required.
+	 * The IPanelFactory::CreatePanelN() method is called when a new panel is required.
 	 *
 	 * @since	2.0
 	 *
 	 * @return		An error code
 	 * @param[in]	panelFactory		The user-defined panel factory instance
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @see			IPanelFactory, IPanelFactory::CreatePanelN()
+	 * @see			IPanelFactory
+	 * @see			IPanelFactory::CreatePanelN()
 	 */
 	result RegisterPanelFactory(const IPanelFactory& panelFactory);
 
@@ -132,7 +134,7 @@ public:
 
 	/**
 	 * Registers scene(s) with the specified resource ID.
-	 * This method does not remove a scene that is already registered.
+	 * The %RegisterScene() method does not remove a scene that is already registered.
 	 *
 	 * @since	2.0
 	 *
@@ -173,9 +175,10 @@ public:
 	 * @exception	E_SUCCESS					The method is successful.
 	 * @exception	E_OUT_OF_MEMORY				The memory is insufficient.
 	 * @exception	E_OBJ_ALREADY_EXIST			The listener with the specified type is already added.
-	 * @see			RemoveSceneManagerEventListener(), ISceneManagerEventListener,
-	 * 				ISceneManagerEventListener::OnSceneTransitionCompleted(),
-	 * 				ISceneManagerEventListener::OnSceneTransitionStarted()
+	 * @see			RemoveSceneManagerEventListener()
+	 * @see			ISceneManagerEventListener
+	 * @see			ISceneManagerEventListener::OnSceneTransitionCompleted()
+	 * @see			ISceneManagerEventListener::OnSceneTransitionStarted()
 	 */
 	result AddSceneManagerEventListener(ISceneManagerEventListener& sceneManagerEventListener);
 
@@ -188,7 +191,8 @@ public:
 	 * @param[in]	sceneManagerEventListener	An instance of ISceneManagerEventListener to remove
 	 * @exception	E_SUCCESS					The method is successful.
 	 * @exception	E_OBJ_NOT_FOUND				The specified listener is not found.
-	 * @see			AddSceneManagerEventListener(), ISceneManagerEventListener
+	 * @see			AddSceneManagerEventListener()
+	 * @see			ISceneManagerEventListener
 	 */
 	result RemoveSceneManagerEventListener(ISceneManagerEventListener& sceneManagerEventListener);
 
@@ -204,8 +208,10 @@ public:
 	 * @exception	E_OUT_OF_MEMORY			The memory is insufficient.
 	 * @exception	E_INVALID_ARG			The specified @c sceneId is invalid.
 	 * @exception	E_OBJ_ALREADY_EXIST		The listener with the specified type is already added.
-	 * @see			RemoveSceneEventListener, ISceneEventListener,
-	 * 				ISceneEventListener::OnSceneActivatedN(), ISceneEventListener::OnSceneDeactivated()
+	 * @see			RemoveSceneEventListener()
+	 * @see			ISceneEventListener
+	 * @see							ISceneEventListener::OnSceneActivatedN()
+	 * @see			ISceneEventListener::OnSceneDeactivated()
 	 */
 	result AddSceneEventListener(const SceneId& sceneId, ISceneEventListener& sceneEventListener);
 
@@ -220,7 +226,8 @@ public:
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG		The specified @c sceneId is invalid.
 	 * @exception	E_OBJ_NOT_FOUND		The specified @c sceneId is not found.
-	 * @see			AddSceneEventListener, ISceneEventListener
+	 * @see			AddSceneEventListener()
+	 * @see			ISceneEventListener
 	 */
 	result RemoveSceneEventListener(const SceneId& sceneId, ISceneEventListener& sceneEventListener);
 
@@ -231,7 +238,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	sceneId					The target scene ID
-	 * @param[in]	pSceneAnimationProvider	An instance of ISceneAnimationProvider to set, or null to clear previous one.
+	 * @param[in]	pSceneAnimationProvider	An instance of ISceneAnimationProvider to set, @n else @c null to clear previous one
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_INVALID_ARG			The specified @c sceneId is invalid.
 	 * @exception	E_OBJ_NOT_FOUND			The specified scene is not found.
@@ -245,10 +252,12 @@ public:
 	 * @since	2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	pSceneTransitionPolicyProvider	An instance of ISceneTransitionPolicyProvider to set,
-	 * 												or null to clear previous one.
+	 * @param[in]	pSceneTransitionPolicyProvider	An instance of ISceneTransitionPolicyProvider to set, @n
+	 * 												else @c null to clear previous one
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @see			ISceneTransitionPolicyProvider, ISceneTransitionPolicyProvider::GetNextScene(), GoForward()
+	 * @see			ISceneTransitionPolicyProvider
+	 * @see			ISceneTransitionPolicyProvider::GetNextScene()
+	 * @see			GoForward()
 	 */
 	result SetSceneTransitionPolicyProvider(ISceneTransitionPolicyProvider* pSceneTransitionPolicyProvider);
 
@@ -265,7 +274,8 @@ public:
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
 	 * @remarks		It throws an E_INVALID_ARG exception if the animationType is SCENE_TRANSITION_ANIMATION_TYPE_NONE
 	 * 				or SCENE_TRANSITION_ANIMATION_TYPE_CUSTOM.
-	 * @see			GoForward(), GoBackward()
+	 * @see			GoForward()
+	 * @see			GoBackward()
 	 */
 	result SetFormTransitionAnimationDefaultValues(SceneTransitionAnimationType animationType, long duration,
 												   Tizen::Ui::Animations::AnimationInterpolatorType interpolatorType);
@@ -277,7 +287,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	sceneTransition		The scene transition that describes the destination and options
-	 * @param[in]	pArgs				A pointer to an IList that contains the scene transition parameters
+	 * @param[in]	pArgs				A pointer to Tizen::Base::Collection::IList that contains the scene transition parameters
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
 	 * @exception	E_IN_PROGRESS		A previous transition is in progress.
@@ -300,7 +310,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	transitionId		The transition ID that describes the destination and options
-	 * @param[in]	pArgs				A pointer to an IList that contains the scene transition parameters
+	 * @param[in]	pArgs				A pointer to Tizen::Base::Collection::IList that contains the scene transition parameters
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
 	 * @exception	E_IN_PROGRESS		A previous transition is in progress.
@@ -323,7 +333,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	sceneTransition		The scene transition that describes the destination and options
-	 * @param[in]	pArgs				A pointer to an IList that contains the scene transition parameters
+	 * @param[in]	pArgs				A pointer to Tizen::Base::Collection::IList that contains the scene transition parameters
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
 	 * @exception	E_IN_PROGRESS		A previous transition is in progress.
@@ -349,7 +359,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	transitionId		The transition ID that describes the destination and options
-	 * @param[in]	pArgs				A pointer to an IList that contains the scene transition parameters
+	 * @param[in]	pArgs				A pointer to Tizen::Base::Collection::IList that contains the scene transition parameters
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
 	 * @exception	E_IN_PROGRESS		A previous transition is in progress.
@@ -396,7 +406,7 @@ public:
 	 * @return		@c true if the scene instance has not been destroyed, @n
 	 *              else @c false
 	 * @param[in]	sceneId				The scene ID
-	 * @remarks		This function is useful to check state of the scene, because the scene lifetime is determined
+	 * @remarks		This method is useful to check state of the scene, because the scene lifetime is determined
 	 * 				by scene transition option and user can destroy the scene in real time.
 	 */
 	bool IsSceneAlive(const SceneId& sceneId) const;
@@ -424,10 +434,10 @@ public:
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_OPERATION_FAILED	The current scene is invalid.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks		If a user sets a form as a current form on a frame by calling SetCurrentForm(),
+	 * @remarks		If a user sets a form as a current form on a frame by calling Tizen::Ui::Controls::Frame::SetCurrentForm(),
 	 * 				they will no longer be under the control of %SceneManager. In this case,
 	 * 				they can get back the control of scene management easily by calling this method.
-	 * @see			Tizen::Ui::Controls::Frame::SetCurrentForm
+	 * @see			Tizen::Ui::Controls::Frame::SetCurrentForm()
 	 */
 	result BringCurrentSceneToTop(void);
 
@@ -438,7 +448,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @see			AddSceneHistory()
+	 * @see			AddToSceneHistory()
 	 */
 	result ClearSceneHistory(void);
 

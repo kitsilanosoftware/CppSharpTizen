@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -250,11 +249,11 @@ public:
 	bool IsReadOnly(void) const;
 
 	/**
-	* Gets the date and time of creation of the directory entry.
+	* Gets the date and time of the last modification of the directory entry.
 	*
 	* @since		2.0
 	*
-	* @return		The date and time of creation
+	* @return		The date and time of the last modification
 	*/
 	Tizen::Base::DateTime GetDateTime(void) const;
 

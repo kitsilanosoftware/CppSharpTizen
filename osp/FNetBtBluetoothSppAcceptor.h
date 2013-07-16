@@ -76,21 +76,28 @@ public:
 	 * Initializes this instance of %BluetoothSppAcceptor with the specified listener.
 	 *
 	 * @since       2.0
+	 * @feature     %http://tizen.org/feature/network.bluetooth
 	 *
 	 * @return      An error code
 	 * @param[in]   listener                The event listener for SPP acceptor
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
-	 * @exception	E_UNSUPPORTED_OPERATION	This operation is not supported.
+	 * @exception   E_UNSUPPORTED_OPERATION The Emulator or target device does not support the required feature.
+	 *                                      For more information, see
+	 *                                      <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">
+	 *                                      Application Filtering</a>.
 	 * @exception   E_SYSTEM                A system error has occurred.
+	 * @remarks     Before calling this method, check whether the feature is supported by 
+	 *			Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	 */
 	result Construct(IBluetoothSppAcceptorEventListener& listener);
 
 	/**
 	 * Accepts a connection request from a remote SPP initiator. @n
-	 * This method establishes a connection.
+	 * The %AcceptConnection() method establishes a connection.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.spp
 	 *
 	 * @return      An error code
@@ -103,6 +110,7 @@ public:
 	 *                                      For example, the service is not started yet or the connection request is
 	 *                                      not yet received from a remote device.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_FAILURE               The method has failed.
 	 * @see         IBluetoothSppInitiatorEventListener::OnSppConnectionResponded()
 	 */
@@ -112,6 +120,7 @@ public:
 	 * Rejects a connection request from a remote SPP initiator.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.spp
 	 *
 	 * @return      An error code
@@ -124,6 +133,7 @@ public:
 	 *                                      For example, the service is not started yet or the connection request is
 	 *                                      not yet received from a remote device.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_FAILURE               The method has failed.
 	 * @see         IBluetoothSppInitiatorEventListener::OnSppConnectionResponded()
 	 */
@@ -133,6 +143,7 @@ public:
 	 * Starts the SPP service with the default service UUID - BT_SVC_UUID_SPP.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.spp
 	 *
 	 * @return      An error code
@@ -143,6 +154,7 @@ public:
 	 * @exception   E_IN_PROGRESS           The service has already started.
 	 * @exception   E_ALREADY_CONNECTED     The connection with an SPP initiator has already been established.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SERVICE_UNAVAILABLE   The SPP service with the specified UUId is unavailable.
 	 * @exception   E_FAILURE               The method has failed.
 	 */
@@ -152,6 +164,7 @@ public:
 	 * Starts the SPP service with the specified service UUID.
 	 *
 	 * @since 2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.spp
 	 *
 	 * @return      An error code
@@ -164,6 +177,7 @@ public:
 	 * @exception   E_IN_PROGRESS           The service has already started.
 	 * @exception   E_ALREADY_CONNECTED     The connection with an SPP initiator has already been established.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SERVICE_UNAVAILABLE   The SPP service with the specified UUId is unavailable.
 	 * @exception   E_FAILURE               The method has failed.
 	 */
@@ -171,9 +185,10 @@ public:
 
 	/**
 	 * Stops the SPP service. @n
-	 * This method disconnects the current connection before stopping the service.
+	 * The %StopService() method disconnects the current connection before stopping the service.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.spp
 	 *
 	 * @return      An error code
@@ -185,6 +200,7 @@ public:
 	 *                                      operation. @n
 	 *                                      For example, the service is not started yet.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_FAILURE               The method has failed.
 	 */
 	result StopService(void);
@@ -193,6 +209,7 @@ public:
 	 * Disconnects the current connection.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.spp
 	 *
 	 * @return      An error code
@@ -205,6 +222,7 @@ public:
 	 *                                      For example, the service is not started yet or a connection with a remote
 	 *                                      device is not established.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_FAILURE               The method has failed.
 	 * @see         IBluetoothSppAcceptorEventListener::OnSppDisconnected()
 	 * @see         IBluetoothSppInitiatorEventListener::OnSppDisconnected()
@@ -215,10 +233,12 @@ public:
 	 * Sends the data.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.spp
 	 *
 	 * @return      An error code
-	 * @param[in]   buffer                  The data to send
+	 * @param[in]   buffer                  The data to send @n
+	 *                                      The size of the buffer should not exceed @c 1000 bytes.
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_INVALID_STATE         This instance is in an invalid state. @n
 	 *                                      For example, this instance has not been constructed as yet or %Bluetooth is
@@ -230,8 +250,8 @@ public:
 	 * @exception   E_INVALID_ARG           The specified @c buffer is empty.
 	 * @exception   E_SYSTEM                A system error has occurred.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_FAILURE               The method has failed.
-	 * @remarks     The size of the buffer should not exceed @c 1000 bytes.
 	 * @see         IBluetoothSppInitiatorEventListener::OnSppDataReceived()
 	 */
 	result SendData(const Tizen::Base::ByteBuffer& buffer);
@@ -242,6 +262,7 @@ private:
 	// of objects.
 	//
 	BluetoothSppAcceptor(const BluetoothSppAcceptor& value);
+
 	//
 	// The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit
 	// copying of objects.

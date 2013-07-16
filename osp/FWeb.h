@@ -26,6 +26,8 @@
 
 #include <FWebHistoryItem.h>
 #include <FWebWebHistory.h>
+#include <FWebBookmarkItem.h>
+#include <FWebWebBookmark.h>
 
 //Controls namespace
 #include <FWebControls.h>

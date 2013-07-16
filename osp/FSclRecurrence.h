@@ -1,5 +1,4 @@
 // 
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd. 
 // 
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -364,14 +363,7 @@ public:
 	 * Sets the interval of recurrence. @n
 	 * If the frequency is weekly and the recurrence interval is set to 2, the event occurs every two weeks.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-     *					For more information, see @ref CompRecurrenceSetIntervalPage "here".
-     * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	interval		The interval of recurrence
@@ -381,16 +373,6 @@ public:
 	result SetInterval(int interval);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page	CompRecurrenceSetIntervalPage Compatibility for SetInterval()
-	 * @section	CompRecurrenceSetIntervalPageIssueSection Issues
-	 *          Implementing this method in OSP compatible applications has the following issues:   @n
-	 *			-# If the value of the interval to be set is greater than 255, E_INVALID_ARG is returned.
-	 *
-	 * @section	CompRecurrenceSetIntervalPageSolutionSection Resolutions
-	 * 			This issue has been resolved in Tizen.  @n
-	 * 			-# There is no limit for the value of the interval.
-	 * @endif
 	 */
 
 	/**
@@ -402,7 +384,7 @@ public:
 	 * @return		An error code
 	 * @param[in]	pUntil			The end date and time
 	 * @exception	E_SUCCESS		The method is successful.
-	 * @exception	E_INVALID_ARG		The @c pUntil is not in a valid range. @n
+	 * @exception	E_INVALID_ARG		The specified @c pUntil is out of the valid range. @n
 	 *					The valid range of the date can be referenced from GetMaxDateTime() and GetMinDateTime().
 	 * @remarks		Either the until or count properties may be set. @n
 	 *				When the until property is set, the count property becomes @c 0. @n
@@ -442,11 +424,10 @@ public:
 
 	/**
 	 * Sets the day of the week that represents the days when the event should recur. @n
-	 * The valid values range between #CAL_SUNDAY and #CAL_SATURDAY. @n
-	 * Any values other than #CAL_SUNDAY ~ #CAL_SATURDAY are ignored. @n
-	 * The Frequency property must be set before setting this property.
-	 * This property is valid for the following #RecurFrequency enumeration types: #FREQ_WEEKLY, #FREQ_MONTHLY, and #FREQ_YEARLY.
-	 * If the frequency is #FREQ_WEEKLY, the value of the day may be a combination of days, such as #CAL_MONDAY|#CAL_FRIDAY.
+	 * The Frequency property must be set before setting this property. @n
+	 * This property is valid for the following #RecurFrequency enumeration types: #FREQ_WEEKLY, #FREQ_MONTHLY, and #FREQ_YEARLY. @n
+	 * The value of the @c day may be a combination of several days of a week. @n
+	 * In other words, the @c day should be an item or a combination of #CalDayOfWeek, such as #CAL_SUNDAY or #CAL_MONDAY|#CAL_FRIDAY.
 	 *
 	 * @since	2.0
 	 *
@@ -512,14 +493,14 @@ public:
 	result SetMonthOfYear(int month);
 
 	/**
-	 * Adds an exception date to this event.
+	 * Adds an exception date to this event. @n
 	 * The instance that its start date and time matched with the exception date will be exclude from recurrence instances.
 	 * If there are any changes in this recurrence, the exception dates would be cleared.
 	 *
 	 * @since	2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	exceptionDate			The exception date to exclude
+	 * @param[in]	exceptionDate			The exception date to exclude. @n Any value with a unit that is less than a second is ignored.
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_INVALID_ARG			The specified @c exceptionDate is invalid.
 	 * @exception	E_OBJ_ALREADY_EXIST		The specified @c exceptionDate already exists.

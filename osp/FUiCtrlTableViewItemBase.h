@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -33,95 +33,95 @@ namespace Tizen { namespace Ui { namespace Controls
 {
 
 /**
- * @class TableViewItemBase
- * @brief    This class defines common behavior for a %TableViewItemBase.
- *
- * @since 2.0
- *
- * The %TableViewItemBase class is a base class which represents a table view item which is the unit of handling of TableView.
- *
- */
+* @class TableViewItemBase
+* @brief    This class defines common behavior for a %TableViewItemBase.
+*
+* @since 2.0
+*
+* The %TableViewItemBase class is a base class which represents a table view item which is the unit of handling of TableView.
+*
+*/
 
 class _OSP_EXPORT_ TableViewItemBase
 	: public Tizen::Ui::Container
 {
 public:
 	/**
-	 * Sets the background image of the item which is displayed when the item is in specified state.
-	 *
-	 * @since 2.0
-	 *
-	 * @return  An error code
-	 * @param[in] pBitmap           The background bitmap image
-	 * @param[in] status            The item drawing state
-	 * @exception E_SUCCESS         The method is successful.
-	 * @exception E_OUT_OF_MEMORY          The memory is insufficient.
-	 * @remarks The background bitmap has priority over the background color. When both the background bitmap and the background color are specified, only the bitmap is displayed.
-	 */
+	* Sets the background image of the item which is displayed when the item is in specified state.
+	*
+	* @since 2.0
+	*
+	* @return  An error code
+	* @param[in] pBitmap           The background bitmap image
+	* @param[in] status            The item drawing state
+	* @exception E_SUCCESS         The method is successful.
+	* @exception E_OUT_OF_MEMORY          The memory is insufficient.
+	* @remarks The background bitmap has priority over the background color. When both the background bitmap and the background color are specified, only the bitmap is displayed.
+	*/
 	result SetBackgroundBitmap(const Tizen::Graphics::Bitmap* pBitmap, TableViewItemDrawingStatus status = TABLE_VIEW_ITEM_DRAWING_STATUS_NORMAL);
 
 	/**
-	 * Sets the background color of the item which is displayed when the item is in specified state.
-	 *
-	 * @since 2.0
-	 *
-	 * @return  An error code
-	 * @param[in] color             The background color
-	 * @param[in] status            The item drawing state
-	 */
+	* Sets the background color of the item which is displayed when the item is in specified state.
+	*
+	* @since 2.0
+	*
+	* @return  An error code
+	* @param[in] color             The background color
+	* @param[in] status            The item drawing state
+	*/
 	void SetBackgroundColor(const Tizen::Graphics::Color& color, TableViewItemDrawingStatus status = TABLE_VIEW_ITEM_DRAWING_STATUS_NORMAL);
 
 	/**
- 	 * Gets the background color of the item which is displayed when the item is in the specified state.
-	 *
-	 * @since 2.0
-	 *
-	 * @return  The background color of the item
-	 * @param[in] status            The item drawing state
-	 *
-	 * @remarks  If an error occurs, this method returns RGBA(0, 0, 0, 0).
-	 * @see     SetBackgroundColor()
-	 */
+	* Gets the background color of the item which is displayed when the item is in the specified state.
+	*
+	* @since 2.0
+	*
+	* @return  The background color of the item
+	* @param[in] status            The item drawing state
+	*
+	* @remarks  If an error occurs, this method returns RGBA(0, 0, 0, 0).
+	* @see     SetBackgroundColor()
+	*/
 	Tizen::Graphics::Color GetBackgroundColor(TableViewItemDrawingStatus status = TABLE_VIEW_ITEM_DRAWING_STATUS_NORMAL) const;
 
 	/**
-	 * Enables or disables the individual selection of a control.
-	 *
-	 * @since 2.0
-	 *
-	 * @return        An error code
-	 * @param[in] pControl          The child control to be selected individually.
-	 * @param[in] enable            Set to @c true to enable the individual selection of a control, else @c false
-	 * @exception E_SUCCESS         The method is successful.
-	 * @exception E_INVALID_ARG     A specified input parameter is invalid.
-	 */
+	* Enables or disables the individual selection of a control.
+	*
+	* @since 2.0
+	*
+	* @return        An error code
+	* @param[in] pControl          The child control to select individually
+	* @param[in] enable            Set to @c true to enable the individual selection of a control, else @c false
+	* @exception E_SUCCESS         The method is successful.
+	* @exception E_INVALID_ARG     A specified input parameter is invalid.
+	*/
 	result SetIndividualSelectionEnabled(const Tizen::Ui::Control* pControl, bool enable);
 
 	/**
-	 * Returns whether the individual selection of a control is enabled or not.
-	 *
-	 * @since 2.0
-	 *
-	 * @return @c true if the individual selection of a control is enabled, else @c false
-	 * @param[in] pControl          The target control.
-	 * @exception E_SUCCESS         The method is successful.
-	 * @exception E_INVALID_ARG     A specified input parameter is invalid.
-	 */
+	* Returns whether the individual selection of a control is enabled or not.
+	*
+	* @since 2.0
+	*
+	* @return @c true if the individual selection of a control is enabled, else @c false
+	* @param[in] pControl          The target control.
+	* @exception E_SUCCESS         The method is successful.
+	* @exception E_INVALID_ARG     A specified input parameter is invalid.
+	*/
 	bool IsIndividualSelectionEnabled(const Tizen::Ui::Control* pControl);
 
 protected:
-	//
-	// This class is constructible only as a subobject of a derived class.
-	//
-	// @since 2.0
-	//
+	/**
+	* This class is constructible only as a subobject of a derived class.
+	*
+	* @since 2.0
+	*/
 	TableViewItemBase(void);
 
-	//
-	// This class is destructible only as a subobject of a derived class.
-	//
-	// @since 2.0
-	//
+	/**
+	* This class is destructible only as a subobject of a derived class.
+	*
+	* @since 2.0
+	*/
 	virtual ~TableViewItemBase(void);
 
 	//

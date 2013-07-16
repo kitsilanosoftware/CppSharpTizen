@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -48,6 +47,8 @@
  *
  *
  * The %Locales namespace contains classes representing a specific cultural region (locale) and the classes for manipulating and formatting locale-sensitive information, such as dates, times, numbers, and time zones.
+ *
+ * Even if the list of all the available languages supported by the device is different, the localized information by the %Locales namespace should be represented properly.
  *
  * For more information on the %Locales namespace features, see <a href="../org.tizen.native.appprogramming/html/guide/locales/locales_namespace.htm">Locales Guide</a>.
  *

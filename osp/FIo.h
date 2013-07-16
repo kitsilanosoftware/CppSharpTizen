@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -17,9 +16,9 @@
 
 /**
  * @file	FIo.h
- * @brief	This is the header file for the Tizen::Io namespace.
+ * @brief	This is the header file for the %Io namespace.
  *
- * This header file contains the declarations of the Tizen::Io namespace.
+ * This header file contains the declarations of the %Io namespace.
  */
 
 #ifndef _FIO_H_
@@ -38,11 +37,19 @@
 #include <FIoFileEventManager.h>
 #include <FIoChannel.h>
 #include <FIoMessagePortManager.h>
-#include <FIoIMessagePortListener.h>
 #include <FIoSerialPort.h>
+#include <FIoMmcStorageManager.h>
 #include <FIoIDbEnumerator.h>
 #include <FIoIFileEventListener.h>
+#include <FIoIMessagePortListener.h>
 #include <FIoISerialPortEventListener.h>
+#include <FIoIMmcStorageMountListener.h>
+#include <FIoIMmcStorageFormatListener.h>
+#include <FIoMemoryMappedFile.h>
+#include <FIoFileLock.h>
+#include <FIoDataRow.h>
+#include <FIoDataSetEnumerator.h>
+#include <FIoDataSet.h>
 
 /**
  * @namespace	Tizen::Io

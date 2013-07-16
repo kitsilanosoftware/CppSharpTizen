@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -79,13 +78,13 @@ public:
 	result Construct(const Tizen::Base::ByteBuffer& keyBytes);
 
 	/**
-	 *	Constructs and initializes this instance of %SecretKeyGenerator for the specified algorithm.
+	 *	Constructs and initializes this instance of %SecretKeyGenerator for the specified @c algorithm.
 	 *
 	 *	@since           2.0
 	 *
 	 *	@return		An error code
 	 *	@param[in]	algorithm				The name of the secure random generator algorithm @n
-	 *											For example, "AES","DES" or "3DES".
+	 *											For example, "AES","DES", or "3DES".
 	 *	@exception	E_SUCCESS				The method is successful.
 	 *	@exception	E_INVALID_ARG			The specified @c algorithm is invalid or an empty string.
 	 *	@exception	E_OUT_OF_MEMORY			The memory is insufficient.

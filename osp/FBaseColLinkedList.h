@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -60,7 +59,7 @@ class _ListNode;
  *		list.Add(new Integer(2));	// 1,2
  *		list.Add(new Integer(3));	// 1,2,3
  *
- *		Integer*	pInt = static_cast<Integer*> (list.GetAt(0));
+ *		Integer*	pInt = static_cast< Integer* > (list.GetAt(0));
  *
  *		if (pValue->Equals(Integer(1))
  *		{
@@ -86,8 +85,8 @@ class _ListNode;
  *		delete pEnum;
  *
  *		// Deallocates all objects
- *		// Because the destructor calls RemoveAll() internally, you don't need to call RemoveAll() to destroy all elements at the end.
- *		list.RemoveAll();
+ *		// Because the destructor calls RemoveAll() internally, you do not need to call RemoveAll() to destroy all elements at the end.
+ *		// list.RemoveAll();
  *	}
  * @endcode
  */
@@ -111,8 +110,8 @@ public:
 	 *
 	 * @param[in]	deleter	The function pointer to type of the element deleter
 	 * @remarks	To create an owing collection, set the element deleter value as @c SingleObjectDeleter. This gives the collection the ownership of elements and the collection will destroy elements. @n
-	 *			On the other hand, to create a non-owning collection, you don't need to set the element deleter value, as @c NoOpDeleter is the default element deleter.
-	 *			It means that you don't transfer the ownership of elements to the collection.
+	 *			On the other hand, to create a non-owning collection, you do not need to set the element deleter value, as @c NoOpDeleter is the default element deleter.
+	 *			It means that you do not transfer the ownership of elements to the collection.
 	 * @see		NoOpDeleter()
 	 * @see		SingleObjectDeleter()
 	 * @see		ArrayDeleter()
@@ -511,7 +510,7 @@ public:
 	 *
 	 * @since 2.0
 	 *
-	 * @return	An function pointer to the existing element deleter
+	 * @return	A function pointer to the existing element deleter
 	 */
 	virtual DeleterFunctionType GetDeleter(void) const;
 

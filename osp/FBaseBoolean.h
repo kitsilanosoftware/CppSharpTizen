@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -21,8 +20,8 @@
  *
  * This header file contains the declarations of the %Boolean class.
  */
-#ifndef _FBASE_BOOL_H_
-#define _FBASE_BOOL_H_
+#ifndef _FBASE_BOOLEAN_H_
+#define _FBASE_BOOLEAN_H_
 
 #include <FBaseObject.h>
 #include <FBaseString.h>
@@ -122,7 +121,7 @@ public:
 	 *
 	 *	@return			@c true if the values of the objects are not equal, @n
 	 *				    else @c false
-	 *	@param[in]	rhs		A instance of %Boolean to compare with the current instance
+	 *	@param[in]	rhs		An instance of %Boolean to compare with the current instance
 	 */
 	bool operator !=(const Boolean& rhs) const;
 
@@ -181,7 +180,7 @@ public:
 	bool ToBool(void) const;
 
 	/**
-	 *	Parses the specified string and converts it to a bool value.
+	 *	Parses the specified string and converts it to a @c bool value.
 	 *
 	 *	@since 2.0
 	 *
@@ -199,7 +198,7 @@ public:
 	static bool Parse(const String& s);
 
 	/**
-	 *	Parses the specified string and converts it to a bool value. @n
+	 *	Parses the specified string and converts it to a @c bool value. @n
 	 *	Case sensitivity can be controlled.
 	 *
 	 *	@since 2.0
@@ -219,7 +218,7 @@ public:
 	static bool Parse(const String& s, bool caseSensitive);
 
 	/**
-	 *	Converts the value of the calling instance from bool to String.
+	 *	Converts the value of the calling instance from @c bool to String.
 	 *
 	 *	@since 2.0
 	 *
@@ -229,9 +228,9 @@ public:
 	String ToString(void) const;
 
 	/**
-	 *	Converts bool parameter to a String
-	 *	instance of the String class and returns the string representation of the
-	 *	input bool value (@c true or @c false).
+	 *	Converts a @c bool parameter to a String
+	 *	instance of the %String class and returns the string representation of the
+	 *	input @c bool value (@c true or @c false).
 	 *
 	 *	@since 2.0
 	 *
@@ -276,4 +275,4 @@ private:
 
 }} // Tizen::Base
 
-#endif //_FBASE_BOOL_H_
+#endif //_FBASE_BOOLEAN_H_

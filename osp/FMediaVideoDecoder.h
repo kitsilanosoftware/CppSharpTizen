@@ -116,8 +116,6 @@ public:
 	 *
 	 *	@since		2.0
 	 *
-	 *	@remarks	After creating an instance of this class, the Construct() method must be called explicitly to initialize this instance.
-	 *	@see		Construct()
 	 */
 	VideoDecoder(void);
 
@@ -180,21 +178,22 @@ public:
 	 *	@exception	E_INVALID_ARG			The specified @c srcBuf or @c dstBuf is invalid.
 	 *	@exception	E_UNSUPPORTED_FORMAT	The input data is not in a supported format.
 	 *	@exception	E_OUT_OF_MEMORY			The destination buffer has insufficient memory.
-	 *  @exception	  E_DIMENSION_CHANGED		The dimension of video stream has changed.
+	 *  @exception	E_DIMENSION_CHANGED		The dimension of video stream has changed.
 	 *	@exception  E_SYSTEM				A system error has occurred.
-	 *	@remarks	The destination buffer must have sufficient free space to store the decoded frame data.
-	 *	@remarks	The decoder starts the decoding of the frame from the current position of the source buffer,
+	 *	@remarks
+	 *			  - The destination buffer must have sufficient free space to store the decoded frame data.
+	 *			  - The decoder starts the decoding of the frame from the current position of the source buffer,
 	 *				and moves the position of the source buffer to the end of the consumed data.
 	 *				The decoder also fills the destination buffer with the decoded frame from the current position of the destination buffer,
 	 *				and moves the position of the destination buffer to the end of the decoded frame.
-	 *  @remarks	When the first decoding begins, the @c E_DIMENSION_CHANGED exception can occur.
-	 *			  An exception can also occur when the dimension of the video frame in the bitstream has changed.
-	 *			  An application should increase the size of @c dstBuf if the @c dstBuf cannot hold the video frame with new dimensions.
-	 *			  The video frame can be received even if the result is @c E_DIMENSION_CHANGED.
-	 *			  The application should check the @c position of the destination buffer and the value of @c gotFrame
-	 *			  when the result is @c E_DIMENSION_CHANGED.
-	 * @remarks	The H.264 video decoder returns data with the width and height in multiples of 16.
-	 *	  			The application should detect the width and height of the frame and crop the decoder's output data if the original dimension is not a multiple of @c 16.
+	 *			  - When the first decoding begins, the @c E_DIMENSION_CHANGED exception can occur.
+	 *				An exception can also occur when the dimension of the video frame in the bitstream has changed.
+	 *				An application should increase the size of @c dstBuf if the @c dstBuf cannot hold the video frame with new dimensions.
+	 *				The video frame can be received even if the result is @c E_DIMENSION_CHANGED.
+	 *				The application should check the @c position of the destination buffer and the value of @c gotFrame
+	 *				when the result is @c E_DIMENSION_CHANGED.
+	 *			  - The H.264 video decoder returns data with the width and height in multiples of 16.
+	 *				The application should detect the width and height of the frame and crop the decoder's output data if the original dimension is not a multiple of @c 16.
 	 *	@see Probe()
 	 */
 	result Decode(Tizen::Base::ByteBuffer& srcBuf, Tizen::Base::ByteBuffer& dstBuf, bool& gotFrame);
@@ -257,8 +256,9 @@ public:
 	 *	@exception	E_OUT_OF_MEMORY		 The memory is insufficient.
 	 *	@exception	E_OBJ_NOT_FOUND			This instance does not support any property.
 	 *	@exception	E_SYSTEM				A system error has occurred.
-	 *	@remarks	The specific error code can be accessed using the GetLastResult() method.
-	 *	@remarks	The return value must be deleted.
+	 *	@remarks
+	 *			  - The specific error code can be accessed using the GetLastResult() method.
+	 *			  - The return value must be deleted.
 	 */
 	Tizen::Base::Collection::IListT<MediaPropertyType>* GetSupportedPropertyListN(void) const;
 
@@ -285,8 +285,9 @@ public:
 	 *             else @c null if an exception occurs
 	 * @exception  E_SUCCESS             The method is successful.
 	 * @exception  E_OUT_OF_MEMORY       The memory is insufficient.
-	 * @remarks    The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks    The return value must be deleted by the caller.
+	 * @remarks
+	 *			 - The specific error code can be accessed using the GetLastResult() method.
+	 *			 - The return value must be deleted by the caller.
 	 */
 	static Tizen::Base::Collection::IListT<CodecType>* GetSupportedCodecListN(void);
 

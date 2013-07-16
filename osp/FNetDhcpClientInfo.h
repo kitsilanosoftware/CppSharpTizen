@@ -81,8 +81,8 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		The MAC address in the form '00-00-00-00-00-00'
-	 * @remarks     In case of the Wi-Fi Direct bearer type, the MAC address is virtual and is used only for the frame packetization.
-	 *              This MAC address is different from the MAC address provided by the WifiManager or the WifiDirectDevice class.
+	 * @remarks     	In case of the Wi-Fi Direct bearer type, the MAC address is virtual and is used only for the frame packetization. @n
+	 *              		This MAC address is different from the MAC address provided by the WifiManager or the WifiDirectDevice class.
 	 */
 	Tizen::Base::String GetMacAddress(void) const;
 
@@ -93,8 +93,8 @@ public:
 	 *
 	 * @return		@c true if the values match, @n
 	 *			    else @c false
-	 * @param[in]	rhs 	The other Object to compare
-	 * @see 		Object::Equals()
+	 * @param[in]	rhs 	The other Tizen::Base::Object to compare
+	 * @see 		Tizen::Base::Object::Equals()
 	 */
 	virtual bool Equals(const Tizen::Base::Object& rhs) const;
 

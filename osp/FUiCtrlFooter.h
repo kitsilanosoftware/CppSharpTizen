@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -68,9 +68,9 @@ enum FooterStyle
  * The %Footer class displays a multi-purpose area at the bottom of the screen. It is used to switch between different application
  * "views", or to host buttons for performing user-defined actions.
  *
- * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_footer.htm">Footer</a>.
+ *For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_footer.htm">Footer</a>.
  *
- * The following examples demonstrate how to use the %Footer class.
+ *The following examples demonstrate how to use the %Footer class.
  * - Constructing a footer
  * When creating a %Form, specify the FORM_STYLE_FOOTER parameter in the Form::Construct() method.
  *
@@ -139,15 +139,16 @@ public:
 	 * @since		2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   item                The footer item to be added
+	 * @param[in]   item                The footer item to add
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_MAX_EXCEEDED      The number of items has exceeded the maximum limit.
 	 * @exception   E_INVALID_ARG       A specified input parameter is invalid. @n
 	 *									The specified item is not constructed.
 	 * @exception   E_SYSTEM            A system error has occurred.
-	 * @remarks     The %Footer control does not throw any exception even though the same action ID is assigned to multiple items. @n
-	 *              However, the content of the specified item is copied to the %Footer control. @n
-	 *              Depending on the style of the %Footer control, several types of items can be added or inserted.
+	 * @remarks
+	 *			- The %Footer control does not throw any exception even though the same action ID is assigned to multiple items. @n
+	 *			However, the content of the specified item is copied to the %Footer control.
+	 *			- Depending on the style of the %Footer control, several types of items can be added or inserted.
 	 */
 	result AddItem(const FooterItem& item);
 
@@ -159,7 +160,7 @@ public:
 	 *
 	 * @return      An error code
 	 * @param[in]   itemIndex           The index where the item must be inserted
-	 * @param[in]   item                The footer item object to be inserted
+	 * @param[in]   item                The footer item object to insert
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_MAX_EXCEEDED      The number of items has exceeded the maximum limit.
 	 * @exception   E_OUT_OF_RANGE      The specified index is outside the bounds of the data structure. @n
@@ -167,9 +168,10 @@ public:
 	 * @exception   E_INVALID_ARG       A specified input parameter is invalid. @n
 	 *									The specified item is not constructed.
 	 * @exception   E_SYSTEM            A system error has occurred.
-	 * @remarks     The %Footer control does not throw any exception even though the same action ID is assigned to multiple items. @n
-	 *              However, the content of the specified item is copied to the %Footer control. @n
-	 *              Depending on the style of the %Footer control, several types of items can be added or inserted.
+	 * @remarks
+	 *			- The %Footer control does not throw any exception even though the same action ID is assigned to multiple items. @n
+	 *			However, the content of the specified item is copied to the %Footer control.
+	 *			- Depending on the style of the %Footer control, several types of items can be added or inserted.
 	 */
 	result InsertItemAt(int itemIndex, const FooterItem& item);
 
@@ -351,8 +353,9 @@ public:
 	 * @return      The selected item index,@n
 	 *              else @c -1 if an error occurs
 	 * @exception   E_SUCCESS               The method is successful.
-	 * @exception   E_UNSUPPORTED_OPERATION	This operation is not supported. @n
-	 *										The operation is supported only when the style of the %Footer control is either segmented or tab.
+	 * @exception   E_UNSUPPORTED_OPERATION The operation is not supported when the style of the %Footer control is
+	 *										::FOOTER_STYLE_BUTTON_TEXT, ::FOOTER_STYLE_BUTTON_ICON
+	 *										or ::FOOTER_STYLE_BUTTON_ICON_TEXT.
 	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
 	 */
 	int GetSelectedItemIndex(void) const;
@@ -390,7 +393,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   position        The position of the button item to be removed
+	 * @param[in]   position        The position of the button item to remove
 	 * @exception   E_SUCCESS       The method is successful.
 	 * @exception   E_SYSTEM        A system error has occurred.
 	 * @remarks     If no button item is set at the specified position, the method will return @c E_SUCCESS.
@@ -430,7 +433,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   itemIndex			The index of the item to be removed
+	 * @param[in]   itemIndex			The index of the item to remove
 	 * @exception   E_SUCCESS			The method is successful.
 	 * @exception   E_OUT_OF_RANGE		The specified index is outside the bounds of the data structure. @n
 	 *									The index is greater than or equal to the number of elements or less than @c 0.
@@ -459,17 +462,15 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]   position                	The position at which to set the specified button item.
-	 * @param[in]   button                      The button item to be set
+	 * @param[in]   button                      The button item to set
 	 * @exception   E_SUCCESS                   The method is successful.
 	 * @exception   E_INVALID_ARG          	 	A specified input parameter is invalid. @n
 	 *									        The specified item is not constructed.
 	 * @exception	E_INVALID_OPERATION			The current state of the instance prohibits the execution of the specified operation.@n
 	 *											There are more than 2 footer items.
-	 * @exception   E_UNSUPPORTED_OPERATION 	This operation is not supported. @n
-	 *											The operation is supported when the style of the %Footer control is either
-	 *											@c FOOTER_STYLE_SEGMENTED_TEXT or @c FOOTER_STYLE_SEGMENTED_ICON.
+	 * @exception   E_UNSUPPORTED_OPERATION     The operation is not supported when the style of the %Footer control is ::FOOTER_STYLE_TAB.
 	 * @exception   E_SYSTEM                    A system error has occurred.
-	 * @remarks     If there is an existing button item at the specified position, it is replaced with the new item.@n
+	 * @remarks	If there is an existing button item at the specified position, it is replaced with the new item.
 	 *              However, the contents of the specified item are copied to the %Footer control.
 	 */
 	result SetButton(ButtonPosition position, const ButtonItem& button);
@@ -482,7 +483,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	status          The status of the button item
-	 * @param[in]	color           The button item color to be set
+	 * @param[in]	color           The button item color to set
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_SYSTEM	    A system error has occurred.
 	 * @see         GetButtonColor()
@@ -530,7 +531,7 @@ public:
 	 *
 	 * @return      An error code
 	 * @param[in]   status          The status of the button item
-	 * @param[in]   color           The button item text color to be set
+	 * @param[in]   color           The button item text color to set
 	 * @exception   E_SUCCESS       The method is successful.
 	 * @exception   E_SYSTEM        A system error has occurred.
 	 * @see         GetButtonTextColor()
@@ -547,7 +548,7 @@ public:
 	 * @param[in]   pBadgeIcon             		The bitmap for the icon
 	 * @exception   E_SUCCESS           		The method is successful.
 	 * @exception 	E_UNSUPPORTED_OPERATION 	This operation is not supported. @n
-	 *      		The operation is not supported when the style of the %Footer control is @c FOOTER_STYLE_TAB.
+	 *      		The operation is not supported when the style of the %Footer control is ::FOOTER_STYLE_TAB.
 	 */
 	result SetButtonBadgeIcon(ButtonPosition position, const Tizen::Graphics::Bitmap* pBadgeIcon);
 
@@ -563,7 +564,7 @@ public:
 	 * @exception   E_SUCCESS          			The method is successful.
 	 * @exception   E_INVALID_ARG          		The specified @c number must be in the range defined by @c 0 and @c 99999.
 	 * @exception   E_UNSUPPORTED_OPERATION   	This operation is not supported. @n
-	 *             	The operation is not supported when the style of the %Footer control is @c FOOTER_STYLE_TAB.
+	 *             	The operation is not supported when the style of the %Footer control is ::FOOTER_STYLE_TAB.
 	 * @remarks  	To remove the numbered badge icon from an item, pass @c 0 as the value of @c number.
 	 */
 	result SetButtonNumberedBadgeIcon(ButtonPosition position, int number);
@@ -579,11 +580,12 @@ public:
 	 * @exception   E_INVALID_OPERATION           The current state of the instance prohibits the execution of the specified operation. @n
 	 *                                            There are more than 2 footer items.
 	 * @exception   E_UNSUPPORTED_OPERATION       This operation is not supported. @n
-	 *											  The operation is not supported when the style of the %Footer control is @c FOOTER_STYLE_TAB. @n
+	 *										The operation is not supported when the style of the %Footer control is ::FOOTER_STYLE_TAB. @n
 	 *                                            This device does not support the software back button.
 	 * @exception   E_SYSTEM                      A system error has occurred.
-	 * @remarks     When the back button is pressed, OnFormBackRequested() of IFormBackEventListener is called. @n
-	 *              If the right button is already set, then the button is replaced with the back button.
+	 * @remarks
+	 *			- When the back button is pressed, OnFormBackRequested() of IFormBackEventListener is called.
+	 *			- If the right button is already set, then the button is replaced with the back button.
 	 * @see         Tizen::Ui::Controls::IFormBackEventListener
 	 */
 	result SetBackButton(void);
@@ -616,13 +618,9 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	status                  The item status
-	 * @param[in]	color                   The item color to be set
+	 * @param[in]	color                   The item color to set
 	 * @exception	E_SUCCESS               The method is successful.
-	 * @exception   E_UNSUPPORTED_OPERATION	This operation is not supported. @n
-	 *                                      The current style of the %Footer control does not support the operation.
 	 * @exception	E_SYSTEM	            A system error has occurred.
-	 * @remarks     It is not possible to set the item colors for the normal and disabled status of the @c FOOTER_STYLE_TAB style %Footer control. @n
-	                Furthermore, @c FOOTER_STYLE_BUTTON_ICON style %Footer control does not support this operation.
 	 * @see         GetItemColor()
 	 */
 	result SetItemColor(FooterItemStatus status, const Tizen::Graphics::Color& color);
@@ -658,8 +656,6 @@ public:
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_OUT_OF_RANGE          The specified index is outside the bounds of the data structure. @n
 	 *										The index is greater than or equal to the number of elements or less than @c 0.
-	 * @exception	E_UNSUPPORTED_OPERATION	This operation is not supported. @n
-	 *										The operation is not supported when the style of the %Footer control is @c FOOTER_STYLE_BUTTON_ICON.
 	 * @exception   E_SYSTEM                A system error has occurred.
 	 */
 	result SetItemBadgeIcon(int itemIndex, const Tizen::Graphics::Bitmap* pBadgeIcon);
@@ -677,8 +673,6 @@ public:
 	 * @exception   E_INVALID_ARG           The specified @c number must be in the range defined by @c 0 and @c 99999.
 	 * @exception   E_OUT_OF_RANGE          The specified index is outside the bounds of the data structure. @n
 	 *										The index is greater than or equal to the number of elements or less than @c 0.
-	 * @exception   E_UNSUPPORTED_OPERATION This operation is not supported. @n
-	 *                                      The operation is not supported when the style of the %Footer control is @c FOOTER_STYLE_BUTTON_ICON.
 	 * @exception   E_SYSTEM                A system error has occurred.
 	 * @remarks     To remove the numbered badge icon from an item, pass @c 0 as the value of @c number.
 	 */
@@ -692,7 +686,7 @@ public:
 	 *
 	 * @return      An error code
 	 * @param[in]   status              The item status
-	 * @param[in]   color               The item text color to be set
+	 * @param[in]   color               The item text color to set
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_SYSTEM            A system error has occurred.
 	 */
@@ -705,14 +699,14 @@ public:
 	 * @since		2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   itemIndex               The index of the item to be selected
+	 * @param[in]   itemIndex               The index of the item to select
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_OUT_OF_RANGE          The specified index is out of the range of the data structure. @n
 	 *										The specified index is either greater than or equal to the number of items or is less than zero.
 	 * @exception   E_INVALID_OPERATION     The current state of the instance prohibits the execution of the specified operation. @n
 	 *                                      The item at the specified index is disabled.
-	 * @exception   E_UNSUPPORTED_OPERATION	This operation is not supported. @n
-	 *										The operation is not supported if the %Footer control style is either @c FOOTER_STYLE_BUTTON_TEXT or @c FOOTER_STYLE_BUTTON_ICON.
+	 * @exception   E_UNSUPPORTED_OPERATION The operation is not supported if the %Footer control style is ::FOOTER_STYLE_BUTTON_TEXT,
+	 *                                      ::FOOTER_STYLE_BUTTON_ICON or ::FOOTER_STYLE_BUTTON_ICON_TEXT.
 	 * @exception   E_SYSTEM                A system error has occurred.
 	 */
 	result SetItemSelected(int itemIndex);
@@ -724,7 +718,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   color				The footer color to be set
+	 * @param[in]   color				The footer color to set
 	 * @exception   E_SUCCESS			The method is successful.
 	 */
 	result SetColor(const Tizen::Graphics::Color& color);
@@ -753,8 +747,7 @@ public:
 	 * @param[in]   enable                  Set to @c true to enable the edit mode, @n
 	 *                                      else @c false
 	 * @exception   E_SUCCESS               The method is successful.
-	 * @exception   E_UNSUPPORTED_OPERATION	This operation is not supported. @n
-	 *										The operation is not supported when the style of the %Footer control style is not @c FOOTER_STYLE_TAB.
+	 * @exception   E_UNSUPPORTED_OPERATION The operation is supported when the style of the %Footer control style is ::FOOTER_STYLE_TAB.
 	 */
 	result SetTabEditModeEnabled(bool enable);
 
@@ -765,8 +758,9 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]   listener	The event listener to be added
-	 * @remarks		When the user collapses the tab style %Footer control which is in the expanded mode by pressing the more button, OnActionPerformed() is called for the currently selected tab item.
+	 * @param[in]   listener	The event listener to add
+	 * @remarks		When the user collapses the tab style %Footer control which is in the expanded mode by pressing the more button,
+	 *				OnActionPerformed() is called for the currently selected tab item.
 	 */
 	void AddActionEventListener(Tizen::Ui::IActionEventListener& listener);
 
@@ -777,15 +771,29 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 */
 	void RemoveActionEventListener(Tizen::Ui::IActionEventListener& listener);
 
 
 	/**
+	* Gets the position and size of the specified button item.
+	*
+	* @since		2.0
+	*
+	* @return      	The position and size of the button item at the specified position.
+	* @param[in]   	position            	The position of the button item
+	* @exception   	E_SUCCESS               The method is successful.
+	* @exception   	E_INVALID_OPERATION    	The current state of the instance prohibits the execution of the specified operation. @n
+	*                                     	There is no button set at the specified position.
+	* @remarks     	The specific error code can be accessed using the GetLastResult() method.
+	*/
+	Tizen::Graphics::Rectangle GetButtonBounds(ButtonPosition position) const;
+
+	/**
 	 * Gets the position and size of the specified button item.
 	 *
-	 * @since		2.0
+	 * @since		2.1
 	 *
 	 * @return      	The position and size of the button item at the specified position.
 	 * @param[in]   	position            	The position of the button item
@@ -794,7 +802,7 @@ public:
 	 *                                     	There is no button set at the specified position.
 	 * @remarks     	The specific error code can be accessed using the GetLastResult() method.
 	 */
-	Tizen::Graphics::Rectangle GetButtonBounds(ButtonPosition position) const;
+	Tizen::Graphics::FloatRectangle GetButtonBoundsF(ButtonPosition position) const;
 
 
 protected:

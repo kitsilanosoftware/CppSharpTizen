@@ -31,9 +31,9 @@ namespace Tizen { namespace Web { namespace Controls
 
 /**
  * @interface	ITextSearchListener
- * @brief              This interface is for receiving the result of the search operation made by asynchronous methods.
+ * @brief		This interface is for receiving the result of the search operation made by asynchronous methods.
  *
- * @since 2.0
+ * @since		2.0
  *
  * The %ITextSearchListener interface receives the result of the search operation made by asynchronous methods.
  */
@@ -47,17 +47,17 @@ public:
 	/**
 	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
-	 * @since 2.0
+	 * @since		2.0
 	 */
 	virtual ~ITextSearchListener(void) {}
 
 	/**
 	 * Called when the text is found.
 	 *
-	 * @since 2.0
+	 * @since		2.0
 	 *
 	 * @param[in]	totalCount		The total count of matches
-	 * @param[in]	currentOrdinal		The ordinal of currently selected match @n
+	 * @param[in]	currentOrdinal	The ordinal of currently selected match @n
 	 *								If there is no match, it will be set to zero.
 	 */
 	virtual void OnTextFound(int totalCount, int currentOrdinal) = 0;
@@ -69,7 +69,7 @@ protected:
 	//
 	// Gets the Impl instance.
 	//
-	// @since 2.0
+	// @since		2.0
 	//
 	virtual void ITextSearchListener_Reserved1(void) {};
 
@@ -78,7 +78,7 @@ protected:
 	//
 	// Gets the Impl instance.
 	//
-	// @since 2.0
+	// @since		2.0
 	//
 	virtual void ITextSearchListener_Reserved2(void) {};
 };

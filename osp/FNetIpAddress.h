@@ -65,7 +65,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		The address as an unsigned @c short value, in the network @c byte order
-	 * @param[in]	host	The IP address to be converted, expressed in host @c byte order
+	 * @param[in]	host	The IP address to convert, expressed in host @c byte order
 	 *
 	 * @see			NetworkToHostOrder()
 	 */
@@ -77,7 +77,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		The address as an unsigned @c long value, in the network @c byte order
-	 * @param[in]	host	The IP address to be converted, expressed in host @c byte order
+	 * @param[in]	host	The IP address to convert, expressed in the host @c byte order
 	 *
 	 * @see			NetworkToHostOrder()
 	 */
@@ -89,7 +89,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		The address as an unsigned @c short value, in the host @c byte order
-	 * @param[in]	network		The IP address to be converted, expressed in the network @c byte order
+	 * @param[in]	network		The IP address to convert, expressed in the network @c byte order
 	 *
 	 * @see			HostToNetworkOrder()
 	 */
@@ -101,7 +101,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		The address as an unsigned @c long value, in the host @c byte order
-	 * @param[in]	network		The IP address to be converted, expressed in the network @c byte order
+	 * @param[in]	network		The IP address to convert, expressed in the network @c byte order
 	 *
 	 * @see				HostToNetworkOrder()
 	*/
@@ -123,7 +123,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[out]	ipAddr				A ByteBuffer object for getting the raw IP address
+	 * @param[out]	ipAddr				A Tizen::Base::ByteBuffer object for getting the raw IP address
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG		The specified @c ipAddr is invalid.
 	 * @exception	E_OVERFLOW			This operation has caused the memory to overflow.

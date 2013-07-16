@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -28,12 +28,12 @@
 namespace Tizen { namespace Ui
 {
 /**
- * @enum        DataBindingFlow
- *
- * Defines the possible data flow types.
- *
- * @since 2.0
- */
+* @enum        DataBindingFlow
+*
+* Defines the possible data flow types.
+*
+* @since 2.0
+*/
 enum DataBindingFlow
 {
 	DATA_BINDING_FLOW_ONE_WAY = 0,                                    /**< The data flow is one way from source to target */
@@ -42,12 +42,12 @@ enum DataBindingFlow
 };
 
 /**
- * @enum        DataBindingTrigger
- *
- * Defines the possible data binding trigger types.
- *
- * @since 2.0
- */
+* @enum        DataBindingTrigger
+*
+* Defines the possible data binding trigger types.
+*
+* @since 2.0
+*/
 enum DataBindingTrigger
 {
 	DATA_BINDING_TRIGGER_IMMEDIATE = 0,                   /**< Immediate trigger */
@@ -55,12 +55,12 @@ enum DataBindingTrigger
 };
 
 /**
- * @enum        DataBindingDataType
- *
- * Defines the possible data types for data binding source.
- *
- * @since 2.0
- */
+* @enum        DataBindingDataType
+*
+* Defines the possible data types for data binding source.
+*
+* @since 2.0
+*/
 enum DataBindingDataType
 {
 	DATA_BINDING_DATA_TYPE_BOOLEAN = 0,                             /**< Boolean type */
@@ -72,16 +72,19 @@ enum DataBindingDataType
 	DATA_BINDING_DATA_TYPE_LONG = 6,                                  /**< Long type */
 	DATA_BINDING_DATA_TYPE_POINT = 7,                                  /**< Point type */
 	DATA_BINDING_DATA_TYPE_RECTANGLE = 8,                           /**< Rectangle type */
-	DATA_BINDING_DATA_TYPE_STRING = 9                                 /**< String type */
+	DATA_BINDING_DATA_TYPE_STRING = 9,                                 /**< String type */
+	DATA_BINDING_DATA_TYPE_FLOAT_DIMENSION = 10,          /**<  Dimension type in floating-point number @b Since: @b 2.1 */
+	DATA_BINDING_DATA_TYPE_FLOAT_POINT = 11,                  /**<Point type in floating-point number @b Since: @b 2.1 */
+	DATA_BINDING_DATA_TYPE_FLOAT_RECTANGLE = 12           /**<Rectangle type in floating-point number @b Since: @b 2.1 */
 };
 
 /**
- * @enum        DataBindingDestinationType
- *
- * Defines the possible destination types for explicit data bindings.
- *
- * @since 2.0
- */
+* @enum        DataBindingDestinationType
+*
+* Defines the possible destination types for explicit data bindings.
+*
+* @since 2.0
+*/
 enum DataBindingDestinationType
 {
 	DATA_BINDING_DESTINATION_TYPE_SOURCE = 0,                            /**< Update source with latest data of associated target */

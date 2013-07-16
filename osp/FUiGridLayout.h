@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -84,30 +84,30 @@ GridLayoutSample::OnInitializing(void)
 	Panel* pPanel = new Panel();
 	pPanel->Construct(gridPanelLayout, Rectangle((GetClientAreaBounds().width - 440)/2, (GetClientAreaBounds().height - 700)/2, 440, 700));
 	{
-		// Creates instances of Label and an instanceo of Button
+		// Creates instances of Label and an instance of Button
 		Label* pLabel1 = new Label();
 		pLabel1->Construct(Rectangle(0, 0, 100, 200), L"Label1\n(0, 0)");
 		pLabel1->SetBackgroundColor(Color(0x00, 0x10, 0x80, 0xFF));
-		pPanel->AddControl(*pLabel1);
+		pPanel->AddControl(pLabel1);
 
 		Label* pLabel2 = new Label();
 		pLabel2->Construct(Rectangle(0, 0, 100, 200), L"Label2\n(0, 1)");
 		pLabel2->SetBackgroundColor(Color(0x00, 0x20, 0xA0, 0xFF));
-		pPanel->AddControl(*pLabel2);
+		pPanel->AddControl(pLabel2);
 
 		Label* pLabel3 = new Label();
 		pLabel3->Construct(Rectangle(0, 0, 100, 200), L"Label3\n(0, 2)");
 		pLabel3->SetBackgroundColor(Color(0x00, 0x30, 0xC0, 0xFF));
-		pPanel->AddControl(*pLabel3);
+		pPanel->AddControl(pLabel3);
 
 		Label* pLabel4 = new Label();
 		pLabel4->Construct(Rectangle(0, 0, 100, 200), L"Label4\n(1, 0)");
 		pLabel4->SetBackgroundColor(Color(0x00, 0x40, 0xE0, 0xFF));
-		pPanel->AddControl(*pLabel4);
+		pPanel->AddControl(pLabel4);
 
 		Button* pButton = new Button();
 		pButton->Construct(Rectangle(0, 0, 100, 200), L"Button\n(1, 1)");
-		pPanel->AddControl(*pButton);
+		pPanel->AddControl(pButton);
 
 		// Sets position to each label and button in grid layout
 		gridPanelLayout.SetPosition(*pLabel1, 0, 0, 1, 1);
@@ -128,7 +128,7 @@ GridLayoutSample::OnInitializing(void)
 	}
 
 	// Adds the top panel to the form
-	AddControl(*pPanel);
+	AddControl(pPanel);
 
 	return r;
 }
@@ -291,6 +291,23 @@ public:
 	result SetColumnSpacing(int columnIndex, int space);
 
 	/**
+	 * Sets the space before the specified column index.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	columnIndex		The column index
+	 * @param[in]	space			An @c int representing the space
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_INVALID_ARG   The specified input parameter is invalid.
+	 * @exception	E_OUT_OF_RANGE	The specified index is out of range.
+	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @remarks		This method does not perform any operation if the value of @c columnIndex is 0.
+	 * @remarks		The column spacing cannot be applied to the first column.
+	 */
+	result SetColumnSpacing(int columnIndex, float space);
+
+	/**
 	 * Sets the stretching ability of the specified row.
 	 *
 	 * @since		2.0
@@ -379,6 +396,23 @@ public:
 	result SetRowSpacing(int rowIndex, int space);
 
 	/**
+	 * Sets the space before the specified column index.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	rowIndex		The row index
+	 * @param[in]	space			An @c int representing the space
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_INVALID_ARG   The specified input parameter is invalid.
+	 * @exception	E_OUT_OF_RANGE	The specified index is out of range.
+	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @remarks		This method does not perform any operation if the value of @c rowIndex is @c 0.
+	 * @remarks		The row spacing cannot be applied to the first column.
+	 */
+	result SetRowSpacing(int rowIndex, float space);
+
+	/**
 	 * Sets the position and span of the control. @n
 	 * Adds the control at the specified position.
 	 *
@@ -388,8 +422,8 @@ public:
 	 * @param[in]	childControl		The control for which the position is set
 	 * @param[in]	rowStartIndex		The row index
 	 * @param[in]	columnStartIndex	The column index
-	 * @param[in]	rowSpan				The row span specifies the total number of cells in a row that are to be merged into a cell
-	 * @param[in]	columnSpan			The column span specifies the total number of cells in a column that are to be merged into a cell
+	 * @param[in]	rowSpan				The row span specifies the total number of cells in a row that are merged into a cell
+	 * @param[in]	columnSpan			The column span specifies the total number of cells in a column that are merged into a cell
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG   	Either of the following conditions has occurred: @n
 	 *									- A specified input parameter is invalid. @n
@@ -443,6 +477,24 @@ public:
 	 */
 	result SetMargin(Control& childControl, int left, int right, int top, int bottom);
 
+	/**
+	 * Sets the margins of the specified control.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	childControl	The control for which the margins are set
+	 * @param[in]	left			The left margin
+	 * @param[in]	right			The right margin
+	 * @param[in]	top				The top margin
+	 * @param[in]	bottom			The bottom margin
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_INVALID_ARG   A specified input parameter is invalid. @n
+	 *								The specified @c childControl parameter is not a child of the container that owns the layout.
+	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @remarks		By default, the margins are set to @c 0.
+	 */
+	result SetMargin(Control& childControl, float left, float right, float top, float bottom);
 private:
 	//
 	// The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.

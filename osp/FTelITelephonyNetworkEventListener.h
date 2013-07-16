@@ -56,7 +56,6 @@ public:
      * @since   2.0
 	 *
      * @param[in]   networkStatus	The new network status
-     * @see	Tizen::Telephony::NetworkStatus
      */
 	virtual void OnTelephonyNetworkStatusChanged(const NetworkStatus& networkStatus) = 0;
 

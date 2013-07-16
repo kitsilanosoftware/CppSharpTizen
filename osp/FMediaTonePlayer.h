@@ -152,13 +152,12 @@ class _OSP_EXPORT_ TonePlayer
 {
 public:
 	/**
-	 * This is the default constructor for this class.
+	 * This is the default constructor for this class. @n
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the Construct() method must be called right after calling this constructor.
 	 *
 	 * @since		2.0
 	 *
-	 * @remarks		After creating an instance of this class, the Construct() method must be
-	 *				called explicitly to initialize this instance
-	 * @see			Construct()
 	 */
 	TonePlayer(void);
 
@@ -169,7 +168,6 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @see			Construct()
 	 */
 	virtual ~TonePlayer(void);
 
@@ -202,7 +200,7 @@ public:
 	* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 	* @exception	E_OUT_OF_RANGE			The count is out of range.
 	* @exception	E_SYSTEM							A system error has occurred.
-	* @remarks		The item(s) of the specified @c toneList should be an instance(s) of Tone.
+	* @remarks		The item(s) of the specified @c toneList must be an instance(s) of Tone.
 	* @see			Close()
 	*/
 	result Open(const Tizen::Base::Collection::IList& toneList, int repeatCount = 1);
@@ -227,7 +225,7 @@ public:
 
 	/**
 	* Plays the playback or resumes the playback if Pause() has been called. @n
-	* In case of the TONE_PLAYER_STATE_END_OF_TONE state, the tone(s) can be played again.
+	* In case of the @c TONEPLAYER_STATE_ENDOFTONE state, the tone(s) can be played again.
 	*
 	* @since		2.0
 	*
@@ -238,7 +236,8 @@ public:
 	* @exception	E_SYSTEM							A system error has occurred.
 	* @remarks		The playback starts from the current position. If playback is paused, playback restarts from
 	*				the last position.
-	* @see			Stop(), Pause()
+	* @see			Stop()
+	* @see			Pause()
 	*/
 	result Play(void);
 
@@ -251,7 +250,8 @@ public:
 	* @exception	E_SUCCESS						The method is successful.
 	* @exception	E_INVALID_STATE		This instance is in an invalid state for this method.
 	* @exception	E_SYSTEM							A system error has occurred.
-	* @see			Play(), Pause()
+	* @see			Play()
+	* @see			Pause()
 	*/
 	result Stop(void);
 
@@ -265,7 +265,7 @@ public:
 	* @exception	E_SUCCESS						The method is successful.
 	* @exception	E_INVALID_STATE		This instance is in an invalid state for this method.
 	* @exception	E_SYSTEM							A system error has occurred.
-	* @see			Play(), Stop()
+	* @see			Stop()
 	*/
 	result Pause(void);
 
@@ -276,7 +276,7 @@ public:
 	* @since		2.0
 	*
 	* @return		An error code
-	* @param[in]	volume				The new value for volume @n
+	* @param[in]	volume				The new value for @c volume @n
 	*									The range of this parameter is @c 0 to @c 100 and it is proportional to the current media sound volume level in setting.
 	* @exception	E_SUCCESS						The method is successful.
 	* @exception	E_OUT_OF_RANGE			The specified @c volume parameter is out of range.
@@ -286,7 +286,7 @@ public:
 	result SetVolume(int volume);
 
 	/**
-	* Gets the current volume level
+	* Gets the current volume level.
 	*
 	* @since		2.0
 	*
@@ -320,7 +320,7 @@ public:
 	TonePlayerState GetState(void) const;
 
 	/**
-	* Sets audio stream type for tone playback
+	* Sets an audio stream type for tone playback.
 	*
 	* @since		2.0
 	*
@@ -328,7 +328,7 @@ public:
 	* @param[in]    type                    			An audio stream type
 	* @exception    E_SUCCESS					The method is successful.
 	* @exception    E_INVALID_STATE			This instance is in an invalid state for this method.
-	* @exception    E_INVALID_ARG				A specified input parameter is invalid.
+	* @exception    E_INVALID_ARG				The specified input parameter is invalid.
 	* @remarks	This method should be called before Open().
 	*/
 	result SetAudioStreamType(AudioStreamType type);

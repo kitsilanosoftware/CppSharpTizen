@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -64,7 +63,7 @@ namespace Tizen { namespace Base { namespace Collection
  *		const Object* pObj = queue.Peek();		// pObj: "First", queue.GetCount(): 3
  *
  *		// Reads and removes the element at the beginning
- *		String* pStr = static_cast<String*> (queue.Dequeue());	// pStr: "First", queue.GetCount(): 2
+ *		String* pStr = static_cast< String* > (queue.Dequeue());	// pStr: "First", queue.GetCount(): 2
  *
  *		delete pStr;	 // Because the queue does not have the Ownership of this pStr after dequeueing
  *

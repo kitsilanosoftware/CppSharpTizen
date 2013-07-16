@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -63,7 +63,7 @@ public:
 	/**
 	 * Called when the child is attached to VisualElement. @n
 	 * Overrides the %OnChildAttached() method to provide user-specific code just after the child is attached to the %VisualElement.
-	 * This method is invoked when @c child is attached to @c source by @c AttachChild, @c InsertChild, @c ChangeZOder, or @c SetZOrderGroup.
+	 * This method is invoked when @c child is attached to @c source by @c AttachChild, @c InsertChild, @c ChangeZOder.
 	 *
 	 * @since		2.0
 	 *
@@ -78,7 +78,7 @@ public:
 	/**
 	 * Called when the child is detached to VisualElement. @n
 	 * Overrides the %OnChildDetached() method to provide user-specific code just after the child is detached from the %VisualElement.
-	 * This method is invoked when @c child is detached from @c source by @c AttachChild, @c InsertChild, @c ChangeZOder, or @c SetZOrderGroup.
+	 * This method is invoked when @c child is detached from @c source by @c DetachChild, @c InsertChild, or @c ChangeZOder.
 	 *
 	 * @since		2.0
 	 *
@@ -92,7 +92,7 @@ public:
 	/**
 	 * Called when VisualElement is attached to the parent. @n
 	 * Overrides the %OnAttached() method to provide user-specific code just after the %VisualElement is attached to the parent.
-	 * This method is invoked when @c source is attached to @c parent by @c AttachChild, @c InsertChild, @c ChangeZOder, or @c SetZOrderGroup.
+	 * This method is invoked when @c source is attached to @c parent by @c AttachChild, @c InsertChild, @c ChangeZOder.
 	 *
 	 * @since		2.0
 	 *
@@ -107,7 +107,7 @@ public:
 	/**
 	 * Called when VisualElement is detached to the parent. @n
 	 * Overrides the %OnDetached() method to provide user-specific code just after the %VisualElement is detached from the parent.
-	 * This method is invoked when @c source is detached from @c parent by @c AttachChild, @c InsertChild, @c ChangeZOder, @c SetZOrderGroup, or @c DetachChild.
+	 * This method is invoked when @c source is detached from @c parent by @c DetachChild, @c InsertChild, or @c ChangeZOder.
 	 *
 	 * @since		2.0
 	 *

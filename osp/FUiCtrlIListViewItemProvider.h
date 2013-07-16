@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -48,7 +48,7 @@ class _OSP_EXPORT_ IListViewItemProvider
 // Operation
 public:
 	/**
-	 * This polymorphic destructor should be overridden if required.
+	 * This polymorphic destructor should be overridden if required. @n
 	 * This way, the destructors of the derived classes are called
 	 * when the destructor of this interface is called.
 	 *
@@ -57,7 +57,7 @@ public:
 	virtual ~IListViewItemProvider(void) {}
 
 	/**
-	 * Called when the ListView is about to be drawn and returns the number of total items.
+	 * Gets the total number of items in a specified group.
 	 *
 	 * @since	2.0
 	 *
@@ -68,35 +68,38 @@ public:
 	virtual int GetItemCount(void) = 0;
 
 	/**
-	 * Called when items need to be loaded.
+	 * Creates a specified item.
 	 *
 	 * @since	2.0
 	 *
 	 * @return  An item of the ListView
 	 * @param[in] index        The index of the item
 	 * @param[in] itemWidth    The width of the item
-	 * @remarks  The applications that use ListView must implement this method. @n
-	 *				This method is expected to return an item which is allocated in a heap memory. @n
-	 *				The returned item can be a SimpleItem or CustomItem. @n
-	 *				Note that when the item becomes unnecessary, the ListView calls IListViewItemProvider::DeleteItem() and the application is in charge of
-	 *				deallocating the item.
+	 * @remarks
+	 *			- The applications that use ListView must implement this method.
+	 *			- This method is expected to return an item which is allocated in a heap memory.
+	 *			- The returned item can be a SimpleItem or CustomItem.
+	 *			- The returned item should not be a null pointer.
+	 *			- Note that when the item becomes unnecessary, the ListView calls IListViewItemProvider::DeleteItem() and the application is in charge of
+	 *			deallocating the item.
 	 * @see     DeleteItem()
 	 */
 	virtual Tizen::Ui::Controls::ListItemBase* CreateItem(int index, int itemWidth) = 0;
 
 	/**
-	 * Called when an item becomes no longer used by the %ListView.
+	 * Deletes a specified item.
 	 *
 	 * @since	2.0
 	 *
 	 * @return  @c true, if the item is deallocated by this method, @n
 	 *          else @c false
 	 * @param[in] index        The index of the item
-	 * @param[in] pItem        The pointer to the item to be deleted
+	 * @param[in] pItem        The pointer to the item to delete
 	 * @param[in] itemWidth    The width of the item
-	 * @remarks  Applications which use ListView must implement this method. @n
-	 *			In this method, the applications have the chance of deallocating the item. @n
-	 *			If the application deallocates the item, this method returns @c true, notifying the %ListView not to free the item. @n
+	 * @remarks
+	 *			- Applications which use ListView must implement this method.
+	 *			- In this method, the applications have the chance of deallocating the item.
+	 *			- If the application deallocates the item, this method returns @c true, notifying the %ListView not to free the item. @n
 	 *			Otherwise, the item will be deallocated by %ListView.
 	 * @see     CreateItem()
 	 */
@@ -104,7 +107,7 @@ public:
 
 protected:
 	//
-	// Following methods are reserved and may change its name at any time without prior notice.
+	// The following methods are reserved and may change its name at any time without prior notice.
 	//
 	virtual void IListViewItemProvider_Reserved1(void) {}
 	virtual void IListViewItemProvider_Reserved2(void) {}

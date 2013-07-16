@@ -2,7 +2,7 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Flora License, Version 1.1 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -46,37 +46,72 @@ class _NetConnectionImpl;
  * The following example demonstrates how to use the %NetConnection class.
  *
  * @code
-
-// Start the network connection.
-using namespace Tizen::Net;
-
-void
-Test(void)
-{
-	// Account ID
-	NetAccountId accountId = INVALID_HANDLE;
-	result r = E_SUCCESS;
-
-	// Account manager
-	NetAccountManager netAccountManager;
-	r = netAccountManager.Construct();
-	accountId = netAccountManager.GetNetAccountId();
-
-	// Construct a listener.
-	TestListener* pMyListener = new TestListener();
-
-	// NetConnection instance allocation.
-	NetConnection* pNetConnection = new NetConnection;
-
-	// Construct NetConnection.
-	r = pNetConnection->Construct(accountId);
-
-	// __NetConnectionEvent AddListener.
-	r = pNetConnection->AddNetConnectionListener(pMyListener);
-
-	// NetConnection connect.
-	r = pNetConnection->Start();
-}
+ *
+ * 	#include <FBase.h>
+ *	#include <FNet.h>
+ *
+ *	using namespace Tizen::Base;
+ *	using namespace Tizen::Net;
+ *
+ *	class MyClass
+ *	  : public Object
+ *	  , public INetConnectionEventListener
+ *	{
+ *	   public:
+ *		  MyClass(void) {}
+ *		  ~MyClass(void) {}
+ *
+ *		void OnNetConnectionStarted(NetConnection& netConnection, result r)
+ *		{
+ *			AppLog("OnStarted result=[%s]\n", GetErrorMessage(r));
+ *		}
+ *
+ *		void OnNetConnectionStopped(NetConnection& netConnection, result r)
+ *		{
+ *			AppLog("OnStopped\n");
+ *		}
+ *
+ *		void OnNetConnectionSuspended(NetConnection& netConnection)
+ *		{
+ *			AppLog("OnSuspended\n");
+ *		}
+ *
+ *		void OnNetConnectionResumed(NetConnection& netConnection)
+ *		{
+ *			AppLog("OnResumed\n");
+ *		}
+ *
+ *		void StartNetConnection(void);
+ *	};
+ *
+ *	void
+ *	MyClass::StartNetConnection(void)
+ *	{
+ *		NetAccountManager netAccountManager;
+ *		result r = netAccountManager.Construct();
+ *		if (IsFailed(r))
+ *		{
+ *			return;
+ *		}
+ *
+ *		NetAccountId accountId = netAccountManager.GetNetAccountId(NET_BEARER_PS);
+ *
+ *		NetConnection* pNetConnection = new NetConnection();
+ *		r = pNetConnection->Construct(accountId);
+ *		if (IsFailed(r))
+ *		{
+ *			delete pNetConnection;
+ *			return;
+ *		}
+ *
+ *		r = pNetConnection->AddNetConnectionListener(*this);
+ *		r = pNetConnection->Start();
+ *
+ *		// Wait OnNetConnectionStarted() event
+ *
+ *		delete pNetConnection;
+ *	}
+ *
  * @endcode
  */
 class _OSP_EXPORT_ NetConnection
@@ -84,7 +119,8 @@ class _OSP_EXPORT_ NetConnection
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the Construct() method must be called right after calling this constructor.
 	 *
 	 * @since		2.0
 	 *
@@ -155,6 +191,8 @@ public:
 	 * Starts the network connection.
 	 *
 	 * @since		2.0
+	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/network.connection
 	 *
 	 * @return		An error code
@@ -167,7 +205,8 @@ public:
 	 * @exception	E_SERVICE_LIMITED		A connection is already active. Therefore, cannot setup a co-existing network connection.
 	 * @exception	E_SYSTEM				An internal error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
-	 * @remarks		When the network is available, after calling this method, the OnNetConnectionStarted() method of the registered
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @remarks		When the network is available, after calling this method, the INetConnectionEventListener::OnNetConnectionStarted() method of the registered
 	 *				INetConnectionEventListener instance is called.
 	 * @see			Stop()
 	 */
@@ -177,6 +216,8 @@ public:
 	 * Stops the network connection.
 	 *
 	 * @since		2.0
+	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/network.connection
 	 *
 	 * @return		An error code
@@ -187,10 +228,12 @@ public:
 	 * @exception	E_INVALID_CONTEXT		The context information associated with the network connection account is invalid.
 	 * @exception	E_SYSTEM				An internal error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
-	 * @remarks		This method stops the network connection of an application.  Additionally, it does not ensure immediate disconnection of the network
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @remarks		This method stops the network connection of an application. Additionally, it does not ensure immediate disconnection of the network
 	 *				service (for example, 3G data service or Wi-Fi). The network service remains active till all the applications stop using the network
 	 *				connection. Once stopped, the network connection can be restarted using the Start() method.
-	 * @see			Start(), Close()
+	 * @see			Start()
+	 * @see			Close()
 	 */
 	result Stop(void);
 
@@ -200,6 +243,8 @@ public:
 	 * with a remote server or gateway.
 	 *
 	 * @since		2.0
+	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/network.connection
 	 *
 	 * @return		An error code
@@ -210,6 +255,7 @@ public:
 	 * @exception	E_INVALID_CONTEXT		The context information associated with the network connection account is invalid.
 	 * @exception	E_SYSTEM				An internal error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @remarks		This method stops the network connection of an application. Additionally, it does not ensure immediate disconnection of the network
 	 *				service (for example, 3G data service or Wi-Fi). The network service remains active till all the applications stop using the network
 	 *				connection.
@@ -280,7 +326,7 @@ public:
 	 * @deprecated	This method is deprecated because it is moved to the NetConnectionManager class.
 	 * @since       2.0
 	 *
-	 * @return		An IList containing indexes to NetConnectionInfo in the network, @n
+	 * @return		A Tizen::Base::Collection::IList containing indexes to NetConnectionInfo in the network, @n
 	 *				else @c null in case of an error or if an active connection is not found
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.

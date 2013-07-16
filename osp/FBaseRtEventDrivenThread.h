@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -41,7 +40,7 @@ namespace Tizen { namespace Base { namespace Runtime
  * @since 2.0
  *
  * The %EventDrivenThread class is the fundamental class for the asynchronous execution of a thread.
- * A Tizen native application can execute several threads during its operation from the multi-threading view.
+ * A %Tizen native application can execute several threads during its operation from the multi-threading view.
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/base/thread.htm">Thread</a>.
  *

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -98,7 +97,7 @@ extern "C" {
  * The following example demonstrates how to use the AppLog macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   AppLog("Initialization successful.");
@@ -122,7 +121,7 @@ extern "C" {
  * The following example demonstrates how to use the AppLogDebug macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   AppLogDebug("Invoked with value: %d", value);
@@ -148,7 +147,7 @@ extern "C" {
  * The following example demonstrates how to use the AppLogException macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   AppLogDebug("Invoked with value: %d", value);
@@ -225,7 +224,7 @@ extern "C" {
  * The following example demonstrates how to use the AppLogIf macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   AppLogIf(value !=0, "Invoked with value: %d", value);
@@ -249,7 +248,7 @@ extern "C" {
  * The following example demonstrates how to use the AppLogDebugIf macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   AppLogDebugIf(value !=0, "Invoked with value: %d", value);
@@ -273,7 +272,7 @@ extern "C" {
  * The following example demonstrates how to use the AppLogExceptionIf macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   int status;
@@ -299,7 +298,7 @@ extern "C" {
  * The following example demonstrates how to use the AppLogTag macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   int status;
@@ -325,7 +324,7 @@ extern "C" {
  * The following example demonstrates how to use the AppLogDebugTag macro.
  *
   * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   AppLogDebugTag("MyTag", "Invoked with value: %d", value);
@@ -352,7 +351,7 @@ extern "C" {
  * The following example demonstrates how to use the AppLogExceptionTag macro.
  *
  * @code
- *	Bool
+ *	bool
  *	MyEngine::Init(int value)
  *	{
  *	   AppLogDebug("Invoked with value: %d", value);
@@ -448,6 +447,28 @@ extern "C" {
 	else {;}
 
 /**
+* If the condition is @c false, it prints a message, sets the last result, evaluates a cleanup expression
+* and goes to label.
+*
+* @since 2.1
+*
+* @param[in]    condition		The condition that is expected to be true
+* @param[in]    expr			Expressions that are evaluated before going to catchLabel
+* @param[in]    catchLabel		The label for goto operation
+* @param[in]    r			The last result to set
+* @param[in]    ...			The message to display
+* @hideinitializer
+*/
+#define TryCatchLabelResult(condition, expr, catchLabel, r, ...) \
+	if (!(condition)) { \
+		SetLastResult(r); \
+		AppLogException(__VA_ARGS__); \
+		expr; \
+		goto catchLabel;	\
+	} \
+	else {;}
+
+/**
  * If the condition is @c false, the message is printed and a value is returned.
  *
  * @since 2.0
@@ -532,6 +553,22 @@ extern "C" {
 	} \
 	else {;}
 
+/**
+* If the condition is @c false, the informative log message is printed and a value is returned.
+*
+* @since 2.1
+*
+* @param[in]    condition		The condition that is expected to be true
+* @param[in]    returnValue		The value to return when the condition is @c false
+* @param[in]    ...			The message to display
+* @hideinitializer
+*/
+#define TryLogReturn(condition, returnValue, ...) \
+	if (!(condition)) { \
+		AppLog(__VA_ARGS__); \
+		return returnValue;	\
+	} \
+	else {;}
 
 // TryTag Macros
 
@@ -574,6 +611,29 @@ extern "C" {
 		AppLogExceptionTag(tag, __VA_ARGS__); \
 		expr; \
 		goto CATCH;	\
+	} \
+	else {;}
+
+/**
+* If the condition is @c false, it prints a message with a tag, sets the last result, evaluates a cleanup expression
+* and goes to label.
+*
+* @since 2.1
+*
+* @param[in]    tag			Used to identify the source of a log message
+* @param[in]    condition		The condition that is expected to be true
+* @param[in]    expr			Expressions that are evaluated before going to catchLabel
+* @param[in]    catchLabel		The label for goto operation
+* @param[in]    r			The last result to set
+* @param[in]    ...			The message to display
+* @hideinitializer
+*/
+#define TryCatchLabelResultTag(tag, condition, expr, catchLabel, r, ...) \
+	if (!(condition)) { \
+		SetLastResult(r); \
+		AppLogExceptionTag(tag, __VA_ARGS__); \
+		expr; \
+		goto catchLabel;	\
 	} \
 	else {;}
 
@@ -667,6 +727,609 @@ extern "C" {
 	} \
 	else {;}
 
+/**
+* If the condition is @c false, the informative log message is printed with a tag and a value is returned.
+*
+* @since 2.1
+*
+* @param[in]    tag			Used to identify the source of a log message
+* @param[in]    condition		The condition that is expected to be true
+* @param[in]    returnValue		The value to return when the condition is @c false
+* @param[in]    ...			The message to display
+* @hideinitializer
+*/
+#define TryLogReturnTag(tag, condition, returnValue, ...) \
+	if (!(condition)) { \
+		AppLogTag(tag, __VA_ARGS__); \
+		return returnValue;	\
+	} \
+	else {;}
+
+/** @} */
+
+
+// Secure Macros
+/**
+ * @addtogroup  GroupMacros
+ *
+ * @{
+ */
+
+#if (defined(_APP_LOG) || defined(_OSP_DEBUG_) || defined(_DEBUG)) && defined(_SECURE_LOG)
+
+#define AppSecureLog(...)			AppLogInternal(__PRETTY_FUNCTION__, __LINE__, "[SECURE_LOG] "__VA_ARGS__)
+#define AppSecureLogDebug(...)			AppLogDebugInternal(__PRETTY_FUNCTION__, __LINE__, "[SECURE_LOG] "__VA_ARGS__)
+#define AppSecureLogException(...)		AppLogExceptionInternal(__PRETTY_FUNCTION__, __LINE__, "[SECURE_LOG] "__VA_ARGS__)
+
+#define AppSecureLogTag(tag, ...)		AppLogTagInternal(tag, __PRETTY_FUNCTION__, __LINE__, "[SECURE_LOG] "__VA_ARGS__)
+#define AppSecureLogDebugTag(tag, ...)		AppLogDebugTagInternal(tag, __PRETTY_FUNCTION__, __LINE__, "[SECURE_LOG] "__VA_ARGS__)
+#define AppSecureLogExceptionTag(tag, ...)	AppLogExceptionTagInternal(tag, __PRETTY_FUNCTION__, __LINE__, "[SECURE_LOG] "__VA_ARGS__)
+
+#else
+/**
+ * This macro is to protect informative log messages which needs to keep security.
+ * It allows display of informative log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, it will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	...			The message to display
+ *
+ * The following example demonstrates how to use the AppSecureLog macro.
+ *
+ * @code
+ *        bool
+ *        MyEngine::Init(int value)
+ *        {
+ *           AppSecureLog("User ID : 'JoneDoe'");
+ *
+ *           return true;
+ *        }
+ * @endcode
+ * @hideinitializer
+ */
+#define AppSecureLog(...)
+
+/**
+ * This macro is to protect debug log messages which needs to keep security.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, it will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	...			The message to display
+ *
+ * The following example demonstrates how to use the AppSecureLogDebug macro.
+ *
+ * @code
+ *        bool
+ *        MyEngine::Init(int value)
+ *        {
+ *           //...
+ *           if (something_wrong)
+ *           {
+ *              AppSecureLogDebug("User ID : 'JoneDoe' mismatch.");
+ *
+ *              return false;
+ *           }
+ *   //...
+ *
+ *           return true;
+ *        }
+ * @endcode
+ * @hideinitializer
+ */
+#define AppSecureLogDebug(...)
+
+/**
+ * This macro is to protect exception log messages which needs to keep security.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, it will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	...			The message to display 
+ *
+ * The following example demonstrates how to use the AppSecureLogException macro.
+ *
+ * @code
+ *        bool
+ *        MyEngine::Init(int value)
+ *        {
+ *           //...
+ *           if (something_wrong)
+ *           {
+ *              AppSecureLogException("User ID : 'JoneDoe' mismatch.");
+ *
+ *              return false;
+ *           }
+ *   //...
+ *
+ *           return true;
+ *        }
+ * @endcode
+ * @hideinitializer
+ */
+#define AppSecureLogException(...)
+
+/**
+ * This macro is to protect informative log messages which needs to keep security, with a tag.
+ * It allows display of informative log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, it will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	tag			The user defined tag
+ * @param[in]	...			The message to display
+ *
+ * The following example demonstrates how to use the AppSecureLogTag macro.
+ *
+ * @code
+ *        bool
+ *        MyEngine::Init(int value)
+ *        {
+ *           AppSecureLogTag("MyTag", "User ID : 'JoneDoe'");
+ *
+ *           return true;
+ *        }
+ * @endcode
+ * @hideinitializer
+ */
+#define AppSecureLogTag(tag, ...)
+
+/**
+ * This macro is to protect debug log messages which needs to keep security, with a tag.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, it will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	tag			The user defined tag
+ * @param[in]	...			The message to display
+ *
+ * The following example demonstrates how to use the AppSecureLogDebugTag macro.
+ *
+ * @code
+ *        bool
+ *        MyEngine::Init(int value)
+ *        {
+ *           AppSecureLogDebugTag("MyTag", "User ID : 'JoneDoe' mismatch.");
+ *
+ *           return true;
+ *        }
+ * @endcode
+ * @hideinitializer
+ */
+#define AppSecureLogDebugTag(tag, ...)
+
+/**
+ * This macro is to protect exception log messages which needs to keep security, with a tag.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, it will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	tag			The user defined tag
+ * @param[in]	...			The message to display
+ *
+ * The following example demonstrates how to use the AppSecureLogExceptionTag macro.
+ *
+ * @code
+ *        bool
+ *        MyEngine::Init(int value)
+ *        {
+ *           AppSecureLogExceptionTag("MyTag", "User ID : 'JoneDoe' mismatch.");
+ *
+ *           return true;
+ *        }
+ * @endcode
+ * @hideinitializer
+ */
+#define AppSecureLogExceptionTag(tag, ...)
+
+#endif
+
+/**
+ * If the condition is @c false, it prints a message, evaluates a cleanup expression,
+ * and goes to <tt>CATCH</tt>.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	expr			Expressions that are evaluated before going to CATCH label
+ * @param[in]	...			The message to display
+ *
+ * The following example demonstrates how to use the SecureTry macro.
+ *
+ * @code
+ *	result
+ *	MyClass::DoSomething(const String* passwd)
+ *	{
+ *	   result r = E_SUCCESS;
+ *
+ *	   // Do something...
+ *
+ *	   // If password is wrong, print "[E_INVALID_ARG] The password '1234' is wrong." to the console
+ *	   // execute the expression "r = E_INVALID_ARG", and move to CATCH
+ *	   SecureTryCatch(*passwd != refPasswd, r = E_INVALID_ARG, "[E_INVALID_ARG] The password '%ls' is wrong.", passwd->GetPointer());
+ *
+ *	   SetLastResult(E_SUCCESS);
+ *
+ *	   return E_SUCCESS;// execute the expression "r = E_INVALID_ARG", and move to CATCH
+ *
+ *	   CATCH:
+ *	      SetLastResult(r);
+ *            // Do something
+ *
+ *	      return r;
+ *	}
+ * @endcode
+ * @hideinitializer
+ */
+#define SecureTryCatch(condition, expr, ...) \
+	if (!(condition)) { \
+		AppSecureLogException(__VA_ARGS__); \
+		expr; \
+		goto CATCH;	\
+	} \
+	else {;}
+
+/**
+ * If the condition is @c false, it prints a message, sets the last result, evaluates a cleanup expression
+ * and goes to <tt>CATCH</tt>.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	expr			Expressions that are evaluated before going to CATCH label
+ * @param[in]	r			The last result to set
+ * @param[in]	...			The message to display
+ * @hideinitializer
+ */
+#define SecureTryCatchResult(condition, expr, r, ...) \
+	if (!(condition)) { \
+		SetLastResult(r); \
+		AppSecureLogException(__VA_ARGS__); \
+		expr; \
+		goto CATCH;	\
+	} \
+	else {;}
+
+/**
+ * If the condition is @c false, it prints a message, sets the last result, evaluates a cleanup expression
+ * and goes to label.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]    condition		The condition that is expected to be true
+ * @param[in]    expr			Expressions that are evaluated before going to catchLabel
+ * @param[in]    catchLabel		The label for goto operation
+ * @param[in]    r			The last result to set
+ * @param[in]    ...			The message to display
+ * @hideinitializer
+ */
+#define SecureTryCatchLabelResult(condition, expr, catchLabel, r, ...) \
+	if (!(condition)) { \
+		SetLastResult(r); \
+		AppSecureLogException(__VA_ARGS__); \
+		expr; \
+		goto catchLabel;	\
+	} \
+	else {;}
+
+/**
+ * If the condition is @c false, the message is printed and a value is returned.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	returnValue		The value to return when the condition is @c false
+ * @param[in]	...			The message to display
+ * @hideinitializer
+ */
+#define SecureTryReturn(condition, returnValue, ...)	\
+	if (!(condition)) { \
+		AppSecureLogException(__VA_ARGS__); \
+		return returnValue;	\
+	} \
+	else {;}
+
+/**
+ * If the condition is @c false, the message is printed, sets the last result and a value is returned.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality  will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	returnValue		The value to return when the condition is @c false
+ * @param[in]	r			The last result to set
+ * @param[in]	...			The message to display
+ * @hideinitializer
+ */
+#define SecureTryReturnResult(condition, returnValue, r, ...)	\
+	if (!(condition)) { \
+		SetLastResult(r); \
+		AppSecureLogException(__VA_ARGS__); \
+		return returnValue;	\
+	} \
+	else {;}
+
+/**
+ * If the condition is @c false, the message is printed, sets the last result and no value is returned.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	r			The last result to set
+ * @param[in]	...			The message to display
+ * @hideinitializer
+ */
+#define SecureTryReturnVoidResult(condition, r, ...)	\
+	if (!(condition)) { \
+		SetLastResult(r); \
+		AppSecureLogException(__VA_ARGS__); \
+		return;	\
+	} \
+	else {;}
+
+/**
+ * If the condition is @c false, the message is printed and no value is returned.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	...			The message to display
+ * @hideinitializer
+ */
+#define SecureTryReturnVoid(condition, ...) \
+	if (!(condition)) { \
+		AppSecureLogException(__VA_ARGS__); \
+		return;	\
+	} \
+	else {;}
+
+/**
+ * If the condition is @c false, the message is printed.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	...			The message to display
+ * @hideinitializer
+ */
+#define SecureTryLog(condition, ...)	\
+	if (!(condition)) { \
+		AppSecureLog(__VA_ARGS__); \
+	} \
+	else {;}
+
+/**
+ * If the condition is @c false, the informative log message is printed and a value is returned.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]    condition		The condition that is expected to be true
+ * @param[in]    returnValue		The value to return when the condition is @c false
+ * @param[in]    ...			The message to display
+ * @hideinitializer
+ */
+#define SecureTryLogReturn(condition, returnValue, ...) \
+	if (!(condition)) { \
+		AppSecureLog(__VA_ARGS__); \
+		return returnValue;	\
+	} \
+	else {;}
+
+// SecureTryTag Macros
+
+/**
+ * If the condition is @c false, it prints a message with a tag, evaluates a cleanup expression
+ * and goes to <tt>CATCH</tt>.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	tag			Used to identify the source of a log message
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	expr			Expressions that are evaluated before going to CATCH label
+ * @param[in]	...			The message to display
+ * @hideinitializer
+ */
+#define SecureTryCatchTag(tag, condition, expr, ...) \
+	if (!(condition)) { \
+		AppSecureLogExceptionTag(tag, __VA_ARGS__); \
+		expr; \
+		goto CATCH;	\
+	} \
+	else {;}
+
+/**
+ * If the condition is @c false, it prints a message with a tag, sets the last result, evaluates a cleanup expression,
+ * and goes to <tt>CATCH</tt>.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	tag			Used to identify the source of a log message
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	expr			Expressions that are evaluated before going to CATCH label
+ * @param[in]	r			The last result to set
+ * @param[in]	...			The message to display
+ * @hideinitializer
+ */
+#define SecureTryCatchResultTag(tag, condition, expr, r, ...) \
+	if (!(condition)) { \
+		SetLastResult(r); \
+		AppSecureLogExceptionTag(tag, __VA_ARGS__); \
+		expr; \
+		goto CATCH;	\
+	} \
+	else {;}
+
+/**
+ * If the condition is @c false, it prints a message with a tag, sets the last result, evaluates a cleanup expression
+ * and goes to label.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]    tag			Used to identify the source of a log message
+ * @param[in]    condition		The condition that is expected to be true
+ * @param[in]    expr			Expressions that are evaluated before going to catchLabel
+ * @param[in]    catchLabel		The label for goto operation
+ * @param[in]    r			The last result to set
+ * @param[in]    ...			The message to display
+ * @hideinitializer
+ */
+#define SecureTryCatchLabelResultTag(tag, condition, expr, catchLabel, r, ...) \
+	if (!(condition)) { \
+		SetLastResult(r); \
+		AppSecureLogExceptionTag(tag, __VA_ARGS__); \
+		expr; \
+		goto catchLabel;	\
+	} \
+	else {;}
+
+/**
+ * If the condition is @c false, the message is printed with a tag and a value is returned.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	tag			Used to identify the source of a log message
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	returnValue		The value to return when the condition is @c false
+ * @param[in]	...			The message to display
+ * @hideinitializer
+ */
+#define SecureTryReturnTag(tag, condition, returnValue, ...)	\
+	if (!(condition)) { \
+		AppSecureLogExceptionTag(tag, __VA_ARGS__); \
+		return returnValue;	\
+	} \
+	else {;}
+
+/**
+ * If the condition is @c false, the message is printed with a tag, sets the last result and a value is returned.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	tag			Used to identify the source of a log message
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	returnValue		The value to return when the condition is @c false
+ * @param[in]	r			The last result to set
+ * @param[in]	...			The message to display
+ * @hideinitializer
+ */
+#define SecureTryReturnResultTag(tag, condition, returnValue, r, ...)	\
+	if (!(condition)) { \
+		SetLastResult(r); \
+		AppSecureLogExceptionTag(tag, __VA_ARGS__); \
+		return returnValue;	\
+	} \
+	else {;}
+
+/**
+ * If the condition is @c false, the message is printed with a tag, sets the last result and no value is returned.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	tag			Used to identify the source of a log message
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	r			The last result to set
+ * @param[in]	...			The message to display
+ * @hideinitializer
+ */
+#define SecureTryReturnVoidResultTag(tag, condition, r, ...)	\
+	if (!(condition)) { \
+		SetLastResult(r); \
+		AppSecureLogExceptionTag(tag, __VA_ARGS__); \
+		return;	\
+	} \
+	else {;}
+
+/**
+ * If the condition is @c false, the message is printed with a tag and no value is returned.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	tag			Used to identify the source of a log message
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	...			The message to display
+ * @hideinitializer
+ */
+#define SecureTryReturnVoidTag(tag, condition, ...) \
+	if (!(condition)) { \
+		AppSecureLogExceptionTag(tag, __VA_ARGS__); \
+		return;	\
+	} \
+	else {;}
+
+/**
+ * If the condition is @c false, the message is printed with a tag.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]	tag			Used to identify the source of a log message
+ * @param[in]	condition		The condition that is expected to be true
+ * @param[in]	...			The message to display
+ * @hideinitializer
+ */
+#define SecureTryLogTag(tag, condition, ...)	\
+	if (!(condition)) { \
+		AppSecureLogTag(tag, __VA_ARGS__); \
+	} \
+	else {;}
+
+/**
+ * If the condition is @c false, the informative log message is printed with a tag and a value is returned.
+ * It allows display of exception log messages if compiled with "_SECURE_LOG" definition.
+ * Otherwise, log printing functionality will be removed in the compile time.
+ *
+ * @since 2.1
+ *
+ * @param[in]    tag			Used to identify the source of a log message
+ * @param[in]    condition		The condition that is expected to be true
+ * @param[in]    returnValue		The value to return when the condition is @c false
+ * @param[in]    ...			The message to display
+ * @hideinitializer
+ */
+#define SecureTryLogReturnTag(tag, condition, returnValue, ...) \
+	if (!(condition)) { \
+		AppSecureLogTag(tag, __VA_ARGS__); \
+		return returnValue;	\
+	} \
+	else {;}
+
 /** @} */
 
 _OSP_EXPORT_ void AppLogInternal(const char* pFunction, int lineNumber, const char* pFormat, ...);
@@ -678,7 +1341,6 @@ _OSP_EXPORT_ void AppassertfInternal(const char* expr, const char* pFunction, in
 _OSP_EXPORT_ void AppLogTagInternal(const char* pTag, const char* pFunction, int lineNumber, const char* pFormat, ...);
 _OSP_EXPORT_ void AppLogDebugTagInternal(const char* pTag, const char* pFunction, int lineNumber, const char* pFormat, ...);
 _OSP_EXPORT_ void AppLogExceptionTagInternal(const char* pTag, const char* pFunction, int lineNumber, const char* pFormat, ...);
-
 
 #ifdef __cplusplus
 }

@@ -41,7 +41,7 @@ namespace Tizen { namespace Web { namespace Controls
  *
  * Defines the types of cache mode.
  *
- * @since         2.0
+ * @since		2.0
  */
 enum CacheMode
 {
@@ -54,7 +54,7 @@ enum CacheMode
  *
  * Defines the types of certification error handling mode.
  *
- * @since         2.0
+ * @since		2.0
  */
 enum CertificateErrorHandlingMode
 {
@@ -89,7 +89,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in] setting An instance of %WebSetting
+	 * @param[in]	setting			An instance of %WebSetting
 	 */
 	WebSetting(const WebSetting& setting);
 
@@ -101,12 +101,18 @@ public:
 	virtual ~WebSetting(void);
 
 	/**
-	* Sets a cache control strategy for a %Web control.
-	*
-	* @since				2.0
-	*
-	* @param[in]		mode		A cache mode
-	*/
+	 * Sets a cache control strategy for a %Web control.
+	 *
+	 * @since		2.0
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/web.service
+	 *
+	 * @param[in]	mode			A cache mode
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
+	 */
 	void SetCacheControl(CacheMode mode);
 
 	/**
@@ -114,7 +120,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	fontSize            The font size
+	 * @param[in]	fontSize		The font size
 	 */
 	void SetFontSize(int fontSize);
 
@@ -132,8 +138,8 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	enable      Set to @c true if the %Web control uses JavaScript, @n
-	 *							else @c false
+	 * @param[in]	enable			Set to @c true if the %Web control uses JavaScript, @n
+	 *									else @c false
 	 */
 	void SetJavascriptEnabled(bool enable);
 
@@ -142,8 +148,8 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	enable      Set to @c true if the %Web control must load images included in the content, @n
-	 *							else @c false
+	 * @param[in]	enable			Set to @c true if the %Web control must load images included in the content, @n
+	 *									else @c false
 	 */
 	void SetAutoImageLoadEnabled(bool enable);
 
@@ -152,14 +158,15 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]   inputStyle	The input style of keypad
-	 * @remarks		If an application sets the input style to INPUT_STYLE_OVERLAY, the application must implement IWebKeypadEventListener to rearrange the layout of the current Form.
+	 * @param[in]   inputStyle		The input style of keypad
+	 * @remarks		If an application sets the input style to @c INPUT_STYLE_OVERLAY, the application must implement IWebKeypadEventListener to rearrange the layout of the current Form.
 	 *
 	 */
 	void SetInputStyle(Tizen::Ui::Controls::InputStyle inputStyle);
 
 	/**
-	 * Gets the value of the cache control strategy for a %Web control.
+	 * Gets the value of the cache control strategy for a %Web control. @n
+	 * The default value is @c WEB_CACHE_VALIDATED.
 	 *
 	 * @since		2.0
 	 *
@@ -168,7 +175,8 @@ public:
 	CacheMode GetCacheControl(void) const;
 
 	/**
-	 * Gets the font size of the content.
+	 * Gets the font size of the content. @n
+	 * The default size is @c 17.
 	 *
 	 * @since		2.0
 	 *
@@ -177,7 +185,8 @@ public:
 	int GetFontSize(void) const;
 
 	/**
-	 * Gets the text encoding of the content of a %Web control.
+	 * Gets the text encoding of the content of a %Web control. @n
+	 * The default encoding is UTF-8.
 	 *
 	 * @since		2.0
 	 *
@@ -187,67 +196,75 @@ public:
 
 	/**
 	 * Checks whether a %Web control uses JavaScript. @n
-	 * Returns @c true if JavaScript is enabled.
+	 * The default value is @c true.
 	 *
 	 * @since		2.0
 	 *
 	 * @return		@c true if JavaScript is enabled and used by a %Web control, @n
-	 *              else @c false
+	 *					else @c false
 	 */
 	bool IsJavascriptEnabled(void) const;
 
 	/**
 	 * Checks whether a %Web control loads images included in the content automatically. @n
-	 * Returns @c true if auto image loading is enabled.
+	 * The default value is @c true.
 	 *
 	 * @since		2.0
 	 *
 	 * @return		@c true if auto image loading is enabled, @n
-	 *               else @c false
+	 *					else @c false
 	 */
 	bool IsAutoImageLoadEnabled(void) const;
 
 	/**
-	 * Gets the input style of the keypad, which is displayed for the <input> or <textarea> tag.
+	 * Gets the input style of the keypad, which is displayed for the <input> or <textarea> tag. @n
+	 * The default style is @c INPUT_STYLE_FULLSCREEN.
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The input style of keypad @n
-	 *				The default value of the input style is INPUT_STYLE_FULLSCREEN.
+	 * @return		The input style of keypad
 	 */
 	Tizen::Ui::Controls::InputStyle GetInputStyle(void) const;
 
 	/**
-	* Sets a certificate error handling mode for a %Web control.
-	*
-	* @since		2.0
-	*
-	* @param[in]	mode	A certificate error handling mode
-	*/
+	 * Sets a certificate error handling mode for a %Web control.
+	 *
+	 * @since		2.0
+	 *
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/web.service
+	 *
+	 * @param[in]	mode			A certificate error handling mode
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
+	 */
 	void SetCertificateErrorHandlingMode(CertificateErrorHandlingMode mode);
 
 	/**
-	* Gets the value of the certificate error handling mode for a %Web control.
-	*
-	* @since		2.0
-	*
-	* @return		A certificate error handling mode
-	*/
+	 * Gets the value of the certificate error handling mode for a %Web control. @n
+	 * The default value is @c WEB_CERTIFICATE_ERROR_HANDLING_MODE_USER_CONFIRM.
+	 *
+	 * @since		2.0
+	 *
+	 * @return		A certificate error handling mode
+	 */
 	CertificateErrorHandlingMode GetCertificateErrorHandlingMode(void) const;
 
 	/**
 	 * Sets a user agent for a %Web control.
 	 *
-	 * @since 2.0
+	 * @since		2.0
 	 *
-	 * @param[in]	agent	The user agent
+	 * @param[in]	agent			The user agent
 	 */
 	void SetUserAgent(const Tizen::Base::String& agent);
 
 	/**
 	 * Gets a value of user agent for a %Web control.
 	 *
-	 * @since 2.0
+	 * @since		2.0
 	 *
 	 * @return		The value of user agent
 	 */
@@ -256,62 +273,125 @@ public:
 	/**
 	 * Decides if a %Web control loads the resized contents to fit width automatically.
 	 *
-	 * @since 2.0
+	 * @since		2.0
 	 *
-	 * @param[in]	enable	Set to @c true if the %Web control should load contents to fit width, @n
-	 *					else @c false
+	 * @param[in]	enable			Set to @c true if the %Web control should load contents to fit width, @n
+	 *									else @c false
 	 */
 	void SetAutoFittingEnabled(bool enable);
 
 	/**
-	 * Checks whether a %Web control loads the resize contents to fit width. Returns true if auto fitting is enabled.
+	 * Checks whether a %Web control loads the resize contents to fit width. @n
+	 * The default value is @c true.
 	 *
-	 * @since 2.0
+	 * @since		2.0
 	 *
-	 * @return	@c true if auto fitting is enabled, @n
-	 *			else @c false
+	 * @return		@c true if auto fitting is enabled, @n
+	 *					else @c false
 	 */
 	bool IsAutoFittingEnabled(void) const;
 
 	/**
 	 * Decides if a %Web control allows JavaScript to open new window.
 	 *
-	 * @since 2.0
+	 * @since		2.0
 	 *
-	 * @param[in]	enable	Set to @c true if the %Web control should allow JavaScript to open new window, @n
-	 *					else @c false
+	 * @param[in]	enable			Set to @c true if the %Web control should allow JavaScript to open new window, @n
+	 *									else @c false
 	 */
 	void SetJavaScriptPopupEnabled(bool enable);
 
 	/**
-	 * Checks whether a %Web control allows JavaScript to open new window. Returns true if opening new window by JavaScript is enabled.
+	 * Checks whether a %Web control allows JavaScript to open new window. @n Returns @c true if opening new window by JavaScript is enabled.
+	 * The default value is @c true.
 	 *
-	 * @since 2.0
+	 * @since		2.0
 	 *
-	 * @return	@c true if opening new window by JavaScript is enabled, @n
-	 *			else @c false
+	 * @return		@c true if opening new window by JavaScript is enabled, @n
+	 *					else @c false
 	 */
 	bool IsJavaScriptPopupEnabled(void) const;
 
 	/**
 	 * Decides if a %Web control supports html5 geolocation feature.
 	 *
-	 * @since 2.0
+	 * @since		2.0
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/web.service
 	 *
-	 * @param[in]	enable	Set to @c true if the %Web control should support html5 geolocation feature, @n
-	 *					else @c false
+	 * @param[in]	enable			Set to @c true if the %Web control should support html5 geolocation feature, @n
+	 *									else @c false
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	void SetGeolocationEnabled(bool enable);
 
 	/**
-	 * Checks whether a %Web control supports html5 geolocation feature. Returns true if html5 geolocation feature is enabled.
+	 * Checks whether a %Web control supports html5 geolocation feature. @n Returns @c true if html5 geolocation feature is enabled.
+	 * The default value is @c true.
 	 *
-	 * @since 2.0
+	 * @since		2.0
 	 *
-	 * @return	@c true if html5 geolocation feature is enabled, @n
-	 *			else @c false
+	 * @return		@c true if html5 geolocation feature is enabled, @n
+	 *					else @c false
 	 */
 	bool IsGeolocationEnabled(void) const;
+
+	/**
+	 * Decides if a %Web control saves form data automatically and supports autocomplete feature.
+	 *
+	 * @since		2.1
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/web.service
+	 *
+	 * @param[in]	enable			Set to @c true if the %Web control should save form data automatically and supports autocomplete feature, @n
+	 *									else @c false
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method.
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
+	 */
+	void SetAutoFormDataShowEnabled(bool enable);
+
+	/**
+	 * Checks whether %Web control saves form data automatically and supports autocomplete feature. @n Returns @c true if those are enabled.
+	 * The default value is @c true.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		@c true if saving form data and autocomplete feature are enabled, @n
+	 *					else @c false
+	 */
+	bool IsAutoFormDataShowEnabled(void) const;
+
+	/**
+	 * Decides if a %Web control saves ID/password for login form automatically and supports autofill feature.
+	 * 
+	 * @since		2.1
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/web.service
+	 *
+	 * @param[in]	enable			Set to @c true if the %Web control should save login ID/password automatically and supports autofill feature, @n
+	 *									else @c false
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method.
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
+	 */
+	void SetAutoLoginFormFillEnabled(bool enable);
+
+	/**
+	 * Checks whether %Web control saves ID/password for login form automatically and supports autofill feature. @n Returns @c true if those are enabled.
+	 * The default value is @c true.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		@c true if saving ID/password for login form and autofill feature are enabled, @n
+	 *					else @c false
+	 */
+	bool IsAutoLoginFormFillEnabled(void) const;
 
 	/**
 	 * Gets the hash value of the current instance.
@@ -328,17 +408,17 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		@c true if the two instances match, @n
-	 *				else @c false
-	 * @param[in]	obj		The object to compare with the current instance
+	 *					else @c false
+	 * @param[in]	obj				The object to compare with the current instance
 	 * @remarks		This method returns @c true if and only if the two instances contain the same elements.
- 	 * @see			Tizen::Object::Equals()
+ 	 * @see			Tizen::Base::Object::Equals()
 	 */
-	virtual bool Equals(const Object& obj) const;
+	virtual bool Equals(const Tizen::Base::Object& obj) const;
 
 	/**
 	 * Copying of objects using this copy assignment operator is allowed. 
 	 *
-	 * @since 2.0
+	 * @since		2.0
 	 *
 	 * @param[in]	setting			The instance of the %WebSetting class to assign from
 	 */

@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an ¡±AS IS¡± BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -26,22 +26,17 @@
 #define _FUI_CTRL_ICON_LIST_VIEW_H_
 
 //Includes
-#include <FBaseObject.h>
-#include <FBaseString.h>
-#include <FBaseTypes.h>
-#include <FGrpBitmap.h>
-#include <FGrpDimension.h>
-#include <FGrpRectangle.h>
+#include <FGrpFloatRectangle.h>
 #include <FOspConfig.h>
 #include <FUiContainer.h>
-#include <FUiControl.h>
 #include <FUiCtrlControlsTypes.h>
 #include <FUiCtrlIconListViewTypes.h>
-#include <FUiCtrlIconListViewItem.h>
 #include <FUiCtrlIIconListViewItemEventListener.h>
 #include <FUiCtrlIIconListViewItemProvider.h>
 #include <FUiCtrlIScrollEventListener.h>
+#include <FUiCtrlIScrollEventListenerF.h>
 #include <FUiCtrlListViewTypes.h>
+#include <FUiCtrlScrollPanelTypes.h>
 
 namespace Tizen { namespace Ui { namespace Controls
 {
@@ -125,7 +120,7 @@ IconListViewSample::OnInitializing(void)
 	__pIconListView->AddIconListViewItemEventListener(*this);
 
 	// Adds the icon list view to the form
-	AddControl(*__pIconListView);
+	AddControl(__pIconListView);
 
 	// Gets instances of Bitmap
 	AppResource* pAppResource = Application::GetInstance()->GetAppResource();
@@ -226,7 +221,7 @@ class _OSP_EXPORT_ IconListView
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. For full construction, the Construct(const Tizen::Graphics::Rectangle&, const Tizen::Graphics::Dimension&, IconListViewStyle, IconListViewScrollDirection, IconListViewScrollStyle) method must be called right after calling this constructor.
 	 *
 	 * @since	2.0
 	 */
@@ -246,22 +241,51 @@ public:
 	 * @since 2.0
 	 *
 	 * @return	An error code
-	 * @param[in]	rect				An instance of the Graphics::Rectangle class @n
+	 * @param[in]	rect				An instance of the Tizen::Graphics::Rectangle class @n
 	 *									This instance represents the x and y coordinates of the top-left corner of the created %IconListView along with
-	 *									the width and height.
-	 * @param[in]   itemBitmapSize		The size of an icon in the %IconListView
+	 *									the width and height.@n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]   itemBitmapSize		The size of an icon in %IconListView
 	 * @param[in]	style				The style set of %IconListView
 	 * @param[in]	direction			The direction of scroll
 	 * @param[in]	scrollStyle			The scroll style of %IconListView
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
+	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 * @remarks	A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier.
 	 * @remarks	The number of items to be displayed on a screen is calculated based on %IconListView size, item size, item spacing, and margins. @n
-	 *			The %IconListView cannot display more than 256 items on the screen at once.
-	 * @remarks	The actual size of bitmap to be displayed in %IconListView is smaller than the specified size when the border style is ICON_LIST_VIEW_ITEM_BORDER_STYLE_SHADOW.
+	 *			%IconListView cannot display more than @c 256 items on the screen at once.
+	 * @remarks	The actual size of bitmap to be displayed in %IconListView is smaller than the specified size when the border style is @c ICON_LIST_VIEW_ITEM_BORDER_STYLE_SHADOW.
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, const Tizen::Graphics::Dimension& itemBitmapSize, IconListViewStyle style = ICON_LIST_VIEW_STYLE_NORMAL, IconListViewScrollDirection direction = ICON_LIST_VIEW_SCROLL_DIRECTION_VERTICAL, IconListViewScrollStyle scrollStyle = ICON_LIST_SCROLL_STYLE_FADE_OUT);
+
+	/**
+	 * Initializes this instance of %IconListView with the specified parameters.
+	 *
+	 * @since   2.1
+	 *
+	 * @return	An error code
+	 * @param[in]	rect				An instance of the Tizen::Graphics::FloatRectangle class @n
+	 *									This instance represents the x and y coordinates of the top-left corner of the created %IconListView along with
+	 *									the width and height.@n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]   itemBitmapSize		The size of an icon in %IconListView
+	 * @param[in]	style				The style set of %IconListView
+	 * @param[in]	direction			The direction of scroll
+	 * @param[in]	scrollStyle			The scroll style of %IconListView
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
+	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @remarks	A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier.
+	 * @remarks	The number of items to be displayed on a screen is calculated based on %IconListView size, item size, item spacing, and margins. @n
+	 *			%IconListView cannot display more than @c 256 items on the screen at once.
+	 * @remarks	The actual size of bitmap to be displayed in %IconListView is smaller than the specified size when the border style is @c ICON_LIST_VIEW_ITEM_BORDER_STYLE_SHADOW.
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, const Tizen::Graphics::FloatDimension& itemBitmapSize, IconListViewStyle style = ICON_LIST_VIEW_STYLE_NORMAL, IconListViewScrollDirection direction = ICON_LIST_VIEW_SCROLL_DIRECTION_VERTICAL, IconListViewScrollStyle scrollStyle = ICON_LIST_SCROLL_STYLE_FADE_OUT);
 
 	/**
 	 * Sets the item provider that creates and deletes items for the %IconListView control.
@@ -272,7 +296,7 @@ public:
 	 * @param[in]	provider			The item provider to create and delete items
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks	If an item provider is not set for the %IconListView, it does not work. @n
+	 * @remarks	If an item provider is not set for %IconListView, it does not work. @n
 	 *			The specified @c provider should be allocated in heap memory.
 	 */
 	result SetItemProvider(IIconListViewItemProvider& provider);
@@ -283,7 +307,7 @@ public:
 	 *
 	 * @since   2.0
 	 *
-	 * @param[in]	listener			The listener to be added
+	 * @param[in]	listener			The listener to add
 	 */
 	void AddIconListViewItemEventListener(IIconListViewItemEventListener& listener);
 
@@ -293,7 +317,7 @@ public:
 	 *
 	 * @since   2.0
 	 *
-	 * @param[in]	listener			The listener to be removed
+	 * @param[in]	listener			The listener to remove
 	 */
 	void RemoveIconListViewItemEventListener(IIconListViewItemEventListener& listener);
 
@@ -303,11 +327,23 @@ public:
 	 *
 	 * @since   2.0
 	 *
-	 * @param[in]	listener			The event listener to be added
+	 * @param[in]	listener			The event listener to add
 	 * @see			IScrollEventListener::OnScrollEndReached()
 	 * @see			RemoveScrollEventListener()
 	 */
 	void AddScrollEventListener(IScrollEventListener& listener);
+
+	/**
+	 * Adds a listener instance that listens to state changes of a scroll event. @n
+	 * The added listener can listen to events on the context of the given event dispatcher when they are fired.
+	 *
+	 * @since   2.1
+	 *
+	 * @param[in]	listener			The event listener to add
+	 * @see			IScrollEventListenerF::OnScrollEndReached()
+	 * @see			RemoveScrollEventListener()
+	 */
+	void AddScrollEventListener(IScrollEventListenerF& listener);
 
 	/**
 	 * Removes a listener instance that listens to state changes of a scroll event. @n
@@ -315,21 +351,33 @@ public:
 	 *
 	 * @since   2.0
 	 *
-	 * @param[in]	listener			The event listener to be removed
+	 * @param[in]	listener			The event listener to remove
 	 * @see			IScrollEventListener::OnScrollEndReached()
 	 * @see			RemoveScrollEventListener()
 	 */
 	void RemoveScrollEventListener(IScrollEventListener& listener);
 
 	/**
-	 * Sets the background bitmap of the %IconListView.
+	 * Removes a listener instance that listens to state changes of a scroll event. @n
+	 * The removed listener cannot listen to events when they are fired.
+	 *
+	 * @since   2.1
+	 *
+	 * @param[in]	listener			The event listener to remove
+	 * @see			IScrollEventListenerF::OnScrollEndReached()
+	 * @see			RemoveScrollEventListener()
+	 */
+	void RemoveScrollEventListener(IScrollEventListenerF& listener);
+
+	/**
+	 * Sets the background bitmap of %IconListView.
 	 *
 	 * @since   2.0
 	 *
 	 * @param[in]   pBitmap				The background bitmap
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks	When @c pBitmap is null, %IconListView does not have a background bitmap. The default value for the background bitmap is @c null.
+	 * @remarks	When @c pBitmap is @c null, %IconListView does not have a background bitmap. The default value for the background bitmap is @c null.
 	 * @remarks	The background bitmap has priority over the background color. When both the background bitmap and the background color are specified,
 	 *			only the bitmap is displayed.
 	 */
@@ -343,7 +391,7 @@ public:
 	 * @return	An error code
 	 * @param[in]	color               The background color
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @remarks	The method sets the alpha value of the specified color to 255, when a device does not support 32 bit color space.
+	 * @remarks	This method sets the alpha value of the specified color to @c 255, when a device does not support @c 32 bit color space.
 	 * @remarks	The background bitmap has priority over the background color. When both the background bitmap and the background color are specified,
 	 *			only the bitmap is displayed.
 	 */
@@ -371,9 +419,25 @@ public:
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 * @remarks	The number of items to be displayed on a screen is calculated based on %IconListView size, item size, item spacing, and
-	 *			margins. The %IconListView cannot display more than 256 items on screen at once.
+	 *			margins. %IconListView cannot display more than @c 256 items on screen at once.
 	 */
 	result SetMargin(MarginType type, int value);
+
+	/**
+	 * Sets the margin of %IconListView.
+	 *
+	 * @since   2.1
+	 *
+	 * @return	An error code
+	 * @param[in]	type				The type of margin
+	 * @param[in]	value				The marginal value
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @remarks	The number of items to be displayed on a screen is calculated based on %IconListView size, item size, item spacing, and
+	 *			margins. The %IconListView cannot display more than 256 items on screen at once.
+	 */
+	result SetMargin(MarginType type, float value);
 
 	/**
 	 * Gets the margin of %IconListView.
@@ -387,6 +451,17 @@ public:
 	int GetMargin(MarginType type) const;
 
 	/**
+	 * Gets the margin of %IconListView.
+	 *
+	 * @since   2.1
+	 *
+	 * @return	The marginal value of %IconListView, @n
+	 *			else @c -1 if an error occurs
+	 * @param[in]	type				The type of margin
+	 */
+	float GetMarginF(MarginType type) const;
+
+	/**
 	 * Sets the horizontal and vertical spacing between the items.
 	 *
 	 * @since   2.0
@@ -398,9 +473,25 @@ public:
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 * @remarks	The number of items to be displayed on a screen is calculated based on %IconListView size, item size, item spacing, and
-	 *			margins. The %IconListView cannot display more than 256 items on screen at once.
+	 *			margins. %IconListView cannot display more than @c 256 items on screen at once.
 	 */
 	result SetItemSpacing(int horizontalSpacing, int verticalSpacing);
+
+	/**
+	 * Sets the horizontal and vertical spacing between the items.
+	 *
+	 * @since   2.1
+	 *
+	 * @return	An error code
+	 * @param[in]   horizontalSpacing	The spacing between items in horizontal direction
+	 * @param[in]   verticalSpacing		The spacing between items in vertical direction
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @remarks	The number of items to be displayed on a screen is calculated based on %IconListView size, item size, item spacing, and
+	 *			margins. The %IconListView cannot display more than 256 items on screen at once.
+	 */
+	result SetItemSpacing(float horizontalSpacing, float verticalSpacing);
 
 	/**
 	 * Gets the horizontal spacing between items of %IconListView.
@@ -413,6 +504,16 @@ public:
 	int GetItemHorizontalSpacing(void) const;
 
 	/**
+	 * Gets the horizontal spacing between items of %IconListView.
+	 *
+	 * @since   2.1
+	 *
+	 * @return	The value of space between items in horizontal direction, @n
+	 *			else @c -1 if an error occurs
+	 */
+	float GetItemHorizontalSpacingF(void) const;
+
+	/**
 	 * Gets the vertical spacing between items of %IconListView.
 	 *
 	 * @since   2.0
@@ -421,6 +522,16 @@ public:
 	 *			else @c -1 if an error occurs
 	 */
 	int GetItemVerticalSpacing(void) const;
+
+	/**
+	 * Gets the vertical spacing between items of %IconListView.
+	 *
+	 * @since   2.1
+	 *
+	 * @return	The value of space between items in vertical direction, @n
+	 *			else @c -1 if an error occurs
+	 */
+	float GetItemVerticalSpacingF(void) const;
 
 	/**
 	 * Sets the checked status of the specified item of %IconListView.
@@ -434,16 +545,16 @@ public:
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 * @exception	E_OUT_OF_RANGE		The specified @c index is out of range.
 	 * @remarks	This method can only be used when the style of the list allows selection.
-	 * @remarks	The method only changes the state of the list item. %IconListView needs to be redrawn to reflect the change on the screen.
+	 * @remarks	This method only changes the state of the list item. %IconListView needs to be redrawn to reflect the change on the screen.
 	 */
 	result SetItemChecked(int index, bool check);
 
 	/**
-	 * Checks whether the specified item is checked.
+	 * Checks whether the specified @c item is checked.
 	 *
 	 * @since   2.0
 	 *
-	 * @return	@c true if the specified item is checked, @n
+	 * @return	@c true if the specified @c item is checked, @n
 	 *			else @c false
 	 * @param[in]   index				The index of the item
 	 * @remarks  This method can only be used when the style of the list allows selection.
@@ -456,11 +567,23 @@ public:
 	 * @since   2.0
 	 *
 	 * @return	The index of the item, @n
-	 *			else @c -1 when there is no list item at the specified position or when the %IconListView instance is invalid
+	 *			else @c -1 if there is no list item at the specified position or if the %IconListView instance is invalid
 	 * @param[in]   x                   The x position of a point
 	 * @param[in]   y                   The y position of a point
 	 */
 	int GetItemIndexFromPosition(int x, int y) const;
+
+	/**
+	 * Gets the index of the item at the specified @c position.
+	 *
+	 * @since   2.1
+	 *
+	 * @return	The index of the item, @n
+	 *			else @c -1 if there is no list item at the specified position or if the %IconListView instance is invalid
+	 * @param[in]   x                   The x position of a point
+	 * @param[in]   y                   The y position of a point
+	 */
+	int GetItemIndexFromPosition(float x, float y) const;
 
 	/**
 	 * Gets the index of the item at the specified position.
@@ -468,10 +591,21 @@ public:
 	 * @since   2.0
 	 *
 	 * @return	The index of the item, @n
-	 *			else @c -1 if there is no list item at the specified position or when the %IconListView instance is invalid
+	 *			else @c -1 if there is no list item at the specified @c position or if the %IconListView instance is invalid
 	 * @param[in]   position            The position of a point
 	 */
 	int GetItemIndexFromPosition(const Tizen::Graphics::Point& position) const;
+
+	/**
+	 * Gets the index of the item at the specified position.
+	 *
+	 * @since   2.1
+	 *
+	 * @return	The index of the item, @n
+	 *			else @c -1 if there is no list item at the specified @c position or if the %IconListView instance is invalid
+	 * @param[in]   position            The position of a point
+	 */
+	int GetItemIndexFromPosition(const Tizen::Graphics::FloatPoint& position) const;
 
 	/**
 	 * Sets the horizontal alignment of the text of an item.
@@ -503,7 +637,7 @@ public:
 	 * @since   2.0
 	 *
 	 * @return	The horizontal alignment of the text, @n
-	 *			else ALIGNMENT_LEFT when the %IconListView instance is invalid
+	 *			else @c ALIGNMENT_LEFT when the %IconListView instance is invalid
 	 */
 	HorizontalAlignment GetTextHorizontalAlignment(void) const;
 
@@ -513,7 +647,7 @@ public:
 	 * @since   2.0
 	 *
 	 * @return	The vertical alignment of the text of an item, @n
-	 *			else ICON_LIST_VIEW_ITEM_TEXT_VERTICAL_ALIGNMENT_INSIDE_TOP when the %IconListView is invalid
+	 *			else @c ICON_LIST_VIEW_ITEM_TEXT_VERTICAL_ALIGNMENT_INSIDE_TOP when the %IconListView instance is invalid
 	 */
 	IconListViewItemTextVerticalAlignment GetTextVerticalAlignment(void) const;
 
@@ -600,6 +734,20 @@ public:
 	result SetItemTextSize(int size);
 
 	/**
+	 * Sets the size of the text of the %IconListView control.
+	 *
+	 * @since   2.1
+	 *
+	 * @return	An error code
+	 * @param[in]	size				The size of the text
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception   E_INVALID_ARG		The specified input parameter is invalid.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @remarks	If the specified @c size is less than the minimum size, this method fails. The minimum font size is @c 6 on devices of high screen density.
+	 */
+	result SetItemTextSize(float size);
+
+	/**
 	 * Gets the size of the text of the %IconListView control.
 	 *
 	 * @since   2.0
@@ -610,18 +758,28 @@ public:
 	int GetItemTextSize(void) const;
 
 	/**
+	 * Gets the size of the text of the %IconListView control.
+	 *
+	 * @since   2.1
+	 *
+	 * @return  The size of the text of the %IconListView control, @n
+	 *			else @c -1 if the instance is invalid
+	 */
+	float GetItemTextSizeF(void) const;
+
+	/**
 	 * Sets the position of the checkbox of the %IconListView control.
 	 *
 	 * @since   2.0
 	 *
 	 * @return	An error code
-	 * @param[in]   position			The position of the checkbox of the %IconListView
+	 * @param[in]   position			The position of the checkbox of the %IconListView control
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *									That is, %IconListView cannot get the position of the checkbox when the style is ICON_LIST_VIEW_STYLE_NORMAL.
+	 *									That is, %IconListView cannot get the position of the checkbox when the style is @c ICON_LIST_VIEW_STYLE_NORMAL.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 * @remarks  This method changes the position of the checkbox image displayed for the "selected" item(s),
-	 *			when the style of %IconListView is either ICON_LIST_VIEW_STYLE_RADIO and ICON_LIST_VIEW_STYLE_MARK.
+	 *			when the style of %IconListView is either @c ICON_LIST_VIEW_STYLE_RADIO or @c ICON_LIST_VIEW_STYLE_MARK.
 	 */
 	result SetCheckBoxPosition(IconListViewCheckBoxPosition position);
 
@@ -631,8 +789,8 @@ public:
 	 * @since   2.0
 	 *
 	 * @return	The position of the checkbox
-	 * @remarks	The method returns @c ICON_LIST_VIEW_CHECK_BOX_POSITION_TOP_LEFT when the style of %IconListView is ICON_LIST_VIEW_STYLE_NORMAL or
-	 *			ICON_LIST_VIEW_STYLE_DIVIDE_TEXT.
+	 * @remarks	This method returns @c ICON_LIST_VIEW_CHECK_BOX_POSITION_TOP_LEFT when the style of %IconListView is @c ICON_LIST_VIEW_STYLE_NORMAL or
+	 *			@c ICON_LIST_VIEW_STYLE_DIVIDE_TEXT.
 	 */
 	IconListViewCheckBoxPosition GetCheckBoxPosition(void) const;
 
@@ -647,7 +805,7 @@ public:
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 * @remarks	If you want to use a separate selected bitmap, the animation effect must be disabled.
-	 * @remarks	In case that a touch animation disabled, the normal bitmap of %IconListViewItem is displayed in response to touch interaction if the
+	 * @remarks	In case a touch animation is disabled, the normal bitmap of IconListViewItem is displayed in response to touch interaction if the
 	 *			selected bitmap of %IconListViewItem is @c null.
 	 */
 	result SetTouchAnimationEnabled(bool enable);
@@ -658,12 +816,12 @@ public:
 	 * @since   2.0
 	 *
 	 * @return	@c true if touch animation is enabled, @n
-	 *          else @c false if touch animation is disabled or when the instance is invalid
+	 *          else @c false if touch animation is disabled or if the instance is invalid
 	 */
 	bool IsTouchAnimationEnabled(void) const;
 
 	/**
-	 * Scrolls the list contents to the specified index.
+	 * Scrolls the list contents to the specified @c index.
 	 *
 	 * @since   2.0
 	 *
@@ -674,6 +832,34 @@ public:
 	 * @exception	E_OUT_OF_RANGE		The specified @c index is out of range.
 	 */
 	result ScrollToItem(int index);
+
+	/*
+	 * Scrolls the list contents with the amount of pixels.
+	 *
+	 * @since 2.1
+	 *
+	 * @return	An error code
+	 * @param[in]	pixel				The amount of pixels to scroll
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_OUT_OF_RANGE		The specified @c pixel is out of range.
+	 * @remarks	If you call ScrollByPixel() with negative @c pixel when position of scroll is already top of contents then it will return @c E_OUT_OF_RANGE.
+	 *			Likewise, in case of positive @c pixel on the bottom position of scroll it will also return @c E_OUT_OF_RANGE.
+	 */
+	result ScrollByPixel(int pixel);
+
+	/*
+	 * Scrolls the list contents with the amount of pixels.
+	 *
+	 * @since 2.1
+	 *
+	 * @return	An error code
+	 * @param[in]	pixel				The amount of pixels to scroll
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_OUT_OF_RANGE		The specified @c pixel is out of range.
+	 * @remarks	If you call ScrollByPixel() with negative @c pixel when position of scroll is already top of contents then it will return @c E_OUT_OF_RANGE.
+	 *			Likewise, in case of positive @c pixel on the bottom position of scroll it will also return @c E_OUT_OF_RANGE.
+	 */
+	result ScrollByPixel(float pixel);
 
 	/**
 	 * Refreshes the specified item of %IconListView.
@@ -719,12 +905,35 @@ public:
 	/**
 	 * Gets the size of bitmap of the item.
 	 *
+	 * @since	2.1
+	 *
+	 * @return	An error code
+	 * @param[out]	width				The width of bitmap of the item
+	 * @param[out]	height				The height of bitmap of the item
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_STATE		This instance is in an invalid state.
+	 */
+	result GetItemBitmapSize(float& width, float& height) const;
+
+	/**
+	 * Gets the size of bitmap of the item.
+	 *
 	 * @since   2.0
 	 *
 	 * @return	The size of bitmap of the item, @n
 	 *			else (-1, -1) if the instance is invalid
 	 */
 	Tizen::Graphics::Dimension GetItemBitmapSize(void) const;
+
+	/**
+	 * Gets the size of bitmap of the item.
+	 *
+	 * @since   2.1
+	 *
+	 * @return	The size of bitmap of the item, @n
+	 *			else (-1, -1) if the instance is invalid
+	 */
+	Tizen::Graphics::FloatDimension GetItemBitmapSizeF(void) const;
 
 	/**
 	 * Gets the size of the item.
@@ -742,12 +951,35 @@ public:
 	/**
 	 * Gets the size of the item.
 	 *
+	 * @since   2.1
+	 *
+	 * @return	An error code
+	 * @param[out]	width				The width of the item
+	 * @param[out]	height				The height of the item
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_STATE		This instance is in an invalid state.
+	 */
+	result GetItemSize(float& width, float& height) const;
+
+	/**
+	 * Gets the size of the item.
+	 *
 	 * @since   2.0
 	 *
 	 * @return	The size of the item, @n
 	 *			else (-1, -1) if the instance is invalid
 	 */
 	Tizen::Graphics::Dimension GetItemSize(void) const;
+
+	/**
+	 * Gets the size of the item.
+	 *
+	 * @since   2.1
+	 *
+	 * @return	The size of the item, @n
+	 *			else (-1, -1) if the instance is invalid
+	 */
+	Tizen::Graphics::FloatDimension GetItemSizeF(void) const;
 
 	/**
 	 * Sets the number of item lines to be scrolled for the magnetic scroll of %IconListView.
@@ -770,7 +1002,7 @@ public:
 	 * @since   2.0
 	 *
 	 * @return	The number of item lines for the magnetic scroll of %IconListView, @n
-	 *			else @c -1 when the instance is invalid
+	 *			else @c -1 if the instance is invalid
 	 */
 	int GetMagneticScrollSize(void) const;
 
@@ -781,8 +1013,8 @@ public:
 	 *
 	 * @return	The number of items to be displayed per axis, @n
 	 *			else @c -1 if the instance is invalid
-	 * @remarks	The axis represents "row" when the scroll style is ICON_LIST_VIEW_SCROLLSDIRECTION_HORIZONTAL, while it represents "column" when the
-	 *			scroll style is ICON_LIST_VIEW_SCROLLDIRECTION_VERTICAL.
+	 * @remarks	The axis represents "row" when the scroll style is @c ICON_LIST_VIEW_SCROLLSDIRECTION_HORIZONTAL, while it represents "column" when the
+	 *			scroll style is @c ICON_LIST_VIEW_SCROLLDIRECTION_VERTICAL.
 	 */
 	int GetItemCountPerAxis(void) const;
 
@@ -890,31 +1122,51 @@ public:
 	result EndReorderingMode(void);
 
 	/**
-	 * Checks whether the %IconListView is in reordering mode.
+	 * Checks whether %IconListView is in reordering mode.
 	 *
 	 * @since 2.0
 	 *
-	 * @return  @c true if the %IconListView is in reordering mode, @n
+	 * @return  @c true if %IconListView is in reordering mode, @n
 	 *          else @c false
 	 */
 	bool IsInReorderingMode(void) const;
+
+	/**
+	 * Sets the scroll input handling mode.
+	 *
+	 * @since 2.1
+	 *
+	 * @param[in] mode	The scroll input handling mode
+	 * @see				GetScrollInputMode()
+	 */
+	void SetScrollInputMode(ScrollInputMode mode);
+
+	/**
+	 * Gets the scroll input handling mode.
+	 *
+	 * @since 2.1
+	 *
+	 * @return		The scroll input handling mode
+	 * @see			SetScrollInputMode()
+	 */
+	ScrollInputMode GetScrollInputMode(void) const;
 
 public:
 	friend class _IconListViewImpl;
 
 private:
-	//
-	// The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
-	//
-	// @since	2.0
-	//
+	/**
+	 * The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
+	 *
+	 * @since	2.0
+	 */
 	IconListView(const IconListView& rhs);
 
-	//
-	// The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit copying of objects.
-	//
-	// @since	2.0
-	//
+	/**
+	 * The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit copying of objects.
+	 *
+	 * @since	2.0
+	 */
 	IconListView& operator =(const IconListView& rhs);
 
 }; // IconListView

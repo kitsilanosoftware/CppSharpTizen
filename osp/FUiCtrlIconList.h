@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -146,7 +146,7 @@ IconListSample::OnInitializing(void)
 	__pIconList->AddItem(&itemText2, pBitmapNormal2, pBitmapFocused2, ID_LIST_SECONDITEM);
 
 	// Adds the icon list to the form
-	AddControl(*__pIconList);
+	AddControl(__pIconList);
 
 	// Deallocates bitmaps
 	delete pBitmapNormal1;
@@ -186,7 +186,8 @@ class _OSP_EXPORT_ IconList
 public:
 	/**
 	 * @if OSPDEPREC
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	* For full construction, the IconList::Construct() method must be called right after calling this constructor.
 	 *
 	 * @brief       <i> [Deprecated] </i>
 	 * @deprecated	This class is deprecated. Instead of using this class, use the IconListView class.
@@ -197,7 +198,8 @@ public:
 
 	/**
 	 * @if OSPDEPREC
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required.@n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @brief       <i> [Deprecated] </i>
 	 * @deprecated	This class is deprecated. Instead of using this class, use the IconListView class.
@@ -225,10 +227,11 @@ public:
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_INVALID_ARG	A specified input parameter is invalid.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier.
-	 * @remarks		The %IconList cannot display more than 64 items on screen at once.
-	 * @remarks		The size of the control must be within the range defined by the minimum and maximum size.
-	 * @remarks		The minimum size of this control is 0 x 0.
+	 * @remarks
+	 *				- A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier.
+	 *				- The %IconList cannot display more than 64 items on screen at once.
+	 *				- The size of the control must be within the range defined by the minimum and maximum size.
+	 * 				- The minimum size of this control is 0 x 0.
 	 * @endif
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, IconListStyle style, int itemWidth, int itemHeight);
@@ -244,7 +247,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use the IconListView class.
 	 * @since		2.0
 	 *
-	 * @param[in]	listener    The listener to be added
+	 * @param[in]	listener    The listener to add
 	 * @endif
 	 */
 	void AddItemEventListener(Tizen::Ui::IItemEventListener& listener);
@@ -258,7 +261,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use the IconListView class.
 	 * @since		2.0
 	 *
-	 * @param[in]	listener    The listener to be removed
+	 * @param[in]	listener    The listener to remove
 	 * @endif
 	 */
 	void RemoveItemEventListener(Tizen::Ui::IItemEventListener& listener);
@@ -336,8 +339,9 @@ public:
 	 * @param[in]	itemId		    The item ID
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks	    The contents of the specified texts and bitmaps are copied and kept by %List.
-	 *				To display text in multi-lines or to denote the end of line, use '\\n'.
+	 * @remarks
+	 *				- The contents of the specified texts and bitmaps are copied and kept by %List.
+	 *				- To display text in multi-lines or to denote the end of line, use '\\n'.
 	 * @endif
 	 */
 	result AddItem(const Tizen::Base::String* pText, const Tizen::Graphics::Bitmap* pNormalBitmap, const Tizen::Graphics::Bitmap* pFocusedBitmap, int itemId = LIST_ITEM_UNSPECIFIED_ID);
@@ -353,14 +357,15 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	index			The item text
-	 * @param[in]	pText			The text item to be added
+	 * @param[in]	pText			The text item to add
 	 * @param[in]	pNormalBitmap	The default bitmap image
 	 * @param[in]	pFocusedBitmap	The displayed bitmap image when an item is selected
 	 * @param[in]	itemId			The item ID
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		The contents of the specified texts and bitmaps are copied and kept by %IconList.
-	 *				To display text in multi-lines or to denote the end of line, use '\\n'.
+	 * @remarks
+	 *				- The contents of the specified texts and bitmaps are copied and kept by %IconList.
+	 *				- To display text in multi-lines or to denote the end of line, use '\\n'.
 	 * @endif
 	 */
 	result InsertItemAt(int index, const Tizen::Base::String* pText, const Tizen::Graphics::Bitmap* pNormalBitmap, const Tizen::Graphics::Bitmap* pFocusedBitmap, int itemId = LIST_ITEM_UNSPECIFIED_ID);
@@ -382,9 +387,10 @@ public:
 	 * @param[in]	itemId		    The item ID
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		The contents of the specified texts and bitmaps are copied and kept by %IconList.
+	 * @remarks
+	 *				- The contents of the specified texts and bitmaps are copied and kept by %IconList.
 	 *			    Call RefreshItem() to update item images.
-	 *				To display text in multi-lines or to denote the end of line, use '\\n'.
+	 *				- To display text in multi-lines or to denote the end of line, use '\\n'.
 	 * @endif
 	 */
 	result SetItemAt(int index, const Tizen::Base::String* pText, const Tizen::Graphics::Bitmap* pNormalBitmap, const Tizen::Graphics::Bitmap* pFocusedBitmap, int itemId = LIST_ITEM_UNSPECIFIED_ID);

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -20,7 +19,7 @@
  * @brief		This is the header file for the %Latin1Encoding class.
  *
  * This header file contains the declarations of the %Latin1Encoding class.
- * The %Latin1Encoding class is derived from the Encoding class.
+ * This class is derived from the Encoding class.
  */
 #ifndef _FTEXT_LATIN1_ENCODING_H_
 #define _FTEXT_LATIN1_ENCODING_H_
@@ -49,7 +48,6 @@ namespace Tizen { namespace Text
  *  For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/text/converting_all_text_data.htm">Converting All Text Data at Once</a>.
  *
  *  The following example demonstrates how to use the %Latin1Encoding class.
-
  *
  *  @code
  *	#include <FBase.h>
@@ -166,7 +164,7 @@ public:
 	 * @exception	E_OVERFLOW                This operation has caused the memory to overflow, or
 	 *                                        the specified @c bytes does not contain sufficient space to store the encoded characters.
 	 * @exception	E_INVALID_ENCODING_RANGE  The specified string contains code points that are outside the bounds of the character encoding scheme.
-	 * @remarks     This method encodes a range of characters in a Tizen::Base::WcharBuffer into a range of bytes in a Tizen::Base::ByteBuffer.
+	 * @remarks     This method encodes a range of characters in Tizen::Base::WcharBuffer into a range of bytes in Tizen::Base::ByteBuffer.
 	 * @see			GetChars()
 	 */
 	virtual result GetBytes(const Tizen::Base::WcharBuffer& chars, int charIndex, int charCount,

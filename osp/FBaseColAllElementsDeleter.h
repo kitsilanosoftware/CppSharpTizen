@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -29,22 +28,22 @@ namespace Tizen { namespace Base { namespace Collection
 {
 /**
  * @struct	AllElementsDeleter
- * @brief	This function object provides a resource clean-up function for collection
+ * @brief	This function object provides a resource clean-up function for collection.
  *
- * This can be used with unique_ptr as a custom deleter.
+ * The %AllElementsDeleter struct provides a resource clean-up function for collection. This can be used with unique_ptr as a custom deleter.
  *
  * @since 2.0
  */
 struct AllElementsDeleter
 {
 	/**
-	 * Deletes every element of the collection and the collection itself
+	 * Deletes every element of the collection and the collection itself.
 	 *
 	 * @since 2.0
 	 *
-	 * @param[in] c		The Collection to clean up
-	 * @remarks		Collection should be destructible and support RemoveAll(bool) method.
-	 *			IList, IMap and IMultiMap support this concept.
+	 * @param[in] c		The collection to clean up
+	 * @remarks		The collection should be destructible and support the RemoveAll(bool) method.
+	 *			IList, IMap, and IMultiMap support this concept.
 	 */
 	template< typename Collection >
 	void operator ()(Collection* c)

@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -43,7 +43,7 @@ namespace Tizen {namespace Ui
  * @interface	IFastScrollEventListener
  * @brief		<i> [Deprecated] </i> This interface implements the listener for fast scroll event.
  *
- * @deprecated  This class is deprecated. Instead of using this class, use the IFastScrollListener class.
+ * @deprecated  This interface is deprecated. Instead of using this interface, use the IFastScrollListener interface.
  * @since		2.0
  *
  *
@@ -58,51 +58,36 @@ class _OSP_EXPORT_ IFastScrollEventListener
 // Operation
 public:
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * This is the destructor for this class.
 	 *
 	 * @brief		<i> [Deprecated] </i>
-	 * @deprecated  This class is deprecated. Instead of using this class, use the IFastScrollListener class.
+	 * @deprecated  This interface is deprecated. Instead of using this interface, use the IFastScrollListener interface.
 	 * @since		2.0
-	 * @endif
+         * @endif
 	 */
 	virtual ~IFastScrollEventListener(void) {}
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Called when a main index is selected.
 	 *
 	 * @brief		<i> [Deprecated] </i>
-	 * @deprecated  This class is deprecated. Instead of using this class, use the IFastScrollListener class.
+	 * @deprecated  This interface is deprecated. Instead of using this interface, use the IFastScrollListener interface.
 	 * @since				2.0
 	 *
 	 * @param[in]   source				The source of the event
 	 * @param[in]   mainIndex			The main index
-	 * @endif
+         * @endif
 	 */
 	virtual void OnMainIndexChanged(const Tizen::Ui::Control& source, Tizen::Base::Character& mainIndex) = 0;
 
 	/**
-	 * @if OSPDEPREC
-	 * Called when a sub index is selected.
-	 *
-	 * @brief		<i> [Deprecated] </i>
-	 * @deprecated  This class is deprecated. Instead of using this class, use the IFastScrollListener class.
-	 * @since				2.0
-	 *
-	 * @param[in]   source				The source of the event
-	 * @param[in]   mainIndex			The main index
-	 * @param[in]   subIndex			The sub index
-	 * @endif
-	 */
-	virtual void OnSubIndexChanged(const Tizen::Ui::Control& source, Tizen::Base::Character& mainIndex, Tizen::Base::Character& subIndex) = 0;
-
-	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Called when a main index is expanded.
 	 *
 	 * @brief		<i> [Deprecated] </i>
-	 * @deprecated  This class is deprecated. Instead of using this class, use the IFastScrollListener class.
+	 * @deprecated  This interface is deprecated. Instead of using this interface, use the IFastScrollListener interface.
 	 * @since				2.0
 	 *
 	 * @param[in]   source				The source of the event
@@ -110,21 +95,6 @@ public:
 	 * @endif
 	 */
 	virtual void OnMainIndexSelected(const Tizen::Ui::Control& source, Tizen::Base::Character& mainIndex) = 0;
-
-	/**
-	 * @if OSPDEPREC
-	 * Called when a sub index is expanded.
-	 *
-	 * @brief		<i> [Deprecated] </i>
-	 * @deprecated  This class is deprecated. Instead of using this class, use the IFastScrollListener class.
-	 * @since				2.0
-	 *
-	 * @param[in]   source				The source of the event
-	 * @param[in]   mainIndex			The main index
-	 * @param[in]   subIndex			The sub index
-	 * @endif
-	 */
-	virtual void OnSubIndexSelected(const Tizen::Ui::Control& source, Tizen::Base::Character& mainIndex, Tizen::Base::Character& subIndex) = 0;
 
 protected:
 

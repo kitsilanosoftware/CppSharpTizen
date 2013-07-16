@@ -20,7 +20,7 @@
  * @brief		This is the header file for the %JsonObject class.
  *
  * This header file contains the declarations of the %JsonObject class.
- * The class represents the JSON value of type object.
+ * This class represents the JSON value of type object.
  */
 #ifndef _FWEB_JSON_JSON_OBJECT_H_
 #define _FWEB_JSON_JSON_OBJECT_H_
@@ -53,10 +53,10 @@ namespace Tizen { namespace Web { namespace Json
  * @final	This class is not intended for extension.
  *
  * The %JsonObject class represents the JSON value of type object.
- * @n
+ * 
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/web/json_namespace.htm">JSON Guide</a>.
  *
- * The following example shows how to create and initialize a %JsonObject instance and how to use its methods.
+ * The following example demonstrates how to create and initialize a %JsonObject instance and how to use its methods.
  *
  * @code
  *	#include <FWebJson.h>
@@ -119,14 +119,15 @@ class _OSP_EXPORT_ JsonObject
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the Construct() method must be called right after calling this constructor.
 	 *
 	 * @since	2.0
 	 */
 	JsonObject(void);
 
 	/**
-	 * This destructor overrides Tizen::Base::Object::~Object()..
+	 * This destructor overrides Tizen::Base::Object::~Object().
 	 *
 	 * @since	2.0
 	 */
@@ -139,8 +140,7 @@ public:
 	 *
 	 * @return      An error code
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @exception	E_INVALID_OPERATION	The Construct() method cannot be called twice.
+	 * @exception	E_SYSTEM		This exception exists only for historical reasons.
 	 */
 	result Construct(void);
 
@@ -150,7 +150,6 @@ public:
 	 * @since		2.0
 	 *
 	 * @return      The type of the JSON object
-	 * @see         JsonType
 	 */
 	JsonType GetType(void) const;
 
@@ -193,7 +192,7 @@ public:
 	 *
 	 * @return		@c true if the JSON object contains the specified value, @n
 	 *				else @c false
-	 * @param[in]	pJsonValue A pointer to a value to locate
+	 * @param[in]	pJsonValue A pointer to the value to locate
 	 */
 	virtual bool ContainsValue(IJsonValue* const& pJsonValue) const;
 
@@ -203,13 +202,13 @@ public:
 	 *	@since		2.0
 	 *
 	 *	@return		@c true if the value of the current instance equals the value of the specified instance, @n
-	                else @c false
+	 *               else @c false
 	 *	@param[in]	obj	The object to compare @n
 	 *                  This object is compared with the current instance of %JsonObject.
 	 *	@remarks    This method returns @c false if the specified object is not of type JSON object.
-	 *  @see		Object::Equals()
+	 *  @see		Tizen::Base::Object::Equals()
 	 */
-	virtual bool Equals(const Object& obj) const;
+ 	virtual bool Equals(const Object& obj) const;
 
 	/**
 	 * Gets the hash value of the current instance.
@@ -217,9 +216,8 @@ public:
 	 * @since 2.0
 	 *
 	 * @return	An integer value indicating the hash value of the current instance
-	 * @remarks	The two equal instances should return the same hash value. For better performance,
-	 *		the used hash function must generate a random distribution for all inputs.
-	 *		@n
+	 * @remarks	The two equal instances must return the same hash value. For better performance,
+	 *		the used hash function must generate a random distribution for all inputs. @n
 	 *		The default implementation of this method returns the address of the current instance.
 	 */
 	virtual int GetHashCode(void) const;
@@ -232,7 +230,7 @@ public:
 	 * @return		An error code
 	 * @param[in]	pKey                A pointer to the key to remove
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_INVALID_ARG		A specified input parameter is invalid, or the key comparison has failed.
+	 * @exception	E_INVALID_ARG		The specified input parameter is invalid, or the key comparison has failed.
 	 * @exception	E_OBJ_NOT_FOUND		The specified @c pKey is not found.
 	 */
 	virtual result Remove(const Tizen::Base::String* const& pKey);
@@ -268,8 +266,8 @@ public:
 	 * @since	    2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	pKey				A pointer to the key for which the value is to be replaced
-	 * @param[in]	pJsonValue			A pointer to the new value to be set
+	 * @param[in]	pKey				A pointer to the key for which the value is to replace
+	 * @param[in]	pJsonValue			A pointer to the new value to set
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid, or the key comparison has failed.
 	 * @exception	E_OBJ_NOT_FOUND		The specified @c pKey is not found.
@@ -283,8 +281,8 @@ public:
 	 * @since	    2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	pKey				A pointer to the key for which the value is to be replaced
-	 * @param[in]	pJsonValue			A pointer to the new value to be set
+	 * @param[in]	pKey				A pointer to the key for which the value is to replace
+	 * @param[in]	pJsonValue			A pointer to the new value to set
 	 * @param[in]	deallocate			Set to @c true to deallocate the JSON value, @n
 	 *                                  else @c false
 	 * @exception	E_SUCCESS			The method is successful.
@@ -309,13 +307,14 @@ public:
 	virtual result ContainsKey(const Tizen::Base::String* const& pKey, bool& out) const;
 
 	/**
-	 * Return a new cloned %JsonObject instance.
+	 * Returns a new cloned %JsonObject instance.
 	 *
 	 * @since 2.0
 	 *
-	 * @return		a new cloned %JsonObject
-	 * @exception	E_SUCCESS		The memory is successful.
-	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @return		A  new cloned %JsonObject or @c null if it fails to allocate the instance
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_OUT_OF_MEMORY	The memory is insufficient.
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	JsonObject* CloneN(void) const;
 

@@ -195,6 +195,18 @@ enum NetNapAuthType
 	NET_NAPAUTH_NONE = 0					// This enum value is for internal use only. Using this enum value can cause behavioral, security-related, and consistency-related issues in the application. Network NAP Authentication Type not set
 };
 
+/**
+ * @enum    NetProxyType
+ *
+ * Defines the proxy type of the network.
+ *
+ * @since 2.0
+ */
+enum NetProxyType
+{
+    NET_PROXY_TYPE_NONE = 0,  /**< No use of proxy */
+    NET_PROXY_TYPE_MANUAL     /**< Manual configuration */
+};
 
 
 } } //Tizen::Net

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -206,6 +205,9 @@ public:
 	 * @param[out]	ret 			The converted numeric value
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_NUM_FORMAT	The specified string does not contain a number that can be parsed.
+	 * @remarks		
+	 * 					- This method guarantees that the original value of out-parameter is not changed when the method returns error.
+	 * 					- The behavior of this method is dependent on the system default locale setting.
 	 */
 	static result Parse(const String& s, double& ret);
 
@@ -278,9 +280,11 @@ public:
 	 * @since 2.0
 	 *
 	 * @return		A string containing a Unicode representation of the value of the current instance
-	 * @remarks		If the value of the current instance is Not-a-Number (NaN), the result is the string "NaN". Furthermore, infinity
+	 * @remarks		
+	 *				- If the value of the current instance is Not-a-Number (NaN), the result is the string "NaN". Furthermore, infinity
 	 *				produces the result "Infinity". @n
 	 *				6 digits are given for the precision of this method. Use String::Format() to set the specific precision.
+	 * 				- The behavior of this method is dependent on the system default locale setting.
 	 */
 	virtual String ToString(void) const;
 
@@ -291,9 +295,11 @@ public:
 	 *
 	 * @return		A string containing a Unicode representation of the specified @c double value
 	 * @param[in]	value A @c double value to convert
-	 * @remarks		If the input value is Not-a-Number (NaN), the result is the string "NaN". Furthermore, infinity
+	 * @remarks		
+	 * 				- If the input value is Not-a-Number (NaN), the result is the string "NaN". Furthermore, infinity
 	 *				produces the result "Infinity". @n
 	 *				6 digits are given for the precision of this method. Use String::Format() to set the specific precision.
+	 * 				- The behavior of this method is dependent on the system default locale setting.
 	 */
 	static String ToString(double value);
 

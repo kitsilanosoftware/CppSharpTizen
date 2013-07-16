@@ -17,9 +17,9 @@
 
 /**
 * @file				FMediaIPlayerProgressiveDownloadListener.h
-* @brief			This is the header file for the IPlayerProgressiveDownloadListener interface.
+* @brief			This is the header file for the %IPlayerProgressiveDownloadListener interface.
 *
-* This header files contains the common thing required for IPlayerProgressiveDownloadListener.
+* This header files contains the declarations of the %IPlayerProgressiveDownloadListener interface.
 *
 */
 #ifndef _FMEDIA_IPLAYER_PROGRESSIVE_DOWNLOAD_LISTENER_H_
@@ -42,19 +42,18 @@ class _OSP_EXPORT_ IPlayerProgressiveDownloadListener
 {
 public:
 	/**
-	* This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor@n
-	* of this interface is called.
+	* This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	*
 	* @since		2.0
 	*/
 	virtual ~IPlayerProgressiveDownloadListener(void) { }
 
 	/**
-	* Called when the progressive download started.
+	* Called when the progressive download has started.
 	*
 	* @since		2.0
 	*
-	* @param[in]	player					A pointer to the Player instance that fired the event
+	* @param[in]	player					An instance of Player that fires the event
 	*/
 	virtual void OnPlayerProgressiveDownloadStarted(Player& player) = 0;
 
@@ -63,7 +62,7 @@ public:
 	*
 	* @since		2.0
 	*
-	* @param[in]	player					A pointer to the Player instance that fired the event
+	* @param[in]	player					An instance of Player that fires the event
 	* @param[in]	downloadedSize		The total downloaded size in bytes
 	* @param[in]	totalSize				The total size in bytes
 	*/
@@ -71,12 +70,12 @@ public:
 
 
 	/**
-	* Called when the progressive download completed.
+	* Called when the progressive download has completed.
 	*
 	* @since		2.0
 	*
-	* @param[in]	player					A pointer to the Player instance that fired the event
-	* @param[in]	r						The result of progressive download.
+	* @param[in]	player					An instance of Player that fires the event
+	* @param[in]	r						The result of progressive download
 	* @exception	E_SUCCESS				The method is successful.
 	* @exception	E_STORAGE_FULL			The storage is full.
 	* @exception	E_INACCESSIBLE_PATH		The file path is invalid to store media data.

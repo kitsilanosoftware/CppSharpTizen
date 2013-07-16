@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -72,53 +72,64 @@ public:
 	result Construct(void);
 
 	/**
-	 * Adds the ITouchRotationGestureEventListener instance to the rotation gesture detector instance. @n
-	 * The added listener gets notified when a gesture is recognized.
-	 *
-	 * @since 2.0
-	 *
-	 * @return			An error code
-	 * @param[in]	listener						The event listener to add
-	 * @exception	E_SUCCESS					The method is successful.
-	 * @exception	E_OBJ_ALREADY_EXIST	The listener is already added.
-	 * @see					RemoveRotationGestureEventListener()
-	 */
+	* Adds the ITouchRotationGestureEventListener instance to the rotation gesture detector instance. @n
+	* The added listener gets notified when a gesture is recognized.
+	*
+	* @since 2.0
+	*
+	* @return			An error code
+	* @param[in]	listener						The event listener to add
+	* @exception	E_SUCCESS					The method is successful.
+	* @exception	E_OBJ_ALREADY_EXIST	The listener is already added.
+	* @see					RemoveRotationGestureEventListener()
+	*/
 	result AddRotationGestureEventListener(Tizen::Ui::ITouchRotationGestureEventListener& listener);
 
 	/**
-	 * Removes the ITouchRotationGestureEventListener instance from the rotation gesture detector instance.
-	 *
-	 * @since 2.0
-	 *
-	 * @return			An error code
-	 * @param[in]	listener						The listener to remove
-	 * @exception	E_SUCCESS					The method is successful.
-	 * @exception	E_OBJ_NOT_FOUND	The specified @c listener is not found.
-	 * @see					AddRotationGestureEventListener()
-	 */
+	* Removes the ITouchRotationGestureEventListener instance from the rotation gesture detector instance.
+	*
+	* @since 2.0
+	*
+	* @return			An error code
+	* @param[in]	listener						The listener to remove
+	* @exception	E_SUCCESS					The method is successful.
+	* @exception	E_OBJ_NOT_FOUND	The specified @c listener is not found.
+	* @see					AddRotationGestureEventListener()
+	*/
 	result RemoveRotationGestureEventListener(Tizen::Ui::ITouchRotationGestureEventListener& listener);
 
 	/**
-	 * Gets the angle between the previous touch points and the current touch points.
-	 *
-	 * @since 2.0
-	 *
-	 * @return			The angle between two touch points
-	 * @exception	E_SUCCESS					The method is successful.
-	 * @remarks	If an error occurs, this method returns -1.
-	 */
+	* Gets the angle between the previous touch points and the current touch points.
+	*
+	* @since 2.0
+	*
+	* @return			The angle between two touch points
+	* @exception	E_SUCCESS					The method is successful.
+	* @remarks	If an error occurs, this method returns @c -1.
+	*/
 	float GetAngle(void) const;
 
 	/**
-	 * Gets the distance between two touch points.
-	 *
-	 * @since 2.0
-	 *
-	 * @return			The distance between two touch points
-	 * @exception	E_SUCCESS					The method is successful.
-	 * @remarks	If an error occurs, this method returns -1.
-	 */
+	* Gets the distance between two touch points.
+	*
+	* @since 2.0
+	*
+	* @return			The distance between two touch points
+	* @exception	E_SUCCESS					The method is successful.
+	* @remarks	If an error occurs, this method returns @c -1.
+	*/
 	int GetDistance(void) const;
+
+	/**
+	* Gets the distance between two touch points.
+	*
+	* @since 2.1
+	*
+	* @return			The distance between two touch points
+	* @exception	E_SUCCESS					The method is successful.
+	* @remarks	If an error occurs, this method returns @c -1.
+	*/
+	float GetDistanceF(void) const;
 
 private:
 	//
@@ -135,6 +146,6 @@ protected:
 	friend class _TouchRotationGestureDetectorImpl;
 }; // TouchRotationGestureDetector
 
-}} // Tizen::Ui
+} } // Tizen::Ui
 
 #endif	//_FUI_TOUCH_ROTATION_GESTURE_DETECTOR_H_

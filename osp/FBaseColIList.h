@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -316,8 +315,8 @@ public:
 	 * 									else @c false
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_OBJ_NOT_FOUND		The specified @c obj is not found.
-	 * @remarks		Based on the specified element deleter, the remove operation not only gets rid of an element from a list, but also deletes its object instance.@n
-	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the remove method.@n
+	 * @remarks		Based on the specified element deleter, the remove operation not only gets rid of an element from a list, but also deletes its object instance. @n
+	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the remove method. @n
 	 *				If both an element deleter and forceDeleteion are set, the remove operation follows @c forceDeletion setting.
 	 * @remarks		Remove(obj, @b true) internally works as the below code:
 	 * @code
@@ -380,8 +379,8 @@ public:
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_OUT_OF_RANGE			The specified index is outside the bounds of the data structure, or
 	 *										the specified @c index is either equal to or greater than the number of elements in the list or less than @c 0.
-	 * @remarks		Based on the specified element deleter, the remove operation not only gets rid of an element from a list, but also deletes its object instance.@n
-	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the remove method.@n
+	 * @remarks		Based on the specified element deleter, the remove operation not only gets rid of an element from a list, but also deletes its object instance. @n
+	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the remove method. @n
 	 *				If both an element deleter and forceDeleteion are set, the remove operation follows @c forceDeletion setting.
 	 * @remarks		RemoveAt(index, @b true) internally works as the below code:
 	 * @code
@@ -445,8 +444,8 @@ public:
 	 *										- The specified @c startIndex is either equal to or greater than the number of elements in the list or less than @c 0. @n
 	 *										- The @c count is greater than the number of elements starting from @c startIndex
 	 *										or less than @c 0.
-	 * @remarks		Based on the specified element deleter, the remove operation not only gets rid of an element from a list, but also deletes its object instance.@n
-	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the remove method.@n
+	 * @remarks		Based on the specified element deleter, the remove operation not only gets rid of an element from a list, but also deletes its object instance. @n
+	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the remove method. @n
 	 *				If both an element deleter and forceDeleteion are set, the remove operation follows @c forceDeletion setting.
 	 * @remarks		RemoveItems(startIndex, count, @b true) internally works as the below code:
 	 * @code
@@ -512,8 +511,8 @@ public:
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation, or
 	 *									the specified @c collection is modified during the operation of this method.
-	 * @remarks		Based on the specified element deleter, the remove operation not only gets rid of an element from a list, but also deletes its object instance.@n
-	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the remove method.@n
+	 * @remarks		Based on the specified element deleter, the remove operation not only gets rid of an element from a list, but also deletes its object instance. @n
+	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the remove method. @n
 	 *				If both an element deleter and forceDeleteion are set, the remove operation follows @c forceDeletion setting.
 	 * @remarks		RemoveItems(collection, @b true) internally works as the below code:
 	 * @code
@@ -575,8 +574,8 @@ public:
 	 * @return		An error code
 	 * @param[in]	forceDeletion		Set to @c true to deallocate all the objects, @n
 	 * 							else @c false
-	 * @remarks		Based on the specified element deleter, the remove operation not only gets rid of an element from a list, but also deletes its object instance.@n
-	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the remove method.@n
+	 * @remarks		Based on the specified element deleter, the remove operation not only gets rid of an element from a list, but also deletes its object instance. @n
+	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the remove method. @n
 	 *				If both an element deleter and forceDeleteion are set, the remove operation follows @c forceDeletion setting.
 	 * @remarks		RemoveAll(@b true) internally works as the below code:
 	 * @code
@@ -631,8 +630,8 @@ public:
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_OUT_OF_RANGE			The specified index is outside the bounds of the data structure, or
 	 *										the specified @c index is either equal to or greater than the number of elements in the list or less than @c 0.
-	 * @remarks		Based on the specified element deleter, the set operation not only gets rid of an element from a list, but also deletes its object instance.@n
-	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the set method.@n
+	 * @remarks		Based on the specified element deleter, the set operation not only gets rid of an element from a list, but also deletes its object instance. @n
+	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the set method. @n
 	 *				If both an element deleter and forceDeleteion are set, the set operation follows @c forceDeletion setting.
 	 * @remarks		SetAt(obj, index, @b true) internally works as the below code:
 	 * @code
@@ -784,7 +783,7 @@ public:
 	 *
 	 * @since 2.0
 	 *
-	 * @return		An function pointer to the existing element deleter
+	 * @return		A function pointer to the existing element deleter
 	 */
 	virtual DeleterFunctionType GetDeleter(void) const = 0;
 

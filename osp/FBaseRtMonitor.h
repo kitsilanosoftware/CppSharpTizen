@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -336,7 +335,8 @@ public:
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_SYSTEM	A system error has occurred.
 	 * @remarks		This method should be called only after acquiring lock by Enter() call
-	 * @see			Notify(), NotifyAll()
+	 * @see			Notify()
+	 * @see			NotifyAll()
 	 */
 	result Wait(void);
 
@@ -349,7 +349,8 @@ public:
 	 * @return		An error code
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_SYSTEM	A system error has occurred.
-	 * @see			NotifyAll(), Wait()
+	 * @see			NotifyAll()
+	 * @see			Wait()
 	 */
 	result Notify(void);
 
@@ -362,7 +363,8 @@ public:
 	 * @return		An error code
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_SYSTEM	A system error has occurred.
-	 * @see			Notify(), Wait()
+	 * @see			Notify()
+	 * @see			Wait()
 	 */
 	result NotifyAll(void);
 

@@ -44,8 +44,8 @@ namespace Tizen { namespace Net { namespace Bluetooth
  */
 enum BluetoothDeviceStateType
 {
-	BT_DEVICE_STATE_OFF,                /**< @if OSPDEPREC The OFF state @endif */
-	BT_DEVICE_STATE_DISCOVERABLE,       /**< @if OSPDEPREC The DISCOVERABLE state  @endif  */
+	BT_DEVICE_STATE_OFF,                /**< @if OSPDEPREC The OFF state             @endif */
+	BT_DEVICE_STATE_DISCOVERABLE,       /**< @if OSPDEPREC The DISCOVERABLE state    @endif */
 	BT_DEVICE_STATE_NOT_DISCOVERABLE    /**< @if OSPDEPREC The NOT DISCOVERABLE state @endif */
 };
 
@@ -59,9 +59,7 @@ enum BluetoothDiscoverableMode
 {
 	BT_DISC_MODE_NOT_DISCOVERABLE,          /**< The mode NOT DISCOVERABLE by other devices */
 	BT_DISC_MODE_DISCOVERABLE,              /**< The mode DISCOVERABLE by other devices     */
-	BT_DISC_MODE_TIME_LIMITED_DISCOVERABLE  /**< The mode DISCOVERABLE by other devices during a certain amount of time
-	                                         *  @if OSPCOMPAT @b Since: @b 2.0 @endif
-	                                         */
+	BT_DISC_MODE_TIME_LIMITED_DISCOVERABLE  /**< The mode DISCOVERABLE by other devices during a certain amount of time */
 };
 
 /**
@@ -73,10 +71,10 @@ enum BluetoothDiscoverableMode
 enum BluetoothConnectionType
 {
 	BT_CONNECTION_GENERIC,              /**< The GENERIC CONNECTION
-				                         *   @if OSPDEPREC
-				                         *   @deprecated    This enumeration field is deprecated. @n
-				                         *   @endif
-				                         */
+	                                     *   @if OSPDEPREC
+	                                     *   @deprecated    This enum field is deprecated.
+	                                     *   @endif
+	                                     */
 	BT_CONNECTION_SPP_ACCEPTOR,         /**< The SPP ACCEPTOR CONNECTION  */
 	BT_CONNECTION_SPP_INITIATOR,        /**< The SPP INITIATOR CONNECTION */
 	BT_CONNECTION_OPP_SERVER,           /**< The OPP SERVER CONNECTION    */
@@ -94,12 +92,12 @@ enum BluetoothHealthDataChannelType
 {
 	BT_HEALTH_DATA_CHANNEL_NONE,         /**< The any type of data channel */
 	BT_HEALTH_DATA_CHANNEL_RELIABLE,    /**< The data channel type for transmitting data with the reliable manner of
-	                                     *   which the confidence in the exchange is at its highest (e.g. measurement
+	                                     *   which the confidence in the exchange is at its highest (for example, measurement
 	                                     *   and alert information)
 	                                     */
 	BT_HEALTH_DATA_CHANNEL_STREAMING    /**< The data channel type for transmitting data when the timeliness of the
 	                                     *   delivery of each frame is more important than the reliable delivery of
-	                                     *   every frame (e.g. an ECG waveform, where low latency is critical)
+	                                     *   every frame (for example, an ECG waveform, where low latency is critical)
 	                                     */
 };
 
@@ -213,22 +211,14 @@ enum BluetoothServiceType
 	BT_SVC_PBAP_SERVICE = 0x00400000,          /**< The PhoneBook Access service type                   */
 	BT_SVC_HSP_HS_SERVICE = 0x00800000,        /**< The Headset service type                            */
 	BT_SVC_HFP_HS_SERVICE = 0x01000000,        /**< The Hands-free Headset service type                 */
-	BT_SVC_HCRP_SERVICE = 0x02000000,          /**< The Hardcopy cable replacement profile service type
-                                                *   @if OSPCOMPAT @b Since: @b 2.0 @endif
-                                                */
-	BT_SVC_DID_SERVICE = 0x04000000,           /**< The device identification profile service type
-                                                *   @if OSPCOMPAT @b Since: @b 2.0 @endif
-                                                */
-	BT_SVC_HDP_SERVICE = 0x08000000,           /**< The health device profile service type
-                                                *   @if OSPCOMPAT @b Since: @b 2.0 @endif
-                                                */
-	BT_SVC_MAP_SERVICE = 0x10000000,           /**< The message access profile service type
-                                                *   @if OSPCOMPAT @b Since: @b 2.0 @endif
-                                                */
+	BT_SVC_HCRP_SERVICE = 0x02000000,          /**< The Hardcopy cable replacement profile service type */
+	BT_SVC_DID_SERVICE = 0x04000000,           /**< The device identification profile service type      */
+	BT_SVC_HDP_SERVICE = 0x08000000,           /**< The health device profile service type              */
+	BT_SVC_MAP_SERVICE = 0x10000000,           /**< The message access profile service type             */
 	BT_SVC_ALL_SERVICE = 0x01FFFFFF,           /**< The All-services-supported-by-BTA service type
-				                                *   @if OSPDEPREC
-				                                *   @deprecated    This enumeration field is deprecated.
-				                                *   @endif
+	                                            *   @if OSPDEPREC
+	                                            *   @deprecated    This enum field is deprecated.
+	                                            *   @endif
 
                                                 */
 	BT_SVC_NONE = 0                            /**< The No service or unknown service type              */
@@ -578,7 +568,7 @@ _OSP_EXPORT_ extern const byte BT_SVC_UUID_GENERIC_FILE_TRANSFER[];
 _OSP_EXPORT_ extern const byte BT_SVC_UUID_GENERIC_AUDIO[];
 
 /**
- * The generic telephony UUID. (00001204-0000-1000-8000-00805F9B34FB)
+ * The generic telephony UUID (00001204-0000-1000-8000-00805F9B34FB).
  *
  * @since 2.0
  */

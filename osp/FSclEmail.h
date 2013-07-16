@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -83,7 +82,7 @@ public:
 
 	/**
 	 * Initializes this instance of %Email with the specified @c type and @c email. @n
-	 * This constructs an instance of %Email of the specified type.
+	 * This constructs an instance of %Email of the specified @c type.
 	 *
 	 * @since	2.0
 	 *
@@ -129,32 +128,16 @@ public:
 	virtual int GetHashCode(void) const;
 
 	/**
-         * Gets the type of the email.
-         *
-	 * @if OSPCOMPAT
-         * @brief <i> [Compatibility] </i>
-	 * @endif
-         * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-         *                           For more information, see @ref CompEmailGetTypePage "here".
-	 * @endif
-         *
-         * @return	The type of the email
-         */
+     * Gets the type of the email.
+     *
+	 * @since	2.0
+	 *
+     * @return	The type of the email
+     */
 	EmailType GetType(void) const;
 
 	/**
-	 * @if OSPCOMPAT
-         * @page                CompEmailGetTypePage         Compatibility for GetType()
-         * @section             CompEmailGetTypePageIssueSection             Issues
-	 * Implementing this method in OSP compatible applications has the following issue: @n
-         * -# EMAIL_TYPE_CUSTOM is not supported. If the type of the email is EMAIL_TYPE_CUSTOM, EMAIL_TYPE_OTHER is returned instead.
-         *
-         * @section             CompEmailGetTypePageSolutionSection          Resolutions
-	 * The issue mentioned above has been resolved in Tizen.
-	 * @endif
-         */
+	 */
 
 	/**
 	 * Gets the email address.
@@ -177,14 +160,7 @@ public:
 	/**
 	 * Sets the email address.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-	 *                            For more information, see @ref CompEmailSetEmailPage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	email			The email address
@@ -194,15 +170,6 @@ public:
 	result SetEmail(const Tizen::Base::String& email);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page		CompEmailSetEmailPage		Compatibility for SetEmail()
-	 * @section		CompEmailSetEmailPageIssueSection		Issues
-	 * Implementing this method in OSP compatible applications has the following issue: @n
-	 * -# If the length of an email address to be set is greater than 100 characters, E_INVALID_ARG is returned.
-	 *
-	 * @section		CompEmailSetEmailPageSolutionSection		Resolutions
-	 * The issue mentioned above has been resolved in Tizen.
-	 * @endif
 	 */
 
 	/**
@@ -216,7 +183,7 @@ public:
 	Tizen::Base::String GetLabel(void) const;
 
 	/**
-	 * Sets the label of an email. 
+	 * Sets the label of an email.
 	 *
 	 * @since	2.0
 	 *

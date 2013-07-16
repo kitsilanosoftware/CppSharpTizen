@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -286,9 +285,8 @@ public:
 	* @exception		E_TYPE_MISMATCH		The operation has attempted to access columns of different types.
 	* @exception		E_INVALID_FORMAT	The date is not correctly formatted, or the method is trying to access column of type String. @n
 	*										The date format should be 'mm/dd/yyyy hh:mm:ss'.
-	* @exception		E_OUT_OF_RANGE		Either the year(%d), month(%d), day(%d), hour(%d), minute(%d), or second(%d) value is out of range,
+	* @exception		E_OUT_OF_RANGE		Either the year, month, day, hour, minute, or second value is out of range,
 	*										or the method is trying to access a column of type String.
-	* @remarks			Note that the DateTime is constructed inside the method.
 	*/
 	virtual result GetDateTimeAt(int columnIndex, Tizen::Base::DateTime& value) const = 0;
 
@@ -304,7 +302,7 @@ public:
 	*									- This instance has not been properly constructed. @n
 	*									- The method has tried to fetch the column data of a result set that is not activated
 	*									  (the query did not yield any result). @n
-	* @remarks		The method must be called after MoveNext(), MoveFirst(), or MoveLast(). @n
+	* @remarks		This method must be called after MoveNext(), MoveFirst(), or MoveLast(). @n
 	*				The specific error code can be accessed using the GetLastResult() method.
 	*/
 	virtual int GetColumnCount(void) const = 0;
@@ -323,7 +321,7 @@ public:
 	*									- The method has tried to fetch the column data of a result set that is not activated
 	*									  (the query did not yield any result). @n
 	* @exception	E_INVALID_ARG		The specified @c columnIndex is out of range.
-	* @remarks		The method must be called after MoveNext(), MoveFirst(), or MoveLast(). @n
+	* @remarks		This method must be called after MoveNext(), MoveFirst(), or MoveLast(). @n
 	*				Currently, DB_COLUMNTYPE_INT is returned for a 64-bit integer. @n
 	*				The specific error code can be accessed using the GetLastResult() method.
 	*/
@@ -345,7 +343,7 @@ public:
 	* @exception	E_INVALID_ARG				The specified @c columnIndex is out of range.
 	* @exception	E_INVALID_ENCODING_RANGE	The string conversion has failed due to invalid encoding range, or
 	*											it is possible if the database file is corrupted.
-	* @remarks		The method must be called after MoveNext(), MoveFirst(), or MoveLast(). @n
+	* @remarks		This method must be called after MoveNext(), MoveFirst(), or MoveLast(). @n
 	*				The specific error code can be accessed using the GetLastResult() method.
 	*/
 	virtual Tizen::Base::String GetColumnName(int columnIndex) const = 0;
@@ -364,7 +362,7 @@ public:
 	*									- The method has tried to fetch the column data of a result set that is not activated
 	*									  (the query did not yield any result). @n
 	* @exception	E_INVALID_ARG		The specified @c columnIndex is out of range.
-	* @remarks		The method must be called after MoveNext(), MoveFirst(), or MoveLast(). @n
+	* @remarks		This method must be called after MoveNext(), MoveFirst(), or MoveLast(). @n
 	*				If the destination column is of type %String, this method returns the @c byte length excluding the @c null terminator character. @n
 	*				The specific error code can be accessed using the GetLastResult() method.
 	*/

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -38,7 +37,7 @@ namespace Tizen { namespace App
 * @interface	IAppControlEventListener
 * @brief		<i>[Deprecated]</i> This interface defines a listener for the AppControl result events.
 *
-* @deprecated	This class is deprecated. Instead of using this interface, use the IAppControlResponseListener interface.
+* @deprecated	This interface is deprecated. Instead of using this interface, use the IAppControlResponseListener interface.
 * @since	2.0
 *
 * The %IAppControlEventListener interface defines a listener for the AppControl result events.
@@ -55,7 +54,7 @@ public:
 	 *
 	 * @brief	<i> [Deprecated] </i>
 	 *
-	 * @deprecated	This class is deprecated. Instead of using this interface, use the IAppControlResponseListener interface.
+	 * @deprecated	This interface is deprecated. Instead of using this interface, use the IAppControlResponseListener interface.
 	 * @since	2.0
 	 * @endif
 	 */
@@ -69,7 +68,7 @@ public:
 	 *
 	 * @brief	<i> [Deprecated] </i>
 	 *
-	 * @deprecated	This class is deprecated. Instead of using this interface, use the IAppControlResponseListener interface.
+	 * @deprecated	This interface is deprecated. Instead of using this interface, use the IAppControlResponseListener interface.
 	 * @since	2.0
 	 *
 	 * @param[in]	providerId	The provider ID

@@ -67,7 +67,7 @@ protected:
 protected:
 	/**
 	 * Writes the message body. @n
-	 * This method can be called several times consecutively. All the message bodies are stored in the queue.
+	 * The %WriteBody() method can be called several times consecutively. All the message bodies are stored in the queue.
 	 *
 	 * @since       2.0
 	 *
@@ -90,7 +90,7 @@ protected:
 protected:
 	/**
 	 * Gets the header. @n
-	 * This method is used to access the headers associated with a transaction request or response.
+	 * The %GetHeader() method is used to access the headers associated with a transaction request or response.
 	 * The handle is obtained from either the HttpRequest or the HttpResponse objects associated with the transaction. Adding, modifying, or removing a
 	 * header field is done using this header handle.
 	 *
@@ -162,7 +162,7 @@ protected:
 	//
 	//  This variable is for internal use only. Using this variable can cause behavioral, security-related, and consistency-related issues in the application.
 	//
-	// The header of message
+	// The header of the message
 	//
 	// @since       2.0
 	//

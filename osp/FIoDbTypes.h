@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -17,9 +16,9 @@
 
 /**
  * @file	FIoDbTypes.h
- * @brief	This is the header file for the %DbTypes class.
+ * @brief	This is the header file for the %DbColumnType enumerator.
  *
- * This header file contains enum declarations of the @e %DbTypes class.
+ * This header file contains the declarations of the %DbColumnType enumerator.
  */
 
 #ifndef _FIO_DB_TYPES_H_
@@ -35,7 +34,7 @@ namespace Tizen { namespace Io
 /**
  * @enum	DbColumnType
  *
- * Defines	types of column.
+ * Defines the column types.
  *
  * @since	2.0
  */
@@ -46,7 +45,7 @@ enum DbColumnType
 	DB_COLUMNTYPE_DOUBLE,   /**< The column type is double */
 	DB_COLUMNTYPE_TEXT,     /**< The column type is text */
 	DB_COLUMNTYPE_BLOB,     /**< The column type is blob */
-	DB_COLUMNTYPE_NULL,     /**< The column type is null */
+	DB_COLUMNTYPE_NULL,     /**< The column type is @c null */
 	DB_COLUMNTYPE_UNDEFINED
 };
 

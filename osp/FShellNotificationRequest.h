@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -33,13 +32,13 @@ namespace Tizen { namespace Shell
 
 /**
  * @class		NotificationRequest
- * @brief		This class provides methods for handling a notification request
+ * @brief		This class provides methods for handling a notification request.
  *
  * @since	2.0
  *
  * @final	This class is not intended for extension.
  *
- * The %NotificationRequest class provides methods for handling the notification request. The request can contain following
+ * The %NotificationRequest class provides methods for handling a notification request. The request can contain following
  * items:
  * -# Constructing element of the notification area such as a notification title or alert text
  * -# Information of the indicator area such as an alert text
@@ -67,6 +66,7 @@ public:
 	 * 							else @c false
 	 * @remarks	Selecting the posted notification in the notification area leads to launch of the associated application
 	 * 			if %NotificationRequest is bound to the destination application.
+	 * @see	SetAlertText()
 	 */
 	explicit NotificationRequest(bool appBinding = true);
 
@@ -187,12 +187,14 @@ public:
 	 * @param[in]	text	The alert text
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_INVALID_ARG	The specified @c text is empty or the length of @c text is greater than Shell::MAX_NOTIFICATION_MESSAGE_LENGTH.
+	 * @remarks	
+	 *				- @c text is displayed according to notification layout, and the length of the @c text depends on the font attributes or the variable font width.
+	 *				- @c text is mandatory for a notification.
 	 */
 	result SetAlertText(const Tizen::Base::String& text);
 
 	/**
-	 * Gets the application message of a notification message. @n
-	 * This message is delivered to the application as launch arguments.
+	 * Gets the application message of a notification message.
 	 *
 	 * @since	2.0
 	 *
@@ -202,16 +204,17 @@ public:
 
 	/**
 	 * Sets the application message of a notification message. @n
-	 * This message is delivered to the application as launch arguments.
+	 * @c appMessage is delivered as the value of the %http://tizen.org/appcontrol/data/notification key
+	 * for Tizen::App::IAppControlProviderEventListener::OnAppControlRequestReceived().
 	 *
 	 * @since	2.0
 	 *
 	 * @return	An error code
 	 * @param[in]	appMessage		The message for the application
 	 * @exception	E_SUCCESS	The method is successful.
-	 * @exception	E_INVALID_ARG	The length of @c appMessage is greater than Shell::MAX_NOTIFICATION_LAUNCH_ARGUMENTS_LENGTH.
+	 * @exception	E_INVALID_ARG	The specified @c appMessage is empty or the length of @c appMessage is greater than Shell::MAX_NOTIFICATION_LAUNCH_ARGUMENTS_LENGTH.
 	 * @exception	E_INVALID_OPERATION	This instance is not bound to the application.
-	 * @remarks	This method returns @c E_INVALID_OPERATION if %NotificationRequest instance is not bound to the application.
+	 * @remarks	This method returns @c E_INVALID_OPERATION if the %NotificationRequest instance is not bound to the application.
 	 */
 	result SetAppMessage(const Tizen::Base::String& appMessage);
 
@@ -232,7 +235,8 @@ public:
 	 * @return	An error code
 	 * @param[in]	title	The title text
 	 * @exception	E_SUCCESS	The method is successful.
-	 * @exception	E_INVALID_ARG	The length of @c title is greater than Shell::MAX_NOTIFICATION_TITLE_LENGTH.
+	 * @exception	E_INVALID_ARG	The specified @c title is empty or the length of @c title is greater than Shell::MAX_NOTIFICATION_TITLE_LENGTH.
+	 * @remarks	If @c title is not set, the application name is displayed.
 	 */
 	result SetTitleText(const Tizen::Base::String& title);
 
@@ -254,6 +258,7 @@ public:
 	 * @param[in]	iconPath	The file path of the icon image
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_INVALID_ARG	The specified path is invalid.
+	 * @remarks	If @c iconPath is not set, the application icon is displayed.
 	 */
 	result SetIconFilePath(const Tizen::Base::String& iconPath);
 
@@ -267,8 +272,7 @@ public:
 	Tizen::Base::String GetSoundFilePath(void) const;
 
 	/**
-	 * Sets the file path of the sound file that is played for the notification message. @n
-	 * The sound file should be in the WAVE file format.
+	 * Sets the file path of the sound file that is played for the notification message.
 	 *
 	 * @since	2.0
 	 *
@@ -276,7 +280,9 @@ public:
 	 * @param[in]	soundPath	The file path of the sound file
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_INVALID_ARG	The specified path is invalid.
-	 * @remarks	If the format of the sound file is not valid, then the sound file is not played properly when the notification message is displayed.
+	 * @remarks	
+	 *				- If the format of the sound file is not valid, then the sound file is not played properly when the notification message is displayed.
+	 *				- If @c soundPath is not set, the default sound is played when the %NotificationRequest instance is delivered to the NotificationManager::Notify() method.
 	 */
 	result SetSoundFilePath(const Tizen::Base::String& soundPath);
 
@@ -315,22 +321,135 @@ public:
 	int GetOngoingActivityProgress(void) const;
 
 	/**
-	 * Sets the progress value with the specified value.
+	 * Sets the progress value with the specified @c value.
 	 *
 	 * @since	2.0
 	 *
 	 * @return	An error code
 	 * @param[in]	value	The progress value
 	 * @exception	E_SUCCESS	The method is successful.
-	 * @exception	E_INVALID_ARG	The specified @c value is less than @c 0, or
-     * 								the specified @c value does not lie between @c 0 and @c 100 for Shell::ONGOING_ACTIVITY_TYPE_PROGRESS_PERCENTAGE.
+	 * @exception	E_INVALID_ARG	Either of the following conditions has occurred: @n
+	 * 								- The specified @c value is less than @c 0.
+     *								- The specified @c value does not lie between @c 0 and @c 100 for Shell::ONGOING_ACTIVITY_TYPE_PROGRESS_PERCENTAGE.
+     *								- The notification type for an ongoing activity is not set.
 	 * @exception	E_INVALID_OPERATION	This instance is in an invalid state. @n
 	 * 								OngoingActivityType must be either Shell::ONGOING_ACTIVITY_TYPE_PROGRESS_BYTE or Shell::ONGOING_ACTIVITY_TYPE_PROGRESS_PERCENTAGE.
+	 * @see	SetOngoingActivityType()
 	 */
 	result SetOngoingActivityProgress(int value);
 
+	/**
+	 * Gets the style of a notification message.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		The notification style
+	 */
+	NotificationStyle  GetNotificationStyle(void) const;
+
+	/**
+	 * Sets the style of a notification message.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	style			The notification style
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_INVALID_ARG	The specified @c style is not valid.
+	 */
+	result SetNotificationStyle(NotificationStyle style);
+
+	/**
+	 * Gets a list of message text for a notification message.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		A string list of message text
+	 */
+	Tizen::Base::Collection::IList* GetMessageTextListN(void) const;
+
+	/**
+	 * Sets a string list of message text for a notification message.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	pTextList		A list of message text
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_INVALID_ARG	The specified @c pTextList is empty or the length of @c pTextList is greater than Shell::MAX_NOTIFICATION_MESSAGE_LENGTH.
+	 * @remarks		This information is only meaningful when the notification style is Shell::NOTIFICATION_STYLE_NORMAL. @n
+	 *				Use the tab(\\t) character to separate the columns.
+	 */
+	result SetMessageTextList(const Tizen::Base::Collection::IList* pTextList);
+
+	/**
+	 * Gets a list of the message thumbnail image absolute file path for a notification message.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		A string list of thumbnail image file path
+	 */
+	Tizen::Base::Collection::IList* GetMessageThumbnailFilePathListN(void) const;
+
+	/**
+	 * Sets a string list of the message thumbnail image absolute file path for a notification message.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	pThumbnailPathList	A list of the thumbnail image file path
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		The specified path is invalid.
+	 * @remarks		This information is only meaningful when the notification style is Shell::NOTIFICATION_STYLE_THUMBNAIL.
+	 */
+	result SetMessageThumbnailFilePathList(const Tizen::Base::Collection::IList* pThumbnailPathList);
+
+	/**
+	 * Gets the notification count text of a notification message.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		The notification count text
+	 */
+	Tizen::Base::String GetNotificationCountText(void) const;
+
+	/**
+	 * Sets the notification count text of a notification message.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	notificationCountText	The notification count text
+	 * @exception	E_SUCCESS				The method is successful.
+	 * @exception	E_INVALID_ARG			The specified @c notificationCountText is empty or the length of @c notificationCountText is greater than Shell::MAX_NOTIFICATION_MESSAGE_LENGTH.
+	 * @remarks	This information is only meaningful when the notification style is Shell::NOTIFICATION_STYLE_NORMAL.
+	 */
+	result SetNotificationCountText(const Tizen::Base::String& notificationCountText);
+
+	/**
+	 * Gets the absolute file path of the background image for a notification message.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		The file path of a background image file
+	 */
+	Tizen::Base::String GetBackgroundImageFilePath(void) const;
+
+	/**
+	 * Sets the absolute file path of the background image for a notification message.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	imagePath		The file path of the background image
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_INVALID_ARG	The specified path is invalid.
+	 */
+	result SetBackgroundImageFilePath(const Tizen::Base::String& imagePath);
+
+
 private:
-	class _NotificationRequestImpl * __pNotificationRequestImpl;
+	class _NotificationRequestImpl* __pNotificationRequestImpl;
 
 	friend class _NotificationRequestImpl;
 }; // NotificationRequest

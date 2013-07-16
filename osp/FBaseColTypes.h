@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -20,7 +19,7 @@
  * @brief		This is the header file for the element deleter.
  *
  * This header file contains the declarations of the element deleter.
- * Depending on the element deleter, collection decides whether removing the object or not.
+ * Depending on the element deleter, collection decides whether to remove the object or not.
  */
 #ifndef _FBASE_COL_TYPES_H_
 #define _FBASE_COL_TYPES_H_
@@ -33,11 +32,11 @@ namespace Tizen { namespace Base { namespace Collection
 typedef void (*DeleterFunctionType)(Object* pObj);
 
 /**
- * This function doesn't remove the object.
+ * This function does not remove the object.
  *
  * @since 2.0
  *
- * @param[in]	pObj		The pointer to object to remove
+ * @param[in]	pObj		The pointer to the object to remove
  */
 _OSP_EXPORT_ void NoOpDeleter(Object* pObj);
 
@@ -46,7 +45,7 @@ _OSP_EXPORT_ void NoOpDeleter(Object* pObj);
  *
  * @since 2.0
  *
- * @param[in]	pObj		The pointer to object to remove
+ * @param[in]	pObj		The pointer to the object to remove
  */
 _OSP_EXPORT_ void SingleObjectDeleter(Object* pObj);
 
@@ -55,7 +54,7 @@ _OSP_EXPORT_ void SingleObjectDeleter(Object* pObj);
  *
  * @since 2.0
  *
- * @param[in]	pObj		The pointer to object to remove
+ * @param[in]	pObj		The pointer to the object to remove
  */
 _OSP_EXPORT_ void ArrayDeleter(Object* pObj);
 

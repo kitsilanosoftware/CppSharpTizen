@@ -85,7 +85,8 @@ class _OSP_EXPORT_ HttpSession
 
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the Construct() method must be called right after calling this constructor.
 	 *
 	 * @since       2.0
 	 *
@@ -100,7 +101,7 @@ public:
 	 * @since           2.0
 	 *
 	 * @return			An error code
-	 * @param[in]		sessionMode				The session mode to open the session
+	 * @param[in]		sessionMode			The session mode to open the session
 	 * @param[in]		pProxyAddr				A proxy address @n
 	 *											The specified @c pProxyAddr must be a valid URL. If @c pProxyAddr is @c null, %HttpSession uses the system
 	 *											default proxy address.
@@ -109,14 +110,14 @@ public:
 	 *											@c hostAddr is ignored (In case of multiple host mode, @c hostAddr is set to HttpRequest::SetUri()).
 	 * @param[in]		pCommonHeader			An instance of HttpHeader @n
 	 *											This is a common header used in all the transactions included in this session.
-	 * @param[in]		flag					Set to @c true if the cookies must be handled automatically, @n
-	 *											else @c false if the cookies must be handled manually
+	 * @param[in]		flag					Set to @c NET_HTTP_COOKIE_FLAG_ALWAYS_AUTOMATIC if the cookies must be handled automatically, @n
+	 *											else @c NET_HTTP_COOKIE_FLAG_ALWAYS_MANUAL if the cookies must be handled manually
 	 * @exception		E_SUCCESS				The method is successful.
 	 * @exception		E_INVALID_ARG			A specified input parameter is invalid.
-	 * @exception		E_OUT_OF_MEMORY			The memory is insufficient.
+	 * @exception		E_OUT_OF_MEMORY		The memory is insufficient.
 	 * @exception		E_INVALID_CONNECTION	The net connection is invalid.
-	 * @exception		E_MAX_EXCEEDED			The number of currently opened sessions has exceeded the maximum limit.
-	 * @exception		E_INVALID_PROXY			The specified proxy address is invalid.
+	 * @exception		E_MAX_EXCEEDED		The number of currently opened sessions has exceeded the maximum limit.
+	 * @exception		E_INVALID_PROXY		The specified proxy address is invalid.
 	 * @exception		E_UNKNOWN				An unknown error has occurred.
 	 * @exception		E_SYSTEM				An internal error has occurred.
 	 * @exception		E_INVALID_ADDRESS		The host address is invalid.
@@ -142,8 +143,8 @@ public:
 	 *											The specified @c hostAddr must be a valid URL.
 	 * @param[in]		pCommonHeader			An instance of HttpHeader @n
 	 *											This is a common header used in all the transactions included in this session.
-	 * @param[in]		flag					Set to @c true if the cookies must be handled automatically, @n
-	 *											else @c false if the cookies must be handled manually
+	 * @param[in]		flag					Set to @c NET_HTTP_COOKIE_FLAG_ALWAYS_AUTOMATIC if the cookies must be handled automatically, @n
+	 *											else @c NET_HTTP_COOKIE_FLAG_ALWAYS_MANUAL if the cookies must be handled manually
 	 * @exception		E_SUCCESS				The method is successful.
 	 * @exception		E_INVALID_ARG			A specified input parameter is invalid.
 	 * @exception		E_OUT_OF_MEMORY			The memory is insufficient.
@@ -170,8 +171,9 @@ public:
 	/**
 	 * Opens a transaction.
 	 *
-	 * @since       2.0
-	 * @privilege	%http://tizen.org/privilege/http
+	 * @since			2.0
+	 * @privlevel		public
+	 * @privilege		%http://tizen.org/privilege/http
 	 *
 	 * @return		A pointer to a new HttpTransaction, @n
 	 *				else @c null if an error occurs
@@ -180,6 +182,7 @@ public:
 	 * @exception	E_OUT_OF_MEMORY			The memory is insufficient.
 	 * @exception	E_SYSTEM				A system error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @remarks		The corresponding event listener must also be added in the same thread. A single transaction can be opened in a session at a time. After closing an open transaction, another
 	 *				transaction can be opened.
@@ -189,8 +192,9 @@ public:
 	/**
 	* Opens a transaction with authentication information.
 	*
-	* @since        2.0
-	* @privilege	%http://tizen.org/privilege/http
+	* @since			2.0
+	* @privlevel		public
+	* @privilege		%http://tizen.org/privilege/http
 	*
 	* @return		The pointer to a new HttpTransaction, @n
 	*				else @c null if an error occurs
@@ -200,6 +204,7 @@ public:
 	* @exception	E_OUT_OF_MEMORY			The memory is insufficient.
 	* @exception	E_SYSTEM				A system error has occurred.
 	* @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	* @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	* @remarks		The specific error code can be accessed using the GetLastResult() method.
 	* @remarks		The corresponding event listener must also be added in the same thread. A single transaction at a time can be opened in a session. After closing an open transaction, another
 	*				transaction can be opened.
@@ -210,8 +215,9 @@ public:
 	 * Cancels the specified transaction. @n
 	 * This method is followed by the CloseTransaction() method.
 	 *
-	 * @since       2.0
-	 * @privilege	%http://tizen.org/privilege/http
+	 * @since			2.0
+	 * @privlevel		public
+	 * @privilege		%http://tizen.org/privilege/http
 	 *
 	 * @return		An error code
 	 * @param[in]	httpTransaction             The HttpTransaction to cancel
@@ -223,6 +229,7 @@ public:
 	 * @exception	E_OUT_OF_MEMORY				The memory is insufficient.
 	 * @exception	E_SYSTEM					A system error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED			The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @remarks		The canceled transaction is no longer considered active. Also, re-opening the transaction is not allowed.
 	 */
 	result CancelTransaction(HttpTransaction& httpTransaction);
@@ -230,8 +237,9 @@ public:
 	/**
 	 * Closes the specified transaction.
 	 *
-	 * @since       2.0
-	 * @privilege	%http://tizen.org/privilege/http
+	 * @since			2.0
+	 * @privlevel		public
+	 * @privilege		%http://tizen.org/privilege/http
 	 *
 	 * @return		An error code
 	 * @param[in]	httpTransaction			The HttpTransaction to close
@@ -244,14 +252,16 @@ public:
 	 * @exception	E_OUT_OF_MEMORY			The memory is insufficient.
 	 * @exception	E_SYSTEM				A system error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 */
 	result CloseTransaction(HttpTransaction& httpTransaction);
 
 	/**
 	 * Closes all the transactions.
 	 *
-	 * @since       2.0
-	 * @privilege	%http://tizen.org/privilege/http
+	 * @since			2.0
+	 * @privlevel		public
+	 * @privilege		%http://tizen.org/privilege/http
 	 *
 	 * @return		An error code
 	 * @exception	E_SUCCESS				The method is successful.
@@ -261,6 +271,7 @@ public:
 	 * @exception	E_OUT_OF_MEMORY			The memory is insufficient.
 	 * @exception	E_SYSTEM				A system error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 */
 	result CloseAllTransactions(void);
 
@@ -294,8 +305,9 @@ public:
 	/**
 	 * Gets the number of active transactions in the current instance of %HttpSession.
 	 *
-	 * @since       2.0
-	 * @privilege	%http://tizen.org/privilege/http
+	 * @since			2.0
+	 * @privlevel		public
+	 * @privilege		%http://tizen.org/privilege/http
 	 *
 	 * @return      An integer value indicating the number of currently active transactions, @n
 	 *				else @c -1 if an error occurs
@@ -303,6 +315,7 @@ public:
 	 * @exception	E_OUT_OF_MEMORY			The memory is insufficient.
 	 * @exception	E_SYSTEM				A system error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @remarks		The transactions in the state between Submitted and Cancelled (or Closed) are considered to be active transactions.
 	 */
@@ -311,8 +324,9 @@ public:
 	/**
 	 * Gets the maximum number of transactions, the current instance of %HttpSession can have.
 	 *
-	 * @since       2.0
-	 * @privilege	%http://tizen.org/privilege/http
+	 * @since			2.0
+	 * @privlevel		public
+	 * @privilege		%http://tizen.org/privilege/http
 	 *
 	 * @return      An integer value indicating the maximum number of transactions allowed @n
 	 *              In NET_HTTP_SESSION_MODE_MULTIPLE_HOST mode, the return value is zero.
@@ -320,6 +334,7 @@ public:
 	 * @exception	E_OUT_OF_MEMORY			The memory is insufficient.
 	 * @exception	E_SYSTEM				A system error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @remarks		In NET_HTTP_SESSION_MODE_MULTIPLE_HOST mode, the platform does not limit the number of maximum HttpTransaction that %HttpSession can have. @n
 	 */

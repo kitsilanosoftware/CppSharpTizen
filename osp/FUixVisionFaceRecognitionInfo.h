@@ -30,7 +30,8 @@
 #include <FBaseObject.h>
 #include <FGrpRectangle.h>
 
-namespace Tizen { namespace Base{
+namespace Tizen { namespace Base
+{
 class ByteBuffer;
 } }
 
@@ -50,7 +51,7 @@ class _FaceRecognizerImpl;
  * The %FaceRecognitionInfo class encapsulates the information of a face recognized using the FaceRecognizer class by:
  * - Getting the position of a recognized face.
  * - Getting the facial features of a recognized face.
- * @n
+ * 
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/uix/face_detector_recognizer.htm">Face Detector and Recognizer</a>.
  */
 
@@ -59,7 +60,7 @@ class _OSP_EXPORT_ FaceRecognitionInfo
 {
 public:
 	/**
-	 * This is the default constructor for this class.
+	 * This is the default constructor for this class. @n
 	 * The object is not fully constructed after this constructor is called.
 	 * For full construction, the Construct() method must be called right after calling this constructor.
 	 *
@@ -87,7 +88,7 @@ public:
 	 * @exception    E_SUCCESS          The method is successful.
 	 * @exception    E_OUT_OF_MEMORY    The memory is insufficient.
 	 * @see          FaceRecognizer::ExtractFaceInfoFromVideoStreamN()
-	 * @see          FaceRecognizer::ExtractFaceInfoFromStillImageN()
+	 * @see          FaceRecognizer::ExtractFaceInfoFromStillImageN(const Tizen::Base::ByteBuffer&, const Tizen::Graphics::Dimension&, Tizen::Graphics::BitmapPixelFormat)
 	 */
 	result Construct(const Tizen::Base::ByteBuffer& faceFeatures);
 

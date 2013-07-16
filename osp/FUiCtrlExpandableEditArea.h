@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -30,6 +30,7 @@
 #include <FBaseTypes.h>
 #include <FUiControl.h>
 #include <FUiCtrlEditTypes.h>
+#include <FUiCtrlIEditTextFilter.h>
 #include <FUiCtrlITokenFilter.h>
 #include <FUiIKeypadEventListener.h>
 #include <FUiILanguageEventListener.h>
@@ -97,12 +98,12 @@ enum ExpandableEditAreaTokenStatus
  * @since	2.0
  *
  * The %ExpandableEditArea class displays a multi-line text editor the height of that is automatically adjusted according to the number of lines currently visible in the text box.
+*
+* For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_exp_editarea.htm">ExpandableEditArea</a>.
  *
- * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_exp_editarea.htm">ExpandableEditArea</a>.
- *
- * The following sample code demonstrates how to use the %ExpandableEditArea class.
- *
- * @code
+* The following sample code demonstrates how to use the %ExpandableEditArea class.
+*
+* @code
 // Sample code for ExpandableEditAreaSample.h
 #include <FUi.h>
 
@@ -132,6 +133,9 @@ private:
 	Tizen::Ui::Controls::ExpandableEditArea* __pExpandableEdit;
 };
 
+* @endcode
+*
+* @code
 // Sample code for ExpandableEditAreaSample.cpp
 #include <FGraphics.h>
 
@@ -157,11 +161,11 @@ ExpandableEditAreaSample::OnInitializing(void)
 	__pExpandableEdit->Construct(Rectangle(25, 100, GetClientAreaBounds().width - 50, 150),
 			EXPANDABLE_EDIT_AREA_STYLE_NORMAL, EXPANDABLE_EDIT_AREA_TITLE_STYLE_NONE, 5);
 
-	// Adds an instace of IKeypadEventListenerevent and an instance of IExpandableEditAreaEventListener
+	// Adds an instance of IKeypadEventListenerevent and an instance of IExpandableEditAreaEventListener
 	__pExpandableEdit->AddKeypadEventListener(*this);
 	__pExpandableEdit->AddExpandableEditAreaEventListener(*this);
 
-	AddControl(*__pExpandableEdit);
+	AddControl(__pExpandableEdit);
 
 	// Sets a focus to the expandable edit area
 	__pExpandableEdit->SetFocus();
@@ -206,21 +210,23 @@ ExpandableEditAreaSample::OnExpandableEditAreaLineRemoved(Tizen::Ui::Controls::E
 {
 	// ....
 }
- * @endcode
- */
+* @endcode
+*/
 class _OSP_EXPORT_ ExpandableEditArea
 	: public Tizen::Ui::Control
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the %Construct() method must be called right after calling this constructor.
 	 *
 	 * @since	2.0
 	 */
 	ExpandableEditArea(void);
 
 	/**
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required.@n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @since	2.0
 	 */
@@ -234,13 +240,15 @@ public:
 	 * @return       An error code
 	 * @param[in]    rect             An instance of the Graphics::Rectangle class @n
 	 *										This instance represents the x and y coordinates of the top-left corner of the expandable edit area along with
-	 *										the width and height.
+	 *										the width and height. @n
+	 *										The optimal size of the control is defined in
+	 *										<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @param[in]    style            The style of the expandable edit area
 	 * @param[in]    titleStyle       The title style
 	 * @param[in]    maxExpandableLines         The maximum number of lines to which the control can be expanded.
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception    E_UNSUPPORTED_OPTION   The specified option is not supported. @n
-	 *										The token style %ExpandabledEditArea does not support EXPANDABLE_EDIT_AREA_TITLE_STYLE_TOP.
+	 *										The token style %ExpandabledEditArea does not support @c EXPANDABLE_EDIT_AREA_TITLE_STYLE_TOP.
 	 * @exception    E_MAX_EXCEEDED         The number of lines has exceeded the maximum limit.
 	 * @exception	E_INVALID_ARG           A specified input parameter is invalid, or @n
 	 *										the specified @c maxLines is either negative or @c 0.
@@ -249,6 +257,31 @@ public:
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, ExpandableEditAreaStyle style, ExpandableEditAreaTitleStyle titleStyle, int maxExpandableLines = 10);
 
+	/**
+	 * Initializes this instance of %ExpandableEditArea with the specified parameters.
+	 *
+	 * @since        2.1
+	 *
+	 * @return       An error code
+	 * @param[in]    rect             An instance of the Tizen::Graphics::FloatRectangle class @n
+	 *										This instance represents the x and y coordinates of the top-left corner of the expandable edit area along with
+	 *										the width and height. @n
+	 *										The optimal size of the control is defined in
+	 *										<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]    style            The style of the expandable edit area
+	 * @param[in]    titleStyle       The title style
+	 * @param[in]    maxExpandableLines         The maximum number of lines to which the control can be expanded.
+	 * @exception	E_SUCCESS				The method is successful.
+	 * @exception    E_UNSUPPORTED_OPTION   The specified option is not supported. @n
+	 *										The token style %ExpandabledEditArea does not support @c EXPANDABLE_EDIT_AREA_TITLE_STYLE_TOP.
+	 * @exception    E_MAX_EXCEEDED         The number of lines has exceeded the maximum limit.
+	 * @exception	E_INVALID_ARG           A specified input parameter is invalid, or @n
+	 *										the specified @c maxLines is either negative or @c 0.
+	 * @exception	E_SYSTEM                A system error has occurred.
+	 * @remarks      By default, the line count is @c 1.
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, ExpandableEditAreaStyle style, ExpandableEditAreaTitleStyle titleStyle, int maxExpandableLines = 10);
+
 // TEXT MANAGEMENT
 	/**
 	 * Appends the specified character at the end of the existing text.
@@ -256,13 +289,14 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      An error code
-	 * @param[in]	character       The character to be appended
+	 * @param[in]	character       The character to append
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_MAX_EXCEEDED  The number of items has exceeded the maximum limit. @n
 	 *                              The number of characters has exceeded the maximum limit.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		The method modifies the text buffer that is managed by the %ExpandableEditArea control. @n
-	 *              To display the changes, the control must be drawn again.
+	 * @remarks
+	 *			- The method modifies the text buffer that is managed by the %ExpandableEditArea control.
+	 *			- To display the changes, the control must be drawn again.
 	 */
 	result AppendCharacter(const Tizen::Base::Character& character);
 
@@ -272,179 +306,186 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   text            The text to be appended
+	 * @param[in]   text            The text to append
 	 * @exception   E_SUCCESS       The method is successful.
 	 * @exception	E_MAX_EXCEEDED  The number of items has exceeded the maximum limit @n
 	 *                              The number of characters has exceeded the maximum limit.
 	 * @exception   E_SYSTEM        A system error has occurred.
-	 * @remarks     The method modifies the text buffer that is managed by the %ExpandableEditArea control. @n
-	 *              To display the changes, the control must be drawn again.
+	 * @remarks
+	 *			- The method modifies the text buffer that is managed by the %ExpandableEditArea control.
+	 *			- To display the changes, the control must be drawn again.
 	 */
 	result AppendText(const Tizen::Base::String& text);
 
 	/**
-	 * Appends the text that will be displayed by bitmap at the end of the existing text.
-	 *
-	 * @since 2.0
-	 *
-	 * @return             An error code
-	 * @param[in]   text            The text to be appended @n
-	 *                                                                  It will be displayed by the @c textImage
-	 * @param[in]   textImage The alternate bitmap to be displayed
-	 * @exception   E_SUCCESS        The method is successful.
-	 * @exception   E_MAX_EXCEEDED  The length of the specified @c text exceeds the maximum length of the text that can be displayed by % ExpanableEditArea.
-	 * @exception   E_UNSUPPORTED_OPERATION  The current state of the instance prohibits the execution of the specified operation. @n
-	 *                                                                                                              The operation is not supported if the style is EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
-	 * @remarks                 The method modifies the text buffer that is managed by the %ExpanableEditArea control. @n
-	 *              To display the changes, the control must be drawn again. The text to be appended will be displayed by the @c textImage.
-	 */
+	* Appends the text that will be displayed by bitmap at the end of the existing text.
+	*
+	* @since 2.0
+	*
+	* @return             An error code
+	* @param[in]   text            The text to append @n
+	*                                                                  It will be displayed by the @c textImage.
+	* @param[in]   textImage The alternate bitmap to display
+	* @exception   E_SUCCESS        The method is successful.
+	* @exception   E_MAX_EXCEEDED  The length of the specified @c text exceeds the maximum length of the text that can be displayed by % ExpanableEditArea.
+	* @exception   E_UNSUPPORTED_OPERATION  The current state of the instance prohibits the execution of the specified operation. @n
+	*                                                             The operation is not supported if the style is ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	* @remarks
+	*			- The method modifies the text buffer that is managed by the %ExpanableEditArea control.
+	*			- To display the changes, the control must be drawn again. The text to be appended will be displayed by the @c textImage.
+	*/
 	result AppendText(const Tizen::Base::String& text, const Tizen::Graphics::Bitmap& textImage);
 
 	/**
-	 * Deletes the character present at the current cursor position.
-	 *
-	 * @since       2.0
-	 *
-	 * @return      An error code
-	 * @param[in]   index			The index
-	 * @exception   E_SUCCESS		The method is successful.
-	 * @exception   E_INVALID_ARG	The specified input parameter is invalid. @n
-	 *								The specified @c index is negative.
-	 * @exception   E_OUT_OF_RANGE  The specified @c index is outside the bounds of the data structure. @n
-	 *								Either the specified @c index is greater than the number of elements or less than @c 0.
-	 * @exception   E_SYSTEM		A system error has occurred.
-	 * @remarks     The method modifies the text buffer that is managed by the %ExpandableEditArea control. @n
-	 *              To display the changes, the control must be drawn again.
-	 */
+	* Deletes the character present at the current cursor position.
+	*
+	* @since       2.0
+	*
+	* @return      An error code
+	* @param[in]   index			The index
+	* @exception   E_SUCCESS		The method is successful.
+	* @exception   E_INVALID_ARG	The specified input parameter is invalid. @n
+	*								The specified @c index is negative.
+	* @exception   E_OUT_OF_RANGE  The specified @c index is outside the bounds of the data structure. @n
+	*								Either the specified @c index is greater than the number of elements or less than @c 0.
+	* @exception   E_SYSTEM		A system error has occurred.
+	* @remarks
+	*			- The method modifies the text buffer that is managed by the %ExpandableEditArea control.
+	*			- To display the changes, the control must be drawn again.
+	*/
 	result DeleteCharacterAt(int index);
 
 	/**
-	 * Inserts a character at the specified index.
-	 *
-	 * @since       2.0
-	 *
-	 * @return	    An error code
-	 * @param[in]   index           The position to insert the character
-	 * @param[in]   character	    The character to be inserted
-	 * @exception   E_SUCCESS        The method is successful.
-	 * @exception   E_OUT_OF_RANGE  The specified @c index is outside the bounds of the data structure. @n
-	 *								Either the specified @c index is greater than the number of elements or less than @c 0.
-	 * @exception   E_MAX_EXCEEDED  The length of the specified @c text exceeds system limitations.
-	 * @exception   E_SYSTEM        A system error has occurred.
-	 * @remarks     The method modifies the text buffer that is managed by the %ExpandableEditArea control. @n
-	 *              To display the changes, the control must be drawn again.
-	 */
+	* Inserts a character at the specified index.
+	*
+	* @since       2.0
+	*
+	* @return	    An error code
+	* @param[in]   index           The position to insert the character
+	* @param[in]   character	    The character to insert
+	* @exception   E_SUCCESS        The method is successful.
+	* @exception   E_OUT_OF_RANGE  The specified @c index is outside the bounds of the data structure. @n
+	*								Either the specified @c index is greater than the number of elements or less than @c 0.
+	* @exception   E_MAX_EXCEEDED  The length of the specified @c text exceeds system limitations.
+	* @exception   E_SYSTEM        A system error has occurred.
+	* @remarks
+	*			- The method modifies the text buffer that is managed by the %ExpandableEditArea control.
+	*			- To display the changes, the control must be drawn again.
+	*/
 	result InsertCharacterAt(int index, const Tizen::Base::Character& character);
 
 	/**
-	 * Inserts the text at the specified index.
-	 *
-	 * @since       2.0
-	 *
-	 * @return	    An error code
-	 * @param[in]   index           The position to insert the text
-	 * @param[in]   text            The text to be inserted
-	 * @exception   E_SUCCESS        The method is successful.
-	 * @exception   E_OUT_OF_RANGE  The specified @c index is outside the bounds of the data structure. @n
-	 *								Either the specified @c index is greater than the number of elements or less than @c 0.
-	 * @exception   E_MAX_EXCEEDED  The length of the specified @c text exceeds system limitations.
-	 * @exception   E_SYSTEM	    A system error has occurred.
-	 */
+	* Inserts the text at the specified index.
+	*
+	* @since       2.0
+	*
+	* @return	    An error code
+	* @param[in]   index           The position to insert the text
+	* @param[in]   text            The text to insert
+	* @exception   E_SUCCESS        The method is successful.
+	* @exception   E_OUT_OF_RANGE  The specified @c index is outside the bounds of the data structure. @n
+	*								Either the specified @c index is greater than the number of elements or less than @c 0.
+	* @exception   E_MAX_EXCEEDED  The length of the specified @c text exceeds system limitations.
+	* @exception   E_SYSTEM	    A system error has occurred.
+	*/
 	result InsertTextAt(int index, const Tizen::Base::String& text);
 
 	/**
-	 * Inserts the text that will be displayed by bitmap at the specified text position.
-	 *
-	 * @since 2.0
-	 *
-	 * @return             An error code
-	 * @param[in]   position           The position to insert the text
-	 * @param[in]   text            The text to be inserted @n
-	 *                                                                  It will be displayed by the @c textImage
-	 * @param[in]   textImage The alternate bitmap to be displayed
-	 * @exception   E_SUCCESS        The method is successful.
-	 * @exception   E_OUT_OF_RANGE  The specified @c position is outside the valid range. @n
-	 *                                Either the specified @c position is greater than the number of existing text in the % ExpanableEditArea or less than @c 0.
-	 * @exception   E_MAX_EXCEEDED  The length of the specified @c text exceeds the maximum length of the text that can be displayed by % ExpanableEditArea.
-	 * @exception   E_UNSUPPORTED_OPERATION  The current state of the instance prohibits the execution of the specified operation. @n
-	 *                                                                                                              The operation is not supported if the style is EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
-	 * @remarks                 The method modifies the text buffer that is managed by the %ExpanableEditArea control. @n
-	 *              To display the changes, the control must be drawn again. The text to be inserted will be displayed by the @c textImage.
-	 */
+	* Inserts the text that will be displayed by bitmap at the specified text position.
+	*
+	* @since 2.0
+	*
+	* @return             An error code
+	* @param[in]   position           The position to insert the text
+	* @param[in]   text            The text to insert @n
+	*                                                                  It will be displayed by the @c textImage.
+	* @param[in]   textImage The alternate bitmap to display
+	* @exception   E_SUCCESS        The method is successful.
+	* @exception   E_OUT_OF_RANGE  The specified @c position is outside the valid range. @n
+	*                                Either the specified @c position is greater than the number of existing text in the % ExpanableEditArea or less than @c 0.
+	* @exception   E_MAX_EXCEEDED  The length of the specified @c text exceeds the maximum length of the text that can be displayed by % ExpanableEditArea.
+	* @exception   E_UNSUPPORTED_OPERATION  The current state of the instance prohibits the execution of the specified operation. @n
+	*										The operation is not supported if the style 	is ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	* @remarks
+	*			- The method modifies the text buffer that is managed by the %ExpanableEditArea control.
+	*			- To display the changes, the control must be drawn again. The text to be inserted will be displayed by the @c textImage.
+	*/
 	result InsertTextAt(int position, const Tizen::Base::String& text, const Tizen::Graphics::Bitmap& textImage);
 
 	/**
-	 * Gets the portion of the text that is displayed by the %ExpandableEditArea control.
-	 *
-	 * @since        2.0
-	 *
-	 * @return       The specified portion of the text, @n
-	 *               else an empty string if an error occurs
-	 * @param[in]    start           The starting index of the range
-	 * @param[in]    end             The last index of the range
-	 * @exception    E_SUCCESS       The method is successful.
-	 * @exception    E_OUT_OF_RANGE  The specified index is outside the bounds of the data structure. @n
-	 *								 The specified @c start or @c end is greater than the number of elements or less than @c 0.
-	 * @exception    E_SYSTEM        A system error has occurred.
-	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
-	 * @see          GetText()
-	 * @see          SetText()
-	 */
+	* Gets the portion of the text that is displayed by the %ExpandableEditArea control.
+	*
+	* @since        2.0
+	*
+	* @return       The specified portion of the text, @n
+	*               else an empty string if an error occurs
+	* @param[in]    start           The starting index of the range
+	* @param[in]    end             The last index of the range
+	* @exception    E_SUCCESS       The method is successful.
+	* @exception    E_OUT_OF_RANGE  The specified index is outside the bounds of the data structure. @n
+	*								 The specified @c start or @c end is greater than the number of elements or less than @c 0.
+	* @exception    E_SYSTEM        A system error has occurred.
+	* @remarks      The specific error code can be accessed using the GetLastResult() method.
+	* @see          GetText()
+	* @see          SetText()
+	*/
 	Tizen::Base::String GetText(int start, int end) const;
 
 	/**
-	 * Gets the text of the %ExpandableEditArea control.
-	 *
-	 * @since        2.0
-	 *
-	 * @return       The text of the %ExpandableEditArea control, @n
-	 *               else an empty string if an error occurs
-	 * @exception    E_SUCCESS       The method is successful.
-	 * @exception    E_SYSTEM        A system error has occurred.
-	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
-	 */
+	* Gets the text of the %ExpandableEditArea control.
+	*
+	* @since        2.0
+	*
+	* @return       The text of the %ExpandableEditArea control, @n
+	*               else an empty string if an error occurs
+	* @exception    E_SUCCESS       The method is successful.
+	* @exception    E_SYSTEM        A system error has occurred.
+	* @remarks      The specific error code can be accessed using the GetLastResult() method.
+	*/
 	Tizen::Base::String GetText(void) const;
 
 	/**
-	 * Gets the text length.
-	 *
-	 * @since       2.0
-	 *
-	 * @return      The length of the text, @n
-	 *	            else @c -1 if an error occurs
-	 * @exception   E_SUCCESS       The method is successful.
-	 * @exception   E_SYSTEM        A system error has occurred.
-	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
-	 */
+	* Gets the text length.
+	*
+	* @since       2.0
+	*
+	* @return      The length of the text, @n
+	*	            else @c -1 if an error occurs
+	* @exception   E_SUCCESS       The method is successful.
+	* @exception   E_SYSTEM        A system error has occurred.
+	* @remarks     The specific error code can be accessed using the GetLastResult() method.
+	*/
 	int GetTextLength(void) const;
 
 	/**
-	 * Sets the text to be displayed by the %ExpandableEditArea control.
-	 *
-	 * @since		2.0
-	 *
-	 * @param[in]	text            The text to be set
-	 * @exception	E_SUCCESS       The method is successful.
-	 * @exception	E_INVALID_ARG   The specified input parameter is invalid, @n
-	 *								or the length of the specified @c text exceeds system limitations.
-	 * @exception	E_SYSTEM        A system error has occurred.
-	 * @remarks     To denote the end of a line use '\\n'.
-	 *              The method modifies the text buffer that is managed by the %ExpandableEditArea control.
-	 *              To display the changes, the control must be drawn again.
-	 */
+	* Sets the text to be displayed by the %ExpandableEditArea control.
+	*
+	* @since		2.0
+	*
+	* @param[in]	text            The text to set
+	* @exception	E_SUCCESS       The method is successful.
+	* @exception	E_INVALID_ARG   The specified input parameter is invalid, @n
+	*								or the length of the specified @c text exceeds system limitations.
+	* @exception	E_SYSTEM        A system error has occurred.
+	* @remarks
+	*			- To denote the end of a line use '\\n'.
+	*			- The method modifies the text buffer that is managed by the %ExpandableEditArea control.
+	*			- To display the changes, the control must be drawn again.
+	*/
 	result SetText(const Tizen::Base::String& text);
 
 	/**
-	 * Clears the text that is displayed by the %ExpandableEditArea control.
-	 *
-	 * @since		2.0
-	 *
-	 * @return		An error code
-	 * @exception	E_SUCCESS       The method is successful.
-	 * @exception	E_SYSTEM        A system error has occurred.
-	 * @remarks		The method modifies the text buffer that is managed by the %ExpandableEditArea control.
-	 *              To display the changes, the control must be drawn again.
-	 */
+	* Clears the text that is displayed by the %ExpandableEditArea control.
+	*
+	* @since		2.0
+	*
+	* @return		An error code
+	* @exception	E_SUCCESS       The method is successful.
+	* @exception	E_SYSTEM        A system error has occurred.
+	* @remarks
+	*			- The method modifies the text buffer that is managed by the %ExpandableEditArea control.
+	*			- To display the changes, the control must be drawn again.
+	*/
 	result Clear(void);
 
 	/**
@@ -453,8 +494,11 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]   title			The title to be set
+	 * @param[in]   title			The title to set
 	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception   E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the
+	 * 										execution of the specified operation. @n This operation
+	 * 										is not supported if the title is not set.
 	 * @exception	E_SYSTEM		A system error has occurred.
 	 */
 	result SetTitleText(const Tizen::Base::String& title);
@@ -488,16 +532,16 @@ public:
 	Tizen::Base::String GetGuideText(void) const;
 
 	/**
-	 * Sets the guide text to be displayed, when there is no data in the search field.
-	 *
-	 * @since       2.0
-	 *
-	 * @return	    An error code
-	 * @param[in]   guideText		 The guide text
-	 * @exception   E_SUCCESS        The method is successful.
-	 * @exception   E_SYSTEM         A system error has occurred.
-	 * @see         GetGuideText()
-	 */
+	* Sets the guide text to be displayed, when there is no data in the search field.
+	*
+	* @since       2.0
+	*
+	* @return	    An error code
+	* @param[in]   guideText		 The guide text
+	* @exception   E_SUCCESS        The method is successful.
+	* @exception   E_SYSTEM         A system error has occurred.
+	* @see         GetGuideText()
+	*/
 	result SetGuideText(const Tizen::Base::String& guideText);
 
 // LINE MANAGEMENT
@@ -522,7 +566,18 @@ public:
 	 * 		    else @c -1 if an error occurs
 	 * @see 	SetLineSpacing ()
 	 */
-	int GetLineSpacing (void) const;
+	int GetLineSpacing(void) const;
+
+	/**
+	 * Gets the line spacing.
+	 *
+	 * @since 2.1
+	 * @return 	The line spacing, @n
+	 * 		    else @c -1.0f if an error occurs
+	 * @see 	SetLineSpacing ()
+	 */
+
+	float GetLineSpacingF(void) const;
 
 	/**
 	 * Sets the line spacing. @n
@@ -540,18 +595,36 @@ public:
 	 * @exception   E_INVALID_ARG       This exception is returned when @c multiplier or @c extra is less than 0.
 	 * @see 	GetLineSpacing ()
 	 */
-	result SetLineSpacing (int multiplier, int extra);
+	result SetLineSpacing(int multiplier, int extra);
 
 	/**
-	 * Gets the current line count.
+	 * Sets the line spacing. @n
+	 * The line spacing is determined by multiplying @c multiplier to the default line spacing and adding @c extra.
 	 *
-	 * @since       2.0
+	 * @code
+	 * The line spacing = (default line spacing) * multiplier + extra
+	 * @endcode
 	 *
-	 * @return      The line count of the text
+	 * @since 2.1
+	 * @return 	An error code
+	 * @param[in]   multiplier		 The line spacing multiplier
+	 * @param[in]   extra		 The extra line spacing
 	 * @exception   E_SUCCESS           The method is successful.
-	 * @exception   E_SYSTEM            A system error has occurred.
-	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
+	 * @exception   E_INVALID_ARG       This exception is returned when @c multiplier or @c extra is less than 0.
+	 * @see 	GetLineSpacing ()
 	 */
+	result SetLineSpacing(int multiplier, float extra);
+
+	/**
+	* Gets the current line count.
+	*
+	* @since       2.0
+	*
+	* @return      The line count of the text
+	* @exception   E_SUCCESS           The method is successful.
+	* @exception   E_SYSTEM            A system error has occurred.
+	* @remarks     The specific error code can be accessed using the GetLastResult() method.
+	*/
 	int GetTextLineCount(void) const;
 
 // TEXT SIZE
@@ -570,19 +643,48 @@ public:
 	int GetTextSize(void) const;
 
 	/**
-	 * Sets the text size.
+	 * Gets the text size.
 	 *
-	 * @since       2.0
+	 * @since       2.1
 	 *
-	 * @return      An error code
-	 * @param[in]   size                The text size
+	 * @return      The size of the text, @n
+	 *	            else @c -1 if an error occurs
 	 * @exception   E_SUCCESS           The method is successful.
-	 * @exception   E_INVALID_ARG       The specified @c size is invalid, @n
-	 *									or the specified @c size is a negative integer.
 	 * @exception   E_SYSTEM            A system error has occurred.
-	 * @see         GetTextSize()
+	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
+	 * @see         SetTextSize()
 	 */
+	float GetTextSizeF(void) const;
+
+	/**
+	* Sets the text size.
+	*
+	* @since       2.0
+	*
+	* @return      An error code
+	* @param[in]   size                The text size
+	* @exception   E_SUCCESS           The method is successful.
+	* @exception   E_INVALID_ARG       The specified @c size is invalid, @n
+	*									or the specified @c size is a negative integer.
+	* @exception   E_SYSTEM            A system error has occurred.
+	* @see         GetTextSize()
+	*/
 	result SetTextSize(int size);
+
+	/**
+	* Sets the text size.
+	*
+	* @since       2.1
+	*
+	* @return      An error code
+	* @param[in]   size                The text size
+	* @exception   E_SUCCESS           The method is successful.
+	* @exception   E_INVALID_ARG       The specified @c size is invalid, @n
+	*									or the specified @c size is a negative integer.
+	* @exception   E_SYSTEM            A system error has occurred.
+	* @see         GetTextSizeF()
+	*/
+	result SetTextSize(float size);
 
 // MARGINS
 	/**
@@ -601,19 +703,27 @@ public:
 	int GetMargin(EditMarginType marginType) const;
 
 	/**
+	 * Gets the margin of the specified margin type.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      The margin value of the specified margin type, @n
+	 *	            else @c -1.0f if an error occurs
+	 * @param[in]   marginType      The margin type
+	 * @exception   E_SUCCESS       The method is successful.
+	 * @exception   E_SYSTEM        A system error has occurred.
+	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
+	 * @see         SetMargin()
+	 */
+	float GetMarginF(EditMarginType marginType) const;
+
+	/**
 	 * Sets the margin for the specified margin type.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since       2.0
-	 * @if OSPCOMPAT
-	 * @compatibility This method has compatibility issues with OSP compatible applications. @n
-	 *                         For more information, see @ref CompSetMarginPage "here".
-	 * @endif
 	 * @return      An error code
 	 * @param[in]   marginType          The margin type
-	 * @param[in]   margin              The margin to be set
+	 * @param[in]   margin              The margin to set
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_INVALID_ARG       A specified input parameter is invalid. @n
 	 *                                  The specified @c margin cannot be negative integer.
@@ -622,21 +732,29 @@ public:
 	 */
 	result SetMargin(EditMarginType marginType, int margin);
 	/**
-	 * @if OSPCOMPAT
-	 * @page                  CompSetMarginPage Compatibility for SetMargin()
-	 * @section           CompSetMarginPageIssueSection                 Issues
-	 * Implementing this method in OSP compatible applications has the following issues:   @n
-	 * -# The SetMargin() method sets the margin value for ExpandableEditArea with only EXPANDABLE_EDIT_AREA_STYLE_NORMAL in API version 2.0. @n
+	 */
+
+	/*
+	 * Sets the margin for the specified margin type.
 	 *
-	 * @section           CompSetMarginPageSolutionSection              Resolutions
-	 * This issue has been resolved in Tizen.  @n
-	 * @endif
+	 * @since       2.1
+	 * @return      An error code
+	 * @param[in]   marginType          The margin type
+	 * @param[in]   margin              The margin to set
+	 * @exception   E_SUCCESS           The method is successful.
+	 * @exception   E_INVALID_ARG       A specified input parameter is invalid. @n
+	 *                                  The specified @c margin cannot be negative integer.
+	 * @exception   E_SYSTEM            A system error has occurred.
+	 * @see         GetMargin()
+	 */
+	result SetMargin(EditMarginType marginType, float margin);
+	/*
 	 */
 
 // LOWER CASE
 	/**
 	 * Enables or disables the lowercase mode.
-	 *
+
 	 * @since       2.0
 	 *
 	 * @return      An error code
@@ -683,7 +801,7 @@ public:
 	 * @since        2.0
 	 *
 	 * @return       An error code
-	 * @param[in]    position        The cursor position to be set
+	 * @param[in]    position        The cursor position to set
 	 * @exception    E_SUCCESS       The method is successful.
 	 * @exception    E_OUT_OF_RANGE  The specified @c position is less than @c 0 or greater than the maximum length.
 	 * @exception    E_SYSTEM        A system error has occurred.
@@ -708,46 +826,46 @@ public:
 	result GetBlockRange(int& start, int& end) const;
 
 	/**
-	 * Releases the selection of the current text block.
-	 *
-	 * @since       2.0
-	 *
-	 * @return      An error code
-	 * @exception   E_SUCCESS          The method is successful.
-	 * @exception   E_SYSTEM           A system error has occurred.
-	 * @see         GetBlockRange()
-	 * @see         SetBlockRange()
-	 */
+	* Releases the selection of the current text block.
+	*
+	* @since       2.0
+	*
+	* @return      An error code
+	* @exception   E_SUCCESS          The method is successful.
+	* @exception   E_SYSTEM           A system error has occurred.
+	* @see         GetBlockRange()
+	* @see         SetBlockRange()
+	*/
 	result ReleaseBlock(void);
 
 	/**
-	 * Removes the text content of the current text block.
-	 *
-	 * @since        2.0
-	 *
-	 * @return       An error code
-	 * @exception    E_SUCCESS          The method is successful.
-	 * @exception    E_OBJ_NOT_FOUND    The specified instance is not found, @n
-	 *									or the text block is not selected.
-	 * @exception    E_SYSTEM           A system error has occurred.
-	 */
+	* Removes the text content of the current text block.
+	*
+	* @since        2.0
+	*
+	* @return       An error code
+	* @exception    E_SUCCESS          The method is successful.
+	* @exception    E_OBJ_NOT_FOUND    The specified instance is not found, @n
+	*									or the text block is not selected.
+	* @exception    E_SYSTEM           A system error has occurred.
+	*/
 	result RemoveTextBlock(void);
 
 	/**
-	 * Sets the block range for the text.
-	 *
-	 * @since       2.0
-	 *
-	 * @return      An error code
-	 * @param[in]   start           The start index of the text block
-	 * @param[in]   end             The end index of the text block
-	 * @exception   E_SUCCESS       The method is successful.
-	 * @exception   E_OUT_OF_RANGE  The specified index is outside the bounds of the data structure. @n
-	 *								Either the index is greater than the number of elements or less than @c 0.
-	 * @exception   E_SYSTEM        A system error has occurred.
-	 * @see         ReleaseBlock()
-	 * @see         GetBlockRange()
-	 */
+	* Sets the block range for the text.
+	*
+	* @since       2.0
+	*
+	* @return      An error code
+	* @param[in]   start           The start index of the text block
+	* @param[in]   end             The end index of the text block
+	* @exception   E_SUCCESS       The method is successful.
+	* @exception   E_OUT_OF_RANGE  The specified index is outside the bounds of the data structure. @n
+	*								Either the index is greater than the number of elements or less than @c 0.
+	* @exception   E_SYSTEM        A system error has occurred.
+	* @see         ReleaseBlock()
+	* @see         GetBlockRange()
+	*/
 	result SetBlockRange(int start, int end);
 
 // KEYPAD MANAGEMENT
@@ -765,42 +883,42 @@ public:
 	Tizen::Ui::KeypadAction GetKeypadAction(void) const;
 
 	/**
-	 * Gets the keypad style.
-	 *
-	 * @since       2.0
-	 *
-	 * @return      The keypad style
-	 * @exception   E_SUCCESS           The method is successful.
-	 * @exception   E_SYSTEM            A system error has occurred.
-	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
-	 * @see         SetKeypadStyle()
-	 */
+	* Gets the keypad style.
+	*
+	* @since       2.0
+	*
+	* @return      The keypad style
+	* @exception   E_SUCCESS           The method is successful.
+	* @exception   E_SYSTEM            A system error has occurred.
+	* @remarks     The specific error code can be accessed using the GetLastResult() method.
+	* @see         SetKeypadStyle()
+	*/
 	KeypadStyle GetKeypadStyle(void) const;
 
 	/**
-	 * Hides the keypad associated with the %ExpandableEditArea control.
-	 *
-	 * @since       2.0
-	 *
-	 * @return      An error code
-	 * @exception   E_SUCCESS           The method is successful.
-	 * @exception   E_SYSTEM            A system error has occurred.
-	 * @see         ShowKeypad()
-	 */
+	* Hides the keypad associated with the %ExpandableEditArea control.
+	*
+	* @since       2.0
+	*
+	* @return      An error code
+	* @exception   E_SUCCESS           The method is successful.
+	* @exception   E_SYSTEM            A system error has occurred.
+	* @see         ShowKeypad()
+	*/
 	result HideKeypad(void);
 
 	/**
-	 * Checks whether the keypad is enabled.
-	 *
-	 * @since       2.0
-	 *
-	 * @return      @c true if the keypad is enabled, @n
-	 *	            else @c false
-	 * @exception   E_SUCCESS            The method is successful.
-	 * @exception   E_SYSTEM             A system error has occurred.
-	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
-	 * @see         SetKeypadEnabled()
-	 */
+	* Checks whether the keypad is enabled.
+	*
+	* @since       2.0
+	*
+	* @return      @c true if the keypad is enabled, @n
+	*	            else @c false
+	* @exception   E_SUCCESS            The method is successful.
+	* @exception   E_SYSTEM             A system error has occurred.
+	* @remarks     The specific error code can be accessed using the GetLastResult() method.
+	* @see         SetKeypadEnabled()
+	*/
 	bool IsKeypadEnabled(void) const;
 
 	/**
@@ -818,68 +936,68 @@ public:
 	result SetKeypadAction(Tizen::Ui::KeypadAction keypadAction);
 
 	/**
-	 * Sets the keypad style.
-	 *
-	 * @since       2.0
-	 *
-	 * @return      An error code
-	 * @param[in]   keypadStyle         The keypad style
-	 * @exception   E_SUCCESS           The method is successful.
-	 * @exception   E_INVALID_ARG       The specified input parameter is invalid. @n
-	 *                                  The specified @c keypadStyle is KEYPAD_STYLE_PASSWORD.
-	 * @exception   E_SYSTEM            A system error has occurred.
-	 * @remarks     Depending on the value of the keypad style, the layout of the keypad will change accordingly.
-	 * @see         GetKeypadStyle()
-	 */
+	* Sets the keypad style.
+	*
+	* @since       2.0
+	*
+	* @return      An error code
+	* @param[in]   keypadStyle         The keypad style
+	* @exception   E_SUCCESS           The method is successful.
+	* @exception   E_INVALID_ARG       The specified input parameter is invalid. @n
+	*                                  The specified @c keypadStyle is @c KEYPAD_STYLE_PASSWORD.
+	* @exception   E_SYSTEM            A system error has occurred.
+	* @remarks     Depending on the value of the keypad style, the layout of the keypad will change accordingly.
+	* @see         GetKeypadStyle()
+	*/
 	result SetKeypadStyle(KeypadStyle keypadStyle);
 
 	/**
-	 * Checks whether the text prediction is enabled.
-	 *
-	 * @since 2.0
-	 * @return                @c true if the text prediction is enabled, @n
-	 *                                 else @c false
-	 * @see                      SetTextPredictionEnabled()
-	 */
+	* Checks whether the text prediction is enabled.
+	*
+	* @since 2.0
+	* @return                @c true if the text prediction is enabled, @n
+	*                                 else @c false
+	* @see                      SetTextPredictionEnabled()
+	*/
 	bool IsTextPredictionEnabled(void) const;
 
 	/**
-	 * Enables or disables the text prediction.
-	 *
-	 * @since 2.0
-	 * @param[in]           enable                       Set to @c true to enable the text prediction, @n
-	 *                                                                    else @c false
-	 * @return                An error code
-	 * @exception           E_SUCCESS                The method is successful.
-	 * @exception		E_UNSUPPORTED_OPERATION     This operation is not supported.
-	 * @see                    IsTextPredictionEnabled()
-	 */
+	* Enables or disables the text prediction.
+	*
+	* @since 2.0
+	* @param[in]           enable                       Set to @c true to enable the text prediction, @n
+	*                                                                    else @c false
+	* @return                An error code
+	* @exception           E_SUCCESS                The method is successful.
+	* @exception		E_UNSUPPORTED_OPERATION     This operation is not supported.
+	* @see                    IsTextPredictionEnabled()
+	*/
 	result SetTextPredictionEnabled(bool enable);
 
 	/**
-	 * Enables or disables the keypad.
-	 *
-	 * @since       2.0
-	 *
-	 * @return      An error code
-	 * @param[in]   enable			Set to @c true to enable the virtual keypad, @n
-	 *								else @c false
-	 * @exception   E_SUCCESS		The method is successful.
-	 * @exception   E_SYSTEM		A system error has occurred.
-	 * @see         IsKeypadEnabled()
-	 */
+	* Enables or disables the keypad.
+	*
+	* @since       2.0
+	*
+	* @return      An error code
+	* @param[in]   enable			Set to @c true to enable the virtual keypad, @n
+	*								else @c false
+	* @exception   E_SUCCESS		The method is successful.
+	* @exception   E_SYSTEM		A system error has occurred.
+	* @see         IsKeypadEnabled()
+	*/
 	result SetKeypadEnabled(bool enable);
 
 	/**
-	 * Shows the keypad.
-	 *
-	 * @since       2.0
-	 *
-	 * @return      An error code
-	 * @exception   E_SUCCESS           The method is successful.
-	 * @exception   E_SYSTEM            A system error has occurred.
-	 * @see         HideKeypad()
-	 */
+	* Shows the keypad.
+	*
+	* @since       2.0
+	*
+	* @return      An error code
+	* @exception   E_SUCCESS           The method is successful.
+	* @exception   E_SYSTEM            A system error has occurred.
+	* @see         HideKeypad()
+	*/
 	result ShowKeypad(void);
 
 // TOKEN FILTER
@@ -892,41 +1010,41 @@ public:
 	 * @param[in]   pFilter                 The filter
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception	E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *										The operation is not supported if the style is not EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	 *										The operation is not supported if the style is not ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
 	 * @exception   E_SYSTEM                A system error has occurred.
 	 * @remarks     The %ExpandableEditArea control checks with the registered filter to decide whether the user-entered text should be replaced.
 	 */
 	result SetTokenFilter(const ITokenFilter* pFilter);
 
 	/**
-	 * Gets the text token filter.
-	 *
-	 * @since        2.0
-	 *
-	 * @return       The filter, @n
-	 *				 else @c null if an error occurs
-	 * @exception    E_SUCCESS                   The method is successful.
-	 * @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *											The operation is not supported if the style is not EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
-	 * @exception    E_SYSTEM                    A system error has occurred.
-	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
-	 */
+	* Gets the text token filter.
+	*
+	* @since        2.0
+	*
+	* @return       The filter, @n
+	*				 else @c null if an error occurs
+	* @exception    E_SUCCESS                   The method is successful.
+	* @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
+	*											The operation is not supported if the style is not ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	* @exception    E_SYSTEM                    A system error has occurred.
+	* @remarks      The specific error code can be accessed using the GetLastResult() method.
+	*/
 	ITokenFilter* GetTokenFilter(void) const;
 
 	/**
-	 * Appends the specified token.
-	 *
-	 * @since        2.0
-	 *
-	 * @return       An error code
-	 * @param[in]    token                   The token to be appended
-	 * @exception    E_SUCCESS               The method is successful.
-	 * @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *											The operation is not supported if the style is not EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
-	 * @exception    E_INVALID_ARG           The specified input parameter is invalid. @n
-	 *                                           The length of the specified @c token is @c 0.
-	 * @exception    E_SYSTEM                A system error has occurred.
-	 */
+	* Appends the specified token.
+	*
+	* @since        2.0
+	*
+	* @return       An error code
+	* @param[in]    token                   The token to append
+	* @exception    E_SUCCESS               The method is successful.
+	* @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
+	*											The operation is not supported if the style is not ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	* @exception    E_INVALID_ARG           The specified input parameter is invalid. @n
+	*                                           The length of the specified @c token is @c 0.
+	* @exception    E_SYSTEM                A system error has occurred.
+	*/
 	result AppendToken(const Tizen::Base::String& token);
 
 	/**
@@ -936,10 +1054,10 @@ public:
 	 *
 	 * @return       An error code
 	 * @param[in]	 index						The position to insert the token
-	 * @param[in]    token                      The token to be added
+	 * @param[in]    token                      The token to add
 	 * @exception    E_SUCCESS                  The method is successful.
 	 * @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *											The operation is not supported if the style is not EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	 *											The operation is not supported if the style is not ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
 	 * @exception    E_INVALID_ARG              A specified input parameter is invalid. @n
 	 *                                          The length of the specified @c token is @c 0.
 	 * @exception    E_SYSTEM                   A system error has occurred.
@@ -956,7 +1074,7 @@ public:
 	 * @param[in]	   index						          The position to get the token
 	 * @exception    E_SUCCESS                  The method is successful.
 	 * @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *											The operation is not supported if the style is not EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	 *											The operation is not supported if the style is not ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
 	 * @exception    E_OUT_OF_RANGE				The specified index parameter is outside the bounds of the data structure. @n
 	 *											Either the index is greater than the number of elements or less than @c 0.
 	 * @exception    E_SYSTEM                   A system error has occurred.
@@ -973,7 +1091,7 @@ public:
 	 *	             else @c -1 if an error occurs
 	 * @exception    E_SUCCESS                  The method is successful.
 	 * @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *											The operation is not supported if the style is not EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	 *											The operation is not supported if the style is not ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
 	 * @exception    E_SYSTEM                   A system error has occurred.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
 	 */
@@ -988,75 +1106,75 @@ public:
 	 *	             else @c -1 if no token is selected or if an error occurs
 	 * @exception    E_SUCCESS                  The method is successful.
 	 * @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *											The operation is not supported if the style is not EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	 *											The operation is not supported if the style is not ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
 	 * @exception    E_SYSTEM                   A system error has occurred.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
 	 */
 	int GetSelectedTokenIndex(void) const;
 
 	/**
-	 * Checks whether the token editing mode is enabled.
-	 *
-	 * @since        2.0
-	 *
-	 * @return       @c true if the editing mode is enabled, @n
-	 *	             else @c false
-	 * @exception    E_SUCCESS                   The method is successful.
-	 * @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
- 	 *											The operation is not supported if the style is not EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
-	 * @exception    E_SYSTEM                    A system error has occurred.
-	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
-	 */
+	* Checks whether the token editing mode is enabled.
+	*
+	* @since        2.0
+	*
+	* @return       @c true if the editing mode is enabled, @n
+	*	             else @c false
+	* @exception    E_SUCCESS                   The method is successful.
+	* @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
+	*											The operation is not supported if the style is not ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	* @exception    E_SYSTEM                    A system error has occurred.
+	* @remarks      The specific error code can be accessed using the GetLastResult() method.
+	*/
 	bool IsTokenEditModeEnabled(void) const;
 
 	/**
-	 * Removes the token at the specified index.
-	 *
-	 * @since        2.0
-	 *
-	 * @return       An error code
-	 * @param[in]    index                   The index of the token to be removed
-	 * @exception    E_SUCCESS               The method is successful.
-	 * @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *											The operation is not supported if the style is not EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
-	 * @exception    E_OUT_OF_RANGE          The specified index is outside the bounds of the data structure. @n
-	 *											Either the index is greater than the number of elements or less than @c 0.
-	 * @exception    E_SYSTEM                A system error has occurred.
-	 */
+	* Removes the token at the specified index.
+	*
+	* @since        2.0
+	*
+	* @return       An error code
+	* @param[in]    index                   The index of the token to remove
+	* @exception    E_SUCCESS               The method is successful.
+	* @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
+	*											The operation is not supported if the style is not ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	* @exception    E_OUT_OF_RANGE          The specified index is outside the bounds of the data structure. @n
+	*											Either the index is greater than the number of elements or less than @c 0.
+	* @exception    E_SYSTEM                A system error has occurred.
+	*/
 	result RemoveTokenAt(int index);
 
 	/**
-	 * Sets the selected state of the specified token.
-	 *
-	 * @since        2.0
-	 *
-	 * @return       An error code
-	 * @param[in]    index                   The index of the token to select
-	 * @param[in]    selected                Set to @c true to select the specified token, @n
-	 *											else @c false to unselect
-	 * @exception    E_SUCCESS               The method is successful.
-	 * @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *											The operation is not supported if the style is not EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
-	 * @exception    E_OUT_OF_RANGE          The specified index is outside the bounds of the data structure. @n
-	 *											Either the index is greater than the number of elements or less than @c 0.
-	 * @exception    E_SYSTEM                A system error has occurred.
-	 * @remarks      The currently selected token gets unselected automatically.
-	 */
+	* Sets the selected state of the specified token.
+	*
+	* @since        2.0
+	*
+	* @return       An error code
+	* @param[in]    index                   The index of the token to select
+	* @param[in]    selected                Set to @c true to select the specified token, @n
+	*											else @c false to unselect
+	* @exception    E_SUCCESS               The method is successful.
+	* @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
+	*											The operation is not supported if the style is not ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	* @exception    E_OUT_OF_RANGE          The specified index is outside the bounds of the data structure. @n
+	*											Either the index is greater than the number of elements or less than @c 0.
+	* @exception    E_SYSTEM                A system error has occurred.
+	* @remarks      The currently selected token gets unselected automatically.
+	*/
 	result SetTokenSelected(int index, bool selected);
 
 	/**
-	 * Enables or disables the token edit mode.
-	 *
-	 * @since        2.0
-	 *
-	 * @return       An error code
-	 * @param[in]    enable	                    Set to @c true to enable the token editing mode, @n
-	 *											else @c false
-	 * @exception    E_SUCCESS               The method is successful.
-	 * @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *											The operation is not supported if the style is not EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
-	 * @exception    E_SYSTEM                A system error has occurred.
-	 */
+	* Enables or disables the token edit mode.
+	*
+	* @since        2.0
+	*
+	* @return       An error code
+	* @param[in]    enable	                    Set to @c true to enable the token editing mode, @n
+	*											else @c false
+	* @exception    E_SUCCESS               The method is successful.
+	* @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
+	*											The operation is not supported if the style is not ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	* @exception    E_SYSTEM                A system error has occurred.
+	*/
 	result SetTokenEditModeEnabled(bool enable);
 
 // LIMIT LENGTH
@@ -1069,8 +1187,9 @@ public:
 	 *	            else @c -1 if an error occurs
 	 * @exception   E_SUCCESS			The method is successful.
 	 * @exception   E_SYSTEM			A system error has occurred.
-	 * @remarks     The specific error code can be accessed using the GetLastResult() method. @n
-	 *              The default limit length is @c 2048.
+	 * @remarks
+	 *			- The specific error code can be accessed using the GetLastResult() method.
+	 *			- The default limit length is @c 2048.
 	 * @see         SetLimitLength()
 	 */
 	int GetLimitLength(void) const;
@@ -1081,13 +1200,14 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   limitLength		The limit text length to be set
+	 * @param[in]   limitLength		The limit text length to set
 	 * @exception   E_SUCCESS		The method is successful.
 	 * @exception   E_INVALID_ARG	The specified input parameter is invalid, @n
 	 *								or the specified limit length is @c 0 or negative.
 	 * @exception   E_SYSTEM		A system error has occurred.
-	 * @remarks		The method modifies the text buffer that is managed by the %ExpandableEditArea control. @n
-	 *              To display the changes, the control must be drawn again.
+	 * @remarks
+	 *			- The method modifies the text buffer that is managed by the %ExpandableEditArea control.
+	 *			- To display the changes, the control must be drawn again.
 	 * @see         GetLimitLength()
 	 */
 	result SetLimitLength(int limitLength);
@@ -1117,7 +1237,7 @@ public:
 	 * @param[in]    type                The text type
 	 * @exception    E_SUCCESS			The method is successful.
 	 * @exception    E_INVALID_ARG		The specified type is not supported, or @n
-	 *									the specified @c type is EDIT_TEXT_COLOR_LINK.
+	 *									the specified @c type is @c EDIT_TEXT_COLOR_LINK.
 	 * @exception    E_SYSTEM			A system error has occurred.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
 	 * @see          SetTextColor()
@@ -1163,7 +1283,7 @@ public:
 	 * @param[in]    status                     The status
 	 * @exception    E_SUCCESS                  The method is successful.
 	 * @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *											The operation is not supported if the style is not EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	 *											The operation is not supported if the style is not ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
 	 * @exception    E_SYSTEM                   A system error has occurred.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
 	 * @see          SetTokenColor
@@ -1179,7 +1299,7 @@ public:
 	 *				 else RGBA (0,0,0,0) if an error occurs
 	 * @exception    E_SUCCESS                  The method is successful.
 	 * @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *											The operation is not supported if the style is not EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	 *											The operation is not supported if the style is not ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
 	 * @exception    E_SYSTEM                   A system error has occurred.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
 	 * @see          SetTokenTextColor()
@@ -1195,7 +1315,7 @@ public:
 	 * 				else RGBA (0,0,0,0) if an error occurs
 	 * @exception    E_SUCCESS					The method is successful.
 	 * @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits	the execution of the specified operation. @n
-	 *											The operation is not supported if the style is not EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	 *											The operation is not supported if the style is not ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
 	 * @exception    E_SYSTEM                   A system error has occurred.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
 	 * @see          SetSelectedTokenTextColor()
@@ -1279,7 +1399,7 @@ public:
 	 * @param[in]    color			The token text color
 	 * @exception    E_SUCCESS                  The method is successful.
 	 * @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits	the execution of the specified operation. @n
-	 *											The	operation is not supported if the style is not EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	 *											The	operation is not supported if the style is not ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
 	 * @exception    E_SYSTEM					A system error has occurred.
 	 * @see          GetSelectedTokenTextColor()
 	 */
@@ -1295,7 +1415,7 @@ public:
 	 * @param[in]    color                      The token color
 	 * @exception    E_SUCCESS                  The method is successful.
 	 * @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *											The operation is not supported if the style is not EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	 *											The operation is not supported if the style is not ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
 	 * @exception    E_SYSTEM                   A system error has occurred.
 	 * @see          GetTokenColor()
 	 */
@@ -1310,7 +1430,7 @@ public:
 	 * @param[in]    color                      The token text color
 	 * @exception    E_SUCCESS                  The method is successful.
 	 * @exception	 E_UNSUPPORTED_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
-	 *											The operation is not supported if the style is not EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
+	 *											The operation is not supported if the style is not ::EXPANDABLE_EDIT_AREA_STYLE_TOKEN.
 	 * @exception    E_SYSTEM                   A system error has occurred.
 	 * @see          GetTokenTextColor()
 	 */
@@ -1359,29 +1479,30 @@ public:
 	bool IsAutoResizingEnabled(void) const;
 
 	/**
-	 * Sets the input language.
-	 *
-	 * @since 2.0
-	 *
-	 * @return     An error code
-	 * @param[in]  languageCode               The language to set
-	 * @exception  E_SUCCESS              The method is successful.
-	 * @exception  E_OUT_OF_MEMORY                   The memory is insufficient.
-	 * @remarks    The application can set the language of the current keypad that is associated with the current %ExpandableEditArea. @n
-	 *             This method only works if the language to set is supported by the current preloaded keypad.
-	 */
+	* Sets the input language.
+	*
+	* @since 2.0
+	*
+	* @return     An error code
+	* @param[in]  languageCode               The language to set
+	* @exception  E_SUCCESS              The method is successful.
+	* @exception  E_OUT_OF_MEMORY                   The memory is insufficient.
+	* @remarks
+	*			- The application can set the language of the current keypad that is associated with the current %ExpandableEditArea.
+	*			- This method only works if the language to set is supported by the current preloaded keypad.
+	*/
 	result SetCurrentLanguage(Tizen::Locales::LanguageCode languageCode);
 
 	/**
-	 * Gets the current input language.
-	 *
-	 * @since 2.0
-	 *
-	 * @return     An error code
-	 * @param[out] language               The current input language
-	 * @exception     E_SUCCESS                             The method is successful.
-	 * @remarks   The application can get the current language of the keypad that is associated with the current %ExpandableEditArea.
-	 */
+	* Gets the current input language.
+	*
+	* @since 2.0
+	*
+	* @return     An error code
+	* @param[out] language               The current input language
+	* @exception     E_SUCCESS                             The method is successful.
+	* @remarks   The application can get the current language of the keypad that is associated with the current %ExpandableEditArea.
+	*/
 	result GetCurrentLanguage(Tizen::Locales::LanguageCode& language) const;
 
 // EVENT LISTENER MANAGEMENT
@@ -1391,7 +1512,7 @@ public:
 	 *
 	 * @since       2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @see         RemoveExpandableEditAreaEventListener()
 	 */
 	void AddExpandableEditAreaEventListener(IExpandableEditAreaEventListener& listener);
@@ -1402,7 +1523,7 @@ public:
 	 *
 	 * @since       2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @see         RemoveKeypadEventListener()
 	 */
 	void AddKeypadEventListener(Tizen::Ui::IKeypadEventListener& listener);
@@ -1412,21 +1533,21 @@ public:
 	 *
 	 * @since       2.0
 	 *
-	 * @param[in]	listener		The event listener to be added
+	 * @param[in]	listener		The event listener to add
 	 * @remarks		Programmatically modifying the text block does not cause the text block selection event to fire.
 	 * @see         RemoveTextBlockEventListener()
 	 */
 	void AddTextBlockEventListener(Tizen::Ui::ITextBlockEventListener& listener);
 
 	/**
-	 * Adds the specified ITextEventListener instance. @n
-	 * The added listener can listen to the text-changed event.
-	 *
-	 * @since       2.0
-	 *
-	 * @param[in]	listener		The listener to be added
-	 * @see         RemoveTextEventListener()
-	 */
+	* Adds the specified ITextEventListener instance. @n
+	* The added listener can listen to the text-changed event.
+	*
+	* @since       2.0
+	*
+	* @param[in]	listener		The listener to add
+	* @see         RemoveTextEventListener()
+	*/
 	void AddTextEventListener(Tizen::Ui::ITextEventListener& listener);
 
 	/**
@@ -1435,7 +1556,7 @@ public:
 	 *
 	 * @since       2.0
 	 *
-	 * @param[in]	listener		The event listener to be removed
+	 * @param[in]	listener		The event listener to remove
 	 * @see         AddActionEventListener()
 	 */
 	void RemoveExpandableEditAreaEventListener(IExpandableEditAreaEventListener& listener);
@@ -1446,7 +1567,7 @@ public:
 	 *
 	 * @since       2.0
 	 *
-	 * @param[in]	listener		The event listener to be removed
+	 * @param[in]	listener		The event listener to remove
 	 * @see         AddKeypadEventListener()
 	 */
 	void RemoveKeypadEventListener(Tizen::Ui::IKeypadEventListener& listener);
@@ -1457,7 +1578,7 @@ public:
 	 *
 	 * @since       2.0
 	 *
-	 * @param[in]   listener		The event listener to be removed
+	 * @param[in]   listener		The event listener to remove
 	 * @see         AddTextBlockEventListener()
 	 */
 	void RemoveTextBlockEventListener(Tizen::Ui::ITextBlockEventListener& listener);
@@ -1468,33 +1589,33 @@ public:
 	 *
 	 * @since       2.0
 	 *
-	 * @param[in]   listener		The listener to be removed
+	 * @param[in]   listener		The listener to remove
 	 * @see         AddTextEventListener()
 	 */
 	void RemoveTextEventListener(Tizen::Ui::ITextEventListener& listener);
 
 	/**
-	 * Adds a listener instance for language events. @n
-	 * The added listener is notified when the input language is changed.
-	 *
-	 * @since 2.0
-	 *
-	 * @param[in]  listener               The listener to add
-	 * @remarks    The application can recognize when the language is changed from the keypad by adding Tizen::Ui::ILanguageEventListener.
-	 * @see            RemoveLanguageEventListener()
-	 */
+	* Adds a listener instance for language events. @n
+	* The added listener is notified when the input language is changed.
+	*
+	* @since 2.0
+	*
+	* @param[in]  listener               The listener to add
+	* @remarks    The application can recognize when the language is changed from the keypad by adding Tizen::Ui::ILanguageEventListener.
+	* @see            RemoveLanguageEventListener()
+	*/
 
 	void AddLanguageEventListener(Tizen::Ui::ILanguageEventListener& listener);
 
 	/**
-	 * Removes the specified listener instance. @n
-	 * The removed listener cannot listen to events when they are fired.
-	 *
-	 * @since 2.0
-	 *
-	 * @param[in]  listener               The listener to remove
-	 * @see             AddLanguageEventListener()
-	 */
+	* Removes the specified listener instance. @n
+	* The removed listener cannot listen to events when they are fired.
+	*
+	* @since 2.0
+	*
+	* @param[in]  listener               The listener to remove
+	* @see             AddLanguageEventListener()
+	*/
 
 	void RemoveLanguageEventListener(Tizen::Ui::ILanguageEventListener& listener);
 
@@ -1522,6 +1643,26 @@ public:
 	 */
 	bool IsAutoShrinkModeEnabled(void) const;
 
+	/**
+	 * Sets the text filter.
+	 *
+	 * @since		2.1
+	 *
+	 * @param[in]		pFilter The filter to set
+	 * @remarks 	The %ExpandableEditArea control checks with the registered filter to decide whether the user-entered text should be replaced or not.
+	 */
+	void  SetEditTextFilter(IEditTextFilter* pFilter);
+
+	/**
+	* Sends opaque command to the input method.
+	*
+	* @since     2.1
+	*
+	* @param[in] command            The opaque command to send
+	* @remarks   This method can be used to provide domain-specific features that are only known between certain input methods and their clients.
+	*                   This method may not work, depending on the active Input Method.
+	*/
+	void SendOpaqueCommand (const Tizen::Base::String& command);
 
 protected:
 	friend class _ExpandableEditAreaImpl;

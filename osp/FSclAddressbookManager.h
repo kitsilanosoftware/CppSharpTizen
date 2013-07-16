@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -27,6 +26,7 @@
 #include <FBaseTypes.h>
 #include <FBaseObject.h>
 #include <FBaseString.h>
+#include <FBaseByteBuffer.h>
 #include <FSclTypes.h>
 
 namespace Tizen { namespace Base
@@ -43,9 +43,11 @@ namespace Tizen { namespace Social
 class Category;
 class Contact;
 class Person;
+class UserProfile;
 class Addressbook;
 class AddressbookFilter;
 class IAddressbookEventListener;
+class IAddressbookChangeEventListener;
 
 /**
  * @class	AddressbookManager
@@ -62,9 +64,12 @@ class _OSP_EXPORT_ AddressbookManager
 {
 public:
 	/**
-	 * Creates an addressbook with the specified account ID and name.
+	 * Creates an addressbook with the specified account ID and name. @n
+	 * The accountId must specify a valid account and only one addressbook can be created per a account. @n
+	 * The name of the addressbook must be specified and the name must be unique among the addressbooks on the device.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.write
 	 *
 	 * @return	An addressbook instance
@@ -72,9 +77,11 @@ public:
 	 * @param[in]	name		The addressbook name
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-	 * @exception	E_INVALID_ARG       The specified @c accountId is invalid or specified @ name is an empty string.
-	 * @exception	E_OBJ_ALREADY_EXIST The addressbook with the specified name already exists.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception	E_INVALID_ARG       The specified @c accountId is invalid or @c name is an empty string.
+	 * @exception	E_OBJ_ALREADY_EXIST The addressbook with the specified account ID or name already exists.
+	 * @exception	E_STORAGE_FULL		The storage is insufficient.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Addressbook* CreateAddressbookN(AccountId accountId, const Tizen::Base::String& name);
@@ -85,15 +92,17 @@ public:
 	 * the contacts and categories that belong to the addressbook are also deleted.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.write
 	 *
 	 * @return	An error code
 	 * @param[in]	addressbookId	The addressbook ID
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		The specified @c addressbookId is invalid or the addressbook specified by @c addressbookId is a default addressbook.
 	 * @exception	E_OBJ_NOT_FOUND	    The specified @c addressbookId does not exist.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 */
 	result DeleteAddressbook(AddressbookId addressbookId);
 
@@ -101,6 +110,7 @@ public:
 	 * Gets the addressbooks associated with the specified account ID.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.read
 	 *
 	 * @return	A list of addressbooks, @n
@@ -108,8 +118,9 @@ public:
 	 * @param[in]	accountId	The account ID
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		The specified @c accountId is invalid.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Tizen::Base::Collection::IList* GetAddressbooksByAccountN(AccountId accountId) const;
@@ -118,13 +129,15 @@ public:
 	 * Gets a list of all addressbooks.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.read
 	 *
 	 * @return	A list of addressbooks, @n
 	 *				    else an empty list if there is no addressbook, or @c null if an exception occurs (@ref Addressbook list)
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	 Tizen::Base::Collection::IList* GetAllAddressbooksN(void) const;
@@ -133,15 +146,17 @@ public:
 	 * Gets an instance of an addressbook specified by the addressbook ID.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.read
 	 *
 	 * @return	An addressbook instance
 	 * @param[in]	addressbookId		The addressbook ID
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		The specified @c addressbookId is invalid.
 	 * @exception	E_OBJ_NOT_FOUND	    The specified @c addressbookId does not exist.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	 Addressbook* GetAddressbookN(AddressbookId addressbookId = DEFAULT_ADDRESSBOOK_ID) const;
@@ -151,16 +166,40 @@ public:
 	  * The listener is called when a contact or a category has been changed.
 	  * To reset the event listener, @c null must be passed.
 	  *
+	  * @brief <i> [Deprecated] </i>
+	  * @deprecated This method and IAddressbookEventListener are deprecated. Instead of using this method, use SetAddressbookChangeEventListener()
+	  * and IAddressbookChangeEventListener.
+	  *
 	  * @since	2.0
+	  * @privlevel	public
 	  * @privilege	%http://tizen.org/privilege/contact.read
 	  *
 	  * @return	An error code
 	  * @param[in]	pListener	The event listener
 	  * @exception	E_SUCCESS		The method is successful.
 	  * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-	  * @exception	E_SYSTEM		A system error has occurred.
+	  * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	  * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
 	  */
 	 result SetEventListener(IAddressbookEventListener* pListener);
+
+	/**
+	 * Sets addressbook change event listener. @n
+	 * The listener is called when a contact or a category has been changed.
+	 * To reset the event listener, @c null must be passed.
+	 *
+	 * @since       2.1
+	 * @privlevel   public
+	 * @privilege   %http://tizen.org/privilege/contact.read
+	 *
+	 * @return      An error code
+	 * @param[in]   pListener       The event listener
+	 * @exception   E_SUCCESS       The method is successful.
+	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method.
+	 * @exception   E_SYSTEM                The method cannot proceed due to a severe system error
+	 */
+	 result SetAddressbookChangeEventListener(IAddressbookChangeEventListener* pListener);
 
 	/**
 	 * Adds a contact to the specified addressbook. @n
@@ -168,6 +207,7 @@ public:
 	 * If the contact has been added successfully, a contact ID is assigned to it.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.write
 	 *
 	 * @return		An error code
@@ -175,12 +215,14 @@ public:
 	 * @param[in]		addressbookId	The addressbook ID
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		Either of the following conditions has occurred: @n
 	 *									- The contact ID is not #INVALID_RECORD_ID. @n
 	 *									- The properties of the contact have not been set. @n
 	 *									- The specified @c addressbookId is invalid.
 	 * @exception	E_OBJ_NOT_FOUND		The specified addressbook is not found.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_STORAGE_FULL		The storage is insufficient.
+	 * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
 	 * @remarks	The #CONTACT_PROPERTY_ID_DISPLAY_NAME and #CONTACT_PROPERTY_ID_LAST_REVISION
 	 * properties cannot be set. @n #CONTACT_PROPERTY_ID_DISPLAY_NAME is automatically generated from the first name and
 	 * the last name. And #CONTACT_PROPERTY_ID_LAST_REVISION is automatically updated with the last update time.
@@ -191,15 +233,17 @@ public:
 	 * Removes a contact.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.write
 	 *
 	 * @return	An error code
 	 * @param[in]	contactId		The contact ID
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		The specified @c contactId is invalid.
 	 * @exception	E_OBJ_NOT_FOUND	    The specified @c contactId does not exist.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 */
 	result RemoveContact(RecordId contactId);
 
@@ -208,16 +252,19 @@ public:
 	 * At least one property of the contact must have been set.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.write
 	 *
 	 * @return	An error code
 	 * @param[in]	contact			The contact to update
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_OBJ_NOT_FOUND	    The specified @c contact does not exist in this address book.
 	 * @exception	E_INVALID_ARG		The specified @c contact is invalid, or
 	 *									the properties of the specified @c contact have not been set.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_STORAGE_FULL		The storage is insufficient.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 */
 	result UpdateContact(const Contact& contact);
 
@@ -227,6 +274,7 @@ public:
 	 * If the category has been added successfully, a category ID is assigned to it.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.write
 	 *
 	 * @return	An error code
@@ -234,13 +282,14 @@ public:
 	 * @param[in]		addressbookId	The addressbook ID
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		Either of the following conditions has occurred: @n
 	 *									- The name of the category has not been set. @n
 	 *									- One of the member contacts is invalid. @n
 	 *									- The category ID of the @c category is not #INVALID_RECORD_ID. @n
 	 *									- The specified @c addressbookId is invalid.
-	 * @exception   E_STORAGE_FULL		The capacity of this address book is full.
-	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @exception	E_STORAGE_FULL		The storage is insufficient.
+	 * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
 	 */
 	result AddCategory(Category& category, AddressbookId addressbookId);
 
@@ -248,15 +297,17 @@ public:
 	 * Removes a category.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.write
 	 *
 	 * @return	An error code
 	 * @param[in]	categoryId		The category ID
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		The specified @c categoryId is invalid or the category specified by @c categoryId is a default category.
 	 * @exception	E_OBJ_NOT_FOUND	    The specified @c categoryId does not exist in this address book.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @see Category::IsDefault()
 	 */
 	result RemoveCategory(RecordId categoryId);
@@ -265,16 +316,19 @@ public:
 	 * Updates a category.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.write
 	 *
 	 * @return	An error code
 	 * @param[in]	category		The category to update
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_OBJ_NOT_FOUND	    The specified @c category does not exist in this address book.
 	 * @exception	E_INVALID_ARG		The specified @c category is invalid, or
 	 *									one of the contact members is invalid.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_STORAGE_FULL		The storage is insufficient.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 */
 	result UpdateCategory(const Category& category);
 
@@ -283,13 +337,15 @@ public:
 	 * The contacts are ordered by display name.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.read
 	 *
 	 * @return	A list of all contacts on the device, @n
 	 *				    else an empty list if there is no contact, or @c null if an exception occurs (@ref Contact list)
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks
 	 *		- The specific error code can be accessed using the GetLastResult() method.
 	 *		- There is a high probability for an occurrence of an out-of-memory exception.
@@ -305,6 +361,7 @@ public:
 	 * The contacts are ordered by display name.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.read
 	 *
 	 * @return	A list of contacts that are members of the specified category, @n
@@ -312,8 +369,9 @@ public:
 	 * @param[in]	categoryId		The category ID
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		The specified @c categoryId is less than INVALID_RECORD_ID.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks
 	 *		- The specific error code can be accessed using the GetLastResult() method.
 	 *		- There is a high probability for an occurrence of an out-of-memory exception.
@@ -327,6 +385,7 @@ public:
 	 * Gets the contacts linked to the person specified by the person ID.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.read
 	 *
 	 * @return      A list of contacts that are linked to this person, @n
@@ -334,6 +393,7 @@ public:
 	 * @param[in]   personId                The person ID
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_INVALID_ARG           The specified @c personId is invalid.
 	 * @exception   E_SYSTEM      The method cannot proceed due to a severe system error.
 	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
@@ -346,6 +406,7 @@ public:
 	 * The categories are ordered by name.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.read
 	 *
 	 * @return              A list of categories that has the specified person as a member, @n
@@ -353,6 +414,7 @@ public:
 	 * @param[in]   personId                The person ID
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_INVALID_ARG           The specified @c personId is invalid.
 	 * @exception   E_SYSTEM      The method cannot proceed due to a severe system error.
 	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
@@ -363,6 +425,7 @@ public:
 	 * Gets the contact with the specified contact ID.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.read
 	 *
 	 * @return		The matched contact, @n
@@ -370,9 +433,10 @@ public:
 	 * @param[in]	contactId		The contact ID
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		The specified @c contactId is invalid.
 	 * @exception	E_OBJ_NOT_FOUND	 	The specified @c contactId is not found.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Contact* GetContactN(RecordId contactId) const;
@@ -381,13 +445,15 @@ public:
 	 * Gets the number of contacts in all addressbooks.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.read
 	 *
 	 * @return		The number of contacts in the address book, @n
 	 *				else @c -1 if an error occurs
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	int GetContactCount(void) const;
@@ -396,6 +462,7 @@ public:
 	 * Adds the specified contact to the specified category.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.write
 	 *
 	 * @return	An error code
@@ -403,9 +470,10 @@ public:
 	 * @param [in]	contactId		The contact ID
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		The specified contact or category does not exist,
 	 *					or the specified contact and category are not in the same addressbook.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks If the contact is already a member of the category, this method does nothing.
 	 */
 	result AddMemberToCategory(RecordId categoryId, RecordId contactId);
@@ -414,6 +482,7 @@ public:
 	 * Removes the specified contact from the specified category.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.write
 	 *
 	 * @return	An error code
@@ -421,8 +490,9 @@ public:
 	 * @param [in]	contactId		The contact ID
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		The specified contact or category does not exist.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks If the contact is not a member of the category, this method does nothing.
 	 */
 	result RemoveMemberFromCategory(RecordId categoryId, RecordId contactId);
@@ -432,13 +502,15 @@ public:
 	 * The categories are ordered by name.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.read
 	 *
 	 * @return	A list of categories on the device, @n
 	 *				else an empty list if there is no category, or @c null if an exception occurs (@ref Category list)
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Tizen::Base::Collection::IList* GetAllCategoriesN(void) const;
@@ -448,6 +520,7 @@ public:
 	 * The categories are ordered by name.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.read
 	 *
 	 * @return		A list of categories that has the specified contact as a member, @n
@@ -455,8 +528,9 @@ public:
 	 * @param[in] contactId		The contact ID
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		The specified @c contactId is invalid.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Tizen::Base::Collection::IList* GetCategoriesByContactN(RecordId contactId) const;
@@ -465,13 +539,15 @@ public:
 	 * Gets the number of categories on the device.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.read
 	 *
 	 * @return		The number of categories on the device, @n
 	 *				else @c -1 if an error occurs
 	 * @exception	E_SUCCESS		    The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-	 * @exception	E_SYSTEM		    A system error has occurred.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception	E_SYSTEM		    The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	int GetCategoryCount(void) const;
@@ -480,6 +556,7 @@ public:
 	 * Gets the category with the specified category ID.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.read
 	 *
 	 * @return		The matched category, @n
@@ -487,9 +564,10 @@ public:
 	 * @param[in]	categoryId		The category ID
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		The specified @c categoryId is invalid.
 	 * @exception	E_OBJ_NOT_FOUND	    The specified record is not found.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Category* GetCategoryN(RecordId categoryId) const;
@@ -500,6 +578,7 @@ public:
 	 * The contacts are ordered by display name.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.read
 	 *
 	 * @return	A list of all matched contacts, @n
@@ -507,8 +586,9 @@ public:
 	 * @param[in]	email			The substring of the email to search
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		The specified @c email is an empty string.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks
 	 *		- The specific error code can be accessed using the GetLastResult() method.
 	 *		- There is a high probability for an occurrence of an out-of-memory exception.
@@ -525,6 +605,7 @@ public:
 	 * The contacts are ordered by display name.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.read
 	 *
 	 * @return	A list of all matched contacts, @n
@@ -532,8 +613,9 @@ public:
 	 * @param[in]	name			The substring of the name to search
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		The specified @c name is an empty string.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks
 	 *		- The specific error code can be accessed using the GetLastResult() method.
 	 *		- There is a high probability for an occurrence of an out-of-memory exception.
@@ -550,6 +632,7 @@ public:
 	 * The contacts are ordered by display name.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.read
 	 *
 	 * @return	A list of all matched contacts, @n
@@ -557,8 +640,9 @@ public:
 	 * @param[in]	phoneNumber		The substring of the phone number to search
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		The specified @c phoneNumber is an empty string.
-	 * @exception	E_SYSTEM	        A system error has occurred.
+	 * @exception	E_SYSTEM	        The method cannot proceed due to a severe system error.
 	 * @remarks
 	 *		- The specific error code can be accessed using the GetLastResult() method.
 	 *		- There is a high probability for an occurrence of an out-of-memory exception.
@@ -572,13 +656,15 @@ public:
 	 * Gets the latest change version.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.read
 	 *
 	 * @return		The latest change version, @n
 	 *			else @c -1 if an exception occurs
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @see GetChangedContactsAfterN()
 	 * @see GetChangedCategoriesAfterN()
@@ -588,7 +674,11 @@ public:
 	/**
 	 * Gets the change information of the contacts that have been changed after the specified change version.
 	 *
+	 * @brief <i> [Deprecated] </i>
+	 * @deprecated This method is deprecated.
+	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.read
 	 *
 	 * @return	A list of contact change information, @n
@@ -597,8 +687,9 @@ public:
 	 * @param[out]	latestVersion	The latest change version among the changed contacts
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		The specified @c version is invalid.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @see GetLatestVersion()
 	 * @see ContactChangeInfo
@@ -628,7 +719,11 @@ public:
 	/**
 	 * Gets the change information of the categories that have been changed after the specified change version.
 	 *
+	 * @brief <i> [Deprecated] </i>
+	 * @deprecated This method is deprecated.
+	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/contact.read
 	 *
 	 * @return	A list of category change information, @n
@@ -637,8 +732,9 @@ public:
 	 * @param[out]	latestVersion	The latest change version among the changed categories
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception	E_INVALID_ARG		The specified @c version is invalid.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @see GetLatestVersion()
 	 * @see CategoryChangeInfo
@@ -669,6 +765,7 @@ public:
 	 * Gets the person with the specified person ID.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.read
 	 *
 	 * @return      The matched person, @n
@@ -676,6 +773,7 @@ public:
 	 * @param[in]   personId                The person ID
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_INVALID_ARG           The specified @c personId is invalid.
 	 * @exception   E_OBJ_NOT_FOUND         The specified @c personId is not found.
 	 * @exception   E_SYSTEM      The method cannot proceed due to a severe system error.
@@ -688,12 +786,14 @@ public:
 	 * All contacts linked to the person will be removed, too.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.write
 	 *
 	 * @return      An error code
 	 * @param[in]   personId                The person ID
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_INVALID_ARG           The specified @c personId is invalid.
 	 * @exception   E_OBJ_NOT_FOUND         The specified person does not exist.
 	 * @exception   E_SYSTEM      The method cannot be proceed due to a severe system error.
@@ -705,12 +805,14 @@ public:
 	 * The persons are ordered by display name.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.read
 	 *
 	 * @return      A list of all persons on the device, @n
 	 *                                  else an empty list if there is no person, or @c null if an exception occurs (@ref Person list)
 	 * @exception   E_SUCCESS              The method is successful.
 	 * @exception   E_PRIVILEGE_DENIED     The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SYSTEM      The method cannot be proceed due to a severe system error.
 	 * @remarks
 	 *		- The specific error code can be accessed using the GetLastResult() method.
@@ -723,10 +825,11 @@ public:
 
 	/**
 	 * Gets the persons that are members of the specified category where a person is a member of a category if a contact linked to it is a member of the category. @n
-	 * If the specified @c categoryId is INVALID_RECORD_ID, this method returns the persons that are not members of any category.@n
+	 * If the specified @c categoryId is INVALID_RECORD_ID, this method returns the persons that are not members of any category. @n
 	 * The persons are ordered by display name.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.read
 	 *
 	 * @return      A list of persons that are members of the specified category, @n
@@ -734,6 +837,7 @@ public:
 	 * @param[in]   categoryId              The category ID
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_INVALID_ARG           The specified @c categoryId is invalid.
 	 * @exception   E_OBJ_NOT_FOUND         The specified category does not exist.
 	 * @exception   E_SYSTEM      The method cannot proceed due to a severe system error.
@@ -751,12 +855,14 @@ public:
 	 * The persons are ordered by display name.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.read
 	 *
 	 * @return      A list of the favorite persons, @n
 	 *                                  else an empty list if there is no favorite person, or @c null if an exception occurs (@ref Person list)
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SYSTEM      The method cannot proceed due to a severe system error.
 	 * @remarks
 	 *		- The specific error code can be accessed using the GetLastResult() method.
@@ -766,7 +872,7 @@ public:
 	 *                <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/exception_check.htm">here</a>.
          * @see SetPersonAsFavorite()
          */
-	Tizen::Base::Collection::IList* GetFavoritePersonsN() const;
+	Tizen::Base::Collection::IList* GetFavoritePersonsN(void) const;
 
 	/**
 	 * Searches the persons that contains the specified @c keyword string in its properties. @n
@@ -774,6 +880,7 @@ public:
 	 * The persons are ordered by display name.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.read
 	 *
 	 * @return      A list of all matched persons, @n
@@ -781,6 +888,7 @@ public:
 	 * @param[in]   keyword                 The key to search
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_INVALID_ARG           The specified @c keyword is an empty string.
 	 * @exception   E_SYSTEM      The method cannot proceed due to a severe system error.
 	 * @remarks
@@ -796,6 +904,7 @@ public:
 	 * Sets whether the specified person is a favorite or not.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.write
 	 *
 	 * @return      An error code
@@ -804,6 +913,7 @@ public:
 	 *                            else @c false to set the specified person as a non-favorite
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_INVALID_ARG           The specified @c personId is invalid.
 	 * @exception   E_OBJ_NOT_FOUND         The specified person does not exist.
 	 * @exception   E_SYSTEM      The method cannot proceed due to a severe system error.
@@ -820,9 +930,10 @@ public:
 	 *      - Removes the source person.
 	 *      - Updates information of the target person.
 	 *
-	 * This method does nothing if the source or target person does not exist.
+	 * The %MergePersons() method does nothing if the source or target person does not exist.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.write
 	 *
 	 * @return      An error code
@@ -830,6 +941,7 @@ public:
 	 * @param[in]   targetPersonId          The target person ID
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_INVALID_ARG           The specified @c sourcePersonId or @c targetPersonId is invalid.
 	 * @exception   E_SYSTEM      The method cannot proceed due to a severe system error.
 	 */
@@ -844,9 +956,10 @@ public:
 	 *      - Updates information of the persons.
 	 *
 	 * It is not allowed to unlink a contact if it is the only one contact linked to a person.
-	 * This method does nothing if the contact has not been linked to the person or does not exist.
+	 * The %UnlinkContact() method does nothing if the contact has not been linked to the person or does not exist.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.write
 	 *
 	 * @return      An error code
@@ -855,6 +968,7 @@ public:
 	 * @param[out]  newPersonId             The ID of the new person
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_INVALID_ARG           The specified @c personId or @c contactId is invalid.
 	 * @exception   E_SYSTEM      The method cannot proceed due to a severe system error.
 	 */
@@ -867,6 +981,7 @@ public:
 	 * If the @c offset is M and the @c maxCount are N, then the first M items are omitted from the result set returned by the searching operation and the next N items are returned.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege    %http://tizen.org/privilege/contact.read
 	 *
 	 * @return       A list of searched results (The list of Addressbook, Person, Contact, Category, PhoneNumberContact, EmailContact), @n
@@ -878,9 +993,10 @@ public:
 	 * @param[in]    maxCount            The maximum count of the searched results @n If this value is @c 0, it will be ignored.
 	 * @exception    E_SUCCESS                          The method is successful.
 	 * @exception    E_PRIVILEGE_DENIED                 The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception    E_INVALID_ARG                      The specified @c offset or @c maxCount is less than @c 0.
 	 *                                                  Or, the @c propertyToSort is not an elements of the enumerator that corresponds with the type of the specified @c filter.
-	 * @exception    E_SYSTEM                A system error has occurred.
+	 * @exception    E_SYSTEM                The method cannot proceed due to a severe system error.
 	 * @remarks
 	 *		- The specific error code can be accessed using the GetLastResult() method.
 	 *		- There is a high probability for an occurrence of an out-of-memory exception.
@@ -902,13 +1018,15 @@ public:
 	 * The filter specifies the item type and condition for searching.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege    %http://tizen.org/privilege/contact.read
 	 *
 	 * @return       The count of the searched results
 	 * @param[in]    filter                  The filter that specifies the search condition @n If the filter is empty, all items that are specified by the type of this filter will be searched.
 	 * @exception    E_SUCCESS               The method is successful.
 	 * @exception    E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
-	 * @exception    E_SYSTEM                A system error has occurred.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception    E_SYSTEM                The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @see AddressbookFilterProperty
 	 * @see PersonFilterProperty
@@ -921,7 +1039,7 @@ public:
 
 	/**
 	 * Parses contacts from the specified vCard file. @n
-	 * This method supports vCard formation 2.1 and 3.0.
+	 * The %ParseContactsFromVcardN() method supports vCard formation 2.1 and 3.0.
 	 *
 	 * @since	2.0
 	 *
@@ -941,6 +1059,7 @@ public:
 	 * Exports a person to the specified vCard 3.0 file. 
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.read
 	 *
 	 * @return      An error code
@@ -948,10 +1067,11 @@ public:
 	 * @param[in]   vcardPath               The file path of a vCard file
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_INVALID_ARG           The specified @c person is invalid.
 	 * @exception   E_ILLEGAL_ACCESS        Access is denied due to insufficient permission.
 	 * @exception   E_FILE_ALREADY_EXIST    The specified file already exists.
-	 * @exception   E_STORAGE_FULL          The disk space is full.
+	 * @exception	E_STORAGE_FULL		The storage is insufficient.
 	 * @exception   E_SYSTEM                The method cannot proceed due to a severe system error.
 	 */
 	result ExportPersonToVcard(const Person& person, const Tizen::Base::String& vcardPath);
@@ -960,18 +1080,20 @@ public:
 	 * Exports a person list to the specified vCard 3.0 file.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege   %http://tizen.org/privilege/contact.read
 	 *
 	 * @return      An error code
-	 * @param[in]   personList              The person list to export @n The list should contain Person instances.
+	 * @param[in]   personList              The person list to export @n The list should contain the Person instances.
 	 * @param[in]   vcardPath               The file path of a vCard file 
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_INVALID_ARG           Either the specified @c personList is invalid or
 	 *                                      the specified @c vcardPath is invalid.
 	 * @exception   E_ILLEGAL_ACCESS        Access is denied due to insufficient permission.
 	 * @exception   E_FILE_ALREADY_EXIST    The specified file already exists.
-	 * @exception   E_STORAGE_FULL          The disk space is full.
+	 * @exception	E_STORAGE_FULL		The storage is insufficient.
 	 * @exception   E_SYSTEM                The method cannot proceed due to a severe system error.
 	 */
 	result ExportPersonsToVcard(const Tizen::Base::Collection::IList& personList, const Tizen::Base::String& vcardPath);
@@ -988,7 +1110,7 @@ public:
 	 * @exception   E_INVALID_ARG           The specified @c contact is invalid.
 	 * @exception   E_ILLEGAL_ACCESS        Access is denied due to insufficient permission.
 	 * @exception   E_FILE_ALREADY_EXIST    The specified file already exists.
-	 * @exception   E_STORAGE_FULL          The disk space is full.
+	 * @exception	E_STORAGE_FULL		The storage is insufficient.
 	 * @exception   E_SYSTEM                The method cannot proceed due to a severe system error.
 	 */
 	result ExportContactToVcard(const Contact& contact, const Tizen::Base::String& vcardPath);
@@ -1006,20 +1128,211 @@ public:
 	 *                                      the specified @c vcardPath is invalid.
 	 * @exception   E_ILLEGAL_ACCESS        Access is denied due to insufficient permission.
 	 * @exception   E_FILE_ALREADY_EXIST    The specified file already exists.
-	 * @exception   E_STORAGE_FULL          The disk space is full.
+	 * @exception	E_STORAGE_FULL		The storage is insufficient.
 	 * @exception   E_SYSTEM                The method cannot proceed due to a severe system error.
 	 */
 	result ExportContactsToVcard(const Tizen::Base::Collection::IList& contactList, const Tizen::Base::String& vcardPath);
+
+	/**
+	* Exports a contact to a vCard format stream.
+	*
+	* @since	2.1
+	*
+	* @return		The exported vcard stream, @n
+	*				else @c null if an exception occurs
+	* @param[in]	contact                 The contact to export
+	* @exception	E_SUCCESS               The method is successful.
+	* @exception	E_INVALID_ARG           The specified @c contact is invalid.
+	* @exception	E_SYSTEM      The method cannot proceed due to a severe system error.
+	* @remarks		The specific error code can be accessed using the GetLastResult() method.
+	* @see ExportContactToVcard()
+	*/
+	Tizen::Base::ByteBuffer*  ExportContactToVcardStreamN(const Contact& contact);
+
+	/**
+	* Exports a contact list to a vCard format stream.
+	*
+	* @since	2.1
+	*
+	* @return		The exported vcard stream, @n
+	*				else @c null if an exception occurs
+	* @param[in]	contactList             The contact list to export @n The list should contain the Contact instances
+	* @exception	E_SUCCESS               The method is successful.
+	* @exception	E_INVALID_ARG           The specified @c contactList contains an invalid contact.
+	* @exception	E_SYSTEM      The method cannot proceed due to a severe system error.
+	* @remarks		The specific error code can be accessed using the GetLastResult() method.
+	* @see ExportContactsToVcard()
+	*/
+	Tizen::Base::ByteBuffer* ExportContactsToVcardStreamN(const Tizen::Base::Collection::IList& contactList);
+
+	/**
+	* Exports a person to a vCard format stream.
+	*
+	* @since	2.1
+	* @privlevel	public
+	* @privilege	%http://tizen.org/privilege/contact.read
+	*
+	* @return		The exported vcard stream, @n
+	*				else @c null if an exception occurs.
+	* @param[in]	person                  The person to export
+	* @exception	E_SUCCESS               The method is successful.
+	* @exception	E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	* @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method.
+	* @exception	E_INVALID_ARG           The specified @c person is invalid.
+	* @exception	E_SYSTEM      The method cannot proceed due to a severe system error.
+	* @remarks		The specific error code can be accessed using the GetLastResult() method.
+	* @see ExportPersonToVcard()
+	*/
+	Tizen::Base::ByteBuffer* ExportPersonToVcardStreamN(const Person& person);
+
+	/**
+	* Exports a person list to a vCard format stream.
+	*
+	* @since	2.1
+	* @privlevel	public
+	* @privilege	%http://tizen.org/privilege/contact.read
+	*
+	* @return		The exported vcard stream, @n
+	*				else @c null if an exception occurs
+	* @param[in]	personList              The person list to export @n The list should contain the Person instances.
+	* @exception	E_SUCCESS               The method is successful.
+	* @exception	E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	* @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method.
+	* @exception	E_INVALID_ARG           The specified @c personList contains invalid person.
+	* @exception	E_SYSTEM      The method cannot proceed due to a severe system error.
+	* @remarks		The specific error code can be accessed using the GetLastResult() method.
+	* @see ExportPersonsToVcard()
+	*/
+	Tizen::Base::ByteBuffer* ExportPersonsToVcardStreamN(const Tizen::Base::Collection::IList& personList);
+
+	/**
+	* Parses contacts from the specified vCard stream. @n
+	* The %ParseVcardStreamN() method supports vCard formation 2.1 and 3.0.
+	*
+	* @since	2.1
+	*
+	* @return		A list of contacts, @n
+	*				else an empty list if there is no contact, or @c null if an exception occurs (@ref Contact list)
+	* @param[in]	vcardStream             The vCard stream
+	* @exception	E_SUCCESS               The method is successful.
+	* @exception	E_INVALID_ARG           The specified @c vcardStream is invalid.
+	* @exception	E_SYSTEM      The method cannot proceed due to a severe system error.
+	* @remarks		The specific error code can be accessed using the GetLastResult() method.
+	* @see ParseContactsFromVcardN()
+	*/
+	Tizen::Base::Collection::IList* ParseVcardStreamN(const Tizen::Base::ByteBuffer& vcardStream);
+
+	/**
+	 * Exports a user profile to a vCard format stream.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      The exported vCard stream, @n
+	 *                       else @c null if an exception occurs
+	 * @param[in]   userProfile                The user profile to export
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_INVALID_ARG         The specified @c userProfile is invalid.
+	 * @exception   E_SYSTEM                The method cannot proceed due to a severe system error.
+	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
+	 */
+	Tizen::Base::ByteBuffer* ExportUserProfileToVcardStreamN(const UserProfile& userProfile);
+
+	/**
+	 * Exports a user profile list to a vCard format stream.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      The exported vCard stream, @n
+	 *                       else @c null if an exception occurs
+	 * @param[in]   userProfileList            The user profile list to export @n The list should contain the UserProfile instances
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_INVALID_ARG         The specified @c userProfile is invalid.
+	 * @exception   E_SYSTEM                The method cannot proceed due to a severe system error.
+	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
+	 */
+	Tizen::Base::ByteBuffer* ExportUserProfilesToVcardStreamN(const Tizen::Base::Collection::IList& userProfileList);
+
+	/**
+	 * Exports a user profile to the specified vCard 3.0 file.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      An error code
+	 * @param[in]   userProfile              The user profile to export
+	 * @param[in]   vcardPath               The file path of a vCard file
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_INVALID_ARG           The specified @c userProfile is invalid.
+	 * @exception   E_ILLEGAL_ACCESS        Access is denied due to insufficient permission.
+	 * @exception   E_FILE_ALREADY_EXIST    The specified file already exists.
+	 * @exception	E_STORAGE_FULL		The storage is insufficient.
+	 * @exception   E_SYSTEM                The method cannot proceed due to a severe system error.
+	 */
+	result ExportUserProfileToVcard(const UserProfile& userProfile, const Tizen::Base::String& vcardPath);
+
+	/**
+	 * Exports a user profile list to the specified vCard 3.0 file.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      An error code
+	 * @param[in]   userProfileList          The user profile list to export @n The list should contain the UserProfile instances
+	 * @param[in]   vcardPath               The file path of a vCard file
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_INVALID_ARG           Either the specified @c userProfileList is invalid or
+	 *                                      the specified @c vcardPath is invalid.
+	 * @exception   E_ILLEGAL_ACCESS        Access is denied due to insufficient permission.
+	 * @exception   E_FILE_ALREADY_EXIST    The specified file already exists.
+	 * @exception	E_STORAGE_FULL		The storage is insufficient.
+	 * @exception   E_SYSTEM                The method cannot proceed due to a severe system error.
+	 */
+	result ExportUserProfilesToVcard(const Tizen::Base::Collection::IList& userProfileList, const Tizen::Base::String& vcardPath);
+
+	/**
+	 * Gets all user profiles on the device.
+	 *
+	 * @since       2.1
+	 * @privlevel 	public
+	 * @privilege   %http://tizen.org/privilege/userprofile.read
+	 *
+	 * @return      A list of all user profiles on the device, @n
+	 *                                  else an empty list if there is no user profile, or @c null if an exception occurs (@ref UserProfile list)
+	 * @exception   E_SUCCESS              The method is successful.
+	 * @exception   E_PRIVILEGE_DENIED     The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method.
+	 * @exception   E_SYSTEM      The method cannot be proceed due to a severe system error.
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
+	 */
+	Tizen::Base::Collection::IList* GetAllUserProfilesN(void) const;
+
+	/**
+	 * Gets a user profile of the address book specified by the address book ID.
+	 *
+	 * @since       2.1
+	 * @privlevel 	public
+	 * @privilege   %http://tizen.org/privilege/userprofile.read
+	 *
+	 * @return      The matched user profile, @n
+	 *                              else @c null if an exception occurs
+	 * @param[in]   addressbookId           The addressbook ID
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method.
+	 * @exception   E_INVALID_ARG           The specified @c addressbookId is invalid.
+	 * @exception   E_OBJ_NOT_FOUND         The specified @c addressbook is not found.
+	 * @exception   E_SYSTEM      The method cannot proceed due to a severe system error.
+	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
+	 */
+	UserProfile* GetUserProfileN(AddressbookId addressbookId) const;
 
 	/**
 	 * Gets the addressbook manager instance.
 	 *
 	 * @since	2.0
 	 *
-	 * @return	A pointer to the %AddressbookManager instance, @n
-	 *			else @c null if it fails
-	 * @exception  E_SUCCESS			The method is successful.
-	 * @exception  E_OUT_OF_MEMORY		The memory is insufficient.
+	 * @return		A pointer to the %AddressbookManager instance, @n
+	 *				else @c null if it fails
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	static AddressbookManager* GetInstance(void);

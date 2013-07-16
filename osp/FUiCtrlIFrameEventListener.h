@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -59,7 +59,7 @@ public:
 public:
 	/**
 	 * Called when a Frame instance is about to be destroyed. @n
-	 * This method is called just before the system destroys the %Frame instance of an application during the application termination sequence.
+	 * The %OnFrameTerminating() method is called just before the system destroys the %Frame instance of an application during the application termination sequence.
 	 *
 	 * @since		2.0
 	 *
@@ -70,24 +70,43 @@ public:
 
 	/**
 	 * Called when a Frame instance is about to be activated. @n
-	 * This method is called just after the system activates the %Frame instance of an application.
+	 * The %OnFrameActivated() method is called just after the system activates the %Frame instance of an application.
 	 *
 	 * @since 2.0
 	 *
 	 * @param[in] 	source		The source of the event
 	  */
-	virtual void OnFrameActivated(const Tizen::Ui::Controls::Frame& source) { }
+	virtual void OnFrameActivated(const Tizen::Ui::Controls::Frame& source) {}
 
 	/**
 	 * Called when a Frame instance is about to be deactivated. @n
-	 * This method is called just after the system deactivates the %Frame instance of an application.
+	 * The %OnFrameDeactivated() method is called just after the system deactivates the %Frame instance of an application.
 	 *
 	 * @since 2.0
 	 *
 	 * @param[in] 	source		The source of the event
 	 */
-	virtual void OnFrameDeactivated(const Tizen::Ui::Controls::Frame& source) { }
+	virtual void OnFrameDeactivated(const Tizen::Ui::Controls::Frame& source) {}
 
+	/**
+	 * Called after a Frame instance is minimized. @n
+	 * The %OnFrameMinimized() method is called just after the system minimizes the %Frame instance of an application.
+	 *
+	 * @since 2.1
+	 *
+	 * @param[in] 	source		The source of the event
+	 */
+	virtual void OnFrameMinimized(const Tizen::Ui::Controls::Frame& source) {}
+
+	/**
+	 * Called after a Frame instance is restored. @n
+	 * The %OnFrameRestored() method is called just after the system restores the %Frame instance of an application.
+	 *
+	 * @since 2.1
+	 *
+	 * @param[in] 	source		The source of the event
+	 */
+	virtual void OnFrameRestored(const Tizen::Ui::Controls::Frame& source) {}
 
 	// Reserves
 protected:
@@ -100,7 +119,7 @@ protected:
 	//
 	// @since 2.0
 	//
-	virtual void IFrameEventListener_Reserved1(void) { }
+	virtual void IFrameEventListener_Reserved3(void) {}
 
 	//
 	//This method is for internal use only. Using this method can cause behavioral, security-related,
@@ -111,7 +130,7 @@ protected:
 	//
 	// @since 2.0
 	//
-	virtual void IFrameEventListener_Reserved2(void) { }
+	virtual void IFrameEventListener_Reserved4(void) {}
 
 	//
 	//This method is for internal use only. Using this method can cause behavioral, security-related,
@@ -122,30 +141,7 @@ protected:
 	//
 	// @since 2.0
 	//
-	virtual void IFrameEventListener_Reserved3(void) { }
-
-	//
-	//This method is for internal use only. Using this method can cause behavioral, security-related,
-	//and consistency-related issues in the application.
-	//
-	// This method is reserved and may change its name at any time without
-	// prior notice.
-	//
-	// @since 2.0
-	//
-	virtual void IFrameEventListener_Reserved4(void) { }
-
-	//
-	//This method is for internal use only. Using this method can cause behavioral, security-related,
-	//and consistency-related issues in the application.
-	//
-	// This method is reserved and may change its name at any time without
-	// prior notice.
-	//
-	// @since 2.0
-	//
-	virtual void IFrameEventListener_Reserved5(void) { }
-
+	virtual void IFrameEventListener_Reserved5(void) {}
 }; // IFrameEventListener
 
 }}} // Tizen::Ui::Controls

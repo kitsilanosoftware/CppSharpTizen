@@ -41,7 +41,7 @@ namespace Tizen { namespace Media
  * @since		2.0
  *
  * The %MediaStreamInfo class provides methods to get media stream information, including:
- * - Content metadata, such as the title, artist, album title, genre, year, and album art.
+ * - %Content metadata, such as the title, artist, album title, genre, year, and album art.
  * - Audio and video stream information.
  *
  * This class supports multiple stream content that consists of several audio or video tracks.

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -154,14 +153,7 @@ public:
 	* Initializes this instance of %Directory with the specified parameter. @n
 	* The Construct() method safely opens an existing directory using the specified directory name.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return			An error code
 	* @param[in]		dirPath				The path to the directory to open
@@ -200,14 +192,7 @@ public:
 	/**
 	* Creates a new directory.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return			An error code
 	* @param[in]		dirPath					The path at which the directory is created
@@ -233,14 +218,7 @@ public:
 	* When @c recursive is set to be @c true, it removes all the subdirectories and their contents. @n
 	* When @c false, this method removes the directory only if it is empty.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return			An error code
 	* @param[in]		dirPath					The path of the directory to remove
@@ -267,14 +245,7 @@ public:
 	* This method does not create parent directories automatically. For example, @b "/CurrentDir" cannot be moved to
 	* @b "/NewDir/SubDir" if @b "/NewDir" does not already exist. An E_FILE_NOT_FOUND exception is thrown.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return			An error code
 	* @param[in]		orgDirPath				The original directory path

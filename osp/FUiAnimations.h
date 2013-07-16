@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -134,7 +134,7 @@ AnimationSample::OnInitializing(void)
 	__pButton->SetText(L"Start animation");
 	__pButton->SetActionId(ID_BUTTON);
 	__pButton->AddActionEventListener(*this);
-	AddControl(*__pButton);
+	AddControl(__pButton);
 
 	return r;
 }
@@ -193,11 +193,11 @@ FrameAnimatorSample::OnAppInitializing(AppRegistry& appRegistry)
 
 	// Adds forms to the frame
 	Frame *pFrame = GetAppFrame()->GetFrame();
-	pFrame->AddControl(*pForm1);
-	pFrame->AddControl(*pForm2);
+	pFrame->AddControl(pForm1);
+	pFrame->AddControl(pForm2);
 
 	// Sets the current form
-	pFrame->SetCurrentForm(*pForm1);
+	pFrame->SetCurrentForm(pForm1);
 
 	// Display the form
 	pForm1->Invalidate();
@@ -225,7 +225,7 @@ Form1::OnActionPerformed(const Control& source, int actionId)
 				pFrameAnimator->SetFormTransitionAnimation (FRAME_ANIMATOR_FORM_TRANSITION_ANIMATION_TRANSLATE_LEFT,
 															1000,
 															ANIMATION_INTERPOLATOR_LINEAR );
-				r = pFrameAnimator->SetCurrentForm (*nextForm);
+				r = pFrameAnimator->SetCurrentForm (nextForm);
 				if (IsFailed(r))
 				{
 					AppLog("SetCurrentForm on the Form2 Failed.\n");
@@ -258,7 +258,7 @@ Form2::OnActionPerformed(const Control& source, int actionId)
 				pFrameAnimator->SetFormTransitionAnimation(FRAME_ANIMATOR_FORM_TRANSITION_ANIMATION_TRANSLATE_RIGHT,
 														   1000,
 														   ANIMATION_INTERPOLATOR_LINEAR );
-				r = pFrameAnimator->SetCurrentForm (*nextForm);
+				r = pFrameAnimator->SetCurrentForm (nextForm);
 				if (IsFailed(r))
 				{
 					AppLog("SetCurrentForm on the Form1 Failed.\n");
@@ -312,7 +312,7 @@ VisualElementSample::OnInitializing(void)
 	__pRect->SetShowState(true);
 	__pRect->SetContentProvider(this);
 
-	GetVisualElement()->AttachChild(*__pRect);
+	GetVisualElement()->AttachChild(__pRect);
 	__pRect->InvalidateRectangle(null);
 
 	return E_SUCCESS;

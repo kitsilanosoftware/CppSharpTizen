@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -44,6 +43,7 @@
 #include <FSclEmail.h>
 #include <FSclEmailContact.h>
 #include <FSclIAddressbookEventListener.h>
+#include <FSclIAddressbookChangeEventListener.h>
 #include <FSclICalendarbookEventListener.h>
 #include <FSclIRecordEventListener.h>
 #include <FSclIRecordListener.h>
@@ -59,7 +59,13 @@
 #include <FSclRelationship.h>
 #include <FSclPerson.h>
 #include <FSclAddressbookFilter.h>
+#include <FSclAccount.h>
+#include <FSclAccountAccessor.h>
+#include <FSclAccountManager.h>
+#include <FSclAccountProvider.h>
+#include <FSclIAccountEventListener.h>
 #include <FSclTypes.h>
+#include <FSclUserProfile.h>
 
 /**
  * @namespace	Tizen::Social
@@ -74,6 +80,16 @@
  *
  * For more information on the %Social namespace features, see <a href="../org.tizen.native.appprogramming/html/guide/social/social_namespace.htm">Social Guide</a>.
  *
+ * The following diagrams illustrate the relationships between the classes belonging to the Social namespace.
+ *
+ * [Account]
+ * @image html social_account_classdiagram.png
+ *
+ * [Addressbook]
+ * @image html social_addressbook_classdiagram.png
+ *
+ * [Calendarbook]
+ * @image html social_calendarbook_using_the_apis_classdiagram.png
  *
  */
 namespace Tizen { namespace Social

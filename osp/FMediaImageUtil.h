@@ -38,7 +38,7 @@ class _ImageUtilImpl;
 
 /**
  * @class	 ImageUtil
- * @brief	 This class provides methods for converting the color space of the image, flipping, rotating, or resizing.
+ * @brief	 This class provides methods for converting the color space of the image, flipping, rotating, and resizing.
  *
  * @since	 2.0
  *
@@ -134,11 +134,12 @@ public:
 	*   @exception   E_INVALID_DATA			   A source image data in the buffer is invalid.
 	*   @exception   E_OUT_OF_MEMORY			  The memory is insufficient.
 	*   @exception   E_SYSTEM					 A system error has occurred.
-	*   @remarks		The supported pixel formats are @c MEDIA_PIXEL_FORMAT_RGB565LE, @c MEDIA_PIXEL_FORMAT_BGRA8888, and @c MEDIA_PIXEL_FORMAT_YUV420P. @n
-	*				   The conversion is possible between: @n
+	*   @remarks
+	*			  - The supported pixel formats are @c MEDIA_PIXEL_FORMAT_RGB565LE, @c MEDIA_PIXEL_FORMAT_BGRA8888, and @c MEDIA_PIXEL_FORMAT_YUV420P. @n
+	*			    The conversion is possible between: @n
 	*				   - @c MEDIA_PIXEL_FORMAT_YUV420P and @c MEDIA_PIXEL_FORMAT_RGB565LE. @n
 	*				   - @c MEDIA_PIXEL_FORMAT_YUV420P and @c MEDIA_PIXEL_FORMAT_BGRA8888. @n
-	*				The position and limit of @c destBuf are set along with the size of the converted data.
+	*			  - The position and limit of @c destBuf are set along with the size of the converted data.
 	*/
 	static result ConvertPixelFormat(const Tizen::Base::ByteBuffer& srcBuf, Tizen::Base::ByteBuffer& destBuf, MediaPixelFormat srcPixelFormat, MediaPixelFormat destPixelFormat, const Tizen::Graphics::Dimension& dim);
 
@@ -161,9 +162,10 @@ public:
 	*   @exception   E_INVALID_DATA			  A source image data in the buffer is invalid.
 	*   @exception   E_OUT_OF_MEMORY			 The memory is insufficient.
 	*   @exception   E_SYSTEM					A system error has occurred.
-	*   @remarks		The supported pixel formats are @c MEDIA_PIXEL_FORMAT_RGB565LE, @c MEDIA_PIXEL_FORMAT_BGRA8888, and @c MEDIA_PIXEL_FORMAT_YUV420P. @n
-	*				The position and limit of @c destBuf are set along with the size of the resized data. @n
-	*				The minimum resolution is 16x16.
+	*   @remarks
+	*			  - The supported pixel formats are @c MEDIA_PIXEL_FORMAT_RGB565LE, @c MEDIA_PIXEL_FORMAT_BGRA8888, and @c MEDIA_PIXEL_FORMAT_YUV420P.
+	*			  - The position and limit of @c destBuf are set along with the size of the resized data. @n
+	*			    The minimum resolution is 16x16.
 	*/
 	static result Resize(const Tizen::Base::ByteBuffer& srcBuf, Tizen::Base::ByteBuffer& destBuf, const Tizen::Graphics::Dimension& srcDim, const Tizen::Graphics::Dimension& destDim, MediaPixelFormat pixelFormat);
 
@@ -185,9 +187,10 @@ public:
 	*   @exception   E_INVALID_DATA				A source image data in the buffer is invalid.
 	*   @exception   E_OUT_OF_MEMORY				The memory is insufficient.
 	*   @exception   E_SYSTEM					A system error has occurred.
-	*   @remarks		The supported pixel formats are @c MEDIA_PIXEL_FORMAT_RGB565LE, @c MEDIA_PIXEL_FORMAT_BGRA8888, and @c MEDIA_PIXEL_FORMAT_YUV420P. @n
-	*				The position and limit of @c destBuf are set along with the size of the rotated data. @n
-	*				The dimension of the destination buffer must be calculated by an application.
+	*   @remarks
+	*			  - The supported pixel formats are @c MEDIA_PIXEL_FORMAT_RGB565LE, @c MEDIA_PIXEL_FORMAT_BGRA8888, and @c MEDIA_PIXEL_FORMAT_YUV420P.
+	*			  - The position and limit of @c destBuf are set along with the size of the rotated data. @n
+	*			    The dimension of the destination buffer must be calculated by an application.
 	*   @see			ImageRotationType
 	*/
 	static result Rotate(const Tizen::Base::ByteBuffer& srcBuf, Tizen::Base::ByteBuffer& destBuf, const Tizen::Graphics::Dimension& dim, ImageRotationType rotate, MediaPixelFormat pixelFormat);
@@ -210,8 +213,9 @@ public:
 	*   @exception   E_INVALID_DATA				A source image data in the buffer is invalid.
 	*   @exception   E_OUT_OF_MEMORY				The memory is insufficient.
 	*   @exception   E_SYSTEM					A system error has occurred.
-	*   @remarks		The supported pixel formats are @c MEDIA_PIXEL_FORMAT_RGB565LE, @c MEDIA_PIXEL_FORMAT_BGRA8888, and @c MEDIA_PIXEL_FORMAT_YUV420P. @n
-	*				The position and limit of @c destBuf are set along with the size of the flipped data.
+	*   @remarks
+	*			  - The supported pixel formats are @c MEDIA_PIXEL_FORMAT_RGB565LE, @c MEDIA_PIXEL_FORMAT_BGRA8888, and @c MEDIA_PIXEL_FORMAT_YUV420P.
+	*			  - The position and limit of @c destBuf are set along with the size of the flipped data.
 	*   @see			ImageFlipType
 	*/
 	static result Flip(const Tizen::Base::ByteBuffer& srcBuf, Tizen::Base::ByteBuffer& destBuf, const Tizen::Graphics::Dimension& dim, ImageFlipType flip, MediaPixelFormat pixelFormat);

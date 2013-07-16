@@ -2,23 +2,23 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
 /**
  * @file		FUiCtrlIconListTypes.h
- * @brief		This is the header file for the %IconList enumerations.
+ * @brief		This is the header file for the enumerations of the IconList class.
  *
- * This header file contains the declarations of the %IconList enumerations.
+ * This header file contains the declarations of the enumerations of the IconList class.
  *
  * These enumerations define the various properties of the %IconList control.
  */
@@ -33,10 +33,10 @@ namespace Tizen { namespace Ui { namespace Controls
  * @if OSPDEPREC
  * @enum    IconListStyle
  *
- * Defines the styles of %IconList.
+ * Defines the styles of IconList.
  *
  * @brief <i> [Deprecated]  </i>
- * @deprecated This enumeration is deprecated. Instead of using this enumeration, use the IconListViewStyle enumeration.
+ * @deprecated This enum is deprecated. Instead of using this enum, use the IconListViewStyle enumeration.
  * @since		2.0
  * @endif
  */
@@ -54,7 +54,7 @@ enum IconListStyle
  * Defines the check-box position.
  *
  * @brief <i> [Deprecated]  </i>
- * @deprecated This enumeration is deprecated. Instead of using this enumeration, use the IconListViewCheckBoxPosition enumeration.
+ * @deprecated This enum is deprecated. Instead of using this enum, use the IconListViewCheckBoxPosition enumeration.
  * @since	2.0
  * @endif
  */

@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -27,14 +27,18 @@
 
 #include <FBaseObject.h>
 #include <FBaseTypes.h>
+#include <FGrpFloatRectangle.h>
 #include <FGrpRectangle.h>
 #include <FUiContainer.h>
 #include <FUiControl.h>
 #include <FUiCtrlIFastScrollListener.h>
 #include <FUiCtrlIListViewItemEventListener.h>
 #include <FUiCtrlIListViewItemProvider.h>
+#include <FUiCtrlIListViewItemProviderF.h>
 #include <FUiCtrlIScrollEventListener.h>
+#include <FUiCtrlIScrollEventListenerF.h>
 #include <FUiCtrlListViewTypes.h>
+#include <FUiCtrlScrollPanelTypes.h>
 #include <FUiIUiLinkEventListener.h>
 
 namespace Tizen { namespace Ui { namespace Controls
@@ -133,7 +137,7 @@ ListViewSample::OnInitializing(void)
 	__pListView->AddListViewItemEventListener(*this);
 
 	// Adds the list view to the form
-	AddControl(*__pListView);
+	AddControl(__pListView);
 
 	// Creates an instance of ListContextItem
 	__pItemContext = new ListContextItem();
@@ -288,7 +292,7 @@ class _OSP_EXPORT_ ListView
 public:
 	/**
 	 * The object is not fully constructed after this constructor is
-	 * called. For full construction, the Construct() method must be
+	 * called. @n For full construction, the %Construct() method must be
 	 * called right after calling this constructor.
 	 *
 	 * @since	2.0
@@ -313,7 +317,9 @@ public:
 	 * @return  An error code
 	 * @param[in] rect				An instance of the Graphics::Rectangle class @n
 	 *								This instance represents the x and y coordinates of the left top corner of the created %ListView along with the width
-	 *								and height.
+	 *								and height.@n
+	 *								The optimal size of the control is defined in
+	 *								<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @param[in] itemDivider       Set to @c true to display an item divider, @n
 	 *								else @c false
 	 * @param[in] fastScroll        Set to @c true to use fast scroll, @n
@@ -334,7 +340,9 @@ public:
 	 * @return  An error code
 	 * @param[in] rect              An instance of the Graphics::Rectangle class @n
 	 *								This instance represents the x and y coordinates of the left top corner of the created %ListView along with the width
-	 *								and height.
+	 *								and height.@n
+	 *								The optimal size of the control is defined in
+	 *								<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @param[in] itemDivider       Set to @c true to display an item divider, @n
 	 *								else @c false
 	 * @param[in] scrollStyle       Set to scroll style
@@ -346,6 +354,27 @@ public:
 	result Construct(const Tizen::Graphics::Rectangle& rect, bool itemDivider, ListScrollStyle scrollStyle);
 
 	/**
+	 * Initializes this instance of %ListView with the specified parameters.
+	 *
+	 * @since 2.1
+	 *
+	 * @return  An error code
+	 * @param[in] rect              An instance of the Graphics::Rectangle class @n
+	 *								This instance represents the x and y coordinates of the left top corner of the created %ListView along with the width
+	 *								and height.@n
+	 *								The optimal size of the control is defined in
+	 *								<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in] itemDivider       Set to @c true to display an item divider, @n
+	 *								else @c false
+	 * @param[in] scrollStyle       Set to scroll style
+	 * @exception E_SUCCESS         The method is successful.
+	 * @exception E_INVALID_ARG     A specified input parameter is invalid. @n
+	 *  							Either the @c rect.width or @c rect.height parameter has a negative value.
+	 * @exception E_SYSTEM          A system error has occurred.
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, bool itemDivider, ListScrollStyle scrollStyle);
+
+	/**
 	 * Sets the item provider that creates and deletes items for the list.
 	 *
 	 * @since	2.0
@@ -354,11 +383,26 @@ public:
 	 * @param[in] provider          The item provider to create and delete items
 	 * @exception E_SUCCESS         The method is successful.
 	 * @exception E_SYSTEM          A system error has occurred.
-	 * @remarks  If an item provider is not set for the list, the list does not work. @n
-	 *			The specified @c provider should be allocated in heap memory.
+	 * @remarks
+	 *			- If an item provider is not set for the list, the list does not work.
+	 *			- The specified @c provider should be allocated in heap memory.
 	 */
 	result SetItemProvider(IListViewItemProvider& provider);
 
+	/**
+	 * Sets the item provider that creates and deletes items for the list.
+	 *
+	 * @since	2.1
+	 *
+	 * @return  An error code
+	 * @param[in] provider          The item provider to create and delete items
+	 * @exception E_SUCCESS         The method is successful.
+	 * @exception E_SYSTEM          A system error has occurred.
+	 * @remarks
+	 *			- If an item provider is not set for the list, the list does not work.
+	 *			- The specified @c provider should be allocated in heap memory.
+	 */
+	result SetItemProvider(IListViewItemProviderF& provider);
 
 	/**
 	 * Adds a listener instance that listens to state changes of list view items. @n
@@ -413,6 +457,18 @@ public:
 	void AddScrollEventListener(IScrollEventListener& listener);
 
 	/**
+	 * Adds a listener instance that listens to state changes of a scroll event. @n
+	 * The added listener can listen to events on a specified event dispatcher's context when they are fired.
+	 *
+	 * @since	2.1
+	 *
+	 * @param[in] listener          The event listener to add
+	 * @see     IScrollEventListener::OnScrollEndReached()
+	 * @see     RemoveScrollEventListener()
+	 */
+	void AddScrollEventListener(IScrollEventListenerF& listener);
+
+	/**
 	 * Removes a listener instance that listens to state changes of a scroll event. @n
 	 * The removed listener cannot listen to events when they are fired.
 	 *
@@ -423,6 +479,18 @@ public:
 	 * @see     AddScrollEventListener()
 	 */
 	void RemoveScrollEventListener(IScrollEventListener& listener);
+
+	/**
+	 * Removes a listener instance that listens to state changes of a scroll event. @n
+	 * The removed listener cannot listen to events when they are fired.
+	 *
+	 * @since	2.1
+	 *
+	 * @param[in] listener			The event listener to remove
+	 * @see		IScrollEventListener::OnScrollEndReached()
+	 * @see     AddScrollEventListener()
+	 */
+	void RemoveScrollEventListener(IScrollEventListenerF& listener);
 
 	/**
 	 * Adds a link event listener.
@@ -504,6 +572,9 @@ public:
 	 * @exception E_SUCCESS         The method is successful.
 	 * @exception E_OUT_OF_RANGE    The specified input parameter is invalid.
 	 * @exception E_SYSTEM          A system error has occurred.
+	 * @remarks	This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView, then the UpdateList() method
+	 *			should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	result ScrollToItem(int index);
 
@@ -534,6 +605,9 @@ public:
 	 * @exception E_OUT_OF_RANGE        A specified input parameter is invalid.
 	 * @exception E_INVALID_OPERATION   The item is disabled.
 	 * @exception E_SYSTEM              A system error has occurred.
+	 * @remarks  This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView, then the UpdateList() method
+	 *			should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	result SetItemChecked(int index, bool check);
 
@@ -545,6 +619,9 @@ public:
 	 * @return  @c true if the item is checked, @n
 	 *          else @c false
 	 * @param[in] index				The item index
+	 * @remarks  This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView, then the UpdateList() method
+	 *			should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	bool IsItemChecked(int index) const;
 
@@ -559,6 +636,9 @@ public:
 	 * @exception E_SUCCESS         The method is successful.
 	 * @exception E_OUT_OF_RANGE    A specified input parameter is invalid.
 	 * @exception E_SYSTEM          A system error has occurred.
+	 * @remarks	This method should be called only after list items are created.  @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 *
 	 */
 	result SetItemEnabled(int index, bool enable);
@@ -571,6 +651,9 @@ public:
 	 * @return  @c true if the item is enabled, @n
 	 *          else @c false
 	 * @param[in] index				The item index
+	 * @remarks This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView, then the UpdateList() method
+	 *			should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	bool IsItemEnabled(int index) const;
 
@@ -593,8 +676,11 @@ public:
 	 * @exception E_SUCCESS         The method is successful.
 	 * @exception E_OUT_OF_RANGE    The specified input parameter is invalid.
 	 * @exception E_SYSTEM          A system error has occurred.
-	 * @remarks  If no description text is set to the item of the specified index, this method does not show the description text.
-	 *
+	 * @remarks
+	 *			- If no description text is set to the item of the specified index, this method does not show the description text.
+	 * 			- This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView, then the UpdateList() method
+	 *			should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	result ShowItemDescriptionText(int index);
 
@@ -608,6 +694,9 @@ public:
 	 * @exception E_SUCCESS         The method is successful.
 	 * @exception E_OUT_OF_RANGE    The specified input parameter is invalid.
 	 * @exception E_SYSTEM          A system error has occurred.
+	 * @remarks This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView, then the UpdateList() method
+	 *			should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	result HideItemDescriptionText(int index);
 
@@ -618,18 +707,22 @@ public:
 	 *
 	 * @return  An error code
 	 * @param[in] index             The item index
-	 * @param[in] type              The item to be added, removed, or modified
+	 * @param[in] type              The item to add, remove, or modify
 	 * @exception E_SUCCESS            The method is successful.
 	 * @exception E_OUT_OF_RANGE       A specified input parameter is invalid.
 	 * @exception E_INVALID_OPERATION  The current state of the instance prohibits the execution of the specified operation.
 	 * @exception E_SYSTEM             A system error has occurred.
-	 * @remarks	3 refresh types are supported: LIST_REFRESH_TYPE_ITEM_ADD, LIST_REFRESH_TYPE_ITEM_REMOVE, and LIST_REFRESH_TYPE_ITEM_MODIFY.
-	 * 			- LIST_REFRESH_TYPE_ITEM_ADD is used when new data is added to the data model. @n
-	 *			- LIST_REFRESH_TYPE_ITEM_REMOVE is used when a data is deleted from the data model. @n
-	 *			- LIST_REFRESH_TYPE_ITEM_MODIFY is used when an existing data has changes and needs to be updated. @n
-	 *			   Calling this method with LIST_REFRESH_TYPE_ITEM_MODIFY invokes the item provider to call DeleteItem() and CreateItem() for the given index in
-	 *			   sequence.
-	 * @remarks  This method internally calls Invalidate(), so you do not need to call them to update the screen.
+	 * @remarks
+	 *			- 3 refresh types are supported:@c  LIST_REFRESH_TYPE_ITEM_ADD, @c LIST_REFRESH_TYPE_ITEM_REMOVE, and @c LIST_REFRESH_TYPE_ITEM_MODIFY. @n
+	 * 			@c LIST_REFRESH_TYPE_ITEM_ADD is used when new data is added to the data model. @n
+	 *			@c LIST_REFRESH_TYPE_ITEM_REMOVE is used when a data is deleted from the data model. @n
+	 *			@c LIST_REFRESH_TYPE_ITEM_MODIFY is used when an existing data has changes and needs to be updated. @n
+	 *			Calling this method with @c LIST_REFRESH_TYPE_ITEM_MODIFY invokes the item provider to call DeleteItem() and CreateItem() for the given index in
+	 *			sequence.
+	 *			- This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView, then the UpdateList() method
+	 *			should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
+This method internally calls Invalidate(), so you do not need to call them to update the screen.
 	 */
 	result RefreshList(int index, ListRefreshType type);
 
@@ -669,9 +762,31 @@ public:
 	 *			else @c -1 if there is no list item at the specified position
 	 * @param[in] x					The X position of the point
 	 * @param[in] y                 The Y position of the point
-	 * @remarks	The method returns -1 when there is no list item at the specified position.
+	 * @remarks
+	 *			- The method returns @c -1 when there is no list item at the specified position.
+	 *			- This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView, then the UpdateList() method
+	 *			should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
+
 	 */
 	int GetItemIndexFromPosition(int x, int y) const;
+
+	/**
+	 * Gets the index of the item at a specified position.
+	 *
+	 * @since	2.1
+	 *
+	 * @return  The index of the item, @n
+	 *			else @c -1 if there is no list item at the specified position
+	 * @param[in] x					The X position of the point
+	 * @param[in] y                 The Y position of the point
+	 * @remarks
+	 *			- This method returns @c -1 when there is no list item at the specified position.
+	 *			- This method should be called only after list items are created. @n If this method needs to
+	 *			be called early in the lifecycle of the ListView, then the UpdateList() method should be called explicitly
+	 *			(for example, during Tizen::Ui::Control::OnInitializing()).
+	 */
+	int GetItemIndexFromPosition(float x, float y) const;
 
 	/**
 	 * Gets the index of the item at the specified position.
@@ -681,8 +796,25 @@ public:
 	 * @return  The index of the item
 	 * @param[in] position		The position of the point, @n
 	 *							else @c -1 if there is no list item at the specified position
+	 * @remarks This method should be called only after list items are created. @n If this method needs to
+	 *			be called early in the lifecycle of the ListView, then the UpdateList() method should be called
+	 *			explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	int GetItemIndexFromPosition(const Tizen::Graphics::Point& position) const;
+
+	/**
+	 * Gets the index of the item at a specified position.
+	 *
+	 * @since	2.1
+	 *
+	 * @return  The index of the item
+	 * @param[in] position		The position of the point, @n
+	 *							else @c -1 if there is no list item at the specified position
+	 * @remarks This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView, then the UpdateList() method
+	 *			should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
+	 */
+	int GetItemIndexFromPosition(const Tizen::Graphics::FloatPoint& position) const;
 
 	/**
 	 * Gets the index of the item and ID of the element at the specified position.
@@ -697,10 +829,36 @@ public:
 	 * @exception E_SUCCESS         The method is successful.
 	 * @exception E_SYSTEM          A system error has occurred, or @n
 	 *								there is no item at the specified position.
-	 * @remarks	The specified @c itemIndex is -1 when there is no list item at the specified position.
-	 * @remarks  The specified @c elementId is -1 when there is no element at the specified position.
+	 * @remarks
+	 *			- The specified @c itemIndex is -1 when there is no list item at the specified position.
+	 * 			- The specified @c elementId is -1 when there is no element at the specified position.
+	 * 			- This method should be called only after list items are created.  @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then the UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	result GetItemIndexFromPosition(int x, int y, int& itemIndex, int& elementId) const;
+
+	/**
+	 * Gets the index of the item and ID of the element at a specified position.
+	 *
+	 * @since	2.1
+	 *
+	 * @return  An error code
+	 * @param[in] x                 The X position of the item
+	 * @param[in] y                 The Y position of the item
+	 * @param[out] itemIndex		The index of the item
+	 * @param[out] elementId        The ID of the element
+	 * @exception E_SUCCESS         The method is successful.
+	 * @exception E_SYSTEM          A system error has occurred, or @n
+	 *								there is no item at the specified position.
+	 * @remarks
+	 *			- The specified @c itemIndex is @c -1 when there is no list item at the specified position.
+	 *			- The specified @c elementId is @c -1 when there is no element at the specified position.
+	 * 			- This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then the UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
+	 */
+	result GetItemIndexFromPosition(float x, float y, int& itemIndex, int& elementId) const;
 
 	/**
 	 * Gets the index of the item and ID of the element at the specified position.
@@ -714,10 +872,35 @@ public:
 	 * @exception E_SUCCESS         The method is successful.
 	 * @exception E_SYSTEM          A system error has occurred, or @n
 	 *								there is no item at the specified position.
-	 * @remarks	The specified @c itemIndex is -1 when there is no list item at the specified position.
-	 * @remarks The specified @c elementId is -1 when there is no element at the specified position.
+	 * @remarks
+	 *			- The specified @c itemIndex is -1 when there is no list item at the specified position.
+	 * 			-  The specified @c elementId is -1 when there is no element at the specified position.
+	 * 			- This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then the UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
 	 */
 	result GetItemIndexFromPosition(const Tizen::Graphics::Point& position, int& itemIndex, int& elementId) const;
+
+	/**
+	 * Gets the index of the item and ID of the element at a specified position.
+	 *
+	 * @since	2.1
+	 *
+	 * @return  An error code
+	 * @param[in] position          The position of the point
+	 * @param[out] itemIndex        The index of the item
+	 * @param[out] elementId		The ID of the element
+	 * @exception E_SUCCESS         The method is successful.
+	 * @exception E_SYSTEM          A system error has occurred, or @n
+	 *								there is no item at the specified position.
+	 * @remarks
+	 *			- The specified @c itemIndex is @c -1 when there is no list item at the specified position.
+	 *			- The specified @c elementId is @c -1 when there is no element at the specified position.
+	 * 			- This method should be called only after list items are created. @n
+	 *			If this method needs to be called early in the lifecycle of the ListView,
+	 *			then the UpdateList() method should be called explicitly (for example, during Tizen::Ui::Control::OnInitializing()).
+	 */
+	result GetItemIndexFromPosition(const Tizen::Graphics::FloatPoint& position, int& itemIndex, int& elementId) const;
 
 	/**
 	 * Sets the color of a division line between items.
@@ -748,8 +931,9 @@ public:
 	 * @return  An error code
 	 * @param[in] color				The background color
 	 * @exception E_SUCCESS			The method is successful.
-	 * @remarks  The method sets the alpha value of the specified @c color to @c 255, when a device does not support 32bit color space. @n
-	 *          The background bitmap has priority over the background color. When both the background bitmap and the background color are specified, only
+	 * @remarks
+	 *			- The method sets the alpha value of the specified @c color to @c 255, when a device does not support 32bit color space.
+	 *			- The background bitmap has priority over the background color. When both the background bitmap and the background color are specified, only
 	 *			the bitmap image is displayed.
 	 */
 	result SetBackgroundColor(const Tizen::Graphics::Color& color);
@@ -864,6 +1048,66 @@ public:
 	 *  		else @c false
 	 */
 	bool IsInReorderingMode(void) const;
+
+	/**
+	 * Sets the scroll input handling mode.
+	 *
+	 * @since 2.1
+	 *
+	 * @param[in] mode  The scroll input handling mode
+	 * @see             GetScrollInputMode()
+	 */
+	void SetScrollInputMode(ScrollInputMode mode);
+
+
+	/**
+	 * Gets the scroll input handling mode.
+	 *
+	 * @since 2.1
+	 *
+	 * @return     The scroll input handling mode
+	 * @see        SetScrollInputMode()
+	 */
+	ScrollInputMode GetScrollInputMode(void) const;
+
+	/**
+	 * Opens the context item at a specified index.
+	 *
+	 * @since 2.1
+	 *
+	 * @return  An error code
+	 * @param[in] itemIndex		The item index
+	 * @exception E_SUCCESS				The method is successful.
+	 * @exception E_OUT_OF_RANGE		The specified input parameter is invalid.
+	 * @exception E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation.
+	 */
+	result OpenContextItem(int itemIndex);
+
+	/**
+	 * Closes the context item at a specified index.
+	 *
+	 * @since 2.1
+	 *
+	 * @return  An error code
+	 * @param[in] itemIndex		The item index
+	 * @exception E_SUCCESS				The method is successful.
+	 * @exception E_OUT_OF_RANGE			The specified input parameter is invalid.
+	 * @exception E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation.
+	 */
+	result CloseContextItem(int itemIndex);
+
+	/**
+	 * Checks whether the context item at a specified index is opened.
+	 *
+	 * @since 2.1
+	 *
+	 * @return	@c true if the context item is opened, @n
+	 *			else @c false
+	 * @param[in] itemIndex		The item index
+	 * @exception E_SUCCESS			The method is successful.
+	 * @exception E_OUT_OF_RANGE	The specified input parameter is invalid.
+	 */
+	bool IsContextItemOpened(int itemIndex) const;
 
 protected:
 	friend class _ListViewImpl;

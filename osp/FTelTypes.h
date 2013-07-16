@@ -16,9 +16,9 @@
 //
 /**
  * @file    FTelTypes.h
- * @brief   This is the header file for the enumerations of the Tizen::Telephony namespace.
+ * @brief   This is the header file for the enumerations of the Telephony namespace.
  *
- * This header file contains the definitions of the enumerations of the Tizen::Telephony namespace.
+ * This header file contains the definitions of the enumerations of the Telephony namespace.
  */
 #ifndef _FTEL_ENUM_H_
 #define _FTEL_ENUM_H_
@@ -55,6 +55,41 @@ enum CallStatus
 	CALL_STATUS_RINGING,        /**< An incoming voice or video call */
 	CALL_STATUS_DIALING,        /**< An outgoing voice or video call */
 	CALL_STATUS_HOLDING         /**< A call on holding status */
+};
+
+/**
+ * @enum	SimType
+ *
+ * Defines the type of the SIM card.
+ *
+ * @since	2.1
+ */
+enum SimType
+{
+	SIM_TYPE_UNKNOWN,			/**< Unknown card */
+	SIM_TYPE_GSM,				/**< GSM SIM card */
+	SIM_TYPE_USIM,				/**< Universal SIM card */
+	SIM_TYPE_RUIM,				/**< Removable UIM (User Identity Module) */
+	SIM_TYPE_ISIM				/**< IMS SIM card */
+};
+
+/**
+ * @enum	SimState
+ *
+ * Defines the current state of the SIM card.
+ *
+ * @since	2.1
+ */
+enum SimState
+{
+	SIM_STATE_UNKNOWN,			/**< Unknown state */
+	SIM_STATE_ABSENT,			/**< SIM is not present */
+	SIM_STATE_INITIALIZING,		/**< SIM is in initializing state */
+	SIM_STATE_READY,			/**< SIM is in ready state */
+	SIM_STATE_PIN_REQUIRED,		/**< PIN required */
+	SIM_STATE_PUK_REQUIRED,		/**< PUK required */
+	SIM_STATE_NETWORK_LOCKED,	/**< Network locked state */
+	SIM_STATE_SIM_LOCKED		/**< PH-SIM (phone-SIM) locked state */
 };
 
 }} // Tizen::Telephony

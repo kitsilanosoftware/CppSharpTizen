@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -184,7 +183,7 @@ public:
 	 *
 	 *	@since		2.0
 	 *
-	 *	@return		A pointer to the Tizen::Base::ByteBuffer that contains the output, @n
+	 *	@return		A pointer to the Tizen::Base::ByteBuffer instance that contains the output, @n
 	 *				else @c null if an error occurs
 	 *	@param[in]	input						An instance of Tizen::Base::ByteBuffer
 	 *	@exception	E_SUCCESS					The method is successful.

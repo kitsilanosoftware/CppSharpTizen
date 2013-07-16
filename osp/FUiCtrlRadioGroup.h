@@ -2,18 +2,19 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
+
 /**
  * @file	FUiCtrlRadioGroup.h
  * @brief	This is the header file for the %RadioGroup class.
@@ -40,7 +41,7 @@ namespace Tizen { namespace Ui { namespace Controls
  *
  * The %RadioGroup class displays a set of CheckButtons with radio style together in a group, allowing the user to select only
  * one of the predefined set of buttons.
- * @n
+ *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_button.htm">Buttons</a>.
  *
  * The following example demonstrates how to use the %RadioGroup class.
@@ -107,16 +108,16 @@ RadioGroupSample::OnInitializing(void)
 	pCheckButton2->AddActionEventListener(*this);
 
 	// Adds check buttons to the form
-	AddControl(*pCheckButton1);
-	AddControl(*pCheckButton2);
+	AddControl(pCheckButton1);
+	AddControl(pCheckButton2);
 
 	// Creates an instance of RadioGroup
 	__pRadioGroup = new RadioGroup();
 	__pRadioGroup->Construct();
 
 	// Adds the check buttons to the radio group
-	__pRadioGroup->Add(*pCheckButton1);
-	__pRadioGroup->Add(*pCheckButton2);
+	__pRadioGroup->Add(pCheckButton1);
+	__pRadioGroup->Add(pCheckButton2);
 
 	return r;
 }
@@ -162,9 +163,9 @@ RadioGroupSample::OnActionPerformed(const Control& source, int actionId)
 		break;
 	}
 }
- * @endcode
- *
- */
+   * @endcode
+   *
+   */
 class _OSP_EXPORT_ RadioGroup
 	: public Tizen::Ui::Control
 {
@@ -177,10 +178,10 @@ public:
 	RadioGroup(void);
 
 	/**
-	 * This is the destructor for this class.
-	 *
-	 * @since	2.0
-	 */
+	* This is the destructor for this class.
+	*
+	* @since	2.0
+	*/
 	virtual ~RadioGroup(void);
 
 
@@ -199,30 +200,65 @@ public:
 	/**
 	 * Adds the check button to the radio group.
 	 *
+	 * @brief       <i> [Deprecated] </i>
+	 * @deprecated  This method is deprecated.
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	checkButton		The %CheckButton instance to be added
+	 * @param[in]	checkButton		The %CheckButton instance to add
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_INVALID_ARG	The specified input parameter is invalid.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		Only CheckButtons whose style is CHECK_BUTTON_STYLE_RADIO or CHECK_BUTTON_STYLE_RADIO_WITH_DIVIDER can be added to %RadioGroup.
+	 * @remarks		Only CheckButtons whose style is @c CHECK_BUTTON_STYLE_RADIO or
+	 *				@c CHECK_BUTTON_STYLE_RADIO_WITH_DIVIDER can be added to %RadioGroup.
 	 */
 	result Add(const CheckButton& checkButton);
 
 	/**
+	 * Adds the check button to the radio group.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	pCheckButton	The %CheckButton instance to add
+	 * @exception	E_SUCCESS       The method is successful.
+	 * @exception	E_INVALID_ARG	The specified input parameter is invalid. @n
+	 *                              The specified @c pCheckButton is @c null.
+	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @remarks		Only CheckButtons whose style is @c CHECK_BUTTON_STYLE_RADIO or
+	 *				@c CHECK_BUTTON_STYLE_RADIO_WITH_DIVIDER can be added to %RadioGroup.
+	 */
+	result Add(CheckButton* pCheckButton);
+
+	/**
 	 * Removes the check button from the radio group.
 	 *
+	 * @brief       <i> [Deprecated] </i>
+	 * @deprecated  This method is deprecated.
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	checkButton			The %CheckButton instance to be removed
+	 * @param[in]	checkButton			The %CheckButton instance to remove
 	 * @exception	E_SUCCESS           The method is successful.
 	 * @exception	E_OBJ_NOT_FOUND		The object is not found.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 * @remarks		Before removing %CheckButton from its parent container, it must be removed from %RadioGroup.
 	 */
 	result Remove(const CheckButton& checkButton);
+
+	/**
+	 * Removes the check button from the radio group.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	pCheckButton		The %CheckButton instance to remove
+	 * @exception	E_SUCCESS           The method is successful.
+     * @exception	E_OBJ_NOT_FOUND		The object is not found.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @remarks		Before removing %CheckButton from its parent container, it must be removed from %RadioGroup.
+	 */
+	result Remove(CheckButton* pCheckButton);
 
 public:
 	/**
@@ -237,11 +273,23 @@ public:
 	/**
 	 * Selects the specified check button in the radio group.
 	 *
+	 * @brief       	<i> [Deprecated] </i>
+	 * @deprecated  	This method is deprecated.
 	 * @since			2.0
 	 *
-	 * @param[in]		checkButton		The check button to be selected
+	 * @param[in]		checkButton		The check button to select
 	 */
 	void SetSelectedItem(const CheckButton& checkButton);
+
+	/**
+	 * Selects the specified check button in the radio group.
+	 *
+	 * @since			2.1
+	 *
+	 * @param[in]		pCheckButton		The check button to select
+	 * @exception       E_INVALID_ARG       The specified @c pCheckButton is @c null.
+	 */
+	void SetSelectedItem(CheckButton* pCheckButton);
 
 	/**
 	 * Gets the selected check button in the radio group.
@@ -254,57 +302,39 @@ public:
 	 */
 	const CheckButton* GetSelectedItem(void) const;
 
+private:
 	//
 	// This method is for internal use only.
 	// Using this method can cause behavioral, security-related, and consistency-related issues in the application.
 	//
-	// This method is prohibited. If this method is used
-	// in an application, the application can get rejected during the certification
-	// process.
+	// This method is reserved and may change its name at any time without
+	// prior notice.
 	//
-	// (Blocked) Draws the control.
+	// @since 2.1
 	//
-	// @since		2.0
-	//
-	// @return		An error code
-	// @exception	E_UNSUPPORTED_OPERATION		This operation is not supported.
-	//
-	virtual result Draw(void);
+	virtual void RadioGroup_Reserved1(void){}
 
 	//
 	// This method is for internal use only.
 	// Using this method can cause behavioral, security-related, and consistency-related issues in the application.
 	//
-	// This method is prohibited. If this method is used
-	// in an application, the application can get rejected during the certification
-	// process.
+	// This method is reserved and may change its name at any time without
+	// prior notice.
 	//
-	// (Blocked) Shows this control.
+	// @since 2.1
 	//
-	// @since		2.0
-	//
-	// @return		An error code
-	// @exception	E_UNSUPPORTED_OPERATION		This operation is not supported.
-	//
-	virtual result Show(void);
+	virtual void RadioGroup_Reserved2(void){}
 
 	//
 	// This method is for internal use only.
 	// Using this method can cause behavioral, security-related, and consistency-related issues in the application.
 	//
-	// This method is prohibited. If this method is used
-	// in an application, the application can get rejected during the certification
-	// process.
+	// This method is reserved and may change its name at any time without
+	// prior notice.
 	//
-	// (Blocked) Gives the input focus to the control. @n
-	// One must call this method if the control needs to listen to the user input events such as key pressed.
+	// @since 2.1
 	//
-	// @since		2.0
-	//
-	// @return		An error code
-	// @exception	E_UNSUPPORTED_OPERATION		This operation is not supported.
-	//
-	virtual result SetFocus(void);
+	virtual void RadioGroup_Reserved3(void){}
 
 protected:
 	friend class _RadioGroupImpl;

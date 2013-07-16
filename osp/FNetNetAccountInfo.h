@@ -43,7 +43,7 @@ class _NetAccountInfoImpl;
  *
  * @since	2.0
  *
- * The %NetAccountInfo class provides all the configuration parameters for setting up network connections.
+ * The %NetAccountInfo class provides configuration parameters for setting up network connections.
  * %NetAccountInfo contains the base information required to connect to various bearers and it is designed to be
  * used in Programmed Data Processor (PDP) context activation. The Wi-Fi accounts are derived from this class
  * and contain additional information specific to Wi-Fi (such as SSID).
@@ -56,7 +56,8 @@ class _OSP_EXPORT_ NetAccountInfo
 {
 public:
 	/**
-	* The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	* The object is not fully constructed after this constructor is called. @n
+	* For full construction, the Construct() method must be called right after calling this constructor.
 	*
 	* @since	2.0
 	*
@@ -191,7 +192,8 @@ public:
 	 * @return		The address scheme
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
-	 * @see			SetLocalAddress(), GetLocalAddress()
+	 * @see			SetLocalAddress()
+	 * @see			GetLocalAddress()
 	 */
 	NetAddressScheme GetLocalAddressScheme(void) const;
 
@@ -233,7 +235,9 @@ public:
 	 * @return		The address scheme for the DNS
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
-	 * @see			GetPrimaryDnsAddress(), GetSecondaryDnsAddress(), SetDnsAddress()
+	 * @see			GetPrimaryDnsAddress()
+	 * @see			GetSecondaryDnsAddress()
+	 * @see			SetDnsAddress()
 	 */
 	NetAddressScheme GetDnsAddressScheme(void) const;
 
@@ -246,9 +250,9 @@ public:
 	 *					else @c null if an error occurs or the dynamic address scheme is being used
 	 * @exception		E_SUCCESS				The method is successful.
 	 * @exception		E_INVALID_OPERATION		This operation is not allowed in the dynamic address scheme.
-	 * @remarks			When this instance is got by @ref NetAccountManager::GetNetAccountInfoN,
+	 * @remarks			When this instance is got by NetAccountManager::GetNetAccountInfoN(),
 	 *					- this method returns a statically assigned primary DNS address pointer if the DNS address scheme is NET_ADDRESS_SCHEME_STATIC
-	 *					- this method returns @n null if the DNS address scheme is NET_ADDRESS_SCHEME_DYNAMIC @n
+	 *					- this method returns @n null if the DNS address scheme is @c NET_ADDRESS_SCHEME_DYNAMIC @n
 	 *			The specific error code can be accessed using the GetLastResult() method.
 	 * @see				GetSecondaryDnsAddress()
 	 */
@@ -282,7 +286,8 @@ public:
 	 * @param[in]	pSecondaryDnsAddress	The statically assigned secondary DNS address if @c dnsAddrScheme is NET_ADDRESS_SCHEME_STATIC
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_INVALID_ARG			A specified input parameter is invalid.
-	 * @see			GetPrimaryDnsAddress(), GetSecondaryDnsAddress()
+	 * @see			GetPrimaryDnsAddress()
+	 * @see			GetSecondaryDnsAddress()
 	 */
 	result SetDnsAddress(NetAddressScheme dnsAddrScheme, const IpAddress* pPrimaryDnsAddress, const IpAddress* pSecondaryDnsAddress);
 
@@ -425,8 +430,8 @@ public:
 	 *
 	 * @return		@c true if the values match, @n
 	 *				else @c false
-	 * @param[in]	rhs 	The other Object to compare
-	 * @see 		Object::Equals()
+	 * @param[in]	rhs 	The other Tizen::Base::Object to compare
+	 * @see 		Tizen::Base::Object::Equals()
 	 */
 	virtual bool Equals(const Tizen::Base::Object& rhs) const;
 

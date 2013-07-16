@@ -84,15 +84,7 @@ public:
 	/**
 	 * Called when the file transfer has finished.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since       2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues. @n
-	 *					For more information, see @ref CompIoPathPage "here".
-	 *
-	 * @endif
 	 * @param[in]   filePath            The path of the file (including the file name) to transfer
 	 * @param[in]   fileSize            The size of the file to transfer
 	 * @param[in]   isCompleted         Set to @c true if the transfer is successfully completed, @n
@@ -102,8 +94,8 @@ public:
 
 protected:
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
-	//
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	// This method is reserved and may change its name at any time without prior notice.
 	//
 	// @since 2.0

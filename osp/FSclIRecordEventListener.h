@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -72,17 +71,10 @@ public:
 	 * @if OSPDEPREC
 	 * Called to notify when a record in the data storage is changed externally.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief		<i> [Deprecated][Compatibility] </i>
-	 * @endif
 	 * @deprecated		This method is deprecated because the %IRecordEventListener interface is deprecated. @n
 	 * 							Instead of using this listener, use IAddressbookEventListener or ICalendarbookEventListener.
 	 *
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 * 					For more information, see @ref CompIRecordEventListenerOnRecordChangedNPage "here".
-	 * @endif
 	 *
 	 * @param[in]	eventType				The operation type
 	 * @param[in]	recordType				The record type of the changed record
@@ -97,16 +89,6 @@ public:
 	virtual void OnRecordChangedN(RecordEventType eventType, RecordType recordType, Record& record, Tizen::Base::Collection::IList* pUpdatedProperties, Tizen::Base::Collection::IList* pUpdatedMultiProperties) = 0;
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page	CompIRecordEventListenerOnRecordChangedNPage Compatibility for OnRecordChangedN()
-	 * @section	CompIRecordEventListenerOnRecordChangedNPageIssueSection Issues
-	 *			Implementation of this method has the following issue: @n
-	 *			Even in OSP compatible applications, we cannot support the following operation.
-	 *			-# If an application "A" changes a record, all the applications exception "A" receive the change notification.
-	 *
-	 *			In Tizen (including OSP compatible applications),
-	 *			-# If an application "A" changes a record, all the applications including "A" receive the change notification.
-	 * @endif
 	 */
 
 protected:

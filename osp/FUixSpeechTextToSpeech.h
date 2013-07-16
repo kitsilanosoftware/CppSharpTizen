@@ -188,15 +188,21 @@ public:
 
     /**
      * Initializes the Text-To-Speech service. @n
-     * This method is asynchronous. @n
+     * The %Initialize() method is asynchronous. @n
      * The ITextToSpeechEventListener::OnTextToSpeechInitialized() is invoked when the service has been initialized.
      *
      * @since 2.0
-	 *
+     *
+     * @feature           %http://tizen.org/feature/speech.synthesis
+     *
      * @return      An error code
      * @exception   E_SUCCESS           The method is successful.
-     * @exception   E_OUT_OF_MEMORY     The memory is insufficient.
-     * @remarks     This method must be called after Construct().
+     * @exception  E_UNSUPPORTED_OPERATION   The Emulator or target device does not support the required feature. @b Since: @b 2.1
+     * For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+     * @remarks     
+     *			- Before calling this method, check whether the feature is supported by 
+     *			Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
+     * 			- This method must be called after Construct().
      */
 	result Initialize(void);
 
@@ -316,7 +322,6 @@ public:
      * @param[in]   rate    A speech rate
      * @exception   E_SUCCESS           The method is successful.
      * @exception   E_INVALID_STATE     This instance is not initialized as yet.
-     * @see         TextToSpeechSpeechRate
      */
     result SetSpeechRate(TextToSpeechSpeechRate rate);
 

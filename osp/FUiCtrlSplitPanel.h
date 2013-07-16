@@ -2,25 +2,25 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
 
 /**
- * @file		FUiCtrlSplitPanel.h
- * @brief	This is the header file for the %SplitPanel class.
- *
- * This header file contains the declarations of the %SplitPanel class.
- */
+* @file		FUiCtrlSplitPanel.h
+* @brief	This is the header file for the %SplitPanel class.
+*
+* This header file contains the declarations of the %SplitPanel class.
+*/
 #ifndef _FUI_CTRL_SPLIT_PANEL_H_
 #define _FUI_CTRL_SPLIT_PANEL_H_
 
@@ -34,6 +34,7 @@ namespace Tizen { namespace Ui { namespace Controls
 {
 
 class ISplitPanelEventListener;
+class ISplitPanelEventListenerF;
 
 /**
  * @class	SplitPanel
@@ -54,47 +55,84 @@ class ISplitPanelEventListener;
 
 class SplitPanelSample
 	: public Tizen::Ui::Controls::Form
+	, public Tizen::Ui::Controls::ISplitPanelEventListener
 {
 public:
+	SplitPanelSample(void)
+	: __pSplitPanel(null)
+	, __pFirstPanel(null)
+	, __pSecondPanel(null){}
+
+    bool Initialize(void);
 	virtual result OnInitializing(void);
+	virtual result OnTerminating(void);
+
+private:
+	Tizen::Ui::Controls::SplitPanel* __pSplitPanel;
+	Tizen::Ui::Controls::Panel* __pFirstPanel;
+	Tizen::Ui::Controls::Panel* __pSecondPanel;
 };
  * @endcode
  *
  * @code
 // Sample code for SplitPanelSample.cpp
+#include <FGraphics.h>
+
 #include "SplitPanelSample.h"
 
+using namespace Tizen::Graphics;
 using namespace Tizen::Ui;
 using namespace Tizen::Ui::Controls;
-using namespace Tizen::Graphics;
+
+bool
+SplitPanelSample::Initialize(void)
+{
+	Construct(FORM_STYLE_NORMAL);
+	return true;
+}
 
 result
 SplitPanelSample::OnInitializing(void)
 {
 	// Creates an instance of SplitPanel
-	SplitPanel* pSplitPanel = new (std::nothrow) SplitPanel();
-	pSplitPanel->Construct(Rectangle(0, 0, 800, 400),
+	__pSplitPanel = new (std::nothrow) SplitPanel();
+	__pSplitPanel->Construct(Rectangle(0, 0, 800, 400),
 			SPLIT_PANEL_DIVIDER_STYLE_MOVABLE, SPLIT_PANEL_DIVIDER_DIRECTION_VERTICAL);
 
 	// Creates instances of Panel
-	Panel* pFirstPanel = new (std::nothrow) Panel();
-	pFirstPanel->Construct(Rectangle(0, 0, 400, 480));
+	__pFirstPanel = new (std::nothrow) Panel();
+	__pFirstPanel->Construct(Rectangle(0, 0, 400, 480));
 
-	Panel* pSecondPanel = new (std::nothrow) Panel();
-	pSecondPanel->Construct(Rectangle(0, 0, 400, 480));
+	__pSecondPanel = new (std::nothrow) Panel();
+	__pSecondPanel->Construct(Rectangle(0, 0, 400, 480));
 
 	//Sets the divider position to the slit panel
-	pSplitPanel->SetDividerPosition(400);
+	__pSplitPanel->SetDividerPosition(400);
 
 	//Sets panes to the split panel
-	pSplitPanel->SetPane(pFirstPanel, SPLIT_PANEL_PANE_ORDER_FIRST);
-	pSplitPanel->SetPane(pSecondPanel, SPLIT_PANEL_PANE_ORDER_SECOND);
+	__pSplitPanel->SetPane(__pFirstPanel, SPLIT_PANEL_PANE_ORDER_FIRST);
+	__pSplitPanel->SetPane(__pSecondPanel, SPLIT_PANEL_PANE_ORDER_SECOND);
 
 	// Adds the split panel to the form
-	AddControl(*pSplitPanel);
+	AddControl(__pSplitPanel);
 
 	return E_SUCCESS;
 }
+
+ result
+ SplitPanelSample::OnTerminating(void)
+ {
+	// Sets null panes to the split panel
+	 __pSplitPanel->SetPane(null, SPLIT_PANEL_PANE_ORDER_FIRST);
+	 __pSplitPanel->SetPane(null, SPLIT_PANEL_PANE_ORDER_SECOND);
+
+	//Deallocates the control
+	 __pFirstPanel->Destroy();
+	 __pSecondPanel->Destroy();
+
+	 return E_SUCCESS;
+ }
+
  * @endcode
  *
  */
@@ -104,14 +142,16 @@ class _OSP_EXPORT_ SplitPanel
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the %Construct() method must be called right after calling this constructor.
 	 *
 	 * @since 2.0
 	 */
 	SplitPanel(void);
 
 	/**
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required.@n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @since 2.0
 	 */
@@ -123,7 +163,7 @@ public:
 	 * @since 2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	rect						The location and size of the %SplitPanel control as a Rectangle instance.
+	 * @param[in]	rect						The location and size of the %SplitPanel control as a Tizen::Graphics::Rectangle instance.
 	 * @param[in]	splitPanelDividerStyle		The divider style of the %SplitPanel control
 	 * @param[in]	splitPanelDividerDirection	The divider direction of the %SplitPanel control @n
 	 * 											The specified divider direction determines the divider is vertical or horizontal.
@@ -133,16 +173,44 @@ public:
 	result Construct(const Tizen::Graphics::Rectangle& rect, SplitPanelDividerStyle splitPanelDividerStyle, SplitPanelDividerDirection splitPanelDividerDirection);
 
 	/**
+	 * Initializes this instance of %SplitPanel with the specified parameters.
+	 *
+	 * @since 2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	rect						The location and size of the %SplitPanel control as a Tizen::Graphics::FloatRectangle instance.
+	 * @param[in]	splitPanelDividerStyle		The divider style of the %SplitPanel control
+	 * @param[in]	splitPanelDividerDirection	The divider direction of the %SplitPanel control @n
+	 * 											The specified divider direction determines the divider is vertical or horizontal.
+	 * @exception	E_SUCCESS					The method is successful.
+	 * @exception	E_INVALID_ARG				A specified input parameter is invalid.
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, SplitPanelDividerStyle splitPanelDividerStyle, SplitPanelDividerDirection splitPanelDividerDirection);
+
+
+	/**
 	 * Adds a ISplitPanelEventListener instance. @n
 	 * The added listener listens to events on the context of the specified event dispatcher when they are fired.
 	 *
 	 * @since 2.0
 	 *
-	 * @param[in] 	listener    			The event listener to be added
+	 * @param[in] 	listener    			The event listener to add
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_OBJ_ALREADY_EXIST		The event listener already exists.
 	 */
 	result AddSplitPanelEventListener(ISplitPanelEventListener& listener);
+
+	/**
+	 * Adds a ISplitPanelEventListenerF instance. @n
+	 * The added listener listens to events on the context of the specified event dispatcher when they are fired.
+	 *
+	 * @since 2.1
+	 *
+	 * @param[in] 	listener    			The event listener to add
+	 * @exception	E_SUCCESS				The method is successful.
+	 * @exception	E_OBJ_ALREADY_EXIST		The event listener already exists.
+	 */
+	result AddSplitPanelEventListener(ISplitPanelEventListenerF& listener);
 
 	/**
 	 * Removes a ISplitPanelEventListener instance. @n
@@ -150,11 +218,23 @@ public:
 	 *
 	 * @since 2.0
 	 *
-	 * @param[in] 	listener    		The event listener to be removed
+	 * @param[in] 	listener    		The event listener to remove
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception   E_OBJ_NOT_FOUND		The event listener is not found.
 	 */
 	result RemoveSplitPanelEventListener(ISplitPanelEventListener& listener);
+
+	/**
+	 * Removes a ISplitPanelEventListenerF instance. @n
+	 * The removed listener cannot listen to events when they are fired.
+	 *
+	 * @since 2.1
+	 *
+	 * @param[in] 	listener    		The event listener to remove
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception   E_OBJ_NOT_FOUND		The event listener is not found.
+	 */
+	result RemoveSplitPanelEventListener(ISplitPanelEventListenerF& listener);
 
 	/**
 	 * Sets the pane to the %SplitPanel control.
@@ -162,9 +242,10 @@ public:
 	 * @since 2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	pControl       		The control to be set.
-	 * @param[in]	paneOrder       	The order of pane. SPLIT_PANEL_PANE_FIRST is displayed on the left side @n
-	 *									and SPLIT_PANEL_PANE_SECOND is displayed on the right side of the %SplitPanel when its direction is SPLIT_PANEL_DIVIDER_DIRECTION_VERTICAL.
+	 * @param[in]	pControl       		The control to set
+	 * @param[in]	paneOrder       	The order of pane. @c SPLIT_PANEL_PANE_FIRST is displayed on the left side @n
+	 *							and @c SPLIT_PANEL_PANE_SECOND is displayed on the right side of the %SplitPanel when its direction is
+	 *							@c SPLIT_PANEL_DIVIDER_DIRECTION_VERTICAL.
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
 	 * @remarks		The %SplitPanel control must contain exactly two panes and the user can change their relative sizes.
@@ -178,8 +259,9 @@ public:
 	 *
 	 * @return		The control at the specified pane order of the %SplitPanel @n
 	 *              @c null, if there is no panel.
-	 * @param[in]	paneOrder			The order of pane. SPLIT_PANEL_PANE_FIRST is displayed on the left side @n
-	 *									and SPLIT_PANEL_PANE_SECOND is displayed on the right side of the %SplitPanel when its direction is SPLIT_PANEL_DIVIDER_DIRECTION_VERTICAL.
+	 * @param[in]	paneOrder			The order of pane. @c SPLIT_PANEL_PANE_FIRST is displayed on the left side @n
+	 *								and @c SPLIT_PANEL_PANE_SECOND is displayed on the right side of the %SplitPanel when
+	 *								its direction is @c SPLIT_PANEL_DIVIDER_DIRECTION_VERTICAL.
  	 * @exception	E_SUCCESS			The method is successful.
  	 * @exception	E_INVALID_ARG  		A specified input parameter is invalid.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
@@ -195,11 +277,32 @@ public:
 	 * @param[in]		position				The position of divider
 	 * @exception   	E_SUCCESS				The method is successful.
 	 * @exception		E_OUT_OF_RANGE			A specified input parameter is invalid.
+	 * @remarks			This Api sets the value to current orientation. The divider position must be reset when the orientation of the form is changed.
 	 * @see				GetDividerPosition()
-	 * @see				SetMaximumDividerPosition(), GetMaximumDividerPosition()
-	 * @see				SetMinimumDividerPosition(), GetMinimumDividerPosition()
+	 * @see				SetMaximumDividerPosition()
+	 * @see				GetMaximumDividerPosition()
+	 * @see				SetMinimumDividerPosition()
+	 * @see				GetMinimumDividerPosition()
 	 */
 	result SetDividerPosition(int position);
+
+	/**
+	 * Sets the divider position of the control.
+	 *
+	 * @since 2.1
+	 *
+	 * @return			An error code
+	 * @param[in]		position				The position of divider
+	 * @exception   	E_SUCCESS				The method is successful.
+	 * @exception		E_OUT_OF_RANGE			A specified input parameter is invalid.
+	 * @remarks			This Api sets the value to current orientation. The divider position must be reset when the orientation of the form is changed.
+	 * @see				GetDividerPosition()
+	 * @see				SetMaximumDividerPosition()
+	 * @see				GetMaximumDividerPosition()
+	 * @see				SetMinimumDividerPosition()
+	 * @see				GetMinimumDividerPosition()
+	 */
+	result SetDividerPosition(float position);
 
 	/**
 	 * Gets the current divider position of the control.
@@ -209,10 +312,27 @@ public:
 	 * @return			The current divider position
 	 * @remarks			The specific error code can be accessed using the GetLastResult() method.
 	 * @see				SetDividerPosition()
-	 * @see				SetMaximumDividerPosition(), GetMaximumDividerPosition()
-	 * @see				SetMinimumDividerPosition(), GetMinimumDividerPosition()
+	 * @see				SetMaximumDividerPosition()
+	 * @see				GetMaximumDividerPosition()
+	 * @see				SetMinimumDividerPosition()
+	 * @see				GetMinimumDividerPosition()
 	 */
 	int GetDividerPosition(void) const;
+
+	/**
+	 * Gets the current divider position of the control.
+	 *
+	 * @since 2.1
+	 *
+	 * @return			The current divider position
+	 * @remarks			The specific error code can be accessed using the GetLastResult() method.
+	 * @see				SetDividerPosition()
+	 * @see				SetMaximumDividerPosition()
+	 * @see				GetMaximumDividerPosition()
+	 * @see				SetMinimumDividerPosition()
+	 * @see				GetMinimumDividerPosition()
+	 */
+	float GetDividerPositionF(void) const;
 
 	/**
 	 * Sets the divider maximum position of the control.
@@ -223,10 +343,28 @@ public:
 	 * @param[in]		position				The position of divider.
 	 * @exception   	E_SUCCESS				The method is successful.
 	 * @exception		E_OUT_OF_RANGE			A specified input parameter is invalid.
+	 * @remarks			This Api sets the value to current orientation. The maximum divider position must be reset when the orientation of the form is changed.
 	 * @see				GetMaximumDividerPosition()
-	 * @see				SetMinimumDividerPosition(), GetMinimumDividerPosition()
+	 * @see				SetMinimumDividerPosition()
+	 * @see				GetMinimumDividerPosition()
 	 */
 	result SetMaximumDividerPosition(int position);
+
+	/**
+	 * Sets the divider maximum position of the control.
+	 *
+	 * @since 2.1
+	 *
+	 * @return			An error code
+	 * @param[in]		position				The position of divider.
+	 * @exception   	E_SUCCESS				The method is successful.
+	 * @exception		E_OUT_OF_RANGE			A specified input parameter is invalid.
+	 * @remarks			This Api sets the value to current orientation. The maximum divider position must be reset when the orientation of the form is changed.
+	 * @see				GetMaximumDividerPosition()
+	 * @see				SetMinimumDividerPosition()
+	 * @see				GetMinimumDividerPosition()
+	 */
+	result SetMaximumDividerPosition(float position);
 
 	/**
 	 * Gets the maximum divider position.
@@ -235,9 +373,22 @@ public:
 	 *
 	 * @return			The maximum divider position of the control.
 	 * @see				SetMaximumDividerPosition()
-	 * @see				SetMinimumDividerPosition(), GetMinimumDividerPosition()
+	 * @see				SetMinimumDividerPosition()
+	 * @see				GetMinimumDividerPosition()
 	 */
 	int GetMaximumDividerPosition(void) const;
+
+	/**
+	 * Gets the maximum divider position.
+	 *
+	 * @since 2.1
+	 *
+	 * @return			The maximum divider position of the control.
+	 * @see				SetMaximumDividerPosition()
+	 * @see				SetMinimumDividerPosition()
+	 * @see				GetMinimumDividerPosition()
+	 */
+	float GetMaximumDividerPositionF(void) const;
 
 	/**
 	 * Sets the divider minimum position of the control.
@@ -248,10 +399,28 @@ public:
 	 * @param[in]		position				The position of divider.
 	 * @exception   	E_SUCCESS				The method is successful.
 	 * @exception		E_OUT_OF_RANGE			A specified input parameter is invalid.
+	 * @remarks			This Api sets the value to current orientation. The minimum divider position must be reset when the orientation of the form is changed.
 	 * @see				GetMinimumDividerPosition()
-	 * @see				SetMaximumDividerPosition(), GetMaximumDividerPosition()
+	 * @see				SetMaximumDividerPosition()
+	 * @see				GetMaximumDividerPosition()
 	 */
 	result SetMinimumDividerPosition(int position);
+
+	/**
+	 * Sets the divider minimum position of the control.
+	 *
+	 * @since 2.1
+	 *
+	 * @return			An error code
+	 * @param[in]		position				The position of divider.
+	 * @exception   	E_SUCCESS				The method is successful.
+	 * @exception		E_OUT_OF_RANGE			A specified input parameter is invalid.
+	 * @remarks			This Api sets the value to current orientation. The minimum divider position must be reset when the orientation of the form is changed.
+ 	 * @see				GetMinimumDividerPosition()
+	 * @see				SetMaximumDividerPosition()
+	 * @see				GetMaximumDividerPosition()
+	 */
+	result SetMinimumDividerPosition(float position);
 
 	/**
 	 * Gets the minimum divider position.
@@ -260,9 +429,22 @@ public:
 	 *
 	 * @return			The minimum divider position of the control.
  	 * @see				SetMinimumDividerPosition()
-	 * @see				SetMaximumDividerPosition(), GetMaximumDividerPosition()
+	 * @see				SetMaximumDividerPosition()
+	 * @see				GetMaximumDividerPosition()
 	 */
 	int GetMinimumDividerPosition(void) const;
+
+	/**
+	 * Gets the minimum divider position.
+	 *
+	 * @since 2.1
+	 *
+	 * @return			The minimum divider position of the control.
+	 * @see				SetMinimumDividerPosition()
+	 * @see				SetMaximumDividerPosition()
+	 * @see				GetMaximumDividerPosition()
+	 */
+	float GetMinimumDividerPositionF(void) const;
 
 	/**
 	 * Maximizes the specified pane.

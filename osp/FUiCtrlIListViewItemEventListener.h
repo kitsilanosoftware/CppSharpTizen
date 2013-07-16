@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -54,7 +54,7 @@ class _OSP_EXPORT_ IListViewItemEventListener
 // Operation
 public:
 	/**
-	 * This polymorphic destructor should be overridden if required.
+	 * This polymorphic destructor should be overridden if required. @n
 	 * This way, the destructors of the derived classes are called
 	 * when the destructor of this interface is called.
 	 *
@@ -72,8 +72,9 @@ public:
 	 * @param[in] elementId     The element ID
 	 * @param[in] status        The status of the element
 	 *
-	 * @remarks  This method is called when an element of the ListViewItem in the ListView is checked, unchecked, or selected. @n
-	 *   		When the event comes from the annex or the whole item, @c elementId is always @c -1.
+	 * @remarks
+	 *			- This method is called when an element of the ListViewItem in the ListView is checked, unchecked, or selected.
+	 *			- When the event comes from the annex or the whole item, @c elementId is always @c -1.
 	 */
 	virtual void OnListViewItemStateChanged(Tizen::Ui::Controls::ListView& listView, int index, int elementId, Tizen::Ui::Controls::ListItemStatus status) = 0;
 
@@ -109,12 +110,13 @@ public:
 	 * @param[in] index			The index of the list
 	 * @param[in] elementId		The element ID
 	 * @param[in,out] invokeListViewItemCallback	Indicates whether to invoke ListView item callback after this method returns
-	 * @remarks  This method is invoked when an item or an element is long pressed. @n
-	 *			When the event comes from the annex or the whole item, @c elementId is always @c -1.
-	 *			Setting @c invokeListViewItemCallback to @c true invokes %ListView item callbacks after this method returns.
-	 *			Set @c invokeListViewItemCallback to @c false to not invoke %ListView item callbacks. The default value of
+	 * @remarks
+	 *			- This method is invoked when an item or an element is long pressed.
+	 *			- When the event comes from the annex or the whole item, @c elementId is always @c -1.
+	 *			- Setting @c invokeListViewItemCallback to @c true invokes %ListView item callbacks after this method returns.
+	 *			- Set @c invokeListViewItemCallback to @c false to not invoke %ListView item callbacks. The default value of
 	 *			@c invokeListViewItemCallback is @c true.
-	 *			Note that other %ListView item callbacks are not called even though @c invokeListViewItemCallback is @c true, in case that ListView
+	 *			- Note that other %ListView item callbacks are not called even though @c invokeListViewItemCallback is @c true, in case that ListView
 	 *			loses the focus, for example, due to invoking a Popup or a ContextMenu in this method.
 	 */
 	virtual void OnListViewItemLongPressed(Tizen::Ui::Controls::ListView& listView, int index, int elementId, bool& invokeListViewItemCallback);
@@ -132,7 +134,7 @@ public:
 
 protected:
 	//
-	// Following methods are reserved and may change its name at any time without prior notice.
+	// The following methods are reserved and may change its name at any time without prior notice.
 	//
 	virtual void IListViewItemEventListener_Reserved1(void) {}
 	virtual void IListViewItemEventListener_Reserved2(void) {}

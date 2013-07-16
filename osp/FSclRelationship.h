@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -141,7 +140,7 @@ public:
 	 *
 	 * @since	2.0
 	 *
-	 * @param[in]	name		The name of the relative
+	 * @param[in]	relativeName		The name of the relative
 	 */
 	void SetRelativeName(const Tizen::Base::String& relativeName);
 

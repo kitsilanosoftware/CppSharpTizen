@@ -90,6 +90,7 @@ public:
 	 * Gets the realm value received.
 	 *
 	 * @since			2.0
+	 * @privlevel		public
 	 * @privilege		%http://tizen.org/privilege/http
 	 *
 	 * @return			The realm value
@@ -97,6 +98,7 @@ public:
 	 * @exception		E_OUT_OF_MEMORY     The memory is insufficient.
 	 * @exception		E_SYSTEM            A system error has occurred.
 	 * @exception		E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @remarks			The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Tizen::Base::String* GetRealmN(void) const;
@@ -105,14 +107,16 @@ public:
 	 * Gets the authentication scheme received.
 	 *
 	 * @since			2.0
+	 * @privlevel		public
 	 * @privilege		%http://tizen.org/privilege/http
 	 *
 	 * @return			The authentication scheme, @n
 	 *					else @c -1 if an error occurs
-	 * @exception		E_SUCCESS			The method is successful.
+	 * @exception		E_SUCCESS				The method is successful.
 	 * @exception		E_OUT_OF_MEMORY		The memory is insufficient.
-	 * @exception		E_SYSTEM			A system error has occurred.
+	 * @exception		E_SYSTEM				A system error has occurred.
 	 * @exception		E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @remarks			The specific error code can be accessed using the GetLastResult() method.
 	 */
 	NetHttpAuthScheme GetAuthScheme(void) const;
@@ -121,6 +125,7 @@ public:
 	 * Sets the credentials required for setting the "WWW-Authenticate" header in the HttpRequest class.
 	 *
 	 * @since			2.0
+	 * @privlevel		public
 	 * @privilege		%http://tizen.org/privilege/http
 	 *
 	 * @return			The new transaction pointer
@@ -132,6 +137,7 @@ public:
 	 * @exception		E_SYSTEM				A system error has occurred.
 	 * @exception		E_AUTHENTICATION		The authentication has failed.
 	 * @exception		E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @remarks			This method is used to set the username and password for the given domain and the authentication
 	 *					scheme on the reception of the IHttpTransactionEventListener::OnTransactionHeaderCompleted() callback.
 	 *					The specific error code can be accessed using the GetLastResult() method.

@@ -50,7 +50,8 @@ class _OSP_EXPORT_ SocketUtility
 
 public:
 	/**
-	* The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	* The object is not fully constructed after this constructor is called. @n
+	* For full construction, the Construct() method must be called right after calling this constructor.
 	*
 	* @since		2.0
 	*/
@@ -80,12 +81,13 @@ public:
 	* Determines the status of one or more sockets.
 	*
 	* @since			2.0
+	* @privlevel		public
 	* @privilege		%http://tizen.org/privilege/socket
 	*
 	* @return			An error code
-	* @param[in,out]	pCheckRead					An IList of Socket instances to check for readability
-	* @param[in,out]	pCheckWrite					An IList of Socket instances to check for writability
-	* @param[in,out]	pCheckError					An IList of Socket instances to check for errors
+	* @param[in,out]	pCheckRead					A Tizen::Base::Collection::IList of Socket instances to check for readability
+	* @param[in,out]	pCheckWrite				A Tizen::Base::Collection::IList of Socket instances to check for writability
+	* @param[in,out]	pCheckError				A Tizen::Base::Collection::IList of Socket instances to check for errors
 	* @param[in]		microSeconds				The time to wait for a response, in microseconds
 	* @exception		E_SUCCESS					The method is successful.
 	* @exception		E_INVALID_SOCKET			The socket is invalid.
@@ -97,8 +99,9 @@ public:
 	* @exception        E_OUT_OF_MEMORY				The memory is insufficient.
 	* @exception		E_SYSTEM					A system error has occurred.
 	* @exception        E_PRIVILEGE_DENIED			The application does not have the privilege to call this method.
+	* @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	* @remarks		This method determines the status of one or more
-	*               Socket instances. There must be at least one socket in an IList
+	*               Socket instances. There must be at least one socket in an Tizen::Base::Collection::IList
 	*               before this method is used.
 	*               To check sockets for readability and writability use @c pCheckRead and @c pCheckWrite of type
 	*				%IList respectively by calling this method.

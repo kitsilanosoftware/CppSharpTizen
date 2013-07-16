@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -33,7 +32,7 @@ namespace Tizen { namespace Base { namespace Collection
 
 /**
  * @interface IMapEnumeratorT
- * @brief	This interface supports simple iteration over a template-based map.
+ * @brief	This interface supports simple iteration over a template-based map. @n
  *			Using this method, you can only access the elements in the map. You cannot modify the elements.
  *
  * @since 2.0
@@ -41,7 +40,7 @@ namespace Tizen { namespace Base { namespace Collection
  * @remarks
  * An enumerator remains valid as long as the map remains unchanged.
  * If changes are made to the map, such as adding, modifying, or
- * deleting elements, the enumerator is irrecoverably invalidated. The next call to any method returns an E_INVALID_OPERATION message.
+ * deleting elements, the enumerator is irrecoverably invalidated. The next call to any method returns an @c E_INVALID_OPERATION message.
  *
  * The %IMapEnumeratorT interface supports simple iteration over a template-based map.
  *			Using this method, you can only access the elements in the map. You cannot modify the elements.

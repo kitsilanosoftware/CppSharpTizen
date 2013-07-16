@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -52,22 +52,22 @@ class _OSP_EXPORT_ TouchEventManager
 {
 public:
 	/**
-	 * Gets the instance of the %TouchEventManager.
-	 *
-	 * @since 2.0
-	 * @return		A instance of the %TouchEventManager
-	 * @exception		E_SUCCESS The method is successful.
-	 * @exception		E_OUT_OF_MEMORY The memory is insufficient.
-	 * @remarks		This method provides a global point of access to the TouchEventManager. And the specific error code can be accessed using the
-	 * 				GetLastResult() method.
-	 */
+	* Gets the instance of %TouchEventManager.
+	*
+	* @since 2.0
+	* @return		An instance of %TouchEventManager
+	* @exception		E_SUCCESS The method is successful.
+	* @exception		E_OUT_OF_MEMORY The memory is insufficient.
+	* @remarks		This method provides a global point of access to the TouchEventManager. The specific error code can be accessed using the
+	* 				GetLastResult() method.
+	*/
 	static TouchEventManager* GetInstance(void);
 
 	/**
 	 * Gets the list of the multi-point touches, each represented by TouchEventInfo.
 	 *
 	 * @since 2.0
-	 * @return		List of the TouchEventInfo
+	 * @return		A list of TouchEventInfo
 	 * @see			Tizen::Ui::TouchEventInfo
 	 *
 	 */
@@ -98,6 +98,6 @@ private:
 	_TouchEventManagerImpl* __pTouchEventManagerImpl;
 }; // TouchEventManager
 
-}} //Tizen::Ui
+} } //Tizen::Ui
 
 #endif // _FUI_TOUCH_EVENT_MANAGER_H_

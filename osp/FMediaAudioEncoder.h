@@ -116,8 +116,6 @@ public:
 	 *
 	 *	@since		2.0
 	 *
-	 *	@remarks	After creating an instance of this class, the Construct() method must be called explicitly to initialize this instance.
-	 *	@see		Construct()
 	 */
 	AudioEncoder(void);
 
@@ -186,8 +184,9 @@ public:
 	*             else @c null if an exception occurs
 	* @exception  E_SUCCESS             The method is successful.
 	* @exception  E_OUT_OF_MEMORY       The memory is insufficient.
-	* @remarks    The specific error code can be accessed using the GetLastResult() method.
-	* @remarks    The return value must be deleted by the caller.
+	* @remarks
+	*			- The specific error code can be accessed using the GetLastResult() method.
+	*			- The return value must be deleted by the caller.
 	*/
 	static Tizen::Base::Collection::IListT<CodecType>* GetSupportedCodecListN(void);
 

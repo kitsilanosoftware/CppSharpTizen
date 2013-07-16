@@ -50,7 +50,7 @@ class _OSP_EXPORT_ ILocationProviderListener
 {
 public:
 	/**
-	* This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called
+	* This polymorphic destructor should be overridden if required. @n This way, the destructors of the derived classes are called
 	* when the destructor of this interface is called.
 	*
 	* @since 2.0
@@ -58,14 +58,11 @@ public:
 	virtual ~ILocationProviderListener(void)  {}
 
 	/**
-	* Called when the location update is running.
-	*
-	* The location update is started when an application calls the LocationProvider::StartLocationUpdatesByInterval() or LocationProvider::StartLocationUpdatesByDistance() methods.
-	*
-	* Note that, the updated locations may not always fall into the requested accuracy level that the application has specified in the criteria.
+	* Called when the location update is running. @n
+	* The location update is started when an application calls the LocationProvider::StartLocationUpdatesByInterval() or LocationProvider::StartLocationUpdatesByDistance() methods. @n
+	* Note that, the updated locations may not always fall into the requested accuracy level that the application has specified in the criteria. @n
 	* The application is able to filter out less accurate locations by checking the location accuracy with the Location::GetHorizontalAccuracy() method
-	* if it matters to the application.
-	*
+	* if it matters to the application. @n
 	* During updating locations, along with changes in the location's accuracy, changes in the service status are also notified.
 	*
 	* @since 2.0
@@ -78,10 +75,8 @@ public:
 	virtual void OnLocationUpdated(const Tizen::Locations::Location& location) { }
 
 	/**
-	* Called when the location provider detects a movement entering into the registered region.
-	*
-	* A region is registered for monitoring by calling LocationProvider::AddMonitoringRegion() and is identified by the region ID.
-	*
+	* Called when the location provider detects a movement entering into the registered region. @n
+	* A region is registered for monitoring by calling LocationProvider::AddMonitoringRegion() and is identified by the region ID. @n
 	* While monitoring regions, the changes in the location's accuracy and the changes in the service status are notified.
 	*
 	* @since 2.0
@@ -94,10 +89,8 @@ public:
 	virtual void OnRegionEntered(Tizen::Locations::RegionId regionId) { }
 
 	/**
-	* Called when the location provider detects a movement leaving from the registered region.
-	*
-	* A region is registered for monitoring by calling LocationProvider::AddMonitoringRegion() and identified by the region ID.
-	*
+	* Called when the location provider detects a movement leaving from the registered region. @n
+	* A region is registered for monitoring by calling LocationProvider::AddMonitoringRegion() and identified by the region ID. @n
 	* While monitoring regions, the changes in the location's accuracy and the changes in the service status are notified.
 	*
 	* @since 2.0
@@ -110,22 +103,17 @@ public:
 	virtual void OnRegionLeft(Tizen::Locations::RegionId regionId) { }
 
 	/**
-	* Called when the service status of the location updates change.
-	*
-	* The status changes to @c LOC_SVC_STATUS_RUNNING, when the location provider successfully runs the requested service.
-	*
+	* Called when the service status of the location updates change. @n
+	* The status changes to @c LOC_SVC_STATUS_RUNNING, when the location provider successfully runs the requested service. @n
 	* The status changes to @c LOC_SVC_STATUS_NOT_FIXED, when the location provider is not able to run the requested service because it
-	* cannot fix the current location due to poor circumstances such as weak radio for positioning.
-	* When this status continues for a fairly long time, it is recommended to cancel the request. The request should be run after some time in order to avoid excessive battery consumption.
-	*
+	* cannot fix the current location due to poor circumstances such as weak radio for positioning. @n
+	* When this status continues for a fairly long time, it is recommended to cancel the request. The request should be run after some time in order to avoid excessive battery consumption. @n
 	* When the user withdraws the permission for an application to use the location information, the status changes to
-	* @c LOC_SVC_STATUS_DENIED and the location provider stops all ongoing services to the application.
+	* @c LOC_SVC_STATUS_DENIED and the location provider stops all ongoing services to the application.  @n
 	* In that case, the application might ask the user to grant permission to continue the aborted service
-	* or to finalize all resources for the location provider.
-	*
+	* or to finalize all resources for the location provider. @n
 	* The status @c LOC_SVC_STATUS_PAUSED is displayed when the location provider pauses the ongoing service. This happens when the application requests for the location updates without keeping the location updates awake. The status will be changed to others
-	* once the location provider resumes the paused service.
-	*
+	* once the location provider resumes the paused service. @n
 	* Note that, the application can get notifications about the location updates and accuracy changes
 	* only when the service status is @c LOC_SVC_STATUS_RUNNING.
 	*
@@ -138,18 +126,14 @@ public:
 
 
 	/**
-	* Called when the service status of the region monitoring changes.
-	*
-	* The status changes to @c LOC_SVC_STATUS_RUNNING, when the location provider successfully runs the requested service.
-	*
+	* Called when the service status of the region monitoring changes. @n
+	* The status changes to @c LOC_SVC_STATUS_RUNNING, when the location provider successfully runs the requested service. @n
 	* The status changes to @c LOC_SVC_STATUS_NOT_FIXED, when the location provider is not able to run the requested service because it
-	* cannot fix the location that is suitable for monitoring the regions.
-	*
+	* cannot fix the location that is suitable for monitoring the regions. @n
 	* When the user withdraws the permission for an application to use the location information, the status changes to
-	* @c LOC_SVC_STATUS_DENIED and the location provider stops all ongoing services to the application.
+	* @c LOC_SVC_STATUS_DENIED and the location provider stops all ongoing services to the application. @n
 	* In that case, the application might ask the user to grant permission to continue the aborted service
-	* or to finalize all resources for the location provider.
-	*
+	* or to finalize all resources for the location provider. @n
 	* Note that, the application can get notifications about the movement around regions and accuracy changes
 	* only when the service status is @c LOC_SVC_STATUS_RUNNING.
 	*
@@ -162,12 +146,10 @@ public:
 
 
 	/**
-	* Called when the accuracy level of the location changes.
-	*
+	* Called when the accuracy level of the location changes. @n
 	* The location provider tries to provide accurate location services as specified in the criteria,
-	* but the location provided by location provider may not always fall into the requested accuracy level.
-	* The %OnAccuracyChanged() listener method is called whenever the current accuracy of the location provided by location provider is changed.
-	*
+	* but the location provided by location provider may not always fall into the requested accuracy level. @n
+	* The %OnAccuracyChanged() listener method is called whenever the current accuracy of the location provided by location provider is changed. @n
 	* The accuracy changes to @c LOC_ACCURACY_INVALID when the location provider is not running any services in @c LOC_SVC_STATUS_RUNNING
 	* status.
 	*

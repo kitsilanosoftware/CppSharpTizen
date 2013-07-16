@@ -36,64 +36,63 @@ class String;
 namespace Tizen { namespace Net { namespace Nfc
 {
 
-// Forward declaration
 class _NdefRecordTypeImpl;
 
 /**
  * @if OSPDEPREC
  * Defines the NDEF RTD Smart Poster type.
  *
- * @brief <i> [Deprecated]  </i>
- * @deprecated 	This object is provided only for backward compatibility and will be deleted in a future release.
- *				Use NFC_NDEF_RTD_SMART_POSTER instead of this object.
+ * @brief <i> [Deprecated] </i>
+ * @deprecated  This object is provided only for backward compatibility and will be deleted in the near future.
+ *              Use @c NFC_NDEF_RTD_SMART_POSTER instead of this object.
  * @since   2.0
  * @endif
  */
 _OSP_EXPORT_ extern const Tizen::Base::String NDEF_RTD_SMART_POSTER;
 
 /**
-* Defines the NDEF RTD Smart Poster type. ("Sp")
-*
-* @since 2.0
-*/
+ * Defines the NDEF RTD Smart Poster type. ("Sp")
+ *
+ * @since 2.0
+ */
 _OSP_EXPORT_ extern const wchar_t NFC_NDEF_RTD_SMART_POSTER[];
 
 /**
  * @if OSPDEPREC
  * Defines the NDEF RTD %Text type.
  *
- * @brief <i> [Deprecated]  </i>
- * @deprecated 	This object is provided only for backward compatibility and will be deleted in a future release.
- *				Use NFC_NDEF_RTD_TEXT instead of this object.
+ * @brief <i> [Deprecated] </i>
+ * @deprecated  This object is provided only for backward compatibility and will be deleted in the near future.
+ *              Use @c NFC_NDEF_RTD_TEXT instead of this object.
  * @since   2.0
  * @endif
  */
 _OSP_EXPORT_ extern const Tizen::Base::String NDEF_RTD_TEXT;
 
 /**
-* Defines the NDEF RTD %Text type. ("T")
-*
-* @since 2.0
-*/
+ * Defines the NDEF RTD %Text type. ("T")
+ *
+ * @since 2.0
+ */
 _OSP_EXPORT_ extern const wchar_t NFC_NDEF_RTD_TEXT[];
 
 /**
  * @if OSPDEPREC
  * Defines the NDEF RTD URI type.
  *
- * @brief <i> [Deprecated]  </i>
- * @deprecated 	This object is provided only for backward compatibility and will be deleted in a future release.
- *				Use NFC_NDEF_RTD_URI instead of this object.
+ * @brief <i> [Deprecated] </i>
+ * @deprecated  This object is provided only for backward compatibility and will be deleted in the near future.
+ *              Use @c NFC_NDEF_RTD_URI instead of this object.
  * @since   2.0
  * @endif
  */
 _OSP_EXPORT_ extern const Tizen::Base::String NDEF_RTD_URI;
 
 /**
-* Defines the NDEF RTD URI type. ("U")
-*
-* @since 2.0
-*/
+ * Defines the NDEF RTD URI type. ("U")
+ *
+ * @since 2.0
+ */
 _OSP_EXPORT_ extern const wchar_t NFC_NDEF_RTD_URI[];
 
 /**
@@ -102,11 +101,11 @@ _OSP_EXPORT_ extern const wchar_t NFC_NDEF_RTD_URI[];
  *
  * @since   2.0
  *
- * The %NdefRecordType class represents the type of an NDEF record. It encapsulates the name and the name format of the NDEF record 
- * type. @n
- * The name format is represented by the enumeration type, Tizen::Net::Nfc::NdefRecordTypeNameFormat. The name is encoded 
- * using the US_ASCII character set and follows the rules defined by the NFC forum RTDs and RFCs. The name does not 
- * include the prefix @c "urn:nfc:wkt:" and @c "urn:nfc:ext:" defined by the NFC forum.
+ * The %NdefRecordType class represents the type of an NDEF record. It encapsulates the name and the name format of the
+ * NDEF record type. @n
+ * The name format is represented by the enumeration type, Tizen::Net::Nfc::NdefRecordTypeNameFormat. The name is
+ * encoded using the US_ASCII character set and follows the rules defined by the NFC forum RTDs and RFCs. The name does
+ * not include the prefix @c "urn:nfc:wkt:" and @c "urn:nfc:ext:" defined by the NFC forum.
  *
  * For more information on the class features, see
  * <a href="../org.tizen.native.appprogramming/html/guide/net/nfc.htm">NFC Guide</a>.
@@ -152,13 +151,13 @@ public:
 	NdefRecordType& operator =(const NdefRecordType& rhs);
 
 	/**
-	 * Compares the specified instance of an Object with the calling instance of %NdefRecordType.
+	 * Compares the specified instance of Tizen::Base::Object with the calling instance of %NdefRecordType.
 	 *
 	 * @since       2.0
 	 *
 	 * @return      @c true if the values match, @n
 	 *              else @c false
-	 * @param[in]   obj             The Object to be compared
+	 * @param[in]   obj             The Tizen::Base::Object to compare
 	 * @remarks     The method returns @c false if the specified object is not an %NdefRecordType instance. @n
 	 *              Additionally, the comparison rules for the record type name are different depending on the Type
 	 *              Name Format (TNF) value, as follows: @n
@@ -180,7 +179,7 @@ public:
 	 *      <td>NDEF_TNF_ABSOLUTE_URI </td>
 	 *      <td>The reserved characters must be percent encoded and the hexadecimal digits are normalized to upper-case 
 	 *      letters. The URI scheme and host parts of the URI must be normalized to lower case. After this, the URIs 
-	 *      are compared character by character in a case-sensitive manner. </td>
+	 *      are compared character by character in a case-sensitive manner.</td>
 	 * </tr>
 	 * <tr>
 	 *      <td>NDEF_TNF_EXTERNAL </td>
@@ -220,11 +219,12 @@ public:
 	 *
 	 * @return      The name of this record type, @n
 	 *              else an empty string if the name format is NDEF_TNF_EMPTY or NDEF_TNF_UNKNOWN
-	 * @remarks     The returned name does not have the prefix @c "urn:nfc:wkt:" and @c "urn:nfc:ext:" defined by the 
-	 *              NFC forum.
-	 *              In case of NDEF_TNF_ABSOLUTE_URI name format, this method returns the name in the same format as it 
-	 *              is given in the constructor, that is, with or without percent encoding. The name consists of the 
-	 *              characters encoded using the US_ASCII character set.
+	 * @remarks
+	 *              - The returned name does not have the prefix @c "urn:nfc:wkt:" and @c "urn:nfc:ext:" defined by the
+	 *                NFC forum.
+	 *              - In case of @c NDEF_TNF_ABSOLUTE_URI name format, this method returns the name in the same format as
+	 *                it is given in the constructor, that is, with or without percent encoding. The name consists of
+	 *                the characters encoded using the US_ASCII character set.
 	 */
 	Tizen::Base::String GetName(void) const;
 

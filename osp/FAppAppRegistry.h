@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -147,9 +146,9 @@ public:
 	 * @param[in]	key		A key corresponding to the value
 	 * @param[in]	value	A string value
 	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and '\n'.
+	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and @htmlonly '\n' @endhtmlonly.
 	 * @exception	E_KEY_ALREADY_EXIST		The key has already been used in the application preferences.
-	 * @remarks	In order to save the value in the persistent storage, the AppRegistry::Save() method must be called.
+	 * @remarks	In order to save the value in the persistent storage, the Save() method must be called.
 	 */
 	result Add(const Tizen::Base::String& key, const Tizen::Base::String& value);
 
@@ -162,9 +161,9 @@ public:
 	 * @param[in]	key		A key corresponding to the value
 	 * @param[in]	value	An integer value
 	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and '\n'.
+	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and @htmlonly '\n' @endhtmlonly.
 	 * @exception	E_KEY_ALREADY_EXIST		The key has already been used in the application preferences.
-	 * @remarks	In order to save the value in the persistent storage, the AppRegistry::Save() method must be called.
+	 * @remarks	In order to save the value in the persistent storage, the Save() method must be called.
 	 */
 	result Add(const Tizen::Base::String& key, int value);
 
@@ -177,9 +176,9 @@ public:
 	 * @param[in]	key		A key corresponding to the value
 	 * @param[in]	value	A floating point value
 	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and '\n'.
+	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and @htmlonly '\n' @endhtmlonly.
 	 * @exception	E_KEY_ALREADY_EXIST		The key has already been used in the application preferences.
-	 * @remarks	In order to save the value in the persistent storage, the AppRegistry::Save() method must be called.
+	 * @remarks	In order to save the value in the persistent storage, the Save() method must be called.
 	 */
 	result Add(const Tizen::Base::String& key, double value);
 
@@ -192,9 +191,9 @@ public:
 	 * @param[in]	key		A key corresponding to the value
 	 * @param[in]	value	A string value
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and '\n'.
+	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and @htmlonly '\n' @endhtmlonly.
 	 * @exception	E_KEY_NOT_FOUND		The specified @c key is not used in the application preferences.
-	 * @remarks	In order to save the value in the persistent storage, the AppRegistry::Save() method must be called.
+	 * @remarks	In order to save the value in the persistent storage, the Save() method must be called.
 	 */
 	result Set(const Tizen::Base::String& key, const Tizen::Base::String& value);
 
@@ -207,9 +206,9 @@ public:
 	 * @param[in]	key	A key corresponding to the value
 	 * @param[in]	value	An integer value
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and '\n'.
+	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and @htmlonly '\n' @endhtmlonly.
 	 * @exception	E_KEY_NOT_FOUND		The specified @c key is not used in the application preferences.
-	 * @remarks	In order to save the value in the persistent storage, the AppRegistry::Save() method must be called.
+	 * @remarks	In order to save the value in the persistent storage, the Save() method must be called.
 	 */
 	result Set(const Tizen::Base::String& key, int value);
 
@@ -222,9 +221,9 @@ public:
 	 * @param[in]	key	A key corresponding to the value
 	 * @param[in]	value	A floating point value
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and '\n'.
+	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and @htmlonly '\n' @endhtmlonly. 
 	 * @exception	E_KEY_NOT_FOUND		The specified @c key is not used in the application preferences.
-	 * @remarks	In order to save the value in the persistent storage, the AppRegistry::Save() method must be called.
+	 * @remarks	In order to save the value in the persistent storage, the Save() method must be called.
 	 */
 	result Set(const Tizen::Base::String& key, double value);
 
@@ -260,7 +259,7 @@ public:
 	 * @param[in]	key		The key of the value to retrieve
 	 * @param[out]	value	A string value to retrieve
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and '\n'.
+	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and @htmlonly '\n' @endhtmlonly.
 	 * @exception	E_KEY_NOT_FOUND		The specified @c key is not used in the application preferences.
 	 */
 	result Get(const Tizen::Base::String& key, Tizen::Base::String& value) const;
@@ -274,7 +273,7 @@ public:
 	 * @param[in]	key		The key of the value to retrieve
 	 * @param[out]	value	An integer value to retrieve
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and '\n'.
+	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and @htmlonly '\n' @endhtmlonly.
 	 * @exception	E_KEY_NOT_FOUND		The specified @c key is not used in the application preferences.
 	 */
 	result Get(const Tizen::Base::String& key, int& value) const;
@@ -288,7 +287,7 @@ public:
 	 * @param[in]	key		The key of the value to retrieve
 	 * @param[out]	value	A floating point value to retrieve
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and '\n'.
+	 * @exception	E_INVALID_ARG			The specified @c key is empty or is string with '\0' and @htmlonly '\n' @endhtmlonly.
 	 * @exception	E_KEY_NOT_FOUND		The specified @c key is not used in the application preferences.
 	 */
 	result Get(const Tizen::Base::String& key, double& value) const;

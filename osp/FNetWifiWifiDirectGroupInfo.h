@@ -43,211 +43,203 @@ class _OSP_EXPORT_ WifiDirectGroupInfo
 	: public Tizen::Base::Object
 {
 public:
-    /**
-     * This is the default constructor for this class.
-     *
-     * @since   2.0
-     */
-    WifiDirectGroupInfo(void);
-
-    /**
-     * Copying of objects using this copy constructor is allowed.
-     *
-     * @since   2.0
-     *
-     * @param[in]   value   An instance of %WifiDirectGroupInfo
-     */
-    WifiDirectGroupInfo(const WifiDirectGroupInfo& value);
-
-    /**
-     * This is the destructor for this class.
-     *
-     * @since   2.0
-     */
-    virtual ~WifiDirectGroupInfo(void);
-
-public:
-    /**
-     * @if OSPDEPREC
-     * Gets the autonomous group owner mode.
-     *
-     * @brief   <i> [Deprecated] </i>
-     * @deprecated  This method is deprecated because this class has been modified and is now composed of information exclusively required to configure a group. @n
-     *              So, a new API has been added. Instead of using this API, use WifiDirectDevice::CreateAutonomousGroup() API.
-
-     *
-     * @since 2.0
-     *
-     * @return  @c true if the autonomous group owner mode is activated, @n
-     *          else @c false
-     * @endif
-     */
-    bool GetAutonomousGroupOwnerMode(void) const;
-
-    /**
-     * Gets the intent of a group owner. It is used during the negotiation phase.
-     *
-     * @since 2.0
-     *
-     * @return  An intent value
-     */
-    int GetGroupOwnerIntent(void) const;
-
-    /**
-     * Gets the maximum number of clients to be associated.
-     *
-     * @since 2.0
-     *
-     * @return  The maximum number of clients to be associated
-     */
-    int GetMaxNumberOfClients(void) const;
-
-    /**
-     * @if OSPDEPREC
-     * @{
-     * Gets the SSID.
-     *
-     * @if OSPCOMPAT
-     * @brief <i> [Deprecated] [Compatibility] </i>
-     * @endif
-     * @deprecated  This method is deprecated because this class has been modified and is now composed of information that is exclusively required to configure a group. @n
-     *              So, new APIs have been added. Instead of using GetSsid() API, use WifiDirectDevice::GetGroupOwnerInfoN() or WifiDirectDevice::GetLocalDeviceInfo() API.
-     *
-     * @since 2.0
-     * @if OSPCOMPAT
-     * @compatibility   This method has compatibility issues with OSP compatible applications. @n
-     *                  For more information, see the issue description for @ref CompWifiDirectGroupInfoGetSsidPage "here".
-     * @endif
-     * @return  The SSID
-     * @}
-     * @endif
-     */
-    Tizen::Base::String GetSsid(void) const;
-
-    /**
-     * @if OSPCOMPAT
-     * @page    CompWifiDirectGroupInfoGetSsidPage Compatibility for GetSsid().
-     * @section CompWifiDirectGroupInfoGetSsidPageIssueSection Issues
-     *          Implementing this method in OSP compatible applications has the following issues: @n
-     *          -# The method returns the SSID which is the same as the device name.
-     *
-     * @section CompWifiDirectGroupInfoGetSsidPageSolutionSection  Resolutions
-     *          This issue has been resolved in Tizen @n
-     *          -# The method returns the SSID which has 'Direct-xy' as its prefix. The 'xy' is two ASCII characters or digits the
-     *          system generates randomly.
-     * @endif
-     */
-
-    /**
-     * @if OSPDEPREC
-     * Gets the BSS ID.
-     *
-     * @brief <i> [Deprecated] </i>
-     * @deprecated  This method is deprecated because this class has been modified and is now composed of information that is exclusively required to configure a group. @n
-     *              So, a new API has been added. Instead of using GetBssId() API, use WifiDirectDevice::GetGroupOwnerInfoN() API.
-     *
-     * @since 2.0
-     *
-     * @return  The BSS ID
-     * @endif
-     */
-    Tizen::Base::String GetBssId(void) const;
-
-    /**
-     * @if OSPDEPREC
-     * Gets the index of a currently working channel.
-     *
-     * @brief <i> [Deprecated] </i>
-     * @deprecated  This method is deprecated because this class has been modified and is now composed of information exclusively required to configure a group. @n
-     *              So this API has been moved to the WifiDirectDevice class.
-     *
-     * @since 2.0
-     *
-     * @return  The Wi-Fi radio channel
-     * @endif
-     */
-    WifiRadioChannel GetOperatingChannel(void) const;
-
-    /**
-     * @if OSPDEPREC
-     * Sets the mode for an autonomous group owner.
-     *
-     * @brief   <i> [Deprecated] </i>
-     * @deprecated  This method is deprecated because this class has been modified and is now composed of information exclusively required to configure a group. @n
-     *              So, a new API has been added. Instead of using SetAutonomousGroupOwnerMode() method, use WifiDirectDevice::CreateAutonomousGroup() API.
-     *
-     * @since 2.0
-     *
-     * @param[in]   mode    Set to @c true if autonomous group owner mode is enabled, @n
-     *                      else @c false
-     * @endif
-     */
-    void SetAutonomousGroupOwnerMode(bool mode);
-
-    /**
-     * Sets the intent of a group owner.
-     *
-     * @since 2.0
-     *
-     * @return       An error code
-     * @param[in]    intent         The intent to become a group owner
-     * @exception   E_SUCCESS       The method is successful.
-     * @exception   E_INVALID_ARG   Either the specified @c intent is less than @c 0, or exceeds Wifi::MAX_WIFI_DIRECT_GROUP_OWNER_INTENT.
-     * @remarks     A higher intent value means that the intent to become a group owner is higher. 
-     *              If Wifi::MAX_WIFI_DIRECT_GROUP_OWNER_INTENT is selected, it means that a device insists to be a group owner only.
-     *              If two devices participating in a group creation select the intent value as
-     *              Wifi::MAX_WIFI_DIRECT_GROUP_OWNER_INTENT, the group creation fails.
-     */
-    result SetGroupOwnerIntent(int intent);
-
-    /** 
-     * Sets the maximum number of clients to be associated.
-     *
-     * @since 2.0
-     *
-     * @return      An error code
-     * @param[in]   numberOfClient  The maximum number of clients to associate
-     * @exception   E_SUCCESS       The method is successful.
-     * @exception   E_INVALID_ARG   Either the specified @c numberOfClient is less than @c 0 or exceeds
-     *                              Wifi::MAX_WIFI_DIRECT_CONNECTED_CLIENTS.
-     */
-    result SetMaxNumberOfClients(int numberOfClient);
-
-    /**
-     * Checks whether the specified instance of %WifiDirectGroupInfo equals the current instance.
-     *
-     * @since    2.0
+	/**
+	 * This is the default constructor for this class.
 	 *
-     * @return   @c true if the specified instance equals the current instance, @n
-     *           else @c false
-     * @param[in]    obj An instance of %WifiDirectGroupInfo
-     * @remarks  This method returns @c false if the specified object is not %WifiDirectGroupInfo.
-     */
-    virtual bool Equals(const Tizen::Base::Object& obj) const;
+	 * @since       2.0
+	 */
+	WifiDirectGroupInfo(void);
 
-    /**
-     * Gets the hash value of the current instance.
-     *
-     * @since    2.0
-     *
-     * @return   The hash value of the current instance
-     */
-    virtual int GetHashCode(void) const;
+	/**
+	 * Copying of objects using this copy constructor is allowed.
+	 *
+	 * @since       2.0
+	 *
+	 * @param[in]   value   An instance of %WifiDirectGroupInfo
+	 */
+	WifiDirectGroupInfo(const WifiDirectGroupInfo& value);
 
-    /**
-     * Assigns the value of the specified instance to the current instance of %WifiDirectGroupInfo.
-     *
-     * @since   2.0
-     *
-     * @return  A reference to the %WifiDirectGroupInfo instance
-     * @param[in]   rhs     An instance of %WifiDirectGroupInfo
-     */
-    WifiDirectGroupInfo& operator =(const WifiDirectGroupInfo& rhs);
+	/**
+	 * This is the destructor for this class.
+	 *
+	 * @since       2.0
+	 */
+	virtual ~WifiDirectGroupInfo(void);
+
+	/**
+	 * @if OSPDEPREC
+	 * Gets the autonomous group owner mode.
+	 *
+	 * @brief       <i> [Deprecated] </i>
+	 * @deprecated  This method is deprecated because this class has been modified and is now composed of information
+	 *              exclusively required to configure a group. @n
+	 *              So, a new API has been added. Instead of using this API, use
+	 *              WifiDirectDevice::CreateAutonomousGroup() API.
+	 *
+	 * @since       2.0
+	 *
+	 * @return      @c true if the autonomous group owner mode is activated, @n
+	 *              else @c false
+	 * @endif
+	 */
+	bool GetAutonomousGroupOwnerMode(void) const;
+
+	/**
+	 * Gets the intent of a group owner. @n It is used during the negotiation phase.
+	 *
+	 * @since       2.0
+	 *
+	 * @return      An intent value
+	 */
+	int GetGroupOwnerIntent(void) const;
+
+	/**
+	 * Gets the maximum number of clients to be associated.
+	 *
+	 * @since       2.0
+	 *
+	 * @return      The maximum number of clients to be associated
+	 */
+	int GetMaxNumberOfClients(void) const;
+
+	/**
+	 * @{	
+	 * @if OSPDEPREC
+	 * Gets the SSID.
+	 *
+	 * @deprecated  This method is deprecated because this class has been modified and is now composed of information
+	 *              that is exclusively required to configure a group. @n
+	 *              So, new APIs have been added. Instead of using the %GetSsid() method, use the
+	 *              WifiDirectDevice::GetGroupOwnerInfoN() or WifiDirectDevice::GetLocalDeviceInfo() method.
+	 *
+	 * @since       2.0
+	 * @return      The SSID
+	 * @endif
+	 * @}
+	 */
+	Tizen::Base::String GetSsid(void) const;
+
+	/**
+	 */
+
+	/**
+	 * @if OSPDEPREC
+	 * Gets the BSS ID.
+	 *
+	 * @brief       <i> [Deprecated] </i>
+	 * @deprecated  This method is deprecated because this class has been modified and is now composed of information
+	 *              that is exclusively required to configure a group. @n
+	 *              So, a new API has been added. Instead of using the %GetBssId() method, use the
+	 *              WifiDirectDevice::GetGroupOwnerInfoN() method.
+	 *
+	 * @since       2.0
+	 *
+	 * @return      The BSS ID
+	 * @endif
+	 */
+	Tizen::Base::String GetBssId(void) const;
+
+	/**
+	 * @if OSPDEPREC
+	 * Gets the index of a currently working channel.
+	 *
+	 * @brief       <i> [Deprecated] </i>
+	 * @deprecated  This method is deprecated because this class has been modified and is now composed of information
+	 *              exclusively required to configure a group. @n
+	 *              So this API has been moved to the WifiDirectDevice class.
+	 *
+	 * @since       2.0
+	 *
+	 * @return      The Wi-Fi radio channel
+	 * @endif
+	 */
+	WifiRadioChannel GetOperatingChannel(void) const;
+
+	/**
+	 * @if OSPDEPREC
+	 * Sets the mode for an autonomous group owner.
+	 *
+	 * @brief       <i> [Deprecated] </i>
+	 * @deprecated  This method is deprecated because this class has been modified and is now composed of information
+	 *              exclusively required to configure a group. @n
+	 *              So, a new API has been added. Instead of using the %SetAutonomousGroupOwnerMode() method, use the
+	 *              WifiDirectDevice::CreateAutonomousGroup() method.
+	 *
+	 * @since       2.0
+	 *
+	 * @param[in]   mode            Set to @c true if autonomous group owner mode is enabled, @n
+	 *                              else @c false
+	 * @endif
+	 */
+	void SetAutonomousGroupOwnerMode(bool mode);
+
+	/**
+	 * Sets the intent of a group owner.
+	 *
+	 * @since       2.0
+	 *
+	 * @return      An error code
+	 * @param[in]   intent          The intent to become a group owner
+	 * @exception   E_SUCCESS       The method is successful.
+	 * @exception   E_INVALID_ARG   Either the specified @c intent is less than @c 0, or exceeds
+	 *                              Wifi::MAX_WIFI_DIRECT_GROUP_OWNER_INTENT.
+	 * @remarks
+	 *              - A higher intent value means that the intent to become a group owner is higher.
+	 *              - If Wifi::MAX_WIFI_DIRECT_GROUP_OWNER_INTENT is selected, it means that a device insists to be a
+	 *                group owner only.
+	 *              - If two devices participating in a group creation select the intent value as
+	 *                Wifi::MAX_WIFI_DIRECT_GROUP_OWNER_INTENT, the group creation fails.
+	 */
+	result SetGroupOwnerIntent(int intent);
+
+	/**
+	 * Sets the maximum number of clients to be associated.
+	 *
+	 * @since       2.0
+	 *
+	 * @return      An error code
+	 * @param[in]   numberOfClient  The maximum number of clients to associate
+	 * @exception   E_SUCCESS       The method is successful.
+	 * @exception   E_INVALID_ARG   Either the specified @c numberOfClient is less than @c 0 or exceeds
+	 *                              Wifi::MAX_WIFI_DIRECT_CONNECTED_CLIENTS.
+	 */
+	result SetMaxNumberOfClients(int numberOfClient);
+
+	/**
+	 * Checks whether the specified instance of %WifiDirectGroupInfo equals the current instance.
+	 *
+	 * @since       2.0
+	 *
+	 * @return      @c true if the specified instance equals the current instance, @n
+	 *              else @c false
+	 * @param[in]   obj             An instance of %WifiDirectGroupInfo
+	 * @remarks     This method returns @c false if the specified object is not %WifiDirectGroupInfo.
+	 */
+	virtual bool Equals(const Tizen::Base::Object& obj) const;
+
+	/**
+	 * Gets the hash value of the current instance.
+	 *
+	 * @since       2.0
+	 *
+	 * @return      The hash value of the current instance
+	 */
+	virtual int GetHashCode(void) const;
+
+	/**
+	 * Assigns the value of the specified instance to the current instance of %WifiDirectGroupInfo.
+	 *
+	 * @since       2.0
+	 *
+	 * @return      A reference to the %WifiDirectGroupInfo instance
+	 * @param[in]   rhs             An instance of %WifiDirectGroupInfo
+	 */
+	WifiDirectGroupInfo& operator =(const WifiDirectGroupInfo& rhs);
 
 private:
-    _WifiDirectGroupInfoImpl* __pWifiDirectGroupInfoImpl;
+	_WifiDirectGroupInfoImpl* __pWifiDirectGroupInfoImpl;
 
-    friend class _WifiDirectGroupInfoImpl;
+	friend class _WifiDirectGroupInfoImpl;
 }; // WifiDirectGroupInfo
 
 } } } // Tizen::Net::Wifi

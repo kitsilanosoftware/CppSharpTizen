@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -70,7 +70,7 @@ _OSP_EXPORT_ extern const wchar_t* const FAST_SCROLL_SEARCH_ICON_INDEX_STRING;
  * OnFastScrollIndexChanged() method of that instance is invoked.
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_listviews.htm">ListViews</a>.
- *
+
  */
 class _OSP_EXPORT_ IFastScrollListener
 	: public Tizen::Base::Runtime::IEventListener
@@ -92,7 +92,7 @@ public:
 	 * @param[in]   source			The source of the event
 	 * @param[in]   index			The index
 	 * @remarks     When the search icon index is enabled, you can check whether the search icon index is touched by comparing @c index with the string
-	 *				constant FAST_SCROLL_SEARCH_ICON_INDEX.
+	 *				constant ::FAST_SCROLL_SEARCH_ICON_INDEX.
 	 *
 	 */
 	virtual void OnFastScrollIndexSelected(Tizen::Ui::Control& source, Tizen::Base::String& index) = 0;

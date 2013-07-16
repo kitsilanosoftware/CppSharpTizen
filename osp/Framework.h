@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -27,7 +26,7 @@
  * @brief		This namespace is the root namespace of the %Tizen native framework.
  *
  * The %Tizen namespace is the top-level namespace that encompasses all other
- * C++ namespaces in Tizen.
+ * C++ namespaces in %Tizen.
  */
 namespace Tizen
 {

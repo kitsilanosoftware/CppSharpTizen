@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -46,7 +45,7 @@ typedef UiApp* (*UiAppInstanceFactory)(void);
  *
  * The %UiApp class is the base class of a %Tizen native UI application.
  * A %Tizen native UI application must inherit from the %UiApp class. This class provides the basic features necessary to define the
- * Tizen native UI application.
+ * %Tizen native UI application.
  * @n
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/app/app_namespace.htm">App Guide</a> and <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/tizen_app_model/application_model.htm">Native Application Model</a>.
  *
@@ -71,7 +70,7 @@ public:
 	 *			else @c null if it fails
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_INVALID_STATE	The frame has not been properly initialized.
-	 * @exception	E_OBJ_NOT_FOUND	Frame is not found.
+	 * @exception	E_OBJ_NOT_FOUND	The frame is not found.
 	 */
 	IAppFrame* GetAppFrame(void) const;
 
@@ -248,7 +247,7 @@ protected:
 	// This method is for internal use only.
 	// Using this method can cause behavioral, security-related, and consistency-related issues in the application.
 	//
-	// The following methods are reserved and the name of the methods can be changed at any time without prior notice.
+	// This method is reserved and may change its name at any time without prior notice.
 	//
 	// @since	2.0
 	//
@@ -258,7 +257,7 @@ protected:
 	// This method is for internal use only.
 	// Using this method can cause behavioral, security-related, and consistency-related issues in the application.
 	//
-	// The following methods are reserved and the name of the methods can be changed at any time without prior notice.
+	// This method is reserved and may change its name at any time without prior notice.
 	//
 	// @since	2.0
 	//
@@ -268,7 +267,7 @@ protected:
 	// This method is for internal use only.
 	// Using this method can cause behavioral, security-related, and consistency-related issues in the application.
 	//
-	// The following methods are reserved and the name of the methods can be changed at any time without prior notice.
+	// This method is reserved and may change its name at any time without prior notice.
 	//
 	// @since	2.0
 	//

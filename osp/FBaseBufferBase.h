@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -56,7 +55,8 @@ enum PositionTo
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/base/buffer.htm">Buffer</a>.
  *
- * @see		Tizen::Base::ByteBuffer, Tizen::Base::Buffer< Type >
+ * @see		Tizen::Base::ByteBuffer
+ * @see		Tizen::Base::Buffer< Type >
  */
 
 class _OSP_EXPORT_ BufferBase
@@ -159,7 +159,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_INVALID_OPERATION The current state of the instance prohibits the execution of the specified operation.@n
+	 * @exception	E_INVALID_OPERATION The current state of the instance prohibits the execution of the specified operation. @n
 	 *									The mark has not been set.
 	 * @remarks		Invoking this method neither changes nor discards the mark's value.
 	 */
@@ -325,7 +325,7 @@ protected:
 	BufferBase(void);
 
 	/**
-	 * Initializes this instance of %BufferBase with the specified capacity.
+	 * Initializes this instance of %BufferBase with the specified @c capacity.
 	 *
 	 * @since 2.0
 	 *

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -43,7 +42,7 @@ namespace Tizen { namespace Base { namespace Collection
 
 /**
  * @interface ICollection
- * @brief	This interface represents a collection of objects.
+ * @brief	This interface represents a collection of objects. @n
  *			It defines the size, enumerators, and the synchronization mechanism of a collection.
  *
  * @since 2.0

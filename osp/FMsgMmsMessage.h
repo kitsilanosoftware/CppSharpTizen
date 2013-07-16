@@ -78,7 +78,7 @@ namespace Tizen { namespace Messaging
 		* @since		2.0
 		*
 		* @return		A reference to the %MmsMessage instance
-		* @param[in]	rhs		A reference to the %MmsMessage instance to be copied
+		* @param[in]	rhs		A reference to the %MmsMessage instance to copy
 		*/
 		MmsMessage& operator =(const MmsMessage& rhs);
 
@@ -87,7 +87,7 @@ namespace Tizen { namespace Messaging
 		*
 		* @since		2.0
 		*
-		* @return			@c true if the specified instance of Object is equal to the calling %MmsMessage instance, @n
+		* @return			@c true if the specified instance of Tizen::Base::Object is equal to the calling %MmsMessage instance, @n
 		*						else @c false
 		* @param[in]		obj		The object to compare
 		*/
@@ -135,14 +135,7 @@ namespace Tizen { namespace Messaging
 		/**
 		* Adds the attachment of the specific type.
 		*
-		* @if OSPCOMPAT
-		* @brief <i> [Compatibility] </i>
-		* @endif
 		* @since		2.0
-		* @if OSPCOMPAT
-		* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-		*					For more information, see @ref CompIoPathPage "here".
-		* @endif
 		*
 		* @return		An error code
 		* @param[in]	format				The format of the attachment
@@ -154,7 +147,7 @@ namespace Tizen { namespace Messaging
 		* 									- The specified file format is already attached. @n
 		* 									- The specified @c format is invalid. @n
 		* 									- The specified file contains invalid or the media is not supported. @n
-		* 									- The specified file format cannot be attached.@n
+		* 									- The specified file format cannot be attached. @n
 		* 									(An MMS attachment may contain either an image, audio, video, vCard, or a vCalendar file or a combination of an image, audio, vCard, and vCalendar file. @n
 		* 									MMS attachments cannot contain a video file in combination with an image or audio file.)
 		* @exception	E_MAX_EXCEEDED		The size of the file exceeds the maximum limit (Maximum 295KB). @n

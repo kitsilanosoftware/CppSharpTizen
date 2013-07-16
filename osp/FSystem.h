@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -54,6 +53,7 @@
 #include <FSysIScreenEventListener.h>
 #include <FSysIChargingEventListener.h>
 #include <FSysPowerManager.h>
+#include <FSysIBootEventListener.h>
 
 // Device State
 #include <FSysDeviceManager.h>

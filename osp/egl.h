@@ -297,6 +297,8 @@ typedef void* EGLClientBuffer;
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLint eglGetError(void);
 
@@ -304,6 +306,8 @@ EGLint eglGetError(void);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLDisplay eglGetDisplay(EGLNativeDisplayType display_id);
 
@@ -311,6 +315,8 @@ EGLDisplay eglGetDisplay(EGLNativeDisplayType display_id);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglInitialize(EGLDisplay dpy, EGLint* major, EGLint* minor);
 
@@ -318,6 +324,8 @@ EGLBoolean eglInitialize(EGLDisplay dpy, EGLint* major, EGLint* minor);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglTerminate(EGLDisplay dpy);
 
@@ -325,6 +333,8 @@ EGLBoolean eglTerminate(EGLDisplay dpy);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 const char* eglQueryString(EGLDisplay dpy, EGLint name);
 
@@ -332,6 +342,8 @@ const char* eglQueryString(EGLDisplay dpy, EGLint name);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglGetConfigs(EGLDisplay dpy, EGLConfig* configs, EGLint config_size, EGLint* num_config);
 
@@ -339,6 +351,8 @@ EGLBoolean eglGetConfigs(EGLDisplay dpy, EGLConfig* configs, EGLint config_size,
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglChooseConfig(EGLDisplay dpy, const EGLint* attrib_list, EGLConfig* configs, EGLint config_size, EGLint* num_config);
 
@@ -346,6 +360,8 @@ EGLBoolean eglChooseConfig(EGLDisplay dpy, const EGLint* attrib_list, EGLConfig*
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglGetConfigAttrib(EGLDisplay dpy, EGLConfig config, EGLint attribute, EGLint* value);
 
@@ -353,6 +369,8 @@ EGLBoolean eglGetConfigAttrib(EGLDisplay dpy, EGLConfig config, EGLint attribute
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLSurface eglCreateWindowSurface(EGLDisplay dpy, EGLConfig config, EGLNativeWindowType win, const EGLint* attrib_list);
 
@@ -360,6 +378,8 @@ EGLSurface eglCreateWindowSurface(EGLDisplay dpy, EGLConfig config, EGLNativeWin
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLSurface eglCreatePbufferSurface(EGLDisplay dpy, EGLConfig config, const EGLint* attrib_list);
 
@@ -367,6 +387,8 @@ EGLSurface eglCreatePbufferSurface(EGLDisplay dpy, EGLConfig config, const EGLin
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLSurface eglCreatePixmapSurface(EGLDisplay dpy, EGLConfig config, EGLNativePixmapType pixmap, const EGLint* attrib_list);
 
@@ -374,6 +396,8 @@ EGLSurface eglCreatePixmapSurface(EGLDisplay dpy, EGLConfig config, EGLNativePix
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglDestroySurface(EGLDisplay dpy, EGLSurface surface);
 
@@ -381,6 +405,8 @@ EGLBoolean eglDestroySurface(EGLDisplay dpy, EGLSurface surface);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglQuerySurface(EGLDisplay dpy, EGLSurface surface, EGLint attribute, EGLint* value);
 
@@ -388,6 +414,8 @@ EGLBoolean eglQuerySurface(EGLDisplay dpy, EGLSurface surface, EGLint attribute,
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglBindAPI(EGLenum api);
 
@@ -395,6 +423,8 @@ EGLBoolean eglBindAPI(EGLenum api);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLenum eglQueryAPI(void);
 
@@ -402,6 +432,8 @@ EGLenum eglQueryAPI(void);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglWaitClient(void);
 
@@ -409,6 +441,8 @@ EGLBoolean eglWaitClient(void);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglReleaseThread(void);
 
@@ -416,6 +450,8 @@ EGLBoolean eglReleaseThread(void);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLSurface eglCreatePbufferFromClientBuffer(EGLDisplay dpy, EGLenum buftype, EGLClientBuffer buffer, EGLConfig config, const EGLint* attrib_list);
 
@@ -423,6 +459,8 @@ EGLSurface eglCreatePbufferFromClientBuffer(EGLDisplay dpy, EGLenum buftype, EGL
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglSurfaceAttrib(EGLDisplay dpy, EGLSurface surface, EGLint attribute, EGLint value);
 
@@ -430,6 +468,8 @@ EGLBoolean eglSurfaceAttrib(EGLDisplay dpy, EGLSurface surface, EGLint attribute
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglBindTexImage(EGLDisplay dpy, EGLSurface surface, EGLint buffer);
 
@@ -437,6 +477,8 @@ EGLBoolean eglBindTexImage(EGLDisplay dpy, EGLSurface surface, EGLint buffer);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglReleaseTexImage(EGLDisplay dpy, EGLSurface surface, EGLint buffer);
 
@@ -444,6 +486,8 @@ EGLBoolean eglReleaseTexImage(EGLDisplay dpy, EGLSurface surface, EGLint buffer)
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglSwapInterval(EGLDisplay dpy, EGLint interval);
 
@@ -451,6 +495,8 @@ EGLBoolean eglSwapInterval(EGLDisplay dpy, EGLint interval);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLContext eglCreateContext(EGLDisplay dpy, EGLConfig config, EGLContext share_context, const EGLint* attrib_list);
 
@@ -458,6 +504,8 @@ EGLContext eglCreateContext(EGLDisplay dpy, EGLConfig config, EGLContext share_c
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglDestroyContext(EGLDisplay dpy, EGLContext ctx);
 
@@ -465,6 +513,8 @@ EGLBoolean eglDestroyContext(EGLDisplay dpy, EGLContext ctx);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglMakeCurrent(EGLDisplay dpy, EGLSurface draw, EGLSurface read, EGLContext ctx);
 
@@ -472,6 +522,8 @@ EGLBoolean eglMakeCurrent(EGLDisplay dpy, EGLSurface draw, EGLSurface read, EGLC
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLContext eglGetCurrentContext(void);
 
@@ -479,6 +531,8 @@ EGLContext eglGetCurrentContext(void);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLSurface eglGetCurrentSurface(EGLint readdraw);
 
@@ -486,6 +540,8 @@ EGLSurface eglGetCurrentSurface(EGLint readdraw);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLDisplay eglGetCurrentDisplay(void);
 
@@ -493,6 +549,8 @@ EGLDisplay eglGetCurrentDisplay(void);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglQueryContext(EGLDisplay dpy, EGLContext ctx, EGLint attribute, EGLint* value);
 
@@ -500,6 +558,8 @@ EGLBoolean eglQueryContext(EGLDisplay dpy, EGLContext ctx, EGLint attribute, EGL
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglWaitGL(void);
 
@@ -507,6 +567,8 @@ EGLBoolean eglWaitGL(void);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglWaitNative(EGLint engine);
 
@@ -514,6 +576,8 @@ EGLBoolean eglWaitNative(EGLint engine);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglSwapBuffers(EGLDisplay dpy, EGLSurface surface);
 
@@ -521,6 +585,8 @@ EGLBoolean eglSwapBuffers(EGLDisplay dpy, EGLSurface surface);
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglCopyBuffers(EGLDisplay dpy, EGLSurface surface, EGLNativePixmapType target);
 
@@ -534,20 +600,12 @@ typedef void (*__eglMustCastToProperFunctionPointerType)(void);
 
 /* Now, define eglGetProcAddress using the generic function ptr. type */
 /**
- * @page EGLeglGetProcAddress Compatibility for eglGetProcAddress.
- * @section CompClassNameMethodNamePageIssueSection Issues
- *	Implementation of this method in API versions prior to 1.2 has the following issue: @n
- *
- * -# This method does not work as expected in API versions prior to 1.2.
- *
- * @section CompClassNameMethodNamePageSolutionSection Resolutions
- * The issue mentioned above is resolved in API version 1.2, and it is recommended to use API version 1.2 or above. @n
-*/
-/**
  * Returns function pointer of a GL or an EGL extension function.
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since					2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  *
 */
 EGLAPI __eglMustCastToProperFunctionPointerType eglGetProcAddress(const char* procname);
@@ -556,6 +614,8 @@ EGLAPI __eglMustCastToProperFunctionPointerType eglGetProcAddress(const char* pr
  * You can find more details at the Khronos Group site: http://www.khronos.org/registry/egl
  *
  * @since	2.0
+ * @feature	%http://tizen.org/feature/opengles, %http://tizen.org/feature/opengles.version.1_1, or %http://tizen.org/feature/opengles.version.2_0
+ * @remarks	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
  */
 EGLBoolean eglUpdateBufferOSP(EGLDisplay dpy, EGLSurface surface);
 

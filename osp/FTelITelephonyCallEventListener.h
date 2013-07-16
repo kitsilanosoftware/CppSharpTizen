@@ -59,7 +59,6 @@ public:
 	*
     * @param[in]    callStatus The new status of a call
     * @param[in]    pCallInfo  The detailed information of a call
-    * @see  Tizen::Telephony::CallStatus
     */
 	virtual void OnTelephonyCallStatusChangedN(CallStatus callStatus, CallInfo* pCallInfo) = 0;
 

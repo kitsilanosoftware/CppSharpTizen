@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -69,6 +68,41 @@ enum MemoryMappedFileSyncFlag
  *
  * The %MemoryMappedFile class provides features for using a memory mapped file,
  * which maps the data of a file to an application's virtual address space.
+ *
+ * @code
+ *
+ * #include <FBase.h>
+ * #include <FIo.h>
+ * #include <FApp.h>
+ *
+ * using namespace Tizen::Base;
+ * using namespace Tizen::Base::Runtime;
+ * using namespace Tizen::Base::Collection;
+ * using namespace Tizen::Io;
+ * using namespace Tizen::App;
+ *
+ * result
+ * MyApp::Execute(void)
+ * {
+ *	File file;
+ *	String filePath(App::GetInstance()->GetAppDataPath() + L”myFile.txt”);
+ *	file.Construct(filePath, “w+);
+ *
+ *	String testMsg(L”MemoryMappedFileTest”);
+ *	file.Write(testMsg);
+ *	file.Flush();
+ *
+ *	long long mapLength = 4096;
+ *	MemoryMappedFile mapFile;
+ *	mapFile.Construct(file);
+ *	void* pMappedAddr = mapFile.Map(null, mapLength, MEMORY_PROTECTION_MODE_READ | MEMORY_PROTECTION_MODE_WRITE, MEMORY_MAPPED_FILE_FLAG_SHARED, 0);
+ *
+ *	char* pBuffer = new char[testMsg.GetLength() + 1];
+ *	memcpy(pBuffer, pMappedAddr, testMsg.GetLength());
+ *
+ * }
+ *
+ * @endcode
  */
 class _OSP_EXPORT_ MemoryMappedFile
 	: public Tizen::Base::Object

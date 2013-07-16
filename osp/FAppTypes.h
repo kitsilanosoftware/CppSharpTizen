@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -79,7 +78,7 @@ enum AppState
 enum AppUiState
 {
 	APP_UI_STATE_FOREGROUND = 0x01,             /**< The application is completely visible on foreground */
-	APP_UI_STATE_PARTIAL_BACKGROUND = 0x02,     /**< The application is partially hidden by another window such as a system pop-up */
+	APP_UI_STATE_PARTIAL_BACKGROUND = 0x02,     /**< The application is partially hidden by another window, such as a system pop-up */
 	APP_UI_STATE_BACKGROUND = 0x04              /**< The application is completely hidden by a full-screen window, usually by another application or an application control */
 };
 
@@ -104,7 +103,7 @@ enum AppCtrlResult
  * Represents the application launch arguments in App::App::OnUserEventReceivedN().
  *
  * @brief	<i> [Deprecated] </i>
- * @deprecated	This variable is deprecated. From %Tizen, App::App::OnUserEventReceivedN()
+ * @deprecated	This variable is deprecated. From %Tizen API version 2.1, App::App::OnUserEventReceivedN()
  * 				is not invoked for the request from application and %AppLaunchRequestId is not used anymore.
  *				Instead, use IAppControlProviderEventListener.
  * @since	2.0

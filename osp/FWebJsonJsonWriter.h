@@ -19,7 +19,7 @@
  * @file		FWebJsonJsonWriter.h
  * @brief		This is the header file for composing a JSON-encoded file.
  *
- * This header file contains the declarations of JSON functionalities for composing JSON-encoded file.
+ * This header file contains the declarations of the JSON functionalities for composing JSON-encoded file.
  */
 #ifndef _FWEB_JSON_JSON_WRITER_H_
 #define _FWEB_JSON_JSON_WRITER_H_
@@ -42,11 +42,11 @@ namespace Tizen { namespace Web { namespace Json
  *
  * @since	2.0
  *
- * The %JsonWriter class contains the declarations of JSON functionalities for composing JSON-encoded files.
- * @n
+ * The %JsonWriter class contains the declarations of the JSON functionalities for composing JSON-encoded files.
+ * 
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/web/json_namespace.htm">JSON Guide</a>.
  *
- * The following example shows how to use %JsonWriter methods.
+ * The following example demonstrates how to use the %JsonWriter methods.
  *
  * @code
  *	#include <FWebJson.h>
@@ -93,60 +93,70 @@ class _OSP_EXPORT_ JsonWriter
 {
 public:
 	/**
-	 * Serializes the JSON-encoded data from %IJsonValue to a file.
+	 * Serializes the JSON-encoded data from IJsonValue to a file.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since		2.0
-	 * @if OSPCOMPAT
-	 * @compatibility  This method has compatibility issues with OSP compatible applications. @n
-	 * 			     				  For more information, see @ref CompIoPathPage "here".
-	 * @endif
 	 *
-	 * @param[in]		pValue			JSON value to be encoded.
-	 * @param[out]		filePath		The JSON file path
 	 * @return		An error code
+	 * @param[in]		pValue			The JSON value to encode
+	 * @param[out]		filePath		The JSON file path
 	 * @exception		E_SUCCESS		The method is successful.
 	 * @exception		E_INVALID_DATA		The specified @c pValue is @c null.
 	 * @exception		E_INVALID_ARG		The specified @c filePath is incorrect.
-	 * @exception		E_FAILURE		The method has failed.
+	 * @exception		E_ILLEGAL_ACCESS	Access is denied due to insufficient permission.
+	 * @exception		E_STORAGE_FULL		The disk space is full.
+	 * @exception		E_SYSTEM		The method cannot proceed due to a severe system error.
 	 */
 	static result Compose(const IJsonValue* pValue, Tizen::Base::String& filePath);
 
 	/**
-	 * Serializes the JSON-encoded data from %IJsonValue to a buffer
+	 * Serializes the JSON-encoded data from IJsonValue to a buffer.
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]		pValue			JSON value to be encoded.
-	 * @param[in]		bufferLength		Json encoded data buffer length.
-	 * @param[out]		pBuffer			The buffer with Json encoded data.
 	 * @return		An error code
+	 * @param[in]		pValue			The JSON value to encode
+	 * @param[in]		bufferLength		The JSON-encoded data buffer length
+	 * @param[out]		pBuffer			The buffer with JSON-encoded data
 	 * @exception		E_SUCCESS		The method is successful.
+	 * @exception		E_INVALID_ARG	Either of the following conditions has occurred:
+	 *								- The specified @c pBuffer is @c null.
+	 *								- The specified bufferLength is negative.
 	 * @exception		E_INVALID_DATA		The specified @c pValue is @c null.
-	 * @exception		E_FAILURE		The method has failed.
 	 */
 	static result Compose(const IJsonValue* pValue, void* pBuffer, int bufferLength);
 
 	/**
-	 * Serializes the JSON-encoded data from %IJsonValue to %ByteBuffer.
+	 * Serializes the JSON-encoded data from IJsonValue to Tizen::Base::ByteBuffer.
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]		pValue			JSON value to be encoded.
-	 * @param[out]		buffer			The buffer with JSON-encoded data
 	 * @return		An error code
+	 * @param[in]		pValue			The JSON value to encode
+	 * @param[out]		buffer			The buffer with JSON-encoded data
 	 * @exception		E_SUCCESS		The method is successful.
 	 * @exception		E_INVALID_DATA		The specified @c pValue is @c null.
-	 * @exception		E_FAILURE		The method has failed.
-	 * @remarks	ByteBuffer parameter has to be constructed with a non zero capacity before calling this method.
+	 * @remarks	The ByteBuffer parameter has to be constructed with a non-zero capacity before calling this method.
 	 */
 	static result Compose(const IJsonValue* pValue, Tizen::Base::ByteBuffer& buffer);
 
+	/**
+	 * Serializes the JSON-encoded data from IJsonValue to Tizen::Base::ByteBuffer with unescaped wide characters.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]		pValue			The JSON value to encode
+	 * @param[out]		buffer			The buffer with JSON-encoded data
+	 * @exception		E_SUCCESS		The method is successful.
+	 * @exception		E_INVALID_DATA		The specified @c pValue is @c null.
+	 * @remarks	The ByteBuffer parameter has to be constructed with a non-zero capacity before calling this method.
+	 */
+	static result ComposeUnescapeUnicode(const IJsonValue* pValue, Tizen::Base::ByteBuffer& buffer);
+
 private:
 	//
-	// This default constructor is intentionally declared as private because this class cannot be constructed
+	// This default constructor is intentionally declared as private because this class cannot be constructed.
 	//
 	// @remarks		This constructor is hidden.
 	//

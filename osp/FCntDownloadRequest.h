@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -25,6 +24,8 @@
 
 #include <FBaseResult.h>
 #include <FBaseString.h>
+#include <FBaseColIMap.h>
+#include <FCntTypes.h>
 
 namespace Tizen { namespace Content
 {
@@ -154,6 +155,124 @@ public:
 	* @return		The file name
 	*/
 	Tizen::Base::String GetFileName(void) const;
+
+	/**
+	* Determines whether the system should show the download notification or not. @n
+	* If @c true, the system posts notifications about this download request through the Tizen::Shell::NotificationManager. @n
+	* By default, this value sets to @c true.
+	*
+	* @since 2.1
+	*
+	* @param[in] enable Set to @c true if the system shows a notification for this download request, @n
+	*					else @c false
+	* @see Tizen::Shell::NotificationManager
+	*/
+	void SetNotification(bool enable);
+
+	/**
+	* Sets extra data that is delivered to the application when the notification message is selected. @n
+	* The extra data will be passed to the application through the
+	* Tizen::App::IAppControlProviderEventListener::OnAppControlRequestReceived() method.
+	*
+	* @since 2.1
+	*
+	* @return An error code
+	* @param[in] pExtraData A pointer to an argument map of the Tizen::Base::String key and the Tizen::Base::String value pair
+	* @exception E_SUCCESS The method is successful.
+	* @exception E_INVALID_ARG Either of the following conditions has occurred:
+	* - The argument is @c null.
+	* - The argument is not a map of the Tizen::Base::String key and the Tizen::Base::String value pair.
+	* @see Tizen::Shell::NotificationManager
+	* @see Tizen::App::IAppControlProviderEventListener::OnAppControlRequestReceived()
+	*/
+	result SetNotificationExtraData(const Tizen::Base::Collection::IMap *pExtraData);
+
+	/**
+	* Sets to an allowed network type. @n
+	* By default, all network types are allowed.
+	*
+	* @since 2.1
+	*
+	* @param[in] type The download network type
+	*/
+	void SetNetworkType(DownloadNetworkType type);
+
+	/**
+	* Checks whether the system should show a notification for this download request.
+	*
+	* @since 2.1
+	*
+	* @return @c true if the system should show a notification for this download request, @n
+	* else @c false
+	*/
+	bool IsNotificationEnabled(void) const;
+
+	/**
+	* Gets extra data that is delivered to the application when the notification message is selected.
+	*
+	* @since 2.1
+	*
+	* @return The extra data map that consists of the Tizen::Base::String key and the Tizen::Base::String value pair
+	*/
+	const Tizen::Base::Collection::IMap* GetNotificationExtraData(void) const;
+
+	/**
+	* Gets an allowed network type.
+	*
+	* @since 2.1
+	*
+	* @return The network type
+	*/
+	DownloadNetworkType GetNetworkType(void) const;
+
+	/**
+	* Adds an HTTP header field.
+	*
+	* @since 2.1
+	*
+	* @return An error code
+	* @param[in] field The HTTP header field
+	* @param[in] value The value of the header field
+	* @exception E_SUCCESS The method is successful.
+	* @exception E_INVALID_ARG Either the field is empty or it already exists.
+	*/
+	result AddRequestHeader(const Tizen::Base::String& field, const Tizen::Base::String& value);
+
+	/**
+	* Sets an HTTP header field.
+	*
+	* @since 2.1
+	*
+	* @return An error code
+	* @param[in] field The HTTP header field
+	* @param[in] value The value of the header field
+	* @exception E_SUCCESS The method is successful.
+	* @exception E_INVALID_ARG Either the field is empty or it does not exist.
+	*/
+	result SetRequestHeader(const Tizen::Base::String& field, const Tizen::Base::String& value);
+
+	/**
+	* Removes an HTTP header field.
+	*
+	* @since 2.1
+	*
+	* @return An error code
+	* @param[in] field The HTTP header field
+	* @exception E_SUCCESS The method is successful.
+	* @exception E_INVALID_ARG Either the field is empty or it does not exist.
+	*/
+	result RemoveRequestHeader(const Tizen::Base::String& field);
+
+	/**
+	* Gets the value of an HTTP header field.
+	*
+	* @since 2.1
+	*
+	* @return The value of the HTTP header field if successful, @n
+	* else @c null if there is no HTTP header field
+	* @param[in] field The HTTP header field
+	*/
+	Tizen::Base::String* GetRequestHeaderN(const Tizen::Base::String& field);
 
 private:
 	/**

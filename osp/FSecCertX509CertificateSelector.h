@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -79,7 +78,7 @@ public:
 	 *
 	 * @param[in]	certificateType		The certificate type
 	 */
-	virtual void SetType(const CertificateType certificateType);
+	virtual void SetType(CertificateType certificateType);
 
 private:
 	X509CertificateSelector(const X509CertificateSelector& rhs);

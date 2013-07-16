@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -81,9 +81,9 @@ public:
 	virtual void OnActionPerformed(const Tizen::Ui::Control& source, int actionId);
 
 private:
-	static const int  ID_TABBAR_ITEM1 = 100;
-	static const int  ID_TABBAR_ITEM2 = 101;
-	static const int  ID_TABBAR_ITEM3 = 102;
+	static const int ID_TABBAR_ITEM1 = 100;
+	static const int ID_TABBAR_ITEM2 = 101;
+	static const int ID_TABBAR_ITEM3 = 102;
 
 	Tizen::Ui::Controls::TabBar *__pTabBar;
 };
@@ -127,7 +127,7 @@ TabBarSample::OnInitializing()
 	__pTabBar->AddActionEventListener(*this);
 
 	// Adds the tab bar to the form
-	AddControl(*__pTabBar);
+	AddControl(__pTabBar);
 
 	return r;
 }
@@ -161,7 +161,8 @@ class _OSP_EXPORT_ TabBar
 // Lifecycle
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the %Construct() method must be called right after calling this constructor.
 	 *
 	 * @since	2.0
 	 *
@@ -185,13 +186,33 @@ public:
 	 * @return      An error code
 	 * @param[in]   x               	The X position of the top left corner
 	 * @param[in]   y               	The Y position of the top left corner
-	 * @param[in]   width           	The width
+	 * @param[in]   width           	The width @n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @exception   E_SUCCESS       	The method is successful.
 	 * @exception   E_INVALID_ARG   	A specified input parameter is invalid.
 	 * @exception   E_INVALID_STATE 	This instance is in an invalid state.
 	 * @exception   E_SYSTEM        	A system error has occurred.
 	 */
 	result Construct(int x, int y, int width);
+
+	/**
+	 * Initializes this instance of %TabBar with the specified parameters.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      An error code
+	 * @param[in]   x               	The X position of the top left corner
+	 * @param[in]   y               	The Y position of the top left corner
+	 * @param[in]   width           	The width @n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @exception   E_SUCCESS       	The method is successful.
+	 * @exception   E_INVALID_ARG   	A specified input parameter is invalid.
+	 * @exception   E_INVALID_STATE 	This instance is in an invalid state.
+	 * @exception   E_SYSTEM        	A system error has occurred.
+	 */
+	result Construct(float x, float y, float width);
 
 
 // Operation
@@ -202,17 +223,18 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   item            	The item to be added
+	 * @param[in]   item            	The item to add
 	 * @exception   E_SUCCESS       	The method is successful.
 	 * @exception   E_INVALID_ARG   	The specified input parameter is invalid. @n
 	 *									The specified @c item is not constructed.
 	 * @exception   E_MAX_EXCEEDED  	The number of items has exceeded the maximum limit.
 	 * @exception   E_INVALID_STATE 	This instance is in an invalid state.
 	 * @exception   E_SYSTEM        	A system error has occurred.
-	 * @remarks		The maximum number of items for a %TabBar control is @c 100. @n
-	 *              However, the content of the specified item is copied to the %TabBar control. @n
-	 *              The item can be deallocated explicitly after this method call if it is created dynamically. @n
-	 *              The %TabBar control does not throw any exception even though the same action ID is assigned to multiple items.
+	 * @remarks
+	 *				- The maximum number of items for a %TabBar control is @c 100.
+	 *				- The content of the specified item is copied to the %TabBar control.
+	 *				- The item can be deallocated explicitly after this method call if it is created dynamically.
+	 *				- The %TabBar control does not throw any exception even though the same action ID is assigned to multiple items.
 	 */
 	result AddItem(const TabBarItem& item);
 
@@ -223,8 +245,8 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   index             	The index of the item to be inserted
-	 * @param[in]   item              	The item to be inserted
+	 * @param[in]   index             	The index of the item to insert
+	 * @param[in]   item              	The item to insert
 	 * @exception   E_SUCCESS         	The method is successful.
 	 * @exception   E_INVALID_ARG     	A specified input parameter is invalid. @n
 	 *								  	The specified @c item is not constructed.
@@ -233,10 +255,11 @@ public:
 	 *									The specified @c index is either greater than or equal to the number of items or is less than @c 0.
 	 * @exception   E_INVALID_STATE   	This instance is in an invalid state.
 	 * @exception   E_SYSTEM          	A system error has occurred.
-	 * @remarks     The maximum number of items for a %TabBar control is @c 100. @n
-	 *              However, the content of the specified item is copied to the @c %TabBar control. @n
-	 *              The item can be deallocated explicitly after this method call if it is created dynamically. @n
-	 *              The %TabBar control does not throw any exception even though the same action ID is assigned to multiple items.
+	 * @remarks
+	 *				- The maximum number of items for a %TabBar control is @c 100.
+	 *				- The content of the specified item is copied to the @c %TabBar control. @n
+	 *				- The item can be deallocated explicitly after this method call if it is created dynamically. @n
+	 *				- The %TabBar control does not throw any exception even though the same action ID is assigned to multiple items.
 	 */
 	result InsertItemAt(int index, const TabBarItem& item);
 
@@ -362,7 +385,7 @@ public:
 	 *
 	 * @return      An error code
 	 * @param[in]   index             	The index at which to set the specified item
-	 * @param[in]   item              	The item to be set
+	 * @param[in]   item              	The item to set
 	 * @exception   E_SUCCESS         	The method is successful.
 	 * @exception   E_INVALID_ARG		A specified input parameter is invalid. @n
 	 *								  	The specified @c item is not constructed.
@@ -370,8 +393,9 @@ public:
 	 *									The specified @c index is either greater than or equal to the number of items or is less than @c 0.
 	 * @exception   E_INVALID_STATE		This instance is in an invalid state.
 	 * @exception   E_SYSTEM			A system error has occurred.
-	 * @remarks     The contents of the specified item are copied. @n
-	 *              The item can be deallocated explicitly after this method call if it is created dynamically.
+	 * @remarks
+	 *				- The contents of the specified item are copied.
+	 *				- The item can be deallocated explicitly after this method call if it is created dynamically.
 	 */
 	result SetItemAt(int index, const TabBarItem& item);
 
@@ -382,7 +406,7 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   index             	The index of the item to be selected
+	 * @param[in]   index             	The index of the item to select
 	 * @exception   E_SUCCESS         	The method is successful.
 	 * @exception   E_OUT_OF_RANGE    	The specified @c index is not within the range of the data structure. @n
 	 *									The specified @c index is either greater than or equal to the number of items or is less than @c 0.
@@ -435,6 +459,20 @@ public:
 	 */
 	result SetWidth(int width);
 
+	/**
+	 * Sets the width of the tab bar.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      An error code
+	 * @param[in]   width             The width
+	 * @exception   E_SUCCESS         The method is successful.
+	 * @exception   E_INVALID_ARG     The specified input parameter is invalid.
+	 * @exception   E_INVALID_STATE   This instance is in an invalid state.
+	 * @exception   E_SYSTEM          A system error has occurred.
+	 */
+	result SetWidth(float width);
+
 
 //Listeners
 public:
@@ -444,7 +482,7 @@ public:
 	 *
 	 * @since 		2.0
 	 *
-	 * @param[in]   listener		The event listener to be added
+	 * @param[in]   listener		The event listener to add
 	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
 	 */
 	void AddActionEventListener(Tizen::Ui::IActionEventListener& listener);
@@ -456,7 +494,7 @@ public:
 	 *
 	 * @since 		2.0
 	 *
-	 * @param[in]   listener		The event listener to be removed
+	 * @param[in]   listener		The event listener to remove
 	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
 	 */
 	void RemoveActionEventListener(Tizen::Ui::IActionEventListener& listener);

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -53,7 +52,9 @@ enum TimerStatus
 *
 * @since 2.0
 *
-* @see		MutexGuard, SemaphoreGuard, Try
+* @see		MutexGuard
+* @see		SemaphoreGuard
+* @see		Try
 */
 struct TryTag
 {

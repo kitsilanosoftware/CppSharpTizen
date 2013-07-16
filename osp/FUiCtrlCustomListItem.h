@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -59,7 +59,8 @@ class _OSP_EXPORT_ CustomListItem
 public:
 	/**
 	 * @if OSPDEPREC
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the CustomListItem::Construct() method must be called right after calling this constructor.
 	 *
 	 * @brief   <i> [Deprecated] </i>
 	 * @deprecated   This class is deprecated. Instead of using this class, use CustomItem class
@@ -71,7 +72,8 @@ public:
 
 	/**
 	 * @if OSPDEPREC
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required. @n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @brief   <i> [Deprecated] </i>
 	 * @deprecated   This class is deprecated. Instead of using this class, use CustomItem class
@@ -106,8 +108,8 @@ public:
 	 * @since			2.0
 	 *
 	 * @param[in]	itemFormat		An instance of %CustomListItemFormat
-	 * @remarks Do not delete @c itemFormat before the associated %CustomListItem is removed from %CustomList, because %CustomListItemFormat is constantly
-	 *			used while %CustomListItem is added to CustomList.
+	 * @remarks Do not delete @c itemFormat before the associated %CustomListItem is removed from %CustomList,
+	 *			because %CustomListItemFormat is constantly used while %CustomListItem is added to CustomList.
 	 * @endif
 	 */
 	void SetItemFormat(const CustomListItemFormat& itemFormat);
@@ -178,7 +180,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	elementId	The ID of the element
-	 * @param[in] text            The text string to be added
+	 * @param[in] text            The text string to add
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception   E_SYSTEM        A system error has occurred.
 	 * @remarks		To display text in multi-lines or to denote the end of line use '\\n'.
@@ -259,23 +261,6 @@ public:
 	 * @endif
 	 */
 	result SetCheckBox(int elementId);
-
-	/**
-	 * @if OSPDEPREC
-	 * Sets the percent value of %CustomListItem.
-	 *
-	 * @brief   <i> [Deprecated] </i>
-	 * @deprecated   This class is deprecated. Instead of using this class, use CustomItem class
-	 * @since			2.0
-	 *
-	 * @return		An error code
-	 * @param[in]   value       The percent value of %CustomListItem @n
-	 *		             The valid range of integers is from @c 0 to @c 100
-	 * @exception	E_SUCCESS	The method is successful.
-	 * @exception   E_SYSTEM	A system error has occurred.
-	 * @endif
-	 */
-	result SetValue(int value);
 
 	/**
 	 * @if OSPDEPREC

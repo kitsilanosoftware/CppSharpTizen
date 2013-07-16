@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -27,7 +26,24 @@
 
 #include <FShellNotificationManager.h>
 #include <FShellNotificationRequest.h>
+#include <FShellIBadgeEventListener.h>
 #include <FShellQuickPanelFrame.h>
+#include <FShellAppWidgetView.h>
+#include <FShellAppWidgetManager.h>
+#include <FShellAppWidgetProviderInfo.h>
+#include <FShellAppWidgetSizeInfo.h>
+#include <FShellAppWidgetProvider.h>
+#include <FShellIAppWidgetProviderFactory.h>
+#include <FShellAppWidgetPopupProvider.h>
+#include <FShellIAppWidgetPopupProviderFactory.h>
+#include <FShellAppWidgetProviderManager.h>
+#include <FShellAppWidgetFrame.h>
+#include <FShellAppWidgetPopup.h>
+#include <FShellIAppWidgetRequestListener.h>
+#include <FShellIAppWidgetViewEventListener.h>
+#include <FShellShortcutManager.h>
+#include <FShellIShortcutRequestListener.h>
+#include <FShellLockManager.h>
 
 /**
  * @namespace	Tizen::Shell
@@ -37,7 +53,7 @@
  * @remarks		@b Header @b %file: @b \#include @b <FShell.h> @n
  *				@b Library : @b osp-shell
  *
- * The %Shell namespace contains the classes for phone shell management, including posting notifications, handling shortcuts, and using livebox.
+ * The %Shell namespace contains the classes for phone shell management, including posting notifications, handling shortcuts, and using appwidget.
  * @n@n
  * For more information on the %Shell namespace features, see <a href="../org.tizen.native.appprogramming/html/guide/shell/shell_namespace.htm">Shell Guide</a>.
  *

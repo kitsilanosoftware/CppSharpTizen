@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -70,9 +70,9 @@ public:
 private:
 	Tizen::Ui::Controls::Label *__pLabel;
 };
- *	@endcode
- *
- *	@code
+*	@endcode
+*
+*	@code
 // Sample code for LabelSample.cpp
 #include <FGraphics.h>
 
@@ -100,7 +100,7 @@ LabelSample::OnInitializing(void)
 	__pLabel->SetBackgroundColor(Color::GetColor(COLOR_ID_BLUE));
 
 	// Adds the label to the form
-	AddControl(*__pLabel);
+	AddControl(__pLabel);
 
 	return r;
 }
@@ -131,18 +131,43 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	rect				An instance of the Rectangle class @n
+	 * @param[in]	rect				An instance of the Tizen::Graphics::Rectangle class @n
 	 *									This instance represents the x and y coordinates of the top-left corner of the created window along with
-	 *									the width and height of the window.
+	 *									the width and height of the window.@n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @param[in]   text				The text for this label instance
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception   E_INVALID_ARG       A specified input parameter is invalid.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks		A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier.
-	 *				To display text in multi-lines or to denote the end of line use '\\n'. @n
-	 *				The size of the control must be within the range defined by the minimum size and the maximum size.
+	 * @remarks
+	 *			- A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier.
+	 *			- To display text in multi-lines or to denote the end of line use '\\n'.
+	 *			- The size of the control must be within the range defined by the minimum size and the maximum size.
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, const Tizen::Base::String& text);
+
+	/**
+	 * Initializes this instance of %Label with the specified parameters.
+     *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	rect				An instance of the Tizen::Graphics::FloatRectangle class @n
+	 *									This instance represents the x and y coordinates of the top-left corner of the created window along with
+	 *									the width and height of the window.@n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]   text				The text for this label instance
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception   E_INVALID_ARG       A specified input parameter is invalid.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @remarks
+	 *			- A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier.
+	 *			- To display text in multi-lines or to denote the end of line use '\\n'.
+	 *			- The size of the control must be within the range defined by the minimum size and the maximum size.
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, const Tizen::Base::String& text);
 
 public:
 	/**
@@ -222,12 +247,12 @@ public:
 	void SetBackgroundColor(const Tizen::Graphics::Color& color);
 
 	/**
-	 * Gets the background color of the %Label control.
-	 *
-	 * @since		2.0
-	 *
-	 * @return		The background color
-	 */
+	* Gets the background color of the %Label control.
+	*
+	* @since		2.0
+	*
+	* @return		The background color
+	*/
 	Tizen::Graphics::Color GetBackgroundColor(void) const;
 
 	/**
@@ -235,7 +260,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	color		The color to be set
+	 * @param[in]	color		The color to set
 	 */
 	virtual void SetTextColor(const Tizen::Graphics::Color& color);
 
@@ -257,10 +282,26 @@ public:
 	 * @param[in]	style			The style of the text
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception   E_INVALID_ARG	A specified input parameter is invalid.
-	 * @remarks		The specific error code can be accessed using the GetLastResult() method. @n
-	 *				If @c size is less than the minimum size, this method fails. The minimum font size is 6 on devices of high screen density.
+	 * @remarks
+	 *			- The specific error code can be accessed using the GetLastResult() method.
+	 *			- If @c size is less than the minimum size, this method fails. The minimum font size is 6 on devices of high screen density.
 	 */
 	void SetTextConfig(int size, LabelTextStyle style);
+
+	/**
+	 * Sets the text attributes of the %Label control.
+	 *
+	 * @since			2.1
+	 *
+	 * @param[in]	size			The size of the text
+	 * @param[in]	style			The style of the text
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception   E_INVALID_ARG	A specified input parameter is invalid.
+	 * @remarks
+	 *			- The specific error code can be accessed using the GetLastResult() method.
+	 *			- If @c size is less than the minimum size, this method fails. The minimum font size is 6 on devices of high screen density.
+	 */
+	void SetTextConfig(float size, LabelTextStyle style);
 
 	/**
 	 * Gets the text size of the %Label control.
@@ -271,6 +312,16 @@ public:
 	 *			else @c -1 if an error occurs
 	 */
 	int GetTextSize(void) const;
+
+	/**
+	 * Gets the text size of the %Label control.
+	 *
+	 * @since	2.1
+	 *
+	 * @return	The size of the text, @n
+	 *			else @c -1.0f if an error occurs
+	 */
+	float GetTextSizeF(void) const;
 
 	/**
 	 * Gets the text style of the %Label control.
@@ -293,10 +344,26 @@ public:
 	 * @exception   E_SUCCESS         The method is successful.
 	 * @exception   E_INVALID_ARG     The specified input parameter is invalid. @n
 	 *                                The specified @c size must be greater than @c 0.
-
-	 * @see                           GetTopMargin(), GetLeftMargin()
+	 * @see                           GetTopMargin()
+	 * @see							  GetLeftMargin()
 	 */
 	result SetMargin(int topMargin, int leftMargin);
+
+	/**
+	 * Sets the top and left margins.
+	 *
+	 * @since	2.1
+	 *
+	 * @return      An error code
+	 * @param[in]   topMargin         The top margin.
+	 * @param[in]   leftMargin        The left margin.
+	 * @exception   E_SUCCESS         The method is successful.
+	 * @exception   E_INVALID_ARG     The specified input parameter is invalid. @n
+	 *                                The specified @c size must be greater than @c 0.
+	 * @see                           GetTopMargin()
+	 * @see							  GetLeftMargin()
+	 */
+	result SetMargin(float topMargin, float leftMargin);
 
 	/**
 	 * Gets the top margin.
@@ -309,6 +376,17 @@ public:
 	 */
 	int GetTopMargin(void) const;
 
+	/**
+	 * Gets the top margin.
+	 *
+	 * @since	2.1
+	 *
+	 * @return      The size of the top margin, @n
+	 *              else @c -1.0f if an error occurs
+	 * @see         SetMargin()
+	 */
+	float GetTopMarginF(void) const;
+
     /**
      * Gets the left margin.
      *
@@ -319,6 +397,17 @@ public:
      * @see         SetMargin()
      */
 	int GetLeftMargin(void) const;
+
+	/**
+	 * Gets the left margin.
+	 *
+	 * @since	2.1
+	 *
+	 * @return      The size of the left margin, @n
+	 *              else @c -1.0f if an error occurs.
+	 * @see         SetMargin()
+	 */
+	float GetLeftMarginF(void) const;
 
 protected:
 	friend class _LabelImpl;

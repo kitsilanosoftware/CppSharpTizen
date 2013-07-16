@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -153,14 +152,7 @@ public:
 	 * An instance has weekdata which are the first of week, minimal days in the first week, weekend on set, and weekend cease.
 	 * The weekdata are set as default values by the specified @c locale.
 	 *
-	 * @if OSPCOMPAT 
-	 * @brief <i> [Compatibility] </i>
-	 * @endif 
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	 *                              For more information, see @ref CompGregorianCalendarConstructPage "here".   
-	 * @endif
 	 *
 	 * @return			An error code
 	 * @param[in]		locale						An instance of Locale
@@ -177,14 +169,7 @@ public:
 	 * An instance has weekdata which are the first of week, minimal days in the first week, weekend on set, and weekend cease.
 	 * The weekdata are set as default values by the specified @c locale.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	 *                              For more information, see @ref CompGregorianCalendarConstructPage "here".   
-	 * @endif
 	 *
 	 * @return			An error code
 	 * @param[in]		timeZone					An instance of TimeZone
@@ -196,18 +181,7 @@ public:
 	result Construct(const TimeZone& timeZone, const Locale& locale);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page                    CompGregorianCalendarConstructPage Compatibility for Construct()
-	 * @section                   CompGregorianCalendarConstructIssueSection Issues
-	 * Implementation of this method in OSP compatible applications has the following issue: @n
-	 * -# The method returns E_UNSUPPORTED_OPERATION if the @c locale is invalid.
-	 *
-	 * @section                 CompGregorianCalendarConstructSolutionSection Resolutions
-	 * This issue has been resolved in Tizen.
-	 * @par When working in Tizen:
-	 * -# The method returns E_INVALID_ARG if the @c locale is invalid.
-	 * @endif
-	*/
+	 */
 
 	/**
 	 * Initializes this instance of %GregorianCalendar based on the specified @c year, @c month, @c day, @c hour, @c minute, and @c second
@@ -371,7 +345,7 @@ public:
 	bool IsLeapYear(int year) const;
 
 
-	/**
+	/*
 	 * Sets the Gregorian Calendar change date. @n
 	 * This is the point when the switch from Julian dates to Gregorian dates occurred.
 	 * Default is 00:00:00 local time, Oct 15, 1582. Previous to this, dates are in the Julian calendar.
@@ -440,7 +414,7 @@ public:
 	int GetCutoverJulianDay(void) const;
 
 
-	/**
+	/*
 	 * Checks whether the current calendar is a Gregorian calendar or not.
 	 *
 	 * @since			2.0
@@ -492,7 +466,7 @@ public:
 	static void DayToFields(int day, int& year, int& month, int& dayOfMonth, int& dayOfWeek, int& dayOfYear);
 
 private:
-	/**
+	/*
 	 * @enum		GregorianCalendarEras
 	 *
 	 * Defines Era for Gregorian calendar. The indexing is 0-based.
@@ -506,13 +480,13 @@ private:
 		GREGORIAN_CALENDAR_CE = 1,      // CE
 	};
 
-	/**
+	/*
 	 * The implementation of this copy constructor is intentionally blank and declared as private to
 	 * prohibit copying of objects.
 	 */
 	GregorianCalendar(const GregorianCalendar& gregorianCalendar);
 
-	/**
+	/*
 	 * The implementation of this copy assignment operator is intentionally blank and declared as private
 	 * to prohibit copying of objects.
 	 */
@@ -527,49 +501,49 @@ private:
 	virtual Calendar* CloneN(void) const;
 
 public:
-	/**
+	/*
 	 * Defines the length of months.
 	 *
 	 * @since 2.0
 	 */
 	static const int MONTH_LENGTH[24];
 
-	/**
+	/*
 	 * Defines the days of a year.
 	 *
 	 * @since 2.0
 	 */
 	static const int NUM_DAYS[24];
 
-	/**
+	/*
 	 * The Gregorian cutover number for Julian day.
 	 *
 	 * @since 2.0
 	 */
 	static const int CUTOVER_JULIAN_DAY = 2299161;      // Oct 15, 1582
 
-	/**
+	/*
 	 * The epoch year.
 	 *
 	 * @since 2.0
 	 */
 	static const int EPOCH_YEAR = 1970;
 
-	/**
+	/*
 	 * The epoch start for Julian day.
 	 *
 	 * @since 2.0
 	 */
 	static const int EPOCH_START_AS_JULIAN_DAY = 2440588; // Jan 1, 1970(Gregorian)
 
-	/**
+	/*
 	 * Jan 1, 1 epoch start for Julian day.
 	 *
 	 * @since 2.0
 	 */
 	static const int JAN_1_1_JULIAN_DAY = 1721426;  // Jan 1, 1 CE Gregorian
 
-	/**
+	/*
 	 * Temporary value for the Gregorian cutover.
 	 *
 	 * @since 2.0
@@ -578,56 +552,56 @@ public:
 		((long long) (GregorianCalendar::CUTOVER_JULIAN_DAY -
 					  GregorianCalendar::EPOCH_START_AS_JULIAN_DAY) * (long long) ONE_DAY_IN_MILLISEC);
 
-	/**
+	/*
 	 * Maximum value for longlong.
 	 *
 	 * @since 2.0
 	 */
 	static const long long MAX_LONGLONG = (2 ^ 63) - 1;
 
-	/**
+	/*
 	 * Minimum value for longlong.
 	 *
 	 * @since 2.0
 	 */
 	static const long long MIN_LONGLONG = -1 * (2 ^ 63);
 
-	/**
+	/*
 	 * Maximum value for Julian day.
 	 *
 	 * @since 2.0
 	 */
 	static const int MAX_JULIAN = 0x7F000000;
 
-	/**
+	/*
 	 * Minimum value for Julian day.
 	 *
 	 * @since 2.0
 	 */
 	static const int MIN_JULIAN = -0x7F000000;
 
-	/**
+	/*
 	 * Maximum millisecond value for Julian day.
 	 *
 	 * @since 2.0
 	 */
 	static const long long MAX_MILLISEC = ((GregorianCalendar::MAX_JULIAN - GregorianCalendar::EPOCH_START_AS_JULIAN_DAY) * (long long) ONE_DAY_IN_MILLISEC);
 
-	/**
+	/*
 	 * Minimum millisecond value for Julian day.
 	 *
 	 * @since 2.0
 	 */
 	static const long long MIN_MILLISEC = ((GregorianCalendar::MIN_JULIAN - GregorianCalendar::EPOCH_START_AS_JULIAN_DAY) * (long long) ONE_DAY_IN_MILLISEC);
 
-	/**
+	/*
 	 * Epoch offset in millisecond value.
 	 *
 	 * @since 2.0
 	 */
 	static const long long EPOCH_OFFSET_IN_MILLISEC = 62135596800000LL; // Jan 1, 1970
 
-	/**
+	/*
 	 * Default Gregorian cutover.
 	 *
 	 * @since 2.0

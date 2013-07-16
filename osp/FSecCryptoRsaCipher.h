@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -74,7 +73,8 @@ public:
 	 *	@since		2.0
 	 *
 	 *	@return		An error code
-	 *	@param[in]	key						An instance of IKey
+	 *	@param[in]	key						An instance of IKey @n
+	 *										The @c key can be in PEM/DER/PKCS8 format only.
 	 *	@exception	E_SUCCESS				The method is successful.
 	 *	@exception	E_INVALID_ARG			The specified @c key is invalid.
 	 *	@exception	E_OUT_OF_MEMORY			The memory is insufficient.
@@ -88,6 +88,7 @@ public:
 	 *
 	 *	@return		An error code
 	 *	@param[in]	key						An instance of IKey
+	 *										The @c key can be in PEM/DER/X509 public key format only.
 	 *	@exception	E_SUCCESS				The method is successful.
 	 *	@exception	E_INVALID_ARG			The specified @c key is invalid.
 	 *	@exception	E_OUT_OF_MEMORY			The memory is insufficient.

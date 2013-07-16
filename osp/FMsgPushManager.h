@@ -53,79 +53,100 @@ class _PushManagerImpl;
 *
 * @code
 *
-    // Creates a listener to override the methods of IPushManagerListener and IPushEventListener.
+	#include <FBase.h>
+	#include <FMessaging.h>
 
-    class PushListener : public IPushManagerListener, public IPushEventListener, public Object
-    {
-    public:
-        void OnPushServiceRegistered(RequestId reqId, const Tizen::Base::String& registrationId, result r, const Tizen::Base::String& errorCode, const Tizen::Base::String& errorMsg);
-        void OnPushServiceUnregistered(RequestId reqId, result r, const Tizen::Base::String& errorCode, const Tizen::Base::String& errorMsg);
-        void OnPushMessageReceived(const PushMessage& message);
-    };
-    void PushListener::OnPushServiceRegistered(RequestId reqId, const Tizen::Base::String& registrationId, result r, const Tizen::Base::String& errorCode, const Tizen::Base::String& errorMsg)
-    {
-        if (E_SUCCESS == r) {
-            // The application must send registrationId to the application server.
-        } else {
-            // Error
-        }
-    }
-    void PushListener::OnPushServiceUnregistered(RequestId reqId, result r, const Tizen::Base::String& errorCode, const Tizen::Base::String& errorMsg)
-    {
-        // Do something
-    }
-    void PushListener::OnPushMessageReceived(const PushMessage& message)
-    {
-        // Do something
-    }
+	using namespace Tizen::Base;
+	using namespace Tizen::Messaging;
 
-    class PushManagerSample : public Object
-    {
-    public:
-        void Initialize(void);
-        void EnablePushService(void);
-        void DisablePushService(void);
-    private:
-        PushListener* pPushListener;
-        PushManager* pPushManager;
-    };
-    void PushManagerSample::Initialize(void)
-    {
-        // Creates a PushListener instance.
-        pPushListener = new PushListener();
+	// Creates a listener to override the methods of IPushManagerListener and IPushEventListener.
+	class MyClass
+		: public Object
+		, public IPushEventListener
+		, public IPushManagerListener
+	{
+	public:
+		MyClass(void) {}
+		~MyClass(void) {}
 
-        // Creates a PushManager instance.
-        pPushManager = new PushManager();
-        pPushManager->Construct(*pPushListener, *pPushListener);
-    }
-    void PushManagerSample::EnablePushService(void)
-    {
-        RequestId reqId;
-        result r = E_SUCCESS;
+		//IPushManagerListener and IPushEventListener
+		void OnPushServiceRegistered(RequestId reqId, const String& registrationId, result r, const String& errorCode, const String& errorMsg);
+		void OnPushServiceUnregistered(RequestId reqId, result r, const String& errorCode, const String& errorMsg);
+		void OnPushMessageReceived(const PushMessage& message);
 
-        r = pPushManager->RegisterPushService(reqId);
-        if (IsFailed(r)) {
-            // Error
-            return;
-        }
+		void Initialize(void);
+		void EnablePushService(void);
+		void DisablePushService(void);
 
-        // The result of registration will be notified by IPushManagerListener::OnPushServiceRegistered().
-    }
-    void PushManagerSample::DisablePushService(void)
-    {
-        // The application must notify the application server to stop sending push messages for this device.
+	private:
+		PushManager* pPushManager;
+	};
 
-        RequestId reqId;
-        result r = E_SUCCESS;
+	void
+	MyClass::OnPushServiceRegistered(RequestId reqId, const String& registrationId, result r, const String& errorCode, const String& errorMsg)
+	{
+		if (E_SUCCESS == r)
+		{
+			// The application must send registrationId to the application server.
+		}
+		else
+		{
+			// Error
+		}
+	}
 
-        r = pPushManager->UnregisterPushService(reqId);
-        if (IsFailed(r)) {
-            // Error
-            return;
-        }
+	void
+	MyClass::OnPushServiceUnregistered(RequestId reqId, result r, const String& errorCode, const String& errorMsg)
+	{
+		// Do something
+	}
 
-        // The result of unregistration will be notified by IPushManagerListener::OnPushServiceUnregistered().
-    }
+	void
+	MyClass::OnPushMessageReceived(const PushMessage& message)
+	{
+		// Do something
+	}
+
+	void
+	MyClass::Initialize(void)
+	{
+		// Creates a PushManager instance.
+		pPushManager = new PushManager();
+		pPushManager->Construct(*this, *this);
+	}
+
+	void
+	MyClass::EnablePushService(void)
+	{
+		RequestId reqId;
+		result r = E_SUCCESS;
+
+		r = pPushManager->RegisterPushService(reqId);
+		if (IsFailed(r))
+		{
+			return;
+		}
+
+		// The result of registration will be notified by IPushManagerListener::OnPushServiceRegistered().
+	}
+
+	void
+	MyClass::DisablePushService(void)
+	{
+		// The application must notify the application server to stop sending push messages for this device.
+
+		RequestId reqId;
+		result r = E_SUCCESS;
+
+		r = pPushManager->UnregisterPushService(reqId);
+		if (IsFailed(r))
+		{
+			return;
+		}
+
+		// The result of unregistration will be notified by IPushManagerListener::OnPushServiceUnregistered().
+	}
+
     *
     * @endcode
     */
@@ -152,10 +173,11 @@ public:
 	* Initializes this instance of the %PushManager class with the specified parameters.
 	*
 	* @since		2.0
+	* @privlevel    public
 	* @privilege	%http://tizen.org/privilege/push
 	*
 	* @pre			In order to use the push messaging service, see <a href="../org.tizen.native.appprogramming/html/guide/messaging/push_messaging.htm">Push Messaging Guide</a>.
-	*
+	* @feature		%http://tizen.org/feature/network.push
 	* @return		An error code
 	* @param[in]	managerListener		A listener that receives the result of the %PushManager
 	*                                   class asynchronous methods
@@ -164,6 +186,11 @@ public:
 	* @exception	E_OUT_OF_MEMORY     The memory is insufficient.
 	* @exception	E_SYSTEM            A system error has occurred.
 	* @exception	E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
+	* @exception    E_UNSUPPORTED_OPERATION	The Emulator or target device does not support the required feature. @b Since: @b 2.1
+	*				For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+	* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+	* @remarks	Before calling this method, check whether the feature is supported by 
+	*			Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	* @see			IPushManagerListener
 	* @see			IPushEventListener
 	*/
@@ -171,9 +198,10 @@ public:
 
 	/**
 	* Registers the push messaging service for the current application. @n
-	* This method is asynchronous.
+	* The %RegisterPushService() method is asynchronous.
 	*
 	* @since		2.0
+	* @privlevel    public
 	* @privilege	%http://tizen.org/privilege/push
 	*
 	* @pre			In order to use the push messaging service, see <a href="../org.tizen.native.appprogramming/html/guide/messaging/push_messaging.htm">Push Messaging Guide</a>.
@@ -184,15 +212,17 @@ public:
 	* @exception	E_OUT_OF_MEMORY     The memory is insufficient.
 	* @exception	E_SYSTEM            A system error has occurred.
 	* @exception	E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
+	* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	* @see			IPushManagerListener::OnPushServiceRegistered()
 	*/
 	result RegisterPushService(RequestId& reqId);
 
 	/**
 	* Unregisters the push messaging service for the current application. @n
-	* This method is asynchronous.
+	* The %UnregisterPushService() method is asynchronous.
 	*
 	* @since		2.0
+	* @privlevel    public
 	* @privilege	%http://tizen.org/privilege/push
 	*
 	* @pre			In order to use the push messaging service, see <a href="../org.tizen.native.appprogramming/html/guide/messaging/push_messaging.htm">Push Messaging Guide</a>.
@@ -203,6 +233,7 @@ public:
 	* @exception	E_OUT_OF_MEMORY     The memory is insufficient.
 	* @exception	E_SYSTEM            A system error has occurred.
 	* @exception	E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
+	* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	* @see			IPushManagerListener::OnPushServiceUnregistered()
 	*/
 	result UnregisterPushService(RequestId& reqId);
@@ -221,9 +252,10 @@ public:
 
 	/**
 	* Gets the unread push messages. @n
-	* If an application receives unread messages with this method, the messages are removed from the system.
+	* If an application receives unread messages with the %GetUnreadMessagesN() method, the messages are removed from the system.
 	*
 	* @since		2.0
+	* @privlevel    public
 	* @privilege	%http://tizen.org/privilege/push
 	*
 	* @pre			In order to use the push messaging service, see <a href="../org.tizen.native.appprogramming/html/guide/messaging/push_messaging.htm">Push Messaging Guide</a>.
@@ -233,25 +265,28 @@ public:
 	* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 	* @exception	E_SYSTEM			A system error has occurred.
 	* @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-	* @remarks		The specific error code can be accessed using the GetLastResult() method.
-	*               If the user launches the application using a ticker or a quick panel,
-	*               the push message related to the notification is delivered to the application
-	*               as a launch argument.
-	*               The launch arguments are the input parameters for
-	*               Tizen::App::IAppControlProviderEventListener::OnAppControlRequestReceivedN().
-	*               This function returns all the unread messages including the message
-	*               delivered as a launch argument.
+	* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+	* @remarks		
+	*			- The specific error code can be accessed using the GetLastResult() method.
+	*			- If the user launches the application using a ticker or a quick panel,
+	*			the push message related to the notification is delivered to the application
+	*			as a launch argument.
+	*			- The launch arguments are the input parameters for
+	*			Tizen::App::IAppControlProviderEventListener::OnAppControlRequestReceivedN().
+	*			- This method returns all the unread messages including the message
+	*			delivered as a launch argument.
 	* @see			Tizen::App::IAppControlProviderEventListener
 	*/
 	Tizen::Base::Collection::IList* GetUnreadMessagesN(void);
 
 	/**
 	* Sends the push message to a single recipient. @n
-	* This method is asynchronous.
+	* The %SendPushMessage() method is asynchronous.
 	*
 	* @since		2.0
+	* @privlevel    public
 	* @privilege	%http://tizen.org/privilege/push and %http://tizen.org/privilege/http @n
-	* 								Both privileges are required
+	* 								Both privileges are required.
 	*
 	* @pre			In order to use the push messaging service, see <a href="../org.tizen.native.appprogramming/html/guide/messaging/push_messaging.htm">Push Messaging Guide</a>.
 	*
@@ -265,6 +300,7 @@ public:
 	* @exception	E_OUT_OF_MEMORY 	The memory is insufficient.
 	* @exception	E_SYSTEM			A system error has occurred.
 	* @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	* @see								IPushManagerListener::OnPushMessageSent()
 	*/
 	result SendPushMessage(const PushMessage& message, const Tizen::Base::String& registrationId, const Tizen::Base::String& appSecret, RequestId& reqId);
@@ -272,11 +308,12 @@ public:
 
 	/**
 	* Sends the push message to multiple recipients. @n
-	* This method is asynchronous.
+	* The %SendPushMessage() method is asynchronous.
 	*
 	* @since		2.0
+	* @privlevel    public
 	* @privilege	%http://tizen.org/privilege/push and %http://tizen.org/privilege/http @n
-	* 								Both privileges are required
+	* 								Both privileges are required.
 	*
 	* @pre			In order to use the push messaging service, see <a href="../org.tizen.native.appprogramming/html/guide/messaging/push_messaging.htm">Push Messaging Guide</a>.
 	*
@@ -291,7 +328,8 @@ public:
 	* @exception	E_OUT_OF_MEMORY 	The memory is insufficient.
 	* @exception	E_SYSTEM			A system error has occurred.
 	* @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-	* @remarks      The maximum limit can be checked by using GetMaxRecipientCount().
+	* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+	* @remarks	The maximum limit can be checked by using GetMaxRecipientCount().
 	* @see								IPushManagerListener::OnPushMessageSent()
 	*/
 	result SendPushMessage(const PushMessage& message, const Tizen::Base::Collection::IList& registrationIdList, const Tizen::Base::String& appSecret, RequestId& reqId);

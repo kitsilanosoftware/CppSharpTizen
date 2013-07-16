@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -65,7 +64,7 @@ namespace Tizen { namespace Base { namespace Collection
  *		const Object* pObj = stack.Peek();				// pObj: "Third", stack.GetCount(): 3
  *
  *		// Reads and removes the element at the top
- *		String* pStr = static_cast<String*> (stack.Pop());	// pStr: "Third", stack.GetCount(): 2
+ *		String* pStr = static_cast< String* > (stack.Pop());	// pStr: "Third", stack.GetCount(): 2
  *
  *		delete pStr;	// Because the stack does not have the ownership of this pStr after popping
  *

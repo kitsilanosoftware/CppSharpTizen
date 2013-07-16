@@ -43,8 +43,8 @@ class ByteBuffer;
 namespace Tizen { namespace Base { namespace Collection
 {
 class IList;
-template<class Type> class IListT;
-template<class KeyType, class ValueType> class IMapT;
+template< class Type > class IListT;
+template< class KeyType, class ValueType > class IMapT;
 } } }
 
 namespace Tizen { namespace Graphics
@@ -172,9 +172,13 @@ public:
 	 *
 	 * @since        2.0
 	 *
+	 * @feature      %http://tizen.org/feature/vision.face_recognition
 	 * @return       An error code
 	 * @exception    E_SUCCESS          The method is successful.
-	 * @exception    E_OUT_OF_MEMORY    The memory is insufficient.
+	 * @exception    E_UNSUPPORTED_OPERATION   The target device does not support the face detection feature. @b Since: @b 2.1
+	 * For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+	 * @remarks      Before calling this method, check whether the feature is supported by 
+	 *			Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	 */
 	result Construct(void);
 
@@ -235,7 +239,7 @@ public:
 	 * @exception    E_OUT_OF_MEMORY    The memory is insufficient.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
 	 */
-	Tizen::Base::Collection::IListT <Tizen::Graphics::PixelFormat>* GetSupportedFormatListN(void) const;
+	Tizen::Base::Collection::IListT< Tizen::Graphics::PixelFormat >* GetSupportedFormatListN(void) const;
 
 	/**
 	 * Extracts the facial template that represents the face from a video.
@@ -285,8 +289,9 @@ public:
 	 * @exception    E_SUCCESS          The method is successful.
 	 * @exception    E_OUT_OF_MEMORY    The memory is insufficient.
 	 * @exception    E_FAILURE          A system error has occurred.
-	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks      BitmapPixelFormat::BITMAP_PIXEL_FORMAT_R8G8B8A8 is not applicable for this method.
+	 * @remarks
+	 *			  - The specific error code can be accessed using the GetLastResult() method.
+	 *			  - BitmapPixelFormat::BITMAP_PIXEL_FORMAT_R8G8B8A8 is not applicable for this method.
 	 * @endif
 	 */
 	Tizen::Base::Collection::IList* ExtractFaceInfoFromStillImageN(const Tizen::Graphics::Bitmap& bitmap);
@@ -305,13 +310,13 @@ public:
 	 * @param[in]    byteBuffer         The buffer containing the input image data
 	 * @param[in]    dim                The width and height of the input image @n
 	 *                                  Both the width and height must be greater than @c 0.
-	 * @param[in]    format             The color format defined by Tizen::Graphics::BitmapPixelFormat
+	 * @param[in]    format             The color format @n
+	 * 							@c BITMAP_PIXEL_FORMAT_R8G8B8A8 is not applicable for this method.
 	 * @exception    E_SUCCESS          The method is successful.
 	 * @exception    E_INVALID_ARG      A specified input parameter is invalid.
 	 * @exception    E_OUT_OF_MEMORY    The memory is insufficient.
 	 * @exception    E_FAILURE          A system error has occurred.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks      BitmapPixelFormat::BITMAP_PIXEL_FORMAT_R8G8B8A8 is not applicable for this method.
 	 */
 	Tizen::Base::Collection::IList* ExtractFaceInfoFromStillImageN(const Tizen::Base::ByteBuffer& byteBuffer, const Tizen::Graphics::Dimension& dim, Tizen::Graphics::BitmapPixelFormat format);
 
@@ -359,10 +364,12 @@ public:
 	 *               else @c null if an exception occurs
 	 * @param[in]    preprocessedFaceBuffer    The preprocessed data
 	 * @param[in]    faceComponentPos          The facial information that is obtained from the
-	 *                                         ExtractFaceComponentsN() method @n
-	 *                                         The @c faceComponentPos parameter must contain the eye position.
+	 *                                         FaceDetector::ExtractFaceComponentsN() method @n
+	 *                                         The specified facial information must contain the eye position. @n
 	 *                                         The position of the eyes must be greater than or equal to @c 0.
-	 *                                         The position of the eyes must be within @c preprocessedFaceBuffer.
+	 *                                         The position of the eyes must be within @c preprocessedFaceBuffer. @n
+	 *							If there are wrong values in the specified facial information, the result cannot be guaranteed even if it returns @c E_SUCCESS. @n
+	 *							Therefore, be sure not to change the value of facial information after getting it from FaceDetector::ExtractFaceComponentsN().
 	 * @exception    E_SUCCESS                 The method is successful.
 	 * @exception    E_INVALID_ARG             A specified input parameter is invalid.
 	 * @exception    E_OUT_OF_MEMORY           The memory is insufficient.
@@ -371,9 +378,8 @@ public:
 	 *                                         This can happen when the detected faces are too small or the input data is not clear.
 	 *                                         This is the result of a normal operation.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks      If there are wrong values in the @c faceComponentPos, the result cannot be guaranteed even if it returns @c E_SUCCESS. Therefore, be sure not to change the value of @c faceComponentPos after getting it from ExtractFaceComponentsN().
 	 * @see          FaceDetector::PreprocessDataN()
-     * @see	         FaceDetector::ExtractFaceComponentsN()
+	 * @see	         FaceDetector::ExtractFaceComponentsN()
 	 */
 	Tizen::Base::ByteBuffer* ExtractFeatureN(const FaceBuffer& preprocessedFaceBuffer, const FaceComponentsPosition& faceComponentPos);
 
@@ -386,9 +392,11 @@ public:
 	 *               else @c EYE_STATE_NONE if an exception occurs
 	 * @param[in]    preprocessedFaceBuffer    The preprocessed data
 	 * @param[in]    faceComponentPos          The facial information that is obtained from the FaceDetector::ExtractFaceComponentsN() method @n
-	 *                                         The @c faceComponentPos parameter must contain the eye position.
+	 *                                         The specified facial information must contain the eye position. @n
 	 *                                         The position of the eyes must be greater than or equal to @c 0.
-	 *                                         The position of the eyes must be within @c preprocessedFaceBuffer.
+	 *                                         The position of the eyes must be within @c preprocessedFaceBuffer. @n
+	 *							If there are wrong values in the specified facial information, the result cannot be guaranteed even if it returns @c E_SUCCESS. @n
+	 *							Therefore, be sure not to change the value of facial information after getting it from FaceDetector::ExtractFaceComponentsN().
 	 * @exception    E_SUCCESS                 The method is successful.
 	 * @exception    E_INVALID_ARG             A specified input parameter is invalid.
 	 * @exception    E_OUT_OF_MEMORY           The memory is insufficient.
@@ -397,8 +405,6 @@ public:
 	 *                                         This can happen when the detected faces are too small or the input data is not clear.
 	 *                                         This is the result of a normal operation.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks      If there are wrong values in the @c faceComponentPos, the result cannot be guaranteed even if it returns @c E_SUCCESS.
-	 *               Therefore, be sure not to change the value of @c faceComponentPos after getting it from ExtractFaceComponentsN().
 	 * @see          FaceDetector::PreprocessDataN()
 	 */
 	EyeState GetEyeState(const FaceBuffer& preprocessedFaceBuffer, const FaceComponentsPosition& faceComponentPos);
@@ -412,9 +418,11 @@ public:
 	 *               else @c FACIAL_EXPRESSION_NONE if an exception occurs
 	 * @param[in]    preprocessedFaceBuffer    The preprocessed data
 	 * @param[in]    faceComponentPos          The facial information that is obtained from the FaceDetector::ExtractFaceComponentsN() method @n
-	 *                                         The @c faceComponentPos parameter must contain the eye position.
+	 *                                         The specified facial information must contain the eye position. @n
 	 *                                         The position of the eyes must be greater than or equal to @c 0.
-	 *                                         The position of the eyes must be within @c preprocessedFaceBuffer.
+	 *                                         The position of the eyes must be within @c preprocessedFaceBuffer. @n
+	 *							If there are wrong values in the specified facial information, the result cannot be guaranteed even if it returns @c E_SUCCESS. @n
+	 *							Therefore, be sure not to change the value of facial information after getting it from FaceDetector::ExtractFaceComponentsN().
 	 * @exception    E_SUCCESS                 The method is successful.
 	 * @exception    E_INVALID_ARG             A specified input parameter is invalid.
 	 * @exception    E_OUT_OF_MEMORY           The memory is insufficient.
@@ -423,8 +431,6 @@ public:
 	 *                                         This can happen when the detected faces are too small or the input data is not clear.
 	 *                                         This is the result of a normal operation.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks      If there are wrong values in the @c faceComponentPos, the result cannot be guaranteed even if it returns @c E_SUCCESS. Therefore,
-	 *               be sure not to change the value of @c faceComponentPos after getting it from ExtractFaceComponentsN().
 	 * @see          FaceDetector::PreprocessDataN()
 	 */
 	FacialExpression RecognizeExpression(const FaceBuffer& preprocessedFaceBuffer, const FaceComponentsPosition& faceComponentPos);
@@ -451,7 +457,7 @@ public:
 	 * @exception    E_SYSTEM           A system error has occurred.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
 	 */
-	Tizen::Base::Collection::IMapT <Tizen::Graphics::Rectangle, EyeState>* DetectBlinksFromVideoStreamN(const Tizen::Base::ByteBuffer& byteBuffer, const Tizen::Graphics::Dimension& dim, const Tizen::Graphics::PixelFormat format);
+	Tizen::Base::Collection::IMapT< Tizen::Graphics::Rectangle, EyeState >* DetectBlinksFromVideoStreamN(const Tizen::Base::ByteBuffer& byteBuffer, const Tizen::Graphics::Dimension& dim, const Tizen::Graphics::PixelFormat format);
 
 
 	/**
@@ -475,7 +481,7 @@ public:
 	 * @exception    E_SYSTEM           A system error has occurred.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
 	 */
-	Tizen::Base::Collection::IMapT <Tizen::Graphics::Rectangle, EyeState>* DetectBlinksFromStillImageN(const Tizen::Base::ByteBuffer& byteBuffer, const Tizen::Graphics::Dimension& dim, Tizen::Graphics::BitmapPixelFormat format);
+	Tizen::Base::Collection::IMapT< Tizen::Graphics::Rectangle, EyeState >* DetectBlinksFromStillImageN(const Tizen::Base::ByteBuffer& byteBuffer, const Tizen::Graphics::Dimension& dim, Tizen::Graphics::BitmapPixelFormat format);
 
 	/**
 	 * Recognizes the facial expressions from a video.
@@ -499,7 +505,7 @@ public:
 	 * @exception    E_SYSTEM           A system error has occurred.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
 	 */
-	Tizen::Base::Collection::IMapT <Tizen::Graphics::Rectangle, FacialExpression>* RecognizeExpressionsFromVideoStreamN(const Tizen::Base::ByteBuffer& byteBuffer, const Tizen::Graphics::Dimension& dim, const Tizen::Graphics::PixelFormat format);
+	Tizen::Base::Collection::IMapT< Tizen::Graphics::Rectangle, FacialExpression >* RecognizeExpressionsFromVideoStreamN(const Tizen::Base::ByteBuffer& byteBuffer, const Tizen::Graphics::Dimension& dim, const Tizen::Graphics::PixelFormat format);
 
 
 	/**
@@ -523,7 +529,7 @@ public:
 	 * @exception    E_SYSTEM    A system error has occurred.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
 	 */
-	Tizen::Base::Collection::IMapT <Tizen::Graphics::Rectangle, FacialExpression>* RecognizeExpressionsFromStillImageN(const Tizen::Base::ByteBuffer& byteBuffer, const Tizen::Graphics::Dimension& dim, Tizen::Graphics::BitmapPixelFormat format);
+	Tizen::Base::Collection::IMapT< Tizen::Graphics::Rectangle, FacialExpression >* RecognizeExpressionsFromStillImageN(const Tizen::Base::ByteBuffer& byteBuffer, const Tizen::Graphics::Dimension& dim, Tizen::Graphics::BitmapPixelFormat format);
 
 
 private:

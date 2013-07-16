@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -38,6 +38,7 @@ namespace Tizen { namespace Graphics
 class Point;
 class Dimension;
 class Rectangle;
+class FloatRectangle;
 class BufferInfo;
 }} // Tizen::Graphics
 
@@ -71,12 +72,11 @@ enum OverlayRegionBufferPixelFormat
  */
 enum OverlayRegionType
 {
-	OVERLAY_REGION_TYPE_PRIMARY_CAMERA = 1,                 /**< The primary camera type @n
-				                                            An overlay region displays the auto-rotated primary camera input that comes from Camera. */
-	OVERLAY_REGION_TYPE_SECONDARY_CAMERA,               /**< The secondary camera type @n
-				                                            An overlay region displays the auto-rotated and mirrored secondary camera input that comes from Camera. */
-	OVERLAY_REGION_TYPE_NORMAL,                         /**< The normal type @n
-				                                            An overlay region displays the user input as it is. */
+	OVERLAY_REGION_TYPE_PRIMARY_CAMERA = 1,			/**< The primary camera type @n An overlay region displays the auto-rotated
+												 		primary camera input that comes from Camera. */
+	OVERLAY_REGION_TYPE_SECONDARY_CAMERA,				/**< The secondary camera type @n An overlay region displays the auto-rotated
+														and mirrored secondary camera input that comes from Camera. */
+	OVERLAY_REGION_TYPE_NORMAL,						/**< The normal type @n An overlay region displays the user input as it is. */
 	OVERLAY_REGION_TYPE_MAX,                             // This enum value is for internal use only. Using this enum value can cause behavioral, security-related, and consistency-related issues in the application.
 	OVERLAY_REGION_TYPE_MIN = 0                          // This enum value is for internal use only. Using this enum value can cause behavioral, security-related, and consistency-related issues in the application.
 };
@@ -90,8 +90,10 @@ enum OverlayRegionType
  */
 enum OverlayRegionEvaluationOption
 {
-	OVERLAY_REGION_EVALUATION_OPTION_GREATER_THAN,  /**< The option evaluating the overlay region bounds and finding the minimum bounds greater than the input bounds */
-	OVERLAY_REGION_EVALUATION_OPTION_LESS_THAN,     /**< The option evaluating the overlay region bounds and finding the maximum bounds smaller than input bounds */
+	OVERLAY_REGION_EVALUATION_OPTION_GREATER_THAN,  /**< The option evaluating the overlay region bounds and finding the minimum
+														bounds greater than the input bounds */
+	OVERLAY_REGION_EVALUATION_OPTION_LESS_THAN,     /**< The option evaluating the overlay region bounds and finding the maximum
+														bounds smaller than input bounds */
 };
 
 
@@ -104,24 +106,23 @@ enum OverlayRegionEvaluationOption
  * @final	This class is not intended for extension.
  *
  * The %OverlayRegion class displays a region of an overlay surface, which is used to play back a video or show the camera preview.
- * @n
+ *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_overlay_region.htm">OverlayRegion</a>.
  *
+ * The following example demonstrates how to use the %OverlayRegion class.
  * @code
-//Sample code for OverlayRegionSample.h
+//Sample code for OverlayRegionSampleForm.h
 #include <FGraphics.h>
 #include <FMedia.h>
 #include <FUi.h>
 
-class OverlayRegionSample
+class OverlayRegionSampleForm
 	: public Tizen::Ui::Controls::Form
 	, public Tizen::Media::IPlayerEventListener
 {
 public:
-	OverlayRegionSample(void)
-	: __pPlayer(null)
-	, __pOverlayRegion(null)
-	, __pOverlayPanel(null){}
+	OverlayRegionSampleForm(void);
+	virtual ~OverlayRegionSampleForm(void);
 
 	bool Initialize(void);
 	virtual result OnInitializing(void);
@@ -137,17 +138,16 @@ public:
 	virtual void OnPlayerReleased(void);
 
 private:
-	Tizen::Media::Player* __pPlayer;
+	Tizen::Ui::Controls::Panel* __pOverlayRegionSamplePanel;
 	Tizen::Ui::Controls::OverlayRegion*__pOverlayRegion;
-	Tizen::Ui::Controls::Panel* __pOverlayPanel;
+	Tizen::Media::Player* __pPlayer;
 };
  *	@endcode
  *
  *	@code
-//Sample code for OverlayRegionSample.cpp
+//Sample code for OverlayRegionSampleForm.cpp
 #include <FApp.h>
-
-#include "OverlayRegionSample.h"
+#include "OverlayRegionSampleForm.h"
 
 using namespace Tizen::App;
 using namespace Tizen::Base;
@@ -155,15 +155,26 @@ using namespace Tizen::Graphics;
 using namespace Tizen::Media;
 using namespace Tizen::Ui::Controls;
 
+OverlayRegionSampleForm::OverlayRegionSampleForm(void)
+	: __pOverlayRegionSamplePanel(null)
+	, __pOverlayRegion(null)
+	, __pPlayer(null)
+{
+}
+
+OverlayRegionSampleForm::~OverlayRegionSampleForm(void)
+{
+}
+
 bool
-OverlayRegionSample::Initialize(void)
+OverlayRegionSampleForm::Initialize(void)
 {
 	Construct(FORM_STYLE_NORMAL);
 	return true;
 }
 
 result
-OverlayRegionSample::OnInitializing(void)
+OverlayRegionSampleForm::OnInitializing(void)
 {
 	result r = E_SUCCESS;
 
@@ -174,8 +185,12 @@ OverlayRegionSample::OnInitializing(void)
 	int positionY = (GetClientAreaBounds().width - 480) / 2;
 	Rectangle overlayRectangle(positionX, positionY, widthVideo, HeightVideo);
 
+	// Evaluates bounds of overlay region
+	bool modified = false;
+	OverlayRegion::EvaluateBounds(OVERLAY_REGION_EVALUATION_OPTION_GREATER_THAN, overlayRectangle, modified);
+
 	// Gets an overlay region
-	__pOverlayRegion = GetOverlayRegionN(overlayRectangle,  OVERLAY_REGION_TYPE_NORMAL);
+	__pOverlayRegion = GetOverlayRegionN(overlayRectangle, OVERLAY_REGION_TYPE_NORMAL);
 
 	// Gets buffer information
 	BufferInfo bufferInfo;
@@ -191,77 +206,73 @@ OverlayRegionSample::OnInitializing(void)
 	__pPlayer->OpenFile(videoFilePath);
 	__pPlayer->Play();
 
-	// Creates an instance of Panel which is overlaid with overlay region
-	__pOverlayPanel = new Panel();
-	__pOverlayPanel->Construct(overlayRectangle);
-	AddControl(*__pOverlayPanel);
-
 	// Creates instaces of Button and Label and adds controls to the panel
 	Label* pLabel = new Label();
-	pLabel->Construct(Rectangle(0, 0, 400, 80),L"OverlayRegion Sample");
+	pLabel->Construct(Rectangle(positionX, positionY, 400, 80),L"OverlayRegion Sample");
 	pLabel->SetTextColor(Color::GetColor(COLOR_ID_RED));
-	__pOverlayPanel->AddControl(*pLabel);
+	AddControl(pLabel);
 
 	Button* pButton = new Button();
-	pButton->Construct(Rectangle(widthVideo - 200, HeightVideo - 100, 180, 80),L"BUTTON");
-	__pOverlayPanel->AddControl(*pButton);
-
-	Invalidate(true);
+	pButton->Construct(Rectangle(positionX + widthVideo - 200, positionX + HeightVideo - 100, 180, 80),L"BUTTON");
+	AddControl(pButton);
 
 	return r;
 }
 
 result
-OverlayRegionSample::OnTerminating(void)
+OverlayRegionSampleForm::OnTerminating(void)
 {
 	result r = E_SUCCESS;
 
 	// Deallocates controls
-	delete __pPlayer;
-	delete __pOverlayRegion;
+	if (__pPlayer)
+	{
+		r = __pPlayer->Close();
+		delete __pPlayer;
+	}
 
 	return r;
 }
 
 // IPlayerEventListener implementation
 void
-OverlayRegionSample::OnPlayerOpened(result r)
+OverlayRegionSampleForm::OnPlayerOpened(result r)
 {
 	// ....
 }
 
 void
-OverlayRegionSample::OnPlayerEndOfClip(void)
+OverlayRegionSampleForm::OnPlayerEndOfClip(void)
 {
 	// ....
 }
 
 void
-OverlayRegionSample::OnPlayerSeekCompleted(result r)
+OverlayRegionSampleForm::OnPlayerSeekCompleted(result r)
 {
 	// ....
 }
 
 void
-OverlayRegionSample::OnPlayerBuffering(int percent)
+OverlayRegionSampleForm::OnPlayerBuffering(int percent)
 {
 	// ....
 }
 
 void
-OverlayRegionSample::OnPlayerErrorOccurred(const PlayerErrorReason r)
+OverlayRegionSampleForm::OnPlayerErrorOccurred(const PlayerErrorReason r)
 {
 	// ....
 }
 
 void
-OverlayRegionSample::OnPlayerInterrupted(void)
+OverlayRegionSampleForm::OnPlayerInterrupted(void)
 {
 	// ....
 }
 
 void
-OverlayRegionSample::OnPlayerReleased(void)
+OverlayRegionSampleForm::OnPlayerReleased(void)
 {
 	// ....
 }
@@ -284,12 +295,26 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @return		An instance of Rectangle that represents the position of the top-left corner, the width, and the height of the overlay region
-	 * @remarks	The shape of an overlay region is rectangular, which is defined by the top-left point, and the width or height. The position of the top-left
-	 *			point is relative to the top-left corner of the parent form.
+	 * @return	An instance of Tizen::Graphics::Rectangle that represents the position of the top-left corner, the width, and
+	 *			the height of the overlay region
+	 * @remarks	The shape of an overlay region is rectangular, which is defined by the top-left point, and the width or height. @n
+	 *			The position of the top-left point is relative to the top-left corner of the parent form.
 	 *
 	 */
 	Tizen::Graphics::Rectangle GetBounds(void) const;
+
+	/**
+	 * Gets the position and size of the overlay region.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An instance of Tizen::Graphics::FloatRectangle that represents the position of the top-left corner, the width,
+	 *				and the height of the overlay region
+	 * @remarks	The shape of an overlay region is rectangular, which is defined by the top-left point, and the width or height. @n
+	 *			The position of the top-left point is relative to the top-left corner of the parent form.
+	 *
+	 */
+	Tizen::Graphics::FloatRectangle GetBoundsF(void) const;
 
 	/**
 	 * Gets the position and size of the overlay region.
@@ -300,18 +325,34 @@ public:
 	 * @param[out]	y		The y position of the top-left corner of the overlay region
 	 * @param[out]	width	The width of the rectangular region
 	 * @param[out]	height	The height of the rectangular region
-	 * @remarks	The shape of an overlay region is rectangular, which is defined by the top-left point, and the width or height. The position of the top-left
-	 *			point is relative to the top-left corner of the parent form.
+	 * @remarks	The shape of an overlay region is rectangular, which is defined by the top-left point, and the width or height. @n
+	 *			The position of the top-left point is relative to the top-left corner of the parent form.
 	 *
 	 */
 	void GetBounds(int& x, int& y, int& width, int& height) const;
 
 	/**
+	 * Gets the position and size of the overlay region.
+	 *
+	 * @since		2.1
+	 *
+	 * @param[out]	x		The x position of the top-left corner of the overlay region
+	 * @param[out]	y		The y position of the top-left corner of the overlay region
+	 * @param[out]	width	The width of the rectangular region
+	 * @param[out]	height	The height of the rectangular region
+	 * @remarks	The shape of an overlay region is rectangular, which is defined by the top-left point, and the width or height. @n
+	 *			The position of the top-left point is relative to the top-left corner of the parent form.
+	 *
+	 */
+	void GetBounds(float& x, float& y, float& width, float& height) const;
+
+	/**
 	 * Sets the input buffer. @n
-	 * Due to the hardware accelerated rendering, there are limitations for an input buffer. The input buffer has the same restriction regarding its size as
-	 * the overlay region and it can be checked by using the GetWidthUnit(), GetHeightUnit() and GetMaxCount(). If the specified condition is not satisfied,
-	 * the E_INVALID_ARG exception is returned. If an input buffer does not fit to the bounds of the overlay region, it will be scaled up or down to the overlay
-	 * region bounds without keeping the ratio of input.
+	 * Due to the hardware accelerated rendering, there are limitations for an input buffer. @n
+	 * The input buffer has the same restriction regarding its size as the overlay region and it can be checked by using the GetWidthUnit(),
+	 * GetHeightUnit() and GetMaxCount(). If the specified condition is not satisfied, the @c E_INVALID_ARG exception is returned. @n
+	 * If an input buffer does not fit to the bounds of the overlay region, it will be scaled up or down to the overlay region bounds without
+	 * keeping the ratio of input.
 	 *
 	 * @since		2.0
 	 *
@@ -338,8 +379,7 @@ public:
 	 * @exception	E_INVALID_OPERATION		The current state of the instance prohibits the execution of the specified operation.
 	 * @exception	E_SYSTEM				A system error has occurred.
 	 * @remarks This method provides the buffer information, except the pointer of a color buffer. Therefore, info.pPixels is always assigned as @c null.
-	 */class Dimension;
-
+	 */
 	result GetBackgroundBufferInfo(Tizen::Graphics::BufferInfo& info) const;
 
 	/**
@@ -349,7 +389,8 @@ public:
 	 *
 	 * @return		An error code
 	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_INVALID_OPERATION		The current state of the instance prohibits the execution of the specified operation, that is, this control cannot be displayed.
+	 * @exception	E_INVALID_OPERATION		The current state of the instance prohibits the execution of the specified operation, that is,
+	 *										this control cannot be displayed.
 	 * @exception	E_SYSTEM				A system error has occurred.
 	 */
 	result Show(void);
@@ -369,15 +410,41 @@ public:
 	 * @exception		E_INVALID_ARG			A specified input parameter is invalid.
 	 * @exception		E_UNSUPPORTED_OPTION	A specified input parameter is not supported.
 	 * @exception		E_SYSTEM				A system error has occurred.
-	 * @remarks Due to the hardware accelerated rendering, there are limitations for an overlay region. @n
-	 * The hardware capability for an overlay region is checked by using the GetWidthUnit(), GetHeightUnit() and GetMaxCount(). @n
-	 *			If the application runs on multi-screen resolutions, the specified bounds may not meet the hardware limitations of the overlay region. In
-	 *			such cases, GetOverlayRegionN() will return E_INVALID_ARG. @n
-	 *          To prevent this kind of problem, the application must use the OverlayRegion::EvaluateBounds() method to get a validated bounds that can be
-	 *			used as the input bounds of the GetOverlayRegionN() method.
-	 * @remarks The specific error code can be accessed using the GetLastResult() method.
+	 * @remarks
+	 *				- Due to the hardware accelerated rendering, there are limitations for an overlay region.
+	 *				- The hardware capability for an overlay region is checked by using the GetWidthUnit(), GetHeightUnit() and GetMaxCount().
+	 *				- If the application runs on multi-screen resolutions, the specified bounds may not meet the hardware limitations of the
+	 *				overlay region. In such cases, Form::GetOverlayRegionN(const Tizen::Graphics::Rectangle&, OverlayRegionType) will return
+	 *				@c E_INVALID_ARG. @n To prevent this kind of problem, the application must use this method to get a validated bounds that can be
+	 *				used as the input bounds of the %Form::GetOverlayRegionN() method.
+	 *				- The specific error code can be accessed using the GetLastResult() method.
 	 */
 	static bool EvaluateBounds(OverlayRegionEvaluationOption option, Tizen::Graphics::Rectangle& rect, bool& modified);
+
+	/**
+	 * Evaluates and returns the valid position and size that are closest to the specified bounds.
+	 *
+	 * @since									2.1
+	 *
+	 * @return		@c true if the evaluation process does not meet an error, @n
+	 *				else @c false
+	 * @param[in]		option					The option for evaluating the bounds of the overlay region
+	 * @param[in, out]	rect					An instance of %FloatRectangle that represents the validated bounds of %OverlayRegion @n
+	 *											The width and height of the input rectangle must be greater than @c 0.
+	 * @param[out]		modified				A boolean flag that indicates whether the specified @c rectangle is modified
+	 * @exception		E_SUCCESS				The method is successful.
+	 * @exception		E_INVALID_ARG			A specified input parameter is invalid.
+	 * @exception		E_UNSUPPORTED_OPTION	A specified input parameter is not supported.
+	 * @exception		E_SYSTEM				A system error has occurred.
+	 * @remarks
+	 *				- Due to the hardware accelerated rendering, there are limitations for an overlay region.
+	 *				- The hardware capability for an overlay region is checked by using the GetWidthUnit(), GetHeightUnit() and GetMaxCount().
+	 *				- If the application runs on multi-screen resolutions, the specified bounds may not meet the hardware limitations of the overlay
+	 *				region. In such cases, Form::GetOverlayRegionN(const Tizen::Graphics::FloatRectangle&, OverlayRegionType) will return @c E_INVALID_ARG. @n To prevent this kind of problem, the application
+	 *				must use this method to get a validated bounds that can be used as the input bounds of the %Form::GetOverlayRegionN() method.
+	 *				- The specific error code can be accessed using the GetLastResult() method.
+	 */
+	static bool EvaluateBounds(OverlayRegionEvaluationOption option, Tizen::Graphics::FloatRectangle& rect, bool& modified);
 
 	/**
 	 * Gets the value of the width. @n
@@ -427,11 +494,13 @@ public:
 	 *				else @c null if no pixel format is supported or an exception occurs
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_OUT_OF_MEMORY			The memory is insufficient.
-	 * @remark		The specific error code can be accessed using the GetLastResult() method. @n
-	 *				The return value and each item in the list must be deleted by the caller. @n
-	 *				The format list can vary depending on the device. After checking the supported formats using this API, it's better to use a proper pixel format. @n
+	 * @remark
+	 *				- The specific error code can be accessed using the GetLastResult() method.
+	 *				- The return value and each item in the list must be deleted by the caller.
+	 *				- The format list can vary depending on the device. After checking the supported formats using this method,
+	 *				it's better to use a proper pixel format.
 	 */
-	static Tizen::Base::Collection::IListT< Tizen::Ui::Controls::OverlayRegionBufferPixelFormat >* GetSupportedBufferPixelFormatListN(void);
+	static Tizen::Base::Collection::IListT< OverlayRegionBufferPixelFormat >* GetSupportedBufferPixelFormatListN(void);
 
 private:
 	//

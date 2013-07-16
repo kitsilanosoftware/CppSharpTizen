@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -198,6 +197,13 @@ public:
 	 *	- Sign:
 	 *		'-'
 	 * @endcode
+	 * @remarks		This method has portability issue. @n
+	 *				When the specified string is nagative number in the ARM architecture, type casting is needed like following code.
+	 * @code
+	 *	char ret;
+	 *	Int8::Decode(L"-0X20", ret);
+	 *	SomeOutputFunction(static_cast< signed char >(ret));
+	 * @endcode
 	 */
 	static result Decode(const String& s, char& ret);
 
@@ -211,25 +217,27 @@ public:
 	 * @param[out]	ret	The result of the operation
 	 * @exception	E_SUCCESS	 The method is successful.
 	 * @exception	E_NUM_FORMAT The specified string does not contain a byte that can be parsed.
-	 * @remarks		This method assumes that the string representing the numeric value
-	 *				uses a radix 10.
+	 * @remarks
+	 *				- This method assumes that the string representing the numeric value uses a radix 10.
+	 *				- This method guarantees that the original value of out-parameter is not changed when the method returns error.
 	 */
 	static result Parse(const String& s, char& ret);
 
 	/**
 	 * Parses the specified string representing a numeric value and
-     * returns the value as @c signed @c char (as out parameter).
-     *
+	 * returns the value as @c signed @c char (as out parameter).
+	 *
 	 * @since 2.0
 	 *
 	 * @return		The @c signed @c char equivalent of the specified string representing the numeric value using the specified index
 	 * @param[in]	s	A string representing a numeric value
 	 * @param[in]	radix	The radix of the string representing a numeric value @n
 	 *						It must either be 2, 8, 10, or 16.
-     * @param[out]	ret		The result of the operation
+	 * @param[out]	ret		The result of the operation
 	 * @exception	E_SUCCESS	 The method is successful.
 	 * @exception	E_NUM_FORMAT The specified string does not contain a number that can be parsed.
 	 * @exception	E_OUT_OF_RANGE The specified @c radix is invalid.
+	 * @remarks		This method guarantees that the original value of out-parameter is not changed when the method returns error.
 	 */
 	static result Parse(const String& s, int radix, char& ret);
 

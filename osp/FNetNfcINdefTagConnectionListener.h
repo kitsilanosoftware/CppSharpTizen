@@ -30,7 +30,6 @@
 namespace Tizen { namespace Net { namespace Nfc
 {
 
-// Forward declaration
 class NdefMessage;
 
 /**
@@ -39,8 +38,8 @@ class NdefMessage;
  *
  * @since       2.0
  *
- * The %INdefTagConnectionListener interface specifies the methods used for creating the notifications about the result of an action for the 
- * NdefTagConnection, such as reading and writing the NDEF data.
+ * The %INdefTagConnectionListener interface specifies the methods used for creating the notifications about the result
+ * of an action for the NdefTagConnection, such as reading and writing the NDEF data.
  *
  * For more information on the class features, see
  * <a href="../org.tizen.native.appprogramming/html/guide/net/nfc.htm">NFC Guide</a>.
@@ -62,7 +61,7 @@ public:
 	 *
 	 * @since       2.0
 	 *
-	 * @param[in]   pMessage                The read %NdefMessage object, @n
+	 * @param[in]   pMessage                The read NdefMessage object, @n
 	 *                                      else @c null if the method is not successful
 	 * @param[in]   r                       An error code
 	 * @exception   E_SUCCESS               The method is successful.
@@ -70,10 +69,10 @@ public:
 	 * @exception   E_INVALID_FORMAT        The read data cannot be formulated to the NDEF message.
 	 * @exception   E_NOT_RESPONDING        The target tag is not responding.
 	 * @exception   E_SYSTEM                A system error has occurred.
-	 * @see         NdefTagConnection::Read()
 	 * @remarks     The input NdefMessage object must be deleted by the application after use, even outside this
 	 *              method. The NdefMessage::RemoveAllRecords() method must be called with @c true as the input value
-	 *              right before the NdefMessage object is deleted.
+	 *              right before the %NdefMessage object is deleted.
+	 * @see         NdefTagConnection::Read()
 	 */
 	virtual void OnNdefReadCompletedN(NdefMessage* pMessage, result r) = 0;
 
@@ -95,7 +94,8 @@ public:
 
 protected:
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
 	// This method is reserved and may change its name at any time without prior notice.
 	//
@@ -104,7 +104,8 @@ protected:
 	virtual void INdefTagConnectionListener_Reserved1(void) {}
 
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
 	// This method is reserved and may change its name at any time without prior notice.
 	//
@@ -113,7 +114,8 @@ protected:
 	virtual void INdefTagConnectionListener_Reserved2(void) {}
 
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
 	// This method is reserved and may change its name at any time without prior notice.
 	//

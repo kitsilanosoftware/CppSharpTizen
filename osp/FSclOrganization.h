@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -139,6 +138,60 @@ public:
 	Tizen::Base::String GetAgent(void) const;
 
 	/**
+	 * Gets the organization type.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      The organization type
+	 */
+	OrganizationType GetType(void) const;
+
+	/**
+	 * Gets the label of the organization.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      The organization label
+	 */
+	Tizen::Base::String GetLabel(void) const;
+
+	/**
+	 * Gets the location.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      The location
+	 */
+	Tizen::Base::String GetLocation(void) const;
+
+	/**
+	 * Gets the description.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      The description
+	 */
+	Tizen::Base::String GetDescription(void) const;
+
+	/**
+	 * Gets the phonetic name.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      The phonetic name
+	 */
+	Tizen::Base::String GetPhoneticName(void) const;
+
+	/**
+	 * Gets the logo image path.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      The logo image file path
+	 */
+	Tizen::Base::String GetLogoPath(void) const;
+
+	/**
 	* Sets the name of the organization.
 	*
 	* @since	2.0
@@ -182,6 +235,67 @@ public:
 	 * @param[in]	agent		The agent
 	 */
 	void SetAgent(const Tizen::Base::String& agent);
+
+	/**
+	 * Sets the organization type.
+	 *
+	 * @since       2.1
+	 *
+	 * @param[in]   type    The organization type
+	 */
+	void SetType(OrganizationType type);
+
+	/**
+	 * Sets the label of the organization.
+	 *
+	 * @since       2.1
+	 *
+	 * @param[in]   label   The organization label
+	 */
+	void SetLabel(const Tizen::Base::String& label);
+
+	/**
+	 * Sets the location.
+	 *
+	 * @since       2.1
+	 *
+	 * @param[in]   location    The location
+	 */
+	void SetLocation(const Tizen::Base::String& location);
+
+	/**
+	 * Sets the description.
+	 *
+	 * @since       2.1
+	 *
+	 * @param[in]   description           The description
+	 */
+	void SetDescription(const Tizen::Base::String& description);
+
+	/**
+	 * Sets the phonetic name.
+	 *
+	 * @since       2.1
+	 *
+	 * @param[in]   phoneticName    The phonetic name
+	 */
+	void SetPhoneticName(const Tizen::Base::String& phoneticName);
+
+	/**
+	 * Sets the logo image. @n
+	 * If the specified @c filePath is an empty string, the current logo image is removed.
+	 *
+	 * @since       2.1
+	 *
+	 * @param[in]   filePath           The file path of the logo image
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_INVALID_ARG           The length of the specified @c filePath exceeds system limitations.
+	 * @exception   E_FILE_NOT_FOUND        The specified file cannot be found or accessed.
+	 * @exception   E_SYSTEM                The method cannot proceed due to a severe system error.
+	 * @remarks     The logo image is copied to the specific directory for logo images by the system when the contact is added or updated.
+	 *              Therefore, GetLogoPath() returns the file path to which the logo image is copied.
+	 */
+	result SetLogo(const Tizen::Base::String& filePath);
 
 	/**
 	 * Copying of objects using this copy assignment operator is allowed.

@@ -2,15 +2,15 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
@@ -34,8 +34,10 @@ namespace Tizen { namespace Graphics { namespace Opengl
 /**
  * @class	IGlRenderer
  * @brief	This virtual class defines the interface for GlPlayer to draw 3D scene.
+ *
  * @since 2.0
  *
+ * The %IGlRenderer virtual class defines the interface for GlPlayer to draw 3D scene.
  */
 class _OSP_EXPORT_ IGlRenderer
 {
@@ -52,90 +54,93 @@ public:
 	 * Initializes GL status and allocates necessary resources for the current Renderer such as shader, texture and so on.
 	 *
 	 * @since 2.0
-	 * @return	Return true when this function successfully initialize the GL status and allocate resources, such as shader and textures. Otherwise, when this function meets some errors or exceptions, then return false.
+	 * @return	@c true if this method successfully initializes the GL status and allocate resources, such as shader and textures, @n
+	 else @c false if this method meets some errors or exceptions
 	 *
 	 */
 	virtual bool InitializeGl(void) = 0;
 
 	/**
-	 * Terminate the Renderer to unload shader and release allocated resources.
+	 * Terminates the Renderer to unload shader and release allocated resources.
 	 *
 	 * @since 2.0
-	 * @return	Return true when this function successfully terminate the GL status and release all the resources, such as shader and textures. Otherwise, when this function meets some errors or exceptions, then return false.
+	 * @return	@c true if this method successfully terminates the GL status and releases all the resources, such as shader and textures, @n
+	 else @c false if this method meets some errors or exceptions
 	 *
 	 */
 	virtual bool TerminateGl(void) = 0;
 
 	/**
-	 * This function is called when GlPlayer draws a scene.
-	 * Users overload this function and calls necessary operations for drawing a scene in this system.
+	 * Draws a scene. @n
+	 * Users overload the %Draw() method and calls necessary operations for drawing a scene in this system.
 	 *
 	 * @since 2.0
-	 * @return	Return true when this function successfully draws a scene with gl functions. Otherwise, when this function meets some errors or exceptions, then return false.
+	 * @return	@c true if this method successfully draws a scene with gl functions, @n
+	 else @c false if this method meets some errors or exceptions
 	 *
 	 */
 	virtual bool Draw(void) = 0;
 
 	/**
-	 * This function is called when GlPlayer is paused.
-	 * Users overload this function and calls necessary operations for the pause of the system, including release resources.
+	 * Pauses the GlPlayer instance. @n
+	 * Users overload the %Pause() method and calls necessary operations for the pause of the system, including release of resources.
 	 *
 	 * @since 2.0
-	 * @return	Return true when this function successfully does intended operations for Pause state. Otherwise, when this function meets some errors or exceptions, then return false.
+	 * @return	@c true if this method successfully does intended operations for pause state, @n else @c false if this method meets some errors or exceptions
 	 *
 	 */
 	virtual bool Pause(void) = 0;
 
-        /**
-         * This function is called when GlPlayer is resumed.
-	 * Users overload this function and calls necessary operations for the resume of the system, including allocation resources.
-         *
-         * @since 2.0
-	 * @return	Return true when this function successfully does intended operations for Resume state. Otherwise, when this function meets some errors or exceptions, then return false.
-         *
-         */
+    /**
+     * Resumes the GlPlayer instance. @n
+	 * Users overload the %Resume method and calls necessary operations for the resume of the system, including allocation of resources.
+     *
+     * @since 2.0
+	 * @return	@c true if this method successfully does intended operations for resume state, @n else @c false if this method meets some errors or exceptions
+     *
+     */
 	virtual bool Resume(void) = 0;
 
 	/**
-	 * Get the target control width.
+	 * Gets the target control width.
 	 *
 	 * @since 2.0
 	 *
-	 * @return	Return the width of Target control.
-	 * @remarks The control width is determined when you register %IGlRenderer to %GlPlayer with GlPlayer::SetIGlRenderer() function. Therefore, developers have to declare a integer variable for control width to implement this function.
+	 * @return	The width of target control
+	 * @remarks The control width is determined when you register %IGlRenderer to %GlPlayer with the GlPlayer::SetIGlRenderer() method. Therefore, developers have to declare an integer variable for control width to implement this method.
 	 *
 	 */
 	virtual int GetTargetControlWidth(void) = 0;
 
 	/**
-	 * Get the target control height.
+	 * Gets the target control height.
 	 *
 	 * @since 2.0
 	 *
-	 * @return	Return the height of Target control.
-	 * @remarks The control height is determined when you register %IGlRenderer to %GlPlayer with GlPlayer::SetIGlRenderer() function. Therefore, developers have to declare a integer variable for control height to implement this function.
+	 * @return	The height of target control
+	 * @remarks The control height is determined when you register %IGlRenderer to %GlPlayer with the GlPlayer::SetIGlRenderer() method. Therefore, developers have to declare an integer variable for control height to implement this method.
 	 *
 	 */
 	virtual int GetTargetControlHeight(void) = 0;
 
 	/**
-	 * Set the target control width.
+	 * Sets the target control width.
 	 *
 	 * @since 2.0
 	 *
-	 * @param[in]	width	Width of Target control.
-	 * @remarks The control width is determined when you register %IGlRenderer to %GlPlayer with GlPlayer::SetIGlRenderer() function. Therefore, this function is used in GlPlayer::SetIGlRenderer function, and developers have to declare a integer variable for control width to implement this function.
+	 * @param[in]	width	The width of target control
+	 * @remarks The control width is determined when you register %IGlRenderer to %GlPlayer with the GlPlayer::SetIGlRenderer() method. Therefore, developers have to declare an integer variable for control width to implement this method.
 	 *
 	 */
 	virtual void SetTargetControlWidth(int width) = 0;
 
 	/**
-	 * Get the target control height.
+	 * Gets the target control height.
 	 *
 	 * @since 2.0
 	 *
-	 * @param[in]	height	Height of Target control.
-	 * @remarks The control height is determined when you register %IGlRenderer to %GlPlayer with GlPlayer::SetIGlRenderer() function. Therefore, this function is used in GlPlayer::SetIGlRenderer function, and developers have to declare a integer variable for control height to implement this function.
+	 * @param[in]	height	The height of target control
+	 * @remarks The control height is determined when you register %IGlRenderer to %GlPlayer with the GlPlayer::SetIGlRenderer() method. Therefore, developers have to declare an integer variable for control height to implement this method.
 	 *
 	 */
 	virtual void SetTargetControlHeight(int height) = 0;

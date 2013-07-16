@@ -37,7 +37,8 @@ namespace Tizen { namespace Net { namespace Nfc
  *
  * @since       2.0
  *
- * The %INfcManagerEventListener interface specifies the method used for creating the notifications about a change in the NfcManager status.
+ * The %INfcManagerEventListener interface specifies the method used for creating the notifications about a change in
+ * the NfcManager status.
  *
  * For more information on the class features, see
  * <a href="../org.tizen.native.appprogramming/html/guide/net/nfc.htm">NFC Guide</a>.
@@ -78,7 +79,8 @@ public:
 
 protected:
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
 	// This method is reserved and may change its name at any time without prior notice.
 	//
@@ -87,7 +89,8 @@ protected:
 	virtual void INfcManagerEventListener_Reserved1(void) {}
 
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
 	// This method is reserved and may change its name at any time without prior notice.
 	//
@@ -96,7 +99,8 @@ protected:
 	virtual void INfcManagerEventListener_Reserved2(void) {}
 
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
 	// This method is reserved and may change its name at any time without prior notice.
 	//
@@ -105,7 +109,8 @@ protected:
 	virtual void INfcManagerEventListener_Reserved3(void) {}
 
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
 	// This method is reserved and may change its name at any time without prior notice.
 	//
@@ -114,7 +119,8 @@ protected:
 	virtual void INfcManagerEventListener_Reserved4(void) {}
 
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
 	// This method is reserved and may change its name at any time without prior notice.
 	//

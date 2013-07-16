@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -119,14 +118,7 @@ public:
 	/**
 	 * Creates a number formatter for the specified locale.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief                               <i> [Compatibility] </i> 
-	 * @endif
 	 * @since				2.0
-	 * @if OSPCOMPAT
-	 * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	 *                              For more information, see @ref CompNumberFormatterCreateNumberFormatterNPage "here".
-	 * @endif
 	 *
 	 * @return				A pointer to a general number formatter for the specified @c locale, @n
 	 *						else @c null if an error occurs
@@ -139,18 +131,7 @@ public:
 	static NumberFormatter* CreateNumberFormatterN(const Locale& locale);
 
 	/**
-	 * @if OSPCOMPAT
-         * @page                    CompNumberFormatterCreateNumberFormatterNPage Compatibility for CreateNumberFormatterN()
-         * @section                   CompNumberFormatterCreateNumberFormatterNIssueSection Issues
-         * Implementation of this method in OSP compatible applications has the following issue: @n
-         * -# The method returns E_UNSUPPORTED_OPERATION if the @c locale is invalid.
-         *
-         * @section                 CompNumberFormatterCreateNumberFormatterNSolutionSection Resolutions
-         * This issue has been resolved in Tizen.
-	 * @par When working in Tizen: 
-         * -# The method returns E_INVALID_ARG if the @c locale is invalid.
-	 * @endif
-         */
+	 */
 
 	/**
 	 * Creates a currency formatter for the default locale.
@@ -170,14 +151,7 @@ public:
 	/**
 	 * Creates a currency formatter for the specified @c locale.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief                               <i> [Compatibility] </i> 
-	 * @endif
 	 * @since				2.0
-	 * @if OSPCOMPAT
-	 * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	 *                              For more information, see @ref CompNumberFormatterCreateCurrencyFormatterNPage "here".
-	 * @endif
 	 *
 	 * @return				A pointer to a currency formatter for the specified @c locale, @n
 	 *						else @c null if an error occurs
@@ -190,18 +164,7 @@ public:
 	static NumberFormatter* CreateCurrencyFormatterN(const Locale& locale);
 
 	/**
-	 * @if OSPCOMPAT
-         * @page                    CompNumberFormatterCreateCurrencyFormatterNPage Compatibility for CreateCurrencyFormatterN()
-         * @section                   CompNumberFormatterCreateCurrencyFormatterNIssueSection Issues
-         * Implementation of this method in OSP compatible applications has the following issue: @n
-         * -# The method returns E_UNSUPPORTED_OPERATION if the @c locale is invalid.
-         *
-         * @section                 CompNumberFormatterCreateCurrencyFormatterNSolutionSection Resolutions
-         * This issue has been resolved in Tizen.
-	 * @par When working in Tizen:
-         * -# The method returns E_INVALID_ARG if the @c locale is invalid.
-	 * @endif
-         */
+	 */
 
 	/**
 	 * Creates a percentage formatter for the system locale.
@@ -221,14 +184,7 @@ public:
 	/**
 	 * Creates a percentage formatter for the specified @c locale.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief                               <i> [Compatibility] </i> 
-	 * @endif
 	 * @since				2.0
-	 * @if OSPCOMPAT
-	 * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	 *                              For more information, see @ref CompNumberFormatterCreatePercentFormatterNPage "here".
-	 * @endif
 	 *
 	 * @return				A pointer to a percentage formatter for the specified @c locale, @n
 	 *						else @c null if an error occurs
@@ -241,18 +197,7 @@ public:
 	static NumberFormatter* CreatePercentFormatterN(const Locale& locale);
 
         /**
-	 * @if OSPCOMPAT
-         * @page                    CompNumberFormatterCreatePercentFormatterNPage Compatibility for CreatePercentFormatterN()
-         * @section                   CompNumberFormatterCreatePercentFormatterNIssueSection Issues
-         * Implementation of this method in OSP compatible applications has the following issue: @n
-         * -# The method returns E_UNSUPPORTED_OPERATION if the @c locale is invalid.
-         *
-         * @section                 CompNumberFormatterCreatePercentFormatterNSolutionSection Resolutions
-         * This issue has been resolved in Tizen.
-	 * @par When working in Tizen:
-         * -# The method returns E_INVALID_ARG if the @c locale is invalid.
-	 * @endif
-         */
+	 */
 
 
 

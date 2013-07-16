@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -158,7 +158,7 @@ SlidableListSample::OnInitializing(void)
 	__pCustomListItemFormat->AddElement(ID_LIST_BITMAP, Rectangle(220, 10, 70, 80));
 
 	// Adds the slidable list to the form
-	AddControl(*__pSlidableList);
+	AddControl(__pSlidableList);
 
 	return r;
 }
@@ -297,7 +297,8 @@ class _OSP_EXPORT_ SlidableList
 public:
 	/**
 	 * @if OSPDEPREC
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the SlidableList::Construct() method must be called right after calling this constructor.
 	 *
 	 * @brief		<i> [Deprecated] </i>
 	 * @deprecated	This class is deprecated. Instead of using this class, use the ListView class.
@@ -308,7 +309,8 @@ public:
 
 	/**
 	 * @if OSPDEPREC
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required.@n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @brief		<i> [Deprecated] </i>
 	 * @deprecated	This class is deprecated. Instead of using this class, use the ListView class.
@@ -352,7 +354,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use the ListView class.
 	 * @since			2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @endif
 	 */
 	void AddSlidableListEventListener(Tizen::Ui::ISlidableListEventListener& listener);
@@ -366,7 +368,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use the ListView class.
 	 * @since			2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 * @endif
 	 */
 	void RemoveSlidableListEventListener(Tizen::Ui::ISlidableListEventListener& listener);
@@ -380,7 +382,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use the ListView class.
 	 * @since			2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @endif
 	 */
 	void AddCustomItemEventListener(Tizen::Ui::ICustomItemEventListener& listener);
@@ -394,7 +396,7 @@ public:
 	 * @since			2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	item			The CustomListItem to be added
+	 * @param[in]	item			The CustomListItem to add
 	 * @param[in]	itemId			The item ID
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
@@ -496,7 +498,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	index           The item index at which to insert the item
-	 * @param[in]	item            The CustomListItem to be inserted
+	 * @param[in]	item            The CustomListItem instance to insert
 	 * @param[in]	itemId		    The item ID for this item
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_INVALID_ARG	The specified @c index is less than @c 0 or greater than the item count.
@@ -534,7 +536,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use the ListView class.
 	 * @since			2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 * @endif
 	 */
 	void RemoveCustomItemEventListener(Tizen::Ui::ICustomItemEventListener& listener);
@@ -669,7 +671,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use the ListView class.
 	 * @since     2.0
 	 *
-	 * @param[in]	color	The color of the text to be displayed
+	 * @param[in]	color	The color of the text to display
 	 * @endif
 	 */
 	void SetTextColorOfEmptyList(const Tizen::Graphics::Color& color);
@@ -768,7 +770,7 @@ public:
 	 * @since			2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	item			The %CustomListItem to be loaded
+	 * @param[in]	item			The CustomListItem instance to load
 	 * @param[in]	itemId			The item ID for this item
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
@@ -785,7 +787,7 @@ public:
 	 * @since			2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	item			The CustomListItem to be loaded
+	 * @param[in]	item			The CustomListItem instance to load
 	 * @param[in]	itemId			The item ID for this item
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
@@ -818,7 +820,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in] index               The item index
-	 * @param[in]	item				The CustomListItem to be set
+	 * @param[in]	item				The CustomListItem instance to set
 	 * @param[in]	itemId				The item ID for this item
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG		The specified @c index is less than @c 0 or greater than or equal to the item count.
@@ -837,8 +839,8 @@ public:
 	 * @since			2.0
 	 *
 	 * @return		An error code
-	 * @param[in] index		The item index to be deleted
-	 * @param[in] itemHeight	The height of the item to be deleted
+	 * @param[in] index		The item index to delete
+	 * @param[in] itemHeight	The height of the item to delete
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_SYSTEM	A system error has occurred.
 	 * @remarks   The removed list item is deleted from the memory.
@@ -855,7 +857,7 @@ public:
 	 * @since			2.0
 	 *
 	 * @return		An error code
-	 * @param[in] itemHeight		The height of the item to be deleted
+	 * @param[in] itemHeight		The height of the item to delete
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
 	 * @remarks   The removed list items are deleted from the memory.

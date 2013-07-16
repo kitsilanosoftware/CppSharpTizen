@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -165,7 +165,7 @@ SlidableGroupedListSample::OnInitializing(void)
 	__pSlidableGroupedList->AddGroup(L"Group3", null, ITEM_COUNT_GROUP3, ITEM_COUNT_GROUP3 * ITEM_HEIGHT);
 
 	// Adds the slidable grouped list to the form
-	AddControl(*__pSlidableGroupedList);
+	AddControl(__pSlidableGroupedList);
 
 	return r;
 }
@@ -298,7 +298,8 @@ class _OSP_EXPORT_ SlidableGroupedList
 public:
 	/**
 	 * @if OSPDEPREC
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the SlidableGroupedList::Construct() method must be called right after calling this constructor.
 	 *
 	 * @brief       <i> [Deprecated] </i>
 	 * @deprecated  This class is deprecated. Instead of using this class, use the %GroupedListView class.
@@ -309,7 +310,8 @@ public:
 
 	/**
 	 * @if OSPDEPREC
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required.@n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @brief       <i> [Deprecated] </i>
 	 * @deprecated  This class is deprecated. Instead of using this class, use the %GroupedListView class.
@@ -339,8 +341,9 @@ public:
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG     A specified input parameter is invalid.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks 	The size of the control must be within the range defined by the minimum size and the maximum size. @n
-	 * @remarks	The minimum size of this control is 274 x 148 on a WVGA screen, 180 x 96 on a HVGA screen and 137 x 74 on a WQVGA screen.
+	 * @remarks
+	 *				- The size of the control must be within the range defined by the minimum size and the maximum size.
+	 *				- The minimum size of this control is 274 x 148 on a WVGA screen, 180 x 96 on a HVGA screen and 137 x 74 on a WQVGA screen.
 	 *
 	 * @endif
 	 */
@@ -355,7 +358,7 @@ public:
 	 * @deprecated  This class is deprecated. Instead of using this class, use the %GroupedListView class.
 	 * @since			2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @endif
 	 */
 	void AddSlidableGroupedListEventListener(Tizen::Ui::ISlidableGroupedListEventListener& listener);
@@ -369,7 +372,7 @@ public:
 	 * @deprecated  This class is deprecated. Instead of using this class, use the %GroupedListView class.
 	 * @since			2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 * @endif
 	 */
 	void RemoveSlidableGroupedListEventListener(Tizen::Ui::ISlidableGroupedListEventListener& listener);
@@ -454,8 +457,9 @@ public:
 	 * @return		An error code
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		The removed list items are deleted from the memory.
-	 * @remarks		After the items have been removed, the ISlidableGroupedListEventListener::OnListPropertyRequested() method is called.
+	 * @remarks
+	 *				- The removed list items are deleted from the memory.
+	 *				- After the items have been removed, the ISlidableGroupedListEventListener::OnListPropertyRequested() method is called.
 	 * @see				ISlidableGroupedListEventListener
 	 * @endif
 	 */
@@ -470,7 +474,7 @@ public:
 	 * @deprecated  This class is deprecated. Instead of using this class, use the %GroupedListView class.
 	 * @since			2.0
 	 *
-	 * @param[in]	listener		The event listener to be removed
+	 * @param[in]	listener		The event listener to remove
 	 * @endif
 	 */
 	void RemoveFastScrollEventListener(Tizen::Ui::IFastScrollEventListener& listener);
@@ -484,7 +488,7 @@ public:
 	 * @deprecated  This class is deprecated. Instead of using this class, use the %GroupedListView class.
 	 * @since			2.0
 	 *
-	 * @param[in]	listener        The event listener to be removed
+	 * @param[in]	listener        The event listener to remove
 	 * @endif
 	 */
 	void RemoveGroupedItemEventListener(Tizen::Ui::IGroupedItemEventListener& listener);
@@ -577,7 +581,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	groupIndex			The group index
-	 * @param[in] 	text				The string of the group to be appended
+	 * @param[in] 	text				The string of the group to append
 	 * @param[in] 	pBackgroundBitmap	The bitmap of the group
 	 * @param[in] 	groupId				The group ID
 	 * @exception	E_SUCCESS			The method is successful.
@@ -595,8 +599,8 @@ public:
 	 * @since					2.0
 	 *
 	 * @return				An error code
-	 * @param[in]   groupIndex		The group index of the item to be checked
-	 * @param[in]   itemIndex		The index of the item to be checked
+	 * @param[in]   groupIndex		The group index of the item to check
+	 * @param[in]   itemIndex		The index of the item to check
 	 * @param[in]   check			Set to @c true to check the item, @n
 	 *                              else @c false to uncheck it
 	 * @exception	E_SUCCESS		The method is successful.
@@ -615,8 +619,8 @@ public:
 	 * @since			2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	groupIndex		The group index of the item to be checked
-	 * @param[in]	itemIndex		The index of the item to be checked
+	 * @param[in]	groupIndex		The group index of the item to check
+	 * @param[in]	itemIndex		The index of the item to check
 	 * @param[in]	enable			Set to @c true to enable the item, @n
 	 *                              else @c false to disable it
 	 * @exception	E_SUCCESS		The method is successful.
@@ -747,7 +751,7 @@ public:
 	 * @since			2.0
 	 *
 	 * @return		An error code
-	 * @param[in] 	height			The height of the item to be deleted
+	 * @param[in] 	height			The height of the item to delete
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
 	 * @remarks   The removed list items are deleted from the memory.
@@ -806,27 +810,6 @@ public:
 	 */
 	result SetFastScrollMainIndex(const Tizen::Base::String& text);
 
-
-	/**
-	 * @if OSPDEPREC
-	 * Sets the second index list of the scroll by text.
-	 *
-	 * @brief       <i> [Deprecated] </i>
-	 * @deprecated  This class is deprecated. Instead of using this class, use the %GroupedListView class.
-	 * @since			2.0
-	 *
-	 * @return		An error code
-	 * @param[in] 	text			The text of the second index @n
-	 *                              Each second index of the first index has to be separated by ','
-	 * @param[in] 	indexDigit		The index digit count
-	 * @exception	E_SUCCESS		The method is successful.
-	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks     The sub-index of fast scroll does not support SCROLL_INDEX_DIGIT_NUM_2. Therefore, when SCROLL_INDEX_DIGIT_NUM_2 is passed to
-	 *				@c indexDigit, this method returns E_SYSTEM.
-	 * @endif
-	 */
-	result SetFastScrollSubIndex(const Tizen::Base::String& text, FastScrollIndexDigit indexDigit = SCROLL_INDEX_DIGIT_NUM_1);
-
 	/**
 	 * @if OSPDEPREC
 	 * Sets the background color of this control.
@@ -861,7 +844,7 @@ public:
 	 * @deprecated  This class is deprecated. Instead of using this class, use the %GroupedListView class.
 	 * @since     	2.0
 	 *
-	 * @param[in]	color	The color of the text to be displayed
+	 * @param[in]	color	The color of the text to display
 	 * @endif
 	 */
 	void SetTextColorOfEmptyList(const Tizen::Graphics::Color& color);
@@ -909,7 +892,7 @@ public:
 	 * @deprecated  This class is deprecated. Instead of using this class, use the %GroupedListView class.
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @endif
 	 */
 	void AddFastScrollEventListener(Tizen::Ui::IFastScrollEventListener& listener);
@@ -923,7 +906,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]   text					The string of the group to be appended
+	 * @param[in]   text					The string of the group to append
 	 * @param[in]   pBackgroundBitmap		The background bitmap of the group
 	 * @param[in]   itemCount				The number of items of the group
 	 * @param[in]   groupHeight				The total height of the items of the group
@@ -943,7 +926,7 @@ public:
 	 * @deprecated  This class is deprecated. Instead of using this class, use the %GroupedListView class.
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @endif
 	 */
 	void AddGroupedItemEventListener(Tizen::Ui::IGroupedItemEventListener& listener);
@@ -1136,7 +1119,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	groupIndex			The group index
-	 * @param[in]   text				The string of the group to be appended
+	 * @param[in]   text				The string of the group to append
 	 * @param[in]   pBackgroundBitmap	The background bitmap of the group
 	 * @param[in]   itemCount			The count of all the items in the group
 	 * @param[in]   groupHeight			The total height of all the items in the group

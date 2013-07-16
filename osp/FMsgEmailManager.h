@@ -48,7 +48,7 @@ namespace Tizen { namespace Messaging
 	*
 	* @code
 	*
-	// Creates a listener to override the OnEmailMessageSent() function of IEmailListener
+	// Creates a listener to override the OnEmailMessageSent() method of IEmailListener
 	// in order to be notified of a change in the state of the message being sent.
 
 	class EmailListener
@@ -144,10 +144,12 @@ namespace Tizen { namespace Messaging
 		* Sends the email message.
 		*
 		* @since		2.0
-		* @privilege	%http://tizen.org/privilege/messaging.email
+		* @privlevel	public
+		* @privilege	%http://tizen.org/privilege/messaging.write @n
+		* 				(%http://tizen.org/privilege/messaging.email is deprecated.)
 		*
 		* @return			An error code
-		* @param[in]	message					The message to be sent
+		* @param[in]	message					The message to send
 		* @param[in]	recipientList			The list of recipients
 		* @param[in]	saveToSentbox			Set to @c true to save the message in the Sentbox, @n
 		*										else @c false
@@ -163,6 +165,7 @@ namespace Tizen { namespace Messaging
 		* @exception	E_INVALID_ARG			The number of recipients is @c 0.
 		* @exception	E_MAX_EXCEEDED			 The number of recipients has crossed the maximum limit (Maximum 20).
 		* @exception	E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+		* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 		* @remarks		The value of the flag, @c saveToSentbox, is fixed to @c false in the emulator.
 		* @see			IEmailListener::OnEmailMessageSent()
 		*/

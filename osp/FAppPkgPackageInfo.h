@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -221,7 +220,32 @@ public:
 	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
-	Tizen::App::Package::PackageAppInfo* GetPackageAppInfoN(const AppId& appId) const;
+	PackageAppInfo* GetPackageAppInfoN(const AppId& appId) const;
+
+	/**
+	 * Gets the type of a package.
+	 *
+	 * @since	2.0
+	 * @privlevel	platform
+	 * @privilege	%http://tizen.org/privilege/packagemanager.setting @n
+	 *           (%http://tizen.org/privilege/packagesetting is deprecated.)
+	 *
+	 * @return The package type
+	 */
+	PackageType GetType(void) const;
+
+	/**
+	* Gets the privilege information list of a package.
+	*
+	* @since         2.1
+	*
+	* @return        A pointer to the list of Tizen::Security::PrivilegeInfo instances, @n
+	*                else @c null if it fails
+	* @exception		E_SUCCESS    	      The method is successful.
+	* @exception		E_SYSTEM            The method cannot proceed due to a severe system error.
+	* @remarks      The specific error code can be accessed using the GetLastResult() method.
+	*/
+	Tizen::Base::Collection::IList* GetPrivilegeListN(void) const;
 
 private:
 	/**
@@ -245,6 +269,7 @@ private:
 
 	friend class _PackageInfoImpl;
 	friend class _PackageManagerImpl;
+	friend class _PackageManagerServer;
 
 }; // PackageInfo
 

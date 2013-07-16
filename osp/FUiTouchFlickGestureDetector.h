@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -71,7 +71,7 @@ public:
 		TouchFlickGestureDetector(void);
 
 	/**
-	 * This destructor overrides Osp::Base::Object::~Object().
+	 * This destructor overrides Tizen::Base::Object::~Object().
 	 *
 	 * @since 2.0
 	 */
@@ -88,30 +88,30 @@ public:
 	result Construct(void);
 
 	/**
-	 * Adds the ITouchFlickGestureEventListener instance to the flick gesture detector instance. @n
-	 * The added listener gets notified when a gesture is recognized.
-	 *
-	 * @since 2.0
-	 *
-	 * @return			An error code
-	 * @param[in]	listener						The event listener to add
-	 * @exception	E_SUCCESS					The method is successful.
-	 * @exception	E_OBJ_ALREADY_EXIST	The listener is already added.
-	 * @see					RemoveFlickGestureEventListener()
-	 */
+	* Adds the ITouchFlickGestureEventListener instance to the flick gesture detector instance. @n
+	* The added listener gets notified when a gesture is recognized.
+	*
+	* @since 2.0
+	*
+	* @return			An error code
+	* @param[in]	listener						The event listener to add
+	* @exception	E_SUCCESS					The method is successful.
+	* @exception	E_OBJ_ALREADY_EXIST	The listener is already added.
+	* @see					RemoveFlickGestureEventListener()
+	*/
 	result AddFlickGestureEventListener(Tizen::Ui::ITouchFlickGestureEventListener& listener);
 
 	/**
-	 * Removes the IFlickGestureEventListener instance from the flick gesture detector instance.
-	 *
-	 * @since 2.0
-	 *
-	 * @return			An error code
-	 * @param[in]	listener						The listener to remove
-	 * @exception	E_SUCCESS					The method is successful.
-	 * @exception	E_OBJ_NOT_FOUND	The specified @c listener is not found.
-	 * @see					AddFlickGestureEventListener()
-	 */
+	* Removes the IFlickGestureEventListener instance from the flick gesture detector instance.
+	*
+	* @since 2.0
+	*
+	* @return			An error code
+	* @param[in]	listener						The listener to remove
+	* @exception	E_SUCCESS					The method is successful.
+	* @exception	E_OBJ_NOT_FOUND	The specified @c listener is not found.
+	* @see					AddFlickGestureEventListener()
+	*/
 	result RemoveFlickGestureEventListener(Tizen::Ui::ITouchFlickGestureEventListener& listener);
 
 	/**
@@ -128,13 +128,26 @@ public:
 	result GetDistance(int& xDistance, int& yDistance) const;
 
 	/**
+	 * Gets the distance of flick.
+	 *
+	 * @since 2.1
+	 *
+	 * @return			An error code
+	 * @param[out] xDistance				The distance in x direction
+	 * @param[out] yDistance				The distance in y direction
+	 * @exception	E_SUCCESS					The method is successful.
+	 * @remarks	If an error occurs, this method returns the x distance of -1 and the y distance of -1.
+	 */
+	result GetDistance(float& xDistance, float& yDistance) const;
+
+	/**
 	 * Gets the duration of flick.
 	 *
 	 * @since 2.0
 	 *
 	 * @return			The duration of flick
 	 * @exception	E_SUCCESS					The method is successful.
-	 * @remarks	If an error occurs, this method returns -1.
+	 * @remarks	If an error occurs, this method returns @c -1.
 	 */
 	int GetDuration(void) const;
 

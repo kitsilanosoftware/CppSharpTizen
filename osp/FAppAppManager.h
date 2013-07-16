@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -61,7 +60,7 @@ class MapDataControl;
  * The application manager supports normal and conditional application launch, and application control search and launch.
  * It looks up the specific application control from the application control registry and creates an application control instance.
  * @n
- * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/app/launching_other_apps_within_apps.htm">Launching Other Applications</a>, <a href="../org.tizen.native.appprogramming/html/guide/app/registering_launch_condition.htm">Registering a Launch Condition</a>, and <a href="../org.tizen.native.appprogramming/html/guide/app/app_controls.htm">Application Controls</a>.
+ * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/app/launching_other_apps_within_apps.htm">Launching Other Applications</a> and <a href="../org.tizen.native.appprogramming/html/guide/app/registering_launch_condition.htm">Registering a Launch Condition</a>, and <a href="../org.tizen.native.appprogramming/html/guide/app/app_controls.htm">Application Controls</a>.
  */
 class _OSP_EXPORT_ AppManager
 	: public Tizen::Base::Object
@@ -101,13 +100,10 @@ public:
 	 * The following example demonstrates how to use the %FindAppControlN() method to find the application control.
 	 *
 	 * @code
-	 * ArrayList dataList(SingleObjectDeleter);
-	 * dataList.Construct();
-	 * dataList.Add(new String(L"tel:1234567900"));
-	 * dataList.Add(new String(L"type:voice"));
+	 * String telUri = L"tel:12345678900";
 	 *
-	 * AppControl* pAc = AppManager::FindAppControlN(L"tizen.phone", L"http://tizen.org/appcontrol/operation/call");
-	 * pAc->Start(&dataList, null);
+	 * AppControl* pAc = AppManager::FindAppControlN(L"tizen.phone", L"http://tizen.org/appcontrol/operation/dial");
+	 * pAc->Start(&telUri, null, null, null);
 	 * @endcode
 	 */
 	static AppControl* FindAppControlN(const AppId& appId, const Tizen::Base::String& operationId);
@@ -134,12 +130,11 @@ public:
 	 * @exception	E_SYSTEM		A system error has occurred. @n
 	 * 								Either the file operation or the DB operation has failed.
 	 * @remarks	The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks	For the delivered launch arguments, see App::GetAppArgumentListN().
 	 */
 	static Tizen::Base::Collection::IList* FindAppControlsN(const Tizen::Base::String* pOperationId, const Tizen::Base::String* pCategory, const Tizen::Base::String* pDataType, const Tizen::Base::String* pUriPattern);
 
 	/**
-         * @if OSPDEPREC
+     * @if OSPDEPREC
 	 * Starts the application control if there is only one application control that matches the specified URI, operation ID, and data type. @n
 	 * If there are more than one application controls, the one that the user selects is started.
 	 *
@@ -147,6 +142,7 @@ public:
 	 * @deprecated	This method is deprecated because IAppControlListener is deprecated and replaced by IAppControlResponselistener.
 	 * 				Instead of using this method, use AppControl::FindAndStart().
 	 * @since		2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/application.launch
 	 *
 	 * @return	An error code
@@ -174,7 +170,7 @@ public:
 	 * String operationId = L"http://tizen.org/appcontrol/operation/call";
 	 * StartAppControl(L"tel:1234567890", &operationId, null, null);
 	 * @endcode
-         * @endif
+     * @endif
 	 */
 	static result StartAppControl(const Tizen::Base::String& uriData, const Tizen::Base::String* pOperationId, const Tizen::Base::String* pDataType, IAppControlListener* pListener);
 
@@ -187,6 +183,7 @@ public:
 	 * @deprecated	This method is deprecated because IAppControlListener is deprecated and replaced by IAppControlResponselistener.
 	 * 				Instead of using this method, use AppControl::FindAndStart().
 	 * @since		2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/application.launch
 	 *
 	 * @return	An error code
@@ -225,7 +222,7 @@ public:
 	 * @param[in]	providerId			The provider ID
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_OBJ_NOT_FOUND		The data control specified with the @c providerId is not found.
-	 * @exception	E_ILLEGAL_ACCESS	The access is denied due to insufficient permission.
+	 * @exception	E_ILLEGAL_ACCESS	Access is denied due to insufficient permission.
 	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
@@ -243,7 +240,7 @@ public:
 	 * @param[in]	providerId			The provider ID
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_OBJ_NOT_FOUND		The data control specified with the @c providerId is not found.
-	 * @exception	E_ILLEGAL_ACCESS	The access is denied due to insufficient permission.
+	 * @exception	E_ILLEGAL_ACCESS	Access is denied due to insufficient permission.
 	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
@@ -261,7 +258,9 @@ public:
 	* @exception	E_SUCCESS			The method is successful.
 	* @exception	E_APP_NOT_INSTALLED	The expected shared directory cannot be found
 	*									because the application specified with @c appId cannot be installed.
-	* @remarks		The specific error code can be accessed using the GetLastResult() method.
+	* @remarks		
+	*				- The returned path can be invalid when the application with specified with @c appId is uninstalled.
+	*				- The specific error code can be accessed using the GetLastResult() method.
 	*/
 	static Tizen::Base::String GetAppSharedPath(const AppId& appId);
 
@@ -277,7 +276,7 @@ public:
 
 	/**
 	 * @if OSPDEPREC
-	 * Launches the default application with given @c appId. @n
+	 * Launches the default application with the given @c appId. @n
 	 * The launch arguments are given as App::OnUserEventReceivedN() or can be obtained by
 	 * invoking App::GetAppArgumentListN(), especially within App::OnAppInitializing().
 	 *
@@ -285,6 +284,7 @@ public:
 	 * @deprecated	This method is deprecated because sending argument with %LaunchApplication() is not recommended. @n
 	 * 				Instead of using this method, use %LaunchApplication() without launch arguments or AppControl::Start().
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/application.launch
 	 *
 	 * @return	An error code
@@ -298,14 +298,16 @@ public:
 	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 	 * @exception	E_MAX_EXCEEDED		The size of @c appId or @c pArguments has exceeded the maximum limit.
 	 * @exception   E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
+	 * @exception E_ILLEGAL_ACCESS				The application is not signed with the same certificate of target application. @b Since: @b 2.1
 	 * @endif
 	 */
 	result LaunchApplication(const AppId& appId, const Tizen::Base::Collection::IList* pArguments, LaunchOption option = LAUNCH_OPTION_DEFAULT);
 
 	/**
-	 * Launches the default application with given @c appId.
+	 * Launches the default application with the given @c appId.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/application.launch
 	 *
 	 * @return	An error code
@@ -315,8 +317,26 @@ public:
 	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @exception	E_APP_NOT_INSTALLED	The target application is not installed.
 	 * @exception   E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
+	 * @exception E_ILLEGAL_ACCESS				The application is not signed with the same certificate of target application. @b Since: @b 2.1
 	 */
 	result LaunchApplication(const AppId& appId, LaunchOption option = LAUNCH_OPTION_DEFAULT);
+
+	/**
+	 * Terminates an application.
+	 *
+	 * @since	2.0
+	 * @privlevel	partner
+	 * @privilege	%http://tizen.org/privilege/appmanager.kill @n
+	 * 				(%http://tizen.org/privilege/application.kill is deprecated.)
+	 *
+	 * @return	An error code
+	 * @param[in]	appId				The application's ID to execute
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_OBJ_NOT_FOUND		The application is either not installed or is not running.
+	 * @exception   E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
+	 */
+	result TerminateApplication(const AppId& appId);
 
 	/**
 	 * Checks whether an application is running.
@@ -349,7 +369,9 @@ public:
 	 * The launch arguments are given as input parameters to %IAppLaunchConditionEventListener::OnAppLaunchConditionMetN().
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/application.launch
+	 * @feature	%http://tizen.org/feature/network.nfc for L"NFC='command'" or %http://tizen.org/feature/usb.accessory for "Serial='command'" in the value of @c condition
 	 *
 	 * @return		An error code
 	 * @param[in]	condition	  The launch condition for the application @n
@@ -360,6 +382,8 @@ public:
 	                              <td>The specified condition is the local due time.</td></tr>
 	                              <tr><td>L"DueTime='mm/dd/yyyy hh:mm:ss' LaunchPeriod='mm'"</td>
 	                              <td>The specific condition is the time period after due time.</td></tr>
+	                              <tr><td>L"WeeklyTime='EEE HH:mm:ss'"</td>
+	                              <td>The specified condition is a day of a week with a specific time at which the application is launched on a weekly basis. For multiple descriptions, "," delimiter can be used as shown in the following example: <br>i"Mon 09:00:00, Tue 09:00:00, Wed 09:00:00, Thu 09:00:00, Fri 09:00:00"<br> To specify the day of the week, it must be in one of the following supported string format: <br>Mon: Monday<br>Tue: Tuesday<br>Wed: Wednesday<br>Thu: Thursday<br>Fri: Friday<br>Sat: Saturday<br>Sun: Sunday</td></tr>
 	                              <tr><td>L"Serial='command'"</td><td>The specified condition is a serial
 	                              communication input command.</td></tr>
 	                              <tr><td>L"NFC='command'"</td><td>The specified condition is a Near Field Communication (NFC) tag that has the NFC Data Exchange Format (NDEF) data.
@@ -379,16 +403,18 @@ public:
 	 * @exception	E_MAX_EXCEEDED		The size of @c pArguments has exceeded the maximum limit.
 	 * @exception	E_SYSTEM				A system error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_UNSUPPORTED_OPERATION	  The Emulator or target device does not support the required feature. For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>. @b Since: @b 2.1
 	 *
 	 * @remarks		When the registered application is about to be launched, the registered launch condition and arguments are given as parameters to IAppLaunchConditionEventListener::OnAppLaunchConditionMetN().
 	 * @remarks		The newly introduced launch condition does not work on the previous SDK version and the E_INVALID_CONDITION exception is returned.
 	 * @remarks		Registering the same launch condition overwrites the previous launch argument without throwing an exception.
 	 * @remarks		The launch period requires more consideration because an inappropriate short period value may lead
 	 *				to an adverse effect on the device battery.
-	 * @remarks		For the NFC launch condition, the detected NDEF message can be acquired using the @c pExtraData parameter of %IAppLaunchConditionEventListener::OnAppLaunchConditionMetN() method.
+	 * @remarks		For the NFC launch condition, the detected NDEF message can be acquired using the @c pExtraData parameter of the %IAppLaunchConditionEventListener::OnAppLaunchConditionMetN() method.
+	 * @remarks 		Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	 * @see			UnregisterAppLaunch()
 	 * @see			IsAppLaunchRegistered()
-	 * @see			LaunchApplication()
+	 * @see			LaunchApplication(const AppId&, LaunchOption);
 	 * @see			Tizen::Base::DateTime::ToString()
 	 * @see			Tizen::Io::SerialPort
 	 *
@@ -414,13 +440,15 @@ public:
 	 * Unregisters the previously registered launch condition.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/application.launch
 	 *
 	 * @return		An error code
-	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_SUCCESS			Either of the following conditions has occurred:
+	 *									- The method is successful.
+	 *									- There is no registered launch condition.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-	 * @remarks		E_SUCCESS			An error occurs when there is no registered launch condition.
 	 * @see			RegisterAppLaunch()
 	 * @see			IsAppLaunchRegistered()
 	 */
@@ -430,6 +458,7 @@ public:
 	 * Unregisters the specified launch condition.
 	 *
 	 * @since		2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/application.launch
 	 *
 	 * @return		An error code
@@ -459,6 +488,110 @@ public:
 	 * @see         UnregisterAppLaunch()
 	 */
 	bool IsAppLaunchRegistered(void) const;
+
+	/**
+	 * Registers the specified application with a specific condition and launches it if the condition is met. @n
+	 * If the requested application is already running, the application is notified through IAppLaunchConditionEventListener::OnAppLaunchConditionMetN().
+	 * The launch arguments are given as input parameters to %IAppLaunchConditionEventListener::OnAppLaunchConditionMetN().
+	 *
+	 * @since		2.0
+	 * @privlevel	partner
+	 * @privilege	%http://tizen.org/privilege/appmanager.launch
+	 * @feature	%http://tizen.org/feature/network.nfc for L"NFC='command'" or %http://tizen.org/feature/usb.accessory for L"Serial='command'" in the value of @c condition
+	 *
+	 * @return     An error code
+	 * @param[in]  appId          The ID of the application registered for launch
+	 * @param[in]  condition      The launch condition for the application @n
+	 *	                          The condition has L"Key='value'" format and is case sensitive. To use single or double quotes in the condition values, prefix them with a slash (\' or \"). @n
+	 *							  For more information on the condition formats, see <a href="../org.tizen.native.appprogramming/html/guide/app/registering_launch_condition.htm">Registering a Launch Condition</a>.
+	 *                             <table><tr><th>Condition Format</th><th>Meaning</th></tr>
+	                             <tr><td>L"DateTime='mm/dd/yyyy hh:mm:ss'"</td>
+	                             <td>The specified condition is the local due time.</td></tr>
+	                             <tr><td>L"DueTime='mm/dd/yyyy hh:mm:ss' LaunchPeriod='mm'"</td>
+	                             <td>The specific condition is the time period after due time.</td></tr>
+	                             <tr><td>L"Serial='command'"</td><td>The specified condition is a serial
+	                             communication input command.</td></tr>
+	                             <tr><td>L"NFC='command'"</td><td>The specified condition is a Near Field Communication (NFC) tag that has the NFC Data Exchange Format (NDEF) data.
+	                             </td></tr></table> @n
+
+	 *
+	 * @param[in]  pArguments	  A list of string arguments that has a maximum size of @c 1024 bytes @n
+	 *							  The parameter can also contain @c null. @n
+	 *						      For more information on the arguments, see <a href="../org.tizen.native.appprogramming/html/guide/app/launching_other_apps_within_apps.htm">Launching Other Applications</a>.
+	 * @param[in]  option         The launch option (currently only AppManager::LAUNCH_OPTION_DEFAULT is available)
+	 * @exception  E_SUCCESS			The method is successful.
+	 * @exception  E_APP_NOT_INSTALLED	The application is not installed.
+	 * @exception  E_INVALID_ARG		The launch condition is empty or too long (Maximum 400 bytes).
+	 * @exception  E_INVALID_FORMAT		The specified condition format is invalid.
+	 * @exception  E_INVALID_CONDITION  The specified condition format is valid but the condition has at least one or more invalid values.
+	 * @exception  E_OUT_OF_MEMORY		The memory is insufficient.
+	 * @exception  E_MAX_EXCEEDED		The size of @c pArguments has exceeded the maximum limit.
+	 * @exception  E_SYSTEM				A system error has occurred.
+	 * @exception  E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	 E_UNSUPPORTED_OPERATION   The Emulator or target device does not support the required feature. For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>. @b Since: @b 2.1
+	 *
+	 * @remarks    When the registered application is about to be launched, the registered launch condition and arguments are given as parameters to IAppLaunchConditionEventListener::OnAppLaunchConditionMetN().
+	 * @remarks    The newly introduced launch condition does not work on the previous SDK version and the @c E_INVALID_CONDITION exception is returned.
+	 * @remarks    Registering the same launch condition overwrites the previous launch argument without throwing an exception.
+	 * @remarks    The launch period requires more consideration because an inappropriate short period value may lead
+	 *             to an adverse effect on the device battery.
+	 * @remarks    For the NFC launch condition, the detected NDEF message can be acquired using the @c pExtraData parameter of the %IAppLaunchConditionEventListener::OnAppLaunchConditionMetN() method.
+	 * @remarks 	Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
+	 * @see        UnregisterAppLaunch()
+	 * @see        IsAppLaunchRegistered()
+	 * @see        LaunchApplication(const AppId&, LaunchOption);
+	 * @see        IAppLaunchConditionEventListener::OnAppLaunchConditionMetN()
+	 * @see        Tizen::Base::DateTime::ToString()
+	 * @see        Tizen::Io::SerialPort
+	 */
+	result RegisterAppLaunch(const AppId& appId, const Tizen::Base::String& condition, const Tizen::Base::Collection::IList* pArguments, LaunchOption option);
+
+	/**
+	 * Unregisters the launch condition.
+	 *
+	 * @since		2.0
+	 * @privlevel	partner
+	 * @privilege	%http://tizen.org/privilege/appmanager.launch
+	 *
+	 * @return     An error code
+	 * @param[in]  appId          The application ID
+	 * @param[in]  pCondition           The launch condition to unregister @n
+	 *                                  If the parameter contains @c null, all the conditions are unregistered.
+	 * @exception  E_SUCCESS			The method is successful.
+	 * @exception  E_APP_NOT_INSTALLED	The application is not installed.
+	 * @exception  E_OBJ_NOT_FOUND		The specified launch condition is not found.
+	 * @exception  E_SYSTEM				A system error has occurred.
+	 * @exception  E_OUT_OF_MEMORY		The memory is insufficient.
+	 * @exception  E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 *
+	 * @see         RegisterAppLaunch()
+	 * @see         IsAppLaunchRegistered()
+	 */
+	result UnregisterAppLaunch(const AppId& appId, const Tizen::Base::String* pCondition);
+
+	/**
+	 * Checks whether a previously registered launch condition is present for the specified application.
+	 *
+	 * @since		2.0
+	 * @privlevel	partner
+	 * @privilege	%http://tizen.org/privilege/appmanager.launch
+	 *
+	 * @return     @c true if a condition is already registered to the specified application with the specified condition, @n
+	 *             else @c false
+	 * @param[in]  appId          The application ID
+	 * @param[in]  pCondition     The launch condition to register for the specified @c appId @n
+	 *                            If the parameter contains @c null, the method checks for any registered launch condition for the specified @c appId.
+	 * @exception  E_SUCCESS			The method is successful.
+	 * @exception  E_APP_NOT_INSTALLED	The application is not installed.
+	 * @exception  E_SYSTEM				A system error has occurred.
+	 * @exception  E_OUT_OF_MEMORY		The memory is insufficient.
+	 * @exception  E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 *
+	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
+	 * @see         RegisterAppLaunch()
+	 * @see         UnregisterAppLaunch()
+	 */
+	bool IsAppLaunchRegistered(const AppId& appId, const Tizen::Base::String* pCondition = null) const;
 
 	/**
 	 * Sets a checkpoint event listener. @n
@@ -515,6 +648,68 @@ public:
      * @see RegisterAppLaunch()
      */
 	void SetAppLaunchConditionEventListener(IAppLaunchConditionEventListener* pListener);
+
+	/**
+	 * Adds an IActiveAppEventListener to the %AppManager. @n
+	 * The listener gets notified when the active application is changed.
+	 *
+	 * @since	2.0
+	 *
+	 * @privlevel	partner
+	 * @privilege	%http://tizen.org/privilege/appusage
+	 *
+	 * @return		An error code
+	 * @param[in]	listener				The event listener
+	 * @exception	E_SUCCESS				The method is successful.
+	 * @exception	E_OUT_OF_MEMORY			The memory is insufficient.
+	 * @exception	E_OBJ_ALREADY_EXIST		The listener is already added.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
+	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @remarks		Active application is the top most window with focus.
+	 * @see			GetActiveApp()
+	 * @see			RemoveActiveAppEventListener()
+	 * @see			IActiveAppEventListener
+	 */
+	result AddActiveAppEventListener(IActiveAppEventListener& listener);
+
+	/**
+	 * Removes an IActiveAppEventListener from the %AppManager.
+	 *
+	 * @since	2.0
+	 *
+	 * @privlevel	partner
+	 * @privilege	%http://tizen.org/privilege/appusage
+	 *
+	 * @return		An error code
+	 * @param[in]	listener				The event listener
+	 * @exception	E_SUCCESS				The method is successful.
+	 * @exception	E_OBJ_NOT_FOUND			The specified @c listener is not found.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
+	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @see			GetActiveApp()
+	 * @see			AddActiveAppEventListener()
+	 * @see			IActiveAppEventListener
+	 */
+	result RemoveActiveAppEventListener(IActiveAppEventListener& listener);
+
+	/**
+	 * Gets the current active application AppId.
+	 *
+	 * @since	2.0
+	 *
+	 * @privlevel	partner
+	 * @privilege	%http://tizen.org/privilege/appusage
+	 *
+	 * @return		An error code
+	 * @param[out]	appId					The AppId of the active application
+	 * @exception	E_SUCCESS				The method is successful.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
+	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @remarks		Active application is the top most window with focus.
+	 * @see			AddActiveAppEventListener()
+	 * @see			RemoveActiveAppEventListener()
+	 */
+	result GetActiveApp(AppId& appId);
 
 private:
 	/**

@@ -19,7 +19,7 @@
  * @file	FNetILocalDhcpServerEventListener.h
  * @brief	This is the header file for the %ILocalDhcpServerEventListener interface.
  *
- * This is the header file for the %ILocalDhcpServerEventListener interface.
+ * This header file contains the declarations of the %ILocalDhcpServerEventListener interface.
  *
  */
 #ifndef _FNET_ILOCAL_DHCP_SERVER_EVENT_LISTENER_H_

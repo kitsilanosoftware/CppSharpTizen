@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -291,14 +290,7 @@ public:
 	/**
 	 * Gets the thumbnail image.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief	<i> [Compatibility] </i>
-	 * @endif
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility This method has compatibility issues with OSP compatible applications. @n
-	 *					 For more information, see @ref CompContentInfoGetThumbnailNPage "here".
-	 * @endif
 	 *
 	 * @return			A pointer to the thumbnail image
 	 * @exception	E_SUCCESS					The method is successful.
@@ -309,13 +301,6 @@ public:
 	Tizen::Graphics::Bitmap* GetThumbnailN(void) const;
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page		CompContentInfoGetThumbnailNPage Compatibility for GetThumbnailN().
-	 * @section	CompContentInfoGetThumbnailNPageIssueSection Issue
-	 *				The thumbnail size of this method in OSP compatible applications has the following issues: @n
-	 *				<DIV> The size is changed from 80x60 pixels to the size of image which is returned from the platform since %Tizen</DIV>
-	 *
-	 * @endif
 	 */
 
 	/**
@@ -466,7 +451,7 @@ protected:
 	};
 
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * This is the default constructor for this class.
 	 *
 	 * @since		2.0
 	 */

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -27,8 +26,8 @@
 #define _FAPP_PKG_H_
 
 #include <FAppPkgIPackageInstallationEventListener.h>
-
-
+#include <FAppPkgIPackageInstallationResponseListener.h>
+#include <FAppPkgIPackageUninstallationResponseListener.h>
 #include <FAppPkgPackageInfo.h>
 #include <FAppPkgPackageAppInfo.h>
 #include <FAppPkgPackageManager.h>
@@ -42,6 +41,8 @@
  *				@b Library : @b osp-appfw
  *
  * The %Package namespace contains classes and interfaces for information of packages and management of its installation or uninstallation.
+ *
+ * The following diagram illustrates the relationships between the classes belonging to the %Package namespace.
  * @image html app_package_namespace_classdiagram.png
  */
 

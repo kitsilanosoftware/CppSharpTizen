@@ -52,7 +52,8 @@ enum AudioInputDevice
  *
  * @since		2.0
  *
- * @see	AudioIn::Prepare(), AudioOut::Prepare()
+ * @see	AudioIn::Prepare()
+ * @see	AudioOut::Prepare()
  */
 enum AudioChannelType
 {
@@ -68,7 +69,8 @@ enum AudioChannelType
  *
  * @since		2.0
  *
- * @see	AudioIn::Prepare(), AudioOut::Prepare()
+ * @see	AudioIn::Prepare()
+ * @see	AudioOut::Prepare()
  */
 enum AudioSampleType
 {

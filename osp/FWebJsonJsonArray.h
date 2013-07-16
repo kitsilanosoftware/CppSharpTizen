@@ -50,10 +50,10 @@ namespace Tizen { namespace Web { namespace Json
  * @final	This class is not intended for extension.
  *
  * The %JsonArray class represents the JSON value of type array.
- * @n
+ * 
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/web/json_namespace.htm">JSON Guide</a>.
  *
- * The following example shows how to create and initialize a %JsonArray instance and how to use its methods.
+ * The following example demonstrates how to create and initialize a %JsonArray instance and how to use its methods.
  *
  * @code
  *	#include <FWebJson.h>
@@ -121,7 +121,8 @@ class _OSP_EXPORT_ JsonArray
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the Construct() method must be called right after calling this constructor.
 	 *
 	 * @since	2.0
 	 */
@@ -135,14 +136,13 @@ public:
 	virtual ~JsonArray(void);
 
 	/**
-	 * Initializes the instance of %JsonArray.
+	 * Initializes this instance of %JsonArray.
 	 *
 	 * @since		2.0
 	 *
 	 * @return      An error code
-	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @exception	E_INVALID_OPERATION	This instance has already been constructed.
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_SYSTEM		This exception exists only for historical reasons.
 	 */
 	result Construct(void);
 
@@ -153,7 +153,6 @@ public:
 	 * @since	2.0
 	 *
 	 * @return      The JSON type
-	 * @see     JsonType
 	 */
 	JsonType GetType(void) const;
 
@@ -163,7 +162,7 @@ public:
 	 * @since	    2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	pJsonValue		A pointer to JsonValue to be added to the list
+	 * @param[in]	pJsonValue		A pointer to JsonValue to add to the list
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_INVALID_ARG	The specified input parameter is invalid.
 	 * @see			Remove()
@@ -177,22 +176,22 @@ public:
 	 * @since	    2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	pJsonValue			A pointer to the JsonValue class to be located
+	 * @param[in]	pJsonValue			A pointer to the JsonValue class to locate
 	 * @param[out]	index				The index of the element
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_OBJ_NOT_FOUND		The @c pJsonValue is not found.
+	 * @exception	E_OBJ_NOT_FOUND		The specified @c pJsonValue is not found.
 	 * @see			LastIndexOf()
 	 */
 	virtual result IndexOf(IJsonValue* const& pJsonValue, int& index) const;
 
 	/**
-	 * Searches for an element starting from the specified index. @n
+	 * Searches for an element starting from the specified @c index. @n
 	 * Gets the index of the element if it is found.
 	 *
 	 * @since	    2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	pJsonValue			A pointer to the JsonValue class to be located
+	 * @param[in]	pJsonValue			A pointer to the JsonValue class to locate
 	 * @param[in]	startIndex			The starting index for the search @n
 	 *									It must be less than the number of elements in the array.
 	 * @param[out]	index				The index of the element
@@ -210,16 +209,16 @@ public:
 	 * @since	    2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	pJsonValue			A pointer to the JsonValue class to be located
+	 * @param[in]	pJsonValue			A pointer to the JsonValue class to locate
 	 * @param[in]	startIndex	The starting index of the range
-	 * @param[in]	count				The number of elements to be read
+	 * @param[in]	count				The number of elements to read
 	 * @param[out]	index				The index of the element
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_OUT_OF_RANGE		Either of the following conditions has occurred: @n
-	 *									- The specified index is outside the bounds of the data structure. @n
-	 *									- The specified @c startIndex is either greater than or equal to the number of elements or less than @c 0. @n
+	 * @exception	E_OUT_OF_RANGE		Either of the following conditions has occurred:
+	 *									- The specified @c index is outside the bounds of the data structure.
+	 *									- The specified @c startIndex is either greater than or equal to the number of elements or less than @c 0.
 	 *									- The specified @c count is either greater than the number of elements starting from @c startIndex or less than @c 0.
-	 * @exception	E_OBJ_NOT_FOUND		The @c pJsonValue is not found.
+	 * @exception	E_OBJ_NOT_FOUND		The specified @c pJsonValue is not found.
 	 * @see			LastIndexOf()
 	 */
 	virtual result IndexOf(IJsonValue* const& pJsonValue, int startIndex, int count, int& index) const;
@@ -231,7 +230,7 @@ public:
 	 * @since	    2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	pJsonValue			A pointer to the JsonValue class to be located
+	 * @param[in]	pJsonValue			A pointer to the JsonValue class to locate
 	 * @param[out]	index				The index of the last occurrence of the specified element
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_OBJ_NOT_FOUND		The specified @c pJsonValue is not found.
@@ -240,26 +239,26 @@ public:
 	virtual result LastIndexOf(IJsonValue* const& pJsonValue, int& index) const;
 
 	/**
-	 * Checks whether the list contains the specified @c JsonValue.
+	 * Checks whether the list contains the specified @c pJsonValue.
 	 *
 	 * @since	    2.0
 	 *
-	 * @return		@c true if the specified @c JsonValue is present in the list, @n
+	 * @return		@c true if the specified @c pJsonValue is present in the list, @n
 	 *				else @c false
-	 * @param[in]	pJsonValue      A pointer to the JsonValue class to be located
+	 * @param[in]	pJsonValue      A pointer to the JsonValue class to locate
 	 */
 	virtual bool Contains(IJsonValue* const& pJsonValue) const;
 
 	/**
-	 * Checks whether value of the specified instance equals to value of the current instance of @c %JsonArray.
+	 * Checks whether value of the specified instance equals to value of the current instance of %JsonArray.
 	 *
 	 *	@since		2.0
 	 *
 	 * @return		@c true if value of the current instance equals to value of the specified instance, @n
 	 *				else @c false
-	 * @param[in]	obj			The element to be compared with the current instance of @c %JsonArray
-	 * @remarks     The method returns @c false if the specified element is not @c %JsonArray.
-	 *  @see		Object::Equals()
+	 * @param[in]	obj			The element to compare with the current instance of %JsonArray @n
+	 *							If the specified element is not %JsonArray, this method returns @c false.
+	 *  @see		Tizen::Base::Object::Equals()
 	 */
 	virtual bool Equals(const Object& obj) const;
 
@@ -281,23 +280,25 @@ public:
 	 * @since	    2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	pJsonValue			A pointer to the %JsonValue class to be removed
-	 * @param[in]	deallocate			Set to @c true to deallocate the @c JsonValue, @n
+	 * @param[in]	pJsonValue			A pointer to the JsonValue class to remove
+	 * @param[in]	deallocate			Set to @c true to deallocate the JsonValue, @n
 	 *                                  else @c false
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_OBJ_NOT_FOUND		The @c pJsonValue is not found.
-	 * @see			Add(), RemoveAt(), RemoveAll()
+	 * @exception	E_OBJ_NOT_FOUND		The specified @c pJsonValue is not found.
+	 * @see			Add()
+	 * @see			RemoveAt()
+	 * @see			RemoveAll()
 	 */
 	virtual result Remove(IJsonValue* const& pJsonValue, bool deallocate = false);
 
 	/**
-	 * Removes all the elements of the specified collection from the list.
+	 * Removes all the elements of the specified @c collection from the list.
 	 *
 	 * @since	    2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	collection      The collection to be removed from this list
-	 * @param[in]	deallocate				Set to @c true to deallocate the @c JsonValues, @n
+	 * @param[in]	collection      The collection to remove from this list
+	 * @param[in]	deallocate				Set to @c true to deallocate the JsonValues, @n
 	 *                                      else @c false
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation. @n
@@ -306,22 +307,23 @@ public:
 	virtual result RemoveItems(const Tizen::Base::Collection::ICollectionT<IJsonValue*>& collection, bool deallocate = false);
 
 	/**
-	 * Removes an element from the specified location.
+	 * Removes an element from a specified location. @n
+	 * The elements that follow the deleted element move up the list to occupy the empty location.
 	 *
 	 * @since	    2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	index                   The index of the element to be removed
-	 * @param[in]	deallocate				Set to @c true to deallocate the @c JsonValue, @n
+	 * @param[in]	index                   The index of the element to remove
+	 * @param[in]	deallocate				Set to @c true to deallocate the JsonValue, @n
 	 *                                      else @c false
 	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_OUT_OF_RANGE			The specified index is outside the bounds of the data structure, or the specified @c index is greater than or equal to the number of elements or less than @c 0.
-	 * @remarks		The elements that follow the deleted element move up the list to occupy the empty location.
+	 * @exception	E_OUT_OF_RANGE			The specified @c index is outside the bounds of the data structure, or the specified @c index is greater than or equal to the number of elements or less than @c 0.
 	 */
 	virtual result RemoveAt(int index, bool deallocate = false);
 
 	/**
-	 * Removes all the elements within a specified range.
+	 * Removes all the elements within a specified range. @n
+	 * The elements that follow the deleted elements move up the list to occupy the empty locations.
 	 *
 	 * @since	    2.0
 	 *
@@ -331,11 +333,10 @@ public:
 	 * @param[in]	deallocate				Set to @c true to deallocate the JsonValue, @n
 	 *                                      else @c false
 	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_OUT_OF_RANGE			Either of the following conditions has occurred: @n
-	 *										- The specified index is outside the bounds. @n
-	 *										- The specified @c startIndex is either greater than or equal to the number of elements or less than @c 0. @n
+	 * @exception	E_OUT_OF_RANGE			Either of the following conditions has occurred:
+	 *										- The specified @c startIndex is outside the bounds of the list.
+	 *										- The specified @c startIndex is either greater than or equal to the number of elements or less than @c 0.
 	 *										- The specified @c count is either greater than the number of elements starting from @c startIndex or less than @c 0.
-	 * @remarks		The elements that follow the deleted elements move up the list to occupy the empty locations.
 	 */
 	virtual result RemoveItems(int startIndex, int count, bool deallocate = false);
 
@@ -350,33 +351,33 @@ public:
 	virtual void RemoveAll(bool deallocate = false);
 
 	/**
-	 * Replaces the element at the specified index with the specified element.
+	 * Replaces the element at the specified @c index with the specified element.
 	 *
 	 * @since	    2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	pJsonValue			A pointer to the JsonValue class to be set
+	 * @param[in]	pJsonValue			A pointer to the JsonValue class to set
 	 * @param[in]	index				The index at which the element must be set
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
-	 * @exception	E_OUT_OF_RANGE		The specified index is outside the bounds of the data structure, or the specified @c index is either equal to or greater than the number of elements or less than @c 0.
+	 * @exception	E_OUT_OF_RANGE		The specified @c index is outside the bounds of the data structure, or the specified @c index is either equal to or greater than the number of elements or less than @c 0.
 	 * @see			GetAt()
 	 */
 	virtual result SetAt(IJsonValue* const& pJsonValue, int index);
 
 	/**
-	 * Replaces the element at the specified index with the specified element.
+	 * Replaces the element at the specified @c index with the specified element.
 	 *
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	pJsonValue			A pointer to the JsonValue class to be set
+	 * @param[in]	pJsonValue			A pointer to the JsonValue class to set
 	 * @param[in]	index				The index at which the element must be set
-	 * @param[in]	deallocate			Set to @c true to deallocate the @c JsonValue, @n
+	 * @param[in]	deallocate			Set to @c true to deallocate the JsonValue, @n
 	 *                                  else @c false
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
-	 * @exception	E_OUT_OF_RANGE		The specified index is outside the bounds of the data structure, or the specified @c index is either equal to or greater than the number of elements or less than @c 0.
+	 * @exception	E_OUT_OF_RANGE		The specified @c index is outside the bounds of the data structure, or the specified @c index is either equal to or greater than the number of elements or less than @c 0.
 	 * @see			GetAt()
 	 */
 	virtual result SetAt(IJsonValue* const& pJsonValue, int index, bool deallocate);
@@ -386,9 +387,10 @@ public:
 	 *
 	 * @since 2.0
 	 *
-	 * @return		A new cloned %JsonArray
-	 * @exception	E_SUCCESS		The memory is successful.
-	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @return		A new cloned %JsonArray or @c null if it fails to allocate the instance
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_OUT_OF_MEMORY	The memory is insufficient.
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	JsonArray* CloneN(void) const;
 

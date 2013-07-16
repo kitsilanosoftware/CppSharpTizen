@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -87,8 +86,8 @@ namespace Tizen { namespace Social
  *
 	//search condition: (calendarId=3 OR calendarId=4) AND (subject LIKE '%meeting%')
 	CalendarbookFilter subFilter(CB_FILTER_TYPE_EVENT);
-	subFilter.AppendInt(FI_CONJ_OP_NONE, EVENT_FI_PR_CALNEDAR_ID, FI_CMP_O_EQUAL, 3);
-	subFilter.AppendInt(FI_CONJ_OP_OR, EVENT_FI_PR_CALNEDAR_ID, FI_CMP_OP_EQUAL, 4);
+	subFilter.AppendInt(FI_CONJ_OP_NONE, EVENT_FI_PR_CALENDAR_ID, FI_CMP_O_EQUAL, 3);
+	subFilter.AppendInt(FI_CONJ_OP_OR, EVENT_FI_PR_CALENDAR_ID, FI_CMP_OP_EQUAL, 4);
 
 	CalendarbookFilter mainFilter(CB_FI_TYPE_EVENT);
 	mainFilter.AppendFilter(FI_CONJ_OP_NONE, subFilter);
@@ -150,7 +149,8 @@ public:
 	 * @since	2.0
 	 *
 	 * @return		The error code
-	 * @param[in]	conjunctiveOperator		The conjunctive operator to append the filtering expression @n If there is no filtering expression or filter has been appended before, FI_CONJ_OP_NON must be used. Otherwise FI_CONJ_OP_AND or FI_CONJ_OP_OR can be used.
+	 * @param[in]	conjunctiveOperator		The conjunctive operator to append the filtering expression @n
+	 * 										If there is no filtering expression or filter has been appended before, FI_CONJ_OP_NON must be used. Otherwise FI_CONJ_OP_AND or FI_CONJ_OP_OR can be used.
 	 * @param[in]	filterProperty		The filter property
 	 * @param[in]	comparisonOperator		The comparison operator
 	 * @param[in]	value		The integer value for comparison
@@ -172,7 +172,8 @@ public:
 	 * @since	2.0
 	 *
 	 * @return		The error code
-	 * @param[in]	conjunctiveOperator		The conjunctive operator to append the filtering expression @n If there is no filtering expression or filter has been appended before, FI_CONJ_OP_NON must be used. Otherwise FI_CONJ_OP_AND or FI_CONJ_OP_OR can be used.
+	 * @param[in]	conjunctiveOperator		The conjunctive operator to append the filtering expression @n
+	 * 										If there is no filtering expression or filter has been appended before, FI_CONJ_OP_NON must be used. Otherwise FI_CONJ_OP_AND or FI_CONJ_OP_OR can be used.
 	 * @param[in]	filterProperty		The filter property
 	 * @param[in]	comparisonOperator		The comparison operator
 	 * @param[in]	value		The double value for comparison
@@ -194,7 +195,8 @@ public:
 	 * @since	2.0
 	 *
 	 * @return		The error code
-	 * @param[in]	conjunctiveOperator		The conjunctive operator to append the filtering expression @n If there is no filtering expression or filter has been appended before, FI_CONJ_OP_NON must be used. Otherwise FI_CONJ_OP_AND or FI_CONJ_OP_OR can be used.
+	 * @param[in]	conjunctiveOperator		The conjunctive operator to append the filtering expression @n
+	 * 										If there is no filtering expression or filter has been appended before, FI_CONJ_OP_NON must be used. Otherwise FI_CONJ_OP_AND or FI_CONJ_OP_OR can be used.
 	 * @param[in]	filterProperty		The filter property
 	 * @param[in]	comparisonOperator		The comparison operator FILTER_COMPARISON_OPERATOR_EQUAL is only permitted
 	 * @param[in]	value		The bool value for comparison
@@ -216,16 +218,17 @@ public:
 	 * @since	2.0
 	 *
 	 * @return		The error code
-	 * @param[in]	conjunctiveOperator		The conjunctive operator to append the filtering expression @n If there is no filtering expression or filter has been appended before, FI_CONJ_OP_NON must be used. Otherwise FI_CONJ_OP_AND or FI_CONJ_OP_OR can be used.
+	 * @param[in]	conjunctiveOperator		The conjunctive operator to append the filtering expression @n
+	 * 										If there is no filtering expression or filter has been appended before, FI_CONJ_OP_NON must be used. Otherwise FI_CONJ_OP_AND or FI_CONJ_OP_OR can be used.
 	 * @param[in]	filterProperty		The filter property
 	 * @param[in]	comparisonOperator		The comparison operator
-	 * @param[in]	value		The Tizen::Base::DateTime value for comparison
+	 * @param[in]	value		The Tizen::Base::DateTime value for comparison. @n Any value with a unit that is less than a second is ignored.
 	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_INVALID_ARG			Either of the following conditions has occurred: @n
-	 *						- The @c filterProperty is not an element of the enumerator that corresponds with the type of this filter. @n
-	 *						- The @c filterProperty is not for Tizen::Base::DateTime value. @n
+	 * @exception	E_INVALID_ARG			Either of the following conditions has occurred: 
+	 *						- The @c filterProperty is not an element of the enumerator that corresponds with the type of this filter. 
+	 *						- The @c filterProperty is not for Tizen::Base::DateTime value.
 	 *						- The specified @c conjunctiveOperator is invalid.
-	 *						- The value is not in a valid range. @n
+	 *						- The specified @c value is out of the valid range.
 	 */
 	result AppendDateTime(FilterConjunctiveOperator conjunctiveOperator, unsigned long filterProperty, FilterComparisonOperator comparisonOperator, const Tizen::Base::DateTime& value);
 
@@ -239,7 +242,8 @@ public:
 	 * @since	2.0
 	 *
 	 * @return		The error code
-	 * @param[in]	conjunctiveOperator		The conjunctive operator to append the filtering expression @n If there is no filtering expression or filter has been appended before, FI_CONJ_OP_NON must be used. Otherwise FI_CONJ_OP_AND or FI_CONJ_OP_OR can be used.
+	 * @param[in]	conjunctiveOperator		The conjunctive operator to append the filtering expression @n
+	 * 										If there is no filtering expression or filter has been appended before, FI_CONJ_OP_NON must be used. Otherwise FI_CONJ_OP_AND or FI_CONJ_OP_OR can be used.
 	 * @param[in]	filterProperty		The filter property
 	 * @param[in]	comparisonOperator		The comparison operator
 	 * @param[in]	value		The Tizen::Base::String value for matching
@@ -260,7 +264,8 @@ public:
 	 * @since	2.0
 	 *
 	 * @return		The error code
-	 * @param[in]	conjunctiveOperator		The conjunctive operator to append the filtering expression @n If there is no filtering expression or filter has been appended before, FI_CONJ_OP_NON must be used. Otherwise FI_CONJ_OP_AND or FI_CONJ_OP_OR can be used.
+	 * @param[in]	conjunctiveOperator		The conjunctive operator to append the filtering expression @n
+	 * 										If there is no filtering expression or filter has been appended before, FI_CONJ_OP_NON must be used. Otherwise FI_CONJ_OP_AND or FI_CONJ_OP_OR can be used.
 	 * @param[in]	filter			The filter to append
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_INVALID_ARG			Either of the following conditions has occurred: @n

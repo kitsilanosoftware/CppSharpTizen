@@ -2,25 +2,25 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
 
 /**
- * @file FUiCtrlTableViewSimpleGroupItem.h
- * @brief This is the header file for the %TableViewSimpleGroupItem class.
- *
- * This header file contains the declarations of the %TableViewSimpleGroupItem class and its helper classes.
- */
+* @file FUiCtrlTableViewSimpleGroupItem.h
+* @brief This is the header file for the %TableViewSimpleGroupItem class.
+*
+* This header file contains the declarations of the %TableViewSimpleGroupItem class and its helper classes.
+*/
 
 #ifndef _FUI_CTRL_TABLE_VIEW_SIMPLE_GROUP_ITEM_H_
 #define _FUI_CTRL_TABLE_VIEW_SIMPLE_GROUP_ITEM_H_
@@ -30,13 +30,14 @@
 namespace Tizen { namespace Ui { namespace Controls
 {
 /**
- * @class	TableViewSimpleGroupItem
- * @brief    This class defines common behavior of %TableViewSimpleGroupItem.
- *
- * @since 2.0
- *
- * The %TableViewSimpleGroupItem class displays a table view group item. The basic layout of the %TableViewSimpleGroupItem instance is text and a bitmap arranged horizontally in one line. The bitmap can be omitted while text must be given.
- */
+* @class	TableViewSimpleGroupItem
+* @brief    This class defines common behavior of %TableViewSimpleGroupItem.
+*
+* @since 2.0
+*
+* The %TableViewSimpleGroupItem class displays a table view group item.
+* The basic layout of the %TableViewSimpleGroupItem instance is text and a bitmap arranged horizontally in one line. The bitmap can be omitted while text must be given.
+*/
 
 class _OSP_EXPORT_ TableViewSimpleGroupItem
 	: public TableViewGroupItem
@@ -82,13 +83,38 @@ public:
 	result Construct(const Tizen::Ui::Layout& layout, const Tizen::Graphics::Dimension& itemSize);
 
 	/**
+	 * Initializes this instance of %TableViewSimpleGroupItem with the specified parameter.
+	 *
+	 * @since 2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	itemSize            The size of the item
+	 * @exception	E_SUCCESS           The method is successful.
+	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
+	 */
+	result Construct(const Tizen::Graphics::FloatDimension& itemSize);
+
+	/**
+	 * Initializes this instance of %TableViewSimpleGroupItem with the specified parameter.
+	 *
+	 * @since 2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	layout              The layout for both of the portrait and landscape modes
+	 * @param[in]	itemSize            The size of the item
+	 * @exception	E_SUCCESS           The method is successful.
+	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
+	 */
+	result Construct(const Tizen::Ui::Layout& layout, const Tizen::Graphics::FloatDimension& itemSize);
+
+	/**
 	 * Sets the text string and bitmap image for %TableViewSimpleGroupItem.
 	 *
 	 * @since 2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	text				The text string to be added
-	 * @param[in]	pBitmap				The bitmap image to be displayed
+	 * @param[in]	text				The text string to add
+	 * @param[in]	pBitmap				The bitmap image to display
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
 	 */

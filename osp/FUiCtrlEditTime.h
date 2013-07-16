@@ -2,25 +2,25 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
 
 /**
- * @file			FUiCtrlEditTime.h
- * @brief		This is the header file for the %EditTime class.
- *
- * This header file contains the declarations of the %EditTime class.
- */
+* @file			FUiCtrlEditTime.h
+* @brief		This is the header file for the %EditTime class.
+*
+* This header file contains the declarations of the %EditTime class.
+*/
 #ifndef _FUI_CTRL_EDIT_TIME_H_
 #define _FUI_CTRL_EDIT_TIME_H_
 
@@ -28,23 +28,24 @@
 #include <FUiITimeChangeEventListener.h>
 #include <FUiIOrientationEventListener.h>
 
-namespace Tizen { namespace Ui { namespace  Controls
+namespace Tizen { namespace Ui { namespace Controls
 {
 
 /**
- * @class	EditTime
- * @brief    This class defines the common behavior of an %EditTime control.
- *
- * @since	2.0
- *
- * The %EditTime class displays a small, fixed-size selector that allows the user to select a time.
- * Unlike TimePicker, %EditTime can be placed in a container.
- *
- * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_edittime_editdate.htm">EditDate and EditTime</a>.
- *
- * The following example demonstrates how to use the %EditTime class.
- *
- * @code
+* @class	EditTime
+* @brief    This class defines the common behavior of an %EditTime control.
+*
+* @since	2.0
+*
+* The %EditTime class displays a small, fixed-size selector that allows the user to select a time.
+* Unlike TimePicker, %EditTime can be placed in a container.
+*
+* For more information on the class features, see
+* <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_edittime_editdate.htm">EditDate and EditTime</a>.
+*
+* The following example demonstrates how to use the %EditTime class.
+*
+* @code
 // Sample code for EditTimeSample.h
 #include <FUi.h>
 
@@ -95,7 +96,7 @@ EditTimeSample::OnInitializing(void)
 	__pEditTime->AddTimeChangeEventListener(*this);
 
 	//Adds the edit time to the form
-	AddControl(*__pEditTime);
+	AddControl(__pEditTime);
 
 	return r;
 }
@@ -112,21 +113,23 @@ EditTimeSample::OnTimeChangeCanceled(const Control& source)
 {
 	// ....
 }
- * @endcode
- */
+* @endcode
+**/
 class _OSP_EXPORT_ EditTime
 	: public Tizen::Ui::Control
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the %Construct() method must be called right after calling this constructor.
 	 *
 	 * @since		2.0
 	 */
 	EditTime(void);
 
 	/**
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required.@n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @since		2.0
 	 */
@@ -137,7 +140,7 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in]	listener    The listener to be added
+	 * @param[in]	listener    The listener to add
 	 * @see				ITimeChangeEventListener::OnTimeChanged()
 	 * @see				ITimeChangeEventListener::OnTimeChangeCanceled()
 	 * @see				RemoveTimeChangeEventListener()
@@ -150,7 +153,7 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in]	listener    The listener to be removed
+	 * @param[in]	listener    The listener to remove
 	 * @see				AddTimeChangeEventListener()
 	 */
 	void RemoveTimeChangeEventListener(Tizen::Ui::ITimeChangeEventListener& listener);
@@ -161,21 +164,39 @@ public:
 	 * @since			2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	point				The position of %EditTime in container
-	 * @param[in]	title			The title
+	 * @param[in]	point				The position of %EditTime in container @n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]	title				The title
 	 * @exception	E_SUCCESS           The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 */
 	result Construct(const Tizen::Graphics::Point& point, const Tizen::Base::String& title = L"");
 
 	/**
+	 * Initializes this instance of %EditTime with the specified parameters.
+	 *
+	 * @since			2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	point				The position of %EditTime in container @n
+	 *									The optimal size of the control is defined in
+	 *									<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]	title				The title
+	 * @exception	E_SUCCESS           The method is successful.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 */
+	result Construct(const Tizen::Graphics::FloatPoint& point, const Tizen::Base::String& title = L"");
+
+	/**
 	 * Gets the current hour value of the %EditTime control.
 	 *
 	 * @since		2.0
 	 *
-	 * @return	The current hour value, @n
-	 *			else @c -1 if the %EditTime instance is not constructed @n
+	 * @return	The current hour value. @n
 	 *			The hour value is between @c 0 to @c 23.
+	 *
+	 * @remarks 	The default hour value is the current system hour.
 	 */
 	int GetHour(void) const;
 
@@ -184,8 +205,9 @@ public:
 	 *
 	 * @since	2.0
 	 *
-	 * @return	The current minute value, @n
-	 *			else @c -1 if this %EditTime instance is not constructed
+	 * @return	The current minute value
+	 *
+	 * @remarks 	The default minute value is the current system minute.
 	 */
 	int GetMinute(void) const;
 
@@ -215,7 +237,7 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in]	hour			The hour value to be set
+	 * @param[in]	hour			The hour value to set
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_INVALID_ARG   The specified hour value is invalid.
 	 * @exception	E_SYSTEM        A system error has occurred.
@@ -229,7 +251,7 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in]	minute			The minute value to be set
+	 * @param[in]	minute			The minute value to set
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_INVALID_ARG   The specified minute value is invalid.
 	 * @exception	E_SYSTEM        A system error has occurred.
@@ -242,7 +264,7 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in]	time	The time to be set
+	 * @param[in]	time	The time to set
 	 */
 	void SetTime(const Tizen::Base::DateTime& time);
 

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -37,7 +36,7 @@ namespace Tizen { namespace Base
  *	@since 2.0
  *
  *	The %TimeSpan class represents a time interval. An instance of %TimeSpan represents a period of time measured in ticks. A tick is the smallest
- *	unit of time used by the platform or system. In Tizen, it is a millisecond.
+ *	unit of time used by the platform or system. In %Tizen, it is a millisecond.
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/base/datetime_timespan.htm">DateTime and TimeSpan</a>.
  *
@@ -385,28 +384,28 @@ public:
 	 *
 	 * @since 2.0
 	 */
-	static const long long NUM_OF_TICKS_IN_DAY = 86400000;
+	static const long long NUM_OF_TICKS_IN_DAY = 86400000LL;
 
 	/**
 	 * A constant holding the number of ticks in an hour.
 	 *
 	 * @since 2.0
 	 */
-	static const long long NUM_OF_TICKS_IN_HOUR = 3600000;
+	static const long long NUM_OF_TICKS_IN_HOUR = 3600000LL;
 
 	/**
 	 * A constant holding the number of ticks in a minute.
 	 *
 	 * @since 2.0
 	 */
-	static const long long NUM_OF_TICKS_IN_MINUTE = 60000;
+	static const long long NUM_OF_TICKS_IN_MINUTE = 60000LL;
 
 	/**
 	 * A constant holding the number of ticks in a second.
 	 *
 	 * @since 2.0
 	 */
-	static const long long NUM_OF_TICKS_IN_SECOND = 1000;
+	static const long long NUM_OF_TICKS_IN_SECOND = 1000LL;
 
 private:
 	//

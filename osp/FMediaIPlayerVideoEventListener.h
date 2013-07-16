@@ -60,8 +60,8 @@ public:
 	*
 	*   @since		2.0
 	*
-	*	@param[in]	 src				A pointer to the Player instance that fired the event
-	*	@param[in]	 bitmapPixelFormat	A pixel format type	of the decoded video frame
+	*	@param[in]	 src				An instance of Player that fires the event
+	*	@param[in]	 bitmapPixelFormat	A pixel format type of the decoded video frame
 	*	@param[in]	 dim				A dimension of the decoded video frame
 	*	@param[in]	 pBuffer			A pointer to a decoded video frame buffer
 	*	@param[in]	 sizeOfBuffer		A size of a buffer
@@ -70,7 +70,9 @@ public:
 	*	@exception	 E_SYSTEM							A system error has occurred.
 	*	@exception	 E_INVALID_DATA	                    The video frame has invalid blocks.
 	*	@remarks	The lifecycle of @c pBuffer is valid inside this method.
-	*	@see		Player::Play(), Player::PlayAndPause(), Player::SeekTo()
+	*	@see		Player::Play()
+	*	@see		Player::PlayAndPause()
+	*	@see		Player::SeekTo()
 	*/
 	virtual void OnVideoFrameDecoded(Tizen::Media::Player& src, Tizen::Graphics::BitmapPixelFormat bitmapPixelFormat, const Tizen::Graphics::Dimension& dim, const byte* pBuffer, int sizeOfBuffer, result r) = 0;
 

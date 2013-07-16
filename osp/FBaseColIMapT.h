@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -77,11 +76,11 @@ public:
 	virtual result Add(const KeyType& key, const ValueType& value) = 0;
 
 	/**
-	 * Gets the value associated with the specified key.
+	 * Gets the value associated with the specified @c key.
 	 *
 	 * @since 2.0
 	 *
-	 * @return		The value associated with the specified key, @n
+	 * @return		The value associated with the specified @c key, @n
 	 *				else @c null if an exception occurs
 	 * @param[in]	key		The key to find the associated value
 	 * @param[out]	value	The value associated with the key
@@ -94,7 +93,7 @@ public:
 	virtual result GetValue(const KeyType& key, ValueType& value) const = 0;
 
 	/**
-	 * Gets the value associated with the specified key.
+	 * Gets the value associated with the specified @c key.
 	 *
 	 * @since 2.0
 	 *
@@ -139,7 +138,7 @@ public:
 	virtual IListT< ValueType >* GetValuesN(void) const = 0;
 
 	/**
-	 * Removes the value associated with the specified key.
+	 * Removes the value associated with the specified @c key.
 	 *
 	 * @since 2.0
 	 *
@@ -161,7 +160,7 @@ public:
 	virtual void RemoveAll(void) = 0;
 
 	/**
-	 * Replaces the value associated with the specified key with the specified value.
+	 * Replaces the value associated with the specified @c key with the specified @c value.
 	 *
 	 * @since 2.0
 	 *
@@ -179,16 +178,16 @@ public:
 	virtual result SetValue(const KeyType& key, const ValueType& value) = 0;
 
 	/**
-	 * Checks whether the map contains the specified key.
+	 * Checks whether the map contains the specified @c key.
 	 *
 	 * @since 2.0
 	 *
 	 * @return		An error code
 	 * @param[in]	key		The key to locate
-	 * @param[out]	out 	Set to @c true if the map contains the specified key, @n
+	 * @param[out]	out 	Set to @c true if the map contains the specified @c key, @n
 	 *						else @c false
-	 * @exception	E_SUCCESS		The method is successful. @n
-	 *								The map contains the specified key.
+	 * @exception	E_SUCCESS		The method is successful, or 
+	 *								the map contains the specified @c key.
 	 * @exception	E_INVALID_ARG	A specified input parameter is invalid, or
 	 *								the comparer has failed to compare the keys.
 	 * @see			ContainsValue()
@@ -196,11 +195,11 @@ public:
 	virtual result ContainsKey(const KeyType& key, bool& out) const = 0;
 
 	/**
-	 * Checks whether the map contains the specified value.
+	 * Checks whether the map contains the specified @c value.
 	 *
 	 * @since 2.0
 	 *
-	 * @return		@c true if the map contains the specified value, @n
+	 * @return		@c true if the map contains the specified @c value, @n
 	 *				else @c false
 	 * @param[in]	value	The value to locate
 	 *

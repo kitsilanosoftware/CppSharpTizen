@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -92,7 +91,7 @@ public:
 	 *
 	 * @param[in]	ch			A Unicode character
 	 */
-	String(const wchar_t ch);
+	String(wchar_t ch);
 
 	/**
 	 * Initializes this instance of %String with the specified Unicode string.
@@ -373,7 +372,7 @@ public:
 	 *	@return			A 32-bit @c signed integer value
 	 *	@param[in]	str0	The first %String instance to compare
 	 *	@param[in]	str1	The second %String instance to compare
-	 *	@remarks		The method performs an ordinal comparison of each Unicode
+	 *	@remarks		This method performs an ordinal comparison of each Unicode
 	 *				character contained in the two given %String instances.
 	 *				For instance, "U+xxx" is greater than "U+XXX", but smaller than "U+yyy".
 	 *
@@ -398,7 +397,7 @@ public:
 	 *				>  0  if the value of the current instance is greater than the value of the specified %String instance
 	 *@endcode
 	 * @param[in]	str		An instance of %String to compare
-	 * @remarks		The method performs an ordinal comparison of each Unicode character. For instance,
+	 * @remarks		This method performs an ordinal comparison of each Unicode character. For instance,
 	 *				L"U+xxx" is greater than L"U+XXX", but smaller than L"U+yyy".
 	 */
 	int CompareTo(const String& str) const;
@@ -425,7 +424,7 @@ public:
 	 * @return		@c true if the value of the specified instance of Object is equal to the value of the current instance of %String, @n
 	 *				else @c false
 	 * @param[in]	obj		An instance of Object to compare
-	 * @remarks		The method returns @c false if the specified @c obj is not a string.
+	 * @remarks		This method returns @c false if the specified @c obj is not a string.
 	 * @see				Object::Equals()
 	 */
 	virtual bool Equals(const Object& obj) const;
@@ -443,7 +442,7 @@ public:
 	 * @param[in]	caseSensitive	Set to @c true to perform a case sensitive ordinal comparison of the strings, @n
 	 *								else @c false
 	 *
-	 * @remarks		The method performs an ordinal comparison of each Unicode
+	 * @remarks		This method performs an ordinal comparison of each Unicode
 	 *			character contained in the two given %String instances.
 	 */
 	bool Equals(const String& str, bool caseSensitive) const;

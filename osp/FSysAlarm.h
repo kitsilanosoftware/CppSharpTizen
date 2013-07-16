@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -86,12 +85,12 @@ public:
 	 * @privilege	%http://tizen.org/privilege/alarm
 	 *
 	 * @return	An error code
-	 * @param[in]	duetime			The time for the alarm to ring
+	 * @param[in]	duetime			The time for the alarm to ring. @n Any value with a unit that is less than a second is ignored.
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
 	 * @exception	E_INVALID_ARG		The specified @c duetime is invalid.
 	 * @exception   E_SYSTEM		A system error has occurred.
-	 * @remarks     If this Alarm instance is already registered by this method, exist alarm is cancelled automatically.
+	 * @remarks     If this %Alarm instance is already registered by this method, existing alarm is cancelled automatically.
 	 */
 	result Set(const Tizen::Base::DateTime& duetime);
 
@@ -103,14 +102,14 @@ public:
 	 * @privilege	%http://tizen.org/privilege/alarm
 	 *
 	 * @return	An error code
-	 * @param[in]	start			The time for the alarm to ring first
-	 * @param[in]	period			The interval in minutes between consecutive alarm rings
-	 * @param[in]	pEnd			The time for the alarm ring to end
+	 * @param[in]	start			The time for the alarm to ring first. @n Any value with a unit that is less than a second is ignored.
+	 * @param[in]	period			The interval in minutes between consecutive alarm rings.
+	 * @param[in]	pEnd			The time for the alarm ring to end. @n Any value with a unit that is less than a second is ignored.
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
 	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
 	 * @exception   E_SYSTEM		A system error has occurred.
-	 * @remarks     If this Alarm instance is already registered by this method, exist alarm is cancelled automatically. @n If @c pEnd is @c null, the alarm repeats forever.
+	 * @remarks     If this %Alarm instance is already registered by this method, existing alarm is cancelled automatically. @n If @c pEnd is @c null, the alarm repeats forever.
 	 */
 	result Set(const Tizen::Base::DateTime& start, int period, const Tizen::Base::DateTime* pEnd = null);
 
@@ -134,7 +133,7 @@ public:
 	 * @since	2.0
 	 *
 	 * @return	An instance of Tizen::Base::DateTime indicating the start time for the alarm
-	 * @remarks     If this Alarm instance is not registered by %Set method, return value is default value of %DateTime class.
+	 * @remarks     If this %Alarm instance is not registered by the Set() method, return value is default value of the Tizen::Base::DateTime class.
 	 */
 	const Tizen::Base::DateTime GetStartTime(void) const;
 
@@ -144,7 +143,7 @@ public:
 	 * @since	2.0
 	 *
 	 * @return	The period of the current instance of %Alarm in minutes
-	 * @remarks     If this Alarm instance is not registered by %Set method, return value is 0.
+	 * @remarks     If this %Alarm instance is not registered by the Set() method, return value is @c 0.
 	 */
 	int GetPeriod(void) const;
 

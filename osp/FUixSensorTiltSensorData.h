@@ -61,6 +61,48 @@ public:
 	 */
 	virtual ~TiltSensorData(void);
 
+	/**
+	 * Copying of objects using this copy constructor is allowed.
+	 *
+	 * @since		2.1
+	 *
+	 * @param[in]	rhs	An instance of %TiltSensorData
+	 */
+	TiltSensorData(const TiltSensorData& rhs);
+
+	/**
+	 * Compares the equality of values between two %TiltSensorData objects by overriding the Tizen::Base::Object::Equals() method.
+	 *
+	 * @since          2.1
+	 *
+	 * @return         @c true if all the fields in the objects are equal, @n
+	 *                     else @c false
+	 * @param[in]    rhs     The Tizen::Base::Object with which the comparison is done
+ 	 * @remarks		An instance of Tizen::Graphics::Bitmap is not taken into account in the comparisons.
+	 */
+	virtual bool Equals(const Tizen::Base::Object& rhs) const;
+
+	/**
+	 * Gets the hash value of the current instance by overriding the Tizen::Base::Object::GetHashCode() method.
+	 *
+	 * @since         2.1
+	 *
+	 * @return        The hash value of the current instance
+	 */
+	virtual int GetHashCode(void) const;
+
+	/**
+	 * Copying of objects using this copy assignment operator is allowed.
+	 *
+	 * @since          2.1
+	 *
+	 * @return         A reference to this instance
+	 * @param[in]    rhs An instance of %TiltSensorData
+	 */
+	TiltSensorData& operator =(const TiltSensorData& rhs);
+
+
+
 private:
 	virtual result GetValue(SensorDataKey dataKey, long& value) const;
 	virtual result GetValue(SensorDataKey dataKey, float& value) const;

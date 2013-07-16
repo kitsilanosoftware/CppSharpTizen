@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -45,6 +44,10 @@
 #include <FBaseColMultiHashMapT.h>
 #include <FBaseColMapEntryT.h>
 #include <FBaseColAllElementsDeleter.h>
+#include <FBaseColStlConverter.h>
+#include <FBaseColIteratorT.h>
+#include <FBaseColPairIteratorT.h>
+#include <FBaseColRandomIteratorT.h>
 
 /**
  * @namespace	Tizen::Base::Collection
@@ -59,7 +62,7 @@
  *
  * For more information on the %Base::Collection namespace features, see <a href="../org.tizen.native.appprogramming/html/guide/base/collection_namespace.htm">Collection</a>.
  *
- * The following diagram illustrates the relationships between the classes belonging to the %Collection namespace.
+ * The following diagrams illustrate the relationships between the classes belonging to the %Collection namespace.
  *
  *  @image html base_collection_namespace_obj_based_classdiagram.png
  *

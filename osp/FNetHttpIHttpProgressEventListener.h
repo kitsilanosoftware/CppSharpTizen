@@ -39,7 +39,7 @@ class HttpTransaction;
  * @since       2.0
  *
  *  The %IHttpProgressEventListener interface is the listener for the HTTP progress events, when the HTTP message is uploaded or downloaded. In order to use this listener,
- *	the listener must be set to the HttpTransaction instance using the SetHttpProgressListener() method.
+ *	the listener must be set to the HttpTransaction instance using the HttpTransaction::SetHttpProgressListener() method.
  */
 
 class _OSP_EXPORT_ IHttpProgressEventListener

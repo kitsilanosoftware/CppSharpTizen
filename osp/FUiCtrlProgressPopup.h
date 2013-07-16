@@ -2,30 +2,32 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
 
 /**
- * @file		FUiCtrlProgressPopup.h
- * @brief		This is the header file for the %ProgressPopup class.
- *
- * This header file contains the declarations of the %ProgressPopup class.
- */
+* @file		FUiCtrlProgressPopup.h
+* @brief		This is the header file for the %ProgressPopup class.
+*
+* This header file contains the declarations of the %ProgressPopup class.
+*/
 
 #ifndef _FUI_CTRL_PROGRESS_POPUP_H_
 #define _FUI_CTRL_PROGRESS_POPUP_H_
 
+
 #include <FUiCtrlPopup.h>
+
 
 namespace Tizen { namespace Ui
 {
@@ -35,15 +37,17 @@ class IProgressPopupEventListener;
 
 namespace Tizen { namespace Ui { namespace Controls
 {
-
 /**
  * @class	ProgressPopup
  * @brief	This class defines the common behavior of a %ProgressPopup control.
  *
- * @since 2.0
+ * @since	2.0
  *
  * The %ProgressPopup class displays processing animation to show processing status.
  * It can contain a title, body text and cancel button.
+ *
+ * For more information on the class features,
+ * see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_progresspopup.htm">ProgressPopup</a>.
  *
  * @see Tizen::Ui::Window
  *
@@ -56,6 +60,7 @@ namespace Tizen { namespace Ui { namespace Controls
 class ProgressPopupSample
 	: public Tizen::Ui::Controls::Form
 	, public Tizen::Ui::IProgressPopupEventListener
+	, public Tizen::Ui::IActionEventListener
 {
 public:
 	ProgressPopupSample(void);
@@ -72,7 +77,6 @@ public:
 
 private:
 	static const int ID_BUTTON_PROGRESSPOPUP = 501;
-	static const int ID_BUTTON_CLOSE_PROGRESSPOPUP = 502;
 
 	Tizen::Ui::Controls::ProgressPopup* __pProgressPopup;
 };
@@ -114,11 +118,12 @@ ProgressPopupSample::OnInitializing(void)
 	__pProgressPopup->SetText(L"Hello World!!");
 	__pProgressPopup->AddProgressPopupEventListener(*this);
 
-	// Creates an instance of Button to open the ProgressPopup
+	// Creates an instance of Button to open the ProgressPopup.
 	Button* pButtonProgressPopup = new Button();
-	pButtonProgressPopup->Construct(Rectangle(10, 10, 250, 60), L"Open ProgressPopup");
+	pButtonProgressPopup->Construct(Rectangle(50, 50, 350, 100), L"Open ProgressPopup");
 	pButtonProgressPopup->SetActionId(ID_BUTTON_PROGRESSPOPUP);
 	pButtonProgressPopup->AddActionEventListener(*this);
+	AddControl(pButtonProgressPopup);
 
 	return r;
 }
@@ -168,7 +173,8 @@ class _OSP_EXPORT_ ProgressPopup
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called.  @n
+	 * For full construction, the ProgressPopup::Construct() method must be called right after calling this constructor.
 	 *
 	 * @since 2.0
 	 */
@@ -188,38 +194,42 @@ public:
 	 * @return        An error code
 	 * @param[in]    cancelButton                Set to @c true if the %ProgressPopup window has a cancel button, @n
 	 *                                                   else @c false
-	 * @param[in]    translucent   Set to @c true if the %ProgressPopup window is translucent, @n
+	 * @param[in]    transparent   Set to @c true if the %ProgressPopup window is translucent, @n
 	 *                                                   else @c false
 	 * @exception    E_SUCCESS                   The method is successful.
 	 * @exception    E_SYSTEM                    A system error has occurred. @n
-     *                                                        This error occurs when the internal resource is not loaded.
-	 * @remarks                                      To show a %ProgressPopup window, call Show() or DoModal() after calling the Construct() method. @n
-	 *                                                   By default, the title area and the body text are not shown. @n
-	 *                                                   Use SetTitleText() and SetText() to show the title area and the body text.
-	 * @remarks                                      If cancelButton is set to true and ProgressPopup is closed by pressing a Cancel Button,
-	 *                                                    out parameter of DoModal(), modalResult, is -1.
+                                                             This error occurs when the internal resource is not loaded.
+	 * @remarks
+	 *				- To show a %ProgressPopup window, call Show() or DoModal() after calling this method.
+	 *				- By default, the title area and the body text are not shown. @n
+	 *				Use SetTitleText() and SetText() to show the title area and the body text.
+	 *				- If @c transparent is set to true, a progress icon is only shown and a cancel button is not shown. @n
+	 *				Also, the texts set by %SetTitleText() and %SetText() are not shown.
+	 *				- If the specified @c cancelButton is set to true and ProgressPopup is closed by pressing a Cancel Button,
+	 *				out parameter of %DoModal(), modalResult, is @c -1.
 	 */
-	result Construct(bool cancelButton, bool translucent);
+	result Construct(bool cancelButton, bool transparent);
 
 	/**
 	 * Sets the text of the %ProgressPopup window.
 	 *
 	 * @since 2.0
 	 * @return                                        An error code
-	 * @param[in]    text                           The text to be set
+	 * @param[in]    text                           The text to set
 	 * @exception    E_SUCCESS                   The method is successful.
 	 * @exception    E_OUT_OF_MEMORY       The memory is insufficient.
+	 * @remarks         If the %ProgressPopup window is constructed as transparent, the text is not shown.
 	 */
 	result SetText(const Tizen::Base::String& text);
 
 	/**
-	 * Gets the text of the %ProgressPopup window.
-	 *
-	 * @since 2.0
-	 *
-	 * @return				The text of the %ProgressPopup window, @n
-	 *                          		else an empty string if an error occurs
-	 */
+	* Gets the text of the %ProgressPopup window.
+	*
+	* @since 2.0
+	*
+	* @return				The text of the %ProgressPopup window, @n
+	*                          		else an empty string if an error occurs
+	*/
 	Tizen::Base::String GetText(void) const;
 
 	/**
@@ -228,9 +238,10 @@ public:
 	 *
 	 * @since 2.0
 	 * @return                                        An error code
-	 * @param[in]     listener                      The event listener to be added. Listener should be allocated at heap, not stack.
+	 * @param[in]     listener                      The event listener to add @n Listener should be allocated at heap, not stack.
 	 * @exception     E_SUCCESS                  This method was successful.
 	 * @exception     E_OBJ_ALREADY_EXIST    The listener was already exist.
+	 * @see			RemoveProgressPopupEventListener()
 	 */
 	result AddProgressPopupEventListener(Tizen::Ui::IProgressPopupEventListener& listener);
 
@@ -240,8 +251,9 @@ public:
 	 *
 	 * @since 2.0
 	 * @return                                        An error code
-	 * @param[in]     listener                      The event listener to be removed. @n
-	 *                                                   Listener should be referring to previously allocated instance which is passed as an argument to AddProgressPopupEventListener.
+	 * @param[in]     listener                      The event listener to remove @n
+	 *                                                   The listener should be referring to previously allocated instance which is passed as an argument to
+	 *								AddProgressPopupEventListener().
 	 * @exception     E_SUCCESS                  This method was successful.
 	 * @exception     E_OBJ_NOT_FOUND       The listener was not found.
 	 */

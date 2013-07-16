@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -66,7 +65,7 @@ public:
 	* @param[in]	pColumnList			A list of column names to query @n
 	*									The type of objects contained in the specified @c pColumnList must be
 	*									Tizen::Base::String class.
-	*									If it is null, all columns are returned in result set.
+	*									If it is @c null, all columns are returned in result set.
 	* @param[in]	pWhere				A filter to select desired rows to query @n
 	*									It is an SQL 'WHERE' clause excluding the 'WHERE' itself such as
 	*									column1 = 'stringValue' AND column2 = numericValue.
@@ -81,8 +80,8 @@ public:
 	* @exception	E_SUCCESS			The method is successful.
 	* @exception	E_INVALID_ARG		Either of the following conditions has occurred:
 	*									- The specified @c pColumnList is empty.
-	*									- The specified @c pOrder is null and @c pLimit is not null.
-	*									- The specified @c pGroup is null and @c pHaving is not null.
+	*									- The specified @c pOrder is @c null and @c pLimit is not @c null.
+	*									- The specified @c pGroup is @c null and @c pHaving is not @c null.
 	* @exception	E_SYSTEM			A system error has occurred.
 	* @remarks      The specific error code can be accessed using the GetLastResult() method.
 	* @remarks		If the value specified in the @c pWhere is string, the value must be wrapped in
@@ -150,7 +149,7 @@ public:
 	* @param[in]	pWhere				A filter to select desired rows to delete @n
 	*									It is an SQL 'WHERE' clause excluding the 'WHERE' itself such as
 	*									column1 = 'stringValue' AND column2 = numericValue.
-	*									If it is null, all rows are deleted.
+	*									If it is @c null, all rows are deleted.
 	* @exception	E_SUCCESS			The method is successful.
 	* @exception	E_INVALID_ARG		A specified parameter is invalid.
 	* @exception	E_SYSTEM			A system error has occurred.

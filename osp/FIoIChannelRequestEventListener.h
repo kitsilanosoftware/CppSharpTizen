@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -40,7 +39,7 @@ class ServerChannel;
 * @interface IChannelRequestEventListener
 * @brief    <i> [Deprecated] </i> This interface provides event handlers for any request events received through a channel.
 *
-* @deprecated	This class is deprecated. Instead of using this class, use IMessagePortListener class.
+* @deprecated	This interface is deprecated. Instead of using this interface, use the IMessagePortListener interface.
 * @since    2.0
 *
 * The %IChannelRequestEventListener interface provides event handlers to receive channel request event.

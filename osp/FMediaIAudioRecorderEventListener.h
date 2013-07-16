@@ -50,7 +50,7 @@ class _OSP_EXPORT_ IAudioRecorderEventListener
 
 public:
 	/**
-	* This is the destructor for this class.
+	* This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	*
 	* @since		2.0
 	*/
@@ -131,9 +131,10 @@ public:
 	* @since		2.0
 	*
 	*	@param[in]	r		An audio recorder error reason of type ::RecorderErrorReason
-	*	@remarks		::RECORDER_ERROR_OUT_OF_STORAGE occurs when the recording size exceeds the maximum available capacity. @n
-	*				While recording especially to the external memory like MMC card, ::RECORDER_ERROR_STORAGE_FAILED can occur.
-	*				@c RECORDER_ERROR_DEVICE_FAILED occurs when the recording device has a problem like damaged shape or hardware malfunction.
+	*	@remarks		
+	*				- ::RECORDER_ERROR_OUT_OF_STORAGE occurs when the recording size exceeds the maximum available capacity.
+	*				- While recording especially to the external memory like MMC card, ::RECORDER_ERROR_STORAGE_FAILED can occur.
+	*				::RECORDER_ERROR_DEVICE_FAILED occurs when the recording device has a problem like damaged shape or hardware malfunction.
 	*/
 	virtual void OnAudioRecorderErrorOccurred(RecorderErrorReason r) = 0;
 

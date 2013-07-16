@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -28,6 +27,11 @@
 #include <FBase.h>
 #include <FAppTypes.h>
 #include <FAppPkgPackageManager.h>
+
+namespace Tizen { namespace Graphics
+{
+class Bitmap;
+} }
 
 namespace Tizen { namespace App { namespace Package
 {
@@ -82,6 +86,65 @@ public:
 	Tizen::Base::String GetAppDisplayName(void) const;
 
 	/**
+	* Gets the menu icon path of an application.
+	*
+	* @since         2.1
+	*
+	* @return        The menu icon path of an application, @n
+	*                else an empty string is returned if there is no value @n
+	*/
+	Tizen::Base::String GetAppMenuIconPath(void) const;
+
+	/**
+	* Gets the setting icon path of an application.
+	*
+	* @since         2.1
+	*
+	* @return        The setting icon path of an application, @n
+	*          			 else an empty string is returned if there is no value @n
+	*/
+	Tizen::Base::String GetAppSettingIconPath(void) const;
+
+	/**
+	* Gets the notification icon path of an application.
+	*
+	* @since         2.1
+	*
+	* @return        The notification icon path of an application, @n
+	*                else an empty string is returned if there is no value @n
+	*/
+	Tizen::Base::String GetAppNotificationIconPath(void) const;
+
+	/**
+	* Gets the menu icon of an application.
+	*
+	* @since         2.1
+	*
+	* @return        A pointer to the menu icon of an application, @n
+	*                else @c null if it fails
+	* @exception    E_SUCCESS                     The method is successful.
+	* @exception    E_FILE_NOT_FOUND              The menu icon does not exist.
+	* @exception    E_UNSUPPORTED_FORMAT          The image file format is not supported.
+	* @remarks      The specific error code can be accessed using the GetLastResult() method.
+	*/
+	Tizen::Graphics::Bitmap* GetAppMenuIconN(void) const;
+
+	/**
+	* Gets the metadata list of an application.
+	*
+	* @since         2.1
+	*
+	* @return       A pointer to a map of key(Tizen::Base::String) and value(Tizen::Base::String) pairs of the metadata, @n
+	*               else @c null if it fails
+	* @exception    E_SUCCESS                     The method is successful.
+	* @exception    E_SYSTEM                      The method cannot proceed due to a severe system error.
+	* @remarks
+	*			- The specific error code can be accessed using the GetLastResult() method.
+	*			- Application can use the metadata to set app-wide information.
+	*/
+	Tizen::Base::Collection::IMap* GetAppMetadataListN(void) const;
+
+	/**
 	 * Gets the category list of an application.
 	 *
 	 * @since	2.0
@@ -114,7 +177,7 @@ public:
 	 * 			else @c false
 	 */
 	bool IsMainApp(void) const;
-
+	
 private:
 	/**
 	 * This is the default constructor for this class. This default constructor is intentionally
@@ -138,6 +201,8 @@ private:
 	friend class _PackageAppInfoImpl;
 	friend class _PackageInfoImpl;
 	friend class _PackageManagerImpl;
+	friend class _PackageParser;
+	friend class _PackageManagerServer;
 
 }; // PackageAppInfo
 

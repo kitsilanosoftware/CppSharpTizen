@@ -41,34 +41,58 @@ class _NetworkStatusImpl;
  *
  * @code
  *
- *	result
- *	MyClass::GetNetworkStatus(void)
- *	{
- *		NetworkStatus networkStatus;
+ *  #include <FBase.h>
+ *  #include <FTelephony.h>
  *
- *		NetworkManager* pNetworkManager = new NetworkManager();
+ *   using namespace Tizen::Base;
+ *   using namespace Tizen::Telephony;
  *
- *		result r = pNetworkManager->Construct(this);
- *		if (IsFailed(r))
- *		{
- *			delete pNetworkManager;
- *			return r;
- *		}
+ *   class MyClass
+ *  	 : public Object
+ *  	 , public ITelephonyNetworkEventListener
+ *   {
+ *     public:
+ *  	 MyClass(void) {}
+ *  	 ~MyClass(void) {}
  *
- *		r = pNetworkManager->GetNetworkStatus(networkStatus);
- *		if (IsFailed(r))
- *		{
- *			delete pNetworkManager;
- *			return r;
- *		}
+ *  	 // ITelephonyNetworkEventListener
+ *  	 void OnTelephonyNetworkStatusChanged(const NetworkStatus& networkStatus);
  *
- *		bool isCallAvail = networkStatus.IsCallServiceAvailable();
- *		bool isDataAvail = networkStatus.IsDataServiceAvailable();
- *		bool isRoaming = networkStatus.IsRoaming();
+ *  	 void GetNetworkStatus (void);
+ *   };
+ *   void
+ *   MyClass::OnTelephonyNetworkStatusChanged(const NetworkStatus& networkStatus)
+ *   {
+ *  	//Do something.
+ *   }
  *
- *		delete pNetworkManager;
- *		return E_SUCCESS;
- *	}
+ *   void
+ *   MyClass::GetNetworkStatus(void)
+ *   {
+ *  	 NetworkStatus networkStatus;
+ *
+ *  	 NetworkManager* pNetworkManager = new (std::nothrow) NetworkManager();
+ *  	 result r = pNetworkManager->Construct(this);
+ *  	 if (IsFailed(r))
+ *  	 {
+ *  		 delete pNetworkManager;
+ *  		 return;
+ *  	 }
+ *
+ *  	 r = pNetworkManager->GetNetworkStatus(networkStatus);
+ *  	 if (IsFailed(r))
+ *  	 {
+ *  		 delete pNetworkManager;
+ *  		 return;
+ *  	 }
+ *
+ *  	 bool isCallAvailable = networkStatus.IsCallServiceAvailable();
+ *  	 bool isDataAvailable = networkStatus.IsDataServiceAvailable();
+ *  	 bool isRoaming = networkStatus.IsRoaming();
+ *
+ *  	 delete pNetworkManager;
+ *  	 return;
+ *   }
  *
  * @endcode
  */
@@ -95,7 +119,9 @@ public:
      *
      * @since	2.0
 	 *
-     * @privilege   %http://tizen.org/privilege/systeminfo
+	 * @privlevel	public
+     * @privilege   %http://tizen.org/privilege/telephony @n
+     * 				(%http://tizen.org/privilege/systeminfo is deprecated.)
      *
      * @return	@c true if the current network is in roaming status, @n
      *                  else @c false
@@ -110,7 +136,9 @@ public:
      *
      * @since	2.0
 	 *
-     * @privilege   %http://tizen.org/privilege/systeminfo
+	 * @privlevel	public
+     * @privilege   %http://tizen.org/privilege/telephony @n
+     * 				(%http://tizen.org/privilege/systeminfo is deprecated.)
      *
      * @return	@c true if call service is available, @n
      *          else @c false
@@ -125,7 +153,9 @@ public:
      *
      * @since	2.0
 	 *
-     * @privilege   %http://tizen.org/privilege/systeminfo
+	 * @privlevel	public
+     * @privilege   %http://tizen.org/privilege/telephony @n
+     * 				(%http://tizen.org/privilege/systeminfo is deprecated.)
      *
      * @return	@c true if data service is available, @n
      *          else @c false

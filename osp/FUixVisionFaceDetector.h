@@ -42,7 +42,7 @@ class ByteBuffer;
 namespace Tizen { namespace Base { namespace Collection
 {
 class IList;
-template<class Type> class IListT;
+template< class Type > class IListT;
 } } }
 
 namespace Tizen { namespace Graphics
@@ -133,7 +133,7 @@ class _OSP_EXPORT_ FaceDetector
 // Lifecycle
 public:
 	/**
-	 * This is the default constructor for this class.
+	 * This is the default constructor for this class. @n
 	 * The object is not fully constructed after this constructor is called.
 	 * For full construction, the Construct() method must be called right after calling this constructor.
 	 *
@@ -158,9 +158,13 @@ public:
 	 *
 	 * @since        2.0
 	 *
+	 * @feature      %http://tizen.org/feature/vision.face_recognition
 	 * @return       An error code
 	 * @exception    E_SUCCESS          The method is successful.
-	 * @exception    E_OUT_OF_MEMORY    The memory is insufficient.
+	 * @exception    E_UNSUPPORTED_OPERATION   The target device does not support the face detection feature. @b Since: @b 2.1
+	 * For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+	 * @remarks      Before calling this method, check whether the feature is supported by 
+	 *			Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	 */
 	result Construct(void);
 
@@ -221,7 +225,7 @@ public:
 	 * @exception    E_OUT_OF_MEMORY    The memory is insufficient.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
 	 */
-	Tizen::Base::Collection::IListT <Tizen::Graphics::PixelFormat>* GetSupportedFormatListN(void) const;
+	Tizen::Base::Collection::IListT< Tizen::Graphics::PixelFormat >* GetSupportedFormatListN(void) const;
 
 	/**
 	 * Searches for faces from a video.
@@ -268,8 +272,9 @@ public:
 	 * @exception    E_SUCCESS          The method is successful.
 	 * @exception    E_OUT_OF_MEMORY    The memory is insufficient.
 	 * @exception    E_FAILURE          A system error has occurred.
-	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks      BitmapPixelFormat::BITMAP_PIXEL_FORMAT_R8G8B8A8 is not applicable for this method.
+	 * @remarks
+	 *			  - The specific error code can be accessed using the GetLastResult() method.
+	 *			  - BitmapPixelFormat::BITMAP_PIXEL_FORMAT_R8G8B8A8 is not applicable for this method.
 	 * @endif
 	 */
 	Tizen::Base::Collection::IList* DetectFacesFromStillImageN(const Tizen::Graphics::Bitmap& bitmap);
@@ -288,13 +293,13 @@ public:
 	 * @param[in]    byteBuffer         The buffer containing the input image data
 	 * @param[in]    dim                The width and height of the input image @n
 	 *                                  Both the width and height must be greater than @c 0.
-	 * @param[in]    format             The color format defined by Tizen::Graphics::BitmapPixelFormat
+	 * @param[in]    format             The color format @n
+	 *							@c BITMAP_PIXEL_FORMAT_R8G8B8A8 is not applicable for this method.
 	 * @exception    E_SUCCESS          The method is successful.
 	 * @exception    E_INVALID_ARG      A specified input parameter is invalid.
 	 * @exception    E_OUT_OF_MEMORY    The memory is insufficient.
 	 * @exception    E_FAILURE          A system error has occurred.
-	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks      BitmapPixelFormat::BITMAP_PIXEL_FORMAT_R8G8B8A8 is not applicable for this method.
+	 * @remarks      The specific error code can be accessed using the GetLastResult() method.  
 	 */
 	Tizen::Base::Collection::IList* DetectFacesFromStillImageN(const Tizen::Base::ByteBuffer& byteBuffer, const Tizen::Graphics::Dimension& dim, Tizen::Graphics::BitmapPixelFormat format);
 
@@ -316,7 +321,6 @@ public:
 	 * @exception    E_OUT_OF_MEMORY    The memory is insufficient.
 	 * @exception    E_SYSTEM           A system error has occurred.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
-     * @see	         FaceBuffer
 	 */
 	FaceBuffer* PreprocessDataN(const Tizen::Base::ByteBuffer& byteBuffer, const Tizen::Graphics::Dimension& dim, Tizen::Graphics::PixelFormat format);
 
@@ -339,7 +343,7 @@ public:
 	 * @exception    E_OUT_OF_MEMORY            The memory is insufficient.
 	 * @exception    E_SYSTEM                   A system error has occurred.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
-     * @see	         FaceDetectorConfigProperty
+	 * @see	         FaceDetectorConfigProperty
 	 */
 	Tizen::Base::Collection::IList* DetectFacesN(const FaceBuffer& preprocessedFaceBuffer, FaceDetectionOption option = FACE_DETECTION_OPTION_FAST);
 
@@ -362,13 +366,13 @@ public:
 	 * @exception    E_OPERATION_FAILED        The method has failed to extract the facial information, but there is no error reported. @n
 	 *                                         This happens when the detected faces are too small or the input data is not clear. This is the result of a normal operation.
 	 * @remarks      The specific error code can be accessed using the GetLastResult() method.
-     * @see	         FaceComponentsPosition
 	 */
 	FaceComponentsPosition* ExtractFaceComponentsN(const FaceBuffer& preprocessedFaceBuffer, const Tizen::Graphics::Rectangle& faceRect);
 
 
 	/**
-	 * Gets the position difference of the face.
+	 * Gets the position difference of the face. @n
+	 * The %GetFaceMovement() method can be used for tracking the face from a sequential video data.
 	 *
 	 * @since         2.0
 	 *
@@ -386,12 +390,11 @@ public:
 	 * @exception     E_SUCCESS             The method is successful.
 	 * @exception     E_INVALID_ARG         A specified input parameter is invalid.
 	 * @exception     E_OPERATION_FAILED    The method has failed to get the position difference of the specified region, but there is no error reported. @n
-	 *                                      In this case, @c xDiff and @c yDiff will be returned with @c 0. @n
+	 *                                      In this case, @c xDiff and @c yDiff are returned with @c 0. @n
 	 *                                      It can happen when the detected faces are too small or two video data are different even if they contain the same face.
 	 *                                      This is the result of a normal operation.
 	 * @remarks       The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks       This can be used for tracking the face from a sequential video data.
-     * @see	          DetectFacesN()
+	 * @see	          DetectFacesN()
 	 */
 	result GetFaceMovement(const FaceBuffer& prevData, const FaceBuffer& curData, const Tizen::Graphics::Rectangle& prevFaceRect, int& xDiff, int& yDiff);
 

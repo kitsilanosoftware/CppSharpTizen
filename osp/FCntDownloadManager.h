@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -42,7 +41,7 @@ class IDownloadListener;
 *
 * @final	This class is not intended for extension.
 *
-* The %DownloadManager class provides methods to handle HTTP downloads. A download request consists of a URL and a destination path; of which the URL is mandatory for downloading content. If the destination path is not specified, the content is downloaded to a default download storage that can be obtained with the System::Environment::GetDownloadPath() method.
+* The %DownloadManager class provides methods to handle HTTP downloads. A download request consists of a URL and a destination path; of which the URL is mandatory for downloading content. If the destination path is not specified, the content is downloaded to a default download storage that can be obtained with the System::Environment::GetDefaultDownloadPath() method.
 * This class conducts the download in the background and calls the Start() method that takes care of HTTP connections. @n
 * The download operation can be:
 * - Paused by calling the Pause() method
@@ -119,7 +118,6 @@ public:
 	* @return		A pointer to the %DownloadManager instance, @n
 	*				else @c null if it fails
 	* @exception     E_SUCCESS           The method is successful.
-	* @exception     E_OUT_OF_MEMORY     The memory is insufficient.
 	* @exception     E_SYSTEM            The method cannot proceed due to a severe system error.
 	* @remarks       The specific error code can be accessed using the GetLastResult() method.
 	*/
@@ -130,16 +128,17 @@ public:
 	* If this operation succeeds, the IDownloadListener::OnDownloadInProgress() method is called. @n
 	*
 	* @since 2.0
+	* @privlevel	public
 	* @privilege 	%http://tizen.org/privilege/download
 	*
 	* @return       An error code
 	* @param[in]    request             The download request
 	* @param[out]   reqId               The request ID
 	* @exception    E_SUCCESS           The method is successful.
-	* @exception	E_INVALID_ARG		The URL of the download request is invalid.
+	* @exception	E_INVALID_ARG		The information of the download request is invalid.
 	* @exception	E_ILLEGAL_ACCESS	Access to the path of the download request is denied due to insufficient permission.
 	* @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-	* @exception    E_OUT_OF_MEMORY     The memory is insufficient.
+	* @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method.
 	* @exception    E_SYSTEM            The method cannot proceed due to a severe system error.
 	*/
 	result Start(const DownloadRequest& request, RequestId& reqId);
@@ -156,7 +155,6 @@ public:
 	* @exception	E_INVALID_ARG		There is no download request for the specified @c reqId.
 	* @exception	E_INVALID_OPERATION	The current download state prohibits the execution of this operation. @n
 	*									The download state of the request ID is not downloading.
-	* @exception    E_OUT_OF_MEMORY     The memory is insufficient.
 	* @exception    E_SYSTEM            The method cannot proceed due to a severe system error.
 	*/
 	result Pause(RequestId reqId);
@@ -172,8 +170,7 @@ public:
 	* @exception    E_SUCCESS           The method is successful.
 	* @exception	E_INVALID_ARG		There is no download request for the specified @c reqId.
 	* @exception	E_INVALID_OPERATION	The current download state prohibits the execution of this operation. @n
-	*									The download operation of the request ID is not paused.
-	* @exception    E_OUT_OF_MEMORY     The memory is insufficient.
+	*									The download state for the specified request ID is either not paused or has failed.
 	* @exception    E_SYSTEM            The method cannot proceed due to a severe system error.
 	*/
 	result Resume(RequestId reqId);
@@ -187,7 +184,6 @@ public:
 	* @param[in]    reqId               The request ID returned by Start()
 	* @exception    E_SUCCESS           The method is successful.
 	* @exception	E_INVALID_ARG		There is no download request for the specified @c reqId.
-	* @exception    E_OUT_OF_MEMORY     The memory is insufficient.
 	* @exception    E_SYSTEM            The method cannot proceed due to a severe system error.
 	*/
 	result Cancel(RequestId reqId);
@@ -201,19 +197,21 @@ public:
 	* @param[in]    reqId               The request ID returned by Start()
 	* @exception    E_SUCCESS           The method is successful.
 	* @exception	E_INVALID_ARG		There is no download request for the specified @c reqId.
-	* @exception    E_OUT_OF_MEMORY     The memory is insufficient.
-	* @remarks		The specific error code can be accessed using the GetLastResult() method.
+	* @remarks
+	* 				- The specific error code can be accessed using the GetLastResult() method.
+	* 				- The download request information is available for at least the next 24 hours after IDownloadListener::OnDownloadCompleted() has been called.
 	*/
 	DownloadRequest* GetDownloadRequestN(RequestId reqId) const;
 
 	/**
 	* Gets the download state of the given request ID. @n
-	* If there is no download request for the request ID, DOWNLOAD_STATE_NONE will be returned.
+	* If there is no download request for the request ID, @c DOWNLOAD_STATE_NONE is returned.
 	*
 	* @since 2.0
 	*
 	* @return       The download state
 	* @param[in]    reqId               The request ID returned by Start()
+	* @remarks      The download state information is available for at least the next 24 hours after IDownloadListener::OnDownloadCompleted() has been called.
 	*/
 	DownloadState GetState(RequestId reqId) const;
 
@@ -228,8 +226,9 @@ public:
 	* @exception    E_SUCCESS           The method is successful.
 	* @exception	E_INVALID_ARG		There is no download request for the specified @c reqId.
 	* @exception	E_INVALID_OPERATION	The current download state prohibits the execution of this operation. @n
-	*									The download state of the request ID is not downloading or paused.
+	*									The download operation has not yet started.
 	* @exception    E_SYSTEM            The method cannot proceed due to a severe system error.
+	* @remarks      The MIME type information is available for at least the next 24 hours after IDownloadListener::OnDownloadCompleted() has been called.
 	*/
 	result GetMimeType(RequestId reqId, Tizen::Base::String& mimeType) const;
 

@@ -1,6 +1,5 @@
 
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -34,6 +33,7 @@ namespace Tizen { namespace System
 class IScreenEventListener;
 class IChargingEventListener;
 class IBatteryEventListener;
+class IBootEventListener;
 
 /**
  * @enum	BatteryLevel
@@ -95,17 +95,18 @@ public:
 	 *
 	 * @since	2.0
 	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/power
 	 *
 	 * @return	An error code
-	 * @param[in]	keepOn	Set to @c true if the screen remains in the 'ON' state until the application goes to the background, @n
+	 * @param[in]	keepOn	Set to @c true if the screen remains in the 'ON' state until the application goes to the background(inactivated), @n
 	 *                      else @c false if the state of the screen is controlled by the default power control policy of the system
 	 * @param[in]   dimming Set to @c true if the screen is dimmed when there is no user input for a certain amount of time, @n
 	 *                      else @c false if the screen is not dimmed
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception   E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks	The application should explicitly call this method again, if the screen is to be kept 'ON' after coming back from the background state.
+	 * @remarks	The application should explicitly call this method again on foreground(activated) state, if the screen is to be kept 'ON' after coming back from the background(inactivated) state.
 	 */
 	static result KeepScreenOnState(bool keepOn, bool dimming = true);
 
@@ -126,17 +127,19 @@ public:
 	 * Sets the screen brightness level for an application.
 	 *
 	 * @since	2.0
+	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/power
 	 *
 	 * @return	An error code
-	 * @param[in]	brightness	The brightness level to set @n
-	 *				The parameter value can range between @c 1 (minimum) and @c 10 (maximum).
-	 * @exception	E_SUCCESS	The method is successful.
+	 * @param[in]	brightness		The brightness level to set @n
+	 	*				The parameter value can range between @c 1 (minimum) and @c 10 (maximum).
+	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception   E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
 	 * @exception	E_OUT_OF_RANGE  	The specified @c brightness is out of range.
 	 * @exception	E_SYSTEM 		The method cannot proceed due to a severe system error.
-	 * @remarks	This brightness level is only available when an application is running on the foreground. Even if the brightness is set to level 1, a black screen is not displayed. Level 1 is the minimum brightness level that can be set for an application.
-	 * @see		RestoreScreenBrightness()
+	 * @remarks	This brightness level is only available when an application is running on the foreground(activated). Even if the brightness is set to level 1, a black screen is not displayed. Level 1 is the minimum brightness level that can be set for an application. For screen off, Please refer TurnScreenOff method.
+	 * @see		RestoreScreenBrightness(), TurnScreenOff()
 	 */
 
 	static result SetScreenBrightness(int brightness);
@@ -173,7 +176,9 @@ public:
 	 *
 	 * @since	2.0
 	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/power
+	 *
 	 * @return	An error code
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
@@ -186,7 +191,9 @@ public:
 	 *
 	 * @since	2.0
 	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/power
+	 *
 	 * @return	An error code
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
@@ -199,6 +206,7 @@ public:
 	 *
 	 * @since	2.0
 	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/power
 	 *
 	 * @return	An error code
@@ -207,27 +215,95 @@ public:
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
 	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @remark	This method keeps CPU power state only. Screen state or lock screen is not managed by this method.
 	 */
 	static result KeepCpuAwake(bool enable);
 
 	/**
 	 * Sets the screen event listener.
 	 *
+	 * @deprecated This method is deprecated. @n 
+	 * Instead of using this method, use AddScreenEventListener() and RemoveScreenEventListener().
 	 * @since	2.0
 	 *
 	 * @param[in]	listener		The screen event listener
-	 * @see		IScreenEventListener
+	 * @remarks	This method always overwrites the first element of internal IScreenEventListener list.
+	 *		The first element added by AddScreenEventListener() may be overwritten by this method,
+	 *		which may not be an expected behavior by API users. So, it is not recommended to use this method.
 	 */
 	static void SetScreenEventListener(IScreenEventListener& listener);
+
+
+	/**
+	 * Adds the screen event listener.
+	 *
+	 * @since       2.1
+	 *
+	 * @param[in]   listener                The screen event listener
+	 * @exception E_SUCCESS               The method is successful.
+	 * @exception E_OBJ_ALREADY_EXIST   The listener has already been added.
+	 * @exception E_SYSTEM                The method cannot proceed due to a severe system error.
+	 * @see         IScreenEventListener
+	 * @see         RemoveScreenEventListener()
+	 */
+	static result AddScreenEventListener(IScreenEventListener& listener);
+
+	/**
+	 * Removes the screen event listener.
+	 *
+	 * @since       2.1
+	 *
+	 * @param[in]   listener                The screen event listener
+	 * @exception E_SUCCESS               The method is successful.
+	 * @exception E_OBJ_NOT_FOUND     The specified listener cannot be found.
+	 * @exception E_SYSTEM                The method cannot proceed due to a severe system error.
+	 * @see         IScreenEventListener
+	 * @see         AddScreenEventListener()
+	 */
+	static result RemoveScreenEventListener(IScreenEventListener& listener);
+
 
 	/**
 	 * Sets the charging event listener.
 	 *
+	 * @deprecated This method is deprecated. @n
+	 *               Instead of using this method, use AddChargingEventListener() and RemoveChargingEventListener().
 	 * @since	2.0
 	 *
 	 * @param[in]	listener	The charging event listener
+	 * @remarks	This method always overwrites the first element of internal IChargingEventListener list.
+	 *		The first element added by AddChargingEventListener() may be overwritten by this method,
+	 *		which may not be an expected behavior by API users. So, it is not recommended to use this method.
 	 */
 	static void SetChargingEventListener(IChargingEventListener& listener);
+
+	/**
+	 * Adds the charging event listener.
+	 *
+	 * @since       2.1
+	 *
+	 * @param[in]   listener                The charging event listener
+	 * @exception E_SUCCESS               The method is successful.
+	 * @exception E_OBJ_ALREADY_EXIST   The listener has already been added.
+	 * @exception E_SYSTEM                The method cannot proceed due to a severe system error.
+	 * @see IChargingEventListener
+	 * @see RemoveChargingEventListener()
+	 */
+	static result AddChargingEventListener(IChargingEventListener& listener);
+
+	/**
+	 * Removes the charging event listener.
+	 *
+	 * @since       2.1
+	 *
+	 * @param[in]   listener                The charging event listener
+	 * @exception E_SUCCESS               The method is successful.
+	 * @exception E_OBJ_NOT_FOUND     The specified listener cannot be found.
+	 * @exception E_SYSTEM                The method cannot proceed due to a severe system error.
+	 * @see IChargingEventListener
+	 * @see AddChargingEventListener()
+	 */
+	static result RemoveChargingEventListener(IChargingEventListener& listener);
 
 	/**
 	 * Sets the battery event listener.
@@ -251,7 +327,7 @@ public:
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_UNSUPPORTED_OPERATION	The method is not supported by this device.
 	 * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
-	 * @remakrs	The specific error code can be accessed using the GetLastResult() method.
+	 * @remarks	The specific error code can be accessed using the GetLastResult() method.
 	 * @remarks	The resolution of the level is @c 1 percentage. The range of the level is minimum @c 0 to maximum @c 100. 
 	 */
 	static int GetCurrentBatteryLevelInPercentage(void);
@@ -282,6 +358,32 @@ public:
 	 * @remarks	The specific error code can be accessed using the GetLastResult() method.
 	 */
 	static bool IsCharging(void);
+
+	/**
+	 * Adds the boot event listener.
+	 *
+	 * @since	2.1
+	 *
+	 * @return      An error code
+	 * @param[in]	listener	The boot event listener
+	 * @exception	E_SUCCESS	The method is successful.
+	 * @exception	E_OBJ_ALREADY_EXIST	The listener is already added.
+	 * @exception	E_SYSTEM	The method cannot proceed due to a severe system error.
+	 */
+	static result AddBootEventListener(IBootEventListener& listener);
+
+	/**
+	 * Removes the boot event listener.
+	 *
+	 * @since	2.1
+	 *
+	 * @return      An error code
+	 * @param[in]	listener	The boot event listener
+	 * @exception	E_SUCCESS	The method is successful.
+	 * @exception	E_OBJ_ALREADY_EXIST	The listener is not added.
+	 * @exception	E_SYSTEM	The method cannot proceed due to a severe system error.
+	 */
+	static result RemoveBootEventListener(IBootEventListener& listener);
 
 private:
 	/**

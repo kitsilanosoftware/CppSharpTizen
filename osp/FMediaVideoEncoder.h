@@ -118,9 +118,6 @@ public:
 	 *
 	 *	@since		2.0
 	 *
-	 *	@remarks		 After creating an instance of this class, the Construct() method must be
-	 *					 called explicitly to initialize this instance.
-	 *	@see		Construct()
 	 */
 	VideoEncoder(void);
 
@@ -144,11 +141,12 @@ public:
 	 *	@exception	E_INVALID_ARG		A specified input parameter has invalid data.
 	 *	@exception	E_OUT_OF_MEMORY		The memory is insufficient. 
 	 *	@exception	E_SYSTEM			A system error has occurred.
-	 *	@remarks	The key type of the specified option is Tizen::Base::Integer and the value type varies depending
-	 *			  on the key type.
+	 *	@remarks
+	 * 			  - The key type of the specified option is Tizen::Base::Integer and the value type varies depending
+	 *				on the key type.
 	 *				The unsupported keys in @c pOption are ignored.
 	 *				If specified @c pOption has an invalid value, @c E_INVALID_ARG is returned.
-	 *  @remarks The supported codec types can vary depending on the device model or platform version.
+	 *			  - The supported codec types can vary depending on the device model or platform version.
 	 */
 	result Construct(CodecType type, const Tizen::Base::Collection::HashMap* pOption = null);
 
@@ -165,8 +163,9 @@ public:
 	 *	@exception	E_INVALID_ARG			The specified source or destination buffer is invalid or has insufficient memory.
 	 *	@exception	E_OUT_OF_MEMORY			The memory is insufficient.
 	 *	@exception	E_SYSTEM				A system error has occurred.
-	 *	@remarks	The destination buffer must have sufficient free space to store the encoded frame data.
-	 *	@remarks	The position of the source buffer is moved to the end of the consumed data and the position of the destination buffer is moved to the end of the written data.
+	 *	@remarks
+	 *			  - The destination buffer must have sufficient free space to store the encoded frame data.
+	 *			  - The position of the source buffer is moved to the end of the consumed data and the position of the destination buffer is moved to the end of the written data.
 	 */
 	result Encode(Tizen::Base::ByteBuffer& srcBuf, Tizen::Base::ByteBuffer& dstBuf);
 
@@ -256,8 +255,9 @@ public:
 	 *             else @c null if an exception occurs
 	 * @exception  E_SUCCESS             The method is successful.
 	 * @exception  E_OUT_OF_MEMORY       The memory is insufficient.
-	 * @remarks    The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks    The return value must be deleted by the caller.
+	 * @remarks
+	 *			 - The specific error code can be accessed using the GetLastResult() method.
+	 *			 - The return value must be deleted by the caller.
 	 */
 	static Tizen::Base::Collection::IListT<CodecType>* GetSupportedCodecListN(void);
 

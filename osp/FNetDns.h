@@ -45,17 +45,96 @@ class _DnsImpl;
  *			method represents a request for the DNS host information for an IP address. Both requests can be made in an asynchronous mode.
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/net/domain_name_system_access.htm">Domain Name System Access</a>.
+ *
+ * The following example demonstrates how to use the %Dns class.
+ *
+ * @code
+ *
+ *	#include <FBase.h>
+ *	#include <FNet.h>
+ *
+ *	using namespace Tizen::Base;
+ *	using namespace Tizen::Base::Collection;
+ *	using namespace Tizen::Net;
+ *
+ *	class MyClass
+ *	  : public Object
+ *	  , public IDnsEventListener
+ *	{
+ *	   public:
+ *		  MyClass(void) {}
+ *		  ~MyClass(void) {}
+ *
+ *		  // IDnsEventListener
+ *		  void OnDnsResolutionCompletedN(IpHostEntry* pIpHostEntry, result r);
+ *
+ *		  void GetHostByName(void);
+ *	};
+ *
+ *	void
+ *	MyClass::OnDnsResolutionCompletedN(IpHostEntry* pIpHostEntry, result r)
+ *	{
+ *		if (pIpHostEntry == null)
+ *		{
+ *			return;
+ *		}
+ *
+ *		IList* pAddressList = pIpHostEntry->GetAddressList();
+ *		if (pAddressList != null)
+ *		{
+ *			int count = pAddressList->GetCount();
+ *
+ *			for (int i = 0; i<count; i++)
+ *			{
+ *				IpAddress* pIpAddress = (IpAddress*)(pAddressList->GetAt(i));
+ *				AppLog("IpAddress no.%d = [%ls]\n", i, pIpAddress->ToString().GetPointer());
+ *			}
+ *		}
+ *
+ *		IList* pAliasList = pIpHostEntry->GetAliasList();
+ *		if (pAliasList != null)
+ *		{
+ *			int count = pAliasList->GetCount();
+ *
+ *			for (int i = 0; i<count; i++)
+ *			{
+ *				String* pAlias = (String*)(pAliasList->GetAt(i));
+ *				AppLog("Alias no.%d = [%ls]\n", i, pAlias->GetPointer());
+ *			}
+ *		}
+ *
+ *		delete pIpHostEntry;
+ *	}
+ *
+ *	void
+ *	MyClass::GetHostByName(void)
+ *	{
+ *		Dns* pDns = new Dns();
+ *		result r = pDns->Construct(*this);
+ *		if (IsFailed(r))
+ *		{
+ *			delete pDns;
+ *			return;
+ *		}
+ *
+ *		r = pDns->GetHostByName(L"www.tizen.org");
+ *
+ *		// Wait OnDnsResolutionCompletedN() event
+ *
+ *		delete pDns;
+ *	}
+ *
+ * @endcode
  */
 class _OSP_EXPORT_ Dns
 	: public Tizen::Base::Object
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the Construct() method must be called right after calling this constructor.
 	 *
 	 * @since		2.0
-	 *
-	 * @remarks		After creating an instance of this class, one of the Construct() methods must be called explicitly to initialize this instance.
 	 */
 	Dns(void);
 
@@ -84,7 +163,7 @@ public:
 	result Construct(const NetConnection& netConnection, IDnsEventListener& listener);
 
 	/**
-	 * Initializes this instance of %Dns with the specified listener.
+	 * Initializes this instance of %Dns with the specified @c listener.
 	 *
      * @since		2.0
 	 *
@@ -102,9 +181,11 @@ public:
 public:
 	/**
 	 * Requests a DNS lookup by host name. @n
-	 * This method is asynchronous.
+	 * The %GetHostByName() method is asynchronous.
 	 *
 	 * @since		2.0
+	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/dns
 	 *
 	 * @return		An error code
@@ -118,7 +199,7 @@ public:
 	 * @exception	E_OPERATION_FAILED		Requested but an error is received while waiting for the response.
 	 * @exception	E_SYSTEM				An internal error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
-	 *
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @remarks		Only one query is processed at a time in this instance.
 	 *              Multiple queries may be discarded.
 	 */
@@ -126,9 +207,11 @@ public:
 
 	/**
 	 * Requests a DNS lookup by IP address. @n
-	 * This method is asynchronous.
+	 * The %GetHostByAddress() method is asynchronous.
 	 *
 	 * @since		2.0
+	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/dns
 	 *
 	 * @return		An error code
@@ -142,6 +225,7 @@ public:
 	 * @exception	E_OPERATION_FAILED		Requested but an error is received while waiting for the response.
 	 * @exception	E_SYSTEM				An internal error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @remarks		Only one query is processed at a time in this instance.
 	 *              Multiple queries may be discarded.
 	 */

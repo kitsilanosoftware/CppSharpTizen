@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -25,8 +25,10 @@
 #ifndef _FUI_INPUT_CONNECTION_H_
 #define _FUI_INPUT_CONNECTION_H_
 
+#include <FGrpFloatRectangle.h>
 #include <FGrpRectangle.h>
 #include <FUiIInputConnectionEventListener.h>
+#include <FUiIInputConnectionEventListenerF.h>
 #include <FUiIInputConnectionProvider.h>
 #include <FUiInputConnectionTypes.h>
 
@@ -44,7 +46,7 @@ class Control;
  *
  * @final This class is not intended for extension.
  *
- * Example:
+ * The following examples demonstrate how to use the %InputConnection class.
  *
  * This is a simple editor that uses an %InputConnection.
  *
@@ -198,7 +200,7 @@ public:
 	virtual ~InputConnection(void);
 
 	/**
-	 * Initializes this instance of the %InputConnection with the specified parameter.
+	 * Initializes this instance of %InputConnection with the specified parameter.
 	 *
 	 * @since 2.0
 	 * @return		An error code
@@ -210,6 +212,21 @@ public:
 	 * @exception    	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 */
 	result Construct(const Control* pControl, IInputConnectionEventListener& listener, IInputConnectionProvider& provider);
+
+	/**
+	 * Initializes this instance of %InputConnection with a specified parameter.
+	 *
+	 * @since 2.1
+	 *
+	 * @return		An error code
+	 * @param[in]		pControl				The source object for connecting the Input Method
+	 * @param[in]		listener			An instance of %IInputConnectionEventListenerF for processing the event
+	 * @param[in]		provider			The %InputConnection provider
+	 * @exception    	E_SUCCESS			The method is successful.
+	 * @exception		E_INVALID_ARG		A specified input parameter is invalid.
+	 * @exception    	E_SYSTEM			The method cannot proceed due to a severe system error.
+	 */
+	result Construct(const Control* pControl, IInputConnectionEventListenerF& listener, IInputConnectionProvider& provider);
 
 	/**
 	 * Binds the %InputConnection to the current active Input Method
@@ -237,7 +254,7 @@ public:
 	 * @since 2.0
 	 * @return		An error code
 	 * @exception    	E_SUCCESS			The method is successful.
-	 * @exception		E_INVALID_STATE   	This exception is thrown when BindInputMethod is not called before calling this method.
+	 * @exception		E_INVALID_STATE   	This exception is thrown when BindInputMethod() is not called before calling this method.
 	 * @see			HideInputPanel()
 	 */
 	result ShowInputPanel(void);
@@ -248,7 +265,7 @@ public:
 	 * @since 2.0
 	 * @return		An error code
 	 * @exception    	E_SUCCESS			The method is successful.
-	 * @exception		E_INVALID_STATE   	This exception is thrown when BindInputMethod is not called before calling this method.
+	 * @exception		E_INVALID_STATE   	This exception is thrown when BindInputMethod() is not called before calling this method.
 	 * @see			ShowInputPanel()
 	 */
 	result HideInputPanel(void);
@@ -278,7 +295,7 @@ public:
 	 * @since 2.0
 	 * @return		An error code
 	 * @exception    	E_SUCCESS			The method is successful.
-	 * @exception		E_INVALID_STATE   	This exception is thrown when BindInputMethod is not called before calling this method.
+	 * @exception		E_INVALID_STATE   	This exception is thrown when BindInputMethod() is not called before calling this method.
 	 */
 	result FinishTextComposition(void);
 
@@ -302,39 +319,54 @@ public:
 	void SetInputPanelActionEnabled(bool enable);
 
 	/**
-	 * Sets the language of the current active Input Panel.
-	 *
-	 * @since 2.0
-	 * @param[in]              languageCode                         The language to set
-	 * @exception             E_SUCCESS                            The method is successful.
-	 * @exception             E_OUT_OF_MEMORY                    The memory is insufficient.
-	 * @remarks                This method may not work, depending on the current active Input Method.
-	 */
+	* Sets the language of the current active Input Panel.
+	*
+	* @since 2.0
+	* @param[in]              languageCode                         The language to set
+	* @exception             E_SUCCESS                            The method is successful.
+	* @exception             E_OUT_OF_MEMORY                    The memory is insufficient.
+	* @remarks                This method may not work, depending on the current active Input Method.
+	*/
 	result SetInputPanelLanguage(Tizen::Locales::LanguageCode languageCode);
 
 	/**
 	 * Sets the cursor at the specified position.
 	 *
 	 * @since 2.0
-	 * @param[in]		position			The cursor position that is to be set
+	 *
 	 * @return		An error code
+	 * @param[in]		position			The cursor position that is to set
 	 * @exception    	E_SUCCESS			The method is successful.
-	 * @exception		E_INVALID_ARG		A specified input parameter is invalid.
-	 * @exception		E_INVALID_STATE   	This exception is thrown when BindInputMethod is not called before calling this method.
+	 * @exception		E_INVALID_ARG		The specified input parameter is invalid.
+	 * @exception		E_INVALID_STATE   	This exception is thrown when BindInputMethod() is not called before calling this method.
 	 */
 	result SetCursorPosition(int position);
 
 	/**
-	 * Sets the bounds of the cursor
+	 * Sets the bounds of the cursor.
 	 *
 	 * @since 2.0
-	 * @param[in]		rect				the rectangle to be set
+	 *
 	 * @return		An error code
+	 * @param[in]		rect				The rectangle to set
 	 * @exception   	E_SUCCESS			The method is successful.
-	 * @exception   	E_INVALID_ARG		A specified input parameter is invalid.
-	 * @exception		E_INVALID_STATE   	This exception is thrown when BindInputMethod is not called before calling this method.
+	 * @exception   	E_INVALID_ARG		The specified input parameter is invalid.
+	 * @exception		E_INVALID_STATE   	This exception is thrown when BindInputMethod() is not called before calling this method.
 	 */
 	result SetCursorBounds(const Tizen::Graphics::Rectangle& rect);
+
+	/**
+	 * Sets the bounds of the cursor.
+	 *
+	 * @since 2.1
+	 *
+	 * @return		An error code
+	 * @param[in]		rect				The rectangle to set
+	 * @exception   	E_SUCCESS			The method is successful.
+	 * @exception   	E_INVALID_ARG		The specified input parameter is invalid.
+	 * @exception		E_INVALID_STATE   	This exception is thrown when BindInputMethod() is not called before calling this method.
+	 */
+	result SetCursorBounds(const Tizen::Graphics::FloatRectangle& rect);
 
 	/**
 	 * Gets the bounds of the current active Input Panel.
@@ -343,10 +375,23 @@ public:
 	 * @return		An instance of the rectangle that represents the position of the top-left corner,
 	 *			the width, and the height of the Input Panel.
 	 * @exception    	E_SUCCESS			The method is successful.
-	 * @exception		E_INVALID_STATE   	This exception is thrown when BindInputMethod is not called before calling this method.
+	 * @exception		E_INVALID_STATE   	This exception is thrown when BindInputMethod() is not called before calling this method.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Tizen::Graphics::Rectangle GetInputPanelBounds(void) const;
+
+	/**
+	 * Gets the bounds of the current active Input Panel.
+	 *
+	 * @since 2.1
+	 *
+	 * @return		An instance of the rectangle that represents the position of the top-left corner,
+	 *			the width, and the height of the Input Panel
+	 * @exception    	E_SUCCESS			The method is successful.
+	 * @exception		E_INVALID_STATE   	This exception is thrown when BindInputMethod() is not called before calling this method.
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
+	 */
+	Tizen::Graphics::FloatRectangle GetInputPanelBoundsF(void) const;
 
 	/**
 	 * Enables or disables text prediction.
@@ -357,6 +402,17 @@ public:
 	 * @remarks		This method may not work, depending on the current active Input Method.
 	 */
 	void SetTextPredictionEnabled(bool enable);
+
+	/**
+	* Sends opaque command to the input method.
+	*
+	* @since     2.1
+	*
+	* @param[in] command            The opaque command
+	* @remarks   This method can be used to provide domain-specific features that are only known between certain input methods and their clients.
+	*                   This method may not work, depending on the active Input Method.
+	*/
+	void SendOpaqueCommand (const Tizen::Base::String& command);
 
 private:
 	//

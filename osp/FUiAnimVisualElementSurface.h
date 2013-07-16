@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -28,6 +28,7 @@
 #include <FOspConfig.h>
 #include <FBaseObject.h>
 #include <FGrpDimension.h>
+#include <FGrpFloatDimension.h>
 
 namespace Tizen { namespace Graphics
 {
@@ -111,6 +112,23 @@ public:
 	result Construct(const DisplayContext& displayContext, const Tizen::Graphics::Dimension& size);
 
 	/**
+	 * Initializes this instance of %VisualElementSurface with the specified parameters.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	displayContext		The display context of the window
+	 * @param[in]	size				The size of the %VisualElementSurface instance
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_OUT_OF_RANGE		The value of the argument is outside the valid range defined by the method.
+	 * @exception	E_INVALID_ARG		The display context is invalid.
+	 * @remarks		The width and height of the @c size parameter is the logical size and must be greater than @c 0.
+	 * @remarks		If this condition is not satisfied, the E_OUT_OF_RANGE exception is returned.
+	 * @see			Tizen::Ui::Window::GetDisplayContext()
+	 */
+	result Construct(const DisplayContext& displayContext, const Tizen::Graphics::FloatDimension& size);
+
+	/**
 	 * Gets the buffer-related information of the %VisualElementSurface instance.
 	 *
 	 * @since		2.0
@@ -130,9 +148,22 @@ public:
 	 * @return		The size of the %VisualElementSurface instance
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @remarks 	The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks		If an error occurs, this method returns Tizen::Graphics:Dimension(0, 0).
+	 * @remarks		If an error occurs, this method returns Tizen::Graphics::Dimension(0, 0).
 	 */
 	Tizen::Graphics::Dimension GetSize(void) const;
+
+	/**
+	 * Gets the size of the %VisualElementSurface instance.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		The size of the %VisualElementSurface instance
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @remarks 	The specific error code can be accessed using the GetLastResult() method.
+	 * @remarks		If an error occurs, this method returns Tizen::Graphics::Dimension(0, 0).
+	 */
+
+	Tizen::Graphics::FloatDimension GetSizeF(void) const;
 
 	/**
 	 * Compares the Tizen::Base::Object instance with the calling %VisualElementSurface instance for equivalence.

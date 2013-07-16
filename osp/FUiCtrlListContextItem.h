@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -25,10 +25,8 @@
 #ifndef _FUI_CTRL_LIST_CONTEXT_ITEM_H_
 #define _FUI_CTRL_LIST_CONTEXT_ITEM_H_
 
-#include <FBaseObject.h>
-#include <FBaseTypes.h>
 #include <FGrpBitmap.h>
-#include <FGrpRectangle.h>
+#include <FUiCtrlListViewTypes.h>
 
 namespace Tizen { namespace Ui { namespace Controls
 {
@@ -52,7 +50,7 @@ class _OSP_EXPORT_ ListContextItem
 public:
 	/**
 	 * The object is not fully constructed after this constructor is
-	 * called. For full construction, the Construct() method must be
+	 * called. @n For full construction, the ListContextItem::Construct() method must be
 	 * called right after calling this constructor.
 	 *
 	 * @since	2.0
@@ -138,9 +136,10 @@ public:
 	 * @param[in] pBitmap           The background bitmap image
 	 * @exception E_SUCCESS         The method is successful.
 	 * @exception E_SYSTEM          A system error has occurred.
-	 * @remarks  The background bitmap has priority over the background color. When both the background bitmap and the background color are specified, only
+	 * @remarks
+	 *			- The background bitmap has priority over the background color. When both the background bitmap and the background color are specified, only
 	 *			the bitmap is displayed. @n
- 	 *			When @c pBitmap is set as @c null, the background color of the context item is drawn.
+ 	 *			- When @c pBitmap is set as @c null, the background color of the context item is drawn.
 	 */
 	result SetBackgroundBitmap(const Tizen::Graphics::Bitmap* pBitmap);
 
@@ -167,6 +166,72 @@ public:
 	 */
 	Tizen::Graphics::Color GetBackgroundColor(void) const;
 
+	/**
+	 * Sets the background color of the context item element.
+	 *
+	 * @since   2.1
+	 *
+	 * @return	An error code
+	 * @param[in] elementId			The ID of the element
+	 * @param[in] status			The status of the context item element
+	 * @param[in] color				The background color of the context item element
+	 * @exception E_SUCCESS				The method is successful.
+	 * @exception E_INVALID_ARG			The specified @c elementId is invalid.
+	 * @exception E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation.
+	 * @remarks	If the specified @c backgroundColor is not set, the default color set by configuration is used.
+	 * @see		GetElementBackgroundColor()
+	 */
+	result SetElementBackgroundColor(int elementId, ListContextItemElementStatus status, const Tizen::Graphics::Color& backgroundColor);
+
+	/**
+	 * Gets the background color of the context item element.
+	 *
+	 * @since   2.1
+	 *
+	 * @return	The background color of the element
+	 * @param[in] elementId			The ID of the element
+	 * @param[in] status			The status of the context item element
+	 * @exception E_SUCCESS				The method is successful.
+	 * @exception E_INVALID_ARG			The specified @c elementId is invalid.
+	 * @exception E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation.
+	 * @remarks	The specific error code can be accessed using the GetLastResult() method.
+	 * @see		SetElementBackgroundColor()
+	 */
+	Tizen::Graphics::Color GetElementBackgroundColor(int elementId, ListContextItemElementStatus status) const;
+
+	/**
+	 * Sets the text color of the context item element.
+	 *
+	 * @since   2.1
+	 *
+	 * @return	An error code
+	 * @param[in] elementId			The ID of the element
+	 * @param[in] status			The status of the context item element
+	 * @param[in] color				The text color of the context item element
+	 * @exception E_SUCCESS				The method is successful.
+	 * @exception E_INVALID_ARG			The specified @c elementId is invalid.
+	 * @exception E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation.
+	 * @remarks	If the element text color is not set by the application, the default color is set by theme.
+	 * @see		GetElementTextColor()
+	 */
+	result SetElementTextColor(int elementId, ListContextItemElementStatus status, const Tizen::Graphics::Color& textColor);
+
+	/**
+	 * Gets the text color of the context item element.
+	 *
+	 * @since   2.1
+	 *
+	 * @return	The text color of the element
+	 * @param[in] elementId			The ID of the element
+	 * @param[in] status			The status of the context item element
+	 * @exception E_SUCCESS				The method is successful.
+	 * @exception E_INVALID_ARG			The specified @c elementId is invalid.
+	 * @exception E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation.
+	 * @remarks	The specific error code can be accessed using the GetLastResult() method.
+	 * @see		SetElementTextColor()
+	 */
+	Tizen::Graphics::Color GetElementTextColor(int elementId, ListContextItemElementStatus status) const;
+
 protected:
 	friend class _ListContextItemImpl;
 
@@ -188,4 +253,3 @@ private:
 }}} // Tizen::Ui::Controls
 
 #endif  // _FUI_CTRL_LIST_CONTEXT_ITEM_H_
-

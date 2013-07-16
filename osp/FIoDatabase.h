@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -291,21 +290,14 @@ public:
 	virtual ~Database(void);
 
 	/**
-	* @if OSPDEPREC
 	* @{
+	* @if OSPDEPREC
 	* Initializes this instance of %Database with the specified parameters. @n
 	* This method creates a new database file or opens an existing database file in the read-write mode.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Deprecated] [Compatibility] </i>
-	* @endif
 	* @deprecated		This method is deprecated. Instead of using this method, use Directory::Create(const Tizen::Base::String &dirPath,
 	*					bool createParentDirectories=false) and Database::Construct(const Tizen::Base::String& dbPath, const Tizen::Base::String& openMode).
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	dbPath					The path of the database file to open
@@ -333,27 +325,20 @@ public:
 	* @remarks	To open the database file in the read-only mode,
 	*			use the Database::Construct(const Tizen::Base::String& dbPath, const char* pOpenMode) method
 	*			with "r" as the value for the open mode flag.
-	* @}
 	* @endif
+	* @}
 	*/
 	result Construct(const Tizen::Base::String& dbPath, bool createIfNotExist);
 
 	/**
-	* @if OSPDEPREC
 	* @{
+	* @if OSPDEPREC
 	* Initializes this instance of %Database with the specified parameters. @n
 	* This method creates a new database file or opens an existing database file in the read-only or the read-write mode.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Deprecated] [Compatibility] </i>
-	* @endif
 	* @deprecated		This method is deprecated. Instead of using this method, use Directory::Create(const Tizen::Base::String &dirPath,
 	*					bool createParentDirectories=false) and Database::Construct(const Tizen::Base::String& dbPath, const Tizen::Base::String& openMode).
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	dbPath					The path of the database file to open
@@ -377,8 +362,8 @@ public:
 	*										- The method has failed to open or create a file. @n
 	*										- An unexpected device failure has occurred as the media ejected suddenly. @n
 	*										- %File corruption is detected.
-	* @}
 	* @endif
+	* @}
 	*/
 	result Construct(const Tizen::Base::String& dbPath, long openMode, long option);
 
@@ -394,7 +379,7 @@ public:
 	*									It can be one of the following:
 	*									- r : Open for reading.
 	*									- r+: Open for reading and writing.
-	*									- a+: Open for appending and reading. The database file is created if it does not exist.
+	*									- a+: Open for writing and reading. The database file is created if it does not exist.
 	* @exception    E_SUCCESS			The method is successful.
 	* @exception	E_INVALID_ARG		Either of the following conditions has occurred: @n
 	*									- The overall length of the specified @c dbPath is equal to @c 0 or
@@ -421,6 +406,7 @@ public:
 	* identical key value in same device. However, the secure files created by this method cannot be accessed in other devices.
 	*
 	* @since		2.0
+	* @feature		%http://tizen.org/feature/database.encryption
 	*
 	* @return		An error code
 	* @param[in]	dbPath					The path of the database file to open or create
@@ -428,7 +414,7 @@ public:
 	*										It can be one of the following: @n
 	*										- r : Open for reading @n
 	*										- r+: Open for reading and writing @n
-	*										- a+: Open for appending and reading. The database file is created if it does not exist. @n
+	*										- a+: Open for writing and reading. The database file is created if it does not exist. @n
 	* @param[in]	secretKey				A key used to encrypt data of a database file or decrypt a secure database file @n
 	*										If a secure database file is created with a specific key value,
 	*										other applications can access the same secure database file with the identical key value.
@@ -446,21 +432,16 @@ public:
 	* @exception	E_IO					Either of the following conditions has occurred: @n
 	*										- An unexpected device failure has occurred as the media ejected suddenly. @n
 	*										- %File corruption is detected. @n
-	* @exception	E_UNSUPPORTED_OPERATION	This operation is not supported.
+	* @exception	E_UNSUPPORTED_OPERATION	The Emulator or target device does not support the required feature. For more information, see
+	*										<a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+	* @remarks		Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	*/
 	result Construct(const Tizen::Base::String& dbPath, const char* pOpenMode, const Tizen::Base::ByteBuffer& secretKey);
 
 	/**
 	* Creates a SQL statement for the current database.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompDatabaseExceptionPage "here".
-	* @endif
 	*
 	* @return		A pointer to the DbStatement instance, @n
 	*               else @c null if an exception occurs
@@ -481,14 +462,7 @@ public:
 	* the data set written by INSERT/UPDATE is automatically encrypted by the Tizen platform and
 	* the data set read by SELECT is also decrypted by itself.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompDatabaseExceptionPage "here".
-	* @endif
 	*
 	* @return		A pointer to the DbEnumerator instance, @n
 	*				else @c null if an exception occurs, if no result set is generated after the successful execution of the
@@ -522,14 +496,7 @@ public:
 	* const char* pOpenMode, const Tizen::Base::ByteBuffer& key),
 	* the data set written by INSERT/UPDATE is automatically encrypted by the Tizen platform.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompDatabaseExceptionPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	sqlStatement		The SQL statement to execute
@@ -555,14 +522,7 @@ public:
 	* const char* pOpenMode, const Tizen::Base::ByteBuffer& key),
 	* the data set read by SELECT is automatically decrypted by the Tizen platform.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompDatabaseExceptionPage "here".
-	* @endif
 	*
 	* @return		A pointer to the %DbEnumerator instance, @n
 	*				else @c null if an exception occurs or if no result set is generated after the successful execution of the SELECT query
@@ -589,14 +549,7 @@ public:
 	/**
 	* Begins a transaction within this %Database instance.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompDatabaseExceptionPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @exception    E_SUCCESS			The method is successful.
@@ -610,14 +563,7 @@ public:
 	/**
 	* Commits a transaction within this %Database instance.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompDatabaseExceptionPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @exception    E_SUCCESS			The method is successful.
@@ -645,14 +591,7 @@ public:
 	/**
 	* Aborts a running transaction within this %Database instance.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompDatabaseExceptionPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @exception	E_SUCCESS			The method is successful.
@@ -681,14 +620,7 @@ public:
 	/**
 	* Deletes the database file with the specified file name.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since		2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	databasePath		The path of the database file to delete
@@ -712,14 +644,7 @@ public:
 	/**
 	* Checks whether the database file exists.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since		2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return		@c true if the database file exists, @n
 	*				else @c false
@@ -741,15 +666,8 @@ public:
 	* Converts a normal database file to a secure database file. @n
 	* A secure database file, that is converted by this method, can be shared among applications with the same key value.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For path compatibility, see @ref CompIoPathPage "here".
-	*					For exception compatibility, see @ref CompDatabaseExceptionPage "here".
-	* @endif
+	* @feature			%http://tizen.org/feature/database.encryption
 	*
 	* @return		An error code
 	* @param[in]	normalDbPath			The normal (non-encrypted) database file path
@@ -771,7 +689,9 @@ public:
 	*										- An unexpected device failure has occurred as the media ejected suddenly. @n
 	*										- %File corruption is detected.
 	* @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
-	* @exception	E_UNSUPPORTED_OPERATION	This operation is not supported.
+	* @exception	E_UNSUPPORTED_OPERATION	The Emulator or target device does not support the required feature. For more information, see
+	*										<a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+	* @remarks		Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	*/
 	static result ConvertToSecureDatabase(const Tizen::Base::String& normalDbPath, const Tizen::Base::String& secureDbPath,
 			const Tizen::Base::ByteBuffer& secretKey);
@@ -794,22 +714,6 @@ public:
 	long long GetLastInsertRowId(void) const;
 
 	/**
-	* @if OSPCOMPAT
-	* @page		CompDatabaseExceptionPage Compatibility for E_DATABASE exception
-	* @section	CompDatabaseExceptionPageIssueSection Issues
-	*			Implementing this method in OSP compatible applications has the following issues: @n
-	*
-	* -# E_DATABASE exception includes many errors from underlying database engine.
-	* -# If database is locked, E_SERVICE_BUSY is returned.
-	*
-	* @section	CompDatabaseExceptionPageSolutionSection Resolutions
-	*			The issue mentioned above is resolved in Tizen. @n
-	*
-	* @par		When working in Tizen:
-	* -# E_DATABASE exception is divided into several exceptions. Refer to exception description of API reference.
-	* -# E_SERVICE_BUSY is changed to E_OBJECT_LOCKED.
-	*
-	* @endif
 	*/
 
 private:

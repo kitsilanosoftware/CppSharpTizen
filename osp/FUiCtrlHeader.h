@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -155,7 +155,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   item                The HeaderItem object to be added
+	 * @param[in]   item                The HeaderItem object to add
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_MAX_EXCEEDED      The number of items has exceeded the maximum limit.
 	 * @exception   E_INVALID_ARG       A specified input parameter is invalid. @n
@@ -174,10 +174,11 @@ public:
 	 *
 	 * @return      An error code
 	 * @param[in]   itemIndex           The index where the item should be inserted
-	 * @param[in]   item                The HeaderItem object to be inserted
+	 * @param[in]   item                The HeaderItem object to insert
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_MAX_EXCEEDED      The number of items has exceeded the maximum limit.
-	 * @exception   E_OUT_OF_RANGE      The specified index is outside the bounds of the data structure, or the index is greater than or equal to the number of elements or less than @c 0.
+	 * @exception   E_OUT_OF_RANGE      The specified index is outside the bounds of the data structure, or the index is greater than or equal to
+	 *								the number of elements or less than @c 0.
 	 * @exception   E_INVALID_ARG       A specified input parameter is invalid. @n
 	 *									The specified @c item is not constructed.
 	 * @exception   E_SYSTEM            A system error has occurred.
@@ -349,8 +350,10 @@ public:
 	 *
 	 * @return		The selected item index, @n
 	 *				else @c -1 if an error occurs
-	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_UNSUPPORTED_OPERATION	This operation is not supported when the style of the %Header control is not @c HEADER_STYLE_SEGMENTED.
+	 * @exception	E_SUCCESS					The method is successful.
+	 * @exception	E_UNSUPPORTED_OPERATION		This operation is supported when the style of the %Header control is
+	 *												::HEADER_STYLE_SEGMENTED, @n ::HEADER_STYLE_SEGMENTED_WITH_TITLE,
+	 												::HEADER_STYLE_TAB or ::HEADER_STYLE_TAB_WITH_TITLE.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	int GetSelectedItemIndex(void) const;
@@ -480,7 +483,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	itemIndex			The index of the item to be removed
+	 * @param[in]	itemIndex			The index of the item to remove
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_OUT_OF_RANGE		The specified index is outside the bounds of the data structure. @n
 	 *									The index is greater than or equal to the number of elements or less than @c 0.
@@ -523,7 +526,7 @@ public:
 	 *
 	 * @return      An error code
 	 * @param[in]   position			The position at which to set the specified button item
-	 * @param[in]   button				The button item to be set
+	 * @param[in]   button				The button item to set
 	 * @exception   E_SUCCESS			The method is successful.
 	 * @exception   E_INVALID_ARG		A specified input parameter is invalid. @n
 	 *									The specified item is not constructed.
@@ -541,7 +544,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	status          The status of the button item
-	 * @param[in]	color           The button item color to be set
+	 * @param[in]	color           The button item color to set
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_SYSTEM	    A system error has occurred.
 	 * @see         GetButtonColor()
@@ -573,7 +576,7 @@ public:
 	 *
 	 * @return      An error code
 	 * @param[in]   status          The status of the button item
-	 * @param[in]   color           The button item text color to be set
+	 * @param[in]   color           The button item text color to set
 	 * @exception   E_SUCCESS       The method is successful.
 	 * @exception   E_SYSTEM        A system error has occurred.
 	 */
@@ -590,7 +593,7 @@ public:
 	 * @param[in]	pBadgeIcon   				The bitmap for the icon
 	 * @exception	E_SUCCESS      				The method is successful.
 	 * @exception	E_UNSUPPORTED_OPERATION 	This operation is not supported. @n
-	 *            	The operation is not supported when the style of the %Header control is @c HEADER_STYLE_TAB or @c HEADER_STYLE_TAB_WITH_TITLE.
+	 *            	The operation is not supported when the style of the %Header control is ::HEADER_STYLE_TAB or ::HEADER_STYLE_TAB_WITH_TITLE.
 	 */
 	result SetButtonBadgeIcon(ButtonPosition position, const Tizen::Graphics::Bitmap* pBadgeIcon);
 
@@ -606,7 +609,7 @@ public:
 	 * @exception  	E_SUCCESS              		The method is successful.
 	 * @exception  	E_INVALID_ARG   			The specified @c number must be in the range defined by @c 0 and @c 99999.
 	 * @exception  	E_UNSUPPORTED_OPERATION  	This operation is not supported. @n
-	 *           	The operation is not supported when the style of the %Header control is @c HEADER_STYLE_TAB or @c HEADER_STYLE_TAB_WITH_TITLE.
+	 *           	The operation is not supported when the style of the %Header control is ::HEADER_STYLE_TAB or ::HEADER_STYLE_TAB_WITH_TITLE.
 	 * @remarks    	To remove the numbered badge icon from an item, pass @c 0 as the value of @c number.
 	 */
 	result SetButtonNumberedBadgeIcon(ButtonPosition position, int number);
@@ -619,7 +622,7 @@ public:
 	 *
 	 * @return      An error code
 	 * @param[in]   itemIndex           The index at which to set the specified item
-	 * @param[in]   item                The item to be set
+	 * @param[in]   item                The item to set
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_OUT_OF_RANGE      The specified index is outside the bounds of the data structure. @n
 	 *									The index is greater than or equal to the number of elements or less than @c 0.
@@ -635,15 +638,14 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @return		An error code
-	 * @param[in]	itemIndex				The item index
-	 * @param[in]	pBadgeIcon				The bitmap for the icon
-	 * @exception	E_SUCCESS				The method is successful.
-	 * @exception	E_OUT_OF_RANGE			The specified index is outside the bounds of the data structure. @n
-	 *										The index is greater than or equal to the number of elements or less than @c 0.
-	 * @exception	E_UNSUPPORTED_OPERATION This operation is not supported. @n
-	 *										The operation is not supported when the style of the %Header control is not @c HEADER_STYLE_SEGMENTED.
-	 * @exception   E_SYSTEM				A system error has occurred.
+	 * @return			An error code
+	 * @param[in]		itemIndex				The item index
+	 * @param[in]		pBadgeIcon				The bitmap for the icon
+	 * @exception		E_SUCCESS				The method is successful.
+	 * @exception		E_OUT_OF_RANGE			The specified index is outside the bounds of the data structure. @n
+	 *											The index is greater than or equal to the number of elements or less than @c 0.
+	 * @exception     	E_UNSUPPORTED_OPERATION The operation is not supported when the style of the %Header control is ::HEADER_STYLE_TITLE.
+	 * @exception		E_SYSTEM				A system error has occurred.
 	 */
 	result SetItemBadgeIcon(int itemIndex, const Tizen::Graphics::Bitmap* pBadgeIcon);
 
@@ -660,8 +662,7 @@ public:
 	 * @exception	E_INVALID_ARG			The specified @c number must be in the range defined by @c 0 and @c 99999.
 	 * @exception	E_OUT_OF_RANGE			The specified index is outside the bounds of the data structure. @n
 	 *										The index is greater than or equal to the number of elements or less than @c 0.
-	 * @exception	E_UNSUPPORTED_OPERATION	This operation is not supported. @n
-	 *                                      The operation is not supported when the style of the %Header control is not @c HEADER_STYLE_SEGMENTED.
+	 * @exception   E_UNSUPPORTED_OPERATION The operation is not supported when the style of the %Header control is ::HEADER_STYLE_TITLE.
 	 * @exception	E_SYSTEM				A system error has occurred.
 	 * @remarks		To remove the numbered badge icon from an item, pass @c 0 as the value of @c number.
 	 */
@@ -675,7 +676,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	status          The item status
-	 * @param[in]	color           The item color to be set
+	 * @param[in]	color           The item color to set
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_SYSTEM	    A system error has occurred.
 	 * @see         GetItemColor()
@@ -689,7 +690,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   itemIndex               The index of the item to be set
+	 * @param[in]   itemIndex               The index of the item to set
 	 * @param[in]   enable                 Set to @c true to enable the item state, @n
 	 *                                      else @c false
 	 * @exception   E_SUCCESS               The method is successful.
@@ -709,7 +710,7 @@ public:
 	 *
 	 * @return      An error code
 	 * @param[in]   status              The item status
-	 * @param[in]   color               The item text color to be set
+	 * @param[in]   color               The item text color to set
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_SYSTEM            A system error has occurred.
 	 */
@@ -722,14 +723,14 @@ public:
 	 * @since		2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   itemIndex               The index of the item to be selected
+	 * @param[in]   itemIndex               The index of the item to select
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_OUT_OF_RANGE          The specified index is outside the bounds of the data structure. @n
 	 *										The index is greater than or equal to the number of elements or less than @c 0.
 	 * @exception   E_INVALID_OPERATION		The current state of the instance prohibits the execution of the specified operation. @n
 	 *                                      The item at the specified index is disabled.
-	 * @exception   E_UNSUPPORTED_OPERATION	This operation is not supported. @n
-	 *										The operation is not supported when the %Header control style is @c HEADER_STYLE_TITLE.
+	 * @exception   E_UNSUPPORTED_OPERATION The operation is not supported when the %Header control style is ::HEADER_STYLE_TITLE, @n
+	 *                                     	::HEADER_STYLE_TITLE_BUTTON or ::HEADER_STYLE_BUTTON.
 	 * @exception   E_SYSTEM                A system error has occurred.
 	 */
 	result SetItemSelected(int itemIndex);
@@ -753,7 +754,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   style		         The header style to be set
+	 * @param[in]   style		         The header style to set
 	 * @exception   E_SUCCESS			 The method is successful.
 	 * @exception   E_SYSTEM			 A system error has occurred.
 	 * @remarks		All items and buttons will be removed if the style is changed.
@@ -767,11 +768,11 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]   pIcon                   The title icon to be set @n
+	 * @param[in]   pIcon                   The title icon to set @n
 	 *								        Set to @c null to remove the title icon.
 	 * @exception	E_SUCCESS               The method is successful.
-	 * @exception	E_UNSUPPORTED_OPERATION The current state of the instance does not support the execution of the specified operation @n
-	 *                                      The style of the %Header control is not @c HEADER_STYLE_TITLE.
+	 * @exception   E_UNSUPPORTED_OPERATION The operation is supported when the %Header control style is ::HEADER_STYLE_TITLE, @n
+	 *                                      ::HEADER_STYLE_SEGMENTED_WITH_TITLE or ::HEADER_STYLE_TAB_WITH_TITLE.
 	 * @exception	E_SYSTEM		        A system error has occurred.
 	 */
 	result SetTitleIcon(const Tizen::Graphics::Bitmap* pIcon);
@@ -783,11 +784,11 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	text		            The text to be set
+	 * @param[in]	text		            The text to set
 	 * @exception	E_SUCCESS               The method is successful.
-	 * @exception	E_UNSUPPORTED_OPERATION The current state of the instance does not support the execution of the specified operation. @n
-	 *                                      The style of the %Header control is not @c HEADER_STYLE_TITLE.
-	 * @exception	E_SYSTEM		        A system error has occurred.
+	 * @exception  	E_UNSUPPORTED_OPERATION The operation is supported when the %Header control style is ::HEADER_STYLE_TITLE, @n
+	 *                              		::HEADER_STYLE_SEGMENTED_WITH_TITLE or ::HEADER_STYLE_TAB_WITH_TITLE.
+	 * @exception 	E_SYSTEM		        A system error has occurred.
 	 * @remarks		If the text cannot be displayed in a line, then the ellipsis is applied at the end. @n
 	 *				When the title icon is set along with the title text, the title retains the left alignment.
 	 */
@@ -800,10 +801,10 @@ public:
 	 * @since		2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   color                   The title text color to be set
+	 * @param[in]   color                   The title text color to set
 	 * @exception	E_SUCCESS               The method is successful.
-	 * @exception	E_UNSUPPORTED_OPERATION The current state of the instance does not support the execution of the specified operation. @n
-	 *                                      The style of the %Header control is not @c HEADER_STYLE_TITLE.
+	 * @exception   E_UNSUPPORTED_OPERATION The operation is supported when the %Header control style is ::HEADER_STYLE_TITLE, @n
+	 *                                      ::HEADER_STYLE_SEGMENTED_WITH_TITLE or ::HEADER_STYLE_TAB_WITH_TITLE.
 	 * @exception	E_SYSTEM		        A system error has occurred.
 	 */
 	result SetTitleTextColor(const Tizen::Graphics::Color& color);
@@ -815,10 +816,10 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	text		            The text to be set
+	 * @param[in]	text		            The text to set
 	 * @exception	E_SUCCESS               The method is successful.
 	 * @exception	E_UNSUPPORTED_OPERATION The current state of the instance does not support the execution of the specified operation. @n
-	 *                                      The style of the %Header control is not @c HEADER_STYLE_TITLE.
+	 *                                      The style of the %Header control is not ::HEADER_STYLE_TITLE.
 	 * @exception	E_SYSTEM		        A system error has occurred.
 	 * @remarks		If the text cannot be displayed in a line, then the ellipsis is applied at the end. @n
 	 *				When the title icon is set along with the title text, the title retains the left alignment.
@@ -832,10 +833,10 @@ public:
 	 * @since		2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   color                   The description text color to be set
+	 * @param[in]   color                   The description text color to set
 	 * @exception	E_SUCCESS               The method is successful.
 	 * @exception	E_UNSUPPORTED_OPERATION The current state of the instance does not support the execution of the specified operation. @n
-	 *                                      The style of the %Header control is not @c HEADER_STYLE_TITLE.
+	 *                                      The style of the %Header control is not ::HEADER_STYLE_TITLE.
 	 * @exception	E_SYSTEM		        A system error has occurred.
 	 */
 	result SetDescriptionTextColor(const Tizen::Graphics::Color& color);
@@ -865,7 +866,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 */
 	void AddActionEventListener(Tizen::Ui::IActionEventListener& listener);
 
@@ -876,7 +877,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]   listener	The event listener to be removed
+	 * @param[in]   listener	The event listener to remove
 	 */
 	void RemoveActionEventListener(Tizen::Ui::IActionEventListener& listener);
 
@@ -901,93 +902,137 @@ public:
 	 * @param[in]   enable                  Set to @c true to enable the edit mode, @n
 	 *                                      else @c false
 	 * @exception   E_SUCCESS               The method is successful.
-	 * @exception   E_UNSUPPORTED_OPERATION	This operation is not supported. @n
-	 *										The operation is not supported when the style of the %Header control style is not @c Header_STYLE_TAB.
+	 * @exception   E_UNSUPPORTED_OPERATION The operation is supported when the style of the %Header control style is ::HEADER_STYLE_TAB @n
+	 *                                      or ::HEADER_STYLE_TAB_WITH_TITLE.
 	 */
 	result SetTabEditModeEnabled(bool enable);
 
 
 	/**
-	 * Sets the back button.
-	 *
-	 * @since		2.0
-	 *
-	 * @return      	An error code
-	 * @exception   	E_SUCCESS					The method is successful.
-	 * @exception   	E_INVALID_OPERATION 		The current state of the instance prohibits the execution of the specified operation. @n
-	 *                                           There are more than 2 header items.
-	 * @exception   	E_UNSUPPORTED_OPERATION     This operation is not supported. @n
-	 *                                           The operation is not supported when the style of the %Header control is @c HEADER_STYLE_BUTTON. @n
-	 *                                          	This device does not support the software back button.
-	 * @remarks     	When the back button is pressed, OnFormBackRequested() of IFormBackEventListener is called. @n
-	 *              	If the right button is already set, then the button is replaced with the back button.
-	 */
+	* Sets the back button.
+	*
+	* @since		2.0
+	*
+	* @return      	An error code
+	* @exception   	E_SUCCESS					The method is successful.
+	* @exception   	E_INVALID_OPERATION 		The current state of the instance prohibits the execution of the specified operation. @n
+	*                                           There are more than 2 header items.
+	* @exception    E_UNSUPPORTED_OPERATION  	The operation is supported when the style of the %Header control is ::HEADER_STYLE_BUTTON. @n
+	*                                          	This device does not support the software back button.
+	* @remarks     	When the back button is pressed, OnFormBackRequested() of IFormBackEventListener is called. @n
+	*              	If the right button is already set, then the button is replaced with the back button.
+	*/
 	result SetBackButton(void);
 
 
 	/**
-	 * Checks whether the back button item is set.
-	 *
-	 * @since		2.0
-	 *
-	 * @return		@c true if the back button item is set, @n
-	 *            	else @c false
-	 */
+	* Checks whether the back button item is set.
+	*
+	* @since		2.0
+	*
+	* @return		@c true if the back button item is set, @n
+	*            	else @c false
+	*/
 	bool IsBackButtonSet(void) const;
 
 
 	/**
-	 * Removes the back button item.
-	 *
-	 * @since		2.0
-	 *
-	 */
+	* Removes the back button item.
+	*
+	* @since		2.0
+	*
+	*/
 	void RemoveBackButton(void);
 
 
 	/**
-	 * Enables or disables the back button.
-	 *
-	 * @since		2.0
-	 *
-	 * @return      	An error code
-	 * @param[in]   	enable                 	Set to @c true to enable the back button, @n
-	 *                         				else @c false
-	 * @exception   	E_SUCCESS               The method is successful.
-	 * @exception   	E_INVALID_OPERATION    	The current state of the instance prohibits the execution of the specified operation. @n
-	 *                                		The back button item is not set.
-	 */
+	* Enables or disables the back button.
+	*
+	* @since		2.0
+	*
+	* @return      	An error code
+	* @param[in]   	enable                 	Set to @c true to enable the back button, @n
+	*                         				else @c false
+	* @exception   	E_SUCCESS               The method is successful.
+	* @exception   	E_INVALID_OPERATION    	The current state of the instance prohibits the execution of the specified operation. @n
+	*                                		The back button item is not set.
+	*/
 	result SetBackButtonEnabled(bool enable);
 
 
 	/**
-	 * Gets the state of the back button.
-	 *
-	 * @since		2.0
-	 *
-	 * @return      	The state of the back button, @n
-	 *              	else @c BUTTON_ITEM_STATUS_NORMAL if an error occurs.
-	 * @exception   	E_SUCCESS          		The method is successful.
-	 * @exception   	E_INVALID_OPERATION  	The current state of the instance prohibits the execution of the specified operation. @n
-	 *            							The back button is not set.
-	 * @remarks     	The specific error code can be accessed using the GetLastResult() method.
-	 */
+	* Gets the state of the back button.
+	*
+	* @since		2.0
+	*
+	* @return      	The state of the back button, @n
+	*              	else @c BUTTON_ITEM_STATUS_NORMAL if an error occurs.
+	* @exception   	E_SUCCESS          		The method is successful.
+	* @exception   	E_INVALID_OPERATION  	The current state of the instance prohibits the execution of the specified operation. @n
+	*            							The back button is not set.
+	* @remarks     	The specific error code can be accessed using the GetLastResult() method.
+	*/
 	ButtonItemStatus GetBackButtonStatus(void) const;
 
 
 	/**
-	 * Gets the position and size of the specified button item.
-	 *
-	 * @since		2.0
-	 *
-	 * @return      	The position and size of the button item at the specified position.
-	 * @param[in]   	position             	The position of the button item
-	 * @exception   	E_SUCCESS               The method is successful.
-	 * @exception   	E_INVALID_OPERATION    	The current state of the instance prohibits the execution of the specified operation. @n
-	 *                                  		There is no button set at the specified position.
-	 * @remarks     	The specific error code can be accessed using the GetLastResult() method.
-	 */
+	* Gets the position and size of the specified button item.
+	*
+	* @since		2.0
+	*
+	* @return      	The position and size of the button item at the specified position.
+	* @param[in]   	position             	The position of the button item
+	* @exception   	E_SUCCESS               The method is successful.
+	* @exception   	E_INVALID_OPERATION    	The current state of the instance prohibits the execution of the specified operation. @n
+	*                                  		There is no button set at the specified position.
+	* @remarks     	The specific error code can be accessed using the GetLastResult() method.
+	*/
 	Tizen::Graphics::Rectangle GetButtonBounds(ButtonPosition position) const;
+
+	/**
+	* Gets the position and size of the specified button item.
+	*
+	* @since		2.1
+	*
+	* @return      	The position and size of the button item at the specified position.
+	* @param[in]   	position             	The position of the button item
+	* @exception   	E_SUCCESS               The method is successful.
+	* @exception   	E_INVALID_OPERATION    	The current state of the instance prohibits the execution of the specified operation. @n
+	*                                  		There is no button set at the specified position.
+	* @remarks     	The specific error code can be accessed using the GetLastResult() method.
+	*/
+	Tizen::Graphics::FloatRectangle GetButtonBoundsF(ButtonPosition position) const;
+
+	/**
+	* Sets the badge icon.
+	*
+	* @since        2.1
+	*
+	* @return       An error code
+	* @param[in]    pBadgeIcon               The bitmap for the badge icon
+	* @exception    E_SUCCESS                The method is successful.
+	* @exception    E_INVALID_OPERATION      This operation is invalid. @n
+	*                                        The operation is invalid when the style of the %Header control is not ::HEADER_STYLE_TITLE
+	*						or ::HEADER_STYLE_SEGMENTED_WITH_TITLE or ::HEADER_STYLE_TAB_WITH_TITLE.
+	* @remarks      For icon size details, see <a href="../org.tizen.native.appprogramming/html/guide/ui/control_iconsize.htm">here</a>.
+	*/
+	result SetTitleBadgeIcon(const Tizen::Graphics::Bitmap* pBadgeIcon);
+
+	/**
+	* Sets the numbered badge icon.
+	*
+	* @since        2.1
+	*
+	* @return       An error code
+	* @param[in]    number                    The number value that should be displayed as the badge icon
+	* @exception    E_SUCCESS                 The method is successful.
+	* @exception    E_INVALID_ARG             The specified @c number must be in the range defined by @c 0 and @c 99999.
+	* @exception    E_INVALID_OPERATION       This operation is invalid. @n
+	*                                         The operation is invalid when the style of the %Header control is not ::HEADER_STYLE_TITLE
+	*							or ::HEADER_STYLE_SEGMENTED_WITH_TITLE TITLE or ::HEADER_STYLE_TAB_WITH_TITLE.
+	* @remarks      To remove the numbered badge icon from an item, pass @c 0 as the value of @c number.
+	*/
+	result SetTitleNumberedBadgeIcon(int number);
 
 
 protected:

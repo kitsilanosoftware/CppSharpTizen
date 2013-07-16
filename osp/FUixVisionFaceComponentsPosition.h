@@ -45,11 +45,11 @@ namespace Tizen { namespace Uix { namespace Vision
  *
  * The %FaceComponentsPosition class encapsulates the extracted face component's information that is processed by the FaceDetector class.
  *
- * This class provides the following functionalities: @n
+ * This class provides the following functionalities:
  * - Getting/Setting the position of a face.
  * - Getting/Setting the position of the eyes.
  * - Getting/Setting the position of the mouth.
- * @n
+ * 
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/uix/face_detector_recognizer.htm">Face Detector and Recognizer</a>.
  */
 
@@ -59,11 +59,9 @@ class _OSP_EXPORT_ FaceComponentsPosition
 public:
 	/**
 	 * This is the default constructor for this class. @n
-	 * Initializes this instance of %FaceComponentsPosition with all its attributes set to @c -1.
+	 * All values of the attributes are set to @c -1 when this instance is initialized.
 	 *
 	 * @since      2.0
-	 *
-	 * @remarks    The attributes are set to @c -1 when initialized.
 	 */
 	FaceComponentsPosition(void);
 
@@ -98,33 +96,33 @@ public:
 
 
 	/**
-	 * Gets the position of the face.
+	 * Gets the position of the face. @n
+	 * The value of all the attributes is set to @c -1 if their value is not set to @c -1 during initialization.
 	 *
 	 * @since      2.0
 	 *
 	 * @return     The position of the face
-	 * @remarks    The value of all the attributes is set to @c -1 if their value is not set to @c -1 during initialization.
 	 */
 	Tizen::Graphics::Rectangle GetFacePosition(void) const;
 
 	/**
-	 * Gets the position of the eyes.
+	 * Gets the position of the eyes. @n
+	 * The value of @c leftEyePos and @c rightEyePos is set to @c -1 if it is not set to @c -1 during initialization.
 	 *
 	 * @since         2.0
 	 *
 	 * @param[out]    leftEyePos     The eye position on the left
 	 * @param[out]    rightEyePos    The eye position on the right
-	 * @remarks       The value of @c leftEyePos and @c rightEyePos is set to @c -1 if it is not set to @c -1 during initialization.
 	 */
 	void GetEyePosition(Tizen::Graphics::Point& leftEyePos, Tizen::Graphics::Point& rightEyePos) const;
 
 	/**
-	 * Gets the position of the mouth.
+	 * Gets the position of the mouth. @n
+	 * The value of all the attributes is set to @c -1 if their value is not set to @c -1 during initialization.
 	 *
 	 * @since      2.0
 	 *
 	 * @return     The position of the mouth
-	 * @remarks    The value of all the attributes is set to @c -1 if their value is not set to @c -1 during initialization.
 	 */
 	Tizen::Graphics::Rectangle GetMouthPosition(void) const;
 
@@ -153,8 +151,7 @@ public:
 	 *                                This position can be obtained using the FaceDetector::ExtractFaceComponentsN() method.
 	 * @param[in]    rightEyePos      The eye position on the right @n
 	 *                                This position can be obtained using the FaceDetector::ExtractFaceComponentsN() method. @n
-	 *                                The position of the eyes must be greater than or equal to @c 0. @n
-	 *                                The position of @c rightEyePos must be greater than the position of @c leftEyePos.
+	 *                                The position of the right eye must be greater than or equal to @c 0, and must be greater than the position of @c leftEyePos.
 	 * @exception    E_SUCCESS        The method is successful.
 	 * @exception    E_INVALID_ARG    A specified input parameter is invalid.
 	 */
@@ -177,7 +174,7 @@ public:
 
 	/**
 	 * This is the copy constructor for the %FaceComponentsPosition class. @n
-	 * Initializes this instance of %FaceComponentsPosition with the specified parameter.
+	 * Initializes this instance of %FaceComponentsPosition with the specified parameter. @n
 	 * Copying of objects using this copy constructor is allowed.
 	 *
 	 * @since        2.0

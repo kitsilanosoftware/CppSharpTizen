@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -76,14 +75,7 @@ public:
 	/**
 	 * Initializes this instance of %Currency with the specified @c locale.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	 *                              For more information, see @ref CompCurrencyConstructPage "here".
-	 * @endif
 	 *
 	 * @return			An error code
 	 * @param[in]		locale						The specified @c locale to get the currency symbol
@@ -97,14 +89,7 @@ public:
 	 * Initializes this instance of %Currency with the specified currency code. @n
 	 * Currencies are enumerated as defined by ISO 4217. For example, if the locale is Korean (language) and Korea (country), the currency code is "KRW".
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-         *                              For more information, see @ref CompCurrencyConstructPage "here".
-	 * @endif
 	 *
 	 * @return			An error code
 	 * @param[in]		currencyCode				The specified currency code to get the currency symbol
@@ -114,18 +99,7 @@ public:
 	 */
 	result Construct(const Tizen::Base::String& currencyCode);
 	/**
-	 * @if OSPCOMPAT
-         * @page                    CompCurrencyConstructPage Compatibility for Construct()
-         * @section                   CompCurrencyConstructIssueSection Issues
-         * Implementation of this method in OSP compatible applications has the following issue: @n
-         * -# The method returns E_UNSUPPORTED_OPERATION if the argument is invalid.
-         *
-         * @section                 CompCurrencyConstructSolutionSection Resolutions
-         * This issue has been resolved in Tizen. @n
-	 * @par When working in Tizen:
-         * -# The method returns E_INVALID_ARG if the argument is invalid.
-	 * @endif
-         */
+	 */
 
 
 	/**

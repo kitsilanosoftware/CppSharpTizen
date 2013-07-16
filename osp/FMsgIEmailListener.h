@@ -33,7 +33,7 @@ namespace Tizen { namespace Messaging
 
 	/**
 	* @interface	IEmailListener
-	* @brief		This is the listener interface for receiving email sent status.
+	* @brief		This interface is the listener interface for receiving email sent status.
 	*
 	* @since		2.0
 	*

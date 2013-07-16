@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -61,9 +61,9 @@ enum WindowState
  */
 enum WindowZOrderGroup
 {
-	WINDOW_Z_ORDER_GROUP_HIGHEST,        /** The highest group for windows such as the call screen */
-	WINDOW_Z_ORDER_GROUP_HIGH,           /** The high qroup for windows such as the lock screen */
-	WINDOW_Z_ORDER_GROUP_NORMAL,         /** The default group of apps */
+	WINDOW_Z_ORDER_GROUP_HIGHEST,        /**< The highest group for windows such as the call screen */
+	WINDOW_Z_ORDER_GROUP_HIGH,           /**< The high group for windows such as the lock screen */
+	WINDOW_Z_ORDER_GROUP_NORMAL,         /**< The default group of apps */
 };
 
 /**
@@ -72,9 +72,9 @@ enum WindowZOrderGroup
  *
  * @since	2.0
  *
+ * The %Window class is an abstract base class.
  * The %Window is a top-level window such as Controls::Frame, Controls::MessageBox, and Controls::Popup.
  * The descendants of a %Window can exist outside of their applications's bounds.
- * The %Window class is an abstract base class.
  *
  */
 class _OSP_EXPORT_ Window
@@ -89,6 +89,7 @@ public:
 	 */
 	virtual ~Window(void) = 0;
 
+public:
 	/**
 	 * Adds the listener instance. @n
 	 * The added listener can listen to events on when they are fired.
@@ -129,6 +130,7 @@ public:
 
 	/**
 	 * Sets the owner of the window.
+	 * The visibility of a window has dependency on the visibility of the owner window.
 	 *
 	 * @since 2.0
 	 *
@@ -136,6 +138,32 @@ public:
 	 * @remarks       The ownership of @c pControl is not transferred to this instance. It is the developer's responsibility to deallocate @c pControl even after calling this method.
 	 */
 	void SetOwner(Tizen::Ui::Control *pControl);
+
+	/**
+	 * Gets the owner of the window.
+	 *
+	 * @since 2.1
+	 *
+	 * @return    The owner of the window
+	 * @see    SetOwner()
+	 */
+	Tizen::Ui::Control* GetOwner(void) const;
+
+	/**
+	 * Sets the Z order group of %Window.
+	 *
+	 * @since 2.0
+	 *
+	 * @privlevel      platform
+	 * @privilege      %http://tizen.org/privilege/uimanager
+	 *
+	 * @return         An error code
+	 * @param[in]      windowZOrderGroup    The Z order group of %Window
+	 * @exception      E_SUCCESS            The method is successful.
+	 * @exception      E_PRIVILEGE_DENIED   The application does not have the privilege to call this method.
+	 * @remarks        If this method is not explicitly called, the Z order group of %Window is set to #WINDOW_Z_ORDER_GROUP_NORMAL.
+	 */
+	result SetZOrderGroup(WindowZOrderGroup windowZOrderGroup);
 
 	/**
 	 * Gets the current state of the window.
@@ -157,7 +185,7 @@ public:
 
 protected:
 	/**
-	 * Initializes this instance of %Window.
+	 * Initializes this instance of %Window with the specified parameters.
 	 *
 	 * @since 2.0
 	 *
@@ -174,6 +202,25 @@ protected:
 	 * @see IsResizable()
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, bool resizable = true, bool movable = true);
+
+	/**
+	 * Initializes this instance of %Window with the specified parameters.
+	 *
+	 * @since 2.1
+	 *
+	 * @return      An error code
+	 * @param[in]   rect                                      The rectangle bounds to set
+	 * @param[in]   resizable                                Set to @c true to make the window resizable, @n
+	 *                                  else @c false
+	 * @param[in]   movable                                          Set to @c true to make the window movable, @n
+	 *                                  else @c false
+	 * @exception   E_SUCCESS           The method is successful.
+	 * @exception   E_INVALID_ARG            A specified input parameter is invalid.
+	 * @remarks     This method must be called from the derived classes's construct methods.
+	 * @remarks     If the @c resizable is @c false, IsResizable() returns @c false.
+	 * @see IsResizable()
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, bool resizable = true, bool movable = true);
 
 	/**
 	 * Initializes this instance of %Window with the specified layout and rectangular region.
@@ -198,6 +245,29 @@ protected:
 	 result Construct(const Tizen::Ui::Layout& layout, const Tizen::Graphics::Rectangle& rect, bool resizable = true, bool movable = true);
 
 	/**
+	 * Initializes this instance of %Window with a specified layout and rectangular region.
+	 *
+	 * @since 2.1
+	 *
+	 * @return                  An error code
+	 * @param[in]   layout                                   The layout for both the portrait and landscape mode
+	 * @param[in]   rect                                      The location and size of the window
+	 * @param[in]   resizable                                Set to @c true to make the window resizable, @n
+	 *                                  else @c false
+	 * @param[in]   movable                                          Set to @c true to make the window movable, @n
+	 *                                  else @c false
+	 * @exception   E_SUCCESS                The method is successful.
+	 * @exception   E_INVALID_ARG            A specified input parameter is invalid.
+	 * @remarks
+	 *			- This method must be called from the derived classes's construct methods.
+	 *			- If the @c resizable is @c false, IsResizable() returns @c false.
+	 * @see IsResizable()
+	 * @see Tizen::Ui::Layout
+	 * @see Tizen::Ui::Container::GetLayoutN()
+	 */
+	 result Construct(const Tizen::Ui::Layout& layout, const Tizen::Graphics::FloatRectangle& rect, bool resizable = true, bool movable = true);
+
+	/**
 	 * Initializes this instance of %Window with the specified layouts and rectangular region.
 	 *
 	 * @since 2.0
@@ -215,11 +285,37 @@ protected:
 	 * @remarks     If the @c resizable is @c false, IsResizable() returns @c false.
 	 * @see IsResizable()
 	 * @see Tizen::Ui::Layout
+	 * @see Tizen::Ui::Layout
 	 * @see Tizen::Ui::Container::GetLayoutN()
 	 * @see Tizen::Ui::Container::GetPortraitLayoutN()
 	 * @see Tizen::Ui::Container::GetLandscapeLayoutN()
 	 */
 	result Construct(const Tizen::Ui::Layout& portraitLayout, const Tizen::Ui::Layout& landscapeLayout, const Tizen::Graphics::Rectangle& rect, bool resizable = true, bool movable = true);
+
+	/**
+	 * Initializes this instance of %Window with the specified layouts and rectangular region.
+	 *
+	 * @since 2.1
+	 *
+	 * @return                  An error code
+	 * @param[in]   portraitLayout              The layout for the portrait mode
+	 * @param[in]   landscapeLayout           The layout for the landscape mode
+	 * @param[in]   rect                                      The location and size of the %Window
+	 * @param[in]   resizable                                Set to @c true to make the window resizable, @n
+	 *                                  else @c false
+	 * @param[in]   movable                                          Set to @c true to make the window movable, @n
+	 *                                  else @c false
+	 * @exception   E_SUCCESS                The method is successful.
+	 * @exception   E_INVALID_ARG            A specified input parameter is invalid.
+	 * @remarks     If the @c resizable is @c false, IsResizable() returns @c false.
+	 * @see IsResizable()
+	 * @see Tizen::Ui::Layout
+	 * @see Tizen::Ui::Layout
+	 * @see Tizen::Ui::Container::GetLayoutN()
+	 * @see Tizen::Ui::Container::GetPortraitLayoutN()
+	 * @see Tizen::Ui::Container::GetLandscapeLayoutN()
+	 */
+	result Construct(const Tizen::Ui::Layout& portraitLayout, const Tizen::Ui::Layout& landscapeLayout, const Tizen::Graphics::FloatRectangle& rect, bool resizable = true, bool movable = true);
 
 	/**
 	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.

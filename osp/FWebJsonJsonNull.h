@@ -20,7 +20,7 @@
  * @brief		This is the header file for the %JsonNull class.
  *
  * This header file contains the declarations of the %JsonNull class.
- * The class represents the JSON value of type @c null.
+ * This class represents the JSON value of type @c null.
  */
 #ifndef _FWEB_JSON_JSON_NULL_H_
 #define _FWEB_JSON_JSON_NULL_H_
@@ -46,9 +46,8 @@ namespace Tizen { namespace Web { namespace Json
  * @final	This class is not intended for extension.
  *
  * The %JsonNull class represents the JSON value of type @c null.
- * @n
+ * 
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/web/json_namespace.htm">JSON Guide</a>.
-
  *
  */
 class _OSP_EXPORT_ JsonNull
@@ -57,7 +56,7 @@ class _OSP_EXPORT_ JsonNull
 {
 public:
 	/**
-	 * This is  the default constructor for this class.
+	 * This is the default constructor for this class.
 	 *
 	 * @since	2.0
 	 */
@@ -86,10 +85,10 @@ public:
 	 *	@since		2.0
 	 *
 	 *	@return			             @c true if the value of the current instance equals the value of the specified instance, @n
-	                                 else @c false
-	 *	@param[in]	obj	             The object to compare with the current instance of %JsonNull
-	 *	@remarks                     The method returns @c false if the specified object is not %JsonNull.
-	 *  @see		Object::Equals()
+	 *                                else @c false
+	 *	@param[in]	obj	             The object to compare with the current instance of %JsonNull @n
+	 *									This method returns @c false if the specified object is not %JsonNull.
+	 *  @see		Tizen::Base::Object::Equals()
 	 */
 	virtual bool Equals(const Object& obj) const;
 
@@ -99,15 +98,14 @@ public:
 	 *	@since		2.0
 	 *
 	 *	@return		An integer value indicating the hash value of the current instance
-	 *	@remarks    The two equal instances should return the same hash value. For better performance,
-	 *				the used hash function must generate a random distribution for all inputs.
-	 *				@n
+	 *	@remarks    The two equal instances must return the same hash value. For better performance,
+	 *				the used hash function must generate a random distribution for all inputs. @n
 	 *				The default implementation of this method returns the address of the current instance.
 	 */
 	virtual int GetHashCode(void) const;
 
 	/**
-	 * Gets the type of the object (Always JSON_NULL)
+	 * Gets the type of the object (always @c JSON_NULL).
 	 *
 	 * @since		2.0
 	 *
@@ -120,7 +118,7 @@ public:
 	 *
 	 *	@since	2.0
 	 *
-	 *	@return	A string representing the value of the current instance.
+	 *	@return	A string representing the value of the current instance
 	 */
 	Tizen::Base::String ToString(void) const;
 
@@ -139,7 +137,7 @@ public:
 	 *	@since		2.0
 	 *
 	 *	@return			@c true if the values of the objects are equal, @n
-	                    else @c false
+	 *                   else @c false
 	 *	@param[in]	rhs		A %JsonNull instance to compare with the current instance
 	 */
 	bool operator ==(const JsonNull& rhs) const;
@@ -151,7 +149,7 @@ public:
 	 *	@since		2.0
 	 *
 	 *	@return			    @c true if the values of the objects are not equal, @n
-	                        else @c false
+	 *                       else @c false
 	 *	@param[in]	rhs		A %JsonNull instance to compare with the current instance
 	 */
 	bool operator !=(const JsonNull& rhs) const;

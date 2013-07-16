@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -59,7 +58,7 @@ enum DeviceType
 	DEVICE_TYPE_WIRED_HEADPHONE = WiredHeadphone,		/**< Wired headphone */
 	DEVICE_TYPE_STORAGE_CARD = StorageCard,			/**< Storage card */
 	DEVICE_TYPE_KEYBOARD = Keyboard,			/**< Hardware Built-in keyboard */
-	DEVICE_TYPE_HDMI,					/**< HDMI @if OSPCOMPAT @b Since @  2.0 @endif */
+	DEVICE_TYPE_HDMI,					/**< HDMI */
 };
 
 /**
@@ -87,14 +86,7 @@ public:
 	/**
 	 * Gets the specific device state.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with %Tizen API versions @b prior @b to @b 2.0. @n
-	 *			For more information, see @ref DeviceManagerGetStatePage "here".
-	 * @endif
 	 *
 	 * @param[in]	deviceType	The value from the enumerator DeviceType indicating the device
 	 * @param[out]	state		The device <a href="../org.tizen.native.appprogramming/html/guide/system/device_management.htm">state</a> of type Tizen::Base::String
@@ -108,27 +100,12 @@ public:
 	static result GetState(DeviceType deviceType, Tizen::Base::String& state);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page DeviceManagerGetStatePage Compatibility for GetState()
-	 * @section DeviceManagerGetStatePageIssueSection Issues
-	 * Implementation of this method in %Tizen API version prior to 2.0 has the following issue: @n
-	 * The GetState() method does not return E_DEVICE_UNAVAILABLE anymore. The E_DEVICE_UNAVAILABLE exception is removed.
-	 * @section DeviceManagerGetStatePageIssueSection Resolutions
-	 * The E_UNSUPPORTED_OPERATION exception is added since 2.0. So, use E_UNSUPPORTED_OPERATION instead of E_DEVICE_UNAVAILABLE.
-	 * @endif
 	 */
 
 	/**
 	 * Adds a device event listener.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with %Tizen API versions @b prior @b to @b 2.0. @n
-	 *			For more information, see @ref DeviceManagerAddDeviceEventListenerPage "here".
-	 * @endif
 	 *
 	 * @return	An error code
 	 * @param[in]	deviceType		The types of a device
@@ -142,14 +119,6 @@ public:
 	static result AddDeviceEventListener(DeviceType deviceType, IDeviceEventListener& listener);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page DeviceManagerAddDeviceEventListenerPage Compatibility for AddDeviceEventListener()
-	 * @section DeviceManagerAddDeviceEventListenerPageIssueSection Issues
-	 * Implementation of this method in %Tizen API version prior to 2.0 has the following issue: @n
-	 * This AddDeviceEventListener() method does not return E_DEVICE_UNAVAILABLE anymore. The E_DEVICE_UNAVAILABLE exception is removed.
-	 * @section DeviceManagerAddDeviceEventListenerPageIssueSection Resolutions
-	 * The E_UNSUPPORTED_OPERATION exception is added since 2.0. So, use E_UNSUPPORTED_OPERATION instead of E_DEVICE_UNAVAILABLE exception.
-	 * @endif
 	 */
 
 	/**
@@ -169,14 +138,6 @@ public:
 	static result RemoveDeviceEventListener(DeviceType deviceType, IDeviceEventListener& listener);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page DeviceManagerRemoveDeviceEventListenerPage Compatibility for RemoveDeviceEventListener()
-	 * @section DeviceManagerRemoveDeviceEventListenerPageIssueSection Issues
-	 * Implementation of this method in %Tizen API version prior to 2.0 has the following issue: @n
-	 * This RemoveDeviceEventListener() method does not return E_DEVICE_UNAVAILABLE anymore. The E_DEVICE_UNAVAILABLE exception is removed.
-	 * @section DeviceManagerRemoveDeviceEventListenerPageIssueSection Resolutions
-	 * The E_UNSUPPORTED_OPERATION exception is added since 2.0. So, use E_UNSUPPORTED_OPERATION instead of E_DEVICE_UNAVAILABLE exception.
-	 * @endif
 	 */
 
 	/**	 

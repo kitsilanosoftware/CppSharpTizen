@@ -40,7 +40,7 @@ class _HttpHeaderImpl;
  *
  * @since	2.0
  *
- *  The %HttpHeader class is a collection of header fields associated with an HTTP message. The header fields can be added, read, modified, and
+ * The %HttpHeader class is a collection of header fields associated with an HTTP message. The header fields can be added, read, modified, and
  *	removed. Also, each field can have multiple values. This class provides easy access to the header.
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/net/http_connectivity.htm">HTTP Guide</a>.

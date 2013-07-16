@@ -136,7 +136,8 @@ class _OSP_EXPORT_ HttpMultipartEntity
 
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the Construct() method must be called right after calling this constructor.
 	 *
 	 * @since       2.0
 	 *
@@ -231,7 +232,7 @@ public:
 	result AddStringPart(const Tizen::Base::String& name, const Tizen::Base::String& text);
 
 	/**
-	 * Adds the string part to the %HttpMultipartEntity.
+	 * Adds the string part to %HttpMultipartEntity.
 	 *
 	 * @since       2.0
 	 *
@@ -252,14 +253,7 @@ public:
 	/**
 	 * Adds the file part to %HttpMultipartEntity with the default MIME type.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since       2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 *					For more information, see @ref CompIoPathPage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	name				The name of the part
@@ -276,14 +270,7 @@ public:
 	/**
 	 * Adds the file part to %HttpMultipartEntity.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since       2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 *					For more information, see @ref CompIoPathPage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	name				The name of the part

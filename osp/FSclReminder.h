@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -27,6 +26,11 @@
 #include <FBaseObject.h>
 #include <FBaseDataType.h>
 #include <FSclTypes.h>
+
+namespace Tizen { namespace Base
+{
+class DateTime;
+}}
 
 namespace Tizen { namespace Social
 {
@@ -143,14 +147,7 @@ public:
 	/**
 	 * Sets the sound file for the reminder.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 *					For more information, see @ref CompIoPathPage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	filePath		The path and name of the new sound file, @n
@@ -169,7 +166,12 @@ public:
 	 * @param[in]	timeUnit			The reminder time unit
 	 * @param[in]	timeOffset			The reminder time offset
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_INVALID_ARG		The specified @c timeOffset is less than @c 0.
+	 * @exception	E_INVALID_ARG		Either of the following conditions has occurred: @n
+	 * 									- The specified @c timeUnit is @c REMINDER_TIME_UNIT_NONE.
+	 * 									- The specified @c timeOffset is less than @c 0.
+	 * @remarks		The time offset and absolute time are mutually exclusive. @n
+	 *				When the absolute time is set, the time unit is @c REMINDER_TIME_UNIT_NONE and offset is @c 0. @n
+	 *				When the time offset is set, the absolute time is reset.
 	 */
 	result SetTimeOffset(ReminderTimeUnit timeUnit, int timeOffset);
 
@@ -178,7 +180,8 @@ public:
 	 *
 	 * @since	2.0
 	 *
-	 * @return		The reminder time unit
+	 * @return		The reminder time unit, @n
+	 * 				else @c REMINDER_TIME_UNIT_NONE if the absolute time is set
 	 */
 	ReminderTimeUnit GetTimeUnit(void) const;
 
@@ -187,9 +190,50 @@ public:
 	 *
 	 * @since	2.0
 	 *
-	 * @return		The reminder time offset
+	 * @return		The reminder time offset, @n
+	 * 				else @c 0 if the absolute time is set
 	 */
 	int GetTimeOffset(void) const;
+
+	/**
+	 * Sets the reminder absolute time. @n
+	 * The time is Coordinated Universal Time (UTC).
+	 *
+	 * @since	2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	time				The reminder absolute time. @n Any value with a unit that is less than a second is ignored.
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		The specified @c time is out of the valid range. @n
+	 *									The valid range of the time can be referenced from Calendarbook::GetMaxDateTime() and Calendarbook::GetMinDateTime().
+	 * @remarks		The time offset and absolute time are mutually exclusive. @n
+	 *				When the absolute time is set, the time unit is @c REMINDER_TIME_UNIT_NONE and offset is @c 0. @n
+	 *				When the time offset is set, the absolute time is reset.
+	 */
+	result SetAbsoluteTime(const Tizen::Base::DateTime& time);
+
+	/**
+	 * Gets the reminder absolute time.
+	 *
+	 * @since	2.1
+	 *
+	 * @return		The reminder absolute time, @n
+	 * 				else the minimum value of Tizen::Base::DateTime if the absolute time is not set
+	 */
+	Tizen::Base::DateTime GetAbsoluteTime(void) const;
+
+	/**
+	 * Checks whether the absolute time is set.
+	 *
+	 * @since	2.1
+	 *
+	 * @return		@c true if the absolute time is set, @n
+	 *				else @c false
+	 * @remarks		The time offset and absolute time are mutually exclusive. @n
+	 *				When the absolute time is set, the time unit is @c REMINDER_TIME_UNIT_NONE and offset is @c 0. @n
+	 *				When the time offset is set, the absolute time is reset.
+	 */
+	bool IsAbsolute(void) const;
 
 	/**
 	 * Copying of objects using this copy assignment operator is allowed.

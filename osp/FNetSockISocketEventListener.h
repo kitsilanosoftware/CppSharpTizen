@@ -2,7 +2,7 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Flora License, Version 1.1 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -41,7 +41,7 @@ class Socket;
 * @since        2.0
 *
 *				The %ISocketEventListener interface specifies methods used for creating notifications about the different kinds of socket events.
-*				These events are only sent out when using the socket in a non-blocking mode. A listener is registered by calling the AddSocketListener()
+*				These events are only sent out when using the socket in a non-blocking mode. A listener is registered by calling the Socket::AddSocketListener()
 *				method. One of these methods is called when a socket event is generated.
 *
 * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/net/sockets.htm">Sockets Guide</a>.

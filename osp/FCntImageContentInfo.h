@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -76,11 +75,10 @@ class _OSP_EXPORT_ ImageContentInfo
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the Construct() method must be called right after calling this constructor.
 	 *
 	 * @since		2.0
-	 *
-	 * @remarks	After creating an instance of this class, the Construct() method must be called explicitly to initialize this instance.
 	 */
 	ImageContentInfo(void);
 
@@ -94,14 +92,7 @@ public:
 	/**
 	 * Initializes this instance of %ImageContentInfo with the specified parameter.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility This method has compatibility issues with OSP compatible applications. @n
-	 *                       For more information, see @ref CompImageContentInfoConstructPage "here".
-	 * @endif
 	 *
 	 * @return			An error code
 	 * @param[in]	pContentPath					The content path
@@ -111,30 +102,15 @@ public:
 	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 	 * @exception	E_IO								An I/O error has occurred.
 	 * @exception	E_SYSTEM						An internal error has occurred.
-	 * @remarks		The @c pContentPath should start with directory path returned by either Tizen::System::Environment::GetMediaPath() or Tizen::System::Environment::GetExternalStoragePath(). @n
-	 *                     If @c pContentPath is @c null, use ContentManager::CreateContent(const Tizen::Base::ByteBuffer&, const Tizen::Base::String&, const ContentInfo*)
-	 *                     or ContentManager::CreateContent(const Tizen::Base::String&, const Tizen::Base::String&, bool, const ContentInfo*). @n
-	 *                     If the content has coordinates as metadata, they are automatically set.
+	 * @remarks
+	 * 				- The @c pContentPath should start with directory path returned by either Tizen::System::Environment::GetMediaPath() or Tizen::System::Environment::GetExternalStoragePath(). @n
+	 *					If @c pContentPath is @c null, use ContentManager::CreateContent(const Tizen::Base::ByteBuffer&, const Tizen::Base::String&, const ContentInfo*) @n
+	 *					or ContentManager::CreateContent(const Tizen::Base::String&, const Tizen::Base::String&, bool, const ContentInfo*).
+	 *				- If the content has coordinates as metadata, they are automatically set.
 	 */
 	result Construct(const Tizen::Base::String* pContentPath);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page	CompImageContentInfoConstructPage Compatibility for the file path.
-	 * @section	CompImageContentInfoConstructPageIssueSection Issues
-	 *                 The content path argument of this method in OSP compatible applications has the following issues: @n
-	 *                 <UL><li> The content path should be a path that begins with an allowed path prefix.
-	 *                     For example, L"/Media/Images/flower.jpg", L"/Storagecard/Media/Images/flower.jpg". </UL></li>
-	 *
-	 * @section	CompImageContentInfoConstructPageSolutionSection Resolutions
-	 *                 This issue has been resolved in Tizen. @n
-	 *                 <UL><li> The content path can be a path without a specific allowed path prefix.
-	 *                 Application do not need to know the specific allowed path prefixes.
-	 *                 To get the directory path, use the following methods:  </UL></li>
-	 *                 - For accessing the media directory, use Tizen::System::Environment::GetMediaPath().
-	 *                 - For accessing the external storage, use Tizen::System::Environment::GetExternalStoragePath().
-	 *
-	 * @endif
 	 */
 
 	/**
@@ -160,9 +136,10 @@ public:
 	 * @exception		E_INVALID_ARG				The specified input parameter is invalid.
 	 * @exception		E_OUT_OF_MEMORY		The memory is insufficient.
 	 * @exception		E_IO								An I/O error has occurred.
-	 * @remarks		The content path must start with @c '/Media' or @c '/Storagecard/Media'. @n
-	 *                       The thumbnail path must start with @c '/Home', @c '/Media', or @c '/Storagecard/Media'. @n
-	 *                       The permitted format for a thumbnail image is Bitmap (bmp).
+	 * @remarks
+	 * 					- The content path must start with @c '/Media' or @c '/Storagecard/Media'.
+	 *					- The thumbnail path must start with @c '/Home', @c '/Media', or @c '/Storagecard/Media'. @n
+	 *						The permitted format for a thumbnail image is Bitmap (bmp).
 	 * @endif
 	 */
 	virtual result Construct(const Tizen::Base::String& contentPath, const Tizen::Base::String& thumbnailPath = L"", bool setGps = false);

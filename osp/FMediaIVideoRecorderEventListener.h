@@ -130,9 +130,10 @@ public:
 	* @since		2.0
 	*
 	*	@param[in]	r		A video recorder error reason of type ::RecorderErrorReason
-	*	@remarks			::RECORDER_ERROR_OUT_OF_STORAGE occurs when the recording size exceeds the maximum available capacity. @n
-	*							While recording to an external memory like MMC card, ::RECORDER_ERROR_STORAGE_FAILED can occur. @n
-	*							@c RECORDER_ERROR_DEVICE_FAILED occurs when the recording device has a problem like damaged shape or h/w failure.
+	*	@remarks			
+	*				- ::RECORDER_ERROR_OUT_OF_STORAGE occurs when the recording size exceeds the maximum available capacity.
+	*				- While recording to an external memory like MMC card, ::RECORDER_ERROR_STORAGE_FAILED can occur.
+	*				- ::RECORDER_ERROR_DEVICE_FAILED occurs when the recording device has a problem like damaged shape or h/w failure.
 	*/
 	virtual void OnVideoRecorderErrorOccurred(RecorderErrorReason r) = 0;
 

@@ -120,8 +120,8 @@ enum DtmfPreset
 	DTMF_PRESET_B,              /**< The DTMF tone for key B: 1633Hz, 770Hz */
 	DTMF_PRESET_C,              /**< The DTMF tone for key C: 1633Hz, 852Hz */
 	DTMF_PRESET_D,              /**< The DTMF tone for key D: 1633Hz, 941Hz */
-	DTMF_PRESET_P,              /**< The DTMF tone for key #: 1477Hz, 941Hz */
-	DTMF_PRESET_S,              /**< The DTMF tone for key *: 1209Hz, 941Hz */
+	DTMF_PRESET_P,              /**< The DTMF tone for key P(#): 1477Hz, 941Hz */
+	DTMF_PRESET_S,              /**< The DTMF tone for key S(*): 1209Hz, 941Hz */
 };
 
 }} // Tizen::Media

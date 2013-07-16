@@ -37,6 +37,10 @@ class TonePlayer;
  *
  * @since		2.0
  *
+ * @remarks			OnTonePlayerInterrupted() is called when the application is interrupted by another application and OnTonePlayerReleased() event can be called at the end of interruption.
+ *			OnTonePlayerAudioFocusChanged() is called when the application is interrupted by another application but the end of interruption is not notified.
+ *			So, the application should handle both events to work properly on various sound scenarios between applications.
+ *
  * The %ITonePlayerEventListener interface specifies the methods used to notify the status of the tone player.
  */
 
@@ -52,7 +56,7 @@ public:
 	virtual ~ITonePlayerEventListener(void) {}
 
 	/**
-	*	Called when the tone player reaches to the end of the tone or the end of the list of tones.
+	*	Called when the tone player reaches the end of the tone or the end of the list of tones.
 	*
 	*     @since		2.0
 	*
@@ -87,7 +91,7 @@ public:
 	*   @since		2.0
 	*
 	*	@param[in]	src									An instance of TonePlayer that fires the event
-	*	@param[in]	r									A cause of the error
+	*	@param[in]	r									The cause of the error
 	*	@exception	E_SYSTEM							A system error has occurred.
 	*/
 	virtual void OnTonePlayerErrorOccurred(Tizen::Media::TonePlayer& src, result r) = 0;
@@ -97,10 +101,12 @@ public:
 	*
 	*	@since		2.0
 	*
-	*	@param[in]		src		A pointer to the TonePlayer instance that fired the event
-	*	@remarks		After the audio focus is being changed, the playback is paused and the state of this instance is changed to TONE_PLAYER_STATE_PAUSED.
-	*	@remarks		An application can play again in the state of TONE_PLAYER_STATE_PAUSED but the interaction between device and user needs for playback again. Because there is a possibility of a race condition between applications which try to play without the interaction
-	*	@remarks		An application cannot start playback again even in the state of TONE_PLAYER_STATE_PAUSED due to other applications which have a higher priority.
+	*	@param[in]		src		An instance of TonePlayer that fires the event
+	*	@remarks		
+	*					- After the audio focus is being changed, the playback is paused and the state of this instance is changed to ::TONE_PLAYER_STATE_PAUSED.
+	*					- User interaction with the device is required for an application in @c TONE_PLAYER_STATE_PAUSED state to resume playing. 
+	*					This is to avoid the occurrence of a race condition among applications that try to play without user interaction.
+	*					- An application cannot start playback again even in the state of @c TONE_PLAYER_STATE_PAUSED due to other applications which have a higher priority.
 	*/
 	virtual void OnTonePlayerAudioFocusChanged(Tizen::Media::TonePlayer& src) {}
 

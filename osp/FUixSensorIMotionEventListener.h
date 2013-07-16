@@ -74,7 +74,7 @@ public:
 	 *
 	 * @since   2.0
 	 *
-	 * @see     Tizen::Uix::Sensor::MotionSnapType
+	 * @see     Tizen::Uix::Sensor::MotionType
 	 */
 	virtual void OnDoubleTapDetected(void) = 0;
 
@@ -89,6 +89,17 @@ public:
 	 */
 	virtual void OnShakeDetected(MotionState motionState) = 0;
 
+	/**
+		* Called when the move-to-ear event is detected. @n
+		* When a move-to-ear event occurs, and if its type is registered by an application, then the event is triggered.
+		*
+		* @since   2.1
+		*
+		* @see     Tizen::Uix::Sensor::MotionType
+		*/
+
+	    virtual void OnMoveToEarDetected(void) {}
+
 protected:
 
     //
@@ -102,12 +113,6 @@ protected:
     // and consistency-related issues in the application.
     //
     virtual void IMotionEventListener_Reserved2(void) {}
-
-    //
-    // This method is for internal use only. Using this method can cause behavioral, security-related,
-    // and consistency-related issues in the application.
-    //
-    virtual void IMotionEventListener_Reserved3(void) {}
 }; // IMotionEventListener
 
 } } } // Tizen::Uix::Sensor

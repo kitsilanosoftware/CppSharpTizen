@@ -295,20 +295,16 @@ public:
 	*
 	* @since		2.0
 	*
-	* @remarks	After creating an instance of this class, the Construct() method must be called explicitly to
-	*           initialize this instance.
-	* @see		Construct()
 	*/
 	Player(void);
 
 	/**
-	* This destructor overrides Tizen::Base::Object::~Object().
+	* This destructor overrides Tizen::Base::Object::~Object(). @n
 	* This method deallocates the resources. This method must be called in the same thread as the Construct()
 	* method.
 	*
 	* @since		2.0
 	*
-	* @see		Construct()
 	*/
 	virtual ~Player(void);
 
@@ -332,41 +328,39 @@ public:
 
 	/**
 	* Opens an audio or video file to be played. @n
-	* This method works synchronously, but when the second parameter, @c isAsync is set to @c true, this method works asynchronously.
+	* The %OpenFile() method works synchronously, but when the second parameter, @c isAsync is set to @c true, this method works asynchronously.
 	* Note that a method that works asynchronously must implement a listener.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since		2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
-	* @return			An error code
-	* @param[in]		mediaLocalPath			The local file path of the media source
-	* @param[in]		isAsync					Set to @c true for the asynchronous mode, @n
+	* @return		An error code
+	* @param[in]	mediaLocalPath			The local file path of the media source
+	* @param[in]	isAsync					Set to @c true for the asynchronous mode, @n
 	*											else @c false for the synchronous mode
-	* @exception		E_SUCCESS							The method is successful.
-	* @exception		E_INVALID_STATE			This instance is in an invalid state for this method.
-	* @exception		E_SYSTEM								A system error has occurred.
-	* @exception		E_FILE_NOT_FOUND			The specified file cannot be found or accessed.
-	* @exception   E_INVALID_DATA    	The specified file contains invalid data.
-	* @exception		E_OUT_OF_MEMORY			The memory is insufficient.
+	* @exception	E_SUCCESS							The method is successful.
+	* @exception	E_INVALID_STATE			This instance is in an invalid state for this method.
+	* @exception	E_SYSTEM								A system error has occurred.
+	* @exception	E_FILE_NOT_FOUND			The specified file cannot be found or accessed.
+	* @exception	E_INVALID_DATA    	The specified file contains invalid data.
+	* @exception	E_OUT_OF_MEMORY			The memory is insufficient.
+	* @exception	E_UNSUPPORTED_FORMAT				The given content format is not supported.
+	* @exception	E_RIGHT_EXPIRED					The content right has expired.
+	* @exception	E_RIGHT_NO_LICENSE				The content has no license.
+	* @exception	E_RIGHT_FUTURE_USE				The content right is for future use.
+	* @exception	E_DISPLAY_RIGHT_VIOLATED				The display right is not valid for the specific output device. @b Since: @b 2.1
 	* @see				Close()
 	*/
 	result OpenFile(const Tizen::Base::String& mediaLocalPath, bool isAsync = false);
 
 	/**
 	* Opens an audio or video streaming content to play through the specified URL. @n
-	* This method works synchronously, but when the second parameter @c isAsync is set to @c true,
+	* The %OpenUrl() method works synchronously, but when the second parameter @c isAsync is set to @c true,
 	* this method works asynchronously. Note that a method that works asynchronously must implement a listener.
 	*
 	* @since		2.0
 	*
 	* @return		An error code
-	* @param[in]	mediaUri				The URL of the media source
+	* @param[in]	mediaUri				The URI of the media source
 	* @param[in]	isAsync					Set to @c true for the asynchronous mode, @n
 	*										else @c false for the synchronous mode
 	* @exception	E_SUCCESS									The method is successful.
@@ -374,36 +368,48 @@ public:
 	* @exception	E_CONNECTION_FAILED			The network connection has failed.
 	* @exception	E_UNSUPPORTED_PROTOCOL	The protocol is not supported.
 	* @exception	E_SYSTEM										A system error has occurred.
-	* @remarks	This method is not thread-safe when @c isAsync is @c false.
-	* @remarks	Input URL should be encoded if there are non-alphanumeric characters in URL.
-	* @see			Close()
+	* @exception	E_FILE_NOT_FOUND					The remote file cannot be found or accessed.
+	* @exception	E_UNSUPPORTED_FORMAT				The given content format is not supported.
+	* @exception	E_RIGHT_EXPIRED					The content right has expired.
+	* @exception	E_RIGHT_NO_LICENSE				The content has no license.
+	* @exception	E_RIGHT_FUTURE_USE				The content right is for future use.
+	* @exception	E_DISPLAY_RIGHT_VIOLATED				The display right is not valid for the specific output device. @b Since: @b 2.1
+	* @remarks	
+	*			- This method is not thread-safe when @c isAsync is @c false.
+	* 			- Input URL should be encoded if there are non-alphanumeric characters in URL.
+	* @see		Close()
 	*/
 	result OpenUrl(const Tizen::Base::Utility::Uri& mediaUri, bool isAsync = false);
 
 	/**
 	* Opens an audio or video content to play on the memory. @n
-	* This method works synchronously, but when the second parameter @c isAsync is set to @c true, this method works asynchronously.
+	* The %OpenBuffer() method works synchronously, but when the second parameter @c isAsync is set to @c true, this method works asynchronously.
 	* Note that a method that works asynchronously must implement a listener.
 	*
 	* @since		2.0
 	*
-	* @return			An error code
-	* @param[in]		mediaBuffer				A pointer to the media source in the external memory
-	* @param[in]		isAsync					Set to @c true for asynchronous mode, @n
+	* @return		An error code
+	* @param[in]	mediaBuffer				A pointer to the media source in the external memory
+	* @param[in]	isAsync					Set to @c true for asynchronous mode, @n
 	*											else @c false for synchronous mode
-	* @exception		E_SUCCESS								The method is successful.
-	* @exception		E_INVALID_STATE	    	This instance is in an invalid state for this method.
-	* @exception		E_SYSTEM									A system error has occurred.
-	* @exception		E_OBJ_NOT_FOUND				The specified media buffer cannot be found.
-	* @exception   E_INVALID_DATA  		   The specified buffer contains invalid data.
-	* @exception		E_OUT_OF_MEMORY				The memory is insufficient.
+	* @exception	E_SUCCESS								The method is successful.
+	* @exception	E_INVALID_STATE	    	This instance is in an invalid state for this method.
+	* @exception	E_SYSTEM									A system error has occurred.
+	* @exception	E_OBJ_NOT_FOUND				The specified media buffer cannot be found.
+	* @exception	E_INVALID_DATA  		   The specified buffer contains invalid data.
+	* @exception	E_OUT_OF_MEMORY				The memory is insufficient.
+	* @exception	E_UNSUPPORTED_FORMAT				The given content format is not supported.
+	* @exception	E_RIGHT_EXPIRED					The content right has expired.
+	* @exception	E_RIGHT_NO_LICENSE				The content has no license.
+	* @exception	E_RIGHT_FUTURE_USE				The content right is for future use.
+	* @exception	E_DISPLAY_RIGHT_VIOLATED				The display right is not valid for the specific output device. @b Since: @b 2.1
 	* @see				Close()
 	*/
 	result OpenBuffer(const Tizen::Base::ByteBuffer& mediaBuffer, bool isAsync = false);
 
 	/**
 	* Closes the audio or video content. @n
-	* This method works synchronously.
+	* The %Close() method works synchronously.
 	*
 	* @since		2.0
 	*
@@ -411,7 +417,9 @@ public:
 	* @exception	E_SUCCESS							The method is successful.
 	* @exception	E_INVALID_STATE   	This instance is in an invalid state for this method.
 	* @exception	E_SYSTEM								A system error has occurred.
-	* @see			OpenFile(), OpenBuffer(), OpenUrl()
+	* @see			OpenFile()
+	* @see			OpenBuffer()
+	* @see			OpenUrl()
 	*/
 	result Close(void);
 
@@ -425,22 +433,25 @@ public:
 	* @return		An error code
 	* @exception	E_SUCCESS								The method is successful.
 	* @exception	E_INVALID_STATE				This instance is in an invalid state for this method.
-	* @exception	E_DEVICE_BUSY						The device cannot be approached because of other applications which have a higher priority.
+	* @exception	E_DEVICE_BUSY		The device cannot be approached because of other operations.
 	* @exception	E_UNSUPPORTED_FORMAT	The specified format is not supported.
 	* @exception	E_UNSUPPORTED_CODEC		The specified codec is not supported.
 	* @exception	E_SYSTEM									A system error has occurred. @n
 	*									If playback has been paused, it resumes from the last position. @n
-	*									E_SYSTEM is returned when unsupported format or codec media data are received during streaming. @n
-	*                                    E_SYSTEM is returned when the unsupport resolution is set for rendering .
+	*									@c E_SYSTEM is returned when unsupported format or codec media data are received during streaming. @n
+	*                                    @c E_SYSTEM is returned when the unsupport resolution is set for rendering .
 	* @remarks		When this method is called after the %Player instance is created with the Construct() method that accepts the IPlayVideoEventListener
-	* interface as a parameter, it delivers every video frame of a video content continuously until the state is changed to PLAYER_STATE_ENDOFCLIP,
+	* interface as a parameter, it delivers every video frame of a video content continuously until the state is changed to ::PLAYER_STATE_ENDOFCLIP,
 	* or the Stop() or Pause() method is called .
-	* @see			Stop(), Pause(), IPlayerVideoEventListener
+	* @see			Stop()
+	* @see			Pause()
+	* @see			IPlayerVideoEventListener
 	*/
 	result Play(void);
 
 	/**
-	* Stops the playback of the audio or video content. This method works synchronously.
+	* Stops the playback of the audio or video content. @n
+	* The %Stop() method works synchronously.
 	*
 	* @since		2.0
 	*
@@ -449,13 +460,14 @@ public:
 	* @exception	E_INVALID_STATE    	This instance is in an invalid state for this method.
 	* @exception	E_SYSTEM								A system error has occurred.
 	* @remarks		In the Real Time Streaming Protocol (RTSP), this method stops the media stream and requests the termination of the network session.
-	* @see			Play(), Pause()
+	* @see			Play()
+	* @see			Pause()
 	*/
 	result Stop(void);
 
 	/**
 	* Pauses the playback of the audio or video content. @n
-	* To resume the playback, the Play() method must be called. This method works synchronously.
+	* To resume the playback, the Play() method must be called. The %Pause() method works synchronously.
 	*
 	* @since		2.0
 	*
@@ -463,7 +475,8 @@ public:
 	* @exception	E_SUCCESS							The method is successful.
 	* @exception	E_INVALID_STATE    	This instance is in an invalid state for this method.
 	* @exception	E_SYSTEM								A system error has occurred.
-	* @see			Play(), Stop()
+	* @see			Play()
+	* @see			Stop()
 	*/
 	result Pause(void);
 
@@ -473,7 +486,11 @@ public:
 	* @since		2.0
 	*
 	* @return		The current state of the player
-	* @see			Close(), Play(), Stop(), Pause(), PlayerState
+	* @see			Close()
+	* @see			Play()
+	* @see			Stop()
+	* @see			Pause()
+	* @see			PlayerState
 	*/
 	PlayerState GetState(void) const;
 
@@ -481,23 +498,25 @@ public:
 	* Gets the time for the current playback position of the audio or video content. @n
 	* Accuracy of the retrieved time is determined by the subsystem (for example, the time slice of the OS scheduler,
 	* time resolution of the audio or video codec, or implementation of the audio or video player).
-	* Note that it must not be assumed that this method can reach the exact position mentioned by GetDuration().
+	* Note that it must not be assumed that the %GetPosition() method can reach the exact position mentioned by GetDuration().
 	*
 	* @since		2.0
 	*
 	* @return		The current position of the player in milliseconds
 	* @exception	E_SUCCESS							The method is successful.
 	* @exception	E_INVALID_STATE			This instance is in an invalid state for this method.
-	* @remarks		The specific error code can be accessed using the GetLastResult() method.
+	* @remarks
+	* 				- The specific error code can be accessed using the GetLastResult() method.
+	* 				- This method returns @c -1 when the method fails.
 	* @see			SeekTo()
 	*/
 	long GetPosition(void) const;
 
 	/**
 	* Seeks the current playback position of the audio or video content to the specified time. @n
-	* This method works asynchronously. @n
+	* The %SeekTo() method works asynchronously. @n
 	* Note that a method that works asynchronously must implement a listener. @n
-	* This method only works for the PLAYER_STATE_PLAYING, PLAYER_STATE_PAUSED and PLAYER_STATE_OPENED(local file/buffer playback only) states of the player. @n
+	* This method only works for the ::PLAYER_STATE_PLAYING, ::PLAYER_STATE_PAUSED, and ::PLAYER_STATE_OPENED states of the player. @n
 	* This method changes the playback position as well as the time value. @n
 	* In video, it may not change position accurately.
 	*
@@ -508,8 +527,8 @@ public:
 	*									@c 0 indicates the starting position.
 	* @exception	E_SUCCESS							The method is successful.
 	* @exception	E_INVALID_STATE    	This instance is in an invalid state for this method. @n
-	*					                While playing live streaming, this operation returns E_INVALID_STATE. @n
-	*							        This method returns E_INVALID_STATE, if this method is called again before
+	*					                While playing live streaming, this operation returns @c E_INVALID_STATE. @n
+	*							        This method returns @c E_INVALID_STATE, if this method is called again before
 	*									IPlayerEventListener::OnPlayerSeekCompleted() is called.
 	* @exception	E_OUT_OF_RANGE				The specified time is out of range.
 	* @exception	E_INVALID_DATA     	The media data is inappropriate for seeking.
@@ -517,7 +536,8 @@ public:
 	* @remarks		For video, this method delivers one video frame on the specified position through the video
 	*				event. Before calling this method, the %Player instance must be created with the Construct()
 	*				method has a parameter of the IPlayVideoEventListener interface .
-	* @see			GetPosition(),  IPlayerVideoEventListener
+	* @see			GetPosition()
+	* @see			IPlayerVideoEventListener
 	*/
 	result SeekTo(long msTime);
 
@@ -529,9 +549,11 @@ public:
 	* @return			The running time of the media source in milliseconds
 	* @exception		E_SUCCESS						The method is successful.
 	* @exception		E_INVALID_STATE		This instance is in an invalid state for this method.
-	* @remarks		The specific error code can be accessed using the GetLastResult() method. @n
-	*				While playing live streaming, this operation returns @c 0.
-	* @remarks           This method is valid in the playing and paused state of this instance.
+	* @remarks		
+	*				- The specific error code can be accessed using the GetLastResult() method.
+	*				- While playing live streaming, this operation returns @c 0.
+	*				- This method is valid in the ::PLAYER_STATE_OPENED, ::PLAYER_STATE_PLAYING, ::PLAYER_STATE_PAUSED, and ::PLAYER_STATE_STOPPED states of this instance.
+	*				- This method returns @c -1 when the method fails.
 	* @see			GetPosition()
 	*/
 	long GetDuration(void) const;
@@ -545,9 +567,11 @@ public:
 	* @param[in]	volume			The new value of volume @n
 	*								The range of this parameter is @c 0 to @c 100 and it is proportional to the current media sound volume level in setting.
 	* @exception	E_SUCCESS					The method is successful.
-	* @exception	E_OUT_OF_RANGE		The specified volume is out of range.
+	* @exception	E_OUT_OF_RANGE		The specified @c volume is out of range.
 	* @exception	E_INVALID_STATE 	This instance is in an invalid state for this method.
-	* @see			GetVolume(), IsMuted(), SetMute()
+	* @see			GetVolume()
+	* @see			IsMuted()
+	* @see			SetMute()
 	*/
 	result SetVolume(int volume);
 
@@ -558,7 +582,9 @@ public:
 	*
 	* @return		The current volume level @n
 	*				The range of this return value is @c 0 to @c 100.
-	* @see			SetVolume(), IsMuted(), SetMute()
+	* @see			SetVolume()
+	* @see			IsMuted()
+	* @see			SetMute()
 	*/
 	int GetVolume(void) const;
 
@@ -572,7 +598,9 @@ public:
 	*									else @c false
 	* @exception	E_SUCCESS						The method is successful.
 	* @exception	E_INVALID_STATE		This instance is in an invalid state for this method.
-	* @see          GetVolume(), SetVolume(), IsMuted()
+	* @see			GetVolume()
+	* @see			SetVolume()
+	* @see			IsMuted()
 	*/
 	result SetMute(bool mute);
 
@@ -583,13 +611,15 @@ public:
 	*
 	* @return		@c true if the audio or video player is muted, @n
 	*				else @c false
-	* @see          GetVolume(), SetVolume(), SetMute()
+	* @see			GetVolume()
+	* @see			SetVolume()
+	* @see			SetMute()
 	*/
 	bool IsMuted(void) const;
 
 	/**
 	* Sets an audio or video player to be in a loop. @n
-	* Set the looping to @c true to continuously play the audio or video content.
+	* Sets the looping to @c true to continuously play the audio or video content.
 	*
 	* @since		2.0
 	*
@@ -598,7 +628,7 @@ public:
 	*									else @c false
 	* @exception	E_SUCCESS						The method is successful.
 	* @exception	E_INVALID_STATE		This instance is in an invalid state for this method.
-	* @remarks		In streaming, this method throws E_INVALID_STATE for the cost of network.
+	* @remarks		In streaming, this method throws @c E_INVALID_STATE for the cost of network.
 	* @see          IsLooping()
 	*/
 	result SetLooping(bool looping);
@@ -624,10 +654,10 @@ public:
 	* @exception    E_INVALID_STATE     This instance is in an invalid state for this method.
 	* @exception    E_INVALID_CONTENT   The content is inappropriate to compose media stream information.
 	* @exception    E_SYSTEM            A system error has occurred.
-	* @remarks       This method returns a stream information of the media, which is currently being played.
-	*               The specific error code can be accessed using the GetLastResult() method.
-	*               This method must be called after Play() to get the correct data.
-	* @see          MediaStreamInfo
+	* @remarks       
+	*			- This method returns a stream information of the media, which is currently being opened.
+	*			- The specific error code can be accessed using the GetLastResult() method.
+	*			- This method is valid in the ::PLAYER_STATE_OPENED, ::PLAYER_STATE_PLAYING, ::PLAYER_STATE_PAUSED, and ::PLAYER_STATE_STOPPED states of this instance.
 	*/
 	MediaStreamInfo* GetCurrentMediaStreamInfoN(void) const;
 
@@ -643,8 +673,10 @@ public:
 	* @exception	E_INVALID_ARG				The specified input parameter is invalid.
 	* @exception	E_SYSTEM							A system error has occurred. @n
 	*                                   E_SYSTEM is returned when the unsupport resolution is set for rendering .
-	* @remarks      This method works for the PLAYER_STATE_OPENED, PLAYER_STATE_ENDOFCLIP, PLAYER_STATE_STOPPED, PLAYER_STATE_PAUSED, and PLAYER_STATE_PLAYING states of the player.
-	* @remarks		This method throws E_INVALID_STATE after the player instance is constructed with IPlayerVideoEventListener.
+	* @remarks      
+	*				- This method works for the ::PLAYER_STATE_OPENED, ::PLAYER_STATE_ENDOFCLIP, ::PLAYER_STATE_STOPPED, 
+	*				::PLAYER_STATE_PAUSED, and ::PLAYER_STATE_PLAYING states of the player.
+	* 				- This method throws @c E_INVALID_STATE after the player instance is constructed with IPlayerVideoEventListener.
 	*/
 	result SetRenderingBuffer(const Tizen::Graphics::BufferInfo& bufferInfo);
 
@@ -659,102 +691,105 @@ public:
 	* @exception    E_SUCCESS                   The method is successful.
 	* @exception    E_SYSTEM                    A system error has occurred.
 	* @exception    E_RESOURCE_UNAVAILABLE      The player's resources are unavailable.
-	* @exception    E_OUT_OF_MEMORY             The memory is insufficient. 
+	* @exception    E_OUT_OF_MEMORY             The memory is insufficient.
 	* @remarks      This method constructs the %Player instance to render the video content into the buffer of the video event listener.
-	* @see          IPlayerVideoEventListener
 	*/
 	result Construct(IPlayerEventListener& listener, IPlayerVideoEventListener& videoListener);
 
 	/**
 	* Captures the video frame. @n
-	* This method delivers one video frame of a video content by using the IPlayVideoEventListener interface only once in the %Player instance. @n
-	* This method works only for the PLAYER_STATE_OPENED state of the %Player instance, and the state of the %Player instance is changed to PLAYER_STATE_PAUSED from PLAYER_STATE_OPENED after calling this method.
+	* The %CaptureVideo() method delivers one video frame of a video content by using the IPlayVideoEventListener interface only once in the %Player instance. @n
+	* This method works only for the ::PLAYER_STATE_OPENED state of the %Player instance, and the state of the %Player instance is changed to 
+	* ::PLAYER_STATE_PAUSED from @c PLAYER_STATE_OPENED after calling this method.
 	*
 	* @since		2.0
 	*
 	* @return       An error code
 	* @exception    E_SUCCESS									The method is successful.
 	* @exception    E_INVALID_STATE					This instance is in an invalid state for this method. @n
-	*										This method throws E_INVALID_STATE if the %Player instance is
+	*										This method throws @c E_INVALID_STATE if the %Player instance is
 	*										constructed without IPlayerVideoEventListener.
 	* @exception    E_INVALID_OPERATION		This method is invalid for the current media content.
 	* @exception    E_SYSTEM									A system error has occurred.
 	* @remarks      In the Real Time Streaming Protocol (RTSP), this method does not work properly.
-	* @see          IPlayerVideoEventListener
 	*/
 	result CaptureVideo(void);
 
 	/**
-	* Sets audio stream type
+	* Sets the audio stream type.
 	*
 	* @since		2.0
 	*
 	* @return       	  An error code
 	* @param[in]    type                    			An audio stream type
 	* @exception    E_SUCCESS					The method is successful.
-	* @exception    E_INVALID_ARG				A specified input parameter is invalid.
+	* @exception    E_INVALID_ARG				The specified input parameter is invalid.
+	* @exception    E_INVALID_STATE					This instance is in an invalid state for this method.
+	* @remarks      
+	*			- This method works for the ::PLAYER_STATE_INITIALIZED or ::PLAYER_STATE_CLOSED states of the %Player instance.
+	*			- In other states of %Player instance, this method returns @c E_SUCCESS, but the audio stream type is not changed properly.
 	*/
 	result SetAudioStreamType(AudioStreamType type);
 
 	/**
-	* Opens an audio or video streaming content to play through the specified URL with the HTTP header.@n
-	* This method works asynchronously, thus application can call further APIs of %Player after IPlayerEventListener::OnPlayerOpened() is called.
+	* Opens an audio or video streaming content to play through the specified URL with the HTTP header. @n
+	* The %OpenUrlAsync() method works asynchronously, thus application can call further methods of %Player after IPlayerEventListener::OnPlayerOpened() is called.
 	*
 	* @since		2.0
 	*
 	* @return								An error code
 	* @param[in]	url						The URL of the media source
 	* @param[in]	pHeader					The list of field and value pairs that will be added in HTTP request header. @n
-	The types of field and value are described in the Programming Guide. If @c null, then default values will be set
+	The types of field and value are described in the Programming Guide. If @c null, then default values will be set.
 	*
 	* @exception	E_SUCCESS				The method is successful.
 	* @exception	E_INVALID_STATE			This instance is in an invalid state for this method.
 	* @exception	E_UNSUPPORTED_PROTOCOL	The protocol is not supported.
-	* @exception	E_INVALID_ARG			The specified input parameter is invalid.
+	* @exception	E_INVALID_ARG			A specified input parameter is invalid.
 	* @exception	E_OUT_OF_MEMORY			The memory is insufficient.
 	* @remarks	See Programming Guide for the detail information of supported HTTP header fields.
-	* @remarks	Input URL should be encoded if there are non-alphanumeric characters in URL.
 	* @see			Close()
 	*/
 	result OpenUrlAsync(const Tizen::Base::String& url, const Tizen::Base::Collection::IMap* pHeader = null);
 
 	/**
 	* Opens an audio or video streaming content to play through the specified HTTP URL with the HTTP header for the progressive download playback. @n
-	* This method works asynchronously, thus application can call further APIs of %Player after IPlayerEventListener::OnPlayerOpened() is called.
-	* The content information of the media source should be located at the beginning of the file for the progressive download playback. Otherwise, it does not guarantee to play and download media stream properly.
+	* The %OpenUrlAsync() method works asynchronously, thus application can call further methods of %Player after IPlayerEventListener::OnPlayerOpened() is called.
+	* The content information of the media source must be located at the beginning of the file for the progressive download playback. Otherwise, it does not guarantee to play and download media stream properly.
 	*
 	* @since		2.0
 	*
 	* @return								An error code
 	* @param[in]	url						The URL of the media source
-	* @param[in]	filePath				The file path on local file system that the downloaded content will be saved.
+	* @param[in]	filePath				The file path on local file system where the downloaded content will be saved
 	* @param[in]	listener				The download listener
-	* @param[in]	pHeader					The list of field and value pairs that will be added in HTTP request header. @n
-	The types of field and value are described in the Programming Guide.
-											If @c null, then default values will be set..
+	* @param[in]	pHeader					The list of field and value pairs that will be added in HTTP request header @n
+	* The types of field and value are described in the Programming Guide.
+	*										If @c null, then default values will be set.
 	* @exception	E_SUCCESS				The method is successful.
 	* @exception	E_INVALID_STATE			This instance is in an invalid state for this method.
 	* @exception	E_UNSUPPORTED_PROTOCOL	The protocol is not supported.
-	* @exception	E_INVALID_ARG			The specified input parameter is invalid.
+	* @exception	E_INVALID_ARG			A specified input parameter is invalid.
 	* @exception	E_OUT_OF_MEMORY			The memory is insufficient.
-	* @remarks	Download will start when Play() is called.
-	* @remarks	If the specified file name already exists, then the old file will be overwritten with the new one.
-	* @remarks	See Programming Guide for the detail information of supported HTTP header fields.
-	* @remarks	Input URL should be encoded if there are non-alphanumeric characters in URL.
-	* @see			Close(), Play()
+	* @remarks	
+	*			- The download will start when Play() is called.
+	* 			- If the specified file name already exists, then the old file will be overwritten with the new one.
+	* 			- See Programming Guide for the detail information of supported HTTP header fields.
+	* @see			Close()
 	*/
 	result OpenUrlAsync(const Tizen::Base::String& url, const Tizen::Base::String& filePath, IPlayerProgressiveDownloadListener& listener, const Tizen::Base::Collection::IMap* pHeader = null);
 
 
 	/**
-	* Sets the interval of calling the progress event
+	* Sets the interval of calling the progress event.
 	*
 	* @since		2.0
 	*
-	* @param[in]	percent					The progress period interval as a percentage value.
-	* @remark		If the server does not provide the information about the content size, progress event will occur randomly.
-	* @remarks		If the percentage value is not set, @c 10 will be set as a default value.
-	* @see			OnPlayerProgressiveDownloadInProgress(), IPlayerProgressiveDownloadListener
+	* @param[in]	percent					The progress period interval as a percentage value
+	* @remarks
+	*				- If the server does not provide the information about the content size, progress event will occur randomly.
+	* 				- If the percentage value is not set, @c 10 will be set as a default value.
+	* @see			IPlayerProgressiveDownloadListener::OnPlayerProgressiveDownloadInProgress()
 	*/
 	void SetProgressiveDownloadIntervalByPercent(int percent);
 
@@ -769,9 +804,28 @@ public:
 	* @exception    E_SUCCESS                The method is successful.
 	* @exception    E_INVALID_ARG      A specified input parameter is invalid.
 	* @exception    E_RESOURCE_UNAVAILABLE  The player's resources are unavailable.
+	* @exception    E_OUT_OF_MEMORY		The memory is insufficient.
 	* @remarks      This method constructs the %Player instance to render the video content into the video texture area.
 	*/
 	result Construct(IPlayerEventListener& listener, Tizen::Graphics::Opengl::VideoTexture& videoTexture);
+
+	/**
+	* Gets the current downloading progress of HTTP streaming playback in percent.
+	*
+	* @since          2.1
+	*
+	* @return        The current position in percent
+	* @exception    E_SUCCESS                                         The method is successful.
+	* @exception    E_INVALID_OPERATION                          The operation cannot be processed further as the media is not in the HTTP streaming playback format.
+	* @exception    E_INVALID_STATE                                 This instance is in an invalid state for this method.
+	* @remarks
+	* 						- This method works only for the ::PLAYER_STATE_PLAYING or ::PLAYER_STATE_PAUSED states of the %Player instance.
+	* 						- This method is not supported in HTTP Live Streaming.
+	* 						- The specific error code can be accessed using GetLastResult() method.
+	* 						- This method returns @c -1 when the method fails.
+	*/
+	int GetHttpStreamingDownloadProgress(void) const;
+
 private:
 	/**
 	 * The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.

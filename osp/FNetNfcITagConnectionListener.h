@@ -41,8 +41,8 @@ namespace Tizen { namespace Net { namespace Nfc
  *
  * @since        2.0
  *
- * The %ITagConnectionListener interface provides methods that are used for creating notifications for the result of the actions of the 
- * TagConnection, such as sending a command.
+ * The %ITagConnectionListener interface provides methods that are used for creating notifications for the result of
+ * the actions of the TagConnection, such as sending a command.
  *
  * For more information on the class features, see
  * <a href="../org.tizen.native.appprogramming/html/guide/net/nfc.htm">NFC Guide</a>.
@@ -64,7 +64,7 @@ public:
 	 *
 	 * @since       2.0
 	 *
-	 * @param[in]   pResponse           The response of the command as the ByteBuffer object, @n
+	 * @param[in]   pResponse           The response of the command as the Tizen::Base::ByteBuffer object, @n
 	 *                                  else @c null if the method is not successful
 	 * @param[in]   r                   An error code
 	 * @exception   E_SUCCESS           The method is successful.
@@ -72,14 +72,15 @@ public:
 	 *                                  The target tag is locked or protected for executing the command.
 	 * @exception   E_NOT_RESPONDING    The target tag is not responding.
 	 * @exception   E_SYSTEM            A system error has occurred.
-	 * @see         TagConnection::SendCommand()
 	 * @remarks     The input response (@c pResponse) must be deleted by the application to prevent memory leak.
+	 * @see         TagConnection::SendCommand()	 
 	 */
 	virtual void OnNfcResponseReceivedN(Tizen::Base::ByteBuffer* pResponse, result r) = 0;
 
 protected:
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
 	// This method is reserved and may change its name at any time without prior notice.
 	//
@@ -88,7 +89,8 @@ protected:
 	virtual void ITagConnectionListener_Reserved1(void) {}
 
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
 	// This method is reserved and may change its name at any time without prior notice.
 	//
@@ -97,7 +99,8 @@ protected:
 	virtual void ITagConnectionListener_Reserved2(void) {}
 
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
 	// This method is reserved and may change its name at any time without prior notice.
 	//

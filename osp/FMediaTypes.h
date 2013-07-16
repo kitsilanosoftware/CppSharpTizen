@@ -188,6 +188,22 @@ enum H263ProfileType
 	H263_PROFILE_VERSION_2 = 0x03,          /**< The version 2 interactive and streaming wireless profile */
 };
 
+/**
+ *  @enum VideoPlaneType
+ *
+ *  Defines the types of the video plane.
+ *
+ *  @since	2.1
+ */
+enum VideoPlaneType
+{
+	VIDEO_PLANE_TYPE_NONE = 0,		/**< The no video plane */
+	VIDEO_PLANE_TYPE_Y,				/**< The Y video plane */
+	VIDEO_PLANE_TYPE_U,				/**< The U video plane */
+	VIDEO_PLANE_TYPE_V,				/**< The V video plane */
+	VIDEO_PLANE_TYPE_UV,			/**< The UV video plane */
+	VIDEO_PLANE_TYPE_YUV,			/**< The YUV video plane */
+};
 
 };
 };   // Tizen::Media

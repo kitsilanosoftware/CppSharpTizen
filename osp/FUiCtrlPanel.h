@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -28,7 +28,7 @@
 #include <FBaseTypes.h>
 #include <FBaseString.h>
 #include <FUiContainer.h>
-#include <FUiCtrlGroupTypes.h>
+#include <FUiCtrlControlsTypes.h>
 
 namespace Tizen {namespace Base
 {
@@ -101,7 +101,7 @@ PanelSample::OnInitializing(void)
 	__pPanel->SetBackgroundColor(Color(0x50, 0xFF, 0x38));
 
 	//Adds the panel to the form
-	AddControl(*__pPanel);
+	AddControl(__pPanel);
 
 	return r;
 }
@@ -113,7 +113,8 @@ class _OSP_EXPORT_ Panel
 // Lifecycle
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 *  For full construction, the %Construct() method must be called right after calling this constructor.
 	 *
 	 * @since	2.0
 	 *
@@ -140,10 +141,25 @@ public:
 	 * @exception   E_INVALID_ARG   A specified input parameter is invalid.
 	 * @exception	E_SYSTEM		A system error has occurred.
 	 * @remarks     The specified group style determines the border look of the %Panel control.
-	 * @see         Tizen::Ui::Container, Tizen::Ui::GroupStyle
+	 * @see         Tizen::Ui::Container
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, GroupStyle groupStyle = GROUP_STYLE_NONE);
 
+	/**
+	 * Initializes this instance of %Panel with the specified parameters.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	rect			The location and size of the %Panel control as an instance of FloatRectangle
+	 * @param[in]	groupStyle		The group style of the %Panel control
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception   E_INVALID_ARG   A specified input parameter is invalid.
+	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @remarks     The specified group style determines the border look of the %Panel control.
+	 * @see         Tizen::Ui::Container
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, GroupStyle groupStyle = GROUP_STYLE_NONE);
 
 	/**
 	 * Initializes this instance of %Panel and child controls with the specified resource ID @n
@@ -160,6 +176,8 @@ public:
 	 * @exception  E_FILE_NOT_FOUND        The specified file cannot be found.
 	 * @exception  E_INVALID_FORMAT        The specified XML format is invalid.
 	 * @exception  E_OPERATION_FAILED      The operation has failed.
+	 * @remarks	If SetBounds(), SetSize(), SetPosition() methods are called before the control is added to the parent via AddControl(), then the new value is applied
+	 *			to both orientations because the current orientation is not known. After AddControl() is called, then the values are applied only to the current orientation.  
 	 */
 	result Construct(const Tizen::Base::String& resourceId);
 
@@ -182,6 +200,24 @@ public:
 	result Construct(const Tizen::Ui::Layout& layout, const Tizen::Graphics::Rectangle& rect, GroupStyle groupStyle = GROUP_STYLE_NONE);
 
 	/**
+	 * Initializes this instance of %Panel with the specified parameters.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	layout				The layout for both the portrait and landscape modes
+	 * @param[in]	rect				The location and size of the %Panel control as an instance of FloatRectangle
+	 * @param[in]	groupStyle			The table view style of the %Panel control
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception   E_INVALID_ARG		A specified input parameter is invalid. @n
+	 *									The specified layout is already bound to another container.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @remarks     The specified group style determines the border look of the %Panel control.
+	 * @see         Tizen::Ui::Container, Tizen::Ui::GroupStyle
+	 */
+	result Construct(const Tizen::Ui::Layout& layout, const Tizen::Graphics::FloatRectangle& rect, GroupStyle groupStyle = GROUP_STYLE_NONE);
+
+	/**
 	 * Initializes this instance of %Panel with the specified layouts, rectangular region, and group style.
 	 *
 	 * @since		2.0
@@ -199,6 +235,25 @@ public:
 	 * @see         Tizen::Ui::Container, Tizen::Ui::GroupStyle
 	 */
 	result Construct(const Tizen::Ui::Layout& portraitLayout, const Tizen::Ui::Layout& landscapeLayout, const Tizen::Graphics::Rectangle& rect, GroupStyle groupStyle = GROUP_STYLE_NONE);
+
+	/**
+	 * Initializes this instance of %Panel with the specified layouts, rectangular region, and group style.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	portraitLayout		The layout for the portrait mode
+	 * @param[in]	landscapeLayout		The layout for the landscape mode
+	 * @param[in]	rect				The location and size of the %Panel control as an instance of FloatRectangle
+	 * @param[in]	groupStyle			The table view style of the %Panel control
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception   E_INVALID_ARG		A specified input parameter is invalid. @n
+	 *									The specified layout is already bound to another container.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @remarks     The specified group style determines the border look of the %Panel control.
+	 * @see         Tizen::Ui::Container, Tizen::Ui::GroupStyle
+	 */
+	result Construct(const Tizen::Ui::Layout& portraitLayout, const Tizen::Ui::Layout& landscapeLayout, const Tizen::Graphics::FloatRectangle& rect, GroupStyle groupStyle = GROUP_STYLE_NONE);
 
 	/**
 	 * Gets the background color of the %Panel control.

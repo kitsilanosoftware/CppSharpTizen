@@ -29,7 +29,6 @@
 namespace Tizen { namespace Net { namespace Nfc
 {
 
-// Forward declaration
 class NdefMessage;
 
 /**
@@ -38,8 +37,8 @@ class NdefMessage;
  *
  * @since       2.0
  *
- * The %INdefMessageDiscoveryEventListener interface specifies the methods used for creating notifications about the NDEF message discovered from the 
- * target tag.
+ * The %INdefMessageDiscoveryEventListener interface specifies the methods used for creating notifications about the
+ * NDEF message discovered from the target tag.
  *
  * For more information on the class features, see
  * <a href="../org.tizen.native.appprogramming/html/guide/net/nfc.htm">NFC Guide</a>.
@@ -63,17 +62,19 @@ public:
 	 * @since       2.0
 	 *
 	 * @param[in]   pMessage        The detected NDEF message
-	 * @remarks     This method can be used for read-only access to the data on the target without opening a connection 
-	 *              to it. @n
-	 *              The input NdefMessage object must be deleted by the application after use, even outside this 
-	 *              method. The NdefMessage::RemoveAllRecords() method must be called with @c true as the input value 
-	 *              immediately before the NdefMessage object is deleted.
+	 * @remarks
+	 *              - This method can be used for read-only access to the data on the target without opening a
+	 *                connection to it.
+	 *              - The input NdefMessage object must be deleted by the application after use, even outside this
+	 *                method. The NdefMessage::RemoveAllRecords() method must be called with @c true as the input value
+	 *                immediately before the NdefMessage object is deleted.
 	 */
 	virtual void OnNdefMessageDetectedN(NdefMessage* pMessage) = 0;
 
 protected:
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
 	// This method is reserved and may change its name at any time without prior notice.
 	//
@@ -82,7 +83,8 @@ protected:
 	virtual void INdefMessageDiscoveryEventListener_Reserved1(void) {}
 
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
 	// This method is reserved and may change its name at any time without prior notice.
 	//
@@ -91,7 +93,8 @@ protected:
 	virtual void INdefMessageDiscoveryEventListener_Reserved2(void) {}
 
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
 	// This method is reserved and may change its name at any time without prior notice.
 	//

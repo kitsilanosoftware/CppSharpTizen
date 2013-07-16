@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -17,9 +17,9 @@
 
 /**
  * @file		FUiIInputConnectionProvider.h
- * @brief	This is the header file for the %IInputConnectionProvider class.
+ * @brief	This is the header file for the %IInputConnectionProvider interface.
  *
- * This header file contains the declarations of the %IInputConnectionProvider class.
+ * This header file contains the declarations of the %IInputConnectionProvider interface.
  *
  *
  */
@@ -30,7 +30,7 @@
 #include <FOspConfig.h>
 
 namespace Tizen { namespace Base {
-class String;
+	class String;
 }} // Tizen::Base
 
 namespace Tizen { namespace Ui {
@@ -38,13 +38,12 @@ namespace Tizen { namespace Ui {
 class InputConnection;
 
 /**
- * @class	IInputConnectionProvider
- * @brief	This is the header file for the %IInputConnectionProvider class.
- * This header file contains the declarations of the %IInputConnectionProvider class.
- * It's possible to not work the callback depending on the current active Input Method.
+ * @interface	IInputConnectionProvider
+ * @brief	This interface defines methods for processing between the InputConnection and the input method.
+ *
  * @since 2.0
  *
- * The %IInputConnectionProvider interface defines methods for processing between the InputConnection and the input method.
+ * The %IInputConnectionProvider interface defines methods for processing between the InputConnection and the input method. It is possible to not work the callback depending on the current active Input Method.
  */
 class _OSP_EXPORT_ IInputConnectionProvider
 {
@@ -61,8 +60,8 @@ public:
 	 *
 	 * @since 2.0
 	 * @param[in]       source                  The source of the event
-	 * @param[in]       offset                   The position to be deleted before the current cursor position.
-	 * @param[in]       charCount             The number of characters to be deleted.
+	 * @param[in]       offset                   The position to delete before the current cursor position
+	 * @param[in]       charCount             The number of characters to delete
 	 */
 	virtual void DeleteSurroundingText(Tizen::Ui::InputConnection& source, int offset, int charCount) = 0;
 
@@ -71,8 +70,8 @@ public:
 	 *
 	 * @since 2.0
 	 * @param[in] 	source		The source of the event
-	 * @param[out] 	text			The text to be sent to the Input Method.
-	 * @param[out] 	cursorPosition	The current cursor position to be sent to the Input Method.
+	 * @param[out] 	text			The text to send to the Input Method
+	 * @param[out] 	cursorPosition	The current cursor position to send to the Input Method
 	 * @remarks      The text will be used for processing the auto-capitalization/auto-period. At least three letters in front of the cursor are required.
 	 */
 	virtual void GetPreviousText(Tizen::Ui::InputConnection& source, Tizen::Base::String& text, int& cursorPosition) = 0;

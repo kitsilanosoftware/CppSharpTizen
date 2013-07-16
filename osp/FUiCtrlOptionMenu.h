@@ -2,18 +2,19 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
+
 /**
  * @file	FUiCtrlOptionMenu.h
  * @brief	This is the header file for the %OptionMenu class.
@@ -163,7 +164,8 @@ class _OSP_EXPORT_ OptionMenu
 public:
 	/**
 	 * @if OSPDEPREC
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called.  @n
+	 * For full construction, the OptionMenu::Construct() method must be called right after calling this constructor.
 	 *
 	 * @brief 	<i> [Deprecated] </i>
 	 * @deprecated  This class is deprecated because the use of the %OptionMenu control is no longer recommended.
@@ -174,7 +176,8 @@ public:
 
 	/**
 	 * @if OSPDEPREC
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required.@n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @brief 	<i> [Deprecated] </i>
 	 * @deprecated  This class is deprecated because the use of the %OptionMenu control is no longer recommended.
@@ -207,7 +210,7 @@ public:
 	 * @deprecated  This class is deprecated because the use of the %OptionMenu control is no longer recommended.
 	 * @since			2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @endif
 	 */
 	void AddActionEventListener(Tizen::Ui::IActionEventListener& listener);
@@ -220,7 +223,7 @@ public:
 	 * @deprecated  This class is deprecated because the use of the %OptionMenu control is no longer recommended.
 	 * @since			2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 * @endif
 	 */
 	void RemoveActionEventListener(Tizen::Ui::IActionEventListener& listener);
@@ -234,11 +237,11 @@ public:
 	 * @since			2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	text			The item to be appended
+	 * @param[in]	text			The item to append
 	 * @param[in]	actionId		The action ID
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		This method has failed.
-	 * @remarks     %OptionMenu can have a maximum of 12 main items.
+	 * @remarks     %OptionMenu can have a maximum of @c 12 main items.
 	 * @endif
 	 */
 	result AddItem(const Tizen::Base::String& text, int actionId);
@@ -253,12 +256,12 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	mainIndex		The main index
-	 * @param[in]	text			The item to be set
+	 * @param[in]	text			The item to set
 	 * @param[in]	actionId		The item ID
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_OUT_OF_RANGE	The specified @c index is less than @c 0 or greater than @c 12.
 	 * @exception	E_SYSTEM		The method has failed.
-	 * @remarks     %OptionMenu can have a maximum of 12 main items.
+	 * @remarks     %OptionMenu can have a maximum of @c 12 main items.
 	 * @endif
 	 */
 	result InsertItemAt(int mainIndex, const Tizen::Base::String& text, int actionId);
@@ -273,7 +276,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	mainIndex		The main index
-	 * @param[in]   text			The string of the item to be set
+	 * @param[in]   text			The string of the item to set
 	 * @param[in]	actionId		The item ID
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_OUT_OF_RANGE	The specified @c index is less than @c 0 or greater than @c 12.
@@ -350,12 +353,12 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	mainIndex		The index of the main item
-	 * @param[in]	text			The string of item to be appended
+	 * @param[in]	text			The string of item to append
 	 * @param[in]	actionId		The item ID
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_OUT_OF_RANGE	The specified @c index is less than @c 0 or greater than @c 12.
 	 * @exception	E_SYSTEM		This method has failed.
-	 * @remarks     %OptionMenu can have a maximum of 32 sub-items.
+	 * @remarks     %OptionMenu can have a maximum of @c 32 sub-items.
 	 * @endif
 	 */
 	result AddSubItem(int mainIndex, const Tizen::Base::String& text, int actionId);
@@ -371,12 +374,12 @@ public:
 	 * @return		An error code
 	 * @param[in]	mainIndex		The index of the main item
 	 * @param[in]	subIndex		The index of the sub-item
-	 * @param[in]   text			The string of the item to be set
+	 * @param[in]   text			The string of the item to set
 	 * @param[in]	actionId		The action ID
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_OUT_OF_RANGE	The specified @c index is less than @c 0 or greater than @c 12.
 	 * @exception	E_SYSTEM		This method has failed.
-	 * @remarks     %OptionMenu can have a maximum of 32 sub-items.
+	 * @remarks     %OptionMenu can have a maximum of @c 32 sub-items.
 	 * @endif
 	 */
 	result InsertSubItemAt(int mainIndex, int subIndex, const Tizen::Base::String& text, int actionId);
@@ -392,7 +395,7 @@ public:
 	 * @return		An error code
 	 * @param[in]	mainIndex		The index of the main item
 	 * @param[in]	subIndex		The index of the sub-item
-	 * @param[in]   text			The string of the item to be set
+	 * @param[in]   text			The string of the item to set
 	 * @param[in]	actionId		The action ID
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_OUT_OF_RANGE	The specified @c index is less than @c 0 or greater than @c 12.

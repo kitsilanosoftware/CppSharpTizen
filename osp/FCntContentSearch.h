@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -44,7 +43,7 @@ class _ContentSearchImpl;
  * @since	2.0
  *
  * The %ContentSearch class provides methods to search content based on conditions and to retrieve the results for a specific
- * column. It enables searching for content stored on the Tizen device. The local content is stored in the form of database columns.
+ * column. It enables searching for content stored on the %Tizen device. The local content is stored in the form of database columns.
  *
  * For more information on the database columns and their corresponding content types, see <a href="../org.tizen.native.appprogramming/html/guide/content/content_search_device.htm">Content Search on the Device</a>.
  *
@@ -94,12 +93,10 @@ class _OSP_EXPORT_ ContentSearch
 
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the Construct() method must be called right after calling this constructor.
 	 *
 	 * @since		2.0
-	 *
-	 * @remarks		After creating an instance of this class, one of the Construct() methods must be called explicitly to initialize this instance.
-	 * @see         Construct()
 	 */
 	ContentSearch(void);
 
@@ -122,7 +119,7 @@ public:
 	 * @exception	E_OUT_OF_MEMORY	The memory is insufficient.
 	 * @exception	E_SYSTEM		A system error has occurred.
 	 *
-	 * @remarks     To search a specific type, use the content type as CONTENT_TYPE_OTHER, CONTENT_TYPE_IMAGE, CONTENT_TYPE_AUDIO, or CONTENT_TYPE_VIDEO.
+	 * @remarks     To search a specific type, use the content type as @c CONTENT_TYPE_OTHER, @c CONTENT_TYPE_IMAGE, @c CONTENT_TYPE_AUDIO, or @c CONTENT_TYPE_VIDEO.
 	 *
 	 * The following example demonstrates how to use the %Construct() method.
 	 *
@@ -144,6 +141,7 @@ public:
 	 * Searches the content and returns the search result list according to the query.
 	 *
 	 * @since		2.0
+	 * @privlevel		public
 	 * @privilege   %http://tizen.org/privilege/content.read
 	 *
 	 * @return		A pointer to a list containing the ContentSearchResult instances @n
@@ -166,14 +164,15 @@ public:
 	 * @exception	E_OUT_OF_MEMORY	The memory is insufficient.
 	 * @exception	E_INVALID_ARG	Either of the following conditions has occurred: @n
 	 *	                                - The specified @c column is either invalid or empty. @n
-	 *	                                - The content is searched with @c type set as CONTENT_TYPE_UNKNOWN. @n
+	 *	                                - The content is searched with @c type set as ::CONTENT_TYPE_UNKNOWN. @n
 	 *	                                - The length of the specified @c whereExpr parameter exceeds 512 characters.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks	The return value must be deleted. @n
-	 *				ContentType supports CONTENT_TYPE_OTHER, CONTENT_TYPE_IMAGE, CONTENT_TYPE_AUDIO, and CONTENT_TYPE_VIDEO.
-	 *				If %ContentType in Construct() uses CONTENT_TYPE_UNKNOWN or an invalid value, E_INVALID_ARG occurs.
+	 * @remarks
+	 * 				- The specific error code can be accessed using the GetLastResult() method.
+	 * 				- The return value must be deleted.
+	 *				- ContentType supports ::CONTENT_TYPE_OTHER, ::CONTENT_TYPE_IMAGE, ::CONTENT_TYPE_AUDIO, and ::CONTENT_TYPE_VIDEO. @n
+	 *					If %ContentType in Construct() uses ::CONTENT_TYPE_UNKNOWN or an invalid value, @c E_INVALID_ARG occurs.
 	 *
 	 * The following example demonstrates how to use the %SearchN() method.
 	 *
@@ -213,6 +212,7 @@ public:
 	 * Gets the value list of the specified column within a specified range.
 	 *
 	 * @since		2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/content.read
 	 *
 	 * @return		A pointer to a list containing the values of a column @n
@@ -230,14 +230,15 @@ public:
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_OUT_OF_MEMORY	The memory is insufficient.
 	 * @exception	E_INVALID_ARG	The specified @c column is either invalid or empty, or
-	 *								the content is searched with @c type set as CONTENT_TYPE_UNKNOWN.
+	 *								the content is searched with @c type set as ::CONTENT_TYPE_UNKNOWN.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
-	 * @remarks  	The return value must be deleted. @n
-	 *			The result of GetValueListN() returns a distinct value. @n
-	 *			ContentType supports CONTENT_TYPE_OTHER, CONTENT_TYPE_IMAGE, CONTENT_TYPE_AUDIO, and CONTENT_TYPE_VIDEO.
-	 *			If %ContentType in Construct() uses CONTENT_TYPE_UNKNOWN or an invalid value, E_INVALID_ARG occurs.
+	 * @remarks
+	 * 				- The specific error code can be accessed using the GetLastResult() method.
+	 * 				- The return value must be deleted. @n
+	 *					The result of GetValueListN() returns a distinct value.
+	 *				- ContentType supports ::CONTENT_TYPE_OTHER, ::CONTENT_TYPE_IMAGE, ::CONTENT_TYPE_AUDIO, and ::CONTENT_TYPE_VIDEO. @n
+	 *					If %ContentType in Construct() uses ::CONTENT_TYPE_UNKNOWN or an invalid value, @c E_INVALID_ARG occurs.
 	 *
 	 * The following example demonstrates how to use the %GetValueListN() method.
 	 *
@@ -281,6 +282,7 @@ public:
 	* @deprecated	This method is deprecated. Instead of using this method, it is recommended to use the GetValueListN(int, int, int&, int&, const Tizen::Base::String&, @n
 	*				Tizen::Base::SortOrder) method, that gets the value list of the specified column.
 	* @since		2.0
+	* @privlevel	public
 	* @privilege	%http://tizen.org/privilege/content.read
 	*
 	* @return		A pointer to a list containing the values of a column @n
@@ -294,11 +296,12 @@ public:
 	* @exception	E_INVALID_ARG	The specified @c column is either invalid or empty, or the content is searched with @c type set as CONTENT_TYPE_UNKNOWN.
 	* @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
 	* @exception	E_SYSTEM		A system error has occurred.
-	* @remarks	The specific error code can be accessed using the GetLastResult() method.
-	* @remarks The return value must be deleted. @n
-	*			The result of GetValueListN() returns a distinct value. @n
-	*			ContentType supports CONTENT_TYPE_OTHER, CONTENT_TYPE_IMAGE, CONTENT_TYPE_AUDIO, and CONTENT_TYPE_VIDEO.
-	*			If %ContentType in Construct() uses CONTENT_TYPE_UNKNOWN or an invalid value, E_INVALID_ARG occurs.
+	* @remarks
+	* 				- The specific error code can be accessed using the GetLastResult() method.
+	* 				- The return value must be deleted. @n
+	*					The result of GetValueListN() returns a distinct value.
+	*				- ContentType supports ::CONTENT_TYPE_OTHER, ::CONTENT_TYPE_IMAGE, ::CONTENT_TYPE_AUDIO, and ::CONTENT_TYPE_VIDEO. @n
+	*					If %ContentType in Construct() uses ::CONTENT_TYPE_UNKNOWN or an invalid value, @c E_INVALID_ARG occurs.
 	*
 	* The following example demonstrates how to use the %GetValueListN() method.
 	*

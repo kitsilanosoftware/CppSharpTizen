@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -78,7 +78,7 @@ enum HorizontalAlignment
 {
 	ALIGNMENT_LEFT,                 /**< The text is left-aligned */
 	ALIGNMENT_CENTER,               /**< The text is center-aligned horizontally */
-	ALIGNMENT_RIGHT                 /**< The text is right-aligned */
+	ALIGNMENT_RIGHT             /**< The text is right-aligned */
 };
 
 /**
@@ -93,6 +93,22 @@ enum VerticalAlignment
 	ALIGNMENT_TOP,                  /**< The text is top-aligned */
 	ALIGNMENT_MIDDLE,               /**< The text is center-aligned vertically */
 	ALIGNMENT_BOTTOM                /**< The text is bottom-aligned */
+};
+
+/**
+ * @enum GroupStyle
+ *
+ * Defines the table view style of a control's border.
+ *
+ * @since	2.0
+ */
+enum GroupStyle
+{
+	GROUP_STYLE_NONE,                   /**< A rectangle with no outline */
+	GROUP_STYLE_SINGLE,                 /**< A rectangle with all corners rounded */
+	GROUP_STYLE_TOP,                    /**< A rectangle with the two top corners rounded */
+	GROUP_STYLE_MIDDLE,                 /**< A rectangle positioned at the center of a group */
+	GROUP_STYLE_BOTTOM                  /**< A rectangle with the two bottom corners rounded */
 };
 
 }}}// Tizen::Ui::Controls

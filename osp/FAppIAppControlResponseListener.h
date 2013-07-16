@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -65,7 +64,8 @@ public:
 	 * @param[in]	appId			The ID of the requested application
 	 * @param[in]	operationId		The operation ID used in application control invocation
 	 * @param[in]	appControlResult	The application control result
-	 * @param[in]	pExtraData		The Tizen::Base::String key and %Tizen::Base::String value pair map of application result data
+	 * @param[in]	pExtraData		A pointer to an result map of key and value pair where the key of type Tizen::Base::String and the value of 
+	 *							type %Tizen::Base::String or of type Tizen::Base::ArrayList of %Tizen::Base::String
 	 * @remarks	The application control completion result is received when the requested application control
 	 * 			sends the result using AppControlProviderManager::SendAppControlResult().
 	 * @see		AppControl
@@ -87,7 +87,7 @@ public:
 	 * @exception	E_OPERATION_CANCELED	The application control resolve request is canceled by a user operation.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		This method invoked only for the implicit AppControl resolution.
+	 * @remarks		This method is invoked only for the implicit AppControl resolution.
 	 * @see	AppControl
 	 * @see	AppControl::FindAndStart()
 	 */

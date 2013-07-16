@@ -43,45 +43,59 @@ class _NetworkInfoImpl;
  *
  * @code
  *
- *	result
- *	MyClass::GetNetworkInfo(void)
- *	{
- *		result r = E_SUCCESS;
- *		int mnc;
- *		int mcc;
- *		int cellId;
- *		int lac;
- *		String plmn;
- *		String operatorName;
+ *  #include <FBase.h>
+ *  #include <FTelephony.h>
  *
- *		NetworkInfo networkInfo;
+ *  using namespace Tizen::Base;
+ *  using namespace Tizen::Telephony;
  *
- *		NetworkManager* pNetworkManager = new NetworkManager();
+ *  class MyClass
+ *  	: public Object
+ *  {
+ *  public:
+ *  	MyClass(void) {}
+ *  	~MyClass(void) {}
  *
- *		r = pNetworkManager->Construct(null);
- *		if (IsFailed(r))
- *		{
- *			delete pNetworkManager;
- *			return r;
- *		}
+ *  	void GetNetworkInfo(void);
+ *  };
  *
- *		r = pNetworkManager->GetNetworkInfo(networkInfo);
- *		if (IsFailed(r))
- *		{
- *			delete pNetworkManager;
- *			return r;
- *		}
+ *  void
+ *  MyClass::GetNetworkInfo(void)
+ *  {
+ *  	result r = E_SUCCESS;
+ *  	int mnc;
+ *  	int mcc;
+ *  	int cellId;
+ *  	int lac;
+ *  	String plmn;
+ *  	String operatorName;
  *
- *		mnc = networkInfo.GetMnc();
- *		mcc = networkInfo.GetMcc();
- *		cellId = networkInfo.GetCellId();
- *		lac = networkInfo.GetLac();
- *		plmn = networkInfo.GetPlmn();
- *		operatorName = networkInfo.GetOperatorName();
+ *  	NetworkInfo networkInfo;
+ *  	NetworkManager* pNetworkManager = new (std::nothrow) NetworkManager();
  *
- *		delete pNetworkManager;
- *		return r;
- *	}
+ *  	r = pNetworkManager->Construct(null);
+ *  	if (IsFailed(r))
+ *  	{
+ *  		delete pNetworkManager;
+ *  		return;
+ *  	}
+ *
+ *  	r = pNetworkManager->GetNetworkInfo(networkInfo);
+ *  	if (IsFailed(r))
+ *  	{
+ *  		delete pNetworkManager;
+ *  		return;
+ *  	}
+ *
+ *  	mnc = networkInfo.GetMnc();
+ *  	mcc = networkInfo.GetMcc();
+ *  	cellId = networkInfo.GetCellId();
+ *  	lac = networkInfo.GetLac();
+ *  	plmn = networkInfo.GetPlmn();
+ *  	operatorName = networkInfo.GetOperatorName();
+ *
+ *  	delete pNetworkManager;
+ *  }
  *
  * @endcode
  */
@@ -116,7 +130,9 @@ public:
      * Gets the Mobile Network Code (MNC) of the network.
      *
      * @since   2.0
-     * @privilege   %http://tizen.org/privilege/systeminfo
+     * @privlevel	public
+     * @privilege   %http://tizen.org/privilege/telephony @n
+     * 				(%http://tizen.org/privilege/systeminfo is deprecated.)
      *
      * @return		The MNC of the network
      * @exception	E_SUCCESS	The method is successful.
@@ -129,7 +145,9 @@ public:
      * Gets the Mobile Country Code (MCC) of the network.
      *
      * @since   2.0
-     * @privilege   %http://tizen.org/privilege/systeminfo
+     * @privlevel	public
+     * @privilege   %http://tizen.org/privilege/telephony @n
+     * 				(%http://tizen.org/privilege/systeminfo is deprecated.)
      *
      * @return		The MCC of the network
      * @exception	E_SUCCESS	The method is successful.
@@ -141,15 +159,10 @@ public:
     /**
      * Gets the Public Land Mobile Network (PLMN).
      *
-     * @if OSPCOMPAT
-     * @brief <i> [Compatibility] </i>
-     * @endif
      * @since   2.0
-     * @if OSPCOMPAT
-     * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-     *                  For more information, see the issue description for @ref CompNetworkInfoGetPlmnPage "here".
-     * @endif
-     * @privilege   %http://tizen.org/privilege/systeminfo
+     * @privlevel	public
+     * @privilege   %http://tizen.org/privilege/telephony @n
+     * 				(%http://tizen.org/privilege/systeminfo is deprecated.)
      *
      * @return		The PLMN name
      * @exception	E_SUCCESS	        The method is successful.
@@ -162,7 +175,7 @@ public:
     /**
      * @page    CompNetworkInfoGetPlmnPage Compatibility for GetPlmn()
      * @section CompNetworkInfoGetPlmnPageIssueSection Issues
-     *          Implementing this method in OSP compatible applications has the following issues:   @n 
+     *          Implementation of this method in Tizen API versions prior to 2.1 has the following issue: @n
      *          -# The method returns an alphabetic name of PLMN.
      *
      * @section CompNetworkInfoGetPlmnPageSolutionSection Resolutions
@@ -174,7 +187,9 @@ public:
      * Gets the current cell ID.
      *
      * @since   2.0
-     * @privilege   %http://tizen.org/privilege/systeminfo
+     * @privlevel	public
+     * @privilege   %http://tizen.org/privilege/telephony @n
+     * 				(%http://tizen.org/privilege/systeminfo is deprecated.)
      *
      * @return		The current cell ID
      * @exception	E_SUCCESS	The method is successful.
@@ -188,7 +203,9 @@ public:
      * Gets the current Location Area Code (LAC).
      *
      * @since   2.0
-     * @privilege   %http://tizen.org/privilege/systeminfo
+     * @privlevel	public
+     * @privilege   %http://tizen.org/privilege/telephony @n
+     * 				(%http://tizen.org/privilege/systeminfo is deprecated.)
      *
      * @return		The current LAC
      * @exception	E_SUCCESS	The method is successful.
@@ -202,7 +219,9 @@ public:
      * Gets the operator name.
      *
      * @since 2.0
-     * @privilege   %http://tizen.org/privilege/systeminfo
+     * @privlevel	public
+     * @privilege   %http://tizen.org/privilege/telephony @n
+     * 				(%http://tizen.org/privilege/systeminfo is deprecated.)
      *
      * @return      The operator name
      * @exception   E_SUCCESS   The method is successful.
@@ -236,14 +255,21 @@ public:
      * Gets the received signal strength indication of a modem device.
      *
      * @since   2.0
-     * @privilege   %http://tizen.org/privilege/systeminfo
-     *
+     * @privlevel	public
+     * @privilege   %http://tizen.org/privilege/telephony @n
+     * 				(%http://tizen.org/privilege/systeminfo is deprecated.)
+	 * @feature		%http://tizen.org/feature/network.telephony
      * @return  The current RSSI @n
      *          The possible RSSI value ranges from @c 0 to @c 100.
      * @exception   E_SUCCESS   The method is successful.
      * @exception   E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
      * @exception   E_SYSTEM    A system error has occurred.
-     * @remarks		The specific error code can be accessed using the GetLastResult() method.
+	 * @exception  E_UNSUPPORTED_OPERATION   The Emulator or target device does not support the required feature. @b Since: @b 2.1
+	 * 										 For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+	 * @remarks
+	 *			- The specific error code can be accessed using the GetLastResult() method.
+	 *			- Before calling this method, check whether the feature is supported by 
+	 *			Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
      */
 	static int GetRssi(void);
 

@@ -254,22 +254,22 @@ enum CameraFlipType
 /**
  * @enum CameraFocusMode
  *
- * Defines the camera focus mode
+ * Defines the camera focus mode.
  * @since		2.0
  */
 enum CameraFocusMode
 {
-	CAMERA_FOCUS_MODE_NONE,	/**< The camera's  focus mode: None*/
-	CAMERA_FOCUS_MODE_NORMAL,	/**< The camera's  focus mode: Normal*/
-	CAMERA_FOCUS_MODE_MACRO,	/**< The camera's  focus mode: Macro*/
-	CAMERA_FOCUS_MODE_CONTINUOUS_AUTO,	/**< The camera's  focus mode: Continuous auto*/
-	CAMERA_FOCUS_MODE_INFINITE,	/**< The camera's  focus mode: Infinite*/
+	CAMERA_FOCUS_MODE_NONE,	/**< The camera's focus mode: None*/
+	CAMERA_FOCUS_MODE_NORMAL,	/**< The camera's focus mode: Normal*/
+	CAMERA_FOCUS_MODE_MACRO,	/**< The camera's focus mode: Macro*/
+	CAMERA_FOCUS_MODE_CONTINUOUS_AUTO,	/**< The camera's focus mode: Continuous auto*/
+	CAMERA_FOCUS_MODE_INFINITE,	/**< The camera's focus mode: Infinite*/
 };
 
 /**
  * @enum CameraFlashMode
  *
- * Defines the camera flash mode
+ * Defines the camera flash mode.
  * @since		2.0
  */
 enum CameraFlashMode
@@ -284,7 +284,7 @@ enum CameraFlashMode
 /**
 * @enum CameraMeteringMode
 *
-* Defines the camera metering mode
+* Defines the camera metering mode.
 * @since		2.0
 */
 enum CameraMeteringMode
@@ -294,6 +294,32 @@ enum CameraMeteringMode
 	CAMERA_METERING_MODE_CENTER_WEIGHTED,	/**< Center weighted average metering mode that uses information of central part of the scene */
 	CAMERA_METERING_MODE_SPOT,			/**< Spot metering mode that uses information of very small area of the scene */
 };
+
+/**
+* @enum CameraSceneMode
+*
+* Defines the camera scene mode.
+* @since		2.1
+*/
+enum CameraSceneMode
+{
+             CAMERA_SCENE_OFF,                                /**< No specific scene @n Scene mode is off. */
+             CAMERA_SCENE_PORTRAIT,                          /**< The camera scene mode: Potrait */
+             CAMERA_SCENE_LANDSCAPE,                       /**< The camera scene mode: Landscape */
+             CAMERA_SCENE_SPORTS,                             /**< The camera scene mode: Sports */
+             CAMERA_SCENE_PARTY_INDOOR,                 /**< The camera scene mode: Indoor */
+             CAMERA_SCENE_BEACH_SHOW,                   /**< The camera scene mode: Beach */
+             CAMERA_SCENE_SUNSET,                            /**< The camera scene mode: Sunset */
+             CAMERA_SCENE_DUSK_DAWN,                    /**< The camera scene mode: Dusk-Dawn */
+             CAMERA_SCENE_AUTUMN_COLOR,              /**< The camera scene mode: Autumn color*/
+             CAMERA_SCENE_NIGHT,                             /**< The camera scene mode: Night */
+             CAMERA_SCENE_FIREWORK,                       /**< The camera scene mode: Firework */
+             CAMERA_SCENE_TEXT,                               /**< The camera scene mode: Text */
+             CAMERA_SCENE_SHOW_WINDOW,              /**< The camera scene mode: Show-window */
+             CAMERA_SCENE_CANDLELIGHT,                 /**< The camera scene mode: Candle light */
+             CAMERA_SCENE_BACKLIGHT                      /**< The camera scene mode: Backlight */
+};
+
 
 }}// Tizen::Media
 

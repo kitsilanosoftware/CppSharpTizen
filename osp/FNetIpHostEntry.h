@@ -41,66 +41,10 @@ class _IpHostEntryImpl;
  * @since	2.0
  *
  *  The %IpHostEntry class associates a Domain Name %System (DNS) host name with a list of aliases and matching IP addresses. If the specified host has
- *  multiple entries in the DNS database, %IpHostEntry contains multiple IP addresses and aliases. The %IpHostEntry class is used as a helper class
+ *  multiple entries in the DNS database, %IpHostEntry contains multiple IP addresses and aliases. This class is used as a helper class
  *	with the Dns class.
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/net/domain_name_system_access.htm">Domain Name System Access</a>.
- *
- * The following example demonstrates how to use the %IpHostEntry class.
- *
- * @code
-class MyDnsListener
-    : public IDnsEventListener
-{
-public:
-    void OnDnsResolutionCompletedN(IpHostEntry* ipHostEntry, result r);
-};
-
-
-void
-MyDnsListener::OnDnsResolutionCompletedN(IpHostEntry* ipHostEntry, result r)
-{
-	if (ipHostEntry == null)
-	{
-		AppLog("error case no.%d \n", r);
-	}
-	else
-	{
-		Tizen::Base::Collection::IList* addressList = ipHostEntry->GetAddressList();
-
-		if (addressList != null)
-		{
-			int count = addressList->GetCount();
-
-			for (int i = 0; i < count; i++)
-			{
-				IpAddress* pIpAddress = (IpAddress*)(addressList->GetAt(i));
-				Tizen::Base::ByteBuffer*_pbb = Tizen::Base::Utility::StringUtil::StringToUtf8N(pIpAddress->ToString());
-
-				AppLog("IpAddress no.%d : %s\n", i, (char*)(_pbb->GetPointer()));
-				delete _pbb;
-			}
-		}
-
-		Tizen::Base::Collection::IList* aliasList = ipHostEntry->GetAliasList();
-
-		if (aliasList != null)
-		{
-			int count = aliasList->GetCount();
-
-			for (int i = 0; i < count; i++)
-			{
-				String* alias = (String*)(aliasList->GetAt(i));
-				Tizen::Base::ByteBuffer*_pbb = Tizen::Base::Utility::StringUtil::StringToUtf8N(*alias);
-
-				AppLog("alias no.%d : %s\n", i, (char*)(_pbb->GetPointer()));
-				delete _pbb;
-			}
-		}
-		delete ipHostEntry;
-	}
-}
- * @endcode
  */
 class _OSP_EXPORT_ IpHostEntry
 	: public Tizen::Base::Object

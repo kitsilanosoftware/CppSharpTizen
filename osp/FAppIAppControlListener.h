@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -39,7 +38,7 @@ namespace Tizen { namespace App
  * @interface	IAppControlListener
  * @brief		<i>[Deprecated]</i> This interface defines a listener for the AppControl start and result events.
  *
- * @deprecated	This class is deprecated. Instead of using this interface, use the IAppControlResponseListener interface.
+ * @deprecated	This interface is deprecated. Instead of using this interface, use the IAppControlResponseListener interface.
  * @since		2.0
  *
  * The %IAppControlListener interface defines a listener for the AppControl start and result events.
@@ -51,13 +50,13 @@ class _OSP_EXPORT_ IAppControlListener
 {
 public:
 	/**
-         * @if OSPDEPREC
+     * @if OSPDEPREC
 	 * This polymorphic destructor should be overridden if required.
 	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @brief		<i>[Deprecated]</i>
 	 *
-	 * @deprecated	This class is deprecated. Instead of using this interface, use the IAppControlResponseListener interface.
+	 * @deprecated	This interface is deprecated. Instead of using this interface, use the IAppControlResponseListener interface.
 	 * @since	2.0
 	 * @endif
 	 */
@@ -70,7 +69,7 @@ public:
 	 *
 	 * @brief		<i>[Deprecated]</i>
 	 *
-	 * @deprecated	This class is deprecated. Instead of using this interface, use the IAppControlResponseListener interface.
+	 * @deprecated	This interface is deprecated. Instead of using this interface, use the IAppControlResponseListener interface.
 	 * @since			2.0
 	 *
 	 * @param[in]	pAppControl			A pointer to the AppControl instance that is started

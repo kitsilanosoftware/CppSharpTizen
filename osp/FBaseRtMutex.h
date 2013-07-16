@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -32,6 +31,29 @@
 
 namespace Tizen { namespace Base { namespace Runtime
 {
+/**
+ * @struct	NonRecursiveMutexTag
+ *
+ * This struct is used only for providing the non-recursive type of mutex.
+ * A non-recursive mutex is a mutex that can not be acquired multiple times by the locking thread. It returns an exception if the locking thread tries to lock the same mutex.
+ *
+ * @since 2.1
+ *
+ * @see		Mutex
+ */
+ struct NonRecursiveMutexTag
+ {
+ };
+
+/**
+ * This is a constant instance of NonRecursiveMutexTag.
+ *
+ * @code
+ * Mutex m;
+ * result r = m.Create(NonRecursiveMutex); 
+ * @endcode
+ */
+ static const NonRecursiveMutexTag NonRecursiveMutex = {};
 
 /**
  *  @class Mutex
@@ -45,7 +67,8 @@ namespace Tizen { namespace Base { namespace Runtime
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/base/mutex_and_semaphore.htm">Mutex and Semaphore</a>.
  *
- *	@see Semaphore, Thread
+ *	@see Semaphore
+ * 	@see Thread
  *
  * The following example demonstrates how to use the %Mutex class.
  *
@@ -111,7 +134,8 @@ public:
 	virtual ~Mutex(void);
 
 	/**
-	 *	Creates an unnamed mutex.
+	 *	Creates an unnamed mutex which is a recursive mutex that can be acquired multiple times by the locking thread. 
+	 *     It keeps the number of getting locked and you must unlock it the same number of times.
 	 *
 	 *	@since 2.0
 	 *
@@ -123,7 +147,19 @@ public:
 	result Create(void);
 
 	/**
-	 *	Creates a named mutex. @n
+	 *	Creates a non-recursive mutex.
+	 *
+	 *	@since 2.1
+	 *
+	 *	@return			An error code
+	 *	@exception	E_SUCCESS		The method is successful.
+	 *	@exception	E_SYSTEM		A system error has occurred.
+	 */
+	result Create(NonRecursiveMutexTag);
+
+	/**
+	 *	Creates a named mutex which is a recursive mutex that can be acquired multiple times by the locking thread. 
+	 *     It keeps the number of getting locked and you must unlock it the same number of times. @n
 	 *	If a mutex with the specified name already exists, this creates a mutex which references that particular mutex.
 	 *
 	 *	@since 2.0

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -116,7 +115,7 @@ public:
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_OBJ_ALREADY_EXIST	The specified @c contactId is already a member of this category.
 	 * @exception	E_INVALID_ARG		The specified @c contactId is invalid.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @endif
 	 */
 	result AddMember(RecordId contactId);
@@ -153,7 +152,7 @@ public:
 	 * @param [in]	contactId		The contact ID
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_INVALID_ARG	The specified @c contactId is invalid.
-	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
 	 * @remarks	The specific error code can be accessed using the GetLastResult() method.
 	 * @endif
 	 */
@@ -171,22 +170,15 @@ public:
 	 * @param [in]	contactId		The contact ID
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG		The specified @c contactId is invalid.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	 * @endif
 	 */
 	result RemoveMember(RecordId contactId);
 
 	/**
-	 * Sets the specified name for the category.
+	 * Sets the specified @c name for the category.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-	 *                            For more information, see @ref CompCategorySetNamePage "here".
-	 * @endif
 	 *
 	 * @return	An error code
 	 * @param [in]	name			The category name
@@ -200,17 +192,7 @@ public:
 	result SetName(const Tizen::Base::String& name);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page		CompCategorySetNamePage		Compatibility for SetName()
-	 * @section		CompCategorySetNamePageIssueSection		Issues
-	 * Implementing this method in OSP compatible applications has the following issue: @n
-	 * -# If the length of the category name to be set is greater than 100 characters, E_INVALID_ARG is returned.
-	 * -# if the category is a default category, E_INVALID_ARG is returned.
-	 *
-	 * @section		CompCategorySetNamePageSolutionSection		Resolutions
-	 * The issue mentioned above has been resolved in Tizen.
-	 * @endif
-	*/
+	 */
 
 	/**
 	 * Sets the specified ringtone for the category.
@@ -220,7 +202,7 @@ public:
 	 * @return	An error code
 	 * @param [in]	filePath		The file path of the ringtone
 	 * @exception	E_SUCCESS		The method is successful.
-	 * @exception	E_INVALID_ARG		The specified @c filePath is an empty string.
+	 * @exception	E_INVALID_ARG		The length of the specified @c filePath exceeds system limitations.
 	 * @exception	E_FILE_NOT_FOUND	The specified file cannot be found or accessed.
 	 * @see GetRingtonePath()
 	 */
@@ -259,15 +241,13 @@ public:
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_INVALID_ARG           The length of the specified @c filePath exceeds system limitations.
 	 * @exception   E_FILE_NOT_FOUND        The specified file cannot be found or accessed.
-	 * @exception   E_SYSTEM                A system error has occurred.
+	 * @exception   E_SYSTEM                The method cannot proceed due to a severe system error.
 	 * @see GetThumbnailPath()
-	 * @remarks	The thumbnail is copied to the specific directory for thumbnails by the system when the category is added or updated.@n
-	 * 		Therefore, GetThumbnailPath() returns the file path to which the thumbnail copied.
 	 */
 	result SetThumbnail(const Tizen::Base::String& filePath);
 
 	/**
-	 * Gets the thumbnail path
+	 * Gets the thumbnail path.
 	 *
 	 * @since	2.0
 	 *

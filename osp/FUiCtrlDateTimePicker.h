@@ -2,47 +2,48 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
 
 /**
- * @file			FUiCtrlDateTimePicker.h
- * @brief	This is the header file for the %DateTimePicker class.
- *
- * This header file contains the declarations of the %DateTimePicker class.
- */
+* @file			FUiCtrlDateTimePicker.h
+* @brief	This is the header file for the %DateTimePicker class.
+*
+* This header file contains the declarations of the %DateTimePicker class.
+*/
 #ifndef _FUI_CTRL_DATE_TIME_PICKER_H_
 #define _FUI_CTRL_DATE_TIME_PICKER_H_
 
 #include <FUiWindow.h>
 #include <FUiIDateTimeChangeEventListener.h>
 
-namespace Tizen { namespace Ui { namespace  Controls
+namespace Tizen { namespace Ui { namespace Controls
 {
 
 /**
- * @class	DateTimePicker
- * @brief	This class displays a full screen %DateTimePicker on top of the screen.
- *
- * @since		2.0
- *
- * The %DateTimePicker class displays a full screen window-based selector that allows the user to select a certain date and time.
- *
- * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_datepicker.htm">DatePicker, TimePicker, and DateTimePicker</a>.
- *
- * The following example demonstrates how to use the %DateTimePicker class.
- *
- * @code
+* @class	DateTimePicker
+* @brief	This class displays a full screen %DateTimePicker on top of the screen.
+*
+* @since		2.0
+*
+* The %DateTimePicker class displays a full screen window-based selector that allows the user to select a certain date and time.
+*
+* For more information on the class features,
+* see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_datepicker.htm">DatePicker, TimePicker, and DateTimePicker</a>.
+*
+* The following example demonstrates how to use the %DateTimePicker class.
+*
+* @code
 // Sample code for DateTimePickerSample.h
 #include <FUi.h>
 
@@ -103,13 +104,13 @@ DateTimePickerSample::OnInitializing(void)
 	pButton->AddActionEventListener(*this);
 
 	// Adds the button to the form
-	AddControl(*pButton);
+	AddControl(pButton);
 
 	// Creates an instance of DateTimePicker
 	__pDateTimePicker = new DateTimePicker();
 	__pDateTimePicker->Construct();
 
-	// Adds an instace of IDateTimeChangeEventListener
+	// Adds an instance of IDateTimeChangeEventListener
 	__pDateTimePicker->AddDateTimeChangeEventListener(*this);
 
 	// Shows the date time picker after it's owner form is shown.
@@ -141,7 +142,7 @@ DateTimePickerSample::OnTerminating(void)
 	result r = E_SUCCESS;
 
 	// Deallocates the date time picker
-	delete __pDateTimePicker;
+	__pDateTimePicker->Destroy();
 
 	return r;
 }
@@ -174,22 +175,24 @@ DateTimePickerSample::OnDateTimeChangeCanceled(const Control& source)
 {
 	// ....
 }
- * @endcode
- */
+* @endcode
+**/
 
 class _OSP_EXPORT_ DateTimePicker
 	: public Tizen::Ui::Window
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the DateTimePicker::Construct() method must be called right after calling this constructor.
 	 *
 	 * @since		2.0
 	 */
 	DateTimePicker(void);
 
 	/**
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required.  @n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @since		2.0
 	 */
@@ -202,7 +205,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The listener to be added
+	 * @param[in]	listener	The listener to add
 	 * @see			IDateTimeChangeEventListener::OnDateTimeChanged()
 	 * @see			IDateTimeChangeEventListener::OnDateTimeChangeCanceled()
 	 * @see			RemoveDateTimeChangeEventListener()
@@ -215,7 +218,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]   listener	The listener to be removed
+	 * @param[in]   listener	The listener to remove
 	 * @see			IDateTimeChangeEventListener::OnDateTimeChanged()
 	 * @see			IDateTimeChangeEventListener::OnDateTimeChangeCanceled()
 	 * @see			AddDateTimeChangeEventListener()
@@ -231,6 +234,8 @@ public:
 	 * @param[in]   title				The title
 	 * @exception   E_SUCCESS			The method is successful.
 	 * @exception   E_SYSTEM			A system error has occurred.
+	 * @remarks		The optimal size of the control is defined in
+	 * <a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 */
 	result Construct(const Tizen::Base::String& title = L"");
 
@@ -239,7 +244,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	dateTime	The date and time to be set
+	 * @param[in]	dateTime	The date and time to set
 	 */
 	void SetDateTime(const Tizen::Base::DateTime& dateTime);
 
@@ -301,7 +306,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	hour			The hour value to be set
+	 * @param[in]	hour			The hour value to set
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_INVALID_ARG   The specified @c hour value is invalid.
 	 * @exception	E_SYSTEM        A system error has occurred.
@@ -315,7 +320,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	minute		    The minute value to be set
+	 * @param[in]	minute		    The minute value to set
 	 * @exception	E_SUCCESS       The method is successful.
 	 * @exception	E_INVALID_ARG   The specified @c minute value is invalid.
 	 * @exception	E_SYSTEM        A system error has occurred.
@@ -328,7 +333,7 @@ public:
 	 * @since		 2.0
 	 *
 	 * @return   The current date and time
-	 * @remarks     This method does not work when %DateTimePicker style is DATETIME_PICKER_STYLE_FROMTO.
+	 * @remarks     This method does not work when %DateTimePicker style is ::DATETIME_PICKER_STYLE_FROMTO.
 	 */
 	Tizen::Base::DateTime GetDateTime(void) const;
 
@@ -407,7 +412,7 @@ public:
 
 	/**
 	 * Sets the valid year range. @n
-	 * The range should be set  between @c 1 and @c 9999.
+	 * The range should be set between @c 1 and @c 9999.
 	 *
 	 * @since		2.0
 	 *

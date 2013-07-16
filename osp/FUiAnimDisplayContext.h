@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -39,7 +39,7 @@ class _DisplayContextImpl;
  *
  * The %DisplayContext class represents the display context of the window.
  * The display context is a set of display resources that includes VisualElements, VisualElementSurfaces, and frame buffer,
- * and it is managed by Tizen::Ui::Controls::Window.
+ * and it is managed by Tizen::Ui::Window.
  */
 class _OSP_EXPORT_ DisplayContext
 	: public Tizen::Base::Object
@@ -51,7 +51,7 @@ protected:
 	 * @since		2.0
 	 *
 	 * @remarks The %DisplayContext instance cannot be created,
-	 * 			it is offered by the Tizen::Ui::Controls::Window::GetDisplayContext() method.
+	 * 			it is offered by the Tizen::Ui::Window::GetDisplayContext() method.
 	 * @see Window::GetDisplayContext()
 	 */
 	DisplayContext(void);
@@ -62,7 +62,7 @@ protected:
 	 *
 	 * @since		2.0
 	 *
-	 * @remarks		The display context is released when the Tizen::Ui::Controls::Window instance is destroyed.
+	 * @remarks		The display context is released when the Tizen::Ui::Window instance is destroyed.
 	 *
 	 */
 	virtual ~DisplayContext(void);

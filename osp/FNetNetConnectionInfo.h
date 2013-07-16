@@ -80,7 +80,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		The protocol type of a specific network connection, @n
-	 *				else @c NET_PROTO_TYPE_NONE	if this instance is invalid
+	 *				else @c NET_PROTO_TYPE_NONE if this instance is invalid
 	 */
 	 NetProtocolType GetProtocolType(void) const;
 
@@ -157,7 +157,7 @@ public:
 	 * @since 		2.0
 	 *
 	 * @return		A pointer to the IpAddress instance representing the subnet mask address of the network connection
-	 * @remarks   	In any case, check whether the %IpAddress pointer is @c null or not, because the subnet mask address field is not mandatory.
+	 * @remarks   	In any case, check whether the IpAddress pointer is @c null or not, because the subnet mask address field is not mandatory.
 	 */
 	const IpAddress* GetSubnetMaskAddress(void) const;
 	
@@ -199,8 +199,8 @@ public:
 	 *
 	 * @return		@c true if the values match, @n
 	 *				else @c false
-	 * @param[in]	rhs 	The other Object to compare
-	 * @see 		Object::Equals()
+	 * @param[in]	rhs 	The other Tizen::Base::Object to compare
+	 * @see 		Tizen::Base::Object::Equals()
 	 */
 	virtual bool Equals(const Tizen::Base::Object& rhs) const;
 

@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -46,7 +46,8 @@ class _OSP_EXPORT_ IGalleryItemProvider
 {
 public:
 	/**
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required.@n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @since 	2.0
 	 */
@@ -73,6 +74,7 @@ public:
 	 * @remarks		An application that uses the Gallery control must implement this method. This method is expected to return an item that is allocated on a
 	 *				heap memory. The returned item can be of type GalleryItem. Note that when the item is not required, the Gallery control calls the
 	 *				IGalleryItemProvider::DeleteItem() method.
+	 *				The returned item should not be a null pointer.
 	 */
 	virtual Tizen::Ui::Controls::GalleryItem* CreateItem(int index) = 0;
 
@@ -84,7 +86,7 @@ public:
 	 * @return		@c true if the item is deallocated by this method, @n
 	 * 				else @c false
 	 * @param[in]	index		The index of the item
-	 * @param[in]	pItem		The pointer to GalleryItem that is to be deleted
+	 * @param[in]	pItem		The pointer to GalleryItem to delete
 	 * @see			CreateItem()
 	 * @remarks		An application that uses the Gallery control must implement this method. Using this method, an application can deallocate the item. If an
 	 *				application deallocates the item, this method returns @c true. This notifies the Gallery control to not release the item.

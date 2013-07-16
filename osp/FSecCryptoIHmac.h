@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -304,7 +303,7 @@ public:
 	 *
 	 *	@return		An error code
 	 *	@param[in]	algorithm				The name of the HMAC algorithm @n
-	 *										For example, "HMACSHA2/224", "HMACSHA2/256", "HMACSHA2/386", or "HMACSHA2/512".
+	 *										For example, "HMACSHA2/224", "HMACSHA2/256", "HMACSHA2/384", or "HMACSHA2/512".
 	 *	@exception	E_SUCCESS				The method is successful.
 	 *	@exception	E_UNSUPPORTED_ALGORITHM	The algorithm is not supported.
 	 */
@@ -324,7 +323,7 @@ public:
 	virtual result SetKey(const Tizen::Security::ISecretKey& key) = 0;
 
 	/**
-	 *	Gets the HMAC with the given input.
+	 *	Gets the HMAC with a given input.
 	 *
 	 *	@since			2.0
 	 *
@@ -342,7 +341,7 @@ public:
 	virtual Tizen::Base::ByteBuffer* GetHmacN(const Tizen::Base::ByteBuffer& input) const = 0;
 
 	/**
-	 *	Initializes the multiple-part HMAC operation.
+	 *	Initializes a multiple-part HMAC operation.
 	 *
 	 *	@since		2.0
 	 *

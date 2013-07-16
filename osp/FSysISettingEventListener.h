@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -17,7 +16,7 @@
 
 /**
  * @file	FSysISettingEventListener.h
- * @brief	This is the header file of the %ISettingEventListener interface.
+ * @brief	This is the header file for the %ISettingEventListener interface.
  *
  * This header file contains the declarations of the %ISettingEventListener interface.
  */

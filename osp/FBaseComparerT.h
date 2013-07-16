@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -41,7 +40,7 @@ namespace Tizen { namespace Base
  *
  * The following example demonstrates how to use the %ComparerT class.
  *
- *	@code
+ * @code
  *
  *	#include <FBase.h>
  *
@@ -62,7 +61,7 @@ namespace Tizen { namespace Base
  *			// ...
  *		}
  *	}
- *	@endcode
+ * @endcode
  */
 template<class Type>
 class ComparerT
@@ -75,7 +74,7 @@ public:
 	 *
 	 * @since 2.0
 	 */
-	ComparerT(void) {}
+	ComparerT(void) { }
 
 
 	/**
@@ -122,17 +121,65 @@ public:
 	}
 
 private:
-	/**
-	 * The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
-	 */
+	//
+	// The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
+	//
 	ComparerT(const ComparerT& obj);
 
-	/**
-	 * The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit copying of objects.
-	 */
+	//
+	// The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit copying of objects.
+	//
 	ComparerT& operator =(const ComparerT& rhs);
 
 }; // ComparerT
+
+template<>
+class ComparerT <Tizen::Base::String>
+	: public virtual Tizen::Base::Collection::IComparerT <Tizen::Base::String>
+	, public Object
+{
+public:
+	/**
+	 * This constructor initializes a new instance of the %ComparerT class.
+	 *
+	 * @since 2.1
+	 */
+	ComparerT(void) { }
+
+	/**
+	 * This destructor overrides Tizen::Base::Object::~Object().
+	 *
+	 * @since 2.1
+	 */
+	virtual ~ComparerT(void) { }
+
+	/**
+	 * Compare two String instances.
+	 *
+	 * @since 2.1
+	 *
+	 * @return       Always returns E_SUCCESS
+	 * @param[in]    str1     The String instance to compare
+	 * @param[in]    str2     The String instance to compare
+	 * @param[in]    cmp      An integer value for result
+	 */
+	virtual result Compare(const Tizen::Base::String& str1, const Tizen::Base::String& str2, int& cmp) const
+	{
+		cmp = String::Compare(str1, str2);
+		return E_SUCCESS;
+	}
+private:
+	//
+	// The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
+	//
+	ComparerT(const ComparerT& obj);
+
+	//
+	// The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit copying of objects.
+	//
+	ComparerT& operator =(const ComparerT& rhs);
+
+}; // ComparerT <Tizen::Base::String>
 
 }} // Tizen::Base
 

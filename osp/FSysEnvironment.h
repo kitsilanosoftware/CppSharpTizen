@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -39,22 +38,23 @@ namespace Tizen { namespace System
  */
 enum PredefinedDirectoryType
 {
-	PREDEFINED_DIRECTORY_IMAGES = 0, /** The directory for image files to be stored in internal storage (read-write permission) */
-	PREDEFINED_DIRECTORY_SOUNDS,	 /** the directory for sound files to be stored in internal storage (read-write permission) */
-	PREDEFINED_DIRECTORY_VIDEOS,	 /** The directory for video files to be stored in internal storage (read-write permission) */
-	PREDEFINED_DIRECTORY_CAMERA,	 /** The directory for files to be stored in internal storage by camera application (read-write permission) */
-	PREDEFINED_DIRECTORY_DOWNLOADS,	 /** The directory for files to be stored in internal storage by download manager (read-write permission) */
-	PREDEFINED_DIRECTORY_OTHERS,	 /** The directory for other files to be stored in internal storage (read-write permission) */
+	PREDEFINED_DIRECTORY_IMAGES = 0, /**< The directory for image files to be stored in internal storage (read-write permission) */
+	PREDEFINED_DIRECTORY_SOUNDS,	 /**< The directory for sound files to be stored in internal storage (read-write permission) */
+	PREDEFINED_DIRECTORY_VIDEOS,	 /**< The directory for video files to be stored in internal storage (read-write permission) */
+	PREDEFINED_DIRECTORY_CAMERA,	 /**< The directory for files to be stored in internal storage by camera application (read-write permission) */
+	PREDEFINED_DIRECTORY_DOWNLOADS,	 /**< The directory for files to be stored in internal storage by download manager (read-write permission) */
+	PREDEFINED_DIRECTORY_OTHERS,	 /**< The directory for other files to be stored in internal storage (read-write permission) */
+	PREDEFINED_DIRECTORY_SYSTEM_RINGTONES,	 /**< The directory for preloaded system ringtone files in internal storage (read only permission) @b Since: @b 2.1*/
 
-	PREDEFINED_DIRECTORY_EXTERNAL_IMAGES = 100,	/** The directory for image files to be stored in external MMC (read-write permission) */
-	PREDEFINED_DIRECTORY_EXTERNAL_SOUNDS,		/** the directory for sound files to be stored in external MMC (read-write permission) */
-	PREDEFINED_DIRECTORY_EXTERNAL_VIDEOS,		/** The directory for video files to be stored in external MMC (read-write permission) */
-	PREDEFINED_DIRECTORY_EXTERNAL_CAMERA,		/** The directory for files to be stored in external MMC by camera application (read-write permission) */
-	PREDEFINED_DIRECTORY_EXTERNAL_DOWNLOADS,	/** The directory for files to be stored in external MMC by download manager (read-write permission) */
-	PREDEFINED_DIRECTORY_EXTERNAL_OTHERS,		/** The directory for other files to be stored in external MMC (read-write permission) */
+	PREDEFINED_DIRECTORY_EXTERNAL_IMAGES = 100,	/**< The directory for image files to be stored in external MMC (read-write permission) */
+	PREDEFINED_DIRECTORY_EXTERNAL_SOUNDS,		/**< The directory for sound files to be stored in external MMC (read-write permission) */
+	PREDEFINED_DIRECTORY_EXTERNAL_VIDEOS,		/**< The directory for video files to be stored in external MMC (read-write permission) */
+	PREDEFINED_DIRECTORY_EXTERNAL_CAMERA,		/**< The directory for files to be stored in external MMC by camera application (read-write permission) */
+	PREDEFINED_DIRECTORY_EXTERNAL_DOWNLOADS,	/**< The directory for files to be stored in external MMC by download manager (read-write permission) */
+	PREDEFINED_DIRECTORY_EXTERNAL_OTHERS,		/**< The directory for other files to be stored in external MMC (read-write permission) */
 
-	PREDEFINED_DIRECTORY_APPLICATIONS = 200,	/** The directory for applications to be installed in internal storage (read-only permission) */
-	PREDEFINED_DIRECTORY_EXTERNAL_APPLICATIONS,	/** The directory for applications to be installed in external MMC (read-only permission) */
+	PREDEFINED_DIRECTORY_APPLICATIONS = 200,	/**< The directory for applications to be installed in internal storage (read-only permission) */
+	PREDEFINED_DIRECTORY_EXTERNAL_APPLICATIONS,	/**< The directory for applications to be installed in external MMC (read-only permission) */
 };
 
 /**
@@ -108,7 +108,6 @@ public:
 	* @param[in]	dirType	The pre-defined directory type
 	* @remarks	The directory path for some directory types such as IMAGES, SOUNDS, VIDEOS, CAMERA, DOWNLOADS, and OTHERS may not yet exist,
 	*		so you must make sure that it exists before using it.
-	* @see		PredefinedDirectoryType
 	* @see		Tizen::Io::Directory::Create()
 	*/
 	static Tizen::Base::String GetPredefinedPath(PredefinedDirectoryType dirType);

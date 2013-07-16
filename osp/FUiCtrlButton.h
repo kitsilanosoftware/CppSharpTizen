@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -90,7 +90,6 @@ private:
 	Tizen::Ui::Controls::Button* __pButton;
 	Tizen::Ui::Controls::Button* __pBitmapButton;
 };
-
  *	@endcode
  *
  *	@code
@@ -122,7 +121,7 @@ ButtonSample::OnInitializing(void)
 	__pButton->SetActionId(ID_BUTTON);
 	__pButton->AddActionEventListener(*this);
 
-	AddControl(*__pButton);
+	AddControl(__pButton);
 
 	// Creates an instance of Button for bitmap button
 	__pBitmapButton = new Button();
@@ -144,7 +143,7 @@ ButtonSample::OnInitializing(void)
 	delete pBitmapPressed;
 
 	// Adds the bitmap button to the form
-	AddControl(*__pBitmapButton);
+	AddControl(__pBitmapButton);
 
 	return r;
 }
@@ -196,19 +195,43 @@ public:
 	 * @since			2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	rect			An instance of the Rectangle class @n
-	 *								This instance represents the x and y coordinates of the top-left corner @n
-	 *                              of the created window along with its width and height. @n
-	 * @param[in]   text			The text to be displayed on the button
+	 * @param[in]	rect			An instance of the Tizen::Graphics::Rectangle class @n
+	 *								This instance represents the x and y coordinates of the top-left corner
+	 *                              of the created window along with its width and height.@n
+	 *								The optimal size of the control is defined in
+	 *								<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]   text			The text to display on the button
+	 *								To display the text in multi-lines or to denote the end of line, use '\\n'.
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception   E_INVALID_ARG	A specified input parameter is invalid.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks		A control is fully functional only after it has been added to a container. Therefore, some methods may fail if they are used before
+	 * @remarks
+	 *				- A control is fully functional only after it has been added to a container. Therefore, some methods may fail if they are used before
 	 *				adding the control to the container.
-	 * @remarks		To display the text in multi-lines or to denote the end of line, use '\\n'.
-	 * @remarks		The size of the control must be within the range defined by the minimum and maximum sizes.
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, const Tizen::Base::String& text = L"");
+
+	/**
+	 * Initializes this instance of %Button with the specified parameters.
+	 *
+	 * @since			2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	rect			An instance of the Tizen::Graphics::FloatRectangle class @n
+	 *								This instance represents the x and y coordinates of the top-left corner
+	 *                              of the created window along with its width and height.@n
+	 *								The optimal size of the control is defined in
+	 *								<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]   text			The text to display on the button
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception   E_INVALID_ARG	A specified input parameter is invalid.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @remarks
+	 *				- A control is fully functional only after it has been added to a container. Therefore, some methods may fail if they are used before
+	 *				adding the control to the container.
+	 *				- To display the text in multi-lines or to denote the end of line, use '\\n'.
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect, const Tizen::Base::String& text = L"");
 
 	/**
 	 * Adds a listener instance. @n
@@ -216,7 +239,7 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 */
 	void AddActionEventListener(Tizen::Ui::IActionEventListener& listener);
 
@@ -226,7 +249,7 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 */
 	void RemoveActionEventListener(Tizen::Ui::IActionEventListener& listener);
 
@@ -311,7 +334,7 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in]	color	The text color to be set
+	 * @param[in]	color	The text color to set
 	 */
 	virtual void SetTextColor(const Tizen::Graphics::Color& color);
 
@@ -330,7 +353,7 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in]	color	The color to be set
+	 * @param[in]	color	The color to set
 	 */
 	void SetPressedTextColor(const Tizen::Graphics::Color& color);
 
@@ -349,7 +372,7 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in]	color	The color to be set
+	 * @param[in]	color	The color to set
 	 */
 	void SetDisabledTextColor(const Tizen::Graphics::Color& color);
 
@@ -367,7 +390,7 @@ public:
 	 *
 	 * @since           2.0
 	 *
-	 * @param[in]	color	The color to be set
+	 * @param[in]	color	The color to set
 	 * @remarks     While navigating the user interface using the directional keys, the focused UI control is highlighted.
 	 */
 	void SetHighlightedTextColor(const Tizen::Graphics::Color& color);
@@ -387,30 +410,80 @@ public:
 	 *
 	 * @since	    2.0
 	 *
-	 * @param[in]	position	The location of a bitmap where it is to be displayed on the button
-	 * @param[in]	bitmap		The bitmap of to be set
+	 * @param[in]	position	The location of a bitmap where it is to display on the button
+	 * @param[in]	bitmap		The bitmap to set
 	 */
 	void SetNormalBitmap(const Tizen::Graphics::Point& position, const Tizen::Graphics::Bitmap& bitmap);
+
+	/**
+	 * Sets a bitmap that is to be displayed when the button is not pressed.
+	 *
+	 * @since	    2.1
+	 *
+	 * @param[in]	position	The location of a bitmap where it is to display on the button
+	 * @param[in]	bitmap		The bitmap to set
+	 */
+	void SetNormalBitmap(const Tizen::Graphics::FloatPoint& position, const Tizen::Graphics::Bitmap& bitmap);
+
+	/**
+	 * Sets the disabled bitmap of the button.
+	 *
+	 * @since		2.0
+	 *
+	 * @param[in]	position	The location of disabled bitmap
+	 * @param[in]	bitmap		The disabled bitmap of the button
+	 */
+	void SetDisabledBitmap(const Tizen::Graphics::Point& position, const Tizen::Graphics::Bitmap& bitmap);
+
+	/**
+	 * Sets the disabled bitmap of the button.
+	 *
+	 * @since		2.1
+	 *
+	 * @param[in]	position	The location of disabled bitmap
+	 * @param[in]	bitmap		The disabled bitmap of the button
+	 */
+	void SetDisabledBitmap(const Tizen::Graphics::FloatPoint& position, const Tizen::Graphics::Bitmap& bitmap);
 
 	/**
 	 * Sets the bitmap that is to be displayed on the button when it is pressed.
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	position	The location of a bitmap where it is to be displayed on the Button control
-	 * @param[in]	bitmap		The bitmap to be set
+	 * @param[in]	position	The location of a bitmap where it is to display on the Button control
+	 * @param[in]	bitmap		The bitmap to set
 	 */
 	void SetPressedBitmap(const Tizen::Graphics::Point& position, const Tizen::Graphics::Bitmap& bitmap);
 
 	/**
-	* Sets the disabled bitmap of the button.
-	*
-	* @since			2.0
-	*
-	* @param[in]		position	The location of disabled bitmap
-	* @param[in]	bitmap		The disabled bitmap of the button
-	*/
-	void SetDisabledBitmap(const Tizen::Graphics::Point& position, const Tizen::Graphics::Bitmap& bitmap);
+	 * Sets the bitmap that is to be displayed on the button when it is pressed.
+	 *
+	 * @since		2.1
+	 *
+	 * @param[in]	position	The location of a bitmap where it is to display on the Button control
+	 * @param[in]	bitmap		The bitmap to set
+	 */
+	void SetPressedBitmap(const Tizen::Graphics::FloatPoint& position, const Tizen::Graphics::Bitmap& bitmap);
+
+	/**
+	 * Sets the highlighted bitmap of the button.
+	 *
+	 * @since       2.1
+	 *
+	 * @param[in]   position     The location of highlighted bitmap
+	 * @param[in]   bitmap       The highlighted bitmap of the button
+	 */
+	void SetHighlightedBitmap(const Tizen::Graphics::Point& position, const Tizen::Graphics::Bitmap& bitmap);
+
+	/**
+	 * Sets the highlighted bitmap of the button.
+	 *
+	 * @since       2.1
+	 *
+	 * @param[in]   position     The location of highlighted bitmap
+	 * @param[in]   bitmap       The highlighted bitmap of the button
+	 */
+	void SetHighlightedBitmap(const Tizen::Graphics::FloatPoint& position, const Tizen::Graphics::Bitmap& bitmap);
 
 	/**
 	 * Sets the normal background bitmap of the button.
@@ -420,6 +493,15 @@ public:
 	 * @param[in]	bitmap			The normal background image
 	 */
 	void SetNormalBackgroundBitmap(const Tizen::Graphics::Bitmap& bitmap);
+
+	/**
+	 * Sets the disabled background bitmap of the button.
+	 *
+	 * @since       2.1
+	 *
+	 * @param[in]   bitmap          The disabled background image
+	 */
+	void SetDisabledBackgroundBitmap(const Tizen::Graphics::Bitmap& bitmap);
 
 	/**
 	 * Sets the pressed background bitmap of the button.
@@ -481,6 +563,20 @@ public:
 	int GetTextSize(void) const;
 
 	/**
+	 * Gets the text size.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      The size of the text, @n
+	 *              else @c -1.0f if an error occurs
+	 * @exception   E_SUCCESS                 The method is successful.
+	 * @exception   E_SYSTEM                  A system error has occurred.
+	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
+	 * @see         SetTextSize()
+	 */
+	float GetTextSizeF(void) const;
+
+	/**
 	 * Sets the text size.
 	 *
 	 * @since       2.0
@@ -494,6 +590,21 @@ public:
 	 * @see                           GetTextSize()
 	 */
 	result SetTextSize(int size);
+
+	/**
+	* Sets the text size.
+    *
+	* @since       2.1
+	*
+	* @return      An error code
+	* @param[in]   size              The text size
+	* @exception   E_SUCCESS         The method is successful.
+	* @exception   E_INVALID_ARG     The specified input parameter is invalid. @n
+	*                                The specified @c size must be greater than @c 0.
+	* @exception   E_SYSTEM          A system error has occurred.
+	* @see                           GetTextSize()
+	*/
+	result SetTextSize(float size);
 
 protected:
 	friend class _ButtonImpl;

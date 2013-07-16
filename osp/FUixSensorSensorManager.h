@@ -2,11 +2,11 @@
 // Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 // 
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.tizenopensource.org/license
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an AS IS BASIS,
@@ -161,14 +161,7 @@ public:
 
 	/**
 	* Adds a sensor listener when the sensor powers up for the first time.
-	* @if OSPCOMPAT
-	* @brief                   <i> [Compatibility] </i>
-	* @endif
 	* @since        2.0
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatible applications. @n
-	*                              For more information, see @ref CompSensorManagerAddSensorListenerPage "here".
-	* @endif
 	* @return       An error code
 	* @param[in]    listener                     The listener to add
 	* @param[in]    sensorType                   The sensor type
@@ -179,37 +172,19 @@ public:
 	* @exception    E_OUT_OF_MEMORY              The memory is insufficient.
 	* @exception    E_INVALID_ARG                An interval must be greater than the maximum interval or less than the minimum interval or the sensor type is invalid.
 	* @exception    E_OPERATION_FAILED         The operation has failed to add a sensor listener.
-	* @exception    E_USER_ALREADY_REGISTERED    The specified listener is already registered for the specified sensor type.
+	* @exception    E_USER_ALREADY_REGISTERED    The specified @c listener is already registered for the specified sensor type.
 	* @exception    E_UNSUPPORTED_OPERATION      The target device does not support the specific sensor.
 	*/
 
 	result AddSensorListener(ISensorEventListener& listener, SensorType sensorType, long interval, bool dataChanged);
 
 	/**
-	* @if OSPCOMPAT
-	* @page	        CompSensorManagerAddSensorListenerPage Compatibility for AddSensorListener()
-	* @section      CompSensorManagerAddSensorListenerIssueSection Issues
-	* Implementing this method in OSP compatible applications has the following issues:   @n
-	* -# The method returns E_DEVICE_UNAVAILABLE if the target device does not support the specific sensor.
-	*
-	* @section      CompSensorManagerAddSensorListenerSolutionSection Resolutions
-	* This issue has been resolved in Tizen. @n
-	* -# The method returns E_UNSUPPORTED_OPERATION if the target device does not support the specific sensor.
-	* -# E_DEVICE_UNAVAILABLE exception is removed.
-	* @endif
 	*/
 
 	/**
 	* Removes a sensor listener from all sensor types. @n
 	* Sensor powers down when every listener added to the type of sensor is removed.
-	* @if OSPCOMPAT
-	* @brief                   <i> [Compatibility] </i>
-	* @endif
 	* @since        2.0
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatible applications. @n
-	*                              For more information, see @ref CompSensorManagerRemoveSensorListenerPage "here".
-	* @endif
 	* @return       An error code
 	* @param[in]    listener                The listener to remove
 	* @exception    E_SUCCESS               The method is successful.
@@ -221,31 +196,13 @@ public:
 	result RemoveSensorListener(ISensorEventListener& listener);
 
 	/**
-	* @if OSPCOMPAT
-	* @page                    CompSensorManagerRemoveSensorListenerPage Compatibility for RemoveSensorListener()
-	* @section                 CompSensorManagerRemoveSensorListenerIssueSection Issues
-	* Implementing this method in OSP compatible applications has the following issues:   @n
-	* -# The method returns E_DEVICE_UNAVAILABLE if the target device does not support the specific sensor.
-	*
-	* @section                 CompSensorManagerRemoveSensorListenerSolutionSection Resolutions
-	* This issue has been resolved in Tizen. @n
-	* -# The method returns E_UNSUPPORTED_OPERATION if the target device does not support the specific sensor.
-	* -# E_DEVICE_UNAVAILABLE exception is removed.
-	* @endif
 	*/
 
 
 	/**
 	* Removes a sensor listener from the sensor type. @n
 	* Sensor powers down when every listener added to the type of sensor is removed.
-	* @if OSPCOMPAT
-	* @brief                   <i> [Compatibility] </i>
-	* @endif
 	* @since        2.0
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatible applications. @n
-	*                              For more information, see @ref CompSensorManagerRemoveSensorListenerPage "here".
-	* @endif
 	* @return       An error code
 	* @param[in]    listener                   The listener to remove
 	* @param[in]    sensorType                 The sensor type
@@ -258,33 +215,15 @@ public:
 	result RemoveSensorListener(ISensorEventListener& listener, SensorType sensorType);
 
 	/**
-	 * @if OSPCOMPAT
-	* @page                    CompSensorManagerRemoveSensorListenerPage Compatibility for RemoveSensorListener ()
-	* @section                   CompSensorManagerRemoveSensorListenerIssueSection Issues
-	* Implementing this method in OSP compatible applications has the following issues:   @n
-	* -# The method returns E_DEVICE_UNAVAILABLE if the target device does not support the specific sensor.
-	*
-	* @section                 CompSensorManagerRemoveSensorListenerSolutionSection Resolutions
-	* This issue has been resolved in Tizen. @n
-	* -# The method returns E_UNSUPPORTED_OPERATION if the target device does not support the specific sensor.
-	* -# E_DEVICE_UNAVAILABLE exception is removed.
-	* @endif
-	*/
+	 */
 
 	/**
-	* @if OSPDEPREC
 	* @{
+	* @if OSPDEPREC
 	* Sets an interval of a sensor.
-	* @if OSPCOMPAT
-	* @brief <i> [Deprecated] [Compatibility] </i>
-	* @endif
 	* @deprecated   This method is deprecated because it changes only the first listener's interval; the other listeners do not have an option to change their intervals.
 	* To resolve this, a new method has been added. Instead of using this method, use the SetInterval(ISensorEventListener& listener, SensorType sensorType, long interval) method.
 	* @since        2.0
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatible applications. @n
-	*                              For more information, see @ref CompSensorManagerSetIntervalPage "here".
-	* @endif
 	* @return       An error code
 	* @param[in]    sensorType                 The sensor type
 	* @param[in]    interval                   The interval (in milliseconds) at which the sensor data is received
@@ -295,36 +234,18 @@ public:
 	* @exception    E_UNSUPPORTED_OPERATION      The target device does not support the specific sensor.
 	* @see SensorManager::GetMaxInterval() for getting the maximum intervals
 	* @see SensorManager::GetMinInterval() for getting the minimum intervals
-	* @}
 	* @endif
+	* @}
 	*/
 
 	result SetInterval(SensorType sensorType, long interval);
 
 	/**
-	* @if OSPCOMPAT
-	* @page                    CompSensorManagerSetIntervalPage Compatibility for SetInterval ()
-	* @section                   CompSensorManagerSetIntervalIssueSection Issues
-	* Implementing this method in OSP compatible applications has the following issues:   @n
-	* -# The method returns E_DEVICE_UNAVAILABLE if the target device does not support the specific sensor.
-	*
-	* @section                 CompSensorManagerSetIntervalSolutionSection Resolutions
-	* This issue has been resolved in Tizen. @n
-	* -# The method returns E_UNSUPPORTED_OPERATION if the target device does not support the specific sensor.
-	* -# E_DEVICE_UNAVAILABLE exception is removed.
-	* @endif
 	*/
 
 	/**
 	* Sets an interval of a sensor using the specified @c listener.
-	* @if OSPCOMPAT
-	* @brief                   <i> [Compatibility] </i>
-	* @endif
 	* @since        2.0
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatible applications. @n
-	*                              For more information, see @ref CompSensorManagerSetIntervalPage "here".
-	* @endif
 	* @return       An error code
 	* @param[in]    listener                   The added listener
 	* @param[in]    sensorType                 The sensor type
@@ -340,29 +261,11 @@ public:
 	result SetInterval(ISensorEventListener& listener, SensorType sensorType, long interval);
 
 	/**
-	* @if OSPCOMPAT
-	* @page                    CompSensorManagerSetIntervalPage Compatibility for SetInterval ()
-	* @section                   CompSensorManagerSetIntervalIssueSection Issues
-	* Implementing this method in OSP compatible applications has the following issues:   @n
-	* -# The method returns E_DEVICE_UNAVAILABLE if the target device does not support the specific sensor.
-	*
-	* @section                 CompSensorManagerSetIntervalSolutionSection Resolutions
-	* This issue has been resolved in Tizen. @n
-	* -# The method returns E_UNSUPPORTED_OPERATION if the target device does not support the specific sensor.
-	* -# E_DEVICE_UNAVAILABLE exception is removed.
-	* @endif
 	*/
 
 	/**
 	* Checks whether a sensor type is available on the device.
-	* @if OSPCOMPAT
-	* @brief                   <i> [Compatibility] </i>
-	* @endif
 	* @since        2.0
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatible applications. @n
-	*                              For more information, see @ref CompSensorManagerIsAvailablePage "here".
-	* @endif
 	* @return       @c true if the sensor type is available, @n
 	*               else @c false
 	* @param[in]    sensorType       The sensor type
@@ -373,29 +276,11 @@ public:
 	bool IsAvailable(SensorType sensorType) const;
 
 	/**
-	* @if OSPCOMPAT
-	* @page                    CompSensorManagerIsAvailablePage Compatibility for IsAvailable ()
-	* @section                   CompSensorManagerIsAvailableIssueSection Issues
-	* Implementing this method in OSP compatible applications has the following issues:   @n
-	* -# The method returns E_DEVICE_UNAVAILABLE if the target device does not support the specific sensor.
-	*
-	* @section                 CompSensorManagerIsAvailableSolutionSection Resolutions
-	* This issue has been resolved in Tizen. @n
-	* -# The method returns E_UNSUPPORTED_OPERATION if the target device does not support the specific sensor.
-	* -# E_DEVICE_UNAVAILABLE exception is removed.
-	* @endif
 	*/
 
 	/**
 	* Gets the minimum interval of the sensor type.
-	* @if OSPCOMPAT
-	* @brief                   <i> [Compatibility] </i>
-	* @endif
 	* @since         2.0
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatible applications. @n
-	*                              For more information, see @ref CompSensorManagerGetMinIntervalPage "here".
-	* @endif
 	* @return        An error code
 	* @param[in]     sensorType                 The sensor type
 	* @param[out]    interval                   The minimum interval in milliseconds
@@ -407,29 +292,11 @@ public:
 	result GetMinInterval(SensorType sensorType, long& interval) const;
 
 	/**
-    * @if OSPCOMPAT
-	* @page                    CompSensorManagerGetMinIntervalPage Compatibility for GetMinInterval()
-	* @section                   CompSensorManagerGetMinIntervalIssueSection Issues
-	* Implementing this method in OSP compatible applications has the following issues:   @n
-	* -# The method returns E_DEVICE_UNAVAILABLE if the target device does not support the specific sensor.
-	*
-	* @section                 CompSensorManagerGetMinIntervalSolutionSection Resolutions
-	* This issue has been resolved in Tizen. @n
-	* -# The method returns E_UNSUPPORTED_OPERATION if the target device does not support the specific sensor.
-	* -# E_DEVICE_UNAVAILABLE exception is removed.
-	* @endif
-	*/
+    */
 
 	/**
 	* Gets the maximum interval of the sensor type.
-	* @if OSPCOMPAT
-	* @brief                   <i> [Compatibility] </i>
-	* @endif
 	* @since         2.0
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatible applications. @n
-	*                              For more information, see @ref CompSensorManagerGetMaxIntervalPage "here".
-	* @endif
 	* @return        An error code
 	* @param[in]     sensorType                 The sensor type
 	* @param[out]    interval                   The maximum interval in milliseconds
@@ -441,30 +308,12 @@ public:
 	result GetMaxInterval(SensorType sensorType, long& interval) const;
 
 	/**
-	* @if OSPCOMPAT
-	* @page                    CompSensorManagerGetMaxIntervalPage Compatibility for GetMaxInterval()
-	* @section                   CompSensorManagerGetMaxIntervalIssueSection Issues
-	* Implementing this method in OSP compatible applications has the following issues:   @n
-	* -# The method returns E_DEVICE_UNAVAILABLE if the target device does not support the specific sensor.
-	*
-	* @section                 CompSensorManagerGetMaxIntervalSolutionSection Resolutions
-	* This issue has been resolved in Tizen. @n
-	* -# The method returns E_UNSUPPORTED_OPERATION if the target device does not support the specific sensor.
-	* -# E_DEVICE_UNAVAILABLE exception is removed.
-	* @endif
 	*/
 
 	/**
 	* Gets a brief description on this sensor.
-	* @if OSPCOMPAT
-	* @brief                   <i> [Compatibility] </i>
-	* @endif
 	* @since         2.0
 	*
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatible applications. @n
-	*                              For more information, see @ref CompSensorManagerGetDescriptionPage "here".
-	* @endif
 	* @return        An error code
 	* @param[in]     sensorType                 The sensor type
 	* @param[out]    description                The sensor description
@@ -476,29 +325,11 @@ public:
 	result GetDescription(SensorType sensorType, Tizen::Base::String& description) const;
 
 	/**
-	* @if OSPCOMPAT
-	* @page                    CompSensorManagerGetDescriptionPage Compatibility for GetDescription()
-	* @section                   CompSensorManagerGetDescriptionIssueSection Issues
-	* Implementing this method in OSP compatible applications has the following issues:   @n
-	* -# The method returns E_DEVICE_UNAVAILABLE if the target device does not support the specific sensor.
-	*
-	* @section                 CompSensorManagerGetDescriptionSolutionSection Resolutions
-	* This issue has been resolved in Tizen. @n
-	* -# The method returns E_UNSUPPORTED_OPERATION if the target device does not support the specific sensor.
-	* -# E_DEVICE_UNAVAILABLE exception is removed.
-	* @endif
 	*/
 
 	/**
 	* Gets the sensor's vendor information.
-	* @if OSPCOMPAT
-	* @brief                   <i> [Compatibility] </i>
-	* @endif
 	* @since         2.0
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatible applications. @n
-	*                              For more information, see @ref CompSensorManagerGetVendorPage "here".
-	* @endif
 	* @return        An error code
 	* @param[in]     sensorType                 The sensor type
 	* @param[out]    vendor                     The vendor information
@@ -510,30 +341,12 @@ public:
 	result GetVendor(SensorType sensorType, Tizen::Base::String& vendor) const;
 
 	/**
-	* @if OSPCOMPAT
-	* @page                    CompSensorManagerGetVendorPage Compatibility for GetVendor()
-	* @section                   CompSensorManagerGetVendorIssueSection Issues
-	* Implementing this method in OSP compatible applications has the following issues:   @n
-	* -# The method returns E_DEVICE_UNAVAILABLE if the target device does not support the specific sensor.
-	*
-	* @section                 CompSensorManagerGetVendorSolutionSection Resolutions
-	* This issue has been resolved in Tizen. @n
-	* -# The method returns E_UNSUPPORTED_OPERATION if the target device does not support the specific sensor.
-	* -# E_DEVICE_UNAVAILABLE exception is removed.
-	* @endif
 	*/
 
 	/**
 	* Gets the sensor's model ID.
-	* @if OSPCOMPAT
-	* @brief                   <i> [Compatibility] </i>
-	* @endif
 	* @since         2.0
 	*
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatible applications. @n
-	*                              For more information, see @ref CompSensorManagerGetModelIdPage "here".
-	* @endif
 	* @return        An error code
 	* @param[in]     sensorType                 The sensor type
 	* @param[out]    modelId                    The model ID of the sensor hardware
@@ -545,30 +358,12 @@ public:
 	result GetModelId(SensorType sensorType, Tizen::Base::String& modelId) const;
 
 	/**
-	* @if OSPCOMPAT
-	* @page                    CompSensorManagerGetModelIdPage Compatibility for GetModelId()
-	* @section                   CompSensorManagerGetModelIdIssueSection Issues
-	* Implementing this method in OSP compatible applications has the following issues:   @n
-	* -# The method returns E_DEVICE_UNAVAILABLE if the target device does not support the specific sensor.
-	*
-	* @section                 CompSensorManagerGetModelIdSolutionSection Resolutions
-	* This issue has been resolved in Tizen. @n
-	* -# The method returns E_UNSUPPORTED_OPERATION if the target device does not support the specific sensor.
-	* -# E_DEVICE_UNAVAILABLE exception is removed.
-	* @endif
 	*/
 
 	/**
 	* Gets the measurement range of the sensor.
-	* @if OSPCOMPAT
-	* @brief                   <i> [Compatibility] </i>
-	* @endif
 	* @since         2.0
 	*
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatible applications. @n
-	*                              For more information, see @ref CompSensorManagerGetMeasurementRangePage "here".
-	* @endif
 	* @return        An error code
 	* @param[in]     sensorType                 The sensor type
 	* @param[out]    min                        The minimum value of the measurement range
@@ -583,68 +378,34 @@ public:
 	result GetMeasurementRange(SensorType sensorType, float& min, float& max, float& resolution) const;
 
 	/**
-	* @if OSPCOMPAT
-	* @page                    CompSensorManagerGetMeasurementRangePage Compatibility for GetMeasurementRange()
-	* @section                   CompSensorManagerGetMeasurementRangeIssueSection Issues
-	* Implementing this method in OSP compatible applications has the following issues:   @n
-	* -# The method returns E_DEVICE_UNAVAILABLE if the target device does not support the specific sensor.
-	*
-	* @section                 CompSensorManagerGetMeasurementRangeSolutionSection Resolutions
-	* This issue has been resolved in Tizen. @n
-	* -# The method returns E_UNSUPPORTED_OPERATION if the target device does not support the specific sensor.
-	* -# E_DEVICE_UNAVAILABLE exception is removed.
-	* @endif
 	*/
 
 	/**
 	* Checks whether the wake up feature is supported for the specified sensor type. @n
 	* The return value can vary depending on a specific device model.
-	* @if OSPCOMPAT
-	* @brief                   <i> [Compatibility] </i>
-	* @endif
 	* @since        2.0
 	*
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatible applications. @n
-	*                              For more information, see @ref CompSensorManagerIsWakeupSupportedPage "here".
-	* @endif
 	* @return       @c true if the sensor type supports the wake up feature while the device is in the sleep mode, @n
 	*               else @c false if the wake up feature is not supported by the sensor or if the instance is not initialized properly
 	* @param[in]    sensorType                 The sensor type
 	* @exception    E_SUCCESS                  The method is successful.
 	* @exception    E_INVALID_ARG              The sensor type is invalid.
 	* @exception    E_OPERATION_FAILED         The operation has failed.
-	* @exception    E_UNSUPPORTED_OPERATION      The target device does not support the specific sensor.
+	* @exception    E_UNSUPPORTED_OPERATION      The target device does not support the specific sensor,or @n
+	* 											the target device does not support wake-up feature  originally or based on the specific sensor.
 	* @remarks      The specific error code can be accessed using the GetLastResult() method.
 	* @remarks		This method cannot be tested on the Emulator. It always returns true on the Emulator.
 	*/
 	bool IsWakeupSupported(SensorType sensorType) const;
 
 	/**
-	* @if OSPCOMPAT
-	* @page                    CompSensorManagerIsWakeupSupportedPage Compatibility for IsWakeupSupported()
-	* @section                   CompSensorManagerIsWakeupSupportedIssueSection Issues
-	* Implementing this method in OSP compatible applications has the following issues:   @n
-	* -# The method returns E_DEVICE_UNAVAILABLE if the target device does not support the specific sensor.
-	*
-	* @section                 CompSensorManagerIsWakeupSupportedSolutionSection Resolutions
-	* This issue has been resolved in Tizen. @n
-	* -# The method returns E_UNSUPPORTED_OPERATION if the target device does not support the specific sensor.
-	* -# E_DEVICE_UNAVAILABLE exception is removed.
-	* @endif
 	*/
 
 	/**
 	* Sets the application-wise wake up feature as enabled or disabled for the specified sensor type.
-	* @if OSPCOMPAT
-	* @brief                   <i> [Compatibility] </i>
-	* @endif
 	* @since        2.0
 	*
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatible applications. @n
-	*                              For more information, see @ref CompSensorManagerSetWakeupEnabledPage "here".
-	* @endif
+	* @feature      %http://tizen.org/feature/sensor.accelerometer.wakeup
 	* @return       An error code
 	* @param[in]    sensorType                 The sensor type
 	* @param[in]    enable                     Set to @c true to enable the wake up feature, @n
@@ -654,61 +415,39 @@ public:
 	* @exception    E_INVALID_STATE            There is no sensor listener registered for this type.
 	* @exception    E_INVALID_ARG              The sensor type is invalid.
 	* @exception    E_OPERATION_FAILED         The operation has failed.
-	* @exception    E_UNSUPPORTED_OPERATION      The target device does not support the specific sensor.
-	* @remarks      The wake up feature is automatically disabled by the system as soon as the calling application is terminated.
-	* @remarks		This method cannot be tested on the Emulator. It always returns E_SUCCESS on the Emulator.
+	* @exception    E_UNSUPPORTED_OPERATION      The target device does not support the specific sensor,or @n
+	* 											the target device does not support wake-up feature originally or based on the specific sensor.
+	* @remarks
+	*			  - The wake up feature is automatically disabled by the system as soon as the calling application is terminated.
+	*			  - This method cannot be tested on the Emulator. It always returns @c E_SUCCESS on the Emulator.
+	*			  - Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	*/
 	result SetWakeupEnabled(SensorType sensorType, bool enable);
 
 	/**
-	* @if OSPCOMPAT
-	* @page                    CompSensorManagerSetWakeupEnabledPage Compatibility for SetWakeupEnabled()
-	* @section                   CompSensorManagerSetWakeupEnabledIssueSection Issues
-	* Implementing this method in OSP compatible applications has the following issues:   @n
-	* -# The method returns E_DEVICE_UNAVAILABLE if the target device does not support the specific sensor.
-	*
-	* @section                 CompSensorManagerSetWakeupEnabledSolutionSection Resolutions
-	* This issue has been resolved in Tizen. @n
-	* -# The method returns E_UNSUPPORTED_OPERATION if the target device does not support the specific sensor.
-	* -# E_DEVICE_UNAVAILABLE exception is removed.
-	* @endif
 	*/
 
 	/**
 	* Checks whether the wake up feature is enabled for the specified sensor type.
-	* @if OSPCOMPAT
-	* @brief                   <i> [Compatibility] </i>
-	* @endif
 	* @since        2.0
 	*
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatible applications. @n
-	*                              For more information, see @ref CompSensorManagerIsWakeupEnabledPage "here".
-	* @endif
+	* @feature      %http://tizen.org/feature/sensor.accelerometer.wakeup
 	* @return       @c true if the wakeup feature is enabled for the specified sensor type for the calling application, @n
 	*               else @c false
 	* @param[in]    sensorType                 The sensor type
 	* @exception    E_SUCCESS                  The method is successful.
 	* @exception    E_INVALID_ARG              The sensor type is invalid.
 	* @exception    E_OPERATION_FAILED         The operation has failed.
-	* @exception    E_UNSUPPORTED_OPERATION      The target device does not support the specific sensor.
-	* @remarks      The specific error code can be accessed using the GetLastResult() method.
-	* @remarks		This method cannot be tested on the Emulator. It always returns true on the Emulator.
+	* @exception    E_UNSUPPORTED_OPERATION      The target device does not support the specific sensor,or @n
+	* 											the target device does not support wake-up feature originally or based on the specific sensor.
+	* @remarks
+	*			  - The specific error code can be accessed using the GetLastResult() method.
+	*			  - This method cannot be tested on the Emulator. It always returns @c true on the Emulator.
+	*			  - Before calling this method, check whether the feature is supported by Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	*/
 	bool IsWakeupEnabled(SensorType sensorType) const;
 
 	/**
-	* @if OSPCOMPAT
-	* @page                    CompSensorManagerIsWakeupEnabledPage Compatibility for IsWakeupEnabled()
-	* @section                   CompSensorManagerIsWakeupEnabledIssueSection Issues
-	* Implementing this method in OSP compatible applications has the following issues:   @n
-	* -# The method returns E_DEVICE_UNAVAILABLE if the target device does not support the specific sensor.
-	*
-	* @section                 CompSensorManagerIsWakeupEnabledSolutionSection Resolutions
-	* This issue has been resolved in Tizen. @n
-	* -# The method returns @c E_UNSUPPORTED_OPERATION if the target device does not support the specific sensor.
-	* -# E_DEVICE_UNAVAILABLE exception is removed.
-	* @endif
 	*/
 
 private:

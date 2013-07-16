@@ -37,6 +37,10 @@ namespace Tizen { namespace Media
  *
  * @since		2.0
  *
+ * @remarks			OnPlayerInterrupted() is called when the application is interrupted by another application and OnPlayerReleased() event can be called at the end of interruption.
+ *			OnPlayerAudioFocusChanged() is called when the application is interrupted by another application but the end of interruption is not notified.
+ *			So, the application should handle both events to work properly on various sound scenarios between applications.
+ *
  * The %IPlayerEventListener interface specifies the methods used to notify the status of the media player during the media playing events.
  * The player engine works asynchronously. Therefore, it is important to implement this listener to ensure that the player flows correctly.
  * When each operation of the Player is completed, an event is generated, and a method from this class is called.
@@ -66,10 +70,17 @@ public:
 	*	@exception	 E_SUCCESS							The method is successful.
 	*	@exception	 E_SYSTEM							A system error has occurred.
 	*	@exception	 E_CONNECTION_FAILED				The network connection has failed.
+	*	@exception	 E_FILE_NOT_FOUND  		   The file cannot be found or accessed.
 	*   @exception	 E_UNSUPPORTED_FORMAT				The specified format is not supported.
 	*   @exception	 E_UNSUPPORTED_CODEC				The specified codec is not supported.
 	*	@exception	 E_OUT_OF_MEMORY					The memory is insufficient.
-	*	@see		Player::OpenFile(), Player::OpenUrl(), Player::OpenBuffer()
+	*	@exception	E_RIGHT_EXPIRED					The content right has expired.
+	*	@exception	E_RIGHT_NO_LICENSE				The content has no license.
+	*	@exception	E_RIGHT_FUTURE_USE				The content right is for future use.
+	*	@exception	E_DISPLAY_RIGHT_VIOLATED				The display right is not valid for the specific output device. @b Since: @b 2.1
+	*	@see		Player::OpenFile()
+	*	@see		Player::OpenUrl()
+	*	@see		Player::OpenBuffer()
 	*/
 	virtual void OnPlayerOpened(result r) = 0;
 
@@ -105,21 +116,22 @@ public:
 	virtual void OnPlayerBuffering(int percent) = 0;
 
 	/**
-	*	Called when an error has occurs while the Player is working.
+	*	Called when an error has occurred while the Player is working.
 	*
 	* @since		2.0
 	*
 	*	@param[in]	r		A player error reason of type ::PlayerErrorReason
-	*	@remarks			While playing streaming media, the player might throw an error like ::PLAYER_ERROR_CONNECTION_LOST
-	*				::PLAYER_ERROR_STREAMING_TIMEOUT, ::PLAYER_ERROR_TRANSPORT or ::PLAYER_ERROR_SERVER. @n
-	*				If the content includes invalid data, ::PLAYER_ERROR_INVALID_DATA may occur.
+	*	@remarks	
+	*				- While playing streaming media, the player might throw an error like ::PLAYER_ERROR_CONNECTION_LOST,
+	*				::PLAYER_ERROR_STREAMING_TIMEOUT, ::PLAYER_ERROR_TRANSPORT, or ::PLAYER_ERROR_SERVER.
+	*				- If the content includes invalid data, ::PLAYER_ERROR_INVALID_DATA may occur.
 	*	@see				PlayerErrorReason
 	*/
 	virtual void OnPlayerErrorOccurred(Tizen::Media::PlayerErrorReason r) = 0;
 
 
 	/**
-	 *	Called when the Player is being interrupted by a task of higher priority than the Player.
+	 *	Called when the Player is being interrupted by a task of higher priority than the %Player.
 	 *
 	 * @since		2.0
 	 */
@@ -135,9 +147,11 @@ public:
 	*	Called when an audio playback focus is changed to another application.
 	*
 	*	@since		2.0
-	*	@remarks	After the audio focus is being changed, the playback is paused or stopped and the state of this instance is changed to PLAYER_STATE_PAUSED or PLAYER_STATE_CLOSED.
-	*	@remarks	An application can play again in the state of PLAYER_STATE_PAUSED but the interaction between device and user needs for playback again. Because there is a possibility of a race condition between applications which try to play without the interaction
-	*	@remarks An application can not play again even in the state of PLAYER_STATE_PAUSED due to the application which has a higher priority.
+	*	@remarks	
+	*				- After the audio focus is being changed, the playback is paused or stopped and the state of this instance is changed to ::PLAYER_STATE_PAUSED or ::PLAYER_STATE_CLOSED.
+	*				- User interaction with the device is required for an application in @c PLAYER_STATE_PAUSED state to resume playing. 
+	*				This is to avoid the occurrence of a race condition among applications that try to play without user interaction.
+	*				- An application can not play again even in the state of @c PLAYER_STATE_PAUSED due to the application which has a higher priority.
 	*/
 	virtual void OnPlayerAudioFocusChanged(void) {}
 protected:

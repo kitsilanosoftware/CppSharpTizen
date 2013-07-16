@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -63,7 +62,7 @@ class LocalMessagePort;
 *		: public Tizen::Io::IMessagePortListener
 * {
 * public:
-*	result Initialize(void);
+*	void Initialize(void);
 *	virtual void OnMessageReceivedN(RemoteMessagePort* pRemoteMessagePort, IMap* pMessage);
 *	void GetOnlineFriends(void);
 *
@@ -82,15 +81,15 @@ class LocalMessagePort;
 * }
 *
 * void
-* MyAppClass::OnMessageReceivedN(RemoteMessagePort* pRemoteMessagePort, IMap* pMessage);
+* MyAppClass::OnMessageReceivedN(RemoteMessagePort* pRemoteMessagePort, IMap* pMessage)
 * {
-*	String* pValue = static_cast<String*>(pMessage->GetValue(L"Reply"));
+*   String* pValue = static_cast<String*>(pMessage->GetValue(String(L"Reply")));
 *
 *	AppLog("My friend's name is %ls", pValue->GetPointer());
 *
 *	delete pMessage;
 * }
-
+*
 * void
 * MyAppClass::GetOnlineFriends(void)
 * {
@@ -146,11 +145,14 @@ public:
 	 * @since    2.0
 	 *
 	 * @return       An error code
-	 * @param[in]     pMessage            A pointer to an argument map of key (String) and value (String or ByteBuffer) pair
+	 * @param[in]     pMessage            A pointer to an argument map of key (String) and value (String or ByteBuffer) pair @n
+	 *									  The recommended message size is under 4KB.
 	 * @exception     E_SUCCESS           The method is successful.
 	 * @exception     E_INVALID_ARG       The message argument is not a map of key (String) and value (String or ByteBuffer) pair.
 	 * @exception     E_OBJ_NOT_FOUND     The message port of the target application is not found.
+	 * @exception     E_MAX_EXCEEDED      The size of @c pMessage has exceeded the maximum limit.
 	 * @exception     E_SYSTEM            The method has failed due to a severe system error.
+	 * @remarks       The recommended message size is under 4KB because severe system performance degradation may occur for large messages. @c E_MAX_EXCEEDED may be returned for messages over 4KB size.
 	 */
 	result SendMessage(const Tizen::Base::Collection::IMap* pMessage);
 
@@ -162,13 +164,16 @@ public:
 	 *
 	 * @return       An error code
 	 * @param[in]     pLocalMessagePort    The local message port
-	 * @param[in]     pMessage            A pointer to an argument map of key (String) and value (String or ByteBuffer) pair
+	 * @param[in]     pMessage            A pointer to an argument map of key (String) and value (String or ByteBuffer) pair @n
+	 *									  The recommended message size is under 4KB.
 	 * @exception     E_SUCCESS           The method is successful.
 	 * @exception     E_INVALID_ARG       Either of the following conditions has occurred: @n
-	 *									  - The local message port is null. @n
+	 *									  - The local message port is @c null. @n
 	 *									  - The message argument is not a map of key (String) and value (String or ByteBuffer) pair.
 	 * @exception     E_OBJ_NOT_FOUND     The message port of the target application is not found.
+	 * @exception     E_MAX_EXCEEDED      The size of @c pMessage has exceeded the maximum limit.
 	 * @exception     E_SYSTEM            The method has failed due to a severe system error.
+	 * @remarks       The recommended message size is under 4KB because severe system performance degradation may occur for large messages. @c E_MAX_EXCEEDED may be returned for messages over 4KB size.
 	 */
 	result SendMessage(const LocalMessagePort* pLocalMessagePort, const Tizen::Base::Collection::IMap* pMessage);
 

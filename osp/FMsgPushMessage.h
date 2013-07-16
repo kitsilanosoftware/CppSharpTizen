@@ -76,7 +76,7 @@ public:
 	* Gets the body of the message.
 	* 
 	* @brief <i> [Deprecated]  </i>
-	* @deprecated	This method is deprecated. Instead of using this method, use Tizen::Shell::NotificationRequest::GetAppMessage() method.
+	* @deprecated	This method is deprecated. Instead of using this method, use the Tizen::Shell::NotificationRequest::GetAppMessage() method.
 	*
 	* @since		2.0
 	*
@@ -116,7 +116,7 @@ public:
 	* @exception    E_SUCCESS                  The method is successful.
 	* @exception    E_INVALID_ARG              The specified input parameter is invalid.
 	* @exception    E_OUT_OF_MEMORY            The memory is insufficient.
-	* @remarks   	PushMessage supports to set only alert text of NotificationRequest instance, and others are ignored.
+	* @remarks		PushMessage supports to set only alert text of NotificationRequest instance, and others are ignored.
 	* @see 			Tizen::Shell::NotificationRequest
 	*/
 	result SetNotification(const Tizen::Shell::NotificationRequest& notificationRequest);
@@ -127,7 +127,7 @@ public:
 	* @since		2.0
 	*
 	* @return		The notification request
-	* @remarks   	PushMessage supports to get only alert text of NotificationRequest instance, and others are ignored.
+	* @remarks		PushMessage supports to get only alert text of NotificationRequest instance, and others are ignored.
 	* @see 			Tizen::Shell::NotificationRequest
 	*/
 	Tizen::Shell::NotificationRequest GetNotification(void) const;
@@ -156,9 +156,9 @@ public:
 	*
 	* @since		2.0
 	*
-	* @return		@c true, if the values match, @n
+	* @return		@c true if the values match, @n
 	*				else @c false
-	* @param[in]	obj 	The other Object to be compared
+	* @param[in]	obj 	The other Tizen::Base::Object to compare
 	* @see 			Tizen::Base::Object::Equals()
 	*/
 	virtual bool Equals(const Tizen::Base::Object& obj) const;
@@ -168,7 +168,7 @@ public:
 	*
 	* @since		2.0
 	*
-	* @return		The current instance's hash value
+	* @return		The hash value of the current instance
 	*/
 	virtual int GetHashCode(void) const;
 

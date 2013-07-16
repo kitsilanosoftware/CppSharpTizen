@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -16,9 +15,9 @@
 //
 /**
  * @file		FContent.h
- * @brief		This is the header file for the %Tizen::Content namespace.
+ * @brief		This is the header file for the %Content namespace.
  *
- * This header file contains the declarations and descriptions of the %Tizen::Content namespace.
+ * This header file contains the declarations and descriptions of the %Content namespace.
  */
 
 #ifndef _FCNT_H_
@@ -43,6 +42,7 @@
 #include <FCntContentTransferInfo.h>
 #include <FCntIContentTransferListener.h>
 #include <FCntIContentScanListener.h>
+#include <FCntIContentUpdateEventListener.h>
 #include <FCntDownloadRequest.h>
 #include <FCntDownloadManager.h>
 #include <FCntIDownloadListener.h>

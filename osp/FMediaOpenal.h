@@ -28,7 +28,7 @@
 /**
  * @if OSPDEPREC
  * @namespace	Tizen::Media::Openal
- * @brief		<i> [Deprecated]  </i>This namespace contains interfaces for %OpenAL.
+ * @brief		<i> [Deprecated] </i>This namespace contains interfaces for %OpenAL.
  * @deprecated   This namespace is deprecated because libopenal/libalut open source libraries are supported directly on Tizen.
  * @since		2.0
  *
@@ -39,9 +39,9 @@
  *
  * The %OpenAL namespace provides %OpenAL (Version 1.1) methods and utilities.
  * %OpenAL is a cross platform three-dimensional audio method. It can also be referred as a software interface to audio hardware.
- * The primary purpose of %OpenAL is to allow an application to position audio sources in three dimensional spaces around a listener, producing reasonable spatialization of the sources for the audio system.
+ * The primary purpose of %OpenAL is to allow an application to position audio sources in three-dimensional spaces around a listener, producing reasonable spatialization of the sources for the audio system.
  * %OpenAL is appropriate for many audio applications, but is specifically designed for gaming audio.
- * The %OpenAL namespace provides %OpenAL Utility Toolkit (ALUT) features.
+ * This namespace provides %OpenAL Utility Toolkit (ALUT) features.
  *
  * For more information, see the <a href="http://connect.creativelabs.com/openal/default.aspx"  target="_blank">Creative Labs Web site</a>.
  * @endif

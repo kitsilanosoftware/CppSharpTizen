@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -28,6 +28,7 @@
 #include <FBaseObject.h>
 #include <FBaseTypes.h>
 #include <FGrpBitmap.h>
+#include <FGrpFloatRectangle.h>
 #include <FGrpRectangle.h>
 #include <FUiCtrlListItemBase.h>
 
@@ -42,8 +43,9 @@ class _GroupItemImpl;
  *
  * @since	2.0
  *
- * The %GroupItem class displays a group item. The basic layout of the %GroupItem instance is text and a bitmap arranged horizontally in one line. The bitmap can be omitted while text must be given.
- * @n
+ * The %GroupItem class displays a group item. The basic layout of the %GroupItem instance is text and a bitmap arranged horizontally in one line.
+ * The bitmap can be omitted while text must be given.
+ *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_listviews.htm">ListViews</a>.
  */
 
@@ -53,7 +55,7 @@ class _OSP_EXPORT_ GroupItem
 public:
 	/**
 	 * The object is not fully constructed after this constructor is
-	 * called. For full construction, the Construct() method must be
+	 * called. @n For full construction, the %Construct() method must be
 	 * called right after calling this constructor.
 	 *
 	 * @since	2.0
@@ -80,6 +82,18 @@ public:
 	result Construct(const Tizen::Graphics::Dimension& itemSize);
 
 	/**
+	 * Initializes this instance of %GroupItem with the specified parameter.
+	 *
+	 * @since	2.1
+	 *
+	 * @return	An error code
+	 * @param[in]	itemSize            The size of the item
+	 * @exception	E_SUCCESS           The method is successful.
+	 * @exception	E_SYSTEM            A system error has occurred.
+	 */
+	result Construct(const Tizen::Graphics::FloatDimension& itemSize);
+
+	/**
 	 * Sets the background image of the item.
 	 *
 	 * @since	2.0
@@ -88,8 +102,8 @@ public:
 	 * @param[in]	pBitmap           The background bitmap image
 	 * @exception	E_SUCCESS         The method is successful.
 	 * @exception	E_SYSTEM          A system error has occurred.
-	 * @remarks	The background bitmap has priority over the background color. When both the background bitmap and background color are specified, only
-	 *			the bitmap is displayed.
+	 * @remarks	The background bitmap has priority over the background color. When both the background bitmap and background color are
+	 *			specified, only the bitmap is displayed.
 	 */
 	result SetBackgroundBitmap(const Tizen::Graphics::Bitmap* pBitmap);
 
@@ -102,8 +116,10 @@ public:
 	 * @param[in]	color				The background color
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks		The background bitmap has priority over the background color. When both the background bitmap and the background color are specified, only the bitmap is displayed. @n
-	 *				The background color of the item is not applied when the item is inserted into the GroupedListView of section style.
+	 * @remarks
+	 *			- The background bitmap has priority over the background color. When both the background bitmap and the
+	 *			background color are specified, only the bitmap is displayed.
+	 *			- The background color of the item is not applied when the item is inserted into the GroupedListView of section style.
 	 */
 	result SetBackgroundColor(const Tizen::Graphics::Color& color);
 
@@ -157,6 +173,20 @@ public:
 	result SetTextSize(int size);
 
 	/**
+	 * Sets the size of a text.
+	 *
+	 * @since	2.1
+	 *
+	 * @return	An error code
+	 * @param[in]	size                The size of the text to set
+	 * @exception	E_SUCCESS           The method is successful.
+	 * @exception	E_INVALID_ARG       The specified input parameter is invalid.
+	 * @exception	E_SYSTEM            A system error has occurred.
+	 * @see     GetTextSize()
+	 */
+	result SetTextSize(float size);
+
+	/**
 	 * Gets the size of the text.
 	 *
 	 * @since	2.0
@@ -169,20 +199,33 @@ public:
 	int GetTextSize(void) const;
 
 	/**
+	 * Gets the size of a text.
+	 *
+	 * @since	2.1
+	 *
+	 * @return  The size of a text,
+	 *			else @c -1.0f if an error occurs
+	 *
+	 * @see     SetTextSize()
+	 */
+	float GetTextSizeF(void) const;
+
+	/**
 	 * Sets the text and bitmap of the element for %GroupItem.
 	 *
 	 * @since   2.0
 	 *
 	 * @return	An error code
-	 * @param[in]	text				The text string to be added
-	 * @param[in]	pBitmap             The bitmap to be displayed
+	 * @param[in]	text				The text string to add
+	 * @param[in]	pBitmap             The bitmap to display
 	 *
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks	The behavior of %GroupItem is different according to the style of GroupedListView. @n
-	 *          When the style is GROUPED_LIST_VIEW_INDEXED, the text and bitmap of %GroupItem are displayed, if they are given. However, when the style
-	 *			is GROUPED_LIST_VIEW_STYLE_SECTION, the bitmap is not displayed in any case and setting an empty text to %GroupItem does not show
-	 *			%GroupItem.
+	 * @remarks
+	 *			- The behavior of %GroupItem is different according to the style of GroupedListView.
+	 *			- When the style is ::GROUPED_LIST_VIEW_INDEXED, the text and bitmap of %GroupItem are displayed,
+	 *			if they are given. However, when the style is ::GROUPED_LIST_VIEW_STYLE_SECTION, the bitmap is not displayed in any
+	 *			case and setting an empty text to %GroupItem does not show %GroupItem.
 	 */
 	result SetElement(const Tizen::Base::String& text, const Tizen::Graphics::Bitmap* pBitmap = null);
 

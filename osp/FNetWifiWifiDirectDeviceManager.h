@@ -51,77 +51,92 @@ class _OSP_EXPORT_ WifiDirectDeviceManager
 	: public Tizen::Base::Object
 {
 public:
-    /**
-     * This is the default constructor for this class.
-     *
-     * @since 2.0
-     */
-    WifiDirectDeviceManager(void);
+	/**
+	 * This is the default constructor for this class.
+	 *
+	 * @since       2.0
+	 */
+	WifiDirectDeviceManager(void);
 
-    /**
-     * This destructor overrides Tizen::Base::Object::~Object().
-     *
-     * @since 2.0
-     */
-    virtual ~WifiDirectDeviceManager(void);
+	/**
+	 * This destructor overrides Tizen::Base::Object::~Object().
+	 *
+	 * @since       2.0
+	 */
+	virtual ~WifiDirectDeviceManager(void);
 
-    /**
-     * Gets a list of all the devices and also their information provided by the system.
-     *
-     * @since 2.0
-     *
-     * @return      An IList containing WifiDirectDeviceInfo of local devices in the system if successful, @n
-     *              else @c null
-     * @exception   E_SUCCESS               The method is successful.
-     * @exception   E_SYSTEM                An internal error has occurred.
-     * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
-     * @exception   E_UNSUPPORTED_OPERATION There is no WifiDirectDeviceInfo available since the device does not support the Wi-Fi Direct feature.
-     * @remarks Currently, a single WifiDirectDeviceInfo instance is returned because the concurrent mode is not supported.
-     *          The specific error code can be accessed using the GetLastResult() method.
-     */
-    static Tizen::Base::Collection::IList* GetAllDeviceInfoN(void);
+	/**
+	 * Gets a list of all the devices and also their information provided by the system.
+	 *
+	 * @since       2.0
+	 *
+	 * @feature     %http://tizen.org/feature/network.wifi.direct
+	 *
+	 * @return      A Tizen::Base::Collection::IList containing WifiDirectDeviceInfo of local devices in the system if
+	 *              successful, @n
+	 *              else @c null
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_SYSTEM                An internal error has occurred.
+	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
+	 * @exception   E_UNSUPPORTED_OPERATION The device does not support the Wi-Fi Direct feature. For more information, see
+	 *                                      <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">
+	 *                                      Application Filtering</a>.
+	 * @remarks
+	 *              - Currently, a single WifiDirectDeviceInfo instance is returned because the concurrent mode is not supported.
+	 *              - The specific error code can be accessed using the GetLastResult() method.
+	 *              - Before calling this method, check whether the feature is supported by
+	 *                Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
+	 */
+	static Tizen::Base::Collection::IList* GetAllDeviceInfoN(void);
 
-    /**
-     * Gets an instance of WifiDirectDevice.
-     *
-     * @since 2.0
-     *
-     * @return      An instance of WifiDirectDevice if successful, @n
-     *              else @c null
-     * @param[in]   pLocalDeviceInfo    A pointer of WifiDirectDeviceInfo
-     * @exception   E_SUCCESS               The method is successful.
-     * @exception   E_SYSTEM                An internal error has occurred.
-     * @exception   E_INVALID_ARG           The specified input parameter is invalid.
-     * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
-     * @exception   E_UNSUPPORTED_OPERATION The device does not support the Wi-Fi Direct feature.
-     * @remarks If the value of @c pLocalDeviceInfo is @c null, the WifiDirectDevice instance is created for the system default
-     *          device.
-     *          Otherwise, the value of @c pLocalDeviceInfo should be one of the elements obtained from WifiDirectDeviceManager::GetAllDeviceInfoN() to
-     *          create a valid %WifiDirectDevice instance.
-     *          The specific error code can be accessed using the GetLastResult() method.
-     */
-    static WifiDirectDevice* GetWifiDirectDeviceN(const WifiDirectDeviceInfo* pLocalDeviceInfo = null);
+	/**
+	 * Gets an instance of WifiDirectDevice.
+	 *
+	 * @since       2.0
+	 *
+	 * @feature     %http://tizen.org/feature/network.wifi.direct
+	 *
+	 * @return      An instance of WifiDirectDevice if successful, @n
+	 *              else @c null
+	 * @param[in]   pLocalDeviceInfo        A pointer to WifiDirectDeviceInfo
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_SYSTEM                An internal error has occurred.
+	 * @exception   E_INVALID_ARG           The specified input parameter is invalid.
+	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
+	 * @exception   E_UNSUPPORTED_OPERATION The device does not support the Wi-Fi Direct feature. For more information, see
+	 *                                      <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">
+	 *                                      Application Filtering</a>.
+	 * @remarks
+	 *              - If the value of @c pLocalDeviceInfo is @c null, the WifiDirectDevice instance is created for the
+	 *                system default device. Otherwise, the value of @c pLocalDeviceInfo should be one of the elements
+	 *                obtained from WifiDirectDeviceManager::GetAllDeviceInfoN() to create a valid %WifiDirectDevice
+	 *                instance.
+	 *              - The specific error code can be accessed using the GetLastResult() method.
+	 *              - Before calling this method, check whether the feature is supported by 
+	 *                Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
+	 */
+	static WifiDirectDevice* GetWifiDirectDeviceN(const WifiDirectDeviceInfo* pLocalDeviceInfo = null);
 
 private:
-    /**
-    * The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
-    *
-    * @param[in]   value   An instance of %WifiDirectDeviceManager
-    */
-    WifiDirectDeviceManager(const WifiDirectDeviceManager& value);
+	/**
+	 * The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
+	 *
+	 * @param[in]   value   An instance of %WifiDirectDeviceManager
+	 */
+	WifiDirectDeviceManager(const WifiDirectDeviceManager& value);
 
-    /**
-     * The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit 
-     * copying of objects.
-     *
-     * @param[in]   rhs An instance of %WifiDirectDeviceManager
-     */
-    WifiDirectDeviceManager& operator =(const WifiDirectDeviceManager& rhs);
+	/**
+	 * The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit
+	 * copying of objects.
+	 *
+	 * @param[in]   rhs An instance of %WifiDirectDeviceManager
+	 */
+	WifiDirectDeviceManager& operator =(const WifiDirectDeviceManager& rhs);
 
 private:
-    _WifiDirectDeviceManagerImpl* __pWifiDirectDeviceManagerImpl;
+	_WifiDirectDeviceManagerImpl* __pWifiDirectDeviceManagerImpl;
 
-    friend class _WifiDirectDeviceManagerImpl;
+	friend class _WifiDirectDeviceManagerImpl;
 }; // WifiDirectDeviceManager
 
 } } } // Tizen::Net::Wifi

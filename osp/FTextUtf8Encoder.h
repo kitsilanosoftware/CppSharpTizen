@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -50,7 +49,6 @@ namespace Tizen { namespace Text
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/text/converting_text_data_separate_blocks.htm">Converting Text Data in Separate Blocks</a>.
  *
  * The following example demonstrates how to use the %Utf8Encoder class.
-
  *
  * @code
  *	#include <FBase.h>

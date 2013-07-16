@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -121,7 +120,7 @@ public:
 	 * @return	An error code
 	 * @param[in]	reqId	The application control request ID
 	 * @param[in]	appControlResult	The application control result
-	 * @param[in]	pExtraData	A pointer to an extra argument map of key and value pair where the key is of type String and the value is of type String
+	 * @param[in]	pExtraData	A pointer to an extra argument map of key and value pair where the key is of type Tizen::Base::String and the value is of type %Tizen::Base::String or type Tizen::Base::Collection::ArrayList of %Tizen::Base::String
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_OBJ_NOT_FOUND	The application control request is not found.
 	 * @exception	E_SYSTEM	The method cannot proceed due to a severe system error.

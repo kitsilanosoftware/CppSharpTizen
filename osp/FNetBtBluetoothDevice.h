@@ -36,6 +36,7 @@ class String;
 namespace Collection
 {
 class IList;
+class IMap;
 }
 } }
 
@@ -82,13 +83,16 @@ public:
 	 * @param[in]   minorClassType          The minor class type of a %Bluetooth device
 	 * @param[in]   serviceClassList        The service class type list
 	 * @param[in]   serviceList             The service type list
-	 * @remarks     The @c serviceClassList parameter consists of Bluetooth::BluetoothServiceClassType values, which are
-	 *              joined by the logical OR operator. @n
-	 *              The @c serviceList parameter consists of Bluetooth::BluetoothServiceType values which are joined by the
-	 *              logical OR operator.
+	 * @remarks
+	 *              - The @c serviceClassList parameter consists of Bluetooth::BluetoothServiceClassType values, which
+	 *                are joined by the logical OR operator.
+	 *              - The @c serviceList parameter consists of Bluetooth::BluetoothServiceType values which are joined
+	 *                by the logical OR operator.
 	 * @endif
 	 */
-	BluetoothDevice(const Tizen::Base::ByteBuffer& address, const Tizen::Base::String& deviceName, BluetoothMajorDeviceClassType majorClassType, BluetoothMinorDeviceClassType minorClassType, unsigned long serviceClassList, unsigned long serviceList);
+	BluetoothDevice(const Tizen::Base::ByteBuffer& address, const Tizen::Base::String& deviceName,
+			BluetoothMajorDeviceClassType majorClassType, BluetoothMinorDeviceClassType minorClassType,
+			unsigned long serviceClassList, unsigned long serviceList);
 
 	/**
 	 * Copying of objects using this copy constructor is allowed.
@@ -107,7 +111,7 @@ public:
 	virtual ~BluetoothDevice(void);
 
 	/**
-	 * Gets the address of a %Bluetooth device which consists of 6 bytes.
+	 * Gets the address of a %Bluetooth device which consists of @c 6 bytes.
 	 *
 	 * @since       2.0
 	 *
@@ -123,10 +127,9 @@ public:
 	 * @return      An error code
 	 * @param[in]   address                 An address of the %Bluetooth device
 	 * @exception   E_SUCCESS               The method is successful.
-	 * @exception   E_INVALID_ARG           The specified address is invalid @n
-	 *                                      The size of the address should be 6 bytes.
-	 * @remarks     @c address must have 6 byte data (remaining elements). @n
-	 *              Setting the address of the %BluetoothDevice instance which is obtained from the paired list does not
+	 * @exception   E_INVALID_ARG           The specified address is invalid. @n
+	 *                                      The size of the address should be @c 6 bytes.
+	 * @remarks     Setting the address of the %BluetoothDevice instance which is obtained from the paired list does not
 	 *              affect the information of the paired list in the system.
 	 */
 	result SetAddress(const Tizen::Base::ByteBuffer& address);
@@ -185,7 +188,6 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      The service class of the device
-	 * @remarks     This operation is not supported in the local device acquired by BluetoothManager::GetLocalDevice().
 	 */
 	unsigned long GetServiceClassList(void) const;
 
@@ -196,7 +198,6 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      The %Bluetooth device service list
-	 * @remarks     This operation is not supported in the local device acquired by BluetoothManager::GetLocalDevice().
 	 */
 	unsigned long GetServiceList(void) const;
 
@@ -207,8 +208,6 @@ public:
 	 * @since 2.0
 	 *
 	 * @return      The %Bluetooth device service UUID list
-	 * @remarks     This operation returns @c null, if it is called in the local device acquired by
-	 *              BluetoothManager::GetLocalDevice().
 	 */
 	const Tizen::Base::Collection::IList* GetServiceUuidList(void) const;
 
@@ -216,6 +215,7 @@ public:
 	 * Compares the calling instance with the specified instance.
 	 *
 	 * @since       2.0
+	 *
 	 * @return      @c true if both the instances are equal, @n
 	 *              else @c false
 	 * @param[in]   obj                    The object to compare
@@ -232,21 +232,43 @@ public:
 	virtual int GetHashCode(void) const;
 
 	/**
-	 * Gets a new instance of %BluetoothDevice generated using the result of the %Bluetooth AppControl.
+	 * Gets a new instance of %BluetoothDevice that is generated using the result of the %Bluetooth AppControl.
+	 *
+	 * @brief <i> [Deprecated]  </i>
+	 * @deprecated  This method is deprecated because the type of AppControl result has changed. Instead of using this
+	 *              method, GetInstanceFromAppControlResultN(const Tizen::Base::Collection::IMap&) is
+	 *              recommended.
 	 *
 	 * @since       2.0
-	 * @return      The %Bluetooth device containing the specified information extracted from the input data if successful,
-	 * @n
+	 *
+	 * @return      The %Bluetooth device containing the specified information extracted from the input data if successful, @n
 	 *              else @c null
 	 * @param[in]   appControlResult        The data list, which is the result of the %Bluetooth AppControl
 	 * @exception   E_SUCCESS               The method is successful.
-	 * @exception   E_INVALID_ARG           The specified @c appControlResult contains an invalid value. @n
+	 * @exception   E_INVALID_ARG           The specified list contains an invalid value. @n
 	 *                                      The result of %Bluetooth AppControl is only permitted to be used as an input
 	 *                                      argument.
-	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
 	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
 	 */
 	static BluetoothDevice* GetInstanceFromAppControlResultN(const Tizen::Base::Collection::IList& appControlResult);
+
+	 /**
+	 * Gets a new instance of %BluetoothDevice that is generated using the result of the %Bluetooth AppControl.
+	 *
+	 * @since       2.1
+	 *
+	 * @return      The %Bluetooth device containing the specified information extracted from the input data if successful, @n
+	 *              else @c null
+	 * @param[in]   appControlResult        The data map, which is the result of the %Bluetooth AppControl
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_INVALID_ARG           The specified map contains an invalid value. @n
+	 *                                      The result of %Bluetooth AppControl is only permitted to be used as an input
+	 *                                      argument.
+	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
+	 * @see         <a href="../org.tizen.native.appprogramming/html/guide/app/appcontrol_bluetooth.htm">Bluetooth
+	 *              AppControl</a>.
+	 */
+	static BluetoothDevice* GetInstanceFromAppControlResultN(const Tizen::Base::Collection::IMap& appControlResult);
 
 	/**
 	 * Copying of objects using this copy assignment operator is allowed.

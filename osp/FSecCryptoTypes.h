@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -19,7 +18,7 @@
  * @file		FSecCryptoTypes.h
  * @brief		This is the header file that defines the different enumerations.
  *
- * This is the header file that defines the different enumerations that can be used for cryptography.
+ * This header file defines the different enumerations that can be used for cryptography.
  */
 #ifndef _FSEC_CRYPTO_TYPES_H_
 #define _FSEC_CRYPTO_TYPES_H_

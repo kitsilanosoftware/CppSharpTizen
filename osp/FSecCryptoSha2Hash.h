@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -73,7 +72,7 @@ public:
 	 *
 	 *	@return		An error code
 	 *	@param[in]	algorithm				The name of the hash algorithm @n
-	 *										For example, "SHA2/224", "SHA2/256", "SHA2/386", or "SHA2/512".
+	 *										For example, "SHA2/224", "SHA2/256", "SHA2/384", or "SHA2/512".
 	 *	@exception	E_SUCCESS				The method is successful.
 	 *	@exception	E_UNSUPPORTED_ALGORITHM	The algorithm is not supported.
 	 */
@@ -98,7 +97,7 @@ public:
 	virtual Tizen::Base::ByteBuffer* GetHashN(const Tizen::Base::ByteBuffer& input) const;
 
 	/**
-	 *	Initializes the multiple-part hash operation.
+	 *	Initializes a multiple-part hash operation.
 	 *
 	 *	@since		2.0
 	 *

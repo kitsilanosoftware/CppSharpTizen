@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -193,7 +192,7 @@ public:
 	 *
 	 * 	@brief	<i> [Deprecated] </i>
 	 *	@deprecated This method is deprecated as a new method has been introduced.
-	 *	Instead of using this method, use ToLowerCase() method that supports Unicode characters other than English alphabets.
+	 *	Instead of using this method, use the ToLowerCase() method that supports Unicode characters other than English alphabets.
 	 *
 	 *	@since 2.0
 	 * 	@endif
@@ -217,7 +216,7 @@ public:
 	 *
 	 * 	@brief	<i> [Deprecated] </i>
 	 *	@deprecated This method is deprecated as a new method has been introduced.
-	 *	Instead of using this method, use ToUpperCase() method that supports the Unicode characters other than English alphabets.
+	 *	Instead of using this method, use the ToUpperCase() method that supports the Unicode characters other than English alphabets.
 	 *
 	 *	@since 2.0
 	 * 	@endif
@@ -276,7 +275,7 @@ public:
 	 *
 	 * 	@brief	<i> [Deprecated] </i>
 	 *	@deprecated This method is deprecated as a new method has been introduced.
-	 *	Instead of using this method, use ToLowerCase(wchar_t ch) method that supports the Unicode characters other than English alphabets.
+	 *	Instead of using this method, use the ToLowerCase(wchar_t ch) method that supports the Unicode characters other than English alphabets.
 	 *
 	 *	@since 2.0
 	 *	@return		An lowercase equivalent of the input Unicode character
@@ -303,7 +302,7 @@ public:
 	 *
 	 * 	@brief	<i> [Deprecated] </i>
 	 *	@deprecated This method is deprecated as a new method has been introduced.
-	 *	Instead of using this method, use ToUpperCase(wchar_t ch) method that supports Unicode characters other than English alphabets.
+	 *	Instead of using this method, use the ToUpperCase(wchar_t ch) method that supports Unicode characters other than English alphabets.
 	 *
 	 *	@since 2.0
 	 *	@return		An uppercase equivalent of the input Unicode character
@@ -326,14 +325,7 @@ public:
 	/**
 	 *	Checks whether the input character is an alphanumeric character (letter or digit). @n
 	 *	A character is considered to be an alphanumeric character if either Character::isLetter(wchar_t ch) or Character::isDigit(wchar_t ch) returns true for the character
-	 * 	@if OSPCOMPAT
-	 * 	@brief <i> [Compatibility] </i>
-	 * 	@endif
 	 *	@since 2.0
-	 * 	@if OSPCOMPAT
-	 *	@compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 *			For more information, see @ref CompCharacterIsAlphaNumericPage "here".
-	 * 	@endif
 	 *	@return		@c true if the input character is alphanumeric, @n
 	 *				else @c false
 	 *	@param[in]	ch	The Unicode character
@@ -341,17 +333,6 @@ public:
 	static bool IsAlphaNumeric(wchar_t ch);
 
 	/**
-	 * 	@if OSPCOMPAT
-	 * 	@page			CompCharacterIsAlphaNumericPage Compatibility for IsAlphaNumeric()
-	 * 	@section		CompCharacterIsAlphaNumericPageIssueSection Issues
-	 *				Implementing this method in OSP compatible applications has the following issues: @n
-	 *
-	 *	-# The method returns true only if the character is alphabet character and cannot checks other Unicode character in Letter and digit category.
-	 *
-	 * 	@section		CompCharacterIsAlphaNumericPageSolutionSection Resolutions
-	 *
-	 * 	This issue has been resolved in Tizen. @n
-	 * 	@endif
 	 */
 
 
@@ -368,14 +349,7 @@ public:
 
 	/**
 	 *	Checks whether the input character is a Unicode letter.
-	 * 	@if OSPCOMPAT
-	 * 	@brief <i> [Compatibility] </i>
-	 * 	@endif
 	 *	@since 2.0
-	 * 	@if OSPCOMPAT
-	 *	@compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 *			For more information, see @ref CompCharacterIsLetterPage "here".
-	 * 	@endif
 	 *	@return		@c true if the input character is an alphabet, @n
 	 *				else @c false
 	 *	@param[in]	ch	The Unicode character
@@ -383,29 +357,18 @@ public:
 	static bool IsLetter(wchar_t ch);
 
 	/**
-	 * 	@if OSPCOMPAT
-	 *	@page			CompCharacterIsLetterPage Compatibility for IsLetter()
-	 *	@section		CompCharacterIsLetterPageIssueSection Issues
-	 *				Implementing this method in OSP compatible applications has the following issues: @n
-	 *
-	 *	-# The method returns true only if the character is alphabet character and cannot checks other Unicode character in Letter category.
-	 *
-	 *	@section		CompCharacterIsLetterPageSolutionSection Resolutions
-	 *
-	 *	This issue has been resolved in Tizen. @n
-	 * 	@endif
 	 */
 
 	/**
 	 *	@if OSPDEPREC
-	 *	Checks whether the input character is an lowercase alphabet.
+	 *	Checks whether the input character is a lowercase alphabet.
 	 *
 	 * 	@brief	<i> [Deprecated] </i>
 	 *	@deprecated This method is deprecated as a new method has been introduced.
-	 *	Instead of using this method, use IsLowerCase(wchar_t ch) method that supports Unicode characters.
+	 *	Instead of using this method, use the IsLowerCase(wchar_t ch) method that supports Unicode characters.
 	 *	@since 2.0
 	 *
-	 *	@return		@c true if the input character is an lowercase English alphabet, @n
+	 *	@return		@c true if the input character is a lowercase English alphabet, @n
 	 *				else @c false
 	 *	@param[in]	ch	The Unicode character
 	 * 	@endif
@@ -413,12 +376,12 @@ public:
 	static bool IsLower(wchar_t ch);
 
 	/**
-	 *	Checks whether the input character is an lowercase alphabet. @n
+	 *	Checks whether the input character is a lowercase alphabet. @n
 	 *	Unicode characters other than English alphabets are also supported.
 	 *
 	 *	@since 2.0
 	 *
-	 *	@return		@c true if the input character is an lowercase alphabet, @n
+	 *	@return		@c true if the input character is a lowercase alphabet, @n
 	 *				else @c false
 	 *	@param[in]	ch The Unicode character
 	 */
@@ -430,7 +393,7 @@ public:
 	 *
 	 * 	@brief	<i> [Deprecated] </i>
 	 *	@deprecated This method is deprecated as a new method has been introduced.
-	 *	Instead of using this method, use IsUpperCase(wchar_t ch) method that also supports Unicode characters other than English alphabets.
+	 *	Instead of using this method, use the IsUpperCase(wchar_t ch) method that also supports Unicode characters other than English alphabets.
 	 *	@since 2.0
 	 *
 	 *	@return		@c true if the input character is an uppercase alphabet, @n
@@ -470,7 +433,8 @@ public:
 	 *
 	 *	@since 2.0
 	 *
-	 *	@return		A Unicode character of the input digit with specified radix; null character (U+0000) otherwise
+	 *	@return		A Unicode character of the input digit with specified @c radix @n
+	 *				else @c null character (U+0000)
 	 *	@param[in]	digit   The digit to determine the value
 	 *	@param[in]	radix   The radix
 	 */
@@ -540,7 +504,7 @@ public:
 	 *
 	 *	@since 2.0
 	 *
-	 *	@return		A title case character equivalent for the input character. The character itself is returned if none is defined
+	 *	@return		A title case character equivalent for the input character @n The character itself is returned if none is defined.
 	 *	@param[in]	ch	A Unicode character
 	 */
 	static wchar_t ToTitleCase(wchar_t ch);
@@ -572,8 +536,8 @@ public:
 	static const wchar_t VALUE_MIN = 0x0000;
 
 	/**
-	 * The minimum radix available for conversion to and from strings.@n
-	 * As value as RADIX_BINARY.
+	 * The minimum radix available for conversion to and from strings. @n
+	 * Same value as RADIX_BINARY.
 	 *
 	 * @since 2.0
 	 */
@@ -619,7 +583,7 @@ public:
 	 *
 	 * @since 2.0
 	 */
-	static const double NO_NUMERIC_VALUE = -123456789;
+	static const double NO_NUMERIC_VALUE = -123456789.0;
 
 private:
 	friend class Int8;

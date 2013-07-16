@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -33,7 +33,7 @@ namespace Tizen { namespace Base { namespace Runtime
 {
 class _IEvent;
 class IEventArg;
-}}}
+} } }
 
 namespace Tizen {namespace Ui
 {
@@ -56,7 +56,7 @@ class _OSP_EXPORT_ KeyEventManager
 {
 public:
 	/**
-	 * This destructor overrides Osp::Base::Object::~Object().
+	 * This destructor overrides Tizen::Base::Object::~Object().
 	 *
 	 * @since	2.0
 	 */
@@ -77,7 +77,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in] 	listener    The event listener to be added
+	 * @param[in] 	listener    The event listener to add
 	 * @remarks     The listener is called after the key event is delivered to the focused control's key event listeners, but before the
 	 *              key event is passed onto the focused control itself. @n
 	 *              Moreover, if the key needs to be consumed by the control itself, the added listeners will not be notified.
@@ -85,13 +85,13 @@ public:
 	 */
 	void AddKeyEventListener(IKeyEventListener& listener);
 
-	/**
+	 /**
 	 * Removes the %IKeyEventListener instance. @n
 	 * The removed listener is not notified even when the key events are fired.
 	 *
 	 * @since		2.0
 	 *
-	 * @return		listener		The current application-wide key event listener to be removed
+	 * @return		listener		The current application-wide key event listener to remove
 	 * @see			AddKeyEventListener()
 	 */
 	void RemoveKeyEventListener(IKeyEventListener& listener);
@@ -130,6 +130,6 @@ private:
 
 }; // KeyEventManager
 
-}} // Tizen::Ui
+} } // Tizen::Ui
 
 #endif // _FUI_KEY_EVENT_MANAGER_H_

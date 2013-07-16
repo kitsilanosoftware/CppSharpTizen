@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -72,7 +72,7 @@ public:
 	TouchGestureDetector(void);
 
 	/**
-	* This destructor overrides Osp::Base::Object::~Object().
+	* This destructor overrides Tizen::Base::Object::~Object().
 	*
 	* @since 2.0
 	*/
@@ -89,18 +89,18 @@ public:
 	result Construct(void);
 
 	/**
-	* Gets the control which the gesture detector is attached to.
+	* Gets the control to which the gesture detector is attached. @n
 	* If an error occurs, this method returns @c null.
 	*
 	* @since 2.0
 	*
-	* @return							The control which the gesture detector is attached to.
+	* @return							The control to which the gesture detector is attached
 	* @exception	E_SUCCESS			The method is successful.
 	*/
 	 Control* GetControl(void) const;
 
 	/**
-	 * Enables or disables delaying touch event on Control.
+	 * Enables or disables delaying touch event on Control. @n
  	 * The %TouchGestureDetector receives touch events prior to a UI control to which it is added.
  	 * Depending on a gesture that it tries to recognize, it is decided whether touch events need to be delivered to the UI control.
 	 * If touch events must not be delivered to the UI control while gesture recognition is in progress, call this method with @c false argument.
@@ -131,7 +131,7 @@ public:
 	bool IsDelayTouchEventEnabled(void) const;
 
 	/**
-	* Enables or disables canceling touch event after a gesture is recognized.
+	* Enables or disables canceling touch event after a gesture is recognized. @n
 	* If canceling touch event is enabled and a gesture is recognized, touch events which have been queued are not delivered to a UI control and discarded.
 	* The default value is @c false.
 	*
@@ -160,21 +160,39 @@ public:
 	/**
 	* Sets priority between gesture detectors.
 	*
+	* @brief       <i> [Deprecated] </i>
+	* @deprecated  This method is deprecated.
 	* @since 2.0
 	*
 	* @return			An error code
 	* @param[in]	gestureDetector			The gesture detector
 	* @exception	E_SUCCESS					The method is successful.
-	* @exception	E_INVALID_ARG				The @c gestureDetector is invalid.
+	* @exception	E_INVALID_ARG				The specified @c gestureDetector is invalid.
 	* @remarks			If you want to set relationship between gesture detectors, call this method.
 	*					If @c gestureDetector fails in recognizing a gesture, the gesture detector which waits for it starts the processing of recognizing.
 	*					If @c gestureDetector succeeds in recognizing a gesture,
-	*					the state of the gesture detector which waits for it changes to GESTURE_DETECTOR_STATE_FAIL.
+	*					the state of the gesture detector which waits for it changes to @c GESTURE_DETECTOR_STATE_FAIL.
 	*/
 	result StartOnFailureOf(const TouchGestureDetector& gestureDetector);
 
 	/**
-	 * Called when touch is pressed in the Control which the gesture detector is attached to.
+	 * Sets priority between gesture detectors.
+	 *
+	 * @since 2.1
+	 *
+	 * @return      An error code
+	 * @param[in]   pGestureDetector       A pointer of gesture detector
+	 * @exception   E_SUCCESS              The method is successful.
+	 * @exception   E_INVALID_ARG          The @c pGestureDetector is null.
+	 * @remarks                            If you want to set relationship between gesture detectors, call this method.
+	 *                                     If @c gestureDetector fails in recognizing a gesture, the gesture detector which waits for it starts the processing of recognizing.
+	 *                                     If @c gestureDetector succeeds in recognizing a gesture,
+	 *                                     the state of the gesture detector which waits for it changes to @c GESTURE_DETECTOR_STATE_FAIL.
+	 */
+	result StartOnFailureOf(TouchGestureDetector* pGestureDetector);
+
+	/**
+	 * Called when touch is pressed in the Control to which the gesture detector is attached.
 	 *
 	 * @since 2.0
 	 *
@@ -184,7 +202,7 @@ public:
 	virtual void OnTouchPressed(Tizen::Ui::Control& source, const Tizen::Ui::TouchEventInfo& touchInfo);
 
 	/**
-	 * Called when touch is moved in the Control which the gesture detector is attached to.
+	 * Called when touch is moved in the Control to which the gesture detector is attached.
 	 *
 	 * @since 2.0
 	 *
@@ -194,7 +212,7 @@ public:
 	virtual void OnTouchMoved(Tizen::Ui::Control& source, const Tizen::Ui::TouchEventInfo& touchInfo);
 
 	/**
-	 * Called when touch is released in the Control which the gesture detector is attached to.
+	 * Called when touch is released in the Control to which the gesture detector is attached.
 	 *
 	 * @since 2.0
 	 *
@@ -204,7 +222,7 @@ public:
 	virtual void OnTouchReleased(Tizen::Ui::Control& source, const Tizen::Ui::TouchEventInfo& touchInfo);
 
 	/**
-	 * Called when touch is canceled in the Control which the gesture detector is attached to.
+	 * Called when touch is canceled in the Control to which the gesture detector is attached.
 	 *
 	 * @since 2.0
 	 *
@@ -215,7 +233,7 @@ public:
 
 protected:
 	/**
-	* Sets the current state of gesture detector.
+	* Sets the current state of gesture detector. @n
 	* You can call this method only inherit %TouchGestureDetector directly.
 	*
 	* @since 2.0
@@ -228,7 +246,7 @@ protected:
 	result SetDetectorState(Tizen::Ui::TouchGestureDetectorState state);
 
 	/**
-	* Gets the current state of gesture detector.
+	* Gets the current state of gesture detector. @n
 	* If an error occurs, this method returns @c GESTURE_DETECTOR_STATE_READY.
 	*
 	* @since 2.0

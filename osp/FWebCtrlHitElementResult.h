@@ -97,7 +97,7 @@ public:
 	*
 	* @since		2.0
 	*
-	* @return       The URL linked to the element
+	* @return       	The URL linked to the element
 	*/
 	Tizen::Base::String GetUrl(void) const;
 
@@ -115,8 +115,8 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @return      @c true if the element is an image element, @n
-	 *				else @c false
+	 * @return      	@c true if the element is an image element, @n
+	 *					else @c false
 	 */
 	bool HasImage(void) const;
 
@@ -125,8 +125,8 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @return      @c true if there is a URL linked to the element, @n
-	 *				else @c false
+	 * @return		@c true if there is a URL linked to the element, @n
+	 *					else @c false
 	 */
 	bool HasUrl(void) const;
 

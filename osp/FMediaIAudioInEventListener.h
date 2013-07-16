@@ -37,6 +37,10 @@ namespace Tizen { namespace Media
  *
  * @since		2.0
  *
+ * @remarks			OnAudioInInterrupted() is called when the application is interrupted by another application and OnAudioInReleased() event can be called at the end of interruption.
+ *			OnAudioInAudioFocusChanged() is called when the application is interrupted by another application but the end of interruption is not notified.
+ *			So, the application should handle both events to work properly on various sound scenarios between applications.
+ *
  * The %IAudioInEventListener interface provides various methods that are called during the operations of %AudioIn.
  * %AudioIn captures audio data from the device in asynchronous mode,
  * and calls the listener's methods to pass the captured audio data.
@@ -85,9 +89,11 @@ public:
 	*   Called when an audio recording focus is changed to another application.
 	*
 	*  @since		2.0
-	*  @remarks		After the audio focus is being changed, the recording is stopped and the state of this instance is changed to AUDIOIN_STATE_STOPPED.
-	*  @remarks		An application can start recording in the state of AUDIOIN_STATE_STOPPED but the interaction between device and user needs to record again.  Because there is a possibility of a race condition between applications which try to resume without the interaction.
-	*		@remarks		An application cannot start recording again even in the state of AUDIOIN_STATE_STOPPED due to other applications which have a higher priority.
+	*  @remarks		
+	*				- After the audio focus is being changed, the recording is stopped and the state of this instance is changed to ::AUDIOIN_STATE_STOPPED.
+	*  				- User interaction with the device is required for an application in @c AUDIOIN_STATE_STOPPED state to resume recording. 
+	*				This is to avoid the occurrence of a race condition among applications that try to resume without user interaction.
+	*				- An application cannot start recording again even in the state of @c AUDIOIN_STATE_STOPPED due to other applications which have a higher priority.
 	*/
 
 	virtual void OnAudioInAudioFocusChanged(void) {}

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -86,96 +85,116 @@ class _OSP_EXPORT_ ContentManagerUtil
 {
 public:
 	/**
-	 * Gets the metadata for an image.
+	 * Gets the metadata for an image from the file.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief	<i> [Compatibility] </i>
-	 * @endif
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility This method has compatibility issues with OSP compatible applications. @n
-	 *                       For more information, see @ref CompContentManagerUtilPage "here".
-	 * @endif
 	 *
 	 * @return			A pointer to ImageMetadata, @n
 	 *                     else @c null if an exception occurs
 	 * @param[in]	filePath					The file path
 	 * @exception	E_SUCCESS					The method is successful.
 	 * @exception	E_INVALID_ARG				The specified input parameter is invalid.
-	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
-	 * @remarks		The supported formats are 'jpg', 'jpeg', 'gif', 'png', 'bmp', 'wbmp', or 'tiff'. @n
-	 *						The specific error code can be accessed using the GetLastResult() method.
+	 * @remarks
+	 * 				- If the image data is valid but meta information does not exist, the width and height are set from the actual image data.
+	 *				- The specific error code can be accessed using the GetLastResult() method.
 	 */
 	static Tizen::Content::ImageMetadata* GetImageMetaN(const Tizen::Base::String& filePath);
 
 	/**
-	 * Gets the metadata for an audio.
+	 * Gets the metadata for an image from the buffer.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief	<i> [Compatibility] </i>
-	 * @endif
+	 * @since		2.1
+	 *
+	 * @return			A pointer to ImageMetadata, @n
+	 *                     else @c null if an exception occurs
+	 * @param[in]	byteBuffer					The buffer that contains image data
+	 * @exception	E_SUCCESS					The method is successful.
+	 * @exception	E_INVALID_ARG				The specified input parameter is invalid.
+	 * @remarks
+	 * 				- If the image data in the buffer is valid but meta information does not exist, the width and height are set from the actual image data.
+	 *				- The specific error code can be accessed using the GetLastResult() method.
+	 */
+	static Tizen::Content::ImageMetadata* GetImageMetaN(const Tizen::Base::ByteBuffer& byteBuffer);
+
+	/**
+	 * Gets the metadata for an audio from the file.
+	 *
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility This method has compatibility issues with OSP compatible applications. @n
-	 *                       For more information, see @ref CompContentManagerUtilPage "here".
-	 * @endif
 	 *
 	 * @return			A pointer to AudioMetadata, @n
 	 *                     else @c null if an exception occurs
 	 * @param[in]	filePath					The file path
 	 * @exception	E_SUCCESS					The method is successful.
 	 * @exception	E_INVALID_ARG				The specified input parameter is invalid.
-	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
-	 * @remarks		The supported formats are 'mp3', 'wav', 'aac', 'wma', 'm4a', 'xmf', '3ga', or 'mmf'. @n
-	 *                     The specific error code can be accessed using the GetLastResult() method.
+	 * @remarks
+	 * 				- If the audio data is valid but meta information does not exist, the duration is set from the actual audio data.
+	 *				- The specific error code can be accessed using the GetLastResult() method.
 	 */
 	static Tizen::Content::AudioMetadata* GetAudioMetaN(const Tizen::Base::String& filePath);
 
 	/**
-	 * Gets the metadata for a video.
+	 * Gets the metadata for an audio from the buffer.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief	<i> [Compatibility] </i>
-	 * @endif
+	 * @since		2.1
+	 *
+	 * @return			A pointer to AudioMetadata, @n
+	 *                     else @c null if an exception occurs
+	 * @param[in]	byteBuffer					The buffer that contains audio data
+	 * @exception	E_SUCCESS					The method is successful.
+	 * @exception	E_INVALID_ARG				The specified input parameter is invalid.
+	 * @remarks
+	 * 				- If the audio data in the buffer is valid but meta information does not exist, the duration is set from the actual audio data.
+	 *				- The specific error code can be accessed using the GetLastResult() method.
+	 */
+	static Tizen::Content::AudioMetadata* GetAudioMetaN(const Tizen::Base::ByteBuffer& byteBuffer);
+
+	/**
+	 * Gets the metadata for a video from the file.
+	 *
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility This method has compatibility issues with OSP compatible applications. @n
-	 *                       For more information, see @ref CompContentManagerUtilPage "here".
-	 * @endif
 	 *
 	 * @return			A pointer to VideoMetadata, @n
 	 *                     else @c null if an exception occurs
 	 * @param[in]	filePath					The file path
 	 * @exception	E_SUCCESS					The method is successful.
 	 * @exception	E_INVALID_ARG				The specified input parameter is invalid.
-	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
-	 * @remarks		The supported formats are 'wmv', 'asf', 'mp4', '3gp', or 'avi'. @n
-	 *                     The specific error code can be accessed using the GetLastResult() method.
+	 * @remarks
+	 * 				- If the video data is valid but meta information does not exist, the duration is set from the actual video data.
+	 *				- The specific error code can be accessed using the GetLastResult() method.
 	 */
 	static Tizen::Content::VideoMetadata* GetVideoMetaN(const Tizen::Base::String& filePath);
 
 	/**
+	 * Gets the metadata for a video from the buffer.
+	 *
+	 * @since		2.1
+	 *
+	 * @return			A pointer to VideoMetadata, @n
+	 *                     else @c null if an exception occurs
+	 * @param[in]	byteBuffer					The buffer that contains video data
+	 * @exception	E_SUCCESS					The method is successful.
+	 * @exception	E_INVALID_ARG				The specified input parameter is invalid.
+	 * @remarks
+	 * 				- If the video data in the buffer is valid but meta information does not exist, the duration is set from the actual video data.
+	 *				- The specific error code can be accessed using the GetLastResult() method.
+	 */
+	static Tizen::Content::VideoMetadata* GetVideoMetaN(const Tizen::Base::ByteBuffer& byteBuffer);
+
+	/**
 	 * Checks the content type from the file path.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief	<i> [Compatibility] </i>
-	 * @endif
 	 * @since           2.0
-	 * @if OSPCOMPAT
-	 * @compatibility This method has compatibility issues with OSP compatible applications. @n
-	 *                       For more information, see @ref CompContentManagerUtilPage "here".
-	 * @endif
 	 *
-	 * @return			The content type
+	 * @return		The content type
 	 * @param[in]	filePath						The file path
 	 * @exception	E_SUCCESS						The method is successful.
 	 * @exception	E_INVALID_ARG					The specified input parameter is invalid, or
 	 *                                                          the length of the specified path is @c 0 or exceeds system limitations.
-	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 	 * @exception	E_FILE_NOT_FOUND			The specified file cannot be found.
-	 * @exception    E_UNSUPPORTED_FORMAT	The specified format is invalid or not supported.
-	 * @remarks		The content type can be different for each device. @n
-	 *                     The specific error code can be accessed using the GetLastResult() method.
+	 * @exception	E_UNSUPPORTED_FORMAT	The specified format is invalid or not supported.
+	 * @remarks
+	 * 				- The content type can be different for each device.
+	 *				- The specific error code can be accessed using the GetLastResult() method.
 	 */
 	static Tizen::Content::ContentType CheckContentType(const Tizen::Base::String& filePath);
 
@@ -205,8 +224,9 @@ public:
 	 *                                                           - An unexpected device failure has occurred as the media ejected suddenly. @n
 	 *                                                           - File corruption is detected. @n
 	 *                                                           - The volume or quota is no more available.
-	 * @remarks		The source file in the system region cannot be copied. @n
-	 *                       The destination file path must start with @c '/Media' or @c '/Storagecard/Media'.
+	 * @remarks
+	 *				 - The source file in the system region cannot be copied.
+	 *				 - The destination file path must start with @c '/Media' or @c '/Storagecard/Media'.
 	 * @endif
 	 */
 	static result CopyToMediaDirectory(const Tizen::Base::String& srcFilePath, const Tizen::Base::String& destFilePath);
@@ -237,30 +257,14 @@ public:
 	 *															- An unexpected device failure has occurred as the media ejected suddenly. @n
 	 *															- File corruption is detected. @n
 	 *															- The volume or quota is no more available.
-	 * @remarks		The source file in the system region cannot be copied. @n
-	 *                       The destination file path must start with @c '/Media' or @c '/Storagecard/Media'.
+	 * @remarks
+	 *			 - The source file in the system region cannot be copied.
+	 *			 - The destination file path must start with @c '/Media' or @c '/Storagecard/Media'.
 	 * @endif
 	 */
 	static result MoveToMediaDirectory(const Tizen::Base::String& srcFilePath, const Tizen::Base::String& destFilePath);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page	CompContentManagerUtilPage Compatibility for the file path.
-	 * @section	CompContentManagerUtilPageIssueSection Issues
-	 *                 The file path argument of this method in OSP compatible applications has the following issues: @n
-	 *                 -# The file path should be a path that begins with an allowed path prefix. @n
-	 *                     For example, L"/Media/Images/flower.jpg", "/Storagecard/Media/Images/flower.jpg".
-	 *
-	 * @section	CompContentManagerUtilPageSolutionSection Resolutions
-	 *                 This issue has been resolved in Tizen. @n
-	 *                 -# The file path can be a path without a specific allowed path prefix. @n
-	 *                 Application do not need to know the specific allowed path prefixes. @n
-	 *                 To get the directory path, use the following methods: @n
-	 *                 - For accessing the home directory, use Tizen::App::App::GetInstance()->GetAppRootPath().
-	 *                 - For accessing the media directory, use Tizen::System::Environment::GetMediaPath().
-	 *                 - For accessing the external storage, use Tizen::System::Environment::GetExternalStoragePath().
-	 *
-	 * @endif
 	 */
 
 private:

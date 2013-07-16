@@ -20,7 +20,7 @@
  * @brief		This is the header file for the %JsonNumber class.
  *
  * This header file contains the declarations of the %JsonNumber class.
- * The class represents the JSON value of type number.
+ * This class represents the JSON value of type number.
  *
  */
 #ifndef _FWEB_JSON_JSON_NUMBER_H_
@@ -46,7 +46,7 @@ namespace Tizen { namespace Web { namespace Json
  * @final	This class is not intended for extension.
  *
  * The %JsonNumber class represents the type of the JSON number.
- * @n
+ * 
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/web/json_namespace.htm">JSON Guide</a>.
 
  *
@@ -80,7 +80,7 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in]	value   An instance of JsonNumber
+	 * @param[in]	value   An instance of %JsonNumber
 	 */
 	JsonNumber(const JsonNumber& value);
 
@@ -97,7 +97,6 @@ public:
 	 * @since		2.0
 	 *
 	 * @return     The type of JSON number
-	 * @see         JsonType
 	 */
 	JsonType GetType(void) const;
 

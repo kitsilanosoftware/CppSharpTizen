@@ -40,7 +40,6 @@ template<class Type> class IListT;
 namespace Tizen { namespace Net { namespace Nfc
 {
 
-// Forward declaration
 class _NfcTagImpl;
 
 /**
@@ -80,7 +79,7 @@ public:
 	 *
 	 * @return      @c true if the tag has the specified tag type, @n
 	 *              else @c false
-	 * @param[in]   type                The tag type to be checked
+	 * @param[in]   type                The tag type to check
 	 */
 	bool HasTagType(NfcTagType type) const;
 
@@ -104,24 +103,19 @@ public:
 	virtual ~NfcTag(void);
 
 private:
-	/**
-	 * This default constructor is intentionally declared as private so that only the platform can create an instance.
-	 */
+	//
+	// This default constructor is intentionally declared as private so that only the platform can create an instance.
+	//
 	NfcTag(void);
 
-	/*
-	 * The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
-	 *
-	 * @param[in]   value					An instance of %NfcTag
-	 */
+	//
+	// The implementation of this copy constructor is intentionally blank to prohibit copying of objects.
+	//
 	NfcTag(const NfcTag& value);
 
-	/*
-	 * The implementation of this copy assignment operator is intentionally blank
-	 * and declared as private to prohibit copying of objects.
-	 *
-	 * @param[in]   value					An instance of %NfcTag
-	 */
+	//
+	// The implementation of this copy assignment operator is intentionally blank to prohibit copying of objects.
+	//
 	NfcTag& operator =(const NfcTag& value);
 
 private:

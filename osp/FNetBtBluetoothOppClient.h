@@ -76,13 +76,19 @@ public:
 	 * Constructs and initializes this instance of %BluetoothOppClient with the specified listener.
 	 *
 	 * @since       2.0
+	 * @feature     %http://tizen.org/feature/network.bluetooth
 	 *
 	 * @return      An error code
 	 * @param[in]   listener                The event listener for the OPP client
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
-	 * @exception	E_UNSUPPORTED_OPERATION	This operation is not supported.
+	 * @exception   E_UNSUPPORTED_OPERATION The Emulator or target device does not support the required feature.
+	 *                                      For more information, see
+	 *                                      <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">
+	 *                                      Application Filtering</a>.
 	 * @exception   E_SYSTEM                A system error has occurred.
+	 * @remarks     Before calling this method, check whether the feature is supported by 
+	 *			Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	 */
 	result Construct(IBluetoothOppClientEventListener& listener);
 
@@ -90,14 +96,8 @@ public:
 	 * Pushes a file to a remote OPP server. @n
 	 * The file transfer starts when the OPP server accepts the request.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since       2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues@n
-	 *					For more information, see @ref CompIoPathPage "here".
-	 * @endif
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.opp
 	 *
 	 * @return      An error code
@@ -108,26 +108,28 @@ public:
 	 *                                          For example, %Bluetooth is not activated.
 	 * @exception   E_IN_PROGRESS               The push process is in progress.
 	 * @exception   E_PRIVILEGE_DENIED          The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED        The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SERVICE_UNAVAILABLE       The OPP service is unavailable.
 	 * @exception   E_INACCESSIBLE_PATH         The specified @c filePath is inaccessible.
 	 * @exception   E_REMOTE_DEVICE_NOT_FOUND   The input device is not found. @n
 	 *                                          This exception is currently not in use.
 	 * @exception   E_FAILURE                   The method has failed.
-	 * @see         IBluetoothOppServerEventListener::OnOppPushRequested()
 	 * @remarks     If the local device is not paired with the specified target device, the pairing process starts
 	 *              internally before the push request is sent.
+	 * @see         IBluetoothOppServerEventListener::OnOppPushRequested()
 	 */
 	result PushFile(const BluetoothDevice& remoteDevice, const Tizen::Base::String& filePath);
 
 	/**
 	 * Cancels the file push request in progress. @n
-	 * If this method is called before the OPP server accepts the push request, the
-	 * IBluetoothOppClientEventListener::OnOppPushResponded() method is called and the exception E_SYSTEM is thrown. @n
+	 * If the %CancelPush() method is called before the OPP server accepts the push request, the
+	 * IBluetoothOppClientEventListener::OnOppPushResponded() method is called and its result @c E_SYSTEM is thrown. @n
 	 * If this method is called during the file transfer, the IBluetoothOppClientEventListener::OnOppTransferDone()
 	 * method is called with @c isCompleted as @c false.
 	 *
 	 * @since       2.0
-	 * @privilege  %http://tizen.org/privilege/bluetooth.opp
+	 * @privlevel   public
+	 * @privilege   %http://tizen.org/privilege/bluetooth.opp
 	 *
 	 * @return      An error code
 	 * @exception   E_SUCCESS               The method is successful.
@@ -137,9 +139,8 @@ public:
 	 *                                      operation. @n
 	 *                                      For example, the push request is not sent or accepted by a remote device.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_FAILURE               The method has failed.
-	 * @see         IBluetoothOppClientEventListener::OnOppPushResponded()
-	 * @see         IBluetoothOppClientEventListener::OnOppTransferDone()
 	 */
 	result CancelPush(void);
 
@@ -154,7 +155,6 @@ public:
 	 * @param[in]   percent                 The minimum period of progress interval as a percentage value
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_OUT_OF_RANGE          The value of an argument is outside the valid range defined by the method.
-	 * @see         IBluetoothOppClientEventListener::OnOppTransferInProgress()
 	 */
 	result SetMinProgressInterval(int percent);
 
@@ -164,6 +164,7 @@ private:
 	// of objects.
 	//
 	BluetoothOppClient(const BluetoothOppClient& value);
+
 	//
 	// The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit
 	// copying of objects.

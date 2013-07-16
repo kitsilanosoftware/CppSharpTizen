@@ -24,15 +24,20 @@
 #ifndef _FMSG_SMS_MESSAGE_H_
 #define _FMSG_SMS_MESSAGE_H_
 
-// Includes
+namespace Tizen { namespace Base
+{
+class String;
+class DateTime;
+} }
 
-#include <FMsgRecipientList.h>
+#include <FBaseObject.h>
+#include <FMsgTypes.h>
 
 namespace Tizen { namespace Messaging
 {
-
 	// forward declaration for class extension
 	class _SmsMessageImpl;
+	class RecipientList;
 
 	/**
 	* @class	SmsMessage
@@ -80,7 +85,7 @@ namespace Tizen { namespace Messaging
 		* @since		2.0
 		*
 		* @return			A reference to the %SmsMessage instance
-		* @param[in]	rhs		A reference to the %SmsMessage instance to be copied
+		* @param[in]	rhs		A reference to the %SmsMessage instance to copy
 		*/
 		SmsMessage& operator =(const SmsMessage& rhs);
 
@@ -89,7 +94,7 @@ namespace Tizen { namespace Messaging
 		*
 		* @since		2.0
 		*
-		* @return			@c true if the specified instance of Object is equal to the calling %SmsMessage instance, @n
+		* @return			@c true if the specified instance of Tizen::Base::Object is equal to the calling %SmsMessage instance, @n
 		*						else @c false
 		* @param[in]		obj		The object to compare
 		*/
@@ -125,9 +130,10 @@ namespace Tizen { namespace Messaging
 		* @since		2.0
 		*
 		* @return		The body of the SMS message
-		* @remarks		If the message is from the Inbox, Sentbox, or Outbox, it may contain only @c 160 bytes for the body text. @n
-		* 				To check whether the message contains more than @c 160 bytes for the body text, use the HasMoreText() method. @n
-		* 				To get the full body text, use the SmsManager::GetFullText() method with its message ID.
+		* @remarks		
+		*				- If the message is from the Inbox, Sentbox, or Outbox, it may contain only @c 160 bytes for the body text.
+		* 				- To check whether the message contains more than @c 160 bytes for the body text, use the HasMoreText() method.
+		* 				- To get the full body text, use the SmsManager::GetFullText() method with its message ID.
 		* @see			SetText()
         * @see  		HasMoreText()
         * @see   		GetId()
@@ -140,13 +146,15 @@ namespace Tizen { namespace Messaging
 		* Gets the sender address of the SMS message.
 		*
 		* @since		2.0
-		*
-		* @privilege	%http://tizen.org/privilege/messaging.sms
+		* @privlevel	public
+		* @privilege	%http://tizen.org/privilege/messaging.read @n
+		* 				(%http://tizen.org/privilege/messaging.sms is deprecated.)
 		*
 		* @return			The sender address of the SMS message
 		* @exception	E_SUCCESS				The method is successful.
 		* @exception	E_INVALID_OPERATION		This operation is only allowed to the incoming message or the message from the Inbox.
 		* @exception	E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+		* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 		* @remarks		The specific error code can be accessed using the GetLastResult() method.
 		*/
 		Tizen::Base::String GetSenderAddress(void) const;
@@ -155,15 +163,18 @@ namespace Tizen { namespace Messaging
 		* Gets the received time of the SMS message.
 		*
 		* @since		2.0
-		*
-		* @privilege	%http://tizen.org/privilege/messaging.sms
+		* @privlevel	public
+		* @privilege	%http://tizen.org/privilege/messaging.read @n
+		* 				(%http://tizen.org/privilege/messaging.sms is deprecated.)
 		*
 		* @return			The received time of the SMS message
 		* @exception	E_SUCCESS				The method is successful.
 		* @exception	E_INVALID_OPERATION		This operation is only allowed to the incoming message or the message from the Inbox.
 		* @exception	E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
-		* @remarks		The specific error code can be accessed using the GetLastResult() method. @n
-		* 				In case of an error, this method returns the instance denoting 00:00:00, January 1, 1.
+		* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+		* @remarks		
+		*				- The specific error code can be accessed using the GetLastResult() method.
+		* 				- In case of an error, this method returns the instance denoting 00:00:00, January 1, 1.
 		*/
 		Tizen::Base::DateTime GetReceivedTime(void) const;
 
@@ -171,15 +182,18 @@ namespace Tizen { namespace Messaging
 		* Gets the unique ID of the SMS message.
 		*
 		* @since		2.0
-		*
-		* @privilege	%http://tizen.org/privilege/messaging.sms
+		* @privlevel	public
+		* @privilege	%http://tizen.org/privilege/messaging.read @n
+		* 				(%http://tizen.org/privilege/messaging.sms is deprecated.)
 		*
 		* @return		The unique ID of the SMS message
 		* @exception	E_SUCCESS				The method is successful.
 		* @exception	E_INVALID_OPERATION		This operation is allowed only when the message is from the Inbox, Sentbox, or Outbox.
 		* @exception	E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
-		* @remarks		In case of an error, this method returns the negative value. For example, @c -1. @n
-		*		 		The specific error code can be accessed using the GetLastResult() method.
+		* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+		* @remarks		
+		*				- In case of an error, this method returns the negative value. For example, @c -1.
+		*		 		- The specific error code can be accessed using the GetLastResult() method.
 		*/
 		int GetId(void) const;
 
@@ -187,14 +201,16 @@ namespace Tizen { namespace Messaging
 		* Gets the sent time of the SMS message.
 		*
 		* @since		2.0
-		*
-		* @privilege	%http://tizen.org/privilege/messaging.sms
+		* @privlevel	public
+		* @privilege	%http://tizen.org/privilege/messaging.read @n
+		* 				(%http://tizen.org/privilege/messaging.sms is deprecated.)
 		*
 		* @return		The sent time of the SMS message
 		* @exception	E_SUCCESS				The method is successful.
 		* @exception	E_INVALID_OPERATION		This operation is allowed only when the message is from the Sentbox or Outbox.
 		* @exception	E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
-		* @remarks		The specific error code can be accessed using the GetLastResult() method. @n
+		* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+		* @remarks		The specific error code can be accessed using the GetLastResult() method.
 		*		 		In case of an error, this method returns the instance denoting 00:00:00, January 1, 1.
 		*/
 		Tizen::Base::DateTime GetSentTime(void) const;
@@ -203,15 +219,18 @@ namespace Tizen { namespace Messaging
 		* Gets the type of the SMS message box.
 		*
 		* @since		2.0
-		*
-		* @privilege	%http://tizen.org/privilege/messaging.sms
+		* @privlevel	public
+		* @privilege	%http://tizen.org/privilege/messaging.read @n
+		* 				(%http://tizen.org/privilege/messaging.sms is deprecated.)
 		*
 		* @return		The type of the SMS message box
 		* @exception	E_SUCCESS				The method is successful.
 		* @exception	E_INVALID_OPERATION		This operation is allowed only when the message is from the Inbox, Sentbox, or Outbox.
 		* @exception	E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
-		* @remarks		In case of an error, this method returns the SMS_MESSAGE_BOX_TYPE_NONE value. @n
-		*		 		The specific error code can be accessed using the GetLastResult() method.
+		* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+		* @remarks		
+		*				- In case of an error, this method returns the SMS_MESSAGE_BOX_TYPE_NONE value.
+		*		 		- The specific error code can be accessed using the GetLastResult() method.
 		*/
 		SmsMessageBoxType GetMessageBoxType(void) const;
 
@@ -219,13 +238,15 @@ namespace Tizen { namespace Messaging
 		* Gets the list of the recipients.
 		*
 		* @since		2.0
-		*
-		* @privilege	%http://tizen.org/privilege/messaging.sms
+		* @privlevel	public
+		* @privilege	%http://tizen.org/privilege/messaging.read @n
+		* 				(%http://tizen.org/privilege/messaging.sms is deprecated.)
 		*
 		* @return		The list of the recipient
 		* @exception	E_SUCCESS				The method is successful.
 		* @exception	E_INVALID_OPERATION		This operation is allowed only when the message is from the Sentbox or Outbox.
 		* @exception	E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+		* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 		* @remarks		The specific error code can be accessed using the GetLastResult() method.
 		*/
 		RecipientList GetRecipientList(void) const;
@@ -234,17 +255,20 @@ namespace Tizen { namespace Messaging
 		* Checks whether the SMS message contains more than @c 160 bytes for the body text.
 		*
 		* @since		2.0
-		*
-		* @privilege	%http://tizen.org/privilege/messaging.sms
+		* @privlevel	public
+		* @privilege	%http://tizen.org/privilege/messaging.read @n
+		* 				(%http://tizen.org/privilege/messaging.sms is deprecated.)
 		*
 		* @return		@c true if this SMS message contains more than @c 160 bytes for the body text, @n
 		*				else @c false
 		* @exception	E_SUCCESS				The method is successful.
 		* @exception	E_INVALID_OPERATION		This operation is allowed only when the message is from the Inbox, Sentbox, or Outbox.
 		* @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
-		* @remarks		If the return value is @c true, the SMS message contains more than @c 160 bytes for the body text. @n
-		* 				To get the full body text, use SmsManager::GetFullText(). @n
-		*		 		The specific error code can be accessed using the GetLastResult() method.
+		* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+		* @remarks		
+		*				- If the return value is @c true, the SMS message contains more than @c 160 bytes for the body text.
+		* 				- To get the full body text, use SmsManager::GetFullText().
+		*		 		- The specific error code can be accessed using the GetLastResult() method.
 		*/
 		bool HasMoreText(void) const;
 

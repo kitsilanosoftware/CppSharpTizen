@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -112,7 +112,7 @@ public:
 	 * @since 2.0
 	 *
 	 * @return	An error code
-	 * @param[in]	rect	An instance of the Rectangle class @n
+	 * @param[in]	rect	An instance of the Tizen::Graphics::Rectangle class @n
 	 *				This instance represents the x and y coordinates of the top-left corner @n
 	 *                             of the created window along with its width and height. @n
 	 * @exception	E_SUCCESS	The method is successful.
@@ -121,10 +121,32 @@ public:
 	 *									is, the method is called on an instance that is constructed).
 	 * @exception	E_MAX_EXCEEDED	The number of Frames and Forms exceeds the system limitation.
 	 * @exception	E_SYSTEM	A system error has occurred.
-	 * @remarks	The maximum number of Forms that an application can construct is limited by available memory.
-	 * @remarks	The specified position and size are only applied when the show mode is not #FRAME_SHOW_MODE_FULL_SCREEN.
+	 * @remarks
+	 *				- The maximum number of Forms that an application can construct is limited by available memory.
+	 *				- The specified position and size are only applied when the show mode is not ::FRAME_SHOW_MODE_FULL_SCREEN.
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect);
+
+	/**
+	 * Initializes this instance of %Frame with the specified position and size.
+	 *
+	 * @since 2.1
+	 *
+	 * @return	An error code
+	 * @param[in]	rect	An instance of the Tizen::Graphics::FloatRectangle class @n
+	 *				This instance represents the x and y coordinates of the top-left corner @n
+	 *                             of the created window along with its width and height. @n
+	 * @exception	E_SUCCESS	The method is successful.
+	 * @exception	E_INVALID_ARG	The specified input parameter is invalid.
+	 * @exception	E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation (that
+	 *									is, the method is called on an instance that is constructed).
+	 * @exception	E_MAX_EXCEEDED	The number of Frames and Forms exceeds the system limitation.
+	 * @exception	E_SYSTEM	A system error has occurred.
+	 * @remarks
+	 *				- The maximum number of Forms that an application can construct is limited by available memory.
+	 *				- The specified position and size are only applied when the show mode is not ::FRAME_SHOW_MODE_FULL_SCREEN.
+	 */
+	result Construct(const Tizen::Graphics::FloatRectangle& rect);
 
 // Operation
 public:
@@ -134,7 +156,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The listener to be added
+	 * @param[in]	listener	The listener to add
 	 * @remarks 	When OnOrientationChanged() event is fired, re-position and draw the child controls, but do not explicitly call
 	 *				the Show() method.
 	 * @see			RemoveOrientationEventListener()
@@ -147,7 +169,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The listener to be added
+	 * @param[in]	listener	The listener to add
 	 * @see			RemoveFrameEventListener()
 	 */
 	void AddFrameEventListener(Tizen::Ui::Controls::IFrameEventListener& listener);
@@ -158,7 +180,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener 	The listener to be removed
+	 * @param[in]	listener 	The listener to remove
 	 * @see			AddOrientationEventListener()
 	 */
 	void RemoveOrientationEventListener(Tizen::Ui::IOrientationEventListener& listener);
@@ -169,7 +191,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener 		The listener to be removed
+	 * @param[in]	listener 		The listener to remove
 	 * @see			AddFrameEventListener()
 	 */
 	void RemoveFrameEventListener(Tizen::Ui::Controls::IFrameEventListener& listener);
@@ -190,20 +212,44 @@ public:
 	/**
 	 * Sets the specified Form control as the current %Form of the %Frame control.
 	 *
+	 * @brief       <i> [Deprecated] </i>
+	 * @deprecated  This method is deprecated.
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	form			The form to be set as the current form of the %Frame control
+	 * @param[in]	form			The form to set as the current form of the %Frame control
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_INVALID_ARG	The specified input parameter is invalid.
 	 *								The specified @c form is not a child control of the %Frame control.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		If a form is set as the current form, it becomes the topmost form amongst its siblings. @n
-	 *         		SetCurrentForm() does not call Invalidate() internally, so if the current form needs to be drawn
+	 * @remarks
+	 *				- If a form is set as the current form, it becomes the topmost form amongst its siblings.
+	 *				- This method does not call Invalidate() internally, so if the current form needs to be drawn
 	 *				immediately, Invalidate() should be called after SetCurrentForm().
-	 *				Only Frame whose show mode is @c FRAME_SHOW_MODE_FULL_SCREEN can set a Form which has the style of @c FORM_STYLE_INDICATOR as the current form.
+	 *				- Only Frame whose show mode is ::FRAME_SHOW_MODE_FULL_SCREEN
+	 *				can set a Form which has the style of ::FORM_STYLE_INDICATOR as the current form.
 	 */
 	result SetCurrentForm(const Form& form);
+
+	/**
+	 * Sets a specified Form control as the current %Form of the %Frame control.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	pForm			The form to set as the current form of the %Frame control
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_INVALID_ARG	The specified input parameter is invalid.
+	 *								The specified @c form is not a child control of the %Frame control.
+	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @remarks
+	 *				- If a form is set as the current form, it becomes the topmost form amongst its siblings.
+	 *				- This method does not call Invalidate() internally, so if the current form needs to be drawn
+	 *				immediately, Invalidate() should be called after SetCurrentForm().
+	 *				- Only Frame whose show mode is ::FRAME_SHOW_MODE_FULL_SCREEN can set a Form which has
+	 *				the style of ::FORM_STYLE_INDICATOR as the current form.
+	 */
+	result SetCurrentForm(Form* pForm);
 
 	/**
 	 * Gets the background color of the %Frame control.
@@ -228,9 +274,14 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in] 	orientation		The orientation mode of the %Frame control
-	 * @remarks	    To see the change in the orientation mode, the corresponding frame must be the topmost frame in the z-order hierarchy.
-	 *				hierarchy.
+	 * @feature %http://tizen.org/setting/screen.auto_rotation for the @c ORIENTATION_AUTOMATIC_FOUR_DIRECTION or
+	 *			@c ORIENTATION_AUTOMATIC value of @c orientation
+	 * @param[in] orientation                                  The orientation mode of the %Frame control
+	 * @exception  E_UNSUPPORTED_OPERATION               The Emulator or target device does not support the required feature. @b Since: @b 2.1 @n
+	 * For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+	 * @remarks
+	 *		- The specific error code can be accessed using the GetLastResult() method.
+	 *		- To see the change in the orientation mode, the corresponding frame must be the topmost frame in the z-order hierarchy.
 	 */
 	void SetOrientation(Tizen::Ui::Orientation orientation);
 
@@ -249,9 +300,9 @@ public:
 	 * @since	2.0
 	 *
 	 * @return	The orientation status
-	 * @remarks	The method returns ORIENTATION_STATUS_NONE if the %Frame control is not drawn.
+	 * @remarks	The method returns @c ORIENTATION_STATUS_NONE if the %Frame control is not drawn.
 	 *          Once it is drawn, the orientation of the %Frame control is set to portrait and the method
-	 *          returns ORIENTATION_STATUS_PORTRAIT if the application has not specified its orientation.
+	 *          returns @c ORIENTATION_STATUS_PORTRAIT if the application has not specified its orientation.
 	 */
 	Tizen::Ui::OrientationStatus GetOrientationStatus(void) const;
 
@@ -274,7 +325,7 @@ public:
 	 * @param[in] mode	The mode to show the %Frame control
 	 * @exception	E_SUCCESS	The method is successful.
 	 * @exception	E_SYSTEM	The method cannot proceed due to a severe system error.
-	 * @remarks	The default mode is #FRAME_SHOW_MODE_FULL_SCREEN.
+	 * @remarks	The default mode is ::FRAME_SHOW_MODE_FULL_SCREEN.
 	 */
 	result SetShowMode(FrameShowMode mode);
 
@@ -284,7 +335,7 @@ public:
 	 * @since 2.0
 	 *
 	 * @return	The mode to show the %Frame control
-	 * @remarks	The default mode is #FRAME_SHOW_MODE_FULL_SCREEN.
+	 * @remarks	The default mode is ::FRAME_SHOW_MODE_FULL_SCREEN.
 	 */
 	FrameShowMode GetShowMode(void) const;
 

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -39,9 +38,9 @@ namespace Tizen { namespace Base { namespace Runtime
  * @since 2.0
  *
  * The %Timer class can activate the timer and notify the listeners.
- *
+ * Once the target goes into sleep mode, Timer does not work properly because the main loop gets stopped.
+ * You can use Alarm on behalf of Timer for sleep mode.
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/base/timer.htm">Timer</a>.
- *
  * The following example demonstrates how to use the %Timer class.
  *
  * @code
@@ -112,6 +111,7 @@ namespace Tizen { namespace Base { namespace Runtime
  * @endcode
  *
  * @see	ITimerEventListener
+ * @see Tizen::System::Alarm
  */
 
 class _OSP_EXPORT_ Timer
@@ -149,16 +149,9 @@ public:
 	/**
 	 * Starts the timer.
 	 *
-	 * @if OSPCOMPACT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 *
 	 * @since 2.0
 	 *
-	 * @if OSPCOMPACT
-         * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-         *                              For more information, see @ref CompTimerStartPage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	timeout	        A timeout interval in milliseconds
@@ -174,11 +167,11 @@ public:
 	/**
 	* @page                    CompTimerStartPage Compatibility for Start(int timeout)
 	* @section                 CompTimerStartPageIssueSection Issues
-	* Implementing this method in OSP compatible applications has the following issues:   @n
+	* Implementation of this method in Tizen API versions prior to 2.1 has the following issue: @n
 	* -# The method returns E_INVALID_ARG if timeout is equal to zero.
 	*
 	* @section                 CompTimerStartPageSolutionSection Resolutions
-	* This issue has been resolved in Tizen.  @n 
+	* The issue mentioned above is resolved in Tizen API version 2.1, and it is recommended to use Tizen API version 2.1 or above.
 	* -# In case of zero, Timer sets timeout to the best-effort minimum interval without returning E_INVALID_ARG.
 	*/
 

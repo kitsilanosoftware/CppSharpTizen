@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an ¡±AS IS¡± BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -21,7 +21,7 @@
  *
  * This header file contains the declarations of the %IIconListViewItemEventListener interface. @n
  * If an item event is generated, a method of this interface is called. @n
- * So, if an application does some jobs related to the item event, use the methods of this interface.
+ * Applications that perform some tasks related to the item event call methods of this interface.
  */
 
 #ifndef _FUI_CTRL_IICON_LIST_VIEW_ITEM_EVENT_LISTENER_H_
@@ -44,7 +44,7 @@ class IconListView;
  *
  * The %IIconListViewItemEventListener interface is the listener interface for receiving IconListView item events.
  * The class that processes a list item event implements this interface, and the instance created with that class is registered
- * with a UI control, using the control's AddIIconListViewItemEventListener() method. When the list item event occurs, the
+ * with a UI control, using the IconListView::AddIconListViewItemEventListener() method. When the list item event occurs, the
  * OnIconListViewItemStateChanged() method of that instance is invoked.
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_listviews.htm">ListViews</a>.
@@ -94,7 +94,7 @@ public:
 	virtual void OnIconListViewItemReordered(Tizen::Ui::Controls::IconListView&  iconListView, int indexFrom, int indexTo) {}
 
 protected:
-	// Following methods are reserved and may change its name at any time without prior notice.
+	// The following methods are reserved and may change its name at any time without prior notice.
 	virtual void IconListViewItemEventListener_Reserved1(void) {}
 	virtual void IconListViewItemEventListener_Reserved2(void) {}
 	virtual void IconListViewItemEventListener_Reserved3(void) {}

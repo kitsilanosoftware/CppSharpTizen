@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -67,8 +66,12 @@ namespace Tizen { namespace System
  * 		goto CATCH;
  * 	}
  *
- * 	// Vibrate with a given pattern and level
- * 	vibrator.Start(2000, 1000, 1, 50);
+ *	// Initializes the vibration pattern
+ *	IntensityDurationVibrationPattern patterns[4] = {{2000, 50}, {1000, 0}, {500, -1}, {1000, 80}};
+ *	int length = sizeof(patterns);
+
+ * 	// Vibrates with a given pattern and repeats count
+ *	vibrator.Start(patterns, length, 3);
  *
  * 	return E_SUCCESS;
  *
@@ -78,6 +81,28 @@ namespace Tizen { namespace System
  * }
  * @endcode
  */
+
+/**
+ * @struct      IntensityDurationVibrationPattern
+ * @brief       This struct has the specified duration and a vibration intensity level.
+ *
+ * The %IntensityDurationVibrationPattern struct has the specified duration and a vibration intensity level. This can be used with Vibrator::Start(IntensityDurationVibrationPattern[] patterns, int length, int repeatCount) as a custom pattern.
+ *
+ * @since 2.1
+ */
+struct _OSP_EXPORT_ IntensityDurationVibrationPattern
+{
+	int duration; /**< The duration in milliseconds when the vibrator is on @n
+			*	The @c duration is not allowed a negative value.
+			*/
+	int intensity; /**< The vibration intensity [@c -1~ @c 100]: @n
+			*	@li The system default vibration intensity (-1)
+			*	@li The silent vibration intensity (0)
+			*	@li The minimum vibration intensity (1)
+			*	@li The maximum vibration intensity (100)
+			*/
+};
+
 
 class _OSP_EXPORT_ Vibrator
 	: public Tizen::Base::Object
@@ -115,13 +140,40 @@ public:
 	 */
 	result Construct(void);
 
+
+        /**
+         * Vibrates the device with a specified array pattern that has vibration intensity and duration. @n
+         * The %Start() method returns the result immediately so that the vibration occurs simultaneously as the device runs. @n
+         * If this method is called again before the previous vibration stops, the previous vibration is canceled and the new vibration starts immediately. @n
+         * If a new vibrator instance triggers the vibration, the vibrator merges the previous vibration pattern with the new one in the overlapped time. @n
+         * If the system alert occurs such as ring vibration and a system event notification, the vibration can be interrupted. @n
+         * If the application is terminated, the vibration is canceled.
+         *
+         * @since 2.1
+         * @privilege     %http://tizen.org/privilege/vibrator
+         *
+         * @return      An error code
+         *
+         * @param[in]   patterns                        An array of @c IntensityDurationVibrationPattern
+	 * @param[in]   length				The length of @c patterns
+         * @param[in]   repeatCount                           The number of times the pattern repeats @n This value must be between @c 1 to @c 100.
+         * @exception   E_SUCCESS           The method is successful.
+         * @exception    E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
+         * @exception   E_INVALID_ARG       A specified input parameter is invalid.
+         * @exception E_OPERATION_FAILED The device operation has failed.
+         * @remarks The vibration intensity does not apply the change, even if the system default vibration intensity is changed after starting vibration.
+         * @see  IntensityDurationVibrationPattern
+         */
+        result Start(IntensityDurationVibrationPattern* patterns, int length, int repeatCount = 1);
+
 	/**
 	 * Vibrates the device with the specified pattern and level. @n
-	 * This method returns the result immediately so that the vibration occurs simultaneously as the device runs.
+	 * The %Start() method returns the result immediately so that the vibration occurs simultaneously as the device runs.
 	 * If this method is called again before the previous vibration stops, the previous vibration is canceled and the new vibration starts immediately.
 	 *
+	 * @deprecated This method is deprecated. Instead of using this method, use Start(IntensityDurationVibrationPattern[] patterns, int length, int repeatCount).
 	 * @since 2.0
-	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/vibrator
 	 *
 	 * @return      An error code
@@ -132,7 +184,7 @@ public:
 	 * @param[in]   count       The number of times to execute the given pattern @n
 	 *                          It should be greater than @c 0.
 	 * @param[in]   level       The vibration level @n
-	 *                          Ranges from [@c 0~ @c 100], where ' @c 0' is a special case indicating the system default level.
+	 *                          Ranges from [@c 0~ @c 100], where '@c 0' is a special case indicating the system default level.
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
 	 * @exception   E_INVALID_ARG       A specified input parameter is invalid.
@@ -148,11 +200,12 @@ public:
 
 	/**
 	 * Vibrates the device for the specified duration at the specified @c level. @n
-	 * This method returns the result immediately so that the vibration occurs simultaneously as the device runs.
+	 * The %Start() method returns the result immediately so that the vibration occurs simultaneously as the device runs.
 	 * If this method is called again before the previous vibration stops, the previous vibration is canceled and the new vibration starts immediately.
 	 *
+	 * @deprecated This method is deprecated. Instead of using this method, use Start(IntensityDurationVibrationPattern[] patterns, int length, int repeatCount).
 	 * @since       2.0
-	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/vibrator
 	 *
 	 * @return      An error code
@@ -177,7 +230,7 @@ public:
 	 * Turns the vibrator off.
 	 *
 	 * @since   2.0
-	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/vibrator
 	 *
 	 * @return      An error code

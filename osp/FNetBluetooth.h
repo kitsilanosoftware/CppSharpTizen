@@ -19,7 +19,7 @@
  * @file        FNetBluetooth.h
  * @brief       This is the header file for the %Bluetooth namespace.
  *
- * This header file contains the declarations and descriptions of the %Tizen::Net::Bluetooth namespace.
+ * This header file contains the declarations and descriptions of the %Bluetooth namespace.
  */
 #ifndef _FNET_BLUETOOTH_H_
 #define _FNET_BLUETOOTH_H_

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -141,30 +140,13 @@ public:
 	/**
 	 * Gets the type of this %Url instance.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-	 *                           For more information, see @ref CompUrlGetTypePage "here".
-	 * @endif
 	 *
 	 * @return		The type of %Url
 	 */
 	UrlType GetType(void) const;
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page                CompUrlGetTypePage         Compatibility for GetType()
-	 * @section             CompUrlGetTypePageIssueSection             Issues
-	 * Implementing this method in OSP compatible applications has the following issue: @n
-	 * -# URL_TYPE_CUSTOM is not supported. If the type of the url is URL_TYPE_CUSTOM, URL_TYPE_OTHER is returned instead.
-	 *
-	 * @section             CompUrlGetTypePageSolutionSection          Resolutions
-	 * The issue mentioned above has been resolved in Tizen.
-	 *
-	 * @endif
 	 */
 
 	/**
@@ -208,14 +190,7 @@ public:
 	/**
 	 * Sets the URL of this %Url instance.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility            This method has compatibility issues with OSP compatible applications. @n
-	 *                           For more information, see @ref CompUrlSetUrlPage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	url				The URL
@@ -225,15 +200,6 @@ public:
 	result SetUrl(const Tizen::Base::String& url);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page		CompUrlSetUrlPage		Compatibility for SetUrl()
-	 * @section		CompUrlSetUrlPageIssueSection		Issues
-	 * Implementing this method in OSP compatible applications has the following issue: @n
-	 * -# If the length of an URL to be set is greater than 100 characters, E_INVALID_ARG is returned.
-	 *
-	 * @section		CompUrlSetUrlPageSolutionSection		Resolutions
-	 * The issue mentioned above has been resolved in Tizen.
-	 * @endif
 	 */
 	/**
 	 * Copying of objects using this copy assignment operator is allowed.

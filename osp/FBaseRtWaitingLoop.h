@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -64,7 +63,8 @@ public:
 	 * @exception E_TIMEOUT    The time is expired.
 	 * @exception E_INVALID_STATE    The waiting loop has already been waiting on a callback event. In order to wait again, you must quit the waiting loop.
 	 * @remarks The timeout set to min(timeout, maximum), where the maximum is set using SetMaxTimeoutForWaiting().
-	 * @see Notify(), SetMaxTimoutForWaiting()
+	 * @see Notify()
+	 * @see SetMaxTimoutForWaiting()
 	 */
 	result Wait(int timeout);
 

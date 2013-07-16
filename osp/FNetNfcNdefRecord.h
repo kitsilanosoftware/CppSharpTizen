@@ -36,7 +36,6 @@ class String;
 namespace Tizen { namespace Net { namespace Nfc
 {
 
-// Forward declaration
 class _NdefRecordImpl;
 class NdefMessage;
 class NdefRecordType;
@@ -47,10 +46,10 @@ class NdefRecordType;
  *
  * @since   2.0
  *
- * The %NdefRecord class represents an NDEF record, including certain attributes such as the type, the payload, and the payload 
- * identifier. It provides the operations to manipulate them. However, this class does not expose all the attributes of 
- * an NDEF record. Some attributes defined in the NDEF specification are hidden because they are not important for 
- * applications. @n
+ * The %NdefRecord class represents an NDEF record, including certain attributes such as the type, the payload, and the
+ * payload identifier. It provides the operations to manipulate them. However, this class does not expose all the
+ * attributes of an NDEF record. Some attributes defined in the NDEF specification are hidden because they are not
+ * important for applications. @n
  * The NDEF record may contain an NDEF message in the payload. It can be converted from a Tizen::Base::ByteBuffer 
  * instance to an NdefMessage instance through the NdefMessage::GetInstanceN() method.
  *
@@ -90,12 +89,12 @@ public:
 	/**
 	 * Compares the calling instance with the specified instance.
 	 *
-	 * @since 2.0
+	 * @since       2.0
 	 *
-	 * @return      @c true if the specified instance of %Object is equal to the calling %NdefRecord instance, @n
+	 * @return      @c true if the specified instance of Tizen::Base::Object is equal to the calling %NdefRecord instance, @n
 	 *              else @c false
 	 * @param[in]   obj                    The object to compare
-	 * @remark      Two %NdefRecord instances are equal only if they contain the same %NdefRecordType instances,
+	 * @remark      Two %NdefRecord instances are equal only if they contain the same NdefRecordType instances,
 	 *              payload ID, and payload.
 	 */
 	virtual bool Equals(const Tizen::Base::Object& obj) const;
@@ -103,7 +102,7 @@ public:
 	/**
 	 * Gets the hash value of the current instance.
 	 *
-	 * @since 2.0
+	 * @since       2.0
 	 *
 	 * @return      The hash value of the current instance
 	 */
@@ -120,7 +119,7 @@ public:
 	Tizen::Base::String GetPayloadId(void) const;
 
 	/**
-	 * Gets the payload in this record as ByteBuffer.
+	 * Gets the payload in this record as Tizen::Base::ByteBuffer.
 	 *
 	 * @since       2.0
 	 *
@@ -145,10 +144,10 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   type                The record type to be set
+	 * @param[in]   type                The record type to set
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_INVALID_ARG       The input argument is invalid. @n
-	 *                                  For example, NDEF_TNF_EMPTY is not allowed as the input value if the identifier
+	 *                                  For example, @c NDEF_TNF_EMPTY is not allowed as the input value if the identifier
 	 *                                  is not an empty string or the payload is not @c null.
 	 */
 	result SetRecordType(NdefRecordType& type);
@@ -162,7 +161,7 @@ public:
 	 * @param[in]   id                          The identifier of the payload
 	 * @exception   E_SUCCESS                   The method is successful.
 	 * @exception   E_INVALID_OPERATION         This operation is not allowed if the type name format of this record is
-	 *                                          NDEF_TNF_EMPTY.
+	 *                                          @c NDEF_TNF_EMPTY.
 	 * @exception   E_INVALID_ARG               The specified identifier is not unique compared to the other records in
 	 *                                          the same NDEF message.
 	 * @exception   E_INVALID_ENCODING_RANGE    The specified input string contains code points that are outside the
@@ -182,7 +181,7 @@ public:
 	 * @param[in]   payload                 The specified payload data
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_INVALID_OPERATION     This operation is not allowed if the type name format of this record is
-	 *                                      NDEF_TNF_EMPTY.
+	 *                                      @c NDEF_TNF_EMPTY.
 	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
 	 * @exception   E_INVALID_ARG           The @c payload is invalid. @n
 	 *                                      For example, @c payload is not constructed.
@@ -192,9 +191,9 @@ public:
 	result SetPayload(const Tizen::Base::ByteBuffer& payload);
 
 	/**
-	 * Copying of objects using this copy assignment operator is allowed.
+	 * Assigns the value of a specified instance to the current instance of %NdefRecord.
 	 *
-	 * @since 2.0
+	 * @since       2.0
 	 *
 	 * @return      A reference to the %NdefRecord instance
 	 * @param[in]   rhs                     A reference to the %NdefRecord instance to copy
@@ -202,6 +201,9 @@ public:
 	NdefRecord& operator =(const NdefRecord& rhs);
 
 private:
+	//
+	// This default constructor is intentionally declared as private so that only the platform can create an instance.
+	//
 	NdefRecord(void);
 
 private:

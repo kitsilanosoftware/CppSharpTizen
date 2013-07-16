@@ -37,7 +37,7 @@ namespace Tizen { namespace Net { namespace Bluetooth
  * @since       2.0
  *
  * The %IBluetoothSppInitiatorEventListener interface specifies the methods used for creating notifications about the
- * different kinds of BluetoothSppInitiator events. When a BluetoothSppInitiator event is generated, one of these
+ * different kinds of BluetoothSppInitiator events. When a %BluetoothSppInitiator event is generated, one of these
  * methods is called.
  *
  * For more information on the class features, see

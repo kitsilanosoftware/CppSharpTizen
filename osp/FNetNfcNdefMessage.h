@@ -36,7 +36,6 @@ class String;
 namespace Tizen { namespace Net { namespace Nfc
 {
 
-// Forward declaration
 class _NdefMessageImpl;
 class NdefRecord;
 
@@ -46,9 +45,9 @@ class NdefRecord;
  *
  * @since   2.0
  *
- * The %NdefMessage class represents an NDEF message. An NDEF message is composed of 1 or more NDEF records. Therefore, this class 
- * has NdefRecord instances and provides the operations to manipulate the list of those instances. These operations are 
- * very similar to those of the Tizen::Base::Collection::IList class.
+ * The %NdefMessage class represents an NDEF message. An NDEF message is composed of 1 or more NDEF records. Therefore,
+ * this class has NdefRecord instances and provides the operations to manipulate the list of those instances. These
+ * operations are very similar to those of the Tizen::Base::Collection::IList class.
  *
  * If a new NDEF record is inserted, the uniqueness of its payload identifier is checked. This class also provides 
  * methods which convert %NdefMessage to Tizen::Base::ByteBuffer and vice versa.
@@ -87,11 +86,13 @@ public:
 	/**
 	 * Compares the calling instance with the specified instance.
 	 *
-	 * @since 2.0
-	 * @return      @c true if the specified instance of %Object is equal to the calling %NdefMessage instance, @n
+	 * @since       2.0
+	 *
+	 * @return      @c true if the specified instance of Tizen::Base::Object is equal to the calling %NdefMessage
+	 *              instance, @n
 	 *              else @c false
 	 * @param[in]   obj                    The object to compare
-	 * @remark      Two %NdefMessage instances are equal only if they contain the same %NdefRecord instances in the
+	 * @remark      Two %NdefMessage instances are equal only if they contain the same NdefRecord instances in the
 	 *              same order.
 	 */
 	virtual bool Equals(const Tizen::Base::Object& obj) const;
@@ -99,7 +100,7 @@ public:
 	/**
 	 * Gets the hash value of the current instance.
 	 *
-	 * @since 2.0
+	 * @since       2.0
 	 *
 	 * @return      The hash value of the current instance
 	 */
@@ -116,7 +117,7 @@ public:
 
 	/**
 	 * Searches for an NdefRecord object in this class. @n
-	 * Gets the index of the NdefRecord object if the record is present.
+	 * Gets the index of the %NdefRecord object if the record is present.
 	 *
 	 * @since       2.0
 	 *
@@ -163,7 +164,7 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   record              The NDEF record to be appended
+	 * @param[in]   record              The NDEF record to append
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_INVALID_ARG       The specified NDEF record is invalid. @n
 	 *                                  For example, the record has the same payload identifier as the other records in
@@ -179,7 +180,7 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   record              The NDEF record to be inserted
+	 * @param[in]   record              The NDEF record to insert
 	 * @param[in]   index               The index at which the NDEF record must be inserted
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_OUT_OF_RANGE      The specified index is outside the bounds of the record list. @n
@@ -189,9 +190,10 @@ public:
 	 *                                  For example, the record has the same payload identifier as the other records in
 	 *                                  this NDEF message.
 	 * @exception   E_OUT_OF_MEMORY     The memory is insufficient.
-	 * @remarks     The NDEF records that appear after the insertion point move downwards to accommodate the inserted
-	 *              NDEF record.
-	 *              This method performs a shallow copy. It adds just the pointer, not the NdefRecord instance.
+	 * @remarks
+	 *              - The NDEF records that appear after the insertion point move downwards to accommodate the inserted
+	 *                NDEF record.
+	 *              - This method performs a shallow copy. It adds just the pointer, not the NdefRecord instance.
 	 */
 	result InsertRecordAt(const NdefRecord& record, int index);
 
@@ -201,8 +203,8 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   record              The NDEF record to be set
-	 * @param[in]   index               The index at which the NDEF record is to be set
+	 * @param[in]   record              The NDEF record to set
+	 * @param[in]   index               The index at which the NDEF record is set
 	 * @param[in]   deallocate          Set to @c true to deallocate the replaced record, @n
 	 *                                  else @c false
 	 * @exception   E_SUCCESS           The method is successful.
@@ -250,7 +252,7 @@ public:
 	 *
 	 * @since       2.0
 	 *
-	 * @return      The NDEF message as a ByteBuffer, @n
+	 * @return      The NDEF message as a Tizen::Base::ByteBuffer, @n
 	 *              else @c null if the conversion fails
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_INVALID_DATA      The specified NDEF message does not contain any NDEF records.
@@ -261,7 +263,7 @@ public:
 	Tizen::Base::ByteBuffer* ToByteBufferN(void) const;
 
 	/**
-	 * Gets a new instance of the NDEF message from the specified ByteBuffer.
+	 * Gets a new instance of the NDEF message from the specified Tizen::Base::ByteBuffer.
 	 *
 	 * @since       2.0
 	 *
@@ -277,9 +279,9 @@ public:
 	static NdefMessage* GetInstanceN(const Tizen::Base::ByteBuffer& buffer);
 
 	/**
-	 * Copying of objects using this copy assignment operator is allowed.
+	 * Assigns the value of a specified instance to the current instance of %NdefMessage.
 	 *
-	 * @since 2.0
+	 * @since       2.0
 	 *
 	 * @return      A reference to the %NdefMessage instance
 	 * @param[in]   rhs                     A reference to the %NdefMessage instance to copy
@@ -289,7 +291,7 @@ public:
 private:
 	_NdefMessageImpl* __pImpl;
 
-	friend class __pImpl;
+	friend class _NdefMessageImpl;
 
 }; // NdefMessage
 

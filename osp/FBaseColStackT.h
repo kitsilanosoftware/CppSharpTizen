@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -56,7 +55,7 @@ template< class Type > class __StackEnumeratorT;
  *	void
  *	MyClass::StackTSample(void)
  *	{
- *		StackT<String> stack;
+ *		StackT< String > stack;
  *		stack.Construct();
  *
  *		String str1(L"First");
@@ -108,7 +107,7 @@ public:
 	}
 
 	/**
-	 * Initializes this instance of %StackT with the specified capacity.
+	 * Initializes this instance of %StackT with the specified @c capacity.
 	 *
 	 * @since 2.0
 	 *
@@ -116,7 +115,7 @@ public:
 	 * @param[in]	capacity		The number of elements @n
 	 *                              The default capacity is @c 10.
 	 * @exception	E_SUCCESS		The method is successful.
-	 * @exception	E_INVALID_ARG	A specified input parameter is invalid, or
+	 * @exception	E_INVALID_ARG	The specified input parameter is invalid, or
 	 *								  the specified @c capacity is negative.
 	 */
 	result Construct(int capacity = DEFAULT_CAPACITY)
@@ -134,7 +133,7 @@ public:
 	}
 
 	/**
-	 * Initializes this instance of %StackT that contains the elements of the specified collection. @n
+	 * Initializes this instance of %StackT that contains the elements of the specified @c collection. @n
 	 * The capacity of the stack is the same as the number of elements copied.
 	 *
 	 * @since 2.0
@@ -378,13 +377,13 @@ CATCH:
 	}
 
 	/**
-	 * Checks whether this stack contains all of the elements in the specified collection.
+	 * Checks whether this stack contains all of the elements in the specified @c collection.
 	 *
 	 * @since 2.0
 	 *
 	 * @return		An error code
 	 * @param[in]	collection	The collection to locate
-	 * @param[out]	out   Set to @c true if this stack contains all of the elements in the specified collection, @n
+	 * @param[out]	out   Set to @c true if this stack contains all of the elements in the specified @c collection, @n
 	 *					 else @c false
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_OPERATION	The current state of the instance prohibits the execution of the specified operation, or
@@ -593,7 +592,7 @@ public:
 	/**
 	 * Moves this enumerator to the next element of the stack. @n
 	 * When this enumerator is first created or after a call to Reset(),
-	 * the first call to MoveNext() positions this enumerator to the first element in the stack.
+	 * the first call to %MoveNext() positions this enumerator to the first element in the stack.
 	 *
 	 * @since 2.0
 	 *

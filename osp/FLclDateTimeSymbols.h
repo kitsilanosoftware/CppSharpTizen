@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -74,14 +73,7 @@ public:
 	/**
 	 * Initializes this instance of %DateTimeSymbols with the specified @c locale and @c calendarType.	
 	 *
-	 * @if OSPCOMPAT 
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since				2.0
-	 * @if OSPCOMPAT
-	 * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	 *                              For more information, see @ref CompDateTimeSymbolsConstructPage "here".   
-	 * @endif
 	 *
 	 * @return				An error code
 	 * @param[in]			locale							The locale
@@ -97,14 +89,7 @@ public:
 	 * Initializes this instance of %DateTimeSymbols with the specified parameter. @n
 	 * This method loads the format data from the resources for the default locale into the default calendar.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since				2.0
-	 * @if OSPCOMPAT
-	 * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	 *                              For more information, see @ref CompDateTimeSymbolsConstructPage "here".   
-	 * @endif
 	 *
 	 * @return				An error code
 	 * @param[in]			calendarType					The calendar type
@@ -115,18 +100,7 @@ public:
 	result Construct(CalendarType calendarType);
 	
 	/**
-	 * @if OSPCOMPAT
-         * @page                    CompDateTimeSymbolsConstructPage Compatibility for Construct()
-         * @section                   CompDateTimeSymbolsConstructIssueSection Issues
-         * Implementation of this method in OSP compatible applications has the following issue: @n
-         * -# The method returns E_UNSUPPORTED_OPERATION if the @c calendarType is invalid.
-         *
-         * @section                 CompDateTimeSymbolsConstructSolutionSection Resolutions
-         * This issue has been resolved in Tizen.
-	 * @par When working in Tizen:   
-         * -# The method returns E_INVALID_ARG if the @c calendarType is invalid.
-	 * @endif
-         */
+	 */
 
 
 	/**
@@ -366,16 +340,6 @@ public:
 	 * @see					SetTimeZoneName()
 	 */
 	result AddTimeZoneName(const Tizen::Base::String& timeZoneId, const Tizen::Base::String& concatenatedTimeZoneName);
-
-
-	/*
-	 * Gets the non-localized date-time pattern characters.
-	 *
-	 * @since				2.0
-	 *
-	 * @return				The non-localized date-time pattern characters
-	 */
-	static Tizen::Base::WcharBuffer* GetNonLocalizedDateTimePatternN(void);
 
 private:
 	/**

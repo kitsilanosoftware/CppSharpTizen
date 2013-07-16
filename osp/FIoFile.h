@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -32,6 +31,7 @@
 #include <FBaseColIList.h>
 #include <FBaseResult.h>
 #include <FIoFileAttributes.h>
+#include <FIoFileLock.h>
 
 namespace Tizen { namespace Io
 {
@@ -169,30 +169,6 @@ CATCH:
  */
 
 /**
- * @if OSPCOMPAT
- * @page	CompIoPathPage Compatibility for path
- * @section CompIoPathPageIssueSection Issues
- *			The path argument of this method in OSP compatible applications has the following issue: @n
- *
- * -# The path should begin with an allowed path prefix such as '/Home', '/Home/Share', '/Res', '/Share/[@e appid]',
- * '/Media', and '/Storagecard/Media'.
- *
- * @section CompIoPathPageSolutionSection Resolutions
- *
- * - There are no specific allowed path prefixes in Tizen.
- *
- * @par	When working in Tizen:
- *  - For accessing its own data directory, use Tizen::App::App::GetInstance()->GetAppRootPath() + L"data" @n
- *    or Tizen::App::App::GetInstance()->GetAppDataPath().
- *  - For accessing its own resource directory, use Tizen::App::App::GetInstance()->GetAppRootPath() + L"res" @n
- *    or Tizen::App::App::GetInstance()->GetAppResourcePath().
- *  - For accessing its own shared directory, use Tizen::App::App::GetInstance()->GetAppRootPath() + L"shared/data".
- *  - For accessing the media directory, use Tizen::System::Environment::GetMediaPath().
- *  - For accessing the external storage, use Tizen::System::Environment::GetExternalStoragePath().
- *
- * For more information on the path,
- * see <a href="../org.tizen.native.appprogramming/html/basics_tizen_programming/io_overview.htm">I/O Overview</a>.
- * @endif
  */
 
 class _OSP_EXPORT_ File
@@ -215,21 +191,14 @@ public:
 	virtual ~File(void);
 
 	/**
-	* @if OSPDEPREC
 	* @{
+	* @if OSPDEPREC
 	* Initializes this instance of %File with the specified parameters. @n
 	* This method opens an existing file or creates a new one according to the specified file opening mode.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Deprecated] [Compatibility] </i>
-	* @endif
 	* @deprecated		This method is deprecated. Instead of using this method, use Directory::Create(const Tizen::Base::String &dirPath,
 	*					bool createParentDirectories=false) and File::Construct(const Tizen::Base::String& filePath, const Tizen::Base::String& openMode).
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	filePath				The path of the file to open or create
@@ -264,8 +233,8 @@ public:
 	* @remarks		The following file opening mode strings are recognized by this method: "w+", "wb+", "w+b", "w", "wb", "a+",
 	*				"ab+", "a+b", "a", "ab", "r+", "rb+", "r+b", "r", "rb". @n
 	*				Other strings lead to E_INVALID_ARG. However, "b"(binary) open mode is ignored internally.
-	* @}
 	* @endif
+	* @}
 	*/
 	result Construct(const Tizen::Base::String& filePath, const Tizen::Base::String& openMode, bool createParentDirectories);
 
@@ -273,14 +242,7 @@ public:
 	* Initializes this instance of %File with the specified parameters. @n
 	* This method opens an existing file or creates a new one according to the specified file opening mode.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	filePath			The path of the file to open or create
@@ -553,7 +515,7 @@ public:
 	result Write(const Tizen::Base::String& buffer);
 
 	/**
-	* Flushes the internally buffered data into a permanent storage immediately.
+	* Flushes the internally buffered data.
 	*
 	* @since			2.0
 	*
@@ -652,17 +614,132 @@ public:
 	Tizen::Base::String GetName(void) const;
 
 	/**
+	* Acquires the file lock on the current opened whole file if it is not acquired.
+	* If the file lock is already acquired by another process, the current process is blocked until the file lock is
+	* released.
+	*
+	* @since			2.1
+	*
+	* @return           The pointer to %FileLock instance, @n
+	*						else @c null pointer in case of failure
+	* @param[in]		lockType				The type of file lock to be created
+	* @exception		E_SUCCESS				The method is successful.
+	* @exception		E_INVALID_ARG			The specified @c lockType is invalid.
+	* @exception		E_INVALID_OPERATION		Either of the following conditions has occurred: @n
+	*												- The specified @c lockType cannot be FILE_LOCK_SHARED if the current
+	*												  file is not open for reading. @n
+	*												- The specified @c lockType cannot be FILE_LOCK_EXCLUSIVE if the current
+	*												  file is not open for writing. @n
+	* @exception		E_WOULD_DEADLOCK		The method would cause a deadlock. @n
+	*												The lock is blocked by a lock from another process, and putting the
+	*												calling process to sleep to wait for that lock to become free would
+	*												cause a deadlock.
+	* @exception		E_MAX_EXCEEDED			The number of file lock exceeds system limitations.
+	* @exception		E_SYSTEM				The method cannot proceed due to a severe system error.
+	* @remarks			The %FileLock instance is invalid if the associated %File instance is deleted. @n
+	*						The specific error code can be accessed using the GetLastResult() method.
+	* @see				Tizen::Io::File::FileLockType
+	*/
+	FileLock* LockN(FileLockType lockType);
+
+	/**
+	* Acquires the file lock on the specified region of the current opened file if it is not acquired.
+	* If the file lock is already acquired by another process, the current process is blocked until the file lock is
+	* released.
+	*
+	* @since			2.1
+	*
+	* @return			The pointer to %FileLock instance, @n
+	*						else @c null pointer in case of failure
+	* @param[in]		lockType				The type of file lock to be created
+	* @param[in]		offset					The starting offset for the locked region
+	* @param[in]		length					The length of the locked region in bytes
+	* @exception		E_SUCCESS				The method is successful.
+	* @exception		E_INVALID_ARG			Either of the following conditions has occurred: @n
+	*											- The specified @c lockType is invalid.
+	*											- The specified @c offset or @c length is negative or is greater than
+	*											  the system limitation.
+	* @exception		E_INVALID_OPERATION		Either of the following conditions has occurred: @n
+	*												- The specified @c lockType cannot be FILE_LOCK_SHARED if the current
+	*											  	  file is not open for reading. @n
+	*												- The specified @c lockType cannot be FILE_LOCK_EXCLUSIVE if the current
+	*											  	  file is not open for writing. @n
+	* @exception		E_WOULD_DEADLOCK		The method would cause a deadlock. @n
+	*												The lock is blocked by a lock from another process, and putting the
+	*												calling process to sleep to wait for that lock to become free would
+	*												cause a deadlock.
+	* @exception		E_MAX_EXCEEDED			The number of file lock exceeds system limitations.
+	* @exception		E_SYSTEM				The method cannot proceed due to a severe system error.
+	* @remarks			The %FileLock instance is invalid if the associated %File instance is deleted. @n
+	*						The specific error code can be accessed using the GetLastResult() method.
+	* @see				Tizen::Io::File::FileLockType
+	*/
+	FileLock* LockN(FileLockType lockType, int offset, int length);
+
+	/**
+	* Tries to acquire the file lock on the current opened whole file.
+	* If the file lock is already acquired by another process, E_OBJECT_LOCKED is returned.
+	*
+	* @since			2.1
+	*
+	* @return			The pointer to %FileLock instance, @n
+	*						else @c null pointer in case of failure
+	* @param[in]		lockType				The type of file lock to be created
+	* @exception		E_SUCCESS				The method is successful.
+	* @exception		E_INVALID_ARG			The specified @c lockType is invalid.
+	* @exception		E_INVALID_OPERATION		Either of the following conditions has occurred: @n
+	*												- The specified @c lockType cannot be FILE_LOCK_SHARED if the current
+	*												  file is not open for reading. @n
+	*												- The specified @c lockType cannot be FILE_LOCK_EXCLUSIVE if the current
+	*												  file is not open for writing. @n
+	* @exception		E_OBJECT_LOCKED			Either of the following conditions has occurred: @n
+	*												- The file lock is already held by another process. @n
+	*												- The file to be locked has been memory-mapped by another process.
+	* @exception		E_MAX_EXCEEDED			The number of file lock exceeds system limitations.
+	* @exception		E_SYSTEM				The method cannot proceed due to a severe system error.
+	* @remarks			The %FileLock instance is invalid if the associated %File instance is deleted. @n
+	*						The specific error code can be accessed using the GetLastResult() method.
+	* @see				Tizen::Io::File::FileLockType
+	*/
+	FileLock* TryToLockN(FileLockType lockType);
+
+	/**
+	* Tries to acquire the file lock on the specified region of the current opened file.
+	* If the file lock is already acquired by another process, E_OBJECT_LOCKED is returned.
+	*
+	* @since			2.1
+	*
+	* @return			The pointer to %FileLock instance, @n
+	*						else @c null pointer in case of failure
+	* @param[in]		lockType				The type of file lock to be created
+	* @param[in]		offset					The starting offset for the locked region
+	* @param[in]		length					The length of the locked region in bytes
+	* @exception		E_SUCCESS				The method is successful.
+	* @exception		E_INVALID_ARG			Either of the following conditions has occurred: @n
+	*												- The specified @c lockType is invalid.
+	*												- The specified @c offset or @c length is negative or is greater than
+	*											  	  the system limitation.
+	* @exception		E_INVALID_OPERATION		Either of the following conditions has occurred: @n
+	*												- The specified @c lockType cannot be FILE_LOCK_SHARED if the current
+	*												  file is not open for reading. @n
+	*												- The specified @c lockType cannot be FILE_LOCK_EXCLUSIVE if the current
+	*												  file is not open for writing. @n
+	* @exception		E_OBJECT_LOCKED			Either of the following conditions has occurred: @n
+	*												- The file lock is already held by another process. @n
+	*												- The file to be locked has been memory-mapped by another process.
+	* @exception		E_MAX_EXCEEDED			The number of file lock exceeds system limitations.
+	* @exception		E_SYSTEM				The method cannot proceed due to a severe system error.
+	* @remarks			The %FileLock instance is invalid if the associated %File instance is deleted. @n
+	*						The specific error code can be accessed using the GetLastResult() method.
+	* @see				Tizen::Io::File::FileLockType
+	*/
+	FileLock* TryToLockN(FileLockType lockType, int offset, int length);
+
+	/**
 	* Deletes the file specified. @n
 	* The opened file cannot be deleted. This method is static.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return			An error code
 	* @param[in]		filePath			The path of the file to delete
@@ -685,14 +762,7 @@ public:
 	* Moves the specified file to another location. @n
 	* The opened files cannot be moved. This method is static.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return			An error code
 	* @param[in]		oldFilePath				The old file path
@@ -750,14 +820,7 @@ public:
 	* Reads the file information such as size, attribute, creation date, and so on. @n
 	* This method is static.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since		2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	filePath			The path of the file @n
@@ -779,14 +842,7 @@ public:
 	* Gets only the file name from the specified file path. @n
 	* For example, if the file path passed is 'xxx/file.txt', 'file.txt' is returned.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since		2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return		The file name of type String
 	* @param[in]	filePath		The path of the file
@@ -800,14 +856,7 @@ public:
 	/**
 	* Gets the file extension of the specified file path.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since		2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return		The file extension, @n
 	*				else an empty string if the file has no extension
@@ -822,14 +871,7 @@ public:
 	/**
 	* Checks whether the specified file or directory exists.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since		2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return		@c true if file or directory exists, @n
 	*				else @c false
@@ -850,14 +892,7 @@ public:
 	* A secure file that is converted by this method can be shared among applications with the same key value.
 	* This method is static.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since 2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompIoPathPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	plainFilePath			The normal (non-encrypted) file path

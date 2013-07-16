@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -62,12 +61,14 @@ enum CalendarType
  *
  * Defines the ISO 639-2 language code. @n
  * The LanguageCode enumerator represents the ISO 639-2 language codes. @n
- * The specified LanguageCode represents the language code with the locale's ISO-15924 abbreviation script code. 
+ * The specific LanguageCode represents the language code with the locale's ISO-15924 abbreviation script code. @n
+ * The supported ISO-15924 script codes are Arabic, Cyrillic, Latin, Hans, Hant and Gurmukhi.
  *
  * @since		2.0
  */
 enum LanguageCode
 {
+	LANGUAGE_INVALID = -1, /**< An invalid language code */
 	LANGUAGE_AAR, /**< Afar */
 	LANGUAGE_ABK, /**< Abkhazian */
 	LANGUAGE_ACE, /**< Achinese */
@@ -570,8 +571,7 @@ enum LanguageCode
 	LANGUAGE_ZUN, /**< Zuni */
 	LANGUAGE_ZXX, /**< No linguistic content; Not applicable */
 	LANGUAGE_ZZA, /**< Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki */
-	LANGUAGE_MAX, // Language max count
-	LANGUAGE_INVALID /**< An invalid language code */
+	LANGUAGE_MAX // Language max count
 }; // LanguageCode
 
 
@@ -580,11 +580,13 @@ enum LanguageCode
  *
  * Defines the ISO 3166-1 alpha-2 country code. @n
  * The CountryCode enumerator represents the ISO 3166-1 alpha-2 country codes.
+ * The area code for Latin america and the Caribbean represents the ISO 3166-1 numeric-3.
  *
  * @since		2.0
  */
 enum CountryCode
 {
+    COUNTRY_INVALID = -1, /**< An invalid country code */
 	COUNTRY_AF, /**< AFGHANISTAN  */
 	COUNTRY_AX, /**< ALAND ISLANDS */
 	COUNTRY_AL, /**< ALBANIA */
@@ -826,8 +828,10 @@ enum CountryCode
 	COUNTRY_ZW, /**< ZIMBABWE */
 	COUNTRY_RS, /**< SERBIA */
 	COUNTRY_ME, /**< MONTENEGRO */
-	COUNTRY_MAX,    //< Country max count
-	COUNTRY_INVALID, //< invalid country code
+	COUNTRY_BL, /**< SAINT BARTHELEMY @b Since: @b 2.1  */
+	COUNTRY_MF, /**< SAINT MARTIN (FRENCH PART) @b Since: @b 2.1 */
+	COUNTRY_AREA_419, /**< Latin America and the Caribbean @b Since: @b 2.1  */
+	COUNTRY_MAX    //< Country max count
 };
 
 
@@ -948,6 +952,8 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		The language code enum value of the instance
+	 *
+	 * @remark		The specific LanguageCode represents the language code with the locale's ISO-15924 abbreviation script code.
 	 */
 	LanguageCode GetLanguageCode(void) const;
 
@@ -965,7 +971,8 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The language code
+	 * @return		The language code, @n
+	 *			The specific language code string has the locale's ISO-15924 abbreviation script code.
 	 */
 	Tizen::Base::String GetLanguageCodeString(void) const;
 
@@ -1071,7 +1078,7 @@ public:
 	 *
 	 * @since					2.0
 	 *
-	 * @param[in]				pVariantCode			A pointer to the variant code	
+	 * @param[in]				pVariantCode			A pointer to the variant code
 	 */
 	void SetVariantCodeString(const Tizen::Base::String* pVariantCode = null);
 
@@ -1080,7 +1087,11 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in]		languageCodeString				The language code 
+	 * @param[in]		languageCodeString				The language code, @n
+	 *									To get the specified LanguageCode with the locale's ISO-15924 abbreviation script code, @n
+	 *									the form of languageCodeString should combine the ISO 639-2 language codes and the locale's ISO-15924 abbreviation script code by "-". @n
+	 *									For example, if the language code is "aze" and the script code is "latn", @n
+	 *									the languageCodeString is "aze-latn", and the LanguageCode is LANGUAGE_AZE_LATIN.
 	 * @return		An instance of LanguageCode associated with the @c languageCodeString.
 	 */
 	static LanguageCode StringToLanguageCode(const Tizen::Base::String& languageCodeString);
@@ -1102,7 +1113,8 @@ public:
 	 *
 	 * @param[in]		languageCode					The language code
 	 * @return		The language code string associated with the @c languageCode, @n
-	 *				else an empty string if languageCode is invaild.
+	 *				else an empty string if languageCode is invalid.
+	 * @see StringToLanguageCode()
 	 */
 	static Tizen::Base::String LanguageCodeToString(LanguageCode languageCode);
 
@@ -1113,7 +1125,7 @@ public:
 	 *
 	 * @param[in]		countryCode						The country code
 	 * @return		The ISO 3166-1 alpha-2 country code string associated with the @c countryCode, @n
-	 *				else an empty string if countryCode is invaild. 
+	 *				else an empty string if countryCode is invalid.
 	 */
 	static Tizen::Base::String CountryCodeToString(CountryCode countryCode);
 
@@ -1124,7 +1136,9 @@ public:
 	 *
 	 * @param[in]		languageCode					The language code
 	 * @return		The ISO 639-2 language code string associated with the @c languageCode, @n
-	 *                              else an empty string if languageCode is invaild.
+	 *				or The ISO 639-2 language code string with the ISO-15924 script code @n
+	 *				if the @c languageCode represents The ISO 639-2 language code with the ISO-15924 script code, @n
+	 *                              else an empty string if languageCode is invalid.
 	 */
 	static Tizen::Base::String LanguageCodeToTwoLetterLanguageCodeString(LanguageCode languageCode);
 
@@ -1135,6 +1149,7 @@ public:
 	 *
 	 * @param[in]		languageCodeString				The language code string
 	 * @return		An instance of LanguageCode associated with the @c languageCodeString.
+	 * @see 		StringToLanguageCode()
 	 */
 	static LanguageCode TwoLetterLanguageCodeStringToLanguageCode(const Tizen::Base::String& languageCodeString);
 
@@ -1145,8 +1160,9 @@ public:
 	 *
 	 * @param[in]		countryCode						The country code
 	 * @return              The ISO 3166-1 alpha-3 country code string associated with the @c countryCode, @n
-	 *                              else an empty string if countryCode is invaild 
+	 *                              else an empty string if countryCode is invalid
 	 * @see			CountryCodeToString()
+	 * @remark		COUNTRY_AREA_419 returns an empty string, since it is not defined in the ISO 3166-1 alpha-3.
 	 */
 	static Tizen::Base::String CountryCodeToThreeLetterCountryCodeString(CountryCode countryCode);
 
@@ -1157,7 +1173,7 @@ public:
 	 *
 	 * @param[in]		countryCodeString				 The country code string
 	 * @return		An instance of CountryCode associated with the @c countryCodeString.
-	 * @see			StringToCountryCode() 
+	 * @see			StringToCountryCode()
 	 */
 	static CountryCode ThreeLetterCountryCodeStringToCountryCode(const Tizen::Base::String& countryCodeString);
 

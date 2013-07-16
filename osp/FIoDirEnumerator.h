@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -160,7 +159,7 @@ public:
 	* @exception        E_INVALID_ARG		Either of the following conditions has occurred: @n
 	*										- The length of the specified path is @c 0 or exceeds
 	*										  system limitations. @n
-	*										- The specified path is invalid.@n
+	*										- The specified path is invalid. @n
 	*										- The file handle is invalid (either the file is closed by
 	*										  another method, or the memory is corrupted).
 	* @exception        E_FILE_NOT_FOUND	An entry for the specified file or path cannot be found.

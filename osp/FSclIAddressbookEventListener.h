@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -23,7 +22,6 @@
 #ifndef _FSCL_IADDRESSBOOK_EVENT_LISTENER_H_
 #define _FSCL_IADDRESSBOOK_EVENT_LISTENER_H_
 
-#include <FSclRecord.h>
 #include <FBaseRtIEventListener.h>
 
 namespace Tizen { namespace Base { namespace Collection {
@@ -37,6 +35,8 @@ namespace Tizen { namespace Social
  * @interface	IAddressbookEventListener
  * @brief	This interface provides a listener that receives the events associated with contact and category changes.
  *
+ * @brief <i> [Deprecated] </i>
+ * @deprecated This interface is deprecated. Instead of using this listener, use IAddressbookChangeEventListener.
  * @since	2.0
  *
  * The %IAddressbookEventListener interface provides a listener that receives the events associated with contact and category changes.
@@ -87,7 +87,7 @@ public:
 
 	/**
 	 * Called to notify when categories are changed. @n
-     * A list of CategoryChangeInfo instances are passed.
+     * A list of CategoryChangeInfo instances is passed.
 	 *
 	 * @since	2.0
 	 *

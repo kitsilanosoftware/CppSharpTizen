@@ -276,6 +276,14 @@ _OSP_EXPORT_ extern const wchar_t* const CAMERA_PRIMARY_DEFAULT_PREVIEW_FORMAT;
 _OSP_EXPORT_ extern const wchar_t* const CAMERA_PRIMARY_METERING_MODE;
 
 /**
+* The property key to check the list of scene mode that the primary camera supports.
+*
+* @since		2.1
+*/
+_OSP_EXPORT_ extern const wchar_t* const CAMERA_PRIMARY_SCENE_MODE;
+
+
+/**
 * The property key to check the list of capture formats that the secondary camera supports.
 *
 * @since		2.0
@@ -470,6 +478,13 @@ _OSP_EXPORT_ extern const wchar_t* const CAMERA_SECONDARY_DEFAULT_PREVIEW_FORMAT
 * @since		2.0
 */
 _OSP_EXPORT_ extern const wchar_t* const CAMERA_SECONDARY_METERING_MODE;
+
+/**
+* The property key to check the list of scene mode that the secondary camera supports.
+*
+* @since		2.1
+*/
+_OSP_EXPORT_ extern const wchar_t* const CAMERA_SECONDARY_SCENE_MODE;
 
 /**
 * The property key to check the list of audio codecs that the player supports.

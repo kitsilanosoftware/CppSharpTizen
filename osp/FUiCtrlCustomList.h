@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -193,7 +193,7 @@ CustomListSample::OnInitializing(void)
 	}
 
 	// Adds the custom list to the form
-	AddControl(*__pCustomList);
+	AddControl(__pCustomList);
 
 	// Deallocates bitmaps
 	delete pBitmapNormal;
@@ -285,7 +285,8 @@ class _OSP_EXPORT_ CustomList
 public:
 	/**
 	 * @if OSPDEPREC
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the CustomList::Construct() method must be called right after calling this constructor.
 	 *
 	 * @brief       <i> [Deprecated] </i>
 	 * @deprecated	This class is deprecated. Instead of using this class, use ListView class.
@@ -296,7 +297,8 @@ public:
 
 	/**
 	 * @if OSPDEPREC
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required. @n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @brief       <i> [Deprecated] </i>
 	 * @deprecated	This class is deprecated. Instead of using this class, use ListView class.
@@ -322,8 +324,9 @@ public:
 	 * @exception	E_SUCCESS           The method is successful.
 	 * @exception	E_INVALID_ARG     A specified input parameter is invalid.
 	 * @exception	E_SYSTEM            A system error has occurred.
-	 * @remarks	The size of the control must be within the range as defined by the minimum and maximum size.
-	 * @remarks	The minimum size of this control is 92 x 72 on a WVGA screen, 60 x 48 on a HVGA screen and 46 x 36 on a WQVGA screen.
+	 * @remarks
+	 *				- The size of the control must be within the range as defined by the minimum and maximum size.
+	 *				- The minimum size of this control is 92 x 72 on a WVGA screen, 60 x 48 on a HVGA screen and 46 x 36 on a WQVGA screen.
 	 * @endif
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, CustomListStyle style, bool itemDivider = true);
@@ -338,7 +341,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use ListView class.
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @endif
 	 */
 	void AddCustomItemEventListener(Tizen::Ui::ICustomItemEventListener& listener);
@@ -352,7 +355,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use ListView class.
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 * @endif
 	 */
 	void RemoveCustomItemEventListener(Tizen::Ui::ICustomItemEventListener& listener);
@@ -366,16 +369,16 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	item				The custom list item to be added
+	 * @param[in]	item				The custom list item to add
 	 * @param[in]	itemId       		The item ID for the item
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks	The specified @c itemId can be used to identify a specific CustomListItem or @n
-	 *				to associate user-allocated resources. @n
-	 *				Note that the custom list does not throw an exception @n
-	 * 		if the same itemID is assigned to multiple items. @n
-	 * @remarks		The added item is deleted automatically when the list is destroyed. @n
-	 *				Do not add, insert, or set an item that already belongs to the %CustomList control.
+	 * @remarks
+	 *				- The specified @c itemId can be used to identify a specific CustomListItem or
+	 *				to associate user-allocated resources.
+	 *				- Note that the custom list does not throw an exception 	if the same itemID is assigned to multiple items.
+	 *				- The added item is deleted automatically when the list is destroyed.
+	 *				- Do not add, insert, or set an item that already belongs to the %CustomList control.
 	 * @endif
 	 */
 	result AddItem(const CustomListItem& item, int itemId = LIST_ITEM_UNSPECIFIED_ID);
@@ -390,14 +393,15 @@ public:
 	 *
 	 * @return      An error code
 	 * @param[in] 	index		        The index at which to insert the item
-	 * @param[in]	item				The custom list item to be inserted
+	 * @param[in]	item				The custom list item to insert
 	 * @param[in] 	itemId            	The item ID for the item
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception 	E_INVALID_ARG     	A specified input parameter is invalid. @n
 	 *									The specified @c index is less than @c 0 or greater than or equal to the item count.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks		The inserted item is deleted automatically when the list is destroyed. @n
-	 *				Do not add, insert, or set an item that already belongs to the %CustomList control.
+	 * @remarks
+	 *				- The inserted item is deleted automatically when the list is destroyed.
+	 *				- Do not add, insert, or set an item that already belongs to the %CustomList control.
 	 * @endif
 	 */
 	result InsertItemAt(int index, const CustomListItem& item, int itemId = LIST_ITEM_UNSPECIFIED_ID);
@@ -412,7 +416,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in] 	index		    	The index at which to set the contents of the item
-	 * @param[in]	item		    	The custom list item to be set
+	 * @param[in]	item		    	The custom list item to set
 	 * @param[in] 	itemId          	The item ID for the item
 	 * @exception	E_SUCCESS	    	The method is successful.
 	 * @exception 	E_INVALID_ARG   	A specified input parameter is invalid. @n
@@ -432,7 +436,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	index				The index of the item to be deleted
+	 * @param[in]	index				The index of the item to delete
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception 	E_INVALID_ARG   	The specified input parameter is invalid. @n
 	 *									The specified @c index is less than @c 0 or greater than or equal to the item count.
@@ -496,7 +500,7 @@ public:
 	 * @since		2.0
    	 *
 	 * @return		An error code
-	 * @param[in] 	index				The index of the item whose status is to be set
+	 * @param[in] 	index				The index of the item whose status is to set
 	 * @param[in]	enable				Set to @c true to enable, @n
 	 *									else @c false
 	 * @exception	E_SUCCESS			The method is successful.
@@ -515,7 +519,7 @@ public:
 	 *
 	 * @return      @c true if the item is enabled, @n
 	 *				else @c false
-	 * @param[in]	index	The index of the item to be checked
+	 * @param[in]	index	The index of the item to check
 	 * @endif
 	 */
 	bool IsItemEnabled(int index) const;
@@ -529,7 +533,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	index				The index of the item to be set
+	 * @param[in]	index				The index of the item to set
 	 * @param[in] 	check				The check status
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
@@ -583,8 +587,9 @@ public:
 	 * @return		An error code
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks		This method can only be used when the style of the list allows multiple selections.
-	 * @remarks   	The removed list items are deleted from the memory.
+	 * @remarks
+	 *				- This method can only be used when the style of the list allows multiple selections.
+	 *				- The removed list items are deleted from the memory.
 	 * @endif
 	 */
 	result RemoveAllCheckedItems(void);
@@ -629,7 +634,7 @@ public:
 	 *              else @c -1 if no more item after the specified index is checked, @n
 	 *              or the specified @c index is less than @c 0 or greater than the item count.
 	 * @param[in]	index		The index of the %CustomList control item
-	 * endif
+	 * @endif
 	 */
 	int GetNextCheckedItemIndexAfter(int index) const;
 
@@ -713,7 +718,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use ListView class.
 	 * @since		2.0
 	 *
-	 * @param[in]	text	The text message to be displayed
+	 * @param[in]	text	The text message to display
 	 * @endif
 	 */
 	void SetTextOfEmptyList(const Tizen::Base::String& text);
@@ -726,7 +731,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use ListView class.
 	 * @since	2.0
 	 *
-	 * @param[in]	color	The color of the text to be displayed
+	 * @param[in]	color	The color of the text to display
  	 * @endif
 	 */
 	void SetTextColorOfEmptyList(const Tizen::Graphics::Color& color);
@@ -812,7 +817,7 @@ public:
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 * @exception	E_INVALID_ARG   	The specified input parameter is invalid. @n
-	 *									The specified @c index is less than @c 0 or greater than the item count.
+	 *							The specified @c index is less than @c 0 or greater than the item count.
 	 * @endif
 	 */
 	result ScrollToTop(int index);

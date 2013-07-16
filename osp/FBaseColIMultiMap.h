@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -144,13 +143,12 @@ public:
 	virtual IEnumerator* GetValuesN(const Object& key) const = 0;
 
 	/**
-	 * Gets a list of all the keys in the map.
+	 * Gets a list of all unique keys in the map.
 	 *
 	 * @since 2.0
 	 *
-	 * @return		A pointer to a list of all the keys in the map, @n
+	 * @return		A pointer to a list of all unique keys in the map, @n
 	 *				else @c null if an exception occurs
-	 * @remarks		The order of the keys is the same as the corresponding values in the IList interface returned by the GetValuesN() method.
 	 * @remarks		The %IList stores just the pointers to the elements in the map, not the elements themselves.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @see			GetValuesN()
@@ -183,8 +181,8 @@ public:
 	 * @exception	E_INVALID_ARG	A specified input parameter is invalid, or
 	 *								the comparer has failed to compare the keys.
 	 * @exception	E_OBJ_NOT_FOUND	The specified @c key is not found in the map.
-	 * @remarks		Based on the specified element deleter, the remove operation not only gets rid of an element from a list, but also deletes its object instance.@n
-	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the remove method.@n
+	 * @remarks		Based on the specified element deleter, the remove operation not only gets rid of an element from a list, but also deletes its object instance. @n
+	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the remove method. @n
 	 *				If both an element deleter and forceDeleteion are set, the remove operation follows @c forceDeletion setting.
 	 * @remarks		Remove(key, @b true) internally works as the below code:
 	 * @code
@@ -250,8 +248,8 @@ public:
 	 * @exception	E_INVALID_ARG	A specified input parameter is invalid, or
 	 *								the comparer has failed to compare the keys.
 	 * @exception	E_OBJ_NOT_FOUND	The @c key and @c value pair is not found in the map.
-	 * @remarks		Based on the specified element deleter, the remove operation not only gets rid of an element from a list, but also deletes its object instance.@n
-	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the remove method.@n
+	 * @remarks		Based on the specified element deleter, the remove operation not only gets rid of an element from a list, but also deletes its object instance. @n
+	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the remove method. @n
 	 *				If both an element deleter and forceDeleteion are set, the remove operation follows @c forceDeletion setting.
 	 * @remarks		Remove(key, value, @b true) internally works as the below code:
 	 * @code
@@ -312,8 +310,8 @@ public:
 	 *
 	 * @param[in]	forceDeletion		Set to @c true to deallocate all objects, @n
 	 * 								else @c false
-	 * @remarks		Based on the specified element deleter, the remove operation not only gets rid of an element from a list, but also deletes its object instance.@n
-	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the remove method.@n
+	 * @remarks		Based on the specified element deleter, the remove operation not only gets rid of an element from a list, but also deletes its object instance. @n
+	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the remove method. @n
 	 *				If both an element deleter and forceDeleteion are set, the remove operation follows @c forceDeletion setting.
 	 * @remarks		RemoveAll(@b true) internally works as the below code:
 	 * @code
@@ -371,8 +369,8 @@ public:
 	 *								the comparer has failed to compare the keys.
 	 * @exception	E_OBJ_NOT_FOUND	The key-value pair is not found in the map.
 	 * @remarks		Use the Add() method to add a new key-value pair.
-	 * @remarks		Based on the specified element deleter, the set operation not only gets rid of an element from a list, but also deletes its object instance.@n
-	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the set method.@n
+	 * @remarks		Based on the specified element deleter, the set operation not only gets rid of an element from a list, but also deletes its object instance. @n
+	 *				The element deleter style is recommended rather than using the @c forceDeletetion argument in the set method. @n
 	 *				If both an element deleter and forceDeleteion are set, the set operation follows @c forceDeletion setting.
 	 * @remarks		SetValue(key, value, newValue, @b true) internally works as the below code:
 	 * @code
@@ -555,7 +553,7 @@ public:
 	 *
 	 * @since 2.0
 	 *
-	 * @return		An function pointer to the existing element deleter
+	 * @return		A function pointer to the existing element deleter
 	 */
 	virtual DeleterFunctionType GetDeleter(void) const = 0;
 

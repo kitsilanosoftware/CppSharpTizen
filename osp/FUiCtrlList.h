@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -81,7 +81,7 @@ namespace Tizen { namespace Ui { namespace Controls
  * This is a simple UI application which uses a list control.
  *
  *
- * @code
+* @code
 //Sample code for ListSample.h
 #include <FUi.h>
 
@@ -143,7 +143,7 @@ ListSample::OnInitializing(void)
 	__pList->AddItem(&itemText2, null, null, null, ID_LIST_SECONDITEM);
 
 	// Adds the list to the form
-	AddControl(*__pList);
+	AddControl(__pList);
 
 	return r;
 }
@@ -177,7 +177,8 @@ class _OSP_EXPORT_ List
 public:
 	/**
 	 * @if OSPDEPREC
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called.  @n
+	 * For full construction, the List::Construct() method must be called right after calling this constructor.
 	 *
 	 * @brief		<i> [Deprecated] </i>
 	 * @deprecated  This class is deprecated. Instead of using this class, use the ListView class.
@@ -188,7 +189,8 @@ public:
 
 	/**
 	 * @if OSPDEPREC
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required.@n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @brief		<i> [Deprecated] </i>
 	 * @deprecated  This class is deprecated. Instead of using this class, use the ListView class.
@@ -218,11 +220,12 @@ public:
 	 * @exception	E_SUCCESS           The method is successful.
 	 * @exception   E_INVALID_ARG       A specified input parameter is invalid.
 	 * @exception	E_SYSTEM		    A system error has occurred.
-	 * @remarks	A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier. @n
-	 *		If the given size is less than the minimum size, %List is constructed with the minimum size. @n
-	 *		When, %List is constructed with LIST_STYLE_NUMBER style, the maximum number of items supported is @c 99.
-	 * @remarks	The size of the control must be within the range defined by the minimum size and the maximum size.
-	 * @remarks     The minimum size of this control is 92 x 72 on a WVGA screen, 60 x 48 on a HVGA screen and 46 x 36 on a WQVGA screen.
+	 * @remarks
+	 *			- A control is fully usable only after it has been added to a container, therefore some methods may fail if used earlier.
+	 *			- If the given size is less than the minimum size, %List is constructed with the minimum size.
+	 *			- When, %List is constructed with ::LIST_STYLE_NUMBER style, the maximum number of items supported is @c 99.
+	 *			- The size of the control must be within the range defined by the minimum size and the maximum size.
+	 *			- The minimum size of this control is 92 x 72 on a WVGA screen, 60 x 48 on a HVGA screen and 46 x 36 on a WQVGA screen.
 	 * @endif
 	 */
 	result Construct(const Tizen::Graphics::Rectangle& rect, ListStyle style, ListItemFormat itemFormat, int row1Height, int row2Height, int column1Width, int column2Width);
@@ -236,7 +239,7 @@ public:
 	 * @deprecated  This class is deprecated. Instead of using this class, use the ListView class.
 	 * @since			2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @endif
 	 */
 	void AddItemEventListener(Tizen::Ui::IItemEventListener& listener);
@@ -250,7 +253,7 @@ public:
 	 * @deprecated  This class is deprecated. Instead of using this class, use the ListView class.
 	 * @since			2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 * @endif
 	 */
 	void RemoveItemEventListener(Tizen::Ui::IItemEventListener& listener);
@@ -272,8 +275,9 @@ public:
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_MAX_EXCEEDED	The number of items has exceeded the maximum limit.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks	The contents of the specified texts and bitmaps are copied and kept by the list.
-	 *			If the size of the text exceeds the displayable area, the text will slide automatically when the list item is selected.
+	 * @remarks
+	 *			- The contents of the specified texts and bitmaps are copied and kept by the list.
+	 *			- If the size of the text exceeds the displayable area, the text will slide automatically when the list item is selected.
 	 * @endif
 	 */
 	result AddItem(const Tizen::Base::String* pText1, const Tizen::Base::String* pText2, const Tizen::Graphics::Bitmap* pBitmap1, const Tizen::Graphics::Bitmap* pBitmap2, int itemId = LIST_ITEM_UNSPECIFIED_ID);
@@ -287,7 +291,7 @@ public:
 	 * @since					2.0
 	 *
 	 * @return		An error code
-	 * @param[in]   index			The index at which the item is to be inserted
+	 * @param[in]   index			The index at which the item is inserted
 	 * @param[in]	pText1		    A pointer to the first string
 	 * @param[in]	pText2		    A pointer to the second string
 	 * @param[in]	pBitmap1	    A pointer to the first normal bitmap
@@ -297,8 +301,9 @@ public:
 	 * @exception	E_OUT_OF_RANGE	The specified @c index is less than @c 0 or greater than the item count.
 	 * @exception	E_MAX_EXCEEDED	The number of items has exceeded the maximum limit.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks	The contents of the specified texts and bitmaps are copied and kept by the list.
-	 *			If the size of the text exceeds the displayable area, the text will slide automatically when a list item is selected.
+	 * @remarks
+	 *			- The contents of the specified texts and bitmaps are copied and kept by the list.
+	 *			- If the size of the text exceeds the displayable area, the text will slide automatically when a list item is selected.
 	 * @endif
 	 */
 	result InsertItemAt(int index, const Tizen::Base::String* pText1, const Tizen::Base::String* pText2, const Tizen::Graphics::Bitmap* pBitmap1, const Tizen::Graphics::Bitmap* pBitmap2, int itemId = LIST_ITEM_UNSPECIFIED_ID);
@@ -312,7 +317,7 @@ public:
 	 * @since					2.0
 	 *
 	 * @return		An error code
-	 * @param[in]   index		        The index at which the contents of the item is to be set
+	 * @param[in]   index		        The index at which the contents of the item is set
 	 * @param[in]	pText1		        A pointer to the first string
 	 * @param[in]	pText2		        A pointer to the second string
 	 * @param[in]	pBitmap1	        A pointer to the first normal bitmap
@@ -321,8 +326,9 @@ public:
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_OUT_OF_RANGE		The specified @c index is less than @c 0 or greater than or equal to the item count.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks	The contents of the specified texts and bitmaps are copied and kept in the list.
-	 *			If the size of the text exceeds the displayable area, the text will slide automatically when a list item is selected.
+	 * @remarks
+	 *			- The contents of the specified texts and bitmaps are copied and kept in the list.
+	 *			- If the size of the text exceeds the displayable area, the text will slide automatically when a list item is selected.
 	 * @endif
 	 */
 	result SetItemAt(int index, const Tizen::Base::String* pText1, const Tizen::Base::String* pText2, const Tizen::Graphics::Bitmap* pBitmap1, const Tizen::Graphics::Bitmap* pBitmap2, int itemId = LIST_ITEM_UNSPECIFIED_ID);
@@ -336,7 +342,7 @@ public:
 	 * @since			2.0
 	 *
 	 * @return		An error code
-	 * @param[in]   index			The index at which the item is to be deleted
+	 * @param[in]   index			The index at which the item is deleted
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_OUT_OF_RANGE	The specified @c index is less than @c 0 or greater than or equal to the item count.
 	 * @exception	E_SYSTEM		A system error has occurred.
@@ -381,7 +387,7 @@ public:
 	 * @since			2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	index		The index of the list item for which status is to be set
+	 * @param[in]	index		The index of the list item for which status is set
 	 * @param[in]	enable	    Set to @c true to enable the item, @n
 	 *							else @c false
 	 * @exception	E_SUCCESS	The method is successful.
@@ -479,7 +485,7 @@ public:
 	 * @deprecated  This class is deprecated. Instead of using this class, use the ListView class.
 	 * @since			2.0
 	 *
-	 * @param[in]	text	The text message to be displayed
+	 * @param[in]	text	The text message to display
 	 * @endif
 	 */
 	void SetTextOfEmptyList(const Tizen::Base::String& text);

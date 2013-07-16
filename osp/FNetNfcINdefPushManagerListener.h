@@ -34,7 +34,8 @@ namespace Tizen { namespace Net { namespace Nfc
  * @brief       This interface provides a listener for the events related to the %NfcPushManager.
  * @since 2.0
  *
- * The %INdefPushManagerListener interface specifies the methods used for receiving the status of the pushed NDEF message asynchronously.
+ * The %INdefPushManagerListener interface specifies the methods used for receiving the status of the pushed NDEF
+ * message asynchronously.
  *
  * For more information on the class features, see
  * <a href="../org.tizen.native.appprogramming/html/guide/net/nfc.htm">NFC Guide</a>.
@@ -56,28 +57,30 @@ public:
 	 *
 	 * @since 2.0
 	 *
-	 * @param[in]	r					The result of pushed NDEF message @
-	 * 									Following exceptions may be given through this parameter.
-	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_NOT_RESPONDING	The device is not responding.
- 	 * @exception	E_OPERATION_FAILED	The operation has failed.
+	 * @param[in]   r                   The result of pushed NDEF message @n
+	 *                                  The following exceptions may be given through this parameter.
+	 * @exception   E_SUCCESS           The method is successful.
+	 * @exception   E_NOT_RESPONDING    The device is not responding.
+ 	 * @exception   E_OPERATION_FAILED  The operation has failed.
 	 */
 	virtual void OnNdefPushMessageSent(result r) = 0;
 
 protected:
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
-	// The following methods are reserved, and the name of methods can be changed at any time without prior notice.
+	// This method is reserved and may change its name at any time without prior notice.
 	//
 	// @since 2.0
 	//
 	virtual void INdefPushManagerListener_Reserved1(void) {}
 
 	//
-	// This method is for internal use only. Using this method can cause behavioral, security-related, and consistency-related issues in the application.
+	// This method is for internal use only. Using this method can cause behavioral, security-related, and
+	// consistency-related issues in the application.
 	//
-	// The following methods are reserved, and the name of methods can be changed at any time without prior notice.
+	// This method is reserved and may change its name at any time without prior notice.
 	//
 	// @since 2.0
 	//

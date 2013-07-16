@@ -96,7 +96,8 @@ public:
 	 * @exception	E_SUCCESS		The instance is created successfully.
 	 * @exception	E_INVALID_ARG	The specified @c ipAddr is invalid.
 	 * @remarks		The GetLastResult() method is used to check whether the %Ip4Address instance is created successfully.
-	 * @see			IpAddress::NetworkToHostOrder(), IpAddress::HostToNetworkOrder()
+	 * @see			IpAddress::NetworkToHostOrder()
+	 * @see			IpAddress::HostToNetworkOrder()
 	 */
 	Ip4Address(unsigned long ipAddr);
 
@@ -133,7 +134,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[out]	ipAddr			A ByteBuffer object containing the raw IP address
+	 * @param[out]	ipAddr			A Tizen::Base::ByteBuffer object containing the raw IP address
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_OVERFLOW		The length of the remaining bytes of @c ipAddr is less than @c 4.
 	 * @remarks		This method returns the raw IP address of the %Ip4Address object. The result is in host byte order. This method writes the raw address
@@ -152,7 +153,8 @@ public:
 	 * @param[out]	ipAddr				An unsigned @c long integer containing the raw IP address
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_STATE		This instance is in an invalid state.
-	 * @see			IpAddress::NetworkToHostOrder(), IpAddress::HostToNetworkOrder()
+	 * @see			IpAddress::NetworkToHostOrder()
+	 * @see			IpAddress::HostToNetworkOrder()
 	 */
 	result GetAddress(unsigned long& ipAddr) const;
 
@@ -195,8 +197,8 @@ public:
 	 *
 	 * @return		@c true if the values match, @n
 	 *				else @c false
-	 * @param[in]	rhs 	The other Object to be compared
-	 * @see 		Object::Equals()
+	 * @param[in]	rhs 	The other Tizen::Base::Object to compare
+	 * @see 		Tizen::Base::Object::Equals()
 	 */
 	virtual bool Equals(const Tizen::Base::Object& rhs) const;
 
@@ -205,7 +207,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @return  	The current instance's hash value
+	 * @return  	The hash value of the current instance
 	 */
 	virtual int GetHashCode(void) const;
 

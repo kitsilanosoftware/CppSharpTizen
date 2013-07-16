@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -66,28 +65,6 @@ static const int MAX_NOTIFICATION_LAUNCH_ARGUMENTS_LENGTH = 1024;
  * @endif
  */
 static const int MAX_NOTIFICATION_BADGE_NUMBER = 999;
-
-/*
- * The maximum length of the title text.
- *
- * @since	2.0
- */
-static const int MAX_NOTIFICATION_TITLE_LENGTH = 1024;
-
-/*
- * @enum	OngoingActivityType
- *
- * Defines the ongoing activity notification type.
- *
- * @since	2.0
- */
-enum OngoingActivityType
-{
-	ONGOING_ACTIVITY_TYPE_TEXT = 1,			/**< The text type */
-	ONGOING_ACTIVITY_TYPE_PROGRESS_BYTE,	/**< The progress type in byte */
-	ONGOING_ACTIVITY_TYPE_PROGRESS_PERCENTAGE	/**< The progress type in percentage */
-};
-
 
 /**
  * @if OSPDEPREC
@@ -260,7 +237,7 @@ public:
 	 * @if OSPDEPREC
 	 * Notifies the user using a message and badge number. @n
 	 * If the user checks the message, @c launchArguments is delivered to the application. @n
-	 * @c launchArguments is delivered as the value of the http://tizen.org/appcontrol/data/notification key
+	 * @c launchArguments is delivered as the value of the %http://tizen.org/appcontrol/data/notification key
 	 * for IAppControlProviderEventListener::OnAppControlRequestReceived().
 	 *
 	 * @brief		<i> [Deprecated] </i>
@@ -331,7 +308,7 @@ public:
 	/**
 	 * @if OSPDEPREC
 	 * Notifies the user about the ongoing activity using a message. @n
-	 * @c launchArguments is delivered as the value of the http://tizen.org/appcontrol/data/notification key
+	 * @c launchArguments is delivered as the value of the %http://tizen.org/appcontrol/data/notification key
 	 * for IAppControlProviderEventListener::OnAppControlRequestReceived().
 	 *
 	 * @brief		<i> [Deprecated] </i>
@@ -369,7 +346,7 @@ public:
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 * @exception   E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
-	 * @remarks	 The method returns @c E_SUCCESS when there is no outstanding notification.
+	 * @remarks	 This method returns @c E_SUCCESS when there is no outstanding notification.
 	 * @endif
 	 */
 	result RemoveOngoingActivityNotification(void);
@@ -395,6 +372,226 @@ public:
 	 * @endif
 	 */
 	int GetBadgeNumber(const AppId& appId);
+
+	/**
+	 * @if OSPDEPREC
+	 * Notifies the user using a badge number on behalf of the specified application.
+	 *
+	 * @brief		<i> [Deprecated] </i>
+	 *
+	 * @deprecated	This class is deprecated. Instead of using this class, use the Tizen::Shell::NotificationManager class.
+	 * @since	2.0
+	 *
+	 * @privlevel	public
+	 * @privilege   %http://tizen.org/privilege/notification @n
+	 * 				(%http://tizen.org/privilege/notificationmanager is deprecated.)
+	 *
+	 * @return		An error code
+	 * @param[in]	appId				The application ID
+	 * @param[in]	badgeNumber			The badge number
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		A specified input parameter is invalid, or
+	 *                                  the specified @c badgeNumber is less than @c 0.
+	 * @exception	E_APP_NOT_INSTALLED  The application is not installed.
+	 * @exception	E_INVALID_OPERATION	The target application with the specified application ID is not permitted to receive any notification as per the %Tizen platform policy.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception   E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
+	 * @endif
+	 */
+	result NotifyOnBehalf(const AppId& appId, int badgeNumber);
+
+	/**
+	 * @if OSPDEPREC
+	 * Notifies the user using a message on behalf of the specified application.
+	 *
+	 * @brief		<i> [Deprecated] </i>
+	 *
+	 * @deprecated	This class is deprecated. Instead of using this class, use the Tizen::Shell::NotificationManager class.
+	 * @since	2.0
+	 *
+	 * @privlevel	public
+	 * @privilege   %http://tizen.org/privilege/notification @n
+	 * 				(%http://tizen.org/privilege/notificationmanager is deprecated.)
+	 *
+	 * @return		An error code
+	 * @param[in]	appId				The application ID
+	 * @param[in]	messageText			The notification message
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		A specified input parameter is invalid, or
+	 *									the length of @c messageText is greater than App::MAX_NOTIFICATION_MESSAGE_LENGTH.
+	 * @exception	E_APP_NOT_INSTALLED  The application is not installed.
+	 * @exception	E_INVALID_OPERATION	The target application with the specified application ID is not permitted to receive any notification as per the %Tizen platform policy.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception   E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
+	 * @endif
+	 */
+	result NotifyOnBehalf(const AppId& appId, const Tizen::Base::String& messageText);
+
+	/**
+	 * @if OSPDEPREC
+	 * Notifies the user using a message and badge number on behalf of the specified application.
+	 *
+	 * @brief		<i> [Deprecated] </i>
+	 *
+	 * @deprecated	This class is deprecated. Instead of using this class, use the Tizen::Shell::NotificationManager class.
+	 * @since	2.0
+	 *
+	 * @privlevel	public
+	 * @privilege   %http://tizen.org/privilege/notification @n
+	 * 				(%http://tizen.org/privilege/notificationmanager is deprecated.)
+	 *
+	 * @return		An error code
+	 * @param[in]	appId				The application ID
+	 * @param[in]	messageText			The notification message
+	 * @param[in]	badgeNumber			The badge number
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		Either of the following conditions has occurred: @n
+	 *									- A specified input parameter is invalid. @n
+	 *									- The specified @c badgeNumber is less than @c 0. @n
+	 *									- The length of @c messageText is greater than App::MAX_NOTIFICATION_MESSAGE_LENGTH.
+	 * @exception	E_APP_NOT_INSTALLED  The application is not installed.
+	 * @exception	E_INVALID_OPERATION	The target application with the specified application ID is not permitted to receive any notification as per the %Tizen platform policy.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception   E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
+	 * @endif
+	 */
+	result NotifyOnBehalf(const AppId& appId, const Tizen::Base::String& messageText, int badgeNumber);
+
+	/**
+	 * @if OSPDEPREC
+	 * Notifies the user using a message and badge number on behalf of the specified application. @n
+	 * If the user checks the message, the @c launchArguments is delivered to the application.
+	 *
+	 * @brief		<i> [Deprecated] </i>
+	 *
+	 * @deprecated	This class is deprecated. Instead of using this class, use the Tizen::Shell::NotificationManager class.
+	 * @since               2.0
+	 *
+	 * @privlevel	public
+	 * @privilege   %http://tizen.org/privilege/notification @n
+	 * 				(%http://tizen.org/privilege/notificationmanager is deprecated.)
+	 *
+	 * @return             An error code
+	 * @param[in]  appId				The application ID
+	 * @param[in]  messageText		The notification message
+	 * @param[in]  launchArguments	The launch arguments for the application
+	 * @exception  E_SUCCESS			The method is successful.
+	 * @exception  E_INVALID_ARG		Either of the following conditions has occurred: @n
+	 *								- A specified input parameter is invalid. @n
+	 *								- The length of the specified @c messageText is greater than App::MAX_NOTIFICATION_MESSAGE_LENGTH. @n
+	 *								- The length of the specified @c launchArguments is greater than App::MAX_NOTIFICATION_LAUNCH_ARGUMENTS_LENGTH.
+	 * @exception  E_APP_NOT_INSTALLED	The application is not installed.
+	 * @exception  E_INVALID_OPERATION	The target application with the specified application ID is not permitted to receive any notification as per the %Tizen platform policy.
+	 * @exception  E_SYSTEM				A system error has occurred.
+	 * @exception E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @endif
+	 */
+	result NotifyOnBehalf(const AppId& appId, const Tizen::Base::String& messageText, const Tizen::Base::String& launchArguments);
+
+	/**
+	 * @if OSPDEPREC
+	 * Notifies the user about the ongoing activity using a message on behalf of the specified application.
+	 *
+	 * @brief		<i> [Deprecated] </i>
+	 *
+	 * @deprecated	This class is deprecated. Instead of using this class, use the Tizen::Shell::NotificationManager class.
+	 * @since				2.0
+	 *
+	 * @privlevel	public
+	 * @privilege   %http://tizen.org/privilege/notification @n
+	 * 				(%http://tizen.org/privilege/notificationmanager is deprecated.)
+	 *
+	 * @return		An error code
+	 * @param[in]	appId				The application ID
+	 * @param[in]	messageText			The notification message
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		The specified input parameter is invalid, or
+	 *									the length of @c messageText is greater than App::MAX_NOTIFICATION_MESSAGE_LENGTH.
+	 * @exception   E_APP_NOT_INSTALLED	The application is not installed.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_INVALID_OPERATION	The type of application calling this method is invalid as per the %Tizen platform policy.
+	 * @exception E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @endif
+	 */
+	result NotifyOngoingActivityOnBehalf(const AppId& appId, const Tizen::Base::String& messageText);
+
+	/**
+	 * @if OSPDEPREC
+	 * Notifies the user about the ongoing activity using a message on behalf of the specified application.
+	 *
+	 * @brief		<i> [Deprecated] </i>
+	 *
+	 * @deprecated	This class is deprecated. Instead of using this class, use the Tizen::Shell::NotificationManager class.
+	 * @since				2.0
+	 *
+	 * @privlevel	public
+	 * @privilege   %http://tizen.org/privilege/notification @n
+	 * 				(%http://tizen.org/privilege/notificationmanager is deprecated.)
+	 *
+	 * @return		An error code
+	 * @param[in]	appId				The application ID
+	 * @param[in]	messageText			The notification message
+	 * @param[in]  launchArguments	The launch arguments for application
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		Either of the following conditions has occurred: @n
+	 *									- A specified input parameter is invalid. @n
+	 *									- The length of @c messageText is greater than App::MAX_NOTIFICATION_MESSAGE_LENGTH. @n
+	 *									- The length of @c launchArguments is greater than App::MAX_NOTIFICATION_LAUNCH_ARGUMENTS_LENGTH.
+	 * @exception   E_APP_NOT_INSTALLED	The application is not installed.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_INVALID_OPERATION	The type of application calling this method is invalid as per the %Tizen platform policy.
+	 * @exception E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @endif
+	 */
+	result NotifyOngoingActivityOnBehalf(const AppId& appId, const Tizen::Base::String& messageText, const Tizen::Base::String& launchArguments);
+
+	/**
+	 * @if OSPDEPREC
+	 * Removes the notification message for the ongoing activity on behalf of the specified application.
+	 *
+	 * @brief		<i> [Deprecated] </i>
+	 *
+	 * @deprecated	This class is deprecated. Instead of using this class, use the Tizen::Shell::NotificationManager class.
+	 * @since			2.0
+	 *
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/notification @n
+	 * 				(%http://tizen.org/privilege/notificationmanager is deprecated.)
+	 *
+	 * @return		An error code
+	 * @param[in]	appId				The application ID
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_APP_NOT_INSTALLED	The application is not installed.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception   E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
+	 * @remarks		Although there is no outstanding notification for the calling application, this method returns @c E_SUCCESS.
+	 * @endif
+	 */
+	result RemoveOngoingActivityNotificationOnBehalf(const AppId& appId);
+
+	/**
+	 * @if OSPDEPREC
+	 * Removes the notification message on behalf of the specified application.
+	 *
+	 * @brief		<i> [Deprecated] </i>
+	 *
+	 * @deprecated	This class is deprecated. Instead of using this class, use the Tizen::Shell::NotificationManager class.
+	 * @since			2.0
+	 *
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/notification @n
+	 * 				(%http://tizen.org/privilege/notificationmanager is deprecated.)
+	 *
+	 * @return		An error code
+	 * @param[in]	appId				The application ID
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_APP_NOT_INSTALLED	The application is not installed.
+	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception   E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
+	 * @remarks		Although there is no outstanding notification for the calling application, this method returns @c E_SUCCESS.
+	 * @endif
+	 */
+	result RemoveNotificationOnBehalf(const AppId& appId);
 
 private:
 	/**

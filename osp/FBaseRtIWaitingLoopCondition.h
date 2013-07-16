@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -54,4 +53,4 @@ public:
 
 } } } // Tizen::Runtime
 
-#endif // _FBASE_RT_WAITING_LOOP_CONDITION_H_
+#endif // _FBASE_RT_I_WAITING_LOOP_CONDITION_H_

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -95,7 +94,7 @@ public:
 	 * @since	2.0
 	 *
 	 * @return	An error code
-	 * @param[in]	timeMode	The time mode @c TIME_MODE_UTC, TIME_MODE_STANDARD, or @c TIME_MODE_WALL
+	 * @param[in]	timeMode	The time mode @c TIME_MODE_UTC, @c TIME_MODE_STANDARD, or @c TIME_MODE_WALL
 	 * @param[out]  currentTime	The current system time
 	 * @exception	E_SUCCESS	The method is successful.
 	 */
@@ -112,6 +111,23 @@ public:
 	 */
 	static result GetTicks(long long& ticks);
 
+	/**
+	 * Sets the current system time.
+	 *
+	 * @since 2.0
+	 *
+	 * @privlevel	platform
+	 * @privilege	%http://tizen.org/privilege/settingmanager.write @n
+	 *		(%http://tizen.org/privilege/systemsetting.write is deprecated.)
+	 *
+	 * @return	An error code
+	 * @param[in]	currentTime		The current system time in UTC
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_SYSTEM		The method cannot proceed due to a severe system error.
+	 */
+	static result SetCurrentTime(const Tizen::Base::DateTime& currentTime);
+private:
 	/**
 	 * This is the default constructor for this class. This default constructor is intentionally declared as private so that only the platform can create an instance.
 	 */

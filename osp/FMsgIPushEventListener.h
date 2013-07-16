@@ -31,7 +31,7 @@ namespace Tizen { namespace Messaging
 {
 /**
 * @interface	IPushEventListener
-* @brief		This is the listener interface for receiving push messages.
+* @brief		This interface is the listener interface for receiving push messages.
 *
 * @since		2.0
 *

@@ -51,17 +51,16 @@ class _OSP_EXPORT_ Tone
 {
 public:
 	/**
-	*	The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	* The object is not fully constructed after this constructor is called. @n
+	* For full construction, the Construct() method must be called right after calling this constructor.
 	*
 	*   @since		2.0
 	*
-	*	@remarks	After creating an instance of this class, one of the Construct() methods must be called explicitly to initialize this instance.
-	*	@see		Construct()
 	*/
 	Tone(void);
 
 	/**
-	*	This destructor overrides Tizen::Base::Object::~Object().
+	*	This destructor overrides Tizen::Base::Object::~Object(). @n
 	*	The resources are deallocated by this method.
 	*	This method must be called in the same thread as the Construct() method.
 	*
@@ -74,17 +73,17 @@ public:
 public:
 	/**
 	* @if OSPDEPREC
-	*	Initializes this instance of %Tone with the values of the specified tone.
+	 *	Initializes this instance of %Tone with the values of the specified tone.
 	*
 	*     @brief	<i> [Deprecated] </i>
 	*     @deprecated     This method is deprecated because this method is not used as 2-phase constructor.
 	*     @since		2.0
 	*
 	*	@return		An error code
-	*	@param[in]	firstFrequency					The first frequency of the dual tone in hertz (Hz) @n
-	*                                               The range of this parameter is @c 0 Hz ~ @c 15000 Hz.
-	*	@param[in]	secondFrequency					The second frequency of the dual tone in hertz (Hz) @n
-	*                                               The range of this parameter is @c 0 Hz ~ @c 15000 Hz.
+	*	@param[in]	firstFrequency					The first frequency of the dual tone in Hertz (Hz) @n
+	*                                               The range of this parameter is @c 0 Hz to @c 15000 Hz.
+	*	@param[in]	secondFrequency					The second frequency of the dual tone in Hertz (Hz) @n
+	*                                               The range of this parameter is @c 0 Hz to @c 15000 Hz.
 	*	@param[in]	duration						The duration of the tone in milliseconds @n
 	*                                               The value of this parameter must be greater than @c 0.
 	*	@exception	E_SUCCESS						The method is successful.
@@ -120,8 +119,8 @@ public:
 	*   @since		2.0
 	*
 	*	@return		An error code
-	*	@param[out]	firstFrequency					The first frequency of the dual tone in hertz (Hz)
-	*	@param[out]	secondFrequency					The second frequency of the dual tone in hertz (Hz)
+	*	@param[out]	firstFrequency					The first frequency of the dual tone in Hertz (Hz)
+	*	@param[out]	secondFrequency					The second frequency of the dual tone in Hertz (Hz)
 	*	@exception	E_SUCCESS						The method is successful.
 	*	@remarks The specified input parameters of this method are @c -1 when an exception occurs.
 	*/
@@ -138,16 +137,14 @@ public:
 	long GetDuration(void) const;
 
 	/**
- * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
-	 *
 	*   Initializes this instance of %Tone with the values of the specified tone.
 	*
 	*   @since		2.0
 	*
-	*   @param[in]       firstFrequency    The first frequency of the dual tone in hertz (Hz) @n
-	*	                                   The range of this parameter is @c 0 Hz ~ @c 15000 Hz.
-	*   @param[in]       secondFrequency   The second frequency of the dual tone in hertz (Hz) @n
-	*                                      The range of this parameter is @c 0 Hz ~ @c 15000 Hz.
+	*   @param[in]       firstFrequency    The first frequency of the dual tone in Hertz (Hz) @n
+	*	                                   The range of this parameter is @c 0 Hz to @c 15000 Hz.
+	*   @param[in]       secondFrequency   The second frequency of the dual tone in Hertz (Hz) @n
+	*                                      The range of this parameter is @c 0 Hz to @c 15000 Hz.
 	*   @param[in]       duration          The duration of the tone in milliseconds @n
 	*	                                   The value of this parameter must be greater than @c 0.
 	*   @remarks If both the input frequencies are @c 0 Hz, the tone is set as a silent tone.
@@ -155,7 +152,6 @@ public:
 	Tone(int firstFrequency, int secondFrequency, long duration);
 
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
 	* Initializes this instance of %Tone with the values of the specified DTMF preset tone.
 	*
 	* @since		2.0
@@ -173,8 +169,8 @@ public:
 	*
 	* @return             @c true if the values match, @n
 	*                     else @c false
-	* @param[in]    rhs   The other Object to be compared
-	* @see                Object::Equals()
+	* @param[in]    rhs   The other Tizen::Base::Object to compare
+	* @see                Tizen::Base::Object::Equals()
 	*/
 	virtual bool Equals(const Object& rhs) const;
 
@@ -183,7 +179,7 @@ public:
 	*
 	* @since		2.0
 	*
-	* @return            The current instance's hash value
+	* @return            The hash value of the current instance
 	*/
 	virtual int GetHashCode(void) const;
 

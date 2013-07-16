@@ -51,7 +51,8 @@ class _OSP_EXPORT_ WebHistory
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called.  @n
+	 * For full construction, the Construct() method must be called right after calling this constructor.
 	 *
 	 * @since		2.0
 	 */
@@ -68,12 +69,10 @@ public:
 	 * Initializes this instance of %WebHistory.
 	 *
 	 * @since		2.0
-	 * @privilege	%http://tizen.org/privilege/web.privacy
 	 *
-	 * @return      An error code
+	 * @return		An error code
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
 	 */
 	result Construct(void);
 
@@ -81,15 +80,16 @@ public:
 	 * Gets the history item pointed to by the specified @c index.
 	 *
 	 * @since		2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/web.privacy
 	 *
 	 * @return		The history item at the specified @c index
 	 * @param[in]	index			The index of an element @n
-	 *                                   The value of the index must be greater than or equal to @c 0.
+	 *								The value of the index must be greater than or equal to @c 0.
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_OUT_OF_RANGE		The specified @c index is out of range.
-	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
-	 * @remarks	The specific error code can be accessed using the GetLastResult() method.
+	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	const HistoryItem* GetItemAt(int index) const;
 
@@ -97,12 +97,13 @@ public:
 	 * Gets the total number of items.
 	 *
 	 * @since		2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/web.privacy
 	 *
 	 * @return		The total number of items
-	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-	 * @remarks	The specific error code can be accessed using the GetLastResult() method.
+	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	int GetItemCount(void) const;
 
@@ -110,7 +111,7 @@ private:
 	//
 	// The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
 	//
-	// @param[in]	item		The instance of the %WebHistory class to copy from
+	// @param[in]	item			The instance of the %WebHistory class to copy from
 	// @remarks		This constructor is hidden.
 	//
 	WebHistory(const WebHistory& item);
@@ -118,7 +119,7 @@ private:
 	//
 	// The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit copying of objects.
 	//
-	// @param[in]	item		The instance of the %WebHistory class to assign from
+	// @param[in]	item			The instance of the %WebHistory class to assign from
 	// @remarks		This operator is hidden.
 	//
 	WebHistory& operator =(const WebHistory& item);

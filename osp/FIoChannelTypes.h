@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -16,9 +15,9 @@
 //
 /**
  * @file		FIoChannelTypes.h
- * @brief		This is the header file for the %ChannelType class.
+ * @brief		This is the header file for the %ChannelType enumerator.
  *
- * This header file contains the enumerator declarations of the %ChannelType class.
+ * This header file contains the declarations of the %ChannelType enumerator.
  */
 #ifndef _FIO_CHANNEL_TYPES_H_
 #define _FIO_CHANNEL_TYPES_H_

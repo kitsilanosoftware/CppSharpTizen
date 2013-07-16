@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -37,6 +36,19 @@ class IPackageInstallationEventListener;
 class IPackageInstallationResponseListener;
 class IPackageUninstallationResponseListener;
 
+/**
+ * @enum PackageType
+ *
+ * Defines the package types.
+  *
+ * @since	2.0
+ */
+enum PackageType
+{
+	PACKAGE_TYPE_TPK,			/**< TIZEN Native package */
+	PACKAGE_TYPE_WGT,			/**< TIZEN %Web package */
+	PACKAGE_TYPE_RPM,			/**< TIZEN Core package */
+};
 
 /**
  * @class		PackageManager
@@ -47,6 +59,9 @@ class IPackageUninstallationResponseListener;
  * @final		This class is not intended for extension.
  *
  * The %PackageManager class provides methods to install or uninstall the packages, retrieves the information of the packages that are installed on the device.
+ *
+ * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/app/package_namespace.htm">Package Management</a>.
+ *
  */
 class _OSP_EXPORT_ PackageManager
 	: public Tizen::Base::Object
@@ -70,7 +85,9 @@ public:
 	 * Adds a package installation event listener.
 	 *
 	 * @since	2.0
-	 * @privilege	%http://tizen.org/privilege/packageinfo
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/package.info @n
+	 * 					 (%http://tizen.org/privilege/packageinfo is deprecated.)
 	 *
 	 * @return		An error code
 	 * @param[in]	listener			The package installation event listener
@@ -84,7 +101,9 @@ public:
 	 * Removes a package installation event listener.
 	 *
 	 * @since	2.0
-	 * @privilege	%http://tizen.org/privilege/packageinfo
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/package.info @n
+	 * 					 (%http://tizen.org/privilege/packageinfo is deprecated.)
 	 *
 	 * @return		An error code
 	 * @param[in]	listener			The package installation event listener
@@ -98,7 +117,9 @@ public:
 	 * Gets a package information with the specific package ID.
 	 *
 	 * @since	2.0
-	 * @privilege	%http://tizen.org/privilege/packageinfo
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/package.info @n
+	 * 					 (%http://tizen.org/privilege/packageinfo is deprecated.)
 	 *
 	 * @return		A pointer to PackageInfo
 	 * @param[in]	packageId				The package ID
@@ -109,13 +130,15 @@ public:
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
-	Tizen::App::Package::PackageInfo* GetPackageInfoN(const PackageId& packageId) const;
+	PackageInfo* GetPackageInfoN(const PackageId& packageId) const;
 
 	/**
 	 * Gets the application information with the specific application ID.
 	 *
 	 * @since	2.0
-	 * @privilege	%http://tizen.org/privilege/packageinfo
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/package.info @n
+	 * 					 (%http://tizen.org/privilege/packageinfo is deprecated.)
 	 *
 	 * @return		A pointer to PackageAppInfo
 	 * @param[in]	appId				The application ID
@@ -125,13 +148,15 @@ public:
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
-	Tizen::App::Package::PackageAppInfo* GetPackageAppInfoN(const AppId& appId) const;
+	PackageAppInfo* GetPackageAppInfoN(const AppId& appId) const;
 
 	/**
 	 * Gets the package information list.
 	 *
 	 * @since	2.0
-	 * @privilege	%http://tizen.org/privilege/packageinfo
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/package.info @n
+	 * 					 (%http://tizen.org/privilege/packageinfo is deprecated.)
 	 *
 	 * @return		A pointer to the list of the PackageInfo instances, @n
 	 * 				else @c null if it fails
@@ -146,7 +171,9 @@ public:
 	 * Checks whether a package is installed.
 	 *
 	 * @since	2.0
-	 * @privilege	%http://tizen.org/privilege/packageinfo
+	 * @privlevel	public
+	 * @privilege	%http://tizen.org/privilege/package.info @n
+	 * 					 (%http://tizen.org/privilege/packageinfo is deprecated.)
 	 *
 	 * @return	@c true if a package is installed, @n
 	 * 			else @c false
@@ -158,6 +185,174 @@ public:
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	bool IsPackageInstalled(const PackageId& packageId) const;
+
+	/**
+	 * Installs a package. @n
+	 * The %InstallPackage() method operates asynchronously, that is, it ends immediately without an installation response. The application is notified when the installation is completed, so the response is available through the IPackageInstallationResponseListener::OnPackageInstallationCompleted() method, if this method returns @c E_SUCCESS.
+	 *
+	 * @since	2.0
+	 * @privlevel	platform
+	 * @privilege	%http://tizen.org/privilege/packagemanager.install
+	 *
+	 * @return		An error code
+	 * @param[in]	packageId			The package ID
+	 * @param[in]	packagePath			The package path
+	 * @param[in]	pListener			The response listener
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		A specified input parameter is invalid.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
+	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @remarks		A listener instance ownership is transferred to the platform. After notifying result, the listener instance is removed automatically. A reuse of the listener instance is not allowed.
+	 * @see			IPackageInstallationResponseListener
+	 */
+	result InstallPackage(const PackageId& packageId, const Tizen::Base::String& packagePath, IPackageInstallationResponseListener* pListener);
+
+	/**
+	 * Uninstalls a package with the specified package ID. @n
+	 * The %UninstallPackage() method operates asynchronously, that is, it ends immediately without an uninstallation response. The application is notified when the uninstallation is completed, so the response is available through the IPackageUninstallationResponseListener::OnPackageUninstallationCompleted() method, if this method returns @c true.
+	 *
+	 * @since	2.0
+	 * @privlevel	platform
+	 * @privilege	%http://tizen.org/privilege/packagemanager.install
+	 *
+	 * @return		An error code
+	 * @param[in]	packageId				The package ID
+	 * @param[in]	pListener				The response listener
+	 * @exception	E_SUCCESS				The method is successful.
+	 * @exception	E_INVALID_ARG			A specified input parameter is invalid.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
+	 * @exception	E_PKG_NOT_INSTALLED		The package is not installed.
+	 * @exception   E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @remarks		A listener instance ownership is transferred to the platform. After notifying result, the listener instance is removed automatically. A reuse of the listener instance is not allowed.
+	 * @see			IPackageUninstallationResponseListener
+	 */
+	result UninstallPackage(const PackageId& packageId, IPackageUninstallationResponseListener* pListener);
+
+	/**
+	 *  Moves a package with the specified package ID to an external storage.
+	 *
+	 * @since	2.0
+	 * @privlevel	platform
+	 * @privilege	%http://tizen.org/privilege/packagemanager.setting @n
+	 * 					 (%http://tizen.org/privilege/packagesetting is deprecated.)
+	 *
+	 * @return		An error code
+	 * @param[in]	packageId				The package ID
+	 * @exception	E_SUCCESS				The method is successful.
+	 * @exception	E_INVALID_ARG			The specified input parameter is invalid.
+	 * @exception	E_INVALID_OPERATION		The package is already installed in an external storage.
+	 * @exception	E_STORAGE_FULL			The storage is full.
+	 * @exception	E_PKG_NOT_INSTALLED		The package is not installed.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
+	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 */
+	result MoveToExternalStorage(const PackageId& packageId);
+
+	/**
+	 * Moves a package with the specified package ID to an internal storage.
+	 *
+	 * @since	2.0
+	 * @privlevel	platform
+	 * @privilege	%http://tizen.org/privilege/packagemanager.setting @n
+	 * 					 (%http://tizen.org/privilege/packagesetting is deprecated.)
+	 *
+	 * @return		An error code
+	 * @param[in]	packageId				The package ID
+	 * @exception	E_SUCCESS				The method is successful.
+	 * @exception	E_INVALID_ARG			The specified input parameter is invalid.
+	 * @exception	E_INVALID_OPERATION		The package is already installed in an internal storage.
+	 * @exception	E_STORAGE_FULL			The storage is full.
+	 * @exception	E_PKG_NOT_INSTALLED		The package is not installed.
+	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
+	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 */
+	result MoveToInternalStorage(const PackageId& packageId);
+
+	/**
+	* Gets a package information from a specific file. @n The supported file extensions are tpk and wgt.
+	*
+	* @since         2.1
+	* @privlevel     platform
+	* @privilege     %http://tizen.org/privilege/packagemanager.info
+	*
+	* @return        A pointer to the %PackageInfo instance, @n
+	*               else @c null if it fails
+	* @param[in]    filePath                           The package file path
+	* @exception    E_SUCCESS                          The method is successful.
+	* @exception    E_INVALID_ARG                      The specified input parameter is invalid.
+	* @exception    E_FILE_NOT_FOUND                   The specified file cannot be found or accessed.
+	* @exception    E_UNSUPPORTED_FORMAT               The specified format is invalid or not supported.
+	* @exception    E_PARSING_FAILED                   The method has failed to parse the package file or xml file(s) inside the package.
+	* @exception    E_PRIVILEGE_DENIED                 The application does not have the privilege to call this method.
+	* @remarks      The specific error code can be accessed using the GetLastResult() method.
+	*/
+	PackageInfo* GetPackageInfoFromFileN(const Tizen::Base::String& filePath) const;
+
+	/**
+	* Gets the package information list with the package filter.
+	*
+	* @since         2.1
+	* @privlevel     public
+	* @privilege     %http://tizen.org/privilege/package.info
+	*
+	* @return        A pointer to the list of the %PackageInfo instances, @n
+	*                else @c null if it fails
+	* @param[in]     packageFilterMap         The predefined key(Tizen::Base::String)-value(Tizen::Base::Boolean) pairs for the package filter @n
+	* For more information on the predefined key-value pairs for package filter,
+	*       see <a href="../org.tizen.native.appprogramming/html/guide/app/package_app_filter.htm">the predefined key-value pairs for package filter</a>.
+	* @exception    E_SUCCESS                            The method is successful.
+	* @exception    E_INVALID_ARG                        The specified input parameter is invalid.
+	* @exception    E_SYSTEM                             The method cannot proceed due to a severe system error.
+	* @exception    E_PRIVILEGE_DENIED                   The application does not have the privilege to call this method.
+	* @remarks      The specific error code can be accessed using the GetLastResult() method.
+	*/
+	Tizen::Base::Collection::IList* GetPackageInfoListN(const Tizen::Base::Collection::IMap& packageFilterMap) const;
+
+	/**
+	* Gets the application information list with the package app filter.
+	*
+	* @since         2.1
+	* @privlevel     public
+	* @privilege     %http://tizen.org/privilege/package.info
+	*
+	* @return        A pointer to the list of the %PackageAppInfo instances, @n
+	*                else @c null if it fails
+	* @param[in]     packageAppFilterMap      The predefined key(Tizen::Base::String)-value(Tizen::Base::String or Tizen::Base::Boolean) pairs for the package app filter @n
+	* For more information on the predefined key-value pairs for package app filter,
+	*       see <a href="../org.tizen.native.appprogramming/html/guide/app/package_app_filter.htm">the predefined key-value pairs for package app filter</a>.
+	* @exception    E_SUCCESS                            The method is successful.
+	* @exception    E_INVALID_ARG                        The specified input parameter is invalid.
+	* @exception    E_SYSTEM                             The method cannot proceed due to a severe system error.
+	* @exception    E_PRIVILEGE_DENIED                   The application does not have the privilege to call this method.
+	* @remarks      The specific error code can be accessed using the GetLastResult() method.
+	*/
+	Tizen::Base::Collection::IList* GetPackageAppInfoListN(const Tizen::Base::Collection::IMap& packageAppFilterMap) const;
+
+	/**
+	* Gets the application information list with the package filter and package app filter.
+	*
+	* @since         2.1
+	* @privlevel     public
+	* @privilege     %http://tizen.org/privilege/package.info
+	*
+	* @return        A pointer to the list of the %PackageAppInfo instances, @n
+	*                              else @c null if it fails
+	* @param[in] packageFilterMap        The predefined key(Tizen::Base::String)-value(Tizen::Base::Boolean) pairs for the package filter @n
+	* @param[in] packageAppFilterMap     The predefined and user defined key(Tizen::Base::String)-value(Tizen::Base::String or Tizen::Base::Boolean) pairs for the package app filter @n
+	*                                    The user defined key-value pairs can be added in <Metadata> of manifest.xml.
+	*
+	* For more information on the predefined key-value pairs for package filter,
+	*              see <a href="../org.tizen.native.appprogramming/html/guide/app/package_app_filter.htm">the predefined key-value pairs for package filter</a>.
+	* For more information on the predefined key-value pairs for package app filter,
+	*              see <a href="../org.tizen.native.appprogramming/html/guide/app/package_app_filter.htm">the predefined key-value pairs for package app filter</a>.
+	*
+	* @exception    E_SUCCESS                            The method is successful.
+	* @exception    E_INVALID_ARG                        A specified input parameter is invalid.
+	* @exception    E_SYSTEM                             The method cannot proceed due to a severe system error.
+	* @exception    E_PRIVILEGE_DENIED                   The application does not have the privilege to call this method.
+	* @remarks      The specific error code can be accessed using the GetLastResult() method.
+	*/
+	Tizen::Base::Collection::IList* GetPackageAppInfoListN(const Tizen::Base::Collection::IMap& packageFilterMap, const Tizen::Base::Collection::IMap& packageAppFilterMap) const;
 
 	/**
 	 * Gets the package manager instance.

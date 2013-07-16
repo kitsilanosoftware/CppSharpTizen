@@ -2,7 +2,7 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Flora License, Version 1.1 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -21,7 +21,7 @@
 * @brief	This is the header file for the %Socket class.
 *
 * This header file contains the declarations of the %Socket class. @n
-* The %Socket class is a base class that provides methods for sending and receiving the data over a network.
+* This class is a base class that provides methods for sending and receiving the data over a network.
 */
 
 #ifndef _FNET_SOCK_SOCKET_H_
@@ -56,7 +56,8 @@ class _OSP_EXPORT_ Socket
 
 public:
 	/**
-	* The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	* The object is not fully constructed after this constructor is called. @n
+	* For full construction, the Construct() method must be called right after calling this constructor.
 	*
 	* @since        2.0
 	*/
@@ -76,8 +77,9 @@ public:
 	* The socket is initialized in a non-blocking mode by default.
 	* Use Ioctl() (with NET_SOCKET_FIONBIO) to use a %Socket in the blocking mode.
 	*
-	* @since        2.0
-	* @privilege	%http://tizen.org/privilege/socket
+	* @since			2.0
+	* @privlevel		public
+	* @privilege		%http://tizen.org/privilege/socket
 	*
 	* @return		An error code
 	* @param[in]	netConnection				A run-time session where a %Socket instance is used
@@ -86,17 +88,18 @@ public:
 	* @param[in]	protocol					A ::NetSocketProtocol value
 	* @exception	E_SUCCESS					The method is successful.
 	* @exception	E_WOULD_BLOCK				A non-blocking socket operation cannot be completed immediately.
-	* @exception	E_OUT_OF_MEMORY				The memory is insufficient.
-	* @exception	E_MAX_EXCEEDED				All sockets are in use.
+	* @exception	E_OUT_OF_MEMORY			The memory is insufficient.
+	* @exception	E_MAX_EXCEEDED			All sockets are in use.
 	* @exception	E_UNSUPPORTED_OPTION		This operation is not supported for this socket.
 	* @exception	E_INVALID_ARG				A specified input parameter is invalid.
-	* @exception	E_UNSUPPORTED_PROTOCOL		The protocol is not supported.
-	* @exception	E_UNSUPPORTED_TYPE			The socket type is not supported.
+	* @exception	E_UNSUPPORTED_PROTOCOL	The protocol is not supported.
+	* @exception	E_UNSUPPORTED_TYPE		The socket type is not supported.
 	* @exception	E_UNSUPPORTED_FAMILY		The address family is not supported.
 	* @exception	E_SYSTEM					A system error has occurred.
 	* @exception	E_INVALID_CONNECTION		The network connection is invalid.
 	* @exception	E_FAILURE					The method has failed.
-	* @exception	E_PRIVILEGE_DENIED			The application does not have the privilege to call this method.
+	* @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	* @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	* @remarks      The @c netConnection parameter specifies a run-time network connection. @n
 	*				The @c addressFamily parameter specifies an address family. @n
 	*				The @c socketType parameter specifies the type of the socket. @n
@@ -126,8 +129,9 @@ public:
 	* The socket is initialized in a non-blocking mode by default.
 	* Use Ioctl() (with NET_SOCKET_FIONBIO) to use a %Socket in the blocking mode.
 	*
-	* @since        2.0
-	* @privilege	%http://tizen.org/privilege/socket
+	* @since			2.0
+	* @privlevel		public
+	* @privilege		%http://tizen.org/privilege/socket
 	*
 	* @return		An error code
 	* @param[in]	addressFamily				A ::NetSocketAddressFamily value
@@ -146,6 +150,7 @@ public:
 	* @exception	E_INVALID_CONNECTION		The network connection is invalid.
 	* @exception	E_FAILURE					The method has failed.
 	* @exception	E_PRIVILEGE_DENIED			The application does not have the privilege to call this method.
+	* @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	* @remarks		The @c addressFamily parameter specifies an address family. @n
 	*				The @c socketType parameter specifies the type of the socket. @n
 	*				The @c protocol parameter specifies the protocol used by the socket. @n
@@ -174,8 +179,9 @@ public:
 	* Closes the socket. @n
 	* All the resources associated with the socket are freed.
 	*
-	* @since        2.0
-	* @privilege	%http://tizen.org/privilege/socket
+	* @since			2.0
+	* @privlevel		public
+	* @privilege		%http://tizen.org/privilege/socket
 	*
 	* @return		An error code
 	* @exception	E_SUCCESS					The method is successful.
@@ -185,6 +191,7 @@ public:
 	* @exception    E_OUT_OF_MEMORY				The memory is insufficient.
 	* @exception	E_SYSTEM					A system error has occurred.
 	* @exception    E_PRIVILEGE_DENIED			The application does not have the privilege to call this method.
+	* @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	* @remarks		If the %Socket class is not initialized through one of the Construct() methods, or this method is called more than once,
 	*				then this method returns E_INVALID_STATE.
 	*/
@@ -194,14 +201,8 @@ public:
 	* Establishes a connection to a remote host for a connection-oriented socket. @n
 	* This socket is of the type NET_SOCKET_TYPE_STREAM.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since            2.0
-	* @if OSPCOMPAT
-    * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-    *                	For more information, see @ref SocketConnectPage "here".
-    * @endif
+	* @privlevel		public
 	* @privilege		%http://tizen.org/privilege/socket
 	*
 	* @return			An error code
@@ -221,8 +222,9 @@ public:
 	* @exception        E_OUT_OF_MEMORY				The memory is insufficient.
 	* @exception		E_SYSTEM					A system error has occurred.
 	* @exception        E_PRIVILEGE_DENIED			The application does not have the privilege to call this method.
+	* @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	* @remarks			If the socket is a connectionless socket (that is, of the type NET_SOCKET_TYPE_DATAGRAM), this method fails.
-	*					After this method is called, OnSocketConnected() is called. the data can be sent to and received from the remote device using Send() and Receive() respectively.
+	*					After this method is called, ISocketEventListener::OnSocketConnected() is called. the data can be sent to and received from the remote device using Send() and Receive() respectively.
 	*					If a connection-oriented protocol is used and Bind() is not called before calling this method, the underlying service provider
 	*					assigns the local network address and port number.
 	*/
@@ -232,11 +234,11 @@ public:
     * @page			SocketConnectPage        Compatibility for Connect()
     *
     * @section		SocketConnectPageIssueSection Issues
-    * Implementing this method in OSP compatible applications has the following issues:   @n
+    * Implementation of this method in %Tizen API versions prior to 2.1 has the following issue: @n
     * -# If the application provides a loopback address in NetEndPoint, it returns E_SYSTEM.
     *
     * @section		SocketConnectPageResolutionSection Resolutions
-    *  This issue has been resolved in Tizen.  @n 
+    *  The issue mentioned above is resolved in %Tizen API version 2.1 as follows: @n
     *  -# If the application provides a loopback address in NetEndPoint, it returns E_SUCCESS instead of E_SYSTEM.
     */
 
@@ -246,7 +248,7 @@ public:
 	* @since        2.0
 	*
 	* @return		An error code
-	* @param[in]	buffer						An instance of ByteBuffer that contains the data to be sent
+	* @param[in]	buffer						An instance of Tizen::Base::ByteBuffer that contains the data to send
 	* @exception	E_SUCCESS					The method is successful.
 	* @exception	E_INVALID_SOCKET			The socket is invalid.
 	* @exception	E_INVALID_STATE				The socket is not in a valid state.
@@ -317,17 +319,10 @@ public:
 	/**
 	* Sends the data to a socket of the type NET_SOCKET_TYPE_DATAGRAM.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since            2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-    *                	For more information, see @ref SocketSendToPage1 "here".
-    * @endif
 	*
 	* @return			An error code
-	* @param[in]		buffer						An instance of ByteBuffer containing the data to send
+	* @param[in]		buffer						An instance of Tizen::Base::ByteBuffer containing the data to send
 	* @param[in]		remoteEndPoint				An instance of NetEndPoint representing the destination for the data
 	* @exception		E_SUCCESS					The method is successful.
 	* @exception		E_INVALID_SOCKET			The socket is invalid.
@@ -354,25 +349,18 @@ public:
     * @page			SocketSendToPage1        Compatibility for SendTo()
     *
     * @section		SocketSendToPage1IssueSection Issues
-    * Implementing this method in OSP compatible applications has the following issues:   @n
+    * Implementation of this method in %Tizen API versions prior to 2.1 has the following issue: @n
     * -# If the application provides a loopback address in NetEndPoint, it returns E_SYSTEM.
     *
     * @section      SocketSendToPage1ResolutionSection Resolutions
-    *  This issue has been resolved in Tizen.  @n 
+    * The issue mentioned above is resolved in %Tizen API version 2.1 as follows: @n
     * -# If the application provides a loopback address in NetEndPoint, it returns E_SUCCESS instead E_SYSTEM.
     */
 
 	/**
 	* Sends the data to a socket of the type NET_SOCKET_TYPE_DATAGRAM.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since            2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-    *                	For more information, see @ref SocketSendToPage2 "here".
-    * @endif
 	*
 	* @return			An error code
 	* @param[in]		pBuffer					The pointer to the buffer containing the data to send
@@ -403,11 +391,11 @@ public:
     * @page			SocketSendToPage2        Compatibility for SendTo()
     *
     * @section		SocketSendToPage2IssueSection Issues
-    * Implementing this method in OSP compatible applications has the following issues:   @n
+    * Implementation of this method in %Tizen API versions prior to 2.1 has the following issue: @n
     * -# If the application provides a loopback address in NetEndPoint, it returns E_SYSTEM.
     *
     * @section      SocketSendToPage2ResolutionSection Resolutions
-    *  This issue has been resolved in Tizen.  @n 
+    * The issue mentioned above is resolved in %Tizen API version 2.1 as follows: @n
     * -# If the application provides a loopback address in NetEndPoint, it returns E_SUCCESS instead of E_SYSTEM.
     */
 
@@ -417,7 +405,7 @@ public:
 	* @since        2.0
 	*
 	* @return		An error code
-	* @param[out]	buffer						An instance of ByteBuffer that is the storage location for the received data
+	* @param[out]	buffer						An instance of Tizen::Base::ByteBuffer that is the storage location for the received data
 	* @exception	E_SUCCESS					The method is successful.
 	* @exception	E_INVALID_SOCKET			The socket is invalid.
 	* @exception	E_INVALID_STATE				The socket is not in a valid state.
@@ -471,17 +459,10 @@ public:
 	/**
 	* Receives the data from a socket of the type NET_SOCKET_TYPE_DATAGRAM.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since        2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-    *                	For more information, see @ref SocketReceiveFromPage1 "here".
-    * @endif
 	*
 	* @return		An error code
-	* @param[out]	buffer						An instance of ByteBuffer that is the storage location for the received data
+	* @param[out]	buffer						An instance of Tizen::Base::ByteBuffer that is the storage location for the received data
 	* @param[out]	remoteEndPoint				The NetEndPoint of the remote server
 	* @exception	E_SUCCESS					The method is successful.
 	* @exception	E_INVALID_SOCKET			The socket is invalid.
@@ -513,25 +494,18 @@ public:
     * @page			SocketReceiveFromPage1  Compatibility for ReceiveFrom()
     *
     * @section		SocketReceiveFromPage1IssueSection Issues
-    * Implementing this method in OSP compatible applications has the following issues:   @n
+    * Implementation of this method in %Tizen API versions prior to 2.1 has the following issue: @n
     * -# If the application provides a loopback address in NetEndPoint, it returns E_SYSTEM.
     *
     * @section		SocketReceiveFromPage1ResolutionSection Resolutions
-    *  This issue has been resolved in Tizen.  @n 
+    * The issue mentioned above is resolved in %Tizen API version 2.1 as follows: @n
     * -# If the application provides a loopback address in NetEndPoint, it returns E_SUCCESS instead of E_SYSTEM.
     */
 
 	/**
 	* Receives the data from a socket of the type NET_SOCKET_TYPE_DATAGRAM.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since        2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-    *                	For more information, see @ref SocketReceiveFromPage2 "here".
-    * @endif
 	*
 	* @return		An error code
 	* @param[out]	pBuffer						The pointer to the buffer that is the storage location for the received data
@@ -567,19 +541,20 @@ public:
     * @page			SocketReceiveFromPage2  Compatibility for ReceiveFrom()
     *
     * @section		SocketReceiveFromPage2IssueSection Issues
-    * Implementing this method in OSP compatible applications has the following issues:   @n
+    * Implementation of this method in %Tizen API versions prior to 2.1 has the following issue: @n
     * -# If the application provides a loopback address in NetEndPoint, it returns E_SYSTEM.
     *
     * @section		SocketReceiveFromPage2ResolutionSection Resolutions
-    *  This issue has been resolved in Tizen.  @n 
+    * The issue mentioned above is resolved in %Tizen API version 2.1 as follows: @n
     * -# If the application provides a loopback address in NetEndPoint, it returns E_SUCCESS instead of E_SYSTEM.
     */
 
 	/**
 	* Binds the socket to a local address.
 	*
-	* @since        2.0
-	* @privilege	%http://tizen.org/privilege/socket
+	* @since			2.0
+	* @privlevel		public
+	* @privilege		%http://tizen.org/privilege/socket
 	*
 	* @return		An error code
 	* @param[in]	localEndPoint				The local NetEndPoint to associate with the socket
@@ -592,6 +567,7 @@ public:
 	* @exception    E_OUT_OF_MEMORY				The memory is insufficient.
 	* @exception	E_SYSTEM					A system error has occurred.
 	* @exception    E_PRIVILEGE_DENIED			The application does not have the privilege to call this method.
+	* @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	* @remarks		Use this method if a specific local endpoint should be used.
 	*				This method can be used on both the connectionless and connection-oriented protocols.
 	*				For connection-oriented sockets, this method need not be called
@@ -603,8 +579,9 @@ public:
 	/**
 	* Places the socket in a listening state.
 	*
-	* @since        2.0
-	* @privilege	%http://tizen.org/privilege/socket
+	* @since			2.0
+	* @privlevel		public
+	* @privilege		%http://tizen.org/privilege/socket
 	*
 	* @return		An error code
 	* @param[in]	backLog						The maximum length of the pending connections queue
@@ -619,6 +596,7 @@ public:
 	* @exception    E_OUT_OF_MEMORY				The memory is insufficient.
 	* @exception	E_SYSTEM					A system error has occurred.
 	* @exception    E_PRIVILEGE_DENIED			The application does not have the privilege to call this method.
+	* @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	* @remarks		This method causes a connection-oriented socket to listen for
 	*				the incoming connection attempts. The @c backlog parameter specifies
 	*				the number of incoming connections that can be queued for acceptance.
@@ -632,8 +610,9 @@ public:
 	* creates a new socket with the same socket type, protocol type, and protocol family
 	* as the listening socket.
 	*
-	* @since        2.0
-	* @privilege	%http://tizen.org/privilege/socket
+	* @since			2.0
+	* @privlevel		public
+	* @privilege		%http://tizen.org/privilege/socket
 	*
 	* @return		A new socket for a newly created connection with the same socket type, protocol type, and protocol family, @n
 	*				else @c null if an error occurs
@@ -647,6 +626,7 @@ public:
 	* @exception    E_OUT_OF_MEMORY				The memory is insufficient.
 	* @exception	E_SYSTEM					A system error has occurred.
 	* @exception    E_PRIVILEGE_DENIED			The application does not have the privilege to call this method.
+	* @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	* @remarks		Before calling this method, the Listen() method must be called first
 	*				to listen for and queue the incoming connection requests.
 	*				In the blocking mode, this method blocks until an incoming connection attempt
@@ -661,8 +641,9 @@ public:
 	/**
 	* Executes the specified command on the socket.
 	*
-	* @since        2.0
-	* @privilege	%http://tizen.org/privilege/socket
+	* @since			2.0
+	* @privlevel		public
+	* @privilege		%http://tizen.org/privilege/socket
 	*
 	* @return		An error code
 	* @param[in]	cmd		                    The command to execute on the socket
@@ -676,6 +657,7 @@ public:
 	* @exception    E_OUT_OF_MEMORY				The memory is insufficient.
 	* @exception	E_SYSTEM					A system error has occurred.
 	* @exception    E_PRIVILEGE_DENIED			The application does not have the privilege to call this method.
+	* @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	* @remarks		This method manipulates the underlying device parameters of the socket descriptors. @n@n
 	*				The NET_SOCKET_FIONBIO option is used for setting the non-blocking/blocking mode on a socket.
 	*				Set the value to zero for enabling the blocking mode, or to a non-zero value for enabling the non-blocking mode.
@@ -796,7 +778,7 @@ public:
 	*				@c optionValue parameter contains the value of the specified socket option.
 	*				For an option with a bool data type, a non-zero value is returned if the option is enabled. Otherwise,
 	*				a zero value is returned. For an option with an integer data type, the method returns the appropriate value.
-	*				The socket options are grouped by the level of protocol support.@n@n
+	*				The socket options are grouped by the level of protocol support. @n@n
 	*				Listed below are the various socket options that can be obtained using this overload. These options are
 	*				grouped by the appropriate NetSocketOptLevel.
 	*				Use the appropriate %NetSocketOptLevel for the @c optionLevel parameter. The option that is chosen,

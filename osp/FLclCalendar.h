@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -143,14 +142,7 @@ public:
 	* November of the next year.
 	* Since, the TIME_FIELD_DAY_OF_MONTH cannot be 31 in November in a %GregorianCalendar, the TIME_FIELD_DAY_OF_MONTH is set to 30 by @b Rule2.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	*                              For more information, see @ref CompCalendarAddTimeFieldPage "here".
-	* @endif
 	*
 	* @return			An error code
 	* @param[in]		field						The time field
@@ -161,31 +153,12 @@ public:
 	virtual result AddTimeField(TimeField field, int amount) = 0;
 
 	/**
-	* @if OSPCOMPAT
-        * @page                    CompCalendarAddTimeFieldPage Compatibility for AddTimeField()
-        * @section                   CompCalendarAddTimeFieldIssueSection Issues
-        * Implementation of this method in OSP compatible applications has the following issue: @n
-        * -# The method returns E_INVALID_STATE if the time field is invalid.
-        *
-        * @section                 CompCalendarAddTimeFieldSolutionSection Resolutions
-        * This issue has been resolved in Tizen. @n
-	*
-	* @par When working in Tizen:
-        * -# The method returns E_INVALID_ARG if the time field is invalid.
-	* @endif
-        */
+	*/
 
 	/**
 	* Compares the current instance of %Calendar with the specified instance.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since				2.0
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	*                              For more information, see @ref CompCalendarAfterPage "here".
-	* @endif
 	*
 	* @return				An error code
 	* @param[in]		otherCalendar					The instance of %Calendar to compare
@@ -201,33 +174,12 @@ public:
 	result After(const Calendar& otherCalendar, bool& after);
 
 	/**
-	* @if OSPCOMPAT
-        * @page                    CompCalendarAfterPage Compatibility for After()
-        * @section                   CompCalendarAfterIssueSection Issues
-        * Implementation of this method in OSP compatible applications has the following issue: @n
-        * -# The method returns E_INVALID_STATE and E_OUT_OF_RANGE if the instance of %Calendar to be compared is invalid.
-        *
-        * @section                 CompCalendarAfterSolutionSection Resolutions
-        * This issue has been resolved in Tizen. @n
-	*
-	* @par When working in Tizen: 
-        * -# The method returns E_INVALID_ARG if the instance of %Calendar to be compared is invalid.
-        * -# The method returns E_INVALID_STATE if any time field value previously set is invalid.
-        * -# The method returns E_OUT_OF_RANGE if the value of the time fields goes out of range.
-	* @endif
-        */                                        
+	*/                                        
 
 	/**
 	* Compares the current instance of %Calendar with the specified instance.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since				2.0
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	*                              For more information, see @ref CompCalendarBeforePage "here".
-	* @endif
 	*
 	* @return				An error code
 	* @param[in]			otherCalendar				The instance of %Calendar to compare
@@ -243,21 +195,7 @@ public:
 	result Before(const Calendar& otherCalendar, bool& before);
 
 	/**
-	* @if OSPCOMPAT
-        * @page                    CompCalendarBeforePage Compatibility for Before()
-        * @section                   CompCalendarBeforeIssueSection Issues
-        * Implementation of this method in OSP compatible applications has the following issue: @n
-        * -# The method returns E_INVALID_STATE and E_OUT_OF_RANGE if the instance of %Calendar to be compared is invalid.
-        *
-        * @section                 CompCalendarBeforeSolutionSection Resolutions
-        * This issue has been resolved in Tizen. @n
-	*
-	* @par When working in Tizen: 
-        * -# The method returns E_INVALID_ARG if the instance of %Calendar to be compared is invalid.
-        * -# The method returns E_INVALID_STATE if any time field value previously set is invalid.
-        * -# The method returns E_OUT_OF_RANGE if the value of the time fields goes out of range.
-        * @endif
-        */
+	*/
 
 	/**
 	* Clears all the time fields and sets it to @c 0. @n
@@ -307,14 +245,7 @@ public:
 	* If the specified @c amount is negative, the amount value is deducted from the specified time field value.
 	* In this method, the time field of this instance is operated upon. If the value of the specified @c field goes out of range, E_OUT_OF_RANGE is returned.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since				2.0
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	*                              For more information, see @ref CompCalendarRollPage "here".
-	* @endif
 	*
 	* @return				An error code
 	* @param[in]			field							The time field to roll
@@ -327,19 +258,7 @@ public:
 	virtual result Roll(TimeField field, int amount);
 
 	/**
-	* @if OSPCOMPAT
-        * @page                    CompCalendarRollPage Compatibility for Roll()
-        * @section                   CompCalendarRollIssueSection Issues
-        * Implementation of this method in OSP compatible applications has the following issue: @n
-        * -# The method returns E_INVALID_STATE if the time field is invalid.
-        *
-        * @section                 CompCalendarRollSolutionSection Resolutions
-        * This issue has been resolved in Tizen. @n
-	*
-	* @par When working in Tizen: 
-        * -# The method returns E_INVALID_ARG if the time field is invalid.
-	* @endif
-        */
+	*/
 
 	/**
 	* Sets the specified time field with the specified @c value. @n
@@ -713,14 +632,7 @@ public:
 	* An instance has weekdata which are the first of week, minimal days in the first week, weekend on set, and weekend cease.
 	* The weekdata are set as default values by the specified @c locale.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since					2.0
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	*                              For more information, see @ref CompCalendarCreateInstanceNPage "here".
-	* @endif
 	*
 	* @return					A pointer to the created %Calendar instance, @n
 	*							else @c null if the method fails
@@ -741,14 +653,7 @@ public:
 	* An instance has weekdata which are the first of week, minimal days in the first week, weekend on set, and weekend cease.
 	* The weekdata are set as default values by the specified @c locale.
 	*
-	* @if OSPCOMPAT
-	* @brief <i> [Compatibility] </i>
-	* @endif
 	* @since					2.0
-	* @if OSPCOMPAT
-	* @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	*                              For more information, see @ref CompCalendarCreateInstanceNPage "here".
-	* @endif	
 	*
 	* @return					A pointer to the created %Calendar instance, @n
 	*							else @c null if the method fails
@@ -765,18 +670,7 @@ public:
 	static Calendar* CreateInstanceN(const TimeZone& timeZone, const Locale& locale, CalendarType calendarType = CALENDAR_GREGORIAN);
 
 	/**
-	* @if OSPCOMPAT
-        * @page                    CompCalendarCreateInstanceNPage Compatibility for CreateInstanceN()
-        * @section                   CompCalendarCreateInstanceNIssueSection Issues
-        * Implementation of this method in OSP compatible applications has the following issue: @n
-        * -# The method returns E_UNSUPPORTED_OPERATION if the locale is invalid.
-        *
-        * @section                 CompCalendarCreateInstanceNSolutionSection Resolutions
-        * This issue has been resolved in Tizen. @n
-	* @par When working in Tizen: 
-        * -# The method returns E_INVALID_ARG if the locale is invalid.
-	* @endif
-        */
+	*/
 
 protected:
 	/**
@@ -862,14 +756,7 @@ protected:
 	 * An instance has weekdata which are the first of week, minimal days in the first week, weekend on set, and weekend cease.
 	 * The weekdata are set as default values by the specified @c locale.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since					2.0
-	 * @if OSPCOMPAT
-	 * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	 *                              For more information, see @ref CompCalendarConstructPage "here".       
-	 * @endif
 	 *
 	 * @return					An error code
 	 * @param[in]				timeZone					An instance of TimeZone
@@ -880,18 +767,7 @@ protected:
 	result Construct(const Tizen::Locales::TimeZone& timeZone, const Locale& locale);
 
 	/**
-	 * @if OSPCOMPAT
-         * @page                    CompCalendarConstructPage Compatibility for Construct()
-         * @section                   CompCalendarConstructIssueSection Issues
-         * Implementation of this method in OSP compatible applications has the following issue: @n
-         * -# The method returns E_UNSUPPORTED_OPERATION if the locale is invalid.
-         *
-         * @section                 CompCalendarConstructSolutionSection Resolutions
-         * This issue has been resolved in Tizen. @n
-	 * @par When working in Tizen: 
-         * -# The method returns E_INVALID_ARG if the locale is invalid.
-	 * @endif	 
-         */
+	 */
 
 	/**
 	* Rolls up or down with a single unit of time on a given time field without changing larger fields. @n
@@ -1088,18 +964,18 @@ public:
 	static const long long ONE_WEEK_IN_MILLISEC = 7 * ONE_DAY_IN_MILLISEC;
 
 protected:
-	/**
+	/*
 	 * The field values for the currently set time for this calendar.
 	 */
 	int _timeFields[TIME_FIELD_FIELD_COUNT];
 
-	/**
+	/*
 	 * Pseudo-time-stamps which specify when each field is set.
 	 * There are two special values - UNSET and INTERNALLY_SET.
 	 */
 	int _stamp[TIME_FIELD_FIELD_COUNT];
 
-	/**
+	/*
 	 * The flags which tell if a specified time field for the calendar is set.
 	 */
 	bool _isSet[TIME_FIELD_FIELD_COUNT];

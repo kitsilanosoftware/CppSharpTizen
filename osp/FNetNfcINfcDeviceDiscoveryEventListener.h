@@ -10,7 +10,7 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
@@ -36,7 +36,7 @@ namespace Tizen { namespace Net { namespace Nfc
  * @since 2.0
  *
  * The %INfcDeviceDiscoveryEventListener interface specifies the methods used for creating the notifications
- *  about detecting a device.
+ * about detecting a device.
  *
  * For more information on the class features, see
  * <a href="../org.tizen.native.appprogramming/html/guide/net/nfc.htm">NFC Guide</a>.
@@ -72,7 +72,7 @@ protected:
 	// This method is for internal use only. Using this method can cause behavioral, security-related,
 	// and consistency-related issues in the application.
 	//
-	// The following methods are reserved, and the name of methods can be changed at any time without prior notice.
+	// This method is reserved and may change its name at any time without prior notice.
 	//
 	// @since 2.0
 	//
@@ -82,7 +82,7 @@ protected:
 	// This method is for internal use only. Using this method can cause behavioral, security-related,
 	// and consistency-related issues in the application.
 	//
-	// The following methods are reserved, and the name of methods can be changed at any time without prior notice.
+	// This method is reserved and may change its name at any time without prior notice.
 	//
 	// @since 2.0
 	//

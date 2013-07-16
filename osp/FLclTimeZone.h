@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -43,9 +42,11 @@ namespace Tizen { namespace Locales
  *
  * The %TimeZone class represents a time zone offset and figures out Daylight Saving Time (DST).
  *
- * The form of time zone ID is "Area/Location". However, the specialized time zone IDs have the different form.@n
+ * The form of time zone ID is "Area/Location". @n
  *
- * The IDs are defined in <a href="http://www.iana.org/time-zones" target="_blank">Time Zone Database</a>. @n
+ * However, the specialized time zone IDs have the different form, such as CST6CDT, EST5EDT and so on. @n
+ *
+ * For more information on IDs, refer <a href="http://www.iana.org/time-zones" target="_blank">Time Zone Database</a>. @n
  * 
  * The supported time zone list depends on the device. Therefore, it must be checked by using LocaleManager::GetAvailableTimeZonesN().
  *
@@ -55,6 +56,8 @@ namespace Tizen { namespace Locales
  *
 @code
 
+#include <FBase.h>
+#include <FSystem.h>
 #include <FLocales.h>
 
 using namespace Tizen::Locales;
@@ -73,8 +76,10 @@ MyClass::MyTimeZone(void)
 	int dstSavings = timeZone.GetDstSavings();
 
 	// Gets the special time zone.
+	DateTime utcTime;
 	TimeZone timeZone2;
-	Tizen::Locales::TimeZone::GetTimeZone(L"Europe/Zurich", timeZone2);
+	Tizen::System::SystemTime::GetCurrentTime(utcTime);
+	Tizen::Locales::TimeZone::GetTimeZone(L"Europe/Zurich", utcTime, timeZone2);
 }
 @endcode
  *
@@ -131,7 +136,7 @@ public:
 	 *
 	 * @param[in]		rawOffset						The base time zone offset to GMT in minutes
 	 * @param[in]		id								The time zone ID
-	 * @remarks                     The form of time zone @c id is "Area/Location". @n For more information on IDs, refer <a href="http://www.iana.org/time-zones">here</a>. @n
+	 * @remarks                     The form of time zone @c id is "Area/Location". @n For more information on IDs, refer <a href="http://www.iana.org/time-zones" target="_blank">here</a>. @n
 	 *                                      However, the supported time zone list depends on the device. Therefore, it must be checked before using this method.
 	 * @see                         LocaleManager::GetAvailableTimeZonesN()
 	 */
@@ -148,7 +153,7 @@ public:
 	 * @param[in]		startRule						The DST starting rule
 	 * @param[in]		endRule							The DST end rule
 	 * @param[in]		dstOffset						The amount of time in minutes saved during DST
-	 * @remarks                     The form of time zone @c id is "Area/Location". @n For more information on IDs, refer <a href="http://www.iana.org/time-zones">here</a>. @n
+	 * @remarks                     The form of time zone @c id is "Area/Location". @n For more information on IDs, refer <a href="http://www.iana.org/time-zones" target="_blank">here</a>. @n
 	 *                                      However, the supported time zone list depends on the device. Therefore, it must be checked before using this method.
 	 * @see                         LocaleManager::GetAvailableTimeZonesN()
 	 */
@@ -331,14 +336,7 @@ public:
 	/**
 	 * Gets the raw and GMT offset for the specified instance of Tizen::Base::DateTime in the current time zone.
 	 *
-	 * @if OSPCOMPAT  
-	 * @brief                               <i> [Compatibility] </i> 
-	 * @endif
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	 *                              For more information, see @ref CompTimeZoneGetOffsetPage "here".
-	 * @endif
 	 *
 	 * @return			An error code
 	 * @param[in]		date						An instance of Tizen::Base::DateTime
@@ -357,18 +355,11 @@ public:
 	/**
 	 * Gets the difference in minutes between the local standard time and GMT, taking into consideration both the raw offset and the effect of DST.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief                               <i> [Compatibility] </i> 
-	 * @endif
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	 *                              For more information, see @ref CompTimeZoneGetOffsetPage "here".
-	 * @endif
 	 *
 	 * @return			An error code
 	 * @param[in]		ticks						The time ticks value @n
-	 *												The value can be either GMT time or local wall time.
+	 *												The value is GMT time.
 	 * @param[out]		offset						The offset between the local standard time and GMT, taking into consideration DST
 	 * @exception		E_SUCCESS					The method is successful.
 	 * @exception           E_INVALID_ARG                                   The specified @c ticks is invalid. 
@@ -376,18 +367,7 @@ public:
 	result GetOffset(long long ticks, int& offset) const;
 
         /** 
-	 * @if OSPCOMPAT
-         * @page                    CompTimeZoneGetOffsetPage Compatibility for GetOffset()
-         * @section                   CompTimeZoneGetOffsetIssueSection Issues
-         * Implementation of this method in OSP compatible applications has the following issue: @n
-         * -# The method returns E_OUT_OF_RANGE if an argument is invalid.
-         *
-         * @section                 CompTimeZoneGetOffsetSolutionSection Resolutions
-         * This issue has been resolved in Tizen.
-	 * @par When working in Tizen:  
-         * -# The method returns E_INVALID_ARG if an argument is invalid.
-	 * @endif
-        */
+	 */
 
 	/**
 	 * Gets the difference in minutes between the local standard time and GMT, without including DST (that is, raw offset).
@@ -451,14 +431,7 @@ public:
 	/**
 	 * Gets the time zone instance from the given ID.
 	 *
-	 * @if OSPCOMPAT  
-	 * @brief                               <i> [Compatibility] </i> 
-	 * @endif 
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	 *                              For more information, see @ref CompTimeZoneGetTimeZonePage "here".
-	 * @endif
 	 *
 	 * @return			An error code
 	 * @param[in]		id				The time zone ID
@@ -474,14 +447,7 @@ public:
 	/**
 	 * Gets the %TimeZone instance from the specified ID and UTC time.
 	 *
-	 * @if OSPCOMPAT 
-	 * @brief                               <i> [Compatibility] </i> 
-	 * @endif
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	 *                              For more information, see @ref CompTimeZoneGetTimeZonePage "here".
-	 * @endif
 	 *
 	 * @return			An error code
 	 * @param[in]		id				The time zone ID
@@ -496,18 +462,7 @@ public:
 	static result GetTimeZone(const Tizen::Base::String& id, const Tizen::Base::DateTime& utcTime, Tizen::Locales::TimeZone& timeZone);
 
         /** 
-	 * @if OSPCOMPAT
-         * @page                    CompTimeZoneGetTimeZonePage Compatibility for GetTimeZone()
-         * @section                   CompTimeZoneGetTimeZoneIssueSection Issues
-         * Implementation of this method in OSP compatible applications has the following issue: @n
-         * -# The method returns E_UNSUPPORTED_OPERATION if the time zone ID is invalid.
-         *
-         * @section                 CompTimeZoneGetTimeZoneSolutionSection Resolutions
-         * This issue has been resolved in Tizen.
-	 * @par When working in Tizen:
-         * -# The method returns E_INVALID_ARG if the time zone ID is invalid.
-	 * @endif
-	*/
+	 */
 
 	/**
 	 * Converts the UTC time to the standard time.

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -84,9 +83,8 @@ class _HashMapEntry;
  *		delete pMapEnum;
  *
  *		// Deallocates all objects
- *		// Because the destructor calls RemoveAll() internally, you don't need to call RemoveAll() to destroy all elements at the end.
- *		map.RemoveAll();
- *
+ *		// Because the destructor calls RemoveAll() internally, you do not need to call RemoveAll() to destroy all elements at the end.
+ *		// map.RemoveAll();
  *	}
  * @endcode
  */
@@ -108,8 +106,8 @@ public:
 	 *
 	 * @param[in]	deleter	The function pointer to type of the element deleter
 	 * @remarks	To create an owing collection, set the element deleter value as @c SingleObjectDeleter. This gives the collection the ownership of elements and the collection will destroy elements. @n
-	 *			On the other hand, to create a non-owning collection, you don't need to set the element deleter value, as @c NoOpDeleter is the default element deleter.
-	 *			It means that you don't transfer the ownership of elements to the collection.
+	 *			On the other hand, to create a non-owning collection, you do not need to set the element deleter value, as @c NoOpDeleter is the default element deleter.
+	 *			It means that you do not transfer the ownership of elements to the collection.
 	 * @see		NoOpDeleter()
 	 * @see		SingleObjectDeleter()
 	 * @see		ArrayDeleter()
@@ -141,7 +139,7 @@ public:
 	result Construct(int capacity = 16, float loadFactor = 0.75);
 
 	/**
-	 * Initializes an instance of a %HashMap class by copying the elements of the specified map.
+	 * Initializes an instance of a %HashMap class by copying the elements of the specified @c map.
 	 *
 	 * @since 2.0
 	 *
@@ -180,7 +178,7 @@ public:
 	result Construct(int capacity, float loadFactor, const IHashCodeProvider& provider, const IComparer& comparer);
 
 	/**
-	 * Initializes an instance of a %HashMap class by copying the elements of a specified map with a specified load factor, hash code provider, and comparer.
+	 * Initializes an instance of a %HashMap class by copying the elements of the specified map with the specified load factor, hash code provider, and comparer.
 	 *
 	 * @since 2.0
 	 *
@@ -245,7 +243,7 @@ public:
 	virtual IMapEnumerator* GetMapEnumeratorN(void) const;
 
 	/**
-	 * Gets the value associated with the specified key.
+	 * Gets the value associated with the specified @c key.
 	 *
 	 * @since 2.0
 	 *
@@ -253,7 +251,7 @@ public:
 	 *				else @c null if an exception occurs
 	 * @param[in]	key		The key to locate
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_INVALID_ARG		A specified input parameter is invalid, or
+	 * @exception	E_INVALID_ARG		The specified input parameter is invalid, or
 	 *									the comparer has failed to compare the keys.
 	 * @exception	E_OBJ_NOT_FOUND		The specified @c key is not found in the map.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
@@ -262,7 +260,7 @@ public:
 	virtual const Object* GetValue(const Object& key) const;
 
 	/**
-	 * Gets the value associated with the specified key.
+	 * Gets the value associated with the specified @c key.
 	 *
 	 * @since 2.0
 	 *
@@ -306,14 +304,14 @@ public:
 	virtual IList* GetValuesN(void) const;
 
 	/**
-	 * Removes the values associated with a specified key.
+	 * Removes the values associated with the specified @c key.
 	 *
 	 * @since 2.0
 	 *
 	 * @return		An error code
 	 * @param[in]	key The key to remove
 	 * @exception	E_SUCCESS			The method is successful.
-	 * @exception	E_INVALID_ARG		A specified input parameter is invalid, or
+	 * @exception	E_INVALID_ARG		The specified input parameter is invalid, or
 	 *									the comparer has failed to compare keys.
 	 * @exception	E_OBJ_NOT_FOUND	The specified @c key is not found in the map.
 	 * @see			Add()
@@ -322,14 +320,14 @@ public:
 
 	/**
 	 * Removes all the object pointers in the collection. @n
-	 * This method can be called before deleting a collection.
+	 * The %RemoveAll() method can be called before deleting a collection.
 	 *
 	 * @since 2.0
 	 */
 	virtual void RemoveAll(void);
 
 	/**
-	 * Sets the value associated with a specified key by allocating it a new value.
+	 * Sets the value associated with the specified @c key by allocating it a new value.
 	 *
 	 * @since 2.0
 	 *
@@ -356,15 +354,15 @@ public:
 	virtual int GetCount(void) const;
 
 	/**
-	 * Checks whether the map contains the specified key.
+	 * Checks whether the map contains the specified @c key.
 	 *
 	 * @since 2.0
 	 *
-	 * @return		@c true if the map contains the specified key, @n
+	 * @return		@c true if the map contains the specified @c key, @n
 	 *				else @c false
 	 * @param[in]	key 	The key to locate
 	 * @exception	E_SUCCESS		The method is successful.
-	 * @exception	E_INVALID_ARG	A specified input parameter is invalid, or
+	 * @exception	E_INVALID_ARG	The specified input parameter is invalid, or
 	 *								the comparer has failed to compare the keys.
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 * @see			ContainsValue()
@@ -372,11 +370,11 @@ public:
 	virtual bool ContainsKey(const Object& key) const;
 
 	/**
-	 * Checks whether the map contains the specified value.
+	 * Checks whether the map contains the specified @c value.
 	 *
 	 * @since 2.0
 	 *
-	 * @return		@c true if the map contains the specified value, @n
+	 * @return		@c true if the map contains the specified @c value, @n
 	 *				else @c false
 	 * @param[in]	value	The value to locate
 	 *
@@ -412,7 +410,7 @@ public:
 	 *
 	 * @since 2.0
 	 *
-	 * @return		An function pointer to the existing element deleter
+	 * @return		A function pointer to the existing element deleter
 	 */
 	virtual DeleterFunctionType GetDeleter(void) const;
 
@@ -432,7 +430,7 @@ private:
 	HashMap& operator =(const HashMap& map);
 
 	/**
-	 * Copies all the pairs from a specified map to this map
+	 * Copies all the pairs from the specified @c map to this map.
 	 *
 	 * @return		An error code
 	 * @param[in]	map The map to copy
@@ -443,7 +441,7 @@ private:
 	result AddAll(const IMap& map);
 
 	/**
-	 * Gets the hash value for a specified object.
+	 * Gets the hash value for the specified object.
 	 *
 	 * @return		The hash value for the specified object
 	 * @param[in]	obj
@@ -471,7 +469,7 @@ private:
 	 *
 	 * @since 2.0
 	 *
-	 * @param[in]	deleter	An function pointer to the element deleter to set
+	 * @param[in]	deleter	A function pointer to the element deleter to set
 	 */
 	virtual void SetDeleter(DeleterFunctionType deleter);
 

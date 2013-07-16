@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -62,7 +61,7 @@ _OSP_EXPORT_ extern const Tizen::Base::String APPCONTROL_CONTACT;
 *
 * @brief	<i> [Deprecated] </i>
 * @deprecated This variable is provided only for backward compatibility and will be deleted in the near future.
-* 				Instead of this variable, use the literal, L"tizen.calendar" or L"tizen.events".
+* 				Instead of this variable, use the literal, L"tizen.calendar".
 * @since	2.0
 * @endif
 */
@@ -107,6 +106,7 @@ _OSP_EXPORT_ extern const Tizen::Base::String APPCONTROL_DIAL;
 * @deprecated This variable is provided only for backward compatibility and will be deleted in the near future.
 * 				Instead of this variable, use the literal, L"tizen.phone" with operation L"http://tizen.org/appcontrol/operation/call".
 * @since	2.0
+* @privlevel	public
 * @privilege    %http://tizen.org/privilege/systeminfo
 *
 * @remarks Privilege is required to use this application control.
@@ -212,6 +212,7 @@ _OSP_EXPORT_ extern const Tizen::Base::String APPCONTROL_AUDIO;
 * @deprecated This variable is provided only for backward compatibility and will be deleted in the near future.
 * 				Instead of this variable, use the literal, L"tizen.internet".
 * @since	2.0
+* @privlevel	public
 * @privilege    %http://tizen.org/privilege/web.service
 * @endif
 */
@@ -295,7 +296,7 @@ _OSP_EXPORT_ extern const Tizen::Base::String APPCONTROL_PROVIDER_CERTIFICATE_MA
 *
 * @brief	<i> [Deprecated] </i>
 * @deprecated	This variable is provided only for backward compatibility and will be deleted in the near future.
-* 				Instead of this variable, use the literal, L"tizen.calendar" or L"tizen.events".
+* 				Instead of this variable, use the literal, L"tizen.calendar".
 * @since	2.0
 * @endif
 */
@@ -312,6 +313,7 @@ _OSP_EXPORT_ extern const Tizen::Base::String APPCONTROL_PROVIDER_CALENDAR;
 * @deprecated	This variable is provided only for backward compatibility and will be deleted in the near future.
 * 				Instead of this variable, use the literal, L"tizen.phone".
 * @since			2.0
+* @privlevel	public
 * @privilege    %http://tizen.org/privilege/systeminfo
 *
 * @remarks Privilege is required to use this application control.
@@ -429,6 +431,7 @@ _OSP_EXPORT_ extern const Tizen::Base::String APPCONTROL_PROVIDER_AUDIO;
 * @deprecated	This variable is provided only for backward compatibility and will be deleted in the near future.
 * 				Instead of this variable, use the literal, L"tizen.internet".
 * @since			2.0
+* @privlevel	public
 * @privilege	%http://tizen.org/privilege/web.service
 *
 * @remarks Privilege is required to use this application control.
@@ -479,131 +482,6 @@ _OSP_EXPORT_ extern const Tizen::Base::String APPCONTROL_PROVIDER_BLUETOOTH;
 * @endif
 */
 _OSP_EXPORT_ extern const Tizen::Base::String APPCONTROL_PROVIDER_SETTINGS;
-
-//
-// The AllShare application control provider ID. @n
-//
-// @since		2.0
-// @visibility	internal
-// @privlevel	user
-// @privilege    ALLSHARE
-//
-// @remarks Privilege is required to use this application control. @n
-//	'path' is the main key of the all keys. Other keys' value are the extra information for the main key's value. @n
-//	'path' and 'type' values must be filled mandatorily and the others are optional. @n
-//	More than one content can be added if the 'path' key and value item is added in the input list.
-//
-// @li	Input dataList : @n
-// <table border=1 cellpadding="1" cellspacing="1">
-// <tr>
-//   <th>Key</th>
-//   <th>value</th>
-//   <th>description</th>
-// </tr>
-// <tr>
-//   <td>path</td>
-//   <td>Path, such as /Media/Images/sampleImage.jpg or http://localhost:8080/sampleVideo.mp4 or http://mycompany.com/sampleImage.jpg"</td>
-//   <td>This is the main key. @n Path to the media file to be shared.</td>
-// </tr>
-// <tr>
-//   <td>type</td>
-//   <td>image|audio|video</td>
-//	<td>Type of the media file.</td>
-// </tr>
-// <tr>
-//   <td>title</td>
-//   <td>Title, such as MyTitle</td>
-//   <td>Title of the media file.</td>
-// </tr>
-// <tr>
-//   <td>duration</td>
-//   <td>Duration in milliseconds, such as 60000 (60secs)</td>
-//	<td>Duration of the media file.</td>
-// </tr>
-// <tr>
-//   <td>bitrate</td>
-//   <td>Bit rate in kilo-bits per second, such as 192</td>
-//	<td>Bit rate of the media file.</td>
-// </tr>
-// <tr>
-//   <td>width</td>
-//   <td>Width in pixel, such as 640</td>
-//	<td>Width of the media file</td>
-// </tr>
-// <tr>
-//   <td>height</td>
-//   <td>Height in pixel, such as 480</td>
-//	<td>Height of the media file</td>
-// </tr>
-//<tr>
-//	<td>size</td>
-//	<td>Size in bytes, such as 512000 (500KB)</td>
-//	<td>Size of the media file.</td>
-//</td>
-//<tr>
-//	<td>mimeType</td>
-//	<td>Mime type, such as audio/mp3</td>
-//	<td>Mime type of the media file.</td>
-//</tr>
-//<tr>
-//	<td>artist</td>
-//	<td>Artist, such as TizenSinger</td>
-//	<td>Artist of media file.</td>
-//</tr>
-//<tr>
-//	<td>albumTitle</td>
-//	<td>Album title, such as TizenAlbum</td>
-//	<td>Album title of media file.</td>
-//</tr>
-// </table>
-//
-// @n
-// @li	Example code for AllShare: @n
-// @code
-//     void
-//     MyAppClass::AllShareAppControlSample(void)
-//     {
-//         ArrayList* pDataList = new ArrayList();
-//
-//         pDataList->Construct();
-//         pDataList->Add(*new String(L"path:/mycompany.com/sampleImage.jpg"));
-//         pDataList->Add(*new String(L"type:image"));
-//         pDataList->Add(*new String(L"title:MyImage"));
-//         pDataList->Add(*new String(L"width:640"));
-//         pDataList->Add(*new String(L"height:480"));
-//         pDataList->Add(*new String(L"size:51200"));
-//         pDataList->Add(*new String(L"mimeType:image/jpg"));
-//         pDataList->Add(*new String(L"path:http://mycompany.com/sampleVideo.mp4"));
-//         pDataList->Add(*new String(L"type:video"));
-//         pDataList->Add(*new String(L"title:MyVideo"));
-//         pDataList->Add(*new String(L"duration:600000"));
-//         pDataList->Add(*new String(L"width:320"));
-//         pDataList->Add(*new String(L"height:240"));
-//         pDataList->Add(*new String(L"size:2097152"));
-//         pDataList->Add(*new String(L"mimeType:video/mp4"));
-//         pDataList->Add(*new String(L"path:http://mycompany.com/sampleAudio.mp3"));
-//         pDataList->Add(*new String(L"type:audio"));
-//         pDataList->Add(*new String(L"title:MyAudio"));
-//         pDataList->Add(*new String(L"duration:200000"));
-//         pDataList->Add(*new String(L"size:3565158"));
-//         pDataList->Add(*new String(L"mimeType:audio/mp3"));
-//         pDataList->Add(*new String(L"artist:TizenSinger"));
-//         pDataList->Add(*new String(L"albumTitle:TizenAlbum"));
-//
-//         AppControl* pAc = AppManager::FindAppControlN(APPCONTROL_PROVIDER_ALLSHARE, APPCONTROL_OPERATION_SHARE);
-//         if (pAc)
-//         {
-//             pAc->Start(pDataList, null);
-//             delete pAc;
-//         }
-//
-//         pDataList->RemoveAll(true);
-//         delete pDataList;
-//     }
-//
-// @endcode
-//
-_OSP_EXPORT_ extern const Tizen::Base::String APPCONTROL_PROVIDER_ALLSHARE;
 
 /**
 * @if OSPDEPREC
@@ -1165,27 +1043,18 @@ _OSP_EXPORT_ extern const Tizen::Base::String APPCONTROL_RESULT_TERMINATED;
 *
 *
 * @code
-*
-*	using namespace Tizen::Base::Collection;
 *	using namespace Tizen::App;
 *
 *	void
-*	MyAppClass::AppControlCallSample(void)
+*	MyAppClass::AppControlDialSample(void)
 *	{
-*		HashMap extraData;
-*		String telKey = L"tel";
-*		String telVal = L"1234567890";
-*		String typeKey = L"type";
-*		String typeVal = L"voice";
 *
-*		extraData.Construct();
-*		extraData.Add(&telKey, &telVal);
-*		extraData.Add(&typeKey, &typeVal);
+* 		String telUri = L"tel:12345678900";
 *
-*		AppControl* pAc = AppManager::FindAppControlN(L"tizen.phone", L"http://tizen.org/appcontrol/operation/call");
-*		if(pAc)
+*		AppControl* pAc = AppManager::FindAppControlN(L"tizen.phone", L"http://tizen.org/appcontrol/operation/dial");
+*		if(pAc) 
 *		{
-*			pAc->Start(null, null, &extraData, null);
+* 			pAc->Start(&telUri, null, null, null);
 *			delete pAc;
 *		}
 *	}
@@ -1214,6 +1083,7 @@ public:
 	 * 				IAppControlResponseListener due to lack of argument capability. @n
 	 * 				Instead of using this method, use Start().
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/application.launch
 	 *
 	 * @return		An error code
@@ -1229,6 +1099,7 @@ public:
 	 *                                       - The target application has already started.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
 	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
+	 * @exception E_ILLEGAL_ACCESS				The application is not signed with the same certificate of target application. @b Since: @b 2.1
 	 * @remarks		If the IAppControlEventListener instance (@c pListener) needs to get the
 	 *               callback result for an application control, it must be valid till
 	 *               IAppControlEventListener::OnAppControlCompleted() is invoked.
@@ -1246,12 +1117,13 @@ public:
 	 * application is displayed.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/application.launch
 	 *
 	 * @return		An error code
 	 * @param[in]	pUriData	A pointer to the URI data
 	 * @param[in]	pDataType	A pointer to the MIME type (RFC 2046) data
-	 * @param[in]	pExtraData	A pointer to an argument map of key and value pair where the key is of type String and the value is of type String to deliver to the resolved application @n
+	 * @param[in]	pExtraData	A pointer to an argument map of key and value pair where the key is of type String and the value is of type String or of type ArrayList of String to deliver to the resolved application @n
 	 *							The maximum size is 16 kilo bytes.
 	 * @param[in]	pListener	The application control callback listener @n
 	 *							Some application need to get the result by implementing the IAppControlResponseListener interface.
@@ -1262,6 +1134,7 @@ public:
 	 *                                      - The application has already started an %AppControl.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
 	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
+	 * @exception E_ILLEGAL_ACCESS				The application is not signed with the same certificate of target application. @b Since: @b 2.1
 	 * @remarks		If the calling application needs to get some result for application control,
 	 * 				it must be valid till IAppControlResponseListener::OnAppControlCompleteResponseReceived() is invoked.
 	 * 				For example, a form object listener must not be deleted before the
@@ -1278,6 +1151,7 @@ public:
 	 * When the found application control is started, the URI pattern, MIME type, and extra data is delivered using IAppControlProviderEventListener.
 	 *
 	 * @since	2.0
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/application.launch
 	 *
 	 * @return  An error code
@@ -1286,7 +1160,9 @@ public:
 	 * @param[in]   pDataType   The MIME type (RFC 2046) or file extension @n
 	 *                          The '.' prefix must be used when specifying the file extension.
 	 * @param[in]   pCategory	The application control category
-	 * @param[in]	pExtraData	A pointer to an argument map of key and value pair where the key is of type String and the value is of type String to deliver to the resolved application @n
+	 * @param[in]	pExtraData	A pointer to an argument map of key and value pair where the key is of type Tizen::Base::String and the value is of
+	 *						type %Tizen::Base::String or of type Tizen::Base::Collection::ArrayList of %Tizen::Base::String to deliver to
+	 *						the resolved application @n
 	 * 							The maximum size is 16 kilo bytes.
 	 * @param[in]   pListener   A listener that gets notified
 	 * @exception   E_SUCCESS           The method is successful.
@@ -1294,6 +1170,7 @@ public:
 	 * @exception   E_OBJ_NOT_FOUND     The application control is not found.
 	 * @exception   E_PRIVILEGE_DENIED  The application does not have the privilege to call this method.
 	 * @exception	E_SYSTEM				The method cannot proceed due to a severe system error.
+	 * @exception E_ILLEGAL_ACCESS				The application is not signed with the same certificate of target application. @b Since: @b 2.1	 
 	 * @see IAppControlResponseListener
 	 */
 	static result FindAndStart(const Tizen::Base::String& operationId, const Tizen::Base::String* pUriPattern, const Tizen::Base::String* pDataType, const Tizen::Base::String* pCategory, const Tizen::Base::Collection::IMap* pExtraData, IAppControlResponseListener* pListener);
@@ -1366,12 +1243,8 @@ public:
 	/**
 	 * Stops the activated application control. @n
 	 * The %Stop() method works only with the following %AppControls provided by the platform:
-	 * App::APPCONTROL_PROVIDER_AUDIO, App::APPCONTROL_PROVIDER_BLUETOOTH, @n
-	 * App::APPCONTROL_PROVIDER_CALENDAR, App::APPCONTROL_PROVIDER_CAMERA, @n
-	 * App::APPCONTROL_PROVIDER_CERTIFICATE_MANAGER, App::APPCONTROL_PROVIDER_CONTACT, @n
-	 * App::APPCONTROL_PROVIDER_EMAIL, App::APPCONTROL_PROVIDER_IMAGE, @n
-	 * App::APPCONTROL_PROVIDER_MEDIA, App::APPCONTROL_PROVIDER_MESSAGE, @n
-	 * and App::APPCONTROL_PROVIDER_VIDEO.
+	 * tizen.bluetooth, tizen.calendar, tizen.camera, tizen.certificatemanager, tizen.contacts,
+	 * tizen.email, tizen.filemanager, tizen.gallery, tizen.imageviewer, tizen.mmsmessages, and tizen.smsmessages.
 	 *
 	 * @since		2.0
 	 *

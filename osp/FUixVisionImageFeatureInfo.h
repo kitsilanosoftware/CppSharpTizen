@@ -1,0 +1,143 @@
+//
+// Open Service Platform
+// Copyright (c) 2013 Samsung Electronics Co., Ltd.
+//
+// Licensed under the Apache License, Version 2.0 (the License);
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+
+/**
+ * @file     FUixVisionImageFeatureInfo.h
+ * @brief    This is the header file for the %ImageFeatureInfo class.
+ *
+ * This header file contains the declarations of the %ImageFeatureInfo class.
+ */
+
+#ifndef _FUIX_VISION_IMAGE_FEATURE_INFO_H_
+#define _FUIX_VISION_IMAGE_FEATURE_INFO_H_
+
+#include <FBaseObject.h>
+#include <FGraphics.h>
+
+namespace Tizen { namespace Uix { namespace Vision
+{
+/**
+ * @class    ImageFeatureInfo
+ * @brief    This class holds information of individual image feature data in an image feature set.
+ *
+ * @since    2.1
+ *
+ * The %ImageFeatureInfo class holds information of individual image feature data in an image feature set.
+ *
+ * @see      Tizen::Uix::Vision::ImageFeatureManager
+ */
+class _OSP_EXPORT_ ImageFeatureInfo
+    : public Tizen::Base::Object
+{
+public:
+
+    /**
+     * Gets detail description for feature set.
+     *
+     * @since       2.1
+     *
+     * @return      Detail description for feature set
+     *
+     */
+    Tizen::Base::String GetDescription(void) const;
+
+    /**
+     * Gets width of thumbnail image.
+     *
+     * @since       2.1
+     *
+     * @return      Thumbnail image width.
+     *
+     */
+    int GetThumbnailWidth(void) const;
+
+    /**
+     * Gets height of thumbnail image.
+     *
+     * @since       2.1
+     *
+     * @return      Thumbnail image height.
+     *
+     * @exception   E_SUCCESS                The method is successful.
+     */
+    int GetThumbnailHeight(void) const;
+
+    /**
+     * Gets the thumbnail image by extracting it.
+     *
+     * @since       2.1
+     *
+     * @return      A pointer to the Tizen::Base::ByteBuffer instance containing the thumbnail image
+     */
+    Tizen::Base::ByteBuffer* GetThumbnailN(void) const;
+
+    /**
+     * Compares the calling instance with a specified instance.
+     *
+     * @since       2.1
+     *
+     * @return      @c true if the specified instance of Tizen::Base::Object is equal to the calling %ImageFeatureInfo instance, @n
+     *              else @c false
+     * @param[in]   obj               The object to compare
+     */
+    virtual bool Equals(const Tizen::Base::Object& obj) const;
+
+    /**
+     * Gets the hash value of a current instance.
+     *
+     * @since        2.1
+     *
+     * @return       The hash value of the current instance
+     */
+    virtual int GetHashCode(void) const;
+
+private:
+    /**
+     * This is the default constructor for this class.
+     * The implementation of this constructor is declared as private to prohibit construction of the object by user.
+     *
+     * @since         2.1
+     */
+    ImageFeatureInfo(void);
+
+    /**
+     * This is the destructor for this class. @n
+     * The resources are deallocated by this method.
+     * This destructor overrides Tizen::Base::Object::~Object().
+     *
+     * @since         2.1
+     */
+    ~ImageFeatureInfo(void);
+    /**
+     * The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying of objects.
+     */
+    ImageFeatureInfo(const ImageFeatureInfo&);
+
+    /**
+     * The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit copying of objects.
+     */
+    ImageFeatureInfo& operator=(const ImageFeatureInfo&);
+
+private:
+    class _ImageFeatureInfoImpl* __pImageFeatureInfoImpl;
+    friend class _ImageFeatureInfoImpl;
+};
+
+} } } //Tizen::Uix::Vision
+
+#endif /* _FUIX_VISION_IMAGE_FEATURE_INFO_H_ */

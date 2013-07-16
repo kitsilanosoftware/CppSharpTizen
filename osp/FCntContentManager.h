@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -37,7 +36,8 @@ namespace Tizen { namespace Content
 
 class ContentInfo;
 class _ContentManagerImpl;
-class _IContentScanListener;
+class IContentScanListener;
+class IContentUpdateEventListener;
 
 /**
  * @class	ContentManager
@@ -131,11 +131,10 @@ class _OSP_EXPORT_ ContentManager
 
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the Construct() method must be called right after calling this constructor.
 	 *
 	 * @since		2.0
-	 *
-	 * @remarks	After creating an instance of this class, the Construct() method must be called explicitly to initialize this instance.
 	 */
 	ContentManager(void);
 
@@ -162,6 +161,7 @@ public:
 	 * Creates the content information.
 	 *
 	 * @since			2.0
+	 * @privlevel		public
 	 * @privilege		%http://tizen.org/privilege/content.write
 	 *
 	 * @return			The content ID
@@ -175,23 +175,18 @@ public:
 	 * @exception	E_SYSTEM						A system error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
 	 * @exception	E_SERVICE_BUSY			The database is busy.
-	 * @remarks		If the E_UNSUPPORTED_FORMAT exception is received from ContentManagerUtil::CheckContentType(),
-	 *                     the file can be created as a content only using the OtherContentInfo class. @n
-	 *                     The specific error code can be accessed using the GetLastResult() method.
+	 * @remarks
+	 * 				- If the @c E_UNSUPPORTED_FORMAT exception is received from ContentManagerUtil::CheckContentType(),
+	 *					the file can be created as a content only using the OtherContentInfo class.
+	 *				- The specific error code can be accessed using the GetLastResult() method.
 	 */
 	ContentId CreateContent(const ContentInfo& contentInfo);
 
 	/**
 	 * Writes the content in the byte buffer to the destination path and creates the content information.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief	<i> [Compatibility] </i>
-	 * @endif
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility This method has compatibility issues with OSP compatible applications. @n
-	 *                       For more information, see @ref CompContentManagerCreateContentPage "here".
-	 * @endif
+	 * @privlevel		public
 	 * @privilege		%http://tizen.org/privilege/content.write
 	 *
 	 * @return			The content ID
@@ -212,23 +207,17 @@ public:
 	 * @exception	E_SYSTEM						A system error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
 	 * @exception	E_SERVICE_BUSY			The database is busy.
-	 * @remarks		The destination path should start with the directory path returned by either Tizen::System::Environment::GetMediaPath() or Tizen::System::Environment::GetExternalStoragePath(). @n
-	 *                     The specific error code can be accessed using the GetLastResult() method. @n
-	 *                     For using CreateContent(), check @ref CreateContentUsage "here".
+	 * @remarks
+	 * 				- The destination path should start with the directory path returned by either Tizen::System::Environment::GetMediaPath() or Tizen::System::Environment::GetExternalStoragePath().
+	 *				- The specific error code can be accessed using the GetLastResult() method.
 	 */
 	ContentId CreateContent(const Tizen::Base::ByteBuffer& byteBuffer, const Tizen::Base::String& destinationPath, const ContentInfo* pContentInfo = null);
 
 	/**
 	 * Copies or moves the actual content to the destination path and creates the content information.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief	<i> [Compatibility] </i>
-	 * @endif
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility This method has compatibility issues with OSP compatible applications. @n
-	 *                       For more information, see @ref CompContentManagerCreateContentPage "here".
-	 * @endif
+	 * @privlevel		public
 	 * @privilege		%http://tizen.org/privilege/content.write
 	 *
 	 * @return			The content ID
@@ -253,122 +242,21 @@ public:
 	 * @exception	E_SYSTEM						A system error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
 	 * @exception	E_SERVICE_BUSY			The database is busy.
-	 * @remarks		The source path should start with the directory path returned by either Tizen::System::Environment::GetAppRootPath() or Tizen::System::Environment::GetExternalStoragePath(). @n
-	 *                     The destination path should start with the directory path returned by either Tizen::System::Environment::GetMediaPath() or Tizen::System::Environment::GetExternalStoragePath(). @n
-	 *                     The specific error code can be accessed using the GetLastResult() method. @n
-	 *                     For using CreateContent(), check @ref CreateContentUsage "here".
+	 * @remarks
+	 * 				- The source path should start with the directory path returned by either Tizen::App::App::GetAppRootPath() or Tizen::System::Environment::GetExternalStoragePath().
+	 *				- The destination path should start with the directory path returned by either Tizen::System::Environment::GetMediaPath() or Tizen::System::Environment::GetExternalStoragePath().
+	 *				- The specific error code can be accessed using the GetLastResult() method.
 	 */
 	ContentId CreateContent(const Tizen::Base::String& sourcePath, const Tizen::Base::String& destinationPath, bool deleteSource, const ContentInfo* pContentInfo = null);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page	CompContentManagerCreateContentPage Compatibility for the file path.
-	 * @section	CompContentManagerCreateContentPageIssueSection Issues
-	 *                 The content path argument of this method in OSP compatible applications has the following issues: @n
-	 *                 -# The content path should be a path that begins with an allowed path prefix. @n
-	 *                     For example, L"/Media/Images/flower.jpg", L"/Storagecard/Media/Images/flower.jpg".
-	 *
-	 * @section	CompContentManagerCreateContentPageSolutionSection Resolutions
-	 *                 This issue has been resolved in Tizen. @n
-	 *                 -# The content path can be a path without a specific allowed path prefix. @n
-	 *                 Application do not need to know the specific allowed path prefixes. @n
-	 *                 To get the directory path, use the following methods: @n
-	 *                 - For accessing the home directory, use Tizen::App::App::GetInstance()->GetAppRootPath().
-	 *                 - For accessing the media directory, use Tizen::System::Environment::GetMediaPath().
-	 *                 - For accessing the external storage, use Tizen::System::Environment::GetExternalStoragePath().
-	 *
-	 * @endif
-	 */
-
-	/**
-	 * @page		CreateContentUsage How To Use CreateContent()
-	 * @section  CreateContentUsageFirst 1. CreateContent(const Tizen::Base::ByteBuffer& byteBuffer, const Tizen::Base::String& destinationPath, const ContentInfo* pContentInfo = null)
-	 *
-	 *			<b> // The first usage </b> @n
-	 *			result r = E_SUCCESS; @n
-	 *			Tizen::Base::ByteBuffer byteBuffer; @n
-	 *			byteBuffer.Construct(1024); @n
-	 *
-	 *			// Set the data to byteBuffer @n
- 	 *
-	 *			ContentId contentId; @n
-	 *			ContentManager contentManager; @n
-	 *			r = contentManager.Construct(); @n
-	 *			TryReturn(!IsFailed(r), r, "Construct failed."); @n
-	 *
-	 *			Tizen::Base::String contentPath = Tizen::System::Environment::GetMediaPath() + L"Images/flower.jpg"; @n
-	 *			contentId = contentManager.CreateContent(byteBuffer, contentPath); @n
-	 *			TryReturn(contentId != Tizen::Base::UuId::GetInvalidUuId(), GetLastResult(), "CreateContent failed."); @n
-	 *
-	 *      @n <b> // The second usage </b> @n
-	 *			result r = E_SUCCESS; @n
-	 *			Tizen::Base::ByteBuffer byteBuffer; @n
-	 *			byteBuffer.Construct(1024); @n
- 	 *
-	 *			// Set the data to byteBuffer @n
-	 *
-	 *			ContentId contentId; @n
-	 *			ContentManager contentManager; @n
-	 *			r = contentManager.Construct(); @n
-	 *			TryReturn(!IsFailed(r), r, "Construct failed."); @n
-	 *
-	 *			ImageContentInfo imageContentInfo; @n
-	 *			r = imageContentInfo.Construct(null); @n
-	 *			TryReturn(!IsFailed(r), r, "Construct failed."); @n
-	 *
-	 *			r = imageContentInfo.SetKeyword(L"apple, fruit"); @n
-	 *			TryReturn(!IsFailed(r), r, "SetKeyword failed."); @n
-	 *
-	 *			r = imageContentInfo.SetProvider(L"kw1128"); @n
-	 *			TryReturn(!IsFailed(r), r, "SetProvider failed."); @n
- 	 *
-	 *			Tizen::Base::String contentPath = Tizen::System::Environment::GetMediaPath() + L"Images/flower.jpg"; @n
-	 *			contentId = contentManager.CreateContent(byteBuffer, contentPath, &imageContentInfo); @n
-	 *			TryReturn(contentId != Tizen::Base::UuId::GetInvalidUuId(), GetLastResult(), "CreateContent failed."); @n
-	 *
-	 * @section  CreateContentUsageSecond 2. CreateContent(const Tizen::Base::String& sourcePath, const Tizen::Base::String& destinationPath, bool deleteSource, const ContentInfo* pContentInfo = null);
-	 *
-	 *			<b> // The first usage </b> @n
-	 *			result r = E_SUCCESS; @n
-	 *			ContentId contentId; @n
-	 *			ContentManager contentManager; @n
-	 *			r = contentManager.Construct(); @n
-	 *			TryReturn(!IsFailed(r), r, "Construct failed."); @n
-	 *
-	 *			 Tizen::Base::String sourcePath = Tizen::App::App::GetInstance()->GetAppRootPath() + L"data/flower.jpg"; @n
-	 *			 Tizen::Base::String destPath = Tizen::System::Environment::GetMediaPath() + L"Images/flower.jpg"; @n
-	 *
-	 *			contentId = contentManager.CreateContent(sourcePath, destPath, false); @n
-	 *			TryReturn(Tizen::Base::UuId::GetInvalidUuId() != contentId, GetLastResult(), "CreateContent failed."); @n
-	 *
-	 *      @n <b> // The second usage </b> @n
-	 *			result r = E_SUCCESS; @n
-	 *			ContentId contentId; @n
-	 *			ContentManager contentManager; @n
-	 *			r = contentManager.Construct(); @n
-	 *			TryReturn(!IsFailed(r), r, "Construct failed."); @n
- 	 *
-	 *			ImageContentInfo imageContentInfo; @n
-	 *			r = imageContentInfo.Construct(null); @n
-	 *			TryReturn(!IsFailed(r), r, "Construct failed."); @n
-	 *
-	 *			r = imageContentInfo.SetKeyword(L"apple, fruit"); @n
-	 *			TryReturn(!IsFailed(r), r, "SetKeyword failed."); @n
-	 *
-	 *			r = imageContentInfo.SetProvider(L"kw1128"); @n
-	 *			TryReturn(!IsFailed(r), r, "SetProvider failed."); @n
- 	 *
-	 *			 Tizen::Base::String sourcePath = Tizen::App::App::GetInstance()->GetAppRootPath() + L"data/flower.jpg"; @n
-	 *			 Tizen::Base::String destPath = Tizen::System::Environment::GetMediaPath() + L"Images/flower.jpg"; @n
-	 *
-	 *			contentId = contentManager.CreateContent(sourcePath, destPath, false, &imageContentInfo); @n
-	 *			TryReturn(Tizen::Base::UuId::GetInvalidUuId() != contentId, GetLastResult(), "CreateContent failed."); @n
 	 */
 
 	/**
 	 * Gets the content information.
 	 *
 	 * @since			2.0
+	 * @privlevel		public
 	 * @privilege		%http://tizen.org/privilege/content.read
 	 *
 	 * @return			A pointer to ContentInfo
@@ -389,6 +277,7 @@ public:
 	 * Updates the content information with the specified instance of ContentInfo.
 	 *
 	 * @since			2.0
+	 * @privlevel		public
 	 * @privilege		%http://tizen.org/privilege/content.write
 	 *
 	 * @return			An error code
@@ -407,6 +296,7 @@ public:
 	 * Deletes the content information with the specified content ID.
 	 *
 	 * @since			2.0
+	 * @privlevel		public
 	 * @privilege		%http://tizen.org/privilege/content.write
 	 *
 	 * @return			An error code
@@ -424,15 +314,73 @@ public:
 	 */
 	result DeleteContent(const ContentId& contentId);
 
-	/*
-	 * Requests to scan a file(for internal use)
+	/**
+	 * Adds a listener to receive the database change notification.
+	 *
+	 * @since			2.1
+	 *
+	 * @return			An error code
+	 * @param[in]		listener				The event listener to add
+	 * @exception		E_SUCCESS				The method is successful.
+	 * @exception		E_OBJ_ALREADY_EXIST	The listener has already been added.
+	 * @exception		E_SYSTEM				The method cannot proceed due to a severe system error.
+	 * @remarks		Only a listener of an instance can be added.
+	 * 					If you add more than two listeners, the listener added first will receive notification for the DB change.
 	 */
-	result ScanFile(const Tizen::Base::String& contentPath);
+	result AddContentUpdateEventListener(IContentUpdateEventListener& listener);
 
-	/*
-	 * Requests to scan directories(for internal use)
+	/**
+	 * Removes a listener.
+	 *
+	 * @since           2.1
+	 *
+	 * @return			An error code
+	 * @param[in]		listener			The event listener to remove
+	 * @exception		E_SUCCESS			The method is successful.
+	 * @exception		E_OBJ_NOT_FOUND	The listener is not found.
+	 * @exception		E_SYSTEM			The method cannot proceed due to a severe system error.
 	 */
-	result ScanDirectory(const Tizen::Base::String& directoryPath, bool recursive, _IContentScanListener& listener);
+	result RemoveContentUpdateEventListener(IContentUpdateEventListener& listener);
+
+
+	/**
+	 * Requests to scan a file.
+	 *
+	 * @since			2.1
+	 * @privlevel		public
+	 * @privilege		%http://tizen.org/privilege/content.write
+	 *
+	 * @return		An error code
+	 * @param[in]	contentPath			The content path
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_ARG		The specified input parameter is invalid.
+	 * @exception	E_SERVICE_BUSY		The database is busy.
+	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
+	 */
+	static result ScanFile(const Tizen::Base::String& contentPath);
+
+	/**
+	 * Requests to scan a directory.
+	 *
+	 * @since			2.1
+	 * @privlevel		public
+	 * @privilege		%http://tizen.org/privilege/content.write
+	 *
+	 * @return			An error code
+	 * @param[in]		directoryPath			The directory path
+	 * @param[in]		recursive				Set to @c true in order to recursively scan sub directories, @n
+	 *                                          else @c false
+	 * @param[in]		pListener				The scan event listener
+	 * @param[out]		reqId					The request ID
+	 * @exception		E_SUCCESS				The method is successful.
+	 * @exception		E_INVALID_ARG			The specified input parameter is invalid.
+	 * @exception		E_SERVICE_BUSY			The database is busy.
+	 * @exception		E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception		E_SYSTEM				The method cannot proceed due to a severe system error.
+	 * @remarks			Platform does not have the ownership of the listener.
+	 */
+	static result ScanDirectory(const Tizen::Base::String& directoryPath, bool recursive, IContentScanListener* pListener, RequestId& reqId);
 
 private:
 	/**

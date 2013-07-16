@@ -40,7 +40,7 @@ class _CapabilityImpl;
  * @since		2.0
  *
  *
- * The %MediaCapability class provides capability information of the various classes in the %Media namespace.
+ * The %MediaCapability class provides capability information of the various classes in the Media namespace.
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/media/media_capabilities.htm">Media Capabilities</a>.
  *
@@ -202,9 +202,10 @@ public:
 	*	@exception	E_OBJ_NOT_FOUND				 The specified @c key is not found.
 	*	@exception	E_INVALID_ARG					The specified input parameter is invalid.
 	*	@exception	E_SYSTEM						A system error has occurred.
-	*	@remarks	The specific error code can be accessed using the GetLastResult() method.
-	*			If the type of a key is 'List, type', use GetValueN(). @n
-	*			For example, 'List, String', 'List, Integer'.
+	*	@remarks	
+	*				- The specific error code can be accessed using the GetLastResult() method.
+	*				- If the type of a key is 'List, type', use GetValueN(). @n
+	*				For example, 'List, String', 'List, Integer'.
 	*/
 	static Tizen::Base::Collection::IList* GetValueN(const Tizen::Base::String& key);
 

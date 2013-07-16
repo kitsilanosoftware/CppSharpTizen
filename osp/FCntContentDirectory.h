@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -128,8 +127,8 @@ public:
 	 * @exception E_OUT_OF_MEMORY           The memory is insufficient.
 	 * @exception E_SYSTEM                  The method cannot connect to the database.
 	 * @remarks   This method is used to access only one type of content. @n
-	 *            If you want to access more than one type of content, use Construct(const Tizen::Base::Collection::IListT<ContentType>&).
-	 *				The allowed types are CONTENT_TYPE_OTHER, CONTENT_TYPE_IMAGE, CONTENT_TYPE_AUDIO, and CONTENT_TYPE_VIDEO.
+	 *            If you want to access more than one type of content, use Construct(const Tizen::Base::Collection::IListT<ContentType>&). @n
+	 *				The allowed types are @c CONTENT_TYPE_OTHER, @c CONTENT_TYPE_IMAGE, @c CONTENT_TYPE_AUDIO, and @c CONTENT_TYPE_VIDEO.
 	 */
 	result Construct(ContentType contentType);
 
@@ -147,8 +146,8 @@ public:
 	 * @remarks   This method is used to access more than one type of content. @n
 	 *            If you want to access only one type of content, use Construct(ContentType). @n
 	 *            Total count of @c contentTypeList should not be greater than @c 4. @n
-	 *	      		Any combination with CONTENT_TYPE_ALL is a invalid argument. @n
-	 *				The allowed types are CONTENT_TYPE_OTHER, CONTENT_TYPE_IMAGE, CONTENT_TYPE_AUDIO, and CONTENT_TYPE_VIDEO.
+	 *	      		Any combination with @c CONTENT_TYPE_ALL is a invalid argument. @n
+	 *				The allowed types are @c CONTENT_TYPE_OTHER, @c CONTENT_TYPE_IMAGE, @c CONTENT_TYPE_AUDIO, and @c CONTENT_TYPE_VIDEO.
 	 */
 	result Construct(const Tizen::Base::Collection::IListT<ContentType>& contentTypeList);
 

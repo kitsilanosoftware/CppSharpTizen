@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -147,7 +147,6 @@ public:
 	 * Sets the action ID of the button item.
 	 *
 	 * @since		2.0
-     *
 	 * @return      An error code
 	 * @param[in]	actionId	      The action ID of the button item
 	 * @exception   E_SUCCESS         The method is successful.
@@ -164,7 +163,7 @@ public:
 	 *
 	 * @return      An error code
 	 * @param[in]   status              The item status
-	 * @param[in]   pBitmap             The background bitmap image to be set, @n
+	 * @param[in]   pBitmap             The background bitmap image to set, @n
 	 *                                  else @c null if no bitmap image is displayed
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_INVALID_OPERATION The current state of the instance prohibits the execution of the specified operation.
@@ -180,12 +179,13 @@ public:
 	 *
 	 * @return      An error code
 	 * @param[in]   status              The item status
-	 * @param[in]   pIcon               The icon to be set, @n
+	 * @param[in]   pIcon               The icon to set, @n
 	 *					                else @c null if no icon is displayed
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_INVALID_OPERATION The current state of the instance prohibits the execution of the specified operation.
-	 * @remarks     If the style of %ButtonItem is BUTTON_ITEM_STYLE_TEXT, the method returns E_INVALID_OPERATION. @n
-	 *              If an icon is not set for a state, the icon for BUTTON_ITEM_STATUS_NORMAL is used.
+	 * @remarks
+	 *				- If the style of %ButtonItem is @c BUTTON_ITEM_STYLE_TEXT, the method returns @c E_INVALID_OPERATION.
+	 *				- If an icon is not set for a state, the icon for @c BUTTON_ITEM_STATUS_NORMAL is used.
 	 */
 	result SetIcon(ButtonItemStatus status, const Tizen::Graphics::Bitmap* pIcon);
 
@@ -196,13 +196,14 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]   text		        The text to be set
+	 * @param[in]   text		        The text to set
 	 * @exception   E_SUCCESS           The method is successful.
 	 * @exception   E_INVALID_OPERATION The current state of the instance prohibits the execution of the specified operation. @n
-	 *                                  The style of %ButtonItem is BUTTON_ITEM_STYLE_ICON.
-	 * @remarks		If the text cannot be displayed in a line, then the text is automatically displayed in two lines and the ellipsis is applied if the text
-	 *				is longer than two lines. @n
-	 *				Use @htmlonly '\n' @endhtmlonly to denote the end of the first line.
+	 *								The style of %ButtonItem is ::BUTTON_ITEM_STYLE_ICON.
+	 * @remarks
+	 * 				- If the text cannot be displayed in a line, then the text is automatically displayed in two lines and the ellipsis is applied if the text
+	 *				is longer than two lines.
+	 *				- Use @htmlonly '\n' @endhtmlonly to denote the end of the first line.
 	 */
 	result SetText(const Tizen::Base::String& text);
 

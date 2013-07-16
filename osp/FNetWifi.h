@@ -1,6 +1,6 @@
 //
 // Open Service Platform
-// Copyright (c) 2012-2013 Samsung Electronics Co., Ltd. 
+// Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@
 #include <FNetWifiWifiBssInfo.h>
 #include <FNetWifiWifiSecurityInfo.h>
 #include <FNetWifiIWifiManagerEventListener.h>
-
+#include <FNetWifiIWifiSystemMonitoringEventListener.h>
 #include <FNetWifiWifiNetAccountInfo.h>
 #include <FNetWifiIWifiDirectDeviceListener.h>
 #include <FNetWifiIWifiDirectGroupOwnerListener.h>
@@ -54,15 +54,18 @@ namespace Tizen { namespace Net
   * @remarks     @b Header @b %file: @b \#include @b <FNet.h> @n
   *              @b Library : @b osp-wifi @n
   *
-  * The %Net::Wifi namespace contains the classes and interfaces for Wi-Fi management and Wi-Fi Direct functionalities. It provides a rich set of methods
-  * to manage the Wi-Fi devices and accounts, and to communicate over a Wi-Fi channel. Additionally, the Wi-Fi Direct functionalities are provided to manage
-  * the Wi-Fi Direct device, create a Wi-Fi Direct group, scan Wi-Fi Direct devices, associate to a Wi-Fi Direct group owner, get the WifiDirectGroupOwner or
-  * the WifiDirectGroupClient instance, and allow the listener to get the events related to Wi-Fi Direct device and group.
+  * The %Net::Wifi namespace contains the classes and interfaces for Wi-Fi management and Wi-Fi Direct functionalities. It
+  * provides a rich set of methods to manage the Wi-Fi devices and accounts, and to communicate over a Wi-Fi channel.
+  * Additionally, the Wi-Fi Direct functionalities are provided to manage the Wi-Fi Direct device, create a Wi-Fi Direct group,
+  * scan Wi-Fi Direct devices, associate to a Wi-Fi Direct group owner, get the WifiDirectGroupOwner or the WifiDirectGroupClient
+  * instance, and allow the listener to get the events related to Wi-Fi Direct device and group.
   *
-  * This namespace provides the Wi-Fi and Wi-Fi Direct functionalities. The Wi-Fi related operations are provided by classes like WifiManager and WifiSecurityInfo.
-  * The Wi-Fi Direct related operations are provided by classes like WifiDirectDevice.
+  * This namespace provides the Wi-Fi and Wi-Fi Direct functionalities. The Wi-Fi related operations are provided by classes like
+  * WifiManager and WifiSecurityInfo. The Wi-Fi Direct related operations are provided by classes like WifiDirectDevice.
   *
-  * For more information on the %Wifi namespace features, see <a href="../org.tizen.native.appprogramming/html/guide/net/wi-fi_connectivity.htm">Wi-Fi Connectivity</a> and <a href="../org.tizen.native.appprogramming/html/guide/net/wi-fi_direct_connectivity.htm">Wi-Fi Direct Connectivity</a>.
+  * For more information on the %Wifi namespace features, see
+  * <a href="../org.tizen.native.appprogramming/html/guide/net/wi-fi_connectivity.htm">Wi-Fi Connectivity</a> and
+  * <a href="../org.tizen.native.appprogramming/html/guide/net/wi-fi_direct_connectivity.htm">Wi-Fi Direct Connectivity</a>.
   *
   * The following diagram illustrates the relationships between the Wi-Fi classes belonging to the %Wifi namespace.
   * @image html net_wi-fi_using_the_apis_classdiagram.png

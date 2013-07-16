@@ -92,8 +92,9 @@ public:
 	/**
 	 * Sets the user name for the current instance of %HttpCredentials.
 	 *
-	 * @since       2.0
-	 * @privilege	%http://tizen.org/privilege/http
+	 * @since			2.0
+	 * @privlevel		public
+	 * @privilege		%http://tizen.org/privilege/http
 	 *
 	 * @param[in]	name				The user name string
 	 * @exception	E_SUCCESS			The method is successful.
@@ -101,14 +102,16 @@ public:
 	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 */
 	result SetName(const Tizen::Base::String& name);
 
 	/**
 	 * Sets the password for the current instance of %HttpCredentials.
 	 *
-	 * @since       2.0
-	 * @privilege	%http://tizen.org/privilege/http
+	 * @since			2.0
+	 * @privlevel		public
+	 * @privilege		%http://tizen.org/privilege/http
 	 *
 	 * @param[in]	password			The password string
 	 * @exception	E_SUCCESS			The method is successful.
@@ -116,20 +119,23 @@ public:
 	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
 	 * @exception	E_SYSTEM			A system error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 */
 	result SetPassword(const Tizen::Base::String& password);
 
 	/**
 	 * Gets the user name of the current instance of %HttpCredentials.
 	 *
-	 * @since       2.0
-	 * @privilege	%http://tizen.org/privilege/http
+	 * @since			2.0
+	 * @privlevel		public
+	 * @privilege		%http://tizen.org/privilege/http
 	 *
 	 * @return			The user name
 	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_OUT_OF_MEMORY			The memory is insufficient.
 	 * @exception	E_SYSTEM				A system error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED		The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Tizen::Base::String GetName(void) const;
@@ -137,14 +143,16 @@ public:
 	/**
 	 * Gets the password of the current instance of %HttpCredentials.
 	 *
-	 * @since       2.0
-	 * @privilege	%http://tizen.org/privilege/http
+	 * @since			2.0
+	 * @privlevel		public
+	 * @privilege		%http://tizen.org/privilege/http
 	 *
 	 * @return			The password
-	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_SUCCESS				The method is successful.
 	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
-	 * @exception	E_SYSTEM			A system error has occurred.
+	 * @exception	E_SYSTEM				A system error has occurred.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
+	 * @exception	E_USER_NOT_CONSENTED		The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @remarks		The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Tizen::Base::String GetPassword(void) const;

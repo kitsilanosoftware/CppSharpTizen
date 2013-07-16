@@ -32,6 +32,9 @@
 #include <FUixSensorTiltSensorData.h>
 #include <FUixSensorGyroSensorData.h>
 #include <FUixSensorLightSensorData.h>
+#include <FUixSensorGravitySensorData.h>
+#include <FUixSensorUserAccelerationSensorData.h>
+#include <FUixSensorDeviceOrientationSensorData.h>
 #include <FUixSensorISensorEventListener.h>
 #include <FUixSensorMotion.h>
 #include <FUixSensorSensorManager.h>

@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -39,7 +39,7 @@ class Control;
  * @class	Touch
  * @brief	<i> [Deprecated] </i> This class supports multi-point touch for %Touch devices.
  *
- * @deprecated  This class is deprecated because the use of the %Touch is no longer recommended. Instead of using this class, use Tizen::Ui::TouchEventManager class.
+ * @deprecated  This class is deprecated because the use of %Touch is no longer recommended. Instead of using this class, use the Tizen::Ui::TouchEventManager class.
  * @since	2.0
  *
  * @final        This class is not intended for extension.
@@ -177,30 +177,30 @@ class _OSP_EXPORT_ Touch
 {
 public:
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * This is the default constructor for this class.
 	 *
 	 * @brief <i> [Deprecated]  </i>
 	 * @deprecated This method is deprecated because the %Touch class is not supported any more. Instead, use the Tizen::Ui::TouchEventManager class.
 	 * @since		2.0
-	 * @endif
+         * @endif
 	 */
 	Touch(void);
 
 	/**
-	 * @if OSPDEPREC
-	 * This destructor overrides Osp::Base::Object::~Object().
+         * @if OSPDEPREC
+	 * This destructor overrides Tizen::Base::Object::~Object().
 	 *
 	 * @brief <i> [Deprecated]  </i>
 	 * @deprecated This method is deprecated because the %Touch class is not supported any more. Instead, use the Tizen::Ui::TouchEventManager class.
 	 * @since		2.0
-	 * @endif
+         * @endif
 	 */
 	virtual ~Touch(void);
 
 public:
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Enables or disables the multi-point touch of the Control.
 	 *
 	 * @brief <i> [Deprecated]  </i>
@@ -213,12 +213,12 @@ public:
 	 * @exception	E_SUCCESS      		The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
  	 * @see			IsMultipointEnabled()
-	 * @endif
+         * @endif
 	 */
 	result SetMultipointEnabled(const Tizen::Ui::Control& control, bool enable);
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Checks whether the multi-point touch is enabled.
 	 *
 	 * @brief <i> [Deprecated]  </i>
@@ -228,107 +228,107 @@ public:
 	 * @return		@c true if the multi-point touch is enabled, @n
 	 *				else @c false
 	 * @see			IsMultipointEnabled()
-	 * @endif
+         * @endif
 	 */
 	bool IsMultipointEnabled(const Tizen::Ui::Control& control) const;
 
 
 	/**
-	 * @if OSPDEPREC
-	 * Gets the touch position.
+         * @if OSPDEPREC
+	 * Gets the touch position. @n
 	 * If there is only a single touch, that is returned. If there are multi-point touches, then the position of the last touch is returned.
 	 *
 	 * @brief <i> [Deprecated]  </i>
 	 * @deprecated 	This method is deprecated because the %Touch class is not supported any more.
-	 *				Instead, get the Tizen::Ui::TouchEventManager::GetTouchInfoListN() and use the Tizen::Ui::TouchEventInfo::GetCurrentPosition() method.
+	 *				Instead, get the Tizen::Ui::TouchEventManager::GetTouchInfoListN() method and use the Tizen::Ui::TouchEventInfo::GetCurrentPosition() method.
 	 * @since			2.0
  	 *
 	 * @return		The coordinates of the touch
  	 * @remarks		If an error occurs, this method returns Point(-1, -1).
- 	 * @endif
+         * @endif
 	 */
 	Tizen::Graphics::Point GetPosition(void) const;
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Gets the touch position by ID.
 	 *
 	 * @brief <i> [Deprecated]  </i>
 	 * @deprecated 	This method is deprecated because the %Touch class is not supported any more.
-	 *				Instead, get the Tizen::Ui::TouchEventManager::GetTouchInfoListN() and use the Tizen::Ui::TouchEventInfo::GetCurrentPosition() method.
+	 *				Instead, get the Tizen::Ui::TouchEventManager::GetTouchInfoListN() method and use the Tizen::Ui::TouchEventInfo::GetCurrentPosition() method.
 	 * @since			2.0
 	 *
 	 * @return		The coordinates of the touch
 	 * @param[in]		id		The ID of the touch
 	 * @remarks		If an error occurs, this method returns Point(-1, -1).
-	 * @endif
+         * @endif
 	 */
 	Tizen::Graphics::Point GetPosition(unsigned long id) const;
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Gets the touch position relative to the specified control.
 	 *
 	 * @brief <i> [Deprecated]  </i>
 	 * @deprecated 	This method is deprecated because the %Touch class is not supported any more.
-	 *				Instead, get the Tizen::Ui::TouchEventManager::GetTouchInfoListN() and use the Tizen::Ui::TouchEventInfo::GetCurrentPosition() method.
+	 *				Instead, get the Tizen::Ui::TouchEventManager::GetTouchInfoListN() method and use the Tizen::Ui::TouchEventInfo::GetCurrentPosition() method.
 	 * @since			2.0
 	 *
 	 * @return		The coordinates of the touch
 	 * @param[in]		control		The source control
 	 * @remarks		If an error occurs, this method returns Point(-1, -1).
-	 * @endif
+         * @endif
 	 */
 	Tizen::Graphics::Point GetPosition(const Tizen::Ui::Control& control) const;
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Gets the touch position relative to the specified control by ID.
 	 *
 	 * @brief <i> [Deprecated]  </i>
 	 * @deprecated 	This method is deprecated because the %Touch class is not supported any more.
-	 *				Instead, get the Tizen::Ui::TouchEventManager::GetTouchInfoListN() and use the Tizen::Ui::TouchEventInfo::GetCurrentPosition() method.
+	 *				Instead, get the Tizen::Ui::TouchEventManager::GetTouchInfoListN() method and use the Tizen::Ui::TouchEventInfo::GetCurrentPosition() method.
 	 * @since			2.0
 	 *
 	 * @return		The coordinates of the touch
 	 * @param[in]		control		The source control
 	 * @param[in]		id			The ID of the touch
 	 * @remarks		If an error occurs, this method returns Point(-1, -1).
-	 * @endif
+         * @endif
 	 */
 	Tizen::Graphics::Point GetPosition(const Tizen::Ui::Control& control, unsigned long id) const;
 
 	/**
-	 * @if OSPDEPREC
-	 * Gets the status of the touch by ID.
-	 *
-	 * @brief <i> [Deprecated]  </i>
-	 * @deprecated 	This method is deprecated because the %Touch class is not supported any more.
-	 *				Instead, get the Tizen::Ui::TouchEventManager::GetTouchInfoListN() and use the Tizen::Ui::TouchEventInfo::GetTouchStatus() method.
-	 * @since			2.0
-	 *
-	 * @param[in]		id		The ID of the touch
-	 * @return		The touch status
-	 * @endif
-	 */
+        * @if OSPDEPREC
+	* Gets the status of the touch by ID.
+	*
+	* @brief <i> [Deprecated]  </i>
+	* @deprecated 	This method is deprecated because the %Touch class is not supported any more.
+	*				Instead, get the Tizen::Ui::TouchEventManager::GetTouchInfoListN() method and use the Tizen::Ui::TouchEventInfo::GetTouchStatus() method.
+	* @since			2.0
+	*
+	* @param[in]		id		The ID of the touch
+	* @return		The touch status
+        * @endif
+	*/
 	TouchStatus GetTouchStatus(unsigned long id) const;
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Gets the list of the multi-point touches, each represented by TouchInfo.
 	 *
 	 * @brief <i> [Deprecated]  </i>
 	 * @deprecated	This method is deprecated because the %Touch class is not supported any more. Instead, use the Tizen::Ui::TouchEventManager::GetTouchInfoListN() method.
 	 * @since			2.0
 	 *
-	 * @return		List of the TouchInfo
+	 * @return		A list of the TouchInfo instances
 	 * @see			Tizen::Ui::TouchInfo
-	 * @endif
+         * @endif
 	 */
 	Tizen::Base::Collection::IList* GetTouchInfoListN(void) const;
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Gets the list of the multi-point touch positions relative to the specified control, each represented by TouchInfo.
 	 *
 	 * @brief <i> [Deprecated]  </i>
@@ -338,35 +338,35 @@ public:
 	 * @return		A list of the TouchInfo instances
 	 * @param[in]		control 	The source object for calculating the coordinates
 	 * @see			Tizen::Ui::TouchInfo
-	 * @endif
+         * @endif
 	 */
 	Tizen::Base::Collection::IList* GetTouchInfoListN(const Tizen::Ui::Control& control) const;
 
 	/**
-	 * @if OSPDEPREC
-	 * Gets the count of the multi-point touches.
-	 *
-	 * @brief <i> [Deprecated]  </i>
-	 * @deprecated 	This method is deprecated because the %Touch class is not supported any more. Instead, get the count of Tizen::Ui::TouchEventManager::GetTouchInfoListN() method.
-	 * @since			2.0
-	 *
-	 * @return		The number of the multi-point touches
-	 * @endif
-	 */
+        * @if OSPDEPREC
+	* Gets the count of the multi-point touches.
+	*
+	* @brief <i> [Deprecated]  </i>
+	* @deprecated 	This method is deprecated because the %Touch class is not supported any more. Instead, get the count of Tizen::Ui::TouchEventManager::GetTouchInfoListN() method.
+	* @since			2.0
+	*
+	* @return		The number of the multi-point touches
+         * @endif
+	*/
 	int GetPointCount(void) const;
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Gets the point ID at the given index.
 	 *
 	 * @brief <i> [Deprecated]  </i>
 	 * @deprecated  	This method is deprecated because the %Touch class is not supported any more.
-	 *				Instead, get the Tizen::Ui::TouchEventManager::GetTouchInfoListN() and use the Tizen::Ui::TouchEventInfo::GetPointId() method.
+	 *				Instead, get the Tizen::Ui::TouchEventManager::GetTouchInfoListN() method and use the Tizen::Ui::TouchEventInfo::GetPointId() method.
 	 * @since			2.0
 	 *
 	 * @return		The touch point ID
 	 * @param[in]		index	The index of the touch
-	 * @endif
+         * @endif
 	 */
 	unsigned long GetPointId(int index) const;
 
@@ -382,6 +382,6 @@ private:
 	Touch& operator =(const Touch&);
 };  // Touch
 
-}} // Tizen::Ui
+} } // Tizen::Ui
 
 #endif // _FUI_TOUCH_H_

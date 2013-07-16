@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -42,7 +42,7 @@ namespace Tizen {namespace Ui
  * @interface	IExpandableItemEventListener
  * @brief      <i> [Deprecated] </i>  This interface implements a listener for the item events.
  *
- * @deprecated  This listener is deprecated. Instead of using this class, use IGroupedTableViewItemEventListener.
+ * @deprecated  This interface is deprecated. Instead of using this interface, use the IGroupedTableViewItemEventListener interface.
  * @since		2.0
  *
  * The %IExpandableItemEventListener interface implements a listener for the item events.
@@ -57,24 +57,23 @@ class _OSP_EXPORT_ IExpandableItemEventListener
 // Operation
 public:
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * This is the destructor for this class.
 	 *
 	 * @brief       <i> [Deprecated] </i>
-	 * @deprecated	This listener is deprecated. This listener is deprecated. Instead of using this class, use
-	 * IGroupedTableViewEventListener.
+	 * @deprecated	This interface is deprecated. Instead of using this interface, use the IGroupedTableViewEventListener interface.
 	 * @since			2.0
 	 * @endif
 	 */
 	virtual ~IExpandableItemEventListener(void) {}
 
 	/**
-	 * @if OSPDEPREC
+         * @if OSPDEPREC
 	 * Called when the state of CustomListItem in the ExpandableList is changed. @n
 	 * If a main item is selected, the index of the sub-item is @c -1.
 	 *
 	 * @brief       <i> [Deprecated] </i>
-	 * @deprecated	This listener is deprecated. Instead of using this class, use IGroupedTableViewEventListener.
+	 * @deprecated	This interface is deprecated. Instead of using this interface, use the IGroupedTableViewEventListener interface.
 	 * @since		2.0
 	 *
 	 * @param[in]  source		The source control from which the event is fired
@@ -84,29 +83,29 @@ public:
 	 * @param[in]  status       The state of the item
 	 * @remarks Implement this method in a class that derives %IExpandableItemEventListener to handle the user interaction at the CustomListItem of the
 	 *			ExpandableList.
-	 * @endif
+         * @endif
 	 */
 	virtual void OnItemStateChanged(const Tizen::Ui::Control& source, int mainIndex, int subIndex, int itemId, Tizen::Ui::ItemStatus status) = 0;
 
 
 	/**
-	 * @if OSPDEPREC
-	 * Called when the state of an element in CustomListItem in ExpandableList is changed. @n
-	 * If a main item is selected, the index of the sub-item is @c -1.
-	 * @brief       <i> [Deprecated] </i>
-	 * @deprecated	This listener is deprecated. Instead of using this class, use IGroupedTableViewEventListener.
-	 * @since		2.0
-	 *
-	 * @param[in]	source			The source control from which the event is fired
-	 * @param[in]	mainIndex		The main index of the item
-	 * @param[in]	subIndex		The sub index of the item
-	 * @param[in]  itemId			The item ID
-	 * @param[in]  elementId		The element ID
-	 * @param[in]  status          The state of the element
-	 * @remarks Implement this method in a class that derives %IExpandableItemEventListener to handle the user interaction at the element in
-	 *			CustomListItem of ExpandableList.
-	 * @endif
-	 */
+          * @if OSPDEPREC
+	  * Called when the state of an element in CustomListItem in ExpandableList is changed. @n
+	  * If a main item is selected, the index of the sub-item is @c -1.
+	  * @brief       <i> [Deprecated] </i>
+	  * @deprecated	This interface is deprecated. Instead of using this interface, use the IGroupedTableViewEventListener interface.
+	  * @since		2.0
+	  *
+	  * @param[in]	source			The source control from which the event is fired
+	  * @param[in]	mainIndex		The main index of the item
+	  * @param[in]	subIndex		The sub index of the item
+	  * @param[in]  itemId			The item ID
+	  * @param[in]  elementId		The element ID
+	  * @param[in]  status          The state of the element
+	  * @remarks Implement this method in a class that derives %IExpandableItemEventListener to handle the user interaction at the element in
+	  *			CustomListItem of ExpandableList.
+	  * @endif
+	  */
 	virtual void OnItemStateChanged(const Tizen::Ui::Control& source, int mainIndex, int subIndex, int itemId, int elementId, Tizen::Ui::ItemStatus status) = 0;
 
 }; //IExpandableItemEventListener

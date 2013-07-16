@@ -2,18 +2,19 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
+
 /**
  * @file	FUiCtrlTab.h
  * @brief	This is the header file for the %Tab class.
@@ -161,7 +162,7 @@ public:
 	 * @deprecated  This class is deprecated because the use of the %Tab control is no longer recommended.
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @endif
 	 */
 	void AddActionEventListener(Tizen::Ui::IActionEventListener& listener);
@@ -175,7 +176,7 @@ public:
 	 * @deprecated  This class is deprecated because the use of the %Tab control is no longer recommended.
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 * @endif
 	 */
 	void RemoveActionEventListener(Tizen::Ui::IActionEventListener& listener);
@@ -587,7 +588,7 @@ public:
 	 * @deprecated  This class is deprecated because the use of the %Tab control is no longer recommended.
 	 * @since		2.0
 	 *
-	 * @param[in]	textColor		The color to be set
+	 * @param[in]	textColor		The color to set
 	 * @endif
 	 */
 	void SetTextColor(const Tizen::Graphics::Color& textColor);
@@ -613,7 +614,7 @@ public:
 	 * @deprecated  This class is deprecated because the use of the %Tab control is no longer recommended.
 	 * @since			2.0
 	 *
-	 * @param[in]		textColor		The color to be set
+	 * @param[in]		textColor		The color to set
 	 * @endif
 	 */
 	void SetSelectedTextColor(const Tizen::Graphics::Color& textColor);
@@ -653,7 +654,7 @@ public:
 	 * @deprecated  This class is deprecated because the use of the %Tab control is no longer recommended.
 	 * @since	2.0
 	 *
-	 * @param[in]	color	The color to be set
+	 * @param[in]	color	The color to set
 	 * @remarks	When a user navigates the user interface using the directional keys, the focused UI control is highlighted.
 	 * @endif
 	 */

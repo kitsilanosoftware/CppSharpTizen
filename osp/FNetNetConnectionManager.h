@@ -2,7 +2,7 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Flora License, Version 1.1 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -48,7 +48,8 @@ class _OSP_EXPORT_ NetConnectionManager
 {
 public:
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the Construct() method must be called right after calling this constructor.
 	 *
 	 * @since       2.0
 	 *
@@ -121,14 +122,24 @@ public:
 	 * Sets the preferred network.
 	 *
 	 * @since       2.0
+	 *
+	 * @privlevel	public
 	 * @privilege	%http://tizen.org/privilege/network.connection
+	 * @feature		%http://tizen.org/feature/network.wifi for the NET_WIFI_ONLY value and @n
+	 * 				%http://tizen.org/feature/network.telephony for the NET_PS_ONLY value of @c netPreference
 	 *
 	 * @return		An error code
 	 * @param[in]	netPreference		The preferred network
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_OPERATION	This operation is not allowed.
 	 * @exception	E_PRIVILEGE_DENIED	The application does not have the privilege to call this method.
-	 * @remarks		If this method is not used, the default connection works in the Wi-Fi first mode.
+	 * @exception	E_USER_NOT_CONSENTED	The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception	E_UNSUPPORTED_OPERATION	The target device does not support the required feature. @b Since: @b 2.1
+	 * 					For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+	 * @remarks
+	 * 				- If this method is not used, the default connection works in the Wi-Fi first mode.
+	 * 				- Before calling this method, check whether the feature is supported by 
+	 *				Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	 */
 	result SetNetPreference(NetPreferenceType netPreference);
 
@@ -154,7 +165,7 @@ public:
 	 *
 	 * @since       2.0
 	 *
-	 * @return		An IList containing indexes to the active %NetConnectionInfo in the network, @n
+	 * @return		A Tizen::Base::Collection::IList containing indexes to the active %NetConnectionInfo in the network, @n
 	 *				else @c null if there is an error or if there is no active connection in the system
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.

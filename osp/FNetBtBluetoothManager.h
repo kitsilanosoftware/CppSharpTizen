@@ -82,13 +82,19 @@ public:
 	 * Constructs and initializes an instance of the %BluetoothManager class with the specified listener.
 	 *
 	 * @since       2.0
+	 * @feature     %http://tizen.org/feature/network.bluetooth
 	 *
 	 * @return      An error code
-	 * @param[in]   listener                    The listener to handle the %BluetoothManager event
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_OUT_OF_MEMORY             The memory is insufficient.
-	 * @exception	E_UNSUPPORTED_OPERATION		This operation is not supported.
-	 * @exception   E_SYSTEM                    A system error has occurred.
+	 * @param[in]   listener                The listener to handle the %BluetoothManager event
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
+	 * @exception   E_UNSUPPORTED_OPERATION The Emulator or target device does not support the required feature.
+	 *                                      For more information, see
+	 *                                      <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">
+	 *                                      Application Filtering</a>.
+	 * @exception   E_SYSTEM                A system error has occurred.
+	 * @remarks     Before calling this method, check whether the feature is supported by 
+	 *			Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	 */
 	result Construct(IBluetoothManagerEventListener& listener);
 
@@ -96,17 +102,19 @@ public:
 	 * Activates %Bluetooth on a device.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.admin
 	 *
 	 * @return      An error code
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_IN_PROGRESS               The %Bluetooth activation process is in progress.
-	 * @exception   E_INVALID_OPERATION         The current state of the instance prohibits the execution of the
-	 *                                          specified operation. @n
-	 *                                          For example, %Bluetooth is already activated.
-	 * @exception   E_OUT_OF_MEMORY             The memory is insufficient.
-	 * @exception   E_PRIVILEGE_DENIED          The application does not have the privilege to call this method.
-	 * @exception   E_SYSTEM                    A system error has occurred.
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_IN_PROGRESS           The %Bluetooth activation process is in progress.
+	 * @exception   E_INVALID_OPERATION     The current state of the instance prohibits the execution of the specified
+	 *                                      operation. @n
+	 *                                      For example, %Bluetooth is already activated.
+	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
+	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception   E_SYSTEM                A system error has occurred.
 	 * @see         IBluetoothManagerEventListener::OnBluetoothActivated()
 	 */
 	result Activate(void);
@@ -115,17 +123,19 @@ public:
 	 * Deactivates %Bluetooth on a device.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.admin
 	 *
 	 * @return      An error code
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_IN_PROGRESS               The %Bluetooth deactivation process is in progress.
-	 * @exception   E_INVALID_OPERATION         The current state of the instance prohibits the execution of the
-	 *                                          specified operation. @n
-	 *                                          For example, the %Bluetooth is already deactivated.
-	 * @exception   E_OUT_OF_MEMORY             The memory is insufficient.
-	 * @exception   E_PRIVILEGE_DENIED          The application does not have the privilege to call this method.
-	 * @exception   E_SYSTEM                    A system error has occurred.
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_IN_PROGRESS           The %Bluetooth deactivation process is in progress.
+	 * @exception   E_INVALID_OPERATION     The current state of the instance prohibits the execution of the specified
+	 *                                      operation. @n
+	 *                                      For example, the %Bluetooth is already deactivated.
+	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
+	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception   E_SYSTEM                A system error has occurred.
 	 * @see         IBluetoothManagerEventListener::OnBluetoothDeactivated()
 	 */
 	result Deactivate(void);
@@ -143,7 +153,7 @@ public:
 	 *
 	 * @return      @c true if the specified type of connection is available, @n
 	 *              else @c false
-	 * @param[in]   type                        The connection type
+	 * @param[in]   type                    The connection type
 	 *
 	 * @endif
 	 */
@@ -156,14 +166,14 @@ public:
 	 * @brief <i> [Deprecated]  </i>
 	 * @deprecated  This method is deprecated because the return value of this method is a dangling pointer if this
 	 *              instance of %BluetoothManager is deleted. In addition to this, the %BluetoothDevice class
-	 *              represents only remote devices since 2.0. Instead of using this method, the GetLocalDeviceAddress()
+	 *              represents only remote devices since Tizen. Instead of using this method, the GetLocalDeviceAddress()
 	 *              and GetLocalDeviceName() methods are recommended.
 	 * @since       2.0
 	 *
 	 * @return      The local device information
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_OUT_OF_MEMORY             The memory is insufficient.
-	 * @exception   E_SYSTEM                    A system error has occurred.
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
+	 * @exception   E_SYSTEM                A system error has occurred.
 	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
 	 * @endif
 	 */
@@ -174,8 +184,8 @@ public:
 	 *
 	 * @since       2.0
 	 *
-	 * @return      The local %Bluetooth device address
-	 * @remarks     The address is expressed as a @c 6 byte hexadecimal value delimited by colons. @n
+	 * @return      The local %Bluetooth device address @n
+	 *              The address is expressed as a @c 6 byte hexadecimal value delimited by colons. @n
 	 *              For example, "00:3D:47:EF:8A:03".
 	 */
 	Tizen::Base::String GetLocalDeviceAddress(void) const;
@@ -218,48 +228,24 @@ public:
 	/**
 	 * Gets the discoverable mode of the local device.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility]  </i>
-	 * @endif
 	 * @since       2.0
-	 * @if OSPCOMPAT
-	 * @compatibility   This method has compatibility issues@n
-	 *                  For more information, see @ref BluetoothManagerGetDiscoverableModePage "here".
-	 *
-	 * @endif
 	 * @return      The discoverable mode of the local device
 	 */
 	BluetoothDiscoverableMode GetDiscoverableMode(void) const;
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page        BluetoothManagerGetDiscoverableModePage Compatibility for GetDiscoverableMode()
-	 *
-	 * @section     BluetoothManagerGetDiscoverableModePageIssueSection Issues
-	 *              Implementation of this method in API versions prior to 2.0 has the following issue: @n
-	 *
-	 *              -# The always discoverable mode and the discoverable mode with a certain amount of time cannot be
-	 *              differentiated. BT_DISC_MODE_DISCOVERABLE of BluetoothDiscoverableMode means both.
-	 *
-	 * @section     BluetoothManagerGetDiscoverableModePageSolutionSection Resolutions
-	 *              The issue mentioned above is resolved in API version 2.0, and it is recommended to use API version
-	 *              3.0 or above. @n
-	 *
-	 *              -# The new element, BT_DISC_MODE_TIME_LIMITED_DISCOVERABLE, is added into BluetoothDiscoverableMode
-	 *              in API version 2.0, Therefore, BT_DISC_MODE_DISCOVERABLE means the always discoverable mode and
-	 *              BT_DISC_MODE_TIME_LIMITED_DISCOVERABLE means the discoverable mode with a certain amount of time.
-	 * @endif
 	 */
 
 	/**
 	 * Gets the remaining time, in seconds, until the discoverable mode is changed from
-	 * @c BT_DISC_MODE_TIME_LIMITED_DISCOVERABLE to be @c BT_DISC_MODE_NOT_DISCOVERABLE. @n
-	 * This method is valid only if the current discoverable mode is @c BT_DISC_MODE_TIME_LIMITED_DISCOVERABLE.
+	 * ::BT_DISC_MODE_TIME_LIMITED_DISCOVERABLE to be ::BT_DISC_MODE_NOT_DISCOVERABLE. @n
+	 * The %GetRemainingTimeAsDiscoverable() method is valid only if the current discoverable mode is @c
+	 * BT_DISC_MODE_TIME_LIMITED_DISCOVERABLE.
 	 *
 	 * @since 2.0
 	 *
-	 * @return      The remaining time, in seconds, until the local device to be not discoverable.
-	 * @remarks     0 will be returned if the current discoverable mode is not @c BT_DISC_MODE_TIME_LIMITED_DISCOVERABLE.
+	 * @return      The remaining time, in seconds, until the local device is not discoverable @n
+	 *              @c 0 is returned if the current discoverable mode is not ::BT_DISC_MODE_TIME_LIMITED_DISCOVERABLE.
  	 */
 	int GetRemainingTimeAsDiscoverable(void) const;
 
@@ -274,23 +260,49 @@ public:
 	bool IsDiscoveryInProgress(void) const;
 
 	/**
-	 * Sets the name of the local device.
-	 *
+	 * Sets a name of the local device. @n
+ 	 * The searching device detects the local devices in close proximity based on the specified device name, and the
+ 	 * name is only valid while an application is active.
+ 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.admin
 	 *
 	 * @return      An error code
-	 * @param[in]   deviceName                  The new device name
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_INVALID_ARG               The specified device name is an empty string.
-	 * @exception   E_PRIVILEGE_DENIED          The application does not have the privilege to call this method.
-	 * @exception   E_SYSTEM                    A system error has occurred.
-	 * @remarks     This method does not affect the system settings. The device name is only valid while an application
-	 *              is active. The searching device detects the local devices in close proximity based on the specified
-	 *              device name. The specified device name is automatically truncated if its size is greater than @c 64
-	 *              bytes.
+	 * @param[in]   deviceName              The new device name @n
+	 *                                      The specified device name is automatically truncated if its size is greater
+	 *                                      than @c 64 bytes.
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_INVALID_ARG           The specified device name is an empty string.
+	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception   E_SYSTEM                A system error has occurred.
+	 * @remarks     This method does not affect the system settings.
 	 */
 	result SetLocalDeviceName(const Tizen::Base::String& deviceName);
+
+	/**
+	 * Sets the discoverable mode of the local device.
+	 *
+	 * @since 2.0
+	 * @privlevel   platform
+	 * @privilege   %http://tizen.org/privilege/bluetoothmanager
+	 *
+	 * @return      An error code
+	 * @param[in]   mode                    The new discoverable mode
+	 * @param[in]   seconds                 The duration in seconds for which the local device is discoverable @n
+	 *                                      The specified duration is adopted only if the specified @c mode is
+	 *                                      @c BT_DISC_MODE_TIME_LIMITED_DISCOVERABLE.
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_INVALID_ARG           The specified @c seconds should be greater than 0 if the specified @c mode
+	 *                                      is @c BT_DISC_MODE_TIME_LIMITED_DISCOVERABLE.
+	 * @exception   E_INVALID_OPERATION     %Bluetooth is not activated.
+	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception   E_SYSTEM                A system error has occurred.
+	 * @see         IBluetoothManagerEventListener::OnBluetoothDiscoverableModeChanged()
+	 */
+	result SetDiscoverableMode(BluetoothDiscoverableMode mode, int seconds = 0);
 
 	/**
 	 * @if OSPDEPREC
@@ -302,9 +314,9 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      An error code
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_OUT_OF_MEMORY             The memory is insufficient.
-	 * @exception   E_SYSTEM                    A system error has occurred.
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
+	 * @exception   E_SYSTEM                A system error has occurred.
 	 * @endif
 	 */
 	result RefreshPairedDeviceList(void);
@@ -322,9 +334,9 @@ public:
 	 *
 	 * @return      The instance of %BluetoothDevice containing the specified address, @n
 	 *              else @c null if the search is not successful
-	 * @param[in]   deviceAddress               The address to locate
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_OBJ_NOT_FOUND             The specified device is not found in the paired device list.
+	 * @param[in]   deviceAddress           The address to locate
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_OBJ_NOT_FOUND         The specified device is not found in the paired device list.
 	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
 	 * @endif
 	 */
@@ -337,10 +349,10 @@ public:
 	 *
 	 * @return      The instance of %BluetoothDevice containing the specified address, @n
 	 *              else @c null if the search is not successful
-	 * @param[in]   deviceAddress               The address to locate
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_OBJ_NOT_FOUND             The specified device is not found in the paired device list.
-	 * @exception   E_OUT_OF_MEMORY             The memory is insufficient.
+	 * @param[in]   deviceAddress           The address to locate
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_OBJ_NOT_FOUND         The specified device is not found in the paired device list.
+	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
 	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
 	 */
 	BluetoothDevice* GetPairedDeviceByAddressN(const Tizen::Base::ByteBuffer& deviceAddress) const;
@@ -352,10 +364,10 @@ public:
 	 *
 	 * @return      A list containing the matching devices, @n
 	 *              else @c null if the search is not successful
-	 * @param[in]   deviceName                  The name of the device to locate
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_OBJ_NOT_FOUND             The specified device is not found in the paired device list.
-	 * @exception   E_OUT_OF_MEMORY             The memory is insufficient.
+	 * @param[in]   deviceName              The name of the device to locate
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_OBJ_NOT_FOUND         The specified device is not found in the paired device list.
+	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
 	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Tizen::Base::Collection::IList* GetPairedDeviceByNameN(const Tizen::Base::String& deviceName) const;
@@ -373,9 +385,9 @@ public:
 	 *
 	 * @return      The instance of %BluetoothDevice at the specified index, @n
 	 *              else @c null if there is no element
-	 * @param[in]   index                       The index in the list
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_OBJ_NOT_FOUND             The specified index is not found in the paired device list.
+	 * @param[in]   index                   The index in the list
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_OBJ_NOT_FOUND         The specified index is not found in the paired device list.
 	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
 	 * @endif
 	 */
@@ -394,7 +406,7 @@ public:
 	 *
 	 * @return      A pointer to the paired device list on success, @n
 	 *              else @c null
-	 * @exception   E_SUCCESS                   The method is successful.
+	 * @exception   E_SUCCESS               The method is successful.
 	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
 	 * @endif
 	 */
@@ -407,8 +419,8 @@ public:
 	 *
 	 * @return      A pointer to the paired device list on success, @n
 	 *              else @c null
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_OUT_OF_MEMORY             The memory is insufficient.
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
 	 * @remarks     The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Tizen::Base::Collection::IList* GetPairedDeviceListN(void) const;
@@ -419,11 +431,12 @@ public:
 	 * @since       2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   pListener                   The device event listener to add
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_SYSTEM                    A system error has occurred.
-	 * @remarks     Only one event listener can be set. If the input parameter is @c null, the listener currently set
-	 *              is unregistered.
+	 * @param[in]   pListener               The device event listener to set @n
+	 *                                      If the specified listener is @c null, the listener currently set is
+	 *                                      unregistered.
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_SYSTEM                A system error has occurred.
+	 * @remarks     Only one event listener can be set.
 	 */
 	result SetBluetoothDeviceListener(IBluetoothDeviceEventListener* pListener);
 
@@ -431,15 +444,17 @@ public:
 	 * Starts the device discovery process.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.gap
 	 *
 	 * @return      An error code
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_IN_PROGRESS               The device discovery process is in progress.
-	 * @exception   E_INVALID_OPERATION         The current state of the instance prohibits the execution of this
-	 *                                          operation.
-	 * @exception   E_PRIVILEGE_DENIED          The application does not have the privilege to call this method.
-	 * @exception   E_SYSTEM                    A system error has occurred.
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_IN_PROGRESS           The device discovery process is in progress.
+	 * @exception   E_INVALID_OPERATION     The current state of the instance prohibits the execution of this
+	 *                                      operation.
+	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception   E_SYSTEM                A system error has occurred.
 	 * @see         IBluetoothDeviceEventListener::OnBluetoothDiscoveryStarted()
 	 * @see         IBluetoothDeviceEventListener::OnBluetoothRemoteDeviceFoundN()
 	 * @see         IBluetoothDeviceEventListener::OnBluetoothDiscoveryDone()
@@ -450,16 +465,18 @@ public:
 	 * Cancels the device discovery process.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.gap
 	 *
 	 * @return      An error code
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_IN_PROGRESS               The termination of the device discovery process is in progress.
-	 * @exception   E_INVALID_OPERATION         The current state of the instance prohibits the execution of this
-	 *                                          operation. @n
-	 *                                          For example, the discovery has not started as yet.
-	 * @exception   E_PRIVILEGE_DENIED          The application does not have the privilege to call this method.
-	 * @exception   E_SYSTEM                    A system error has occurred.
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_IN_PROGRESS           The termination of the device discovery process is in progress.
+	 * @exception   E_INVALID_OPERATION     The current state of the instance prohibits the execution of this
+	 *                                      operation. @n
+	 *                                      For example, the discovery has not started as yet.
+	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception   E_SYSTEM                A system error has occurred.
 	 * @see         IBluetoothDeviceEventListener::OnBluetoothDiscoveryDone()
 	 */
 	result CancelDiscovery(void);
@@ -468,18 +485,20 @@ public:
 	 * Retrieves the service list from a remote device.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.gap
 	 *
 	 * @return      An error code
-	 * @param[in]   pairedDevice                A remote device that is already paired with the local device
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_IN_PROGRESS               The retrieving is in progress.
-	 * @exception   E_INVALID_OPERATION         The current state of the instance prohibits the execution of this
-	 *                                          operation. @n
-	 *                                          For example, the discovery is in progress.
-	 * @exception   E_NOT_PAIRED                The input device is not found in the paired device list.
-	 * @exception   E_PRIVILEGE_DENIED          The application does not have the privilege to call this method.
-	 * @exception   E_SYSTEM                    A system error has occurred.
+	 * @param[in]   pairedDevice            A remote device that is already paired with the local device
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_IN_PROGRESS           The retrieving is in progress.
+	 * @exception   E_INVALID_OPERATION     The current state of the instance prohibits the execution of this
+	 *                                      operation. @n
+	 *                                      For example, the discovery is in progress.
+	 * @exception   E_NOT_PAIRED            The input device is not found in the paired device list.
+	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception   E_SYSTEM                A system error has occurred.
 	 * @remarks     The target remote device should be a paired device.
 	 * @see         IBluetoothDeviceEventListener::OnBluetoothServiceListReceived()
 	 */
@@ -489,17 +508,19 @@ public:
 	 * Pairs with the specified remote device.
 	 *
 	 * @since 2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.gap
 	 *
 	 * @return      An error code
-	 * @param[in]   remoteDevice                The remote %Bluetooth device to pair with
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_INVALID_OPERATION         The current state of the instance prohibits the execution of this
-	 *                                          operation. @n
-	 *                                          For example, the %Bluetooth is not activated.
-	 * @exception   E_DEVICE_BUSY               The device cannot be approached because other operation is in progress.
-	 * @exception   E_PRIVILEGE_DENIED          The application does not have the privilege to call this method.
-	 * @exception   E_SYSTEM                    A system error has occurred.
+	 * @param[in]   remoteDevice            The remote %Bluetooth device to pair with
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_INVALID_OPERATION     The current state of the instance prohibits the execution of this
+	 *                                      operation. @n
+	 *                                      For example, the %Bluetooth is not activated.
+	 * @exception   E_DEVICE_BUSY           The device cannot be approached because other operation is in progress.
+	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception   E_SYSTEM                A system error has occurred.
 	 * @remarks     IBluetoothDeviceEventListener::OnBluetoothPaired() is called if the pairing is successful, @n
 	 *              IBluetoothDeviceEventListener::OnBluetoothPairingFailed() if the pairing has failed.
 	 */
@@ -509,54 +530,56 @@ public:
 	 * Stops the pairing process.
 	 *
 	 * @since 2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.gap
 	 *
 	 * @return      An error code
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_INVALID_OPERATION         The current state of the instance prohibits the execution of this
-	 *                                          operation. @n
-	 *                                          For example, the pairing process is not in progress.
-	 * @exception   E_IN_PROGRESS               The termination of the pairing process is in progress.
-	 * @exception   E_PRIVILEGE_DENIED          The application does not have the privilege to call this method.
-	 * @exception   E_SYSTEM                    A system error has occurred.
-	 * @remarks     If the canceling of the pairing process is successful,
-	 *              IBluetoothDeviceEventListener::OnBluetoothPairingFailed() is called with E_OPERATION_CANCELED.
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_INVALID_OPERATION     The current state of the instance prohibits the execution of this
+	 *                                      operation. @n
+	 *                                      For example, the pairing process is not in progress.
+	 * @exception   E_IN_PROGRESS           The termination of the pairing process is in progress.
+	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception   E_SYSTEM                A system error has occurred.
+	 * @remarks     If the canceling of the pairing process is successful, @n
+	 *              IBluetoothDeviceEventListener::OnBluetoothPairingFailed() is called with @c E_OPERATION_CANCELED.
 	 */
 	result CancelPair(void);
 
 	/**
-	 * Unpairs with the paired device.
+	 * Unpairs with a paired device. @n
+	 * The process of unpairing is to remove a specified device from the paired device list. No notification is
+	 * transmitted to the remote device. @n
+	 * The %Unpair() method is synchronous. Only when the result of this method is @c E_SUCCESS, the unpaired event is fired.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.gap
 	 *
 	 * @return      An error code
-	 * @param[in]   pairedDevice                The paired device to unpair
-	 * @exception   E_SUCCESS                   The method is successful.
-	 * @exception   E_INVALID_OPERATION         The current state of the instance prohibits the execution of this
-	 *                                          operation. @n
-	 *                                          For example, the %Bluetooth is not activated, or retrieving the service
-	 *                                          list is in progress.
-	 * @exception   E_NOT_PAIRED                The input device is not found in the paired device list.
-	 * @exception   E_PRIVILEGE_DENIED          The application does not have the privilege to call this method.
-	 * @exception   E_SYSTEM                    A system error has occurred.
-	 * @remarks     The process of unpairing is to remove the specified device from the paired device list. No
-	 *              notification is transmitted to the remote device. @n
-	 *              This method is synchronous. Only when the result of this method is E_SUCCESS, the unpaired event is
-	 *              fired.
+	 * @param[in]   pairedDevice            The paired device to unpair
+	 * @exception   E_SUCCESS               The method is successful.
+	 * @exception   E_INVALID_OPERATION     The current state of the instance prohibits the execution of this
+	 *                                      operation. @n
+	 *                                      For example, the %Bluetooth is not activated, or retrieving the service
+	 *                                      list is in progress.
+	 * @exception   E_NOT_PAIRED            The input device is not found in the paired device list.
+	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+	 * @exception   E_SYSTEM                A system error has occurred.
 	 * @see         IBluetoothDeviceEventListener::OnBluetoothUnpaired()
 	 */
 	result Unpair(const BluetoothDevice& pairedDevice);
 
 private:
 	//
-	// The implementation of this copy constructor is intentionally blank and declared as private to prohibit copying
-	// of objects.
+	// The implementation of this copy constructor is intentionally blank to prohibit copying of objects.
 	//
 	BluetoothManager(const BluetoothManager& value);
+
 	//
-	// The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit
-	// copying of objects.
+	// The implementation of this copy assignment operator is intentionally blank to prohibit copying of objects.
 	//
 	BluetoothManager& operator =(const BluetoothManager& value);
 

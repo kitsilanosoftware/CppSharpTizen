@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -51,7 +51,7 @@ class _OSP_EXPORT_ IGroupedListViewItemProvider
 // Operation
 public:
 	/**
-	 * This polymorphic destructor should be overridden if required.
+	 * This polymorphic destructor should be overridden if required. @n
 	 * This way, the destructors of the derived classes are called
 	 * when the destructor of this interface is called.
 	 *
@@ -88,10 +88,12 @@ public:
 	 * @return  A group item of the GroupedListView control
 	 * @param[in] groupIndex        The index of the group
 	 * @param[in] itemWidth         The width of the item
-	 * @remarks	An application that uses the GroupedListView control must implement this method. This method is expected to return a group item that is
-	 *			allocated on a heap memory. @n
-	 *			Note that when the item is not required, the GroupedListView control calls %IGroupedListViewItemProvider::DeleteGroupItem() and the
+	 * @remarks
+	 *			- An application that uses the GroupedListView control must implement this method. This method is expected to return a group item that is
+	 *			allocated on a heap memory.
+	 *			- Note that when the item is not required, the GroupedListView control calls %IGroupedListViewItemProvider::DeleteGroupItem() and the
 	 *			application deallocates the item.
+	 *			- The returned item should not be a null pointer.
 	 */
 	virtual Tizen::Ui::Controls::GroupItem* CreateGroupItem(int groupIndex, int itemWidth) = 0;
 
@@ -103,11 +105,12 @@ public:
 	 * @return  @c true if the item is deallocated by this method, @n
 	 *          else @c false
 	 * @param[in] groupIndex        The index of the group
-	 * @param[in] pItem             The pointer to GroupItem that is to be deleted
+	 * @param[in] pItem             The pointer to GroupItem to delete
 	 * @param[in] itemWidth         The width of the item
-	 * @remarks  An application that uses the %GroupedListView control must implement this method. @n
-	 *			Using this method, an application can deallocate the item. @n
-	 *			If an application deallocates the item, this method must return true. This notifies the GroupedListView control not to release the
+	 * @remarks
+	 *			- An application that uses the %GroupedListView control must implement this method.
+	 *			- Using this method, an application can deallocate the item.
+	 *			- If an application deallocates the item, this method must return true. This notifies the GroupedListView control not to release the
 	 *			item. Otherwise, the item is deallocated by the GroupedListView control.
 	 * @see     CreateItem()
 	 */
@@ -122,10 +125,11 @@ public:
 	 * @param[in] groupIndex        The index of the group
 	 * @param[in] itemIndex         The index of the item
 	 * @param[in] itemWidth			The width of the item
-	 * @remarks  An application that uses the GroupedListView control must implement this method. @n
-	 *			This method is expected to return an item that is allocated on a heap memory. @n
-	 *			The returned item can be a simple or custom item. @n
-	 *			Note that when the item is not required, the GroupedListView control calls %IGroupedListViewItemProvider::DeleteItem() and the application
+	 * @remarks
+	 *			- An application that uses the GroupedListView control must implement this method.
+	 *			- This method is expected to return an item that is allocated on a heap memory.
+	 *			- The returned item can be a simple or custom item.
+	 *			- Note that when the item is not required, the GroupedListView control calls %IGroupedListViewItemProvider::DeleteItem() and the application
 	 *			deallocates the item.
 	 * @see     DeleteItem()
 	 */
@@ -140,16 +144,16 @@ public:
 	 *			else @c false
 	 * @param[in] groupIndex        The index of the group
 	 * @param[in] itemIndex         The index of the item
-	 * @param[in] pItem             The pointer to ListItemBase that is to be deleted
+	 * @param[in] pItem             The pointer to ListItemBase to delete
 	 * @param[in] itemWidth         The width of the item
-	 * @remarks  An application that uses the GroupedListView control must implement this method. @n
-	 *			Using this method, an application can deallocate the item. @n
-	 *			If the application deallocates the item, this method must return true. This notifies the %GroupedListView control not to release the
+	 * @remarks
+	 *			- An application that uses the GroupedListView control must implement this method.
+	 *			- Using this method, an application can deallocate the item.
+	 *			- If the application deallocates the item, this method must return true. This notifies the %GroupedListView control not to release the
 	 *			item. Otherwise, the item is deallocated by the %GroupedListView control.
 	 * @see     CreateItem()
 	 */
 	virtual bool DeleteItem(int groupIndex, int itemIndex, Tizen::Ui::Controls::ListItemBase* pItem, int itemWidth) = 0;
-
 
 	/**
 	 * Checks whether the item can be reordered.
@@ -164,7 +168,7 @@ public:
 
 protected:
 	//
-	// Following methods are reserved and may change its name at any time without prior notice.
+	// The following methods are reserved and may change its name at any time without prior notice.
 	//
 	virtual void IGroupedListViewItemProvider_Reserved1(void) {}
 	virtual void IGroupedListViewItemProvider_Reserved2(void) {}

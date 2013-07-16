@@ -66,9 +66,10 @@ public:
 	* @param[in]	r			  The result of the upload
 	* @param[in]	errorCode	  The error code
 	* @param[in]	errorMessage  The error message
-	* @remarks	The Image object must not be deleted in this event listener. @n@n
-	*			This method passes auto-scaled bitmap, @n
-	*			so the dimension can be different to the requested dimension when the passed bitmap is locked.
+	* @remarks	
+	*			  - The Image object must not be deleted in this event listener.
+	*			  - This method passes an auto-scaled bitmap, @n
+	*			    so the dimension can be different from the requested dimension if the passed bitmap is locked.
 	* @see		Image::DecodeUrl()
 	*/
 	virtual void OnImageDecodeUrlReceived(RequestId reqId, Tizen::Graphics::Bitmap* pBitmap, result r, const Tizen::Base::String errorCode, const Tizen::Base::String errorMessage) = 0;

@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 //
@@ -51,8 +50,23 @@ typedef int RecordId;
 const RecordId INVALID_RECORD_ID = -1;
 
 /**
+ * A unique ID for an account. @n
+ * If an account is added successfully, an @c AccountId is automatically assigned to the account.
+ *
+ * @since	2.1
+ */
+typedef int AccountId;
+
+/**
+ * An invalid account ID.
+ *
+ * @since	2.1
+ */
+const AccountId INVALID_ACCOUNT_ID = -1;
+
+/**
  * @typedef	RecurrenceId
- * Defines the recurrence ID which is used to identify a specific instance of a recurring calendar component (CalEvent). @n
+ * Defines the recurrence ID that is used to identify a specific instance of a recurring calendar component (CalEvent). @n
  * The value type is @c Tizen::Base::DateTime. The property value is the effective value of the start time ("DTSTART" property) of the Recurrence instance.
  *
  * @since	2.0
@@ -275,36 +289,40 @@ enum ContactPropertyId
 	CONTACT_PROPERTY_ID_LAST_NAME,				/**< The last name property ID (String type) */
 	CONTACT_PROPERTY_ID_DISPLAY_NAME,			/**< The formatted name property ID (String type) */
 	CONTACT_PROPERTY_ID_NICK_NAME,				/**< @if OSPDEPREC The nick name property ID (String type)
-									@deprecated This enum field is deprecated because there can be multiple nicknames
+									@deprecated This enum value is deprecated because there can be multiple nicknames
 									in a contact. Instead of using this, use ContactMultiPropertyId::CONTACT_MPROPERTY_ID_NICKNAMES. @endif */
 	CONTACT_PROPERTY_ID_THUMBNAIL,				/**< @if OSPDEPREC The thumbnail property ID (Bitmap type)
-								@deprecated This enumeration field is deprecated because it is not used any longer. @endif */
+								@deprecated This enumeration value is deprecated because it is not used any longer. @endif */
 	CONTACT_PROPERTY_ID_BIRTHDAY,				/**< @if OSPDEPREC The birthday property ID (DateTime type)
-                                                                	@deprecated This enum field is deprecated because there can be multiple birthday events.
+                                                                	@deprecated This enum value is deprecated because there can be multiple birthday events.
 									Instead of using this, use ContactMultiPropertyId::CONTACT_MPROPERTY_ID_EVENTS. @endif */
 	CONTACT_PROPERTY_ID_JOB_TITLE,				/**< @if OSPDEPREC The job title property ID (String type)
-                                                                	@deprecated This enum field is deprecated because there can be multiple organizational information.
+                                                                	@deprecated This enum value is deprecated because there can be multiple organizational information.
 									Instead of using this, use ContactMultiPropertyId::CONTACT_MPROPERTY_ID_ORGANIZATIONS. @endif */
 	CONTACT_PROPERTY_ID_COMPANY,				/**< @if OSPDEPREC The company property ID (String type)
-									@deprecated This enum field is deprecated because there can be multiple organizational information.
+									@deprecated This enum value is deprecated because there can be multiple organizational information.
 									Instead of using this, use ContactMultiPropertyId::CONTACT_MPROPERTY_ID_ORGANIZATIONS.@endif */
 	CONTACT_PROPERTY_ID_NOTE,				/**< @if OSPDEPREC The note property ID (String type)
-									@deprecated This enum field is deprecated because there can be multiple notes
+									@deprecated This enum value is deprecated because there can be multiple notes
 									in a contact. Instead of using this, use ContactMultiPropertyId::CONTACT_MPROPERTY_ID_NOTES.@endif */
 	CONTACT_PROPERTY_ID_ANNIVERSARY,			/**< @if OSPDEPREC The anniversary property ID (DateTime type)
-									@deprecated This enum field is deprecated because there can be multiple anniversary events.
+									@deprecated This enum value is deprecated because there can be multiple anniversary events.
 									Instead of using this, use ContactMultiPropertyId::CONTACT_MPROPERTY_ID_EVENTS.@endif */
 	CONTACT_PROPERTY_ID_RINGTONE,				/**< The ringtone property ID (String type) */
 	CONTACT_PROPERTY_ID_MIDDLE_NAME,			/**< The middle name property ID (String type) */
 	CONTACT_PROPERTY_ID_LAST_REVISION,			/**< An ID for the calendar date and time for the last update in Coordinated Universal Time (UTC) @n	Read-only (DateTime type). */
 	CONTACT_PROPERTY_ID_NAME_PREFIX,			/**< The name honorific prefix property ID (String type) */
 	CONTACT_PROPERTY_ID_NAME_SUFFIX,			/**< The name honorific suffix property ID (String type) */
+	CONTACT_PROPERTY_ID_PHONETIC_FIRST_NAME,	/**< The phonetic first name property ID (String type) @b Since: @b 2.1 */
+	CONTACT_PROPERTY_ID_PHONETIC_LAST_NAME,		/**< The phonetic last name property ID (String type) @b Since: @b 2.1 */
+	CONTACT_PROPERTY_ID_PHONETIC_MIDDLE_NAME,	/**< The phonetic middle name property ID (String type) @b Since: @b 2.1 */
+	CONTACT_PROPERTY_ID_UID,			/**< The globally unique ID (String type) @b Since: @b 2.1 */
 };
 
 /**
  * @enum	ContactMultiPropertyId
  *
- * Defines the IDs for accessing the multi-value type properties of a %Contact. @n
+ * Defines the IDs for accessing the multi-value type properties of Contact. @n
  * The properties have several values and they are called multi-type properties.
  * @since	2.0
  */
@@ -327,7 +345,7 @@ enum ContactMultiPropertyId
  * The number of #ContactPropertyId factors.
  *
  * @brief <i> [Deprecated] </i>
- * @deprecated	This constant is deprecated it is not used any more.
+ * @deprecated	This constant is deprecated because it is not used any more.
  * @since	2.0
  * @endif
  */
@@ -338,7 +356,7 @@ static const int CONTACT_PROPERTY_ID_NUM = 14;
  * The number of #ContactMultiPropertyId factors.
  *
  * @brief <i> [Deprecated] </i>
- * @deprecated	This constant is deprecated it is not used any more.
+ * @deprecated	This constant is deprecated because it is not used any more.
  * @since	2.0
  * @endif
  */
@@ -360,7 +378,7 @@ enum RecordSensitivity
 
 /**
  * @enum	AttendeeRole
- * @brief	Defines the role of the attendee.
+ * Defines the role of the attendee.
  * @since	2.0
  */
 enum AttendeeRole
@@ -372,7 +390,6 @@ enum AttendeeRole
 
 /**
  * @enum	AttendeeStatus
- *
  * Defines the possible status of the attendee.
  * @since	2.0
  */
@@ -413,7 +430,7 @@ static const unsigned long EVENT_CATEGORY_ALL = EVENT_CATEGORY_APPOINTMENT | EVE
 
 /**
  * @enum		EventPriority
- * @brief	Defines the possible priority levels of the event.
+ * Defines the possible priority levels of the event.
  *
  * @since	2.0
  */
@@ -426,7 +443,7 @@ enum EventPriority
 
 /**
  * @enum		EventStatus
- * @brief	Defines the possible statuses of the event.
+ * Defines the possible statuses of the event.
  *
  * @since	2.0
  */
@@ -440,7 +457,7 @@ enum EventStatus
 
 /**
  * @enum		BusyStatus
- * @brief	Defines the busy statuses of the event.
+ * Defines the busy statuses of the event.
  *
  * @since	2.0
  */
@@ -512,10 +529,10 @@ enum RecordEventType
 	ALL_RECORDS_REMOVED,		/**<
 				 	 * @if OSPDEPREC
 					 * The removal of all records @n
-					 * @deprecated   This enum value is deprecated because it's not used any more.
+					 * @deprecated   This enum value is deprecated because it is not used any more.
 					 * @endif
 					 */
-	MULTI_RECORDS_ADDED,		/**< @if OSPDEPREC The adding of multiple records @endif	*/
+	MULTI_RECORDS_ADDED,		/**< @if OSPDEPREC The adding of multiple records @endif */
 	MULTI_RECORDS_UPDATED,		/**< @if OSPDEPREC The adding, updating, and/or removal of multiple records @endif */
 	MULTI_RECORDS_REMOVED		/**< @if OSPDEPREC The removal of multiple records @endif */
 };
@@ -553,7 +570,7 @@ enum CalDayOfWeek
 
 /**
  * @enum	RecordChangeType
- * Defines the change type of a Record.
+ * Defines the change type of Record.
  *
  * @since	2.0
  */
@@ -592,7 +609,8 @@ enum PhoneNumberType
 	PHONENUMBER_TYPE_WORK_FAX,	/**< The phone number type for work fax */
 	PHONENUMBER_TYPE_PAGER,	 	/**< The phone number type for pager */
 	PHONENUMBER_TYPE_OTHER,		/**< The phone number type for other */
-	PHONENUMBER_TYPE_CUSTOM		/**< The custom type @n The actual type can be set in the label. */
+	PHONENUMBER_TYPE_CUSTOM,	/**< The custom type @n The actual type can be set in the label. */
+	PHONENUMBER_TYPE_ASSISTANT	/**< The phone number type for assistant. @b Since: @b 2.1 */
 };
 
 /**
@@ -606,7 +624,8 @@ enum ReminderTimeUnit
 	REMINDER_TIME_UNIT_MINUTE,		/**< The unit of time offset is minute */
 	REMINDER_TIME_UNIT_HOUR,			/**< The unit of time offset is hour */
 	REMINDER_TIME_UNIT_DAY,			/**< The unit of time offset is day */
-	REMINDER_TIME_UNIT_WEEK			/**< The unit of time offset is week */
+	REMINDER_TIME_UNIT_WEEK,			/**< The unit of time offset is week */
+	REMINDER_TIME_UNIT_NONE,			/**< The unit of time offset is none @b Since @b 2.1 */
 };
 
 /**
@@ -621,21 +640,20 @@ enum EmailType
 	EMAIL_TYPE_PERSONAL,	/**< The email type for personal*/
 	EMAIL_TYPE_WORK,	/**< The email type for work */
 	EMAIL_TYPE_OTHER,	/**< The email type for other */
-	EMAIL_TYPE_CUSTOM	/**< The custom type @n The actual type can be set in the label. */
+	EMAIL_TYPE_CUSTOM,	/**< The custom type @n The actual type can be set in the label. */
+	EMAIL_TYPE_MOBILE	/**< The email type for mobile. @b Since: @b 2.1 */
 };
 
 /**
- * @enum AddressType
- *
  * Defines the types of address.
  *
-* @since	2.0
+ * @since	2.0
  */
 enum AddressType
 {
-	ADDRESS_TYPE_HOME,	/**< The address type for home address*/
-	ADDRESS_TYPE_WORK,	/**< The address type for work address*/
-	ADDRESS_TYPE_OTHER,	/**< The address type for other*/
+	ADDRESS_TYPE_HOME,	/**< The address type for home address */
+	ADDRESS_TYPE_WORK,	/**< The address type for work address */
+	ADDRESS_TYPE_OTHER,	/**< The address type for other */
 	ADDRESS_TYPE_CUSTOM	/**< The custom type @n The actual type can be set in the label. */
 };
 
@@ -694,6 +712,22 @@ enum RelationshipType
 	CONTACT_RELATIONSHIP_TYPE_SPOUSE,		/**< The relation type for spouse */
 	CONTACT_RELATIONSHIP_TYPE_CUSTOM		/**< The custom event @n The actual type can be set in the label. */
 };
+
+/**
+ * @enum OrganizationType
+ *
+ * Defines the types of organization.
+ *
+ * @since 2.1
+ */
+
+enum OrganizationType
+{
+	ORGANIZATION_TYPE_WORK,		/**< The organization type for work */
+	ORGANIZATION_TYPE_OTHER,	/**< The organization type for other */
+	ORGANIZATION_TYPE_CUSTOM	/**< The custom type @n The actual type can be set in the label */
+};
+
 /**
  * @if OSPDEPREC
  * The maximum length of the phone number property.
@@ -807,8 +841,8 @@ enum AddressbookFilterType
 
 /**
  * @enum AddressbookFilterProperty
- * Defines the property for filtering the addressbooks.
- * This properties can be used to create a AddressbookFilter of #AB_FI_TYPE_ADDRESSBOOK type.
+ * Defines the property for filtering the addressbooks. @n
+ * These properties can be used to create an AddressbookFilter of #AB_FI_TYPE_ADDRESSBOOK type.
  *
  * @since	2.0
  */
@@ -821,8 +855,8 @@ enum AddressbookFilterProperty
 
 /**
  * @enum PersonFilterProperty
- * Defines the property for filtering the persons.
- * This properties can be used to create a AddressbookFilter of #AB_FI_TYPE_PERSON type.
+ * Defines the property for filtering the persons. @n
+ * These properties can be used to create an AddressbookFilter of #AB_FI_TYPE_PERSON type.
  *
  * @since	2.0
  */
@@ -839,8 +873,8 @@ enum PersonFilterProperty
 
 /**
  * @enum ContactFilterProperty
- * Defines the property for filtering the contacts.
- * This properties can be used to create a AddressbookFilter of #AB_FI_TYPE_CONTACT type.
+ * Defines the property for filtering the contacts. @n
+ * These properties can be used to create an AddressbookFilter of #AB_FI_TYPE_CONTACT type.
  *
  * @since	2.0
  */
@@ -857,7 +891,7 @@ enum ContactFilterProperty
 /**
  * @enum CategoryFilterProperty
  * Defines the property for filtering the categories.
- * This properties can be used to create a AddressbookFilter of #AB_FI_TYPE_CATEGORY type.
+ * These properties can be used to create an AddressbookFilter of #AB_FI_TYPE_CATEGORY type.
  *
  * @since	2.0
  */
@@ -871,7 +905,7 @@ enum CategoryFilterProperty
 /**
  * @enum PhoneContactFilterProperty
  * Defines the property for filtering the contacts with phone number.
- * This properties can be used to create a AddressbookFilter of #AB_FI_TYPE_PHONE_CONTACT type.
+ * These properties can be used to create an AddressbookFilter of #AB_FI_TYPE_PHONE_CONTACT type.
  *
  * @since	2.0
  */
@@ -887,7 +921,7 @@ enum PhoneContactFilterProperty
 /**
  * @enum EmailContactFilterProperty
  * Defines the property for filtering the contacts with email.
- * This properties can be used to create a AddressbookFilter of #AB_FI_TYPE_EMAIL_CONTACT type.
+ * These properties can be used to create an AddressbookFilter of #AB_FI_TYPE_EMAIL_CONTACT type.
  *
  * @since	2.0
  */
@@ -898,6 +932,46 @@ enum EmailContactFilterProperty
 	EMAIL_CONTACT_FI_PR_PERSON_ID,                     /**< The person ID: int (PersonId) */
 	EMAIL_CONTACT_FI_PR_DISPLAY_NAME,                  /**< The display name: String */
 	EMAIL_CONTACT_FI_PR_EMAIL,                         /**< The email: String */
+};
+
+/**
+ * @enum        UserProfilePropertyId
+ *
+ * Defines the IDs for accessing the single value type properties of UserProfile.
+ * @since       2.1
+ */
+enum UserProfilePropertyId
+{
+	USER_PROFILE_PROPERTY_ID_FIRST_NAME = 1,                  /**< The first name property ID (String type) */
+	USER_PROFILE_PROPERTY_ID_LAST_NAME,                        /**< The last name property ID (String type) */
+	USER_PROFILE_PROPERTY_ID_MIDDLE_NAME,                      /**< The middle name property ID (String type) */
+	USER_PROFILE_PROPERTY_ID_NAME_PREFIX,                      /**< The name honorific prefix property ID (String type) */
+	USER_PROFILE_PROPERTY_ID_NAME_SUFFIX,                      /**< The name honorific suffix property ID (String type) */
+	USER_PROFILE_PROPERTY_ID_DISPLAY_NAME,                     /**< The formatted name property ID (String type) */
+	USER_PROFILE_PROPERTY_ID_PHONETIC_FIRST_NAME,           /**< The phonetic first name property ID (String type) */
+	USER_PROFILE_PROPERTY_ID_PHONETIC_LAST_NAME,            /**< The phonetic last name property ID (String type) */
+	USER_PROFILE_PROPERTY_ID_PHONETIC_MIDDLE_NAME,          /**< The phonetic middle name property ID (String type) */
+};
+
+/**
+ * @enum        UserProfileMultiPropertyId
+ *
+ * Defines the IDs for accessing the multi-value type properties of UserProfile. @n
+ * The properties have several values and they are called multi-type properties.
+ * @since       2.1
+ */
+enum UserProfileMultiPropertyId
+{
+	USER_PROFILE_MPROPERTY_ID_PHONE_NUMBERS,           /**< The phone number property ID (PhoneNumber class) */
+	USER_PROFILE_MPROPERTY_ID_EMAILS,                  /**< The email property ID (Email class) */
+	USER_PROFILE_MPROPERTY_ID_URLS,                    /**< The URL property ID (Url class) */
+	USER_PROFILE_MPROPERTY_ID_ADDRESSES,               /**< The address property ID (Address class) */
+	USER_PROFILE_MPROPERTY_ID_IMADDRESSES,             /**< The instant message property ID (ImAddress class) */
+	USER_PROFILE_MPROPERTY_ID_EVENTS,                  /**< The contact event property ID (ContactEvent class) */
+	USER_PROFILE_MPROPERTY_ID_ORGANIZATIONS,           /**< The organization property ID (Organization class) */
+	USER_PROFILE_MPROPERTY_ID_NOTES,                   /**< The note property ID (String type) */
+	USER_PROFILE_MPROPERTY_ID_NICKNAMES,               /**< The nickname property ID (String type) */
+	USER_PROFILE_MPROPERTY_ID_RELATIONSHIPS,           /**< The relationship property ID (Relationship type) */
 };
 
 /**
@@ -917,15 +991,15 @@ enum CalendarbookFilterType
 
 /**
  * @enum EventFilterProperty
- * Defines the property for filtering the events.
- * This properties can be used to create a CalendarbookFilter of CB_FI_TYPE_EVENT type.
+ * Defines the property for filtering the events. @n
+ * These properties can be used to create a CalendarbookFilter of CB_FI_TYPE_EVENT type.
  *
  * @since	2.0
  */
 enum EventFilterProperty
 {
-	EVENT_FI_PR_EVENT_ID = 1,		/**< The event id: int (RecordId) */
-	EVENT_FI_PR_CALENDAR_ID,		/**< The calendar id: long long (RecordId) */
+	EVENT_FI_PR_EVENT_ID = 1,		/**< The event ID: int (RecordId) */
+	EVENT_FI_PR_CALENDAR_ID,		/**< The calendar ID: long long (RecordId) */
 	EVENT_FI_PR_SUBJECT,				/**< The subject of the event: String */
 	EVENT_FI_PR_DESCRIPTION,		/**< The description of the event: String */
 	EVENT_FI_PR_LOCATION,			/**< The location of the event: String */
@@ -942,16 +1016,16 @@ enum EventFilterProperty
 };
 
 /**
- * @enum TodoFilterProperty
-* Defines the property for filtering the to-dos.
-* This properties can be used to create a CalendarbookFilter of CB_FI_TYPE_TODO type.
+* @enum TodoFilterProperty
+* Defines the property for filtering the to-dos. @n
+* These properties can be used to create a CalendarbookFilter of CB_FI_TYPE_TODO type.
 *
 * @since	2.0
 */
 enum TodoFilterProperty
 {
-	TODO_FI_PR_TODO_ID = 100,			/**< The todo id: long long (RecordId) */
-	TODO_FI_PR_CALENDAR_ID,			/**< The calendar id: long long (RecordId) */
+	TODO_FI_PR_TODO_ID = 100,			/**< The todo ID: long long (RecordId) */
+	TODO_FI_PR_CALENDAR_ID,			/**< The calendar ID: long long (RecordId) */
 	TODO_FI_PR_START_DATE,			/**< The start date of the to-do: DateTime*/
 	TODO_FI_PR_DUE_DATE,			/**< The due date of the to-do: DateTime */
 	TODO_FI_PR_SUBJECT,			/**< The subject of the to-do: String */
@@ -967,16 +1041,16 @@ enum TodoFilterProperty
 };
 
 /**
- * @enum EventInstanceFilterProperty
-* Defines the property for filtering the all day event instances or non-all day event instances.
-* This properties can be used to create the CalendarbookFilter of CB_FI_TYPE_ALL_DAY_EVENT_INSTANCE type or CB_FI_TYPE_NON_ALL_DAY_EVENT_INSTANCE type.
+* @enum EventInstanceFilterProperty
+* Defines the property for filtering the all day event instances or non-all day event instances. @n
+* These properties can be used to create a CalendarbookFilter of CB_FI_TYPE_ALL_DAY_EVENT_INSTANCE type or CB_FI_TYPE_NON_ALL_DAY_EVENT_INSTANCE type.
 *
 * @since	2.0
 */
 enum EventInstanceFilterProperty
 {
-	EVENT_INST_FI_PR_ORIGINAL_EVENT_ID = 200,			/**< The original event id: int (RecordId) */
-	EVENT_INST_FI_PR_CALENDAR_ID,			/**< The calendar id: int (RecordId) */
+	EVENT_INST_FI_PR_ORIGINAL_EVENT_ID = 200,			/**< The original event ID: int (RecordId) */
+	EVENT_INST_FI_PR_CALENDAR_ID,			/**< The calendar ID: int (RecordId) */
 	EVENT_INST_FI_PR_START_TIME,			/**< The start time of the event instance: DateTime */
 	EVENT_INST_FI_PR_END_TIME,			/**< The end time of the event instance: DateTime */
 	EVENT_INST_FI_PR_SUBJECT,				/**< The subject of the event instance: String */
@@ -993,16 +1067,16 @@ enum EventInstanceFilterProperty
 };
 
 /**
- * @enum CalendarFilterProperty
-* Defines the property for filtering the calendars.
-* This properties can be used to create a CalendarbookFilter of CB_FI_TYPE_CALENDAR type.
+* @enum CalendarFilterProperty
+* Defines the property for filtering the calendars. @n
+* These properties can be used to create a CalendarbookFilter of CB_FI_TYPE_CALENDAR type.
 *
 * @since	2.0
 */
 enum CalendarFilterProperty
 {
-	CALENDAR_FI_PR_CALENDAR_ID = 400,			/**< The calendar id: int (RecordId) */
-	CALENDAR_FI_PR_ACCOUNT_ID,			/**< The account id of calendar: int (AccountId) */
+	CALENDAR_FI_PR_CALENDAR_ID = 400,			/**< The calendar ID: int (RecordId) */
+	CALENDAR_FI_PR_ACCOUNT_ID,			/**< The account ID of calendar: int (AccountId) */
 	CALENDAR_FI_PR_NAME,						/**< The name of calendar: String */
 	CALENDAR_FI_PR_ITEM_TYPE				/**< The type of calendar: int (CalendarItemType) */
 };

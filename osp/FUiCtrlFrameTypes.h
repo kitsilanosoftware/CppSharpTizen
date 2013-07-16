@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -37,9 +37,10 @@ namespace Tizen { namespace Ui { namespace Controls
  */
 enum FrameShowMode
 {
-	FRAME_SHOW_MODE_FULL_SCREEN,                 /**< The full screen mode */
-	FRAME_SHOW_MODE_PARTIAL_SCREEN,              /**< The partial screen mode */
-	FRAME_SHOW_MODE_PARTIAL_SCREEN_FLOATING,     /**< The partial screen mode which is always on top of other Frames */
+	FRAME_SHOW_MODE_FULL_SCREEN,                 /**< The frame occupies the whole screen */
+	FRAME_SHOW_MODE_PARTIAL_SCREEN,              /**< The frame occupies the partial screen */
+	FRAME_SHOW_MODE_PARTIAL_SCREEN_FLOATING,     /**< The frame is always on top of other frames, occupying the partial screen */
+	FRAME_SHOW_MODE_MINIMIZED,                   /**< The frame is minimized @b Since: @b 2.1 */
 };
 
 }}} // Tizen::Ui::Controls

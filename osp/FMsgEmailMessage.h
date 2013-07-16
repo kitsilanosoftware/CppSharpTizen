@@ -78,7 +78,7 @@ namespace Tizen { namespace Messaging
 		* @since		2.0
 		*
 		* @return			The reference of this instance
-		* @param[in]	rhs		A reference to the %EmailMessage instance to be copied
+		* @param[in]	rhs		A reference to the %EmailMessage instance to copy
 		*/
 		EmailMessage& operator =(const EmailMessage& rhs);
 
@@ -87,7 +87,7 @@ namespace Tizen { namespace Messaging
 		*
 		* @since		2.0
 		*
-		* @return			@c true if the specified instance of Object is equal to the calling %EmailMessage instance, @n
+		* @return			@c true if the specified instance of Tizen::Base::Object is equal to the calling %EmailMessage instance, @n
 		*						else @c false
 		* @param[in]		obj		The object to compare
 		*/
@@ -134,14 +134,7 @@ namespace Tizen { namespace Messaging
 		/**
 		* Adds a file attachment to the email.
 		*
-		* @if OSPCOMPAT
-		* @brief <i> [Compatibility] </i>
-		* @endif
 		* @since		2.0
-		* @if OSPCOMPAT
-		* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-		*					For more information, see @ref CompIoPathPage "here".
-		* @endif
 		*
 		* @return			An error code
 		* @param[in]	filePath				The path of the file to attach
@@ -160,20 +153,14 @@ namespace Tizen { namespace Messaging
 		/**
 		* Removes an attachment from an email.
 		* 
-		* @if OSPCOMPAT
-		* @brief <i> [Compatibility] </i>
-		* @endif
 		* @since		2.0
-		* @if OSPCOMPAT
-		* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-		*					For more information, see @ref CompIoPathPage "here".
-		* @endif
 		*
 		* @return			An error code
-		* @param[in]	filePath				The path of the file to be removed
+		* @param[in]	filePath				The path of the file to remove
 		* @exception	E_SUCCESS				The method is successful.
 		* @exception	E_FILE_NOT_FOUND		The corresponding format file is not found.
-		* @see			AddAttachment(), GetAttachmentListN()
+		* @see			AddAttachment()
+		* @see			GetAttachmentListN()
 		*/
 		result RemoveAttachment(const Tizen::Base::String& filePath);
 

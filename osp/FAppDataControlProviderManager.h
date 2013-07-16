@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -122,6 +121,7 @@ public:
 	* @exception	E_IO				Either of the following conditions has occurred:
 	*									- An unexpected device failure has occurred as the media ejected suddenly.
 	*									- %File corruption is detected.
+	* @exception	E_MAX_EXCEEDED		The size of sending buffer has exceeded the maximum limit.
 	* @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	* @see			Tizen::App::DataControlProviderManager::SendSqlDataControlInsertResult()
 	* @see			Tizen::App::DataControlProviderManager::SendSqlDataControlUpdateDeleteResult()
@@ -195,7 +195,7 @@ public:
 	*									- The specified @c pResultValueList must not be @c null if the request is
 	*									  GetValue() query.
 	* @exception	E_OBJ_NOT_FOUND		The data control request specified with the @c reqId does not exist.
-	* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
+	* @exception	E_MAX_EXCEEDED		The size of sending buffer has exceeded the maximum limit.
 	* @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
 	* @see			Tizen::App::DataControlProviderManager::SendDataControlError()
 	* @see			Tizen::App::IMapDataControlProviderEventListener
@@ -215,8 +215,9 @@ public:
 	* @param[in]	errorMsg			The provider-defined error message
 	* @exception	E_SUCCESS			The method is successful.
 	* @exception	E_OBJ_NOT_FOUND		The data control request specified with the @c reqId did not exist.
-	* @exception	E_OUT_OF_MEMORY		The memory is insufficient.
+	* @exception	E_MAX_EXCEEDED		The size of sending buffer has exceeded the maximum limit.
 	* @exception	E_SYSTEM			The method cannot proceed due to a severe system error.
+	* @remarks		The recommended data size is under 16KB because severe system performance degradation may occur for large messages. @c E_MAX_EXCEEDED may be returned for messages over 16KB size.
 	* @see			Tizen::App::DataControlProviderManager::SendSqlDataControlSelectResult()
 	* @see			Tizen::App::DataControlProviderManager::SendSqlDataControlInsertResult()
 	* @see			Tizen::App::DataControlProviderManager::SendSqlDataControlUpdateDeleteResult()

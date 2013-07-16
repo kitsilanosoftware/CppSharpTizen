@@ -20,9 +20,6 @@
  * @brief		This is the header file for the %IJavaScriptBridge interface.
  *
  * This header file contains the declarations of the %IJavaScriptBridge interface.
- * @n
- * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/web/controls_namespace.htm">Web Controls Guide</a>.
- *
  */
 #ifndef _FWEB_CTRL_IJAVA_SCRIPT_BRIDGE_H_
 #define _FWEB_CTRL_IJAVA_SCRIPT_BRIDGE_H_
@@ -39,11 +36,14 @@ namespace Tizen { namespace Web { namespace Controls
 
 /**
  * @interface	IJavaScriptBridge
- * @brief	 This interface provides a communication channel between JavaScript and native object.
+ * @brief	 	This interface provides a communication channel between JavaScript and native object.
  *
- * @since	2.0
+ * @since		2.0
  *
- * The %IJavaScriptBridge interface provides a communication channel between JavaScript and C++ object.
+ * The %IJavaScriptBridge interface provides a communication channel between JavaScript and native object.
+ *
+ * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/web/controls_namespace.htm">Web Controls Guide</a>.
+ *
  */
 class _OSP_EXPORT_ IJavaScriptBridge
 {
@@ -60,12 +60,12 @@ public:
 	 *
 	 * @since			2.0
 	 *
-	 * @param[in] pArg        The parameters delivered by JavaScript
+	 * @param[in] pArg	The parameters delivered by JavaScript
 	 */
 	virtual void HandleJavaScriptRequestN(Tizen::Web::Json::IJsonValue* pArg) = 0;
 
 	/**
-	 * Provides the name of %IJavaScriptBridge to identify each %IJavaScriptBridge
+	 * Gets the name of %IJavaScriptBridge to identify each %IJavaScriptBridge.
 	 *
 	 * @since		2.0
 	 *

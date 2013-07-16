@@ -49,7 +49,7 @@ class _OSP_EXPORT_ ICameraEventListener
 
 public:
 	/**
-	* This is the destructor for this class.
+	* This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	*
 	* @since		2.0
 	*/
@@ -79,9 +79,10 @@ public:
 	* @param[in]	r	The cause of the error
 	*	@exception	 E_SUCCESS	The method is successful.
 	*	@exception	 E_INVALID_DATA	 The ByteBuffer contains invalid data.
-	*	@remarks	This method is called only if the @c previewedData flag of
+	*	@remarks	
+	*				- This method is called only if the @c previewedData flag of
 	*				Camera::StartPreview() is @c true.
-	*	@remarks	This method can be delayed or dropped depending on system performance.
+	*				- This method can be delayed or dropped depending on system performance.
         *   @see	    Camera::GetPreviewFormat()
 	*
 	* The camera rotation can be different according to the physical design.
@@ -150,13 +151,14 @@ public:
 	*
 	*	@param[in]	r		A camera error @n
 	*						This is one of the ::CameraErrorReason values.
-	*	@remarks			The ::CAMERA_ERROR_DEVICE_FAILED error occurs when the camera device
-	*					   has a problem, such as damaged shape or hardware malfunction.
-	*						The ::CAMERA_ERROR_DEVICE_INTERRUPTED error occurs when the camera
-	*					   device has been interrupted by other request, such as an incoming
-	*					   video telephony call.
-	*						In this method, the application calls the Camera::PowerOff()
-	*					 method to reset the camera device.
+	*	@remarks			
+	*					- The ::CAMERA_ERROR_DEVICE_FAILED error occurs when the camera device
+	*					has a problem, such as damaged shape or hardware malfunction.
+	*					- The ::CAMERA_ERROR_DEVICE_INTERRUPTED error occurs when the camera
+	*					device has been interrupted by other request, such as an incoming
+	*					video telephony call.
+	*					- In this method, the application calls the Camera::PowerOff()
+	*					method to reset the camera device.
 	*/
 	virtual void OnCameraErrorOccurred(CameraErrorReason r) = 0;
 

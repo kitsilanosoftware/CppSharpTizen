@@ -75,21 +75,28 @@ public:
 	 * Constructs and initializes this instance of %BluetoothOppServer with the specified listener.
 	 *
 	 * @since       2.0
+	 * @feature     %http://tizen.org/feature/network.bluetooth
 	 *
 	 * @return      An error code
 	 * @param[in]   listener                The event listener for the OPP server
 	 * @exception   E_SUCCESS               The method is successful.
 	 * @exception   E_OUT_OF_MEMORY         The memory is insufficient.
-	 * @exception	E_UNSUPPORTED_OPERATION	This operation is not supported.
+	 * @exception   E_UNSUPPORTED_OPERATION The Emulator or target device does not support the required feature.
+	 *                                      For more information, see
+	 *                                      <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">
+	 *                                      Application Filtering</a>.
 	 * @exception   E_SYSTEM                A system error has occurred.
+	 * @remarks     Before calling this method, check whether the feature is supported by
+	 *			Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 	 */
 	result Construct(IBluetoothOppServerEventListener& listener);
 
 	/**
 	 * Accepts a push request from a remote OPP client. @n
-	 * This method starts the file transfer.
+	 * The %AcceptPush() method starts the file transfer.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.opp
 	 *
 	 * @return      An error code
@@ -102,6 +109,7 @@ public:
 	 *                                      For example, the service is not started yet or a push request is not
 	 *                                      received from a remote device.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_FAILURE               The method has failed.
 	 * @see         IBluetoothOppClientEventListener::OnOppPushResponded()
 	 */
@@ -111,6 +119,7 @@ public:
 	 * Rejects a push request from a remote OPP client.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.opp
 	 *
 	 * @return      An error code
@@ -123,6 +132,7 @@ public:
 	 *                                      For example, the service is not started yet or a push request is not
 	 *                                      received from a remote device.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_FAILURE               The method has failed.
 	 * @see         IBluetoothOppClientEventListener::OnOppPushResponded()
 	 */
@@ -131,15 +141,7 @@ public:
 	/**
 	 * Sets the destination path of the file to be received.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since       2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues. @n
-	 *					For more information, see @ref CompIoPathPage "here".
-	 *
-	 * @endif
 	 * @return      An error code
 	 * @param[in]   dstPath                 The new destination file path
 	 * @exception   E_SUCCESS               The method is successful.
@@ -154,14 +156,8 @@ public:
 	/**
 	 * Starts the OPP service and associates a listener with it.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since       2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues. @n
-	 *					For more information, see @ref CompIoPathPage "here".
-	 * @endif
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.opp
 	 *
 	 * @return      An error code
@@ -171,6 +167,7 @@ public:
 	 *                                      For example, %Bluetooth is not activated.
 	 * @exception   E_IN_PROGRESS           The service has already started.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_SERVICE_UNAVAILABLE   The OPP service is unavailable.
 	 * @exception   E_INACCESSIBLE_PATH     The specified @c dstPath is inaccessible.
 	 * @exception   E_INVALID_OPERATION     The current state of the instance prohibits the execution of the specified
@@ -182,9 +179,10 @@ public:
 
 	/**
 	 * Stops the OPP service. @n
-	 * This method cancels the file transfer before stopping the service.
+	 * The %StopService() method cancels the file transfer before stopping the service.
 	 *
 	 * @since       2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.opp
 	 *
 	 * @return      An error code
@@ -195,6 +193,7 @@ public:
 	 *                                      operation. @n
 	 *                                      For example, the service is not started as yet.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_IN_PROGRESS           The stop process is in progress.
 	 * @exception   E_FAILURE               The method has failed.
 	 */
@@ -202,10 +201,11 @@ public:
 
 	/**
 	 * Stops the file transfer in progress which was started by the client. @n
-	 * If this method is called during the file transfer, the IBluetoothOppServerEventListener::OnOppTransferDone()
+	 * If the %StopTransfer() method is called during the file transfer, the IBluetoothOppServerEventListener::OnOppTransferDone()
 	 * method is called with @c isCompleted as @c false.
 	 *
 	 * @since 2.0
+	 * @privlevel   public
 	 * @privilege   %http://tizen.org/privilege/bluetooth.opp
 	 *
 	 * @return      An error code
@@ -216,8 +216,8 @@ public:
 	 *                                      operation. @n
 	 *                                      For example, the file transfer is not in progress.
 	 * @exception   E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
+	 * @exception   E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
 	 * @exception   E_OPERATION_FAILED      The operation has failed.
-	 * @see         IBluetoothOppServerEventListener::OnOppTransferDone()
 	 */
 	result StopTransfer(void);
 
@@ -242,6 +242,7 @@ private:
 	// of objects.
 	//
 	BluetoothOppServer(const BluetoothOppServer& value);
+
 	//
 	// The implementation of this copy assignment operator is intentionally blank and declared as private to prohibit
 	// copying of objects.

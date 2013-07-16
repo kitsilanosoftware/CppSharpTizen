@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -39,7 +38,7 @@ namespace Tizen { namespace Text
  *
  * The %Encoder class converts blocks of characters to blocks of encoded bytes
  * through successive calls to the GetBytesN() method. This class maintains the state consistency information between
- * successive calls to GetBytesN(), enabling it to encode a character into a sequence of bytes,
+ * successive calls to %GetBytesN(), enabling it to encode a character into a sequence of bytes,
  * such as surrogate pairs, that span adjacent blocks.
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/text/converting_text_data_separate_blocks.htm">Converting Text Data in Separate Blocks</a>.

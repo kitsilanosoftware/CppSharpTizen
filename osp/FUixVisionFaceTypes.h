@@ -17,9 +17,9 @@
 
 /**
  * @file     FUixVisionFaceTypes.h
- * @brief    This is the header file for the declarations of the Tizen::Uix::Vision namespace.
+ * @brief    This is the header file for the declarations of the Vision namespace.
  *
- * This header file contains the declarations of the Tizen::Uix::Vision namespace.
+ * This header file contains the declarations of the Vision namespace.
  */
 
 #ifndef _FUIX_VISION_FACE_TYPES_H_
@@ -42,13 +42,13 @@ enum FaceDetectorConfigProperty
 {
 	/**
 	 * The maximum number of faces to detect from a video stream. @n
-	 * This will be used when FaceDetector::DetectFacesFromVideoStreamN() is called.
+	 * This is used when FaceDetector::DetectFacesFromVideoStreamN() is called.
 	 */
 	FACEDETECTOR_MAXNUMBER_VIDEO,
 
 	/**
 	 * The maximum number of faces to detect from a still image. @n
-	 * This will be used when FaceDetector::DetectFacesFromStillImageN() is called.
+	 * This is used when FaceDetector::DetectFacesFromStillImageN(const Tizen::Base::ByteBuffer&, const Tizen::Graphics::Dimension&, Tizen::Graphics::BitmapPixelFormat) is called.
 	 */
 	FACEDETECTOR_MAXNUMBER_IMAGE,
 
@@ -60,7 +60,7 @@ enum FaceDetectorConfigProperty
 	 * The value @c 3 is used when FaceDetector::DetectFacesFromVideoStreamN() is called unless it has been changed earlier
 	 * using the FaceDetector::SetProperty() method. @n
 	 *
-	 * This will be used when %FaceDetector::DetectFacesFromVideoStreamN() is called.
+	 * This is used when %FaceDetector::DetectFacesFromVideoStreamN() is called.
 	 */
 	FACEDETECTOR_SCALE_VIDEO,
 
@@ -69,18 +69,18 @@ enum FaceDetectorConfigProperty
 	 * The range is from values @c 1 to @c 3, where the value @c 1 has the longest execution time and @c 3 has
 	 * the shortest execution time. The value @c 1 detects small faces.
 	 * Therefore, for an application handling images, the value @c 1 is an appropriate option.
-	 * The value @c 1 is used when FaceDetector::DetectFacesFromStillImageN() is called unless it has been changed
+	 * The value @c 1 is used when FaceDetector::DetectFacesFromStillImageN(const Tizen::Base::ByteBuffer&, const Tizen::Graphics::Dimension&, Tizen::Graphics::BitmapPixelFormat) is called unless it has been changed
 	 * earlier using the FaceDetector::SetProperty() method. @n
 	 *
-	 * This will be used when %FaceDetector::DetectFacesFromStillImageN() is called.
+	 * This is used when %FaceDetector::DetectFacesFromStillImageN(const %Tizen::Base::ByteBuffer&, const %Tizen::Graphics::Dimension&, %Tizen::Graphics::BitmapPixelFormat) is called.
 	 */
 	FACEDETECTOR_SCALE_IMAGE,
 
 	/**
 	 * The maximum number of faces to detect. @n
-	 * The value @c 1 is used when DetectFacesN() is called unless it has been changed earlier
+	 * The value @c 1 is used when FaceDetector::DetectFacesN() is called unless it has been changed earlier
 	 * using the FaceDetector::SetProperty() method. @n
-	 * This will be used when FaceDetector::DetectFacesN() is called.
+	 * This is used when %FaceDetector::DetectFacesN() is called.
 	 */
 	FACEDETECTOR_MAXNUMBER_FACES,
 
@@ -91,7 +91,7 @@ enum FaceDetectorConfigProperty
 	 * The value @c 3 is used when FaceDetector::DetectFacesN() is called unless it has been changed earlier using
 	 * the FaceDetector::SetProperty() method. @n
 	 *
-	 * This will be used when %FaceDetector::DetectFacesN() is called.
+	 * This is used when %FaceDetector::DetectFacesN() is called.
 	 */
 	FACEDETECTOR_SCALE_FACTOR,
 };
@@ -110,13 +110,13 @@ enum FaceRecognizerConfigProperty
 {
 	/**
 	 * The maximum number of faces to extract face information from a video stream. @n
-	 * This will be used when FaceRecognizer::ExtractFaceInfoFromVideoStreamN() is called.
+	 * This is used when FaceRecognizer::ExtractFaceInfoFromVideoStreamN() is called.
 	 */
 	FACERECOGNIZER_MAXNUMBER_VIDEO,
 
 	/**
 	 * The maximum number of faces to extract face information from a still image. @n
-	 * This will be used when FaceRecognizer::ExtractFaceInfoFromStillImageN() is called.
+	 * This is used when FaceRecognizer::ExtractFaceInfoFromStillImageN(const Tizen::Base::ByteBuffer&, const Tizen::Graphics::Dimension&, Tizen::Graphics::BitmapPixelFormat) is called.
 	 */
 	FACERECOGNIZER_MAXNUMBER_IMAGE,
 
@@ -125,10 +125,10 @@ enum FaceRecognizerConfigProperty
 	 * The range is from values @c 1 to @c 3, where the value @c 1 has the longest execution time and @c 3 has
 	 * the shortest execution time. The value @c 1 detects small faces.
 	 * Therefore, for an application using a camera or a video file, the value @c 3 is an appropriate option.
-	 * The value @c 3 is used when ExtractFaceInfoFromVideoStreamN() is called unless it has been changed
+	 * The value @c 3 is used when FaceRecognizer::ExtractFaceInfoFromVideoStreamN() is called unless it has been changed
 	 * earlier using the FaceDetector::SetProperty() method. @n
 	 *
-	 * This will be used when FaceRecognizer::ExtractFaceInfoFromVideoStreamN() is called.
+	 * This is used when %FaceRecognizer::ExtractFaceInfoFromVideoStreamN() is called.
 	 */
 	FACERECOGNIZER_SCALE_VIDEO,
 
@@ -138,10 +138,10 @@ enum FaceRecognizerConfigProperty
 	 * the shortest execution time.
 	 * The value @c 1 detects small faces.
 	 * Therefore, for an application handling images, the value @c 1 is an appropriate option.
-	 * The value @c 1 is used when ExtractFaceInfoFromStillImageN() is called unless it has been changed
+	 * The value @c 1 is used when FaceRecognizer::ExtractFaceInfoFromStillImageN(const Tizen::Base::ByteBuffer&, const Tizen::Graphics::Dimension&, Tizen::Graphics::BitmapPixelFormat) is called unless it has been changed
 	 * earlier using the FaceDetector::SetProperty() method. @n
 	 *
-	 * This will be used when FaceRecognizer::ExtractFaceInfoFromStillImageN() is called.
+	 * This is used when %FaceRecognizer::ExtractFaceInfoFromStillImageN(const %Tizen::Base::ByteBuffer&, const %Tizen::Graphics::Dimension&, %Tizen::Graphics::BitmapPixelFormat) is called.
 	 */
 	FACERECOGNIZER_SCALE_IMAGE,
 };

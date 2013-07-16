@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -54,7 +54,7 @@ enum ContextMenuStyle
 {
 	CONTEXT_MENU_STYLE_LIST,/**< The style of the vertical list of image + text */
 	CONTEXT_MENU_STYLE_GRID,/**< The style of the grid of buttons */
-	CONTEXT_MENU_STYLE_ICON /**<@if OSPDEPREC @deprecated This enumeration field is deprecated because this style can be implemented using the CONTEXT_MENU_STYLE_GRID style @endif */
+	CONTEXT_MENU_STYLE_ICON /**<@if OSPDEPREC @deprecated This enum value is deprecated because this style can be implemented using the CONTEXT_MENU_STYLE_GRID style @endif */
 } ;
 
 /**
@@ -98,7 +98,6 @@ enum ContextMenuAnchorDirection
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/ui/implementing_contextmenus.htm">ContextMenu</a>.
  *
  * The following example demonstrates how to use the %ContextMenu class.
-
  *
  * @code
 // Sample code for ContextMenuSample.h
@@ -166,7 +165,7 @@ ContextMenuSample::OnInitializing(void)
 	pButton->AddActionEventListener(*this);
 
 	// Adds the button to the form
-	AddControl(*pButton);
+	AddControl(pButton);
 
 	return r;
 }
@@ -175,7 +174,7 @@ ContextMenuSample::OnInitializing(void)
 void
 ContextMenuSample::ShowContextMenu(bool show)
 {
-	__pContextMenu->SetPosition(Point(300, 200));
+	__pContextMenu->SetAnchorPosition(Point(300, 200));
 
 	// Change to desired show state
 	__pContextMenu->SetShowState(show);
@@ -197,7 +196,7 @@ ContextMenuSample::OnTerminating(void)
 	result r = E_SUCCESS;
 
 	// Deallocates the __pContextMenu
-	delete __pContextMenu;
+	__pContextMenu->Destroy();
 
 	return r;
 }
@@ -236,7 +235,8 @@ class _OSP_EXPORT_ ContextMenu
 public:
 // Lifecycle
 	/**
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the %Construct() method must be called right after calling this constructor.
 	 *
 	 * @since	2.0
 	 *
@@ -257,13 +257,33 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
+	 * @param[in]	point	        The x and y coordinates of the anchor of %ContextMenu @n
+	 *								The optimal size of the control is defined in
+	 *								<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]	style			The context menu style
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_INVALID_STATE	This instance has already been constructed.
+	 * @exception	E_SYSTEM	    A system error has occurred.
+	 * @remarks		The default owner will be the current Form (or Frame). It is possible that this control may not be visible
+	 * due to this ownership relationship. @n In this case, use the SetOwner() method to change the ownership to the top-most window.
+	 */
+	result Construct(const Tizen::Graphics::Point& point, ContextMenuStyle style);
+
+	/**
+	 * Initializes this instance of %ContextMenu with the specified parameters.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
 	 * @param[in]	point	        The x and y coordinates of the anchor of %ContextMenu
 	 * @param[in]	style			The context menu style
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_INVALID_STATE	This instance has already been constructed.
 	 * @exception	E_SYSTEM	    A system error has occurred.
+	 * @remarks		The default owner will be the current Form (or Frame). It is possible that this control may not be visible
+	 * due to this ownership relationship. @n In this case, use the SetOwner() method to change the ownership to the top-most window.
 	 */
-	result Construct(const Tizen::Graphics::Point& point, ContextMenuStyle style);
+	result Construct(const Tizen::Graphics::FloatPoint& point, ContextMenuStyle style);
 
 	/**
 	 * Initializes this instance of %ContextMenu with the specified parameters.
@@ -271,14 +291,37 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	point			The x and y coordinates of the anchor of the %ContextMenu control
+	 * @param[in]	point			The x and y coordinates of the anchor of the %ContextMenu control @n
+	 *								The optimal size of the control is defined in
+	 *								<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
 	 * @param[in]	style			The context menu style
 	 * @param[in]	direction		The anchor arrow direction
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_INVALID_STATE	This instance has already been constructed.
 	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @remarks		The default owner will be the current Form (or Frame). It is possible that this control may not be visible
+	 * due to this ownership relationship. @n In this case, use the SetOwner() method to change the ownership to the top-most window.
 	 */
 	result Construct(const Tizen::Graphics::Point& point, ContextMenuStyle style, ContextMenuAnchorDirection direction);
+
+	/**
+	 * Initializes this instance of %ContextMenu with the specified parameters.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	point			The x and y coordinates of the anchor of the %ContextMenu control @n
+	 *								The optimal size of the control is defined in
+	 *								<a href="../org.tizen.native.appprogramming/html/guide/ui/control_optimalsize.htm">Optimal Size of UI Controls</a>.
+	 * @param[in]	style			The context menu style
+	 * @param[in]	direction		The anchor arrow direction
+	 * @exception	E_SUCCESS		The method is successful.
+	 * @exception	E_INVALID_STATE	This instance has already been constructed.
+	 * @exception	E_SYSTEM		A system error has occurred.
+	 * @remarks		The default owner will be the current Form (or Frame). It is possible that this control may not be visible
+	 * due to this ownership relationship. @n In this case, use the SetOwner() method to change the ownership to the top-most window.
+	 */
+	result Construct(const Tizen::Graphics::FloatPoint& point, ContextMenuStyle style, ContextMenuAnchorDirection direction);
 
 	/**
 	 * Adds a listener instance.
@@ -286,7 +329,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 */
 	void AddActionEventListener(Tizen::Ui::IActionEventListener& listener);
 
@@ -296,7 +339,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 */
 	void RemoveActionEventListener(Tizen::Ui::IActionEventListener& listener);
 
@@ -314,27 +357,28 @@ public:
 	 * @exception	E_SUCCESS 		    The method is successful.
 	 * @exception	E_MAX_EXCEEDED	    The number of items has exceeded the maximum limit.
 	 * @exception	E_SYSTEM		    A system error has occurred.
-	 * @remarks		This method can only be used when the style of the context menu is CONTEXT_MENU_STYLE_GRID.
+	 * @remarks		This method can only be used when the style of the context menu is ::CONTEXT_MENU_STYLE_GRID.
 	 */
 	result AddItem(const Tizen::Graphics::Bitmap& normalBitmap, const Tizen::Graphics::Bitmap* pPressedBitmap, int actionId);
 
-    /**
-     * Appends the specified item at the end of the %ContextMenu control.
-     *
-     * @since 		2.0
+	 /**
+	 * Appends the specified item at the end of the %ContextMenu control.
 	 *
-     * @return      An error code
-     * @param[in]   normalBitmap        The normal bitmap of the item
-     * @param[in]   pPressedBitmap      The pressed bitmap of the item
-     * @param[in]   pHighlightedBitmap  The highlighted bitmap of the item
-     * @param[in]   actionId            The action ID for this item
-     * @exception   E_SUCCESS           The method is successful.
-     * @exception   E_MAX_EXCEEDED      The number of items has exceeded the maximum limit.
-     * @exception   E_SYSTEM            A system error has occurred.
-     * @remarks     This method can only be used when the style of the context menu is CONTEXT_MENU_STYLE_GRID. @n
-     *				When a user navigates the user interface using the directional keys, the selected UI control is highlighted and the control takes the
-	 *				focus.
-     */
+	 * @since 		2.0
+	 *
+	 * @return      An error code
+	 * @param[in]   normalBitmap        The normal bitmap of the item
+	 * @param[in]   pPressedBitmap      The pressed bitmap of the item
+	 * @param[in]   pHighlightedBitmap  The highlighted bitmap of the item
+	 * @param[in]   actionId            The action ID for this item
+	 * @exception   E_SUCCESS           The method is successful.
+	 * @exception   E_MAX_EXCEEDED      The number of items has exceeded the maximum limit.
+	 * @exception   E_SYSTEM            A system error has occurred.
+	 * @remarks
+	 *				- This method can only be used when the style of the context menu is ::CONTEXT_MENU_STYLE_GRID.
+	 *				- When a user navigates the user interface using the directional keys, the selected UI control is highlighted and
+	 *				the control takes the focus.
+	 */
 	result AddItem(const Tizen::Graphics::Bitmap& normalBitmap, const Tizen::Graphics::Bitmap* pPressedBitmap, const Tizen::Graphics::Bitmap* pHighlightedBitmap, int actionId);
 
 	/**
@@ -343,7 +387,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in] 	text			The string of the item to be appended
+	 * @param[in] 	text			The string of the item to append
 	 * @param[in]	actionId		The specified action ID for this item
 	 * @exception	E_SUCCESS 		The method is successful.
 	 * @exception	E_MAX_EXCEEDED	The number of items has exceeded the maximum limit.
@@ -357,15 +401,15 @@ public:
 	 * @since 		2.0
 	 *
 	 * @return		An error code
-	 * @param[in] 	text				The string of the item to be appended
+	 * @param[in] 	text				The string of the item to append
 	 * @param[in]	actionId			The specified action ID for this item
 	 * @param[in] 	normalBitmap        The normal bitmap of the item
-     * @param[in] 	pPressedBitmap      The pressed bitmap of the item
-     * @param[in] 	pHighlightedBitmap  The highlighted bitmap of the item
+	 * @param[in] 	pPressedBitmap      The pressed bitmap of the item
+	 * @param[in] 	pHighlightedBitmap  The highlighted bitmap of the item
 	 * @exception	E_SUCCESS 			The method is successful.
 	 * @exception	E_MAX_EXCEEDED		The total number of items has exceeded the maximum limit.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks		This method can only be used when the style of the context menu is CONTEXT_MENU_STYLE_LIST.
+	 * @remarks		This method can only be used when the style of the context menu is ::CONTEXT_MENU_STYLE_LIST.
 	 */
 	result AddItem(const Tizen::Base::String& text, int actionId, const Tizen::Graphics::Bitmap& normalBitmap, const Tizen::Graphics::Bitmap* pPressedBitmap = null, const Tizen::Graphics::Bitmap* pHighlightedBitmap = null);
 
@@ -383,28 +427,30 @@ public:
 	 * @exception	E_MAX_EXCEEDED	The number of items has exceeded the maximum limit.
 	 * @exception	E_OUT_OF_RANGE	The specified @c index is less than @c 0 or greater than the number of items in %ContextMenu.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		This method can only be used when the style of the context menu is CONTEXT_MENU_STYLE_GRID. @n
-	 * 				The %ContextMenu control can have a maximum of 3 icons.
+	 * @remarks
+	 *				- This method can only be used when the style of the context menu is ::CONTEXT_MENU_STYLE_GRID.
+	 *				- The %ContextMenu control can have a maximum of @c 3 icons.
 	 */
 	result InsertItemAt(int index, const Tizen::Graphics::Bitmap& normalBitmap, const Tizen::Graphics::Bitmap* pPressedBitmap, int actionId);
 
-    /**
-     * Inserts the specified item at the given index of the %ContextMenu control.
-     *
-     * @since 		2.0
+	 /**
+	 * Inserts the specified item at the given index of the %ContextMenu control.
 	 *
-     * @return		An error code
-     * @param[in]	index                      The location
-     * @param[in]	normalBitmap               The normal bitmap of the item
-     * @param[in]	pPressedBitmap             The pressed bitmap of the item
-     * @param[in]	pHighlightedBitmap         The highlighted bitmap of the item
-     * @param[in]	actionId                   The specified action ID for this item
-     * @exception	E_SUCCESS                  The method is successful.
-     * @exception	E_MAX_EXCEEDED             The number of items has exceeded the maximum limit.
-     * @exception	E_OUT_OF_RANGE             The specified @c index is less than @c 0 or greater than the number of items in %ContextMenu.
-     * @exception	E_SYSTEM                   A system error has occurred.
-     * @remarks		This method can only be used when the style of the context menu is CONTEXT_MENU_STYLE_GRID. @n
-     * @remarks		When a user navigates the user interface using the directional keys, the selected UI control is highlighted and the control takes the focus.
+	 * @since 		2.0
+	 *
+	 * @return		An error code
+	 * @param[in]	index                      The location
+	 * @param[in]	normalBitmap               The normal bitmap of the item
+	 * @param[in]	pPressedBitmap             The pressed bitmap of the item
+	 * @param[in]	pHighlightedBitmap         The highlighted bitmap of the item
+	 * @param[in]	actionId                   The specified action ID for this item
+	 * @exception	E_SUCCESS                  The method is successful.
+	 * @exception	E_MAX_EXCEEDED             The number of items has exceeded the maximum limit.
+	 * @exception	E_OUT_OF_RANGE             The specified @c index is less than @c 0 or greater than the number of items in %ContextMenu.
+	 * @exception	E_SYSTEM                   A system error has occurred.
+	 * @remarks
+	 *				- This method can only be used when the style of the context menu is ::CONTEXT_MENU_STYLE_GRID.
+	 *				- When a user navigates the user interface using the directional keys, the selected UI control is highlighted and the control takes the focus.
 	 */
 	result InsertItemAt(int index, const Tizen::Graphics::Bitmap& normalBitmap, const Tizen::Graphics::Bitmap* pPressedBitmap, const Tizen::Graphics::Bitmap* pHighlightedBitmap, int actionId);
 
@@ -434,13 +480,13 @@ public:
 	 * @param[in] 	text				The string of the item to set
 	 * @param[in]	actionId			The specified action ID for this item
 	 * @param[in] 	normalBitmap        The normal bitmap of the item
-     * @param[in] 	pPressedBitmap      The pressed bitmap of the item
-     * @param[in] 	pHighlightedBitmap  The highlighted bitmap of the item
+	 * @param[in] 	pPressedBitmap      The pressed bitmap of the item
+	 * @param[in] 	pHighlightedBitmap  The highlighted bitmap of the item
 	 * @exception	E_SUCCESS 			The method is successful.
 	 * @exception	E_MAX_EXCEEDED		The number of items has exceeded the maximum limit.
 	 * @exception	E_OUT_OF_RANGE		The specified @c index is less than @c 0 or greater than the number of items in %ContextMenu.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks		This method can only be used when the style of the context menu is CONTEXT_MENU_STYLE_LIST.
+	 * @remarks		This method can only be used when the style of the context menu is ::CONTEXT_MENU_STYLE_LIST.
 	 */
 	result InsertItemAt(int index, const Tizen::Base::String& text, int actionId, const Tizen::Graphics::Bitmap& normalBitmap, const Tizen::Graphics::Bitmap* pPressedBitmap = null, const Tizen::Graphics::Bitmap* pHighlightedBitmap = null);
 
@@ -457,7 +503,7 @@ public:
 	 * @exception	E_SUCCESS 			The method is successful.
 	 * @exception	E_OUT_OF_RANGE	    The specified @c index is less than @c 0 or greater than the number of items in %ContextMenu.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks     This method can only be used when the style of the context menu is CONTEXT_MENU_STYLE_GRID.
+	 * @remarks     This method can only be used when the style of the context menu is ::CONTEXT_MENU_STYLE_GRID.
 	 */
 	result SetItemAt(int index, const Tizen::Graphics::Bitmap& normalBitmap, const Tizen::Graphics::Bitmap* pPressedBitmap, int actionId);
 
@@ -467,17 +513,18 @@ public:
 	 * @since           2.0
 	 *
 	 * @return        An error code
-     * @param[in]     index                      The location
-     * @param[in]     normalBitmap               The normal bitmap of the item
-     * @param[in]     pPressedBitmap             The pressed bitmap of the item
-     * @param[in]     pHighlightedBitmap         The highlighted bitmap of the item
-     * @param[in]     actionId                   The action ID for this item
-     * @exception     E_SUCCESS                  The method is successful.
-     * @exception     E_OUT_OF_RANGE             The specified @c index is less than @c 0 or greater than the number of items in %ContextMenu.
-     * @exception     E_SYSTEM                   A system error has occurred.
-     * @remarks       This method can only be used when the style of the context menu is CONTEXT_MENU_STYLE_GRID. @n
-     * @remarks       When a user navigates the user interface using the directional keys, @n
-     *                the selected UI control is highlighted and the control takes the focus.
+	 * @param[in]     index                      The location
+	 * @param[in]     normalBitmap               The normal bitmap of the item
+	 * @param[in]     pPressedBitmap             The pressed bitmap of the item
+	 * @param[in]     pHighlightedBitmap         The highlighted bitmap of the item
+	 * @param[in]     actionId                   The action ID for this item
+	 * @exception     E_SUCCESS                  The method is successful.
+	 * @exception     E_OUT_OF_RANGE             The specified @c index is less than @c 0 or greater than the number of items in %ContextMenu.
+	 * @exception     E_SYSTEM                   A system error has occurred.
+	 * @remarks
+	 *				- This method can only be used when the style of the context menu is ::CONTEXT_MENU_STYLE_GRID.
+	 *				- When a user navigates the user interface using the directional keys, @n
+	 *				the selected UI control is highlighted and the control takes the focus.
 	 */
 	result SetItemAt(int index, const Tizen::Graphics::Bitmap& normalBitmap, const Tizen::Graphics::Bitmap* pPressedBitmap, const Tizen::Graphics::Bitmap* pHighlightedBitmap, int actionId);
 
@@ -511,7 +558,7 @@ public:
 	 * @exception	E_SUCCESS 			The method is successful.
 	 * @exception	E_OUT_OF_RANGE		The specified @c index less than @c 0 or greater than the number of items in %ContextMenu.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks    	This method can only be used when the style of the context menu is CONTEXT_MENU_STYLE_LIST.
+	 * @remarks    	This method can only be used when the style of the context menu is ::CONTEXT_MENU_STYLE_LIST.
 	 */
 	result SetItemAt(int index, const Tizen::Base::String& text, int actionId, const Tizen::Graphics::Bitmap& normalBitmap, const Tizen::Graphics::Bitmap* pPressedBitmap = null, const Tizen::Graphics::Bitmap* pHighlightedBitmap = null);
 
@@ -523,6 +570,7 @@ public:
 	 * @return		An error code
 	 * @param[in] 	index			The location
 	 * @exception	E_SUCCESS 		The method is successful.
+	 * @exception   E_OUT_OF_RANGE  The specified @c index less than @c 0 or greater than the number of items in %ContextMenu.
 	 * @exception	E_SYSTEM		A system error has occurred.
 	 */
 	result RemoveItemAt(int index);
@@ -587,7 +635,7 @@ public:
 	 *
 	 * @return      An error code
 	 * @param[in]   status				The item status
-	 * @param[in]   color				The item text color to be set
+	 * @param[in]   color				The item text color to set
 	 * @exception   E_SUCCESS			The method is successful.
 	 * @exception   E_INVALID_ARG		A specified input parameter is invalid.
 	 * @exception   E_SYSTEM			A system error has occurred.
@@ -609,6 +657,20 @@ public:
 	result SetAnchorPosition(const Tizen::Graphics::Point& position);
 
 	/**
+	 * Sets the position of the anchor.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		An error code
+	 * @param[in]	position			The new position
+	 * @exception	E_SUCCESS			The method is successful.
+	 * @exception	E_INVALID_STATE		This instance is in an invalid state.
+	 * @remarks		The x and y coordinates of the anchor are defined in the coordinate space of its parent,
+	 *				which means that @c x and @c y must be defined relative to the top-left corner (0,0) of its parent.
+	 */
+	result SetAnchorPosition(const Tizen::Graphics::FloatPoint& position);
+
+	/**
 	 * Gets the position of the anchor.
 	 *
 	 * @since		2.0
@@ -617,6 +679,16 @@ public:
 	 * @remarks		The coordinate of the anchor position is defined from the top-left corner of its parent Container.
 	 */
 	Tizen::Graphics::Point GetAnchorPosition(void) const;
+
+	/**
+	 * Gets the position of the anchor.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		The position of the anchor
+	 * @remarks		The coordinate of the anchor position is defined from the top-left corner of its parent Container.
+	 */
+	Tizen::Graphics::FloatPoint GetAnchorPositionF(void) const;
 
 	/**
 	 * Gets the color of the %ContextMenu control.
@@ -635,7 +707,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	color				The color to be set
+	 * @param[in]	color				The color to set
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_STATE		This instance is in an invalid state.
 	 * @exception	E_SYSTEM			A system error has occurred.
@@ -653,11 +725,13 @@ public:
 	 * @param[in]	status				The menu item status
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG		The specified input parameter is invalid. @n
-	 * 									The item color for CONTEXT_MENU_ITEM_STATUS_NORMAL is not supported.
+	 * 									The item color for @c CONTEXT_MENU_ITEM_STATUS_NORMAL is not supported.
 	 * @exception	E_INVALID_STATE		This instance is in an invalid state.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks		The specific error code can be accessed using the GetLastResult() method. @n
-	 * 				The item color for the CONTEXT_MENU_ITEM_STATUS_NORMAL status is always the same as the color of the %ContextMenu control.
+	 * @remarks
+	 *				- The specific error code can be accessed using the GetLastResult() method.
+	 *				- The item color for the @c CONTEXT_MENU_ITEM_STATUS_NORMAL status is always the same as the
+	 *				color of the %ContextMenu control.
 	 * @see			SetItemColor()
 	 */
 	Tizen::Graphics::Color GetItemColor(ContextMenuItemStatus status) const;
@@ -669,13 +743,14 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]	status				The menu item status
-	 * @param[in]	color				The color to be set
+	 * @param[in]	color				The color to set
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_INVALID_ARG		The specified input parameter is invalid. @n
-	 * 									The item color for CONTEXT_MENU_ITEM_STATUS_NORMAL is not supported.
+	 * 									The item color for @c CONTEXT_MENU_ITEM_STATUS_NORMAL is not supported.
 	 * @exception	E_INVALID_STATE		This instance is in an invalid state.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks		The item color for the CONTEXT_MENU_ITEM_STATUS_NORMAL status is always the same as the color of the %ContextMenu control.
+	 * @remarks		The item color for the @c CONTEXT_MENU_ITEM_STATUS_NORMAL status is always the same
+	 *				as the color of the %ContextMenu control.
 	 * @see			GetItemColor()
 	 */
 	result SetItemColor(ContextMenuItemStatus status, const Tizen::Graphics::Color& color);

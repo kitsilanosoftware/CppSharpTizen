@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -27,11 +26,11 @@
 #include <FSecCertICertificate.h>
 #include <FSecCertICertificatePath.h>
 #include <FSecCertICertificateSelector.h>
-
+#include <FSecCertICertificateStore.h>
 #include <FSecCertX509Certificate.h>
 #include <FSecCertX509CertificatePath.h>
 #include <FSecCertX509CertificateSelector.h>
-
+#include <FSecCertX509CertificateStore.h>
 
 
 /**

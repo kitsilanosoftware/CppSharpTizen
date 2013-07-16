@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -152,14 +151,7 @@ public:
 	/**
 	 * Creates the date formatter with the specified formatting style for the specified locale.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	 *                              For more information, see @ref CompDateTimeFormatterCreateDateFormatterNPage "here".   
-	 * @endif
 	 *
 	 * @return			A pointer to the specified locale date formatter, @n
 	 *					else @c null if an error occurs
@@ -174,18 +166,7 @@ public:
 	static DateTimeFormatter* CreateDateFormatterN(const Locale& locale, DateTimeStyle style = DATE_TIME_STYLE_DEFAULT);
 	
 	/**
-	 * @if OSPCOMPAT
-         * @page                    CompDateTimeFormatterCreateDateFormatterNPage Compatibility for CreateDateFormatterN()
-         * @section                   CompDateTimeFormatterCreateDateFormatterNIssueSection Issues
-         * Implementation of this method in OSP compatible applications has the following issue: @n
-         * -# The method returns E_UNSUPPORTED_OPERATION if the @c locale is invalid.
-         *
-         * @section                 CompDateTimeFormatterCreateDateFormatterNtSolutionSection Resolutions
-         * This issue has been resolved in Tizen.
-	 * @par When working in Tizen:
-         * -# The method returns E_INVALID_ARG if the @c locale or @c style is invalid.
-	 * @endif
-         */
+	 */
 
 
 	/**
@@ -209,14 +190,7 @@ public:
 	/**
 	 * Creates the time formatter with the specified formatting style for the specified @c locale.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif   
 	 * @since			2.0
-	 * @if OSPCOMPAT
-	 * @compatibility     This method has compatibility issues with OSP compatibile applications. @n
-	 *                              For more information, see @ref CompDateTimeFormatterCreateTimeFormatterNPage "here".   
-	 * @endif
 	 *
 	 * @return			A pointer to the specified locale time formatter, @n
 	 *					else @c null if an error occurs
@@ -231,18 +205,7 @@ public:
 	static DateTimeFormatter* CreateTimeFormatterN(const Locale& locale, DateTimeStyle style = DATE_TIME_STYLE_DEFAULT);
 
 	/**
-	 * @if OSPCOMPAT
-         * @page                    CompDateTimeFormatterCreateTimeFormatterNPage Compatibility for CreateTimeFormatterN()
-         * @section                   CompDateTimeFormatterCreateTimeFormatterNIssueSection Issues
-         * Implementation of this method in OSP compatible applications has the following issue: @n
-         * -# The method returns E_UNSUPPORTED_OPERATION if the @c locale is invalid.
-         *
-         * @section                 CompGrDateTimeFormatterCreateTimeFormatterNSolutionSection Resolutions
-         * This issue has been resolved in Tizen.
-         * @par When working in Tizen:
-         * -# The method returns E_INVALID_ARG if the @c locale or @c style is invalid.
-	 * @endif
-         */
+	 */
 
 	/**
 	 * Creates the date/time formatter with the specified formatting style for the system locale.

@@ -16,9 +16,9 @@
 //
 /**
  * @file		FMsgTypes.h
- * @brief		This is the header file for the %Messaging class.
+ * @brief		This is the header file for the enumerations of the Messaging namespace.
  *
- * This header file contains the type declarations for the %Messaging namespace.
+ * This header file contains the type declarations of the Messaging namespace.
  */
 
 #ifndef _FMSG_TYPES_H_
@@ -29,7 +29,7 @@ namespace Tizen { namespace Messaging
 	/**
 	* @enum RecipientType
 	*
-	* Defines the recipient type for a Short Message Service(SMS), Multimedia %Messaging Service(MMS) and email messages.
+	* Defines the recipient type for a Short Message Service(SMS), Multimedia %Messaging Service(MMS), and email messages.
 	*
 	* @since		2.0
 	*/
@@ -86,6 +86,19 @@ namespace Tizen { namespace Messaging
 		SMS_MESSAGE_BOX_TYPE_ALL = 10           /**< All message box type */
 	};
 
+	/**
+	* @enum EmailMessagePriority
+	*
+	* Defines the priority level for an email.
+	*
+	* @since		2.0
+	*/
+	enum EmailMessagePriority
+	{
+		EMAIL_MESSAGE_PRIORITY_HIGH = 1,	/**< High priority */
+		EMAIL_MESSAGE_PRIORITY_NORMAL = 3,	/**< Normal priority */
+		EMAIL_MESSAGE_PRIORITY_LOW = 5		/**< Low priority */
+	};
 
 	/**
 	* @enum    PushAction
@@ -99,7 +112,8 @@ namespace Tizen { namespace Messaging
 	{
 		PUSH_ACTION_SILENT = 0,		/**< Store the message without alerting the user */
 		PUSH_ACTION_DISCARD,		/**< Discard the message */
-		PUSH_ACTION_ALERT			/**< Store the message and alert the user */
+		PUSH_ACTION_ALERT,			/**< Store the message and alert the user */
+		PUSH_ACTION_LAUNCH          /**< Launch the application @b Since: @b 2.1 */
 	};
 
 } } // Tizen::Messaging

@@ -1,5 +1,4 @@
 // 
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd. 
 // 
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -195,14 +194,7 @@ public:
 	/**
 	 * Sets the subject of the current instance of %CalTodo.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 *					For more information, see @ref CompCalTodoSetSubjectPage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	subject				The to-do subject
@@ -211,29 +203,12 @@ public:
 	result SetSubject(const Tizen::Base::String& subject);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page	CompCalTodoSetSubjectPage Compatibility for SetSubject()
-	 * @section	CompCalTodoSetSubjectPageIssueSection Issues
-	 *			Implementing this method in OSP compatible applications has the following issues:   @n
-	 *			-# If the length of the subject to be set is greater than 100 characters, E_INVALID_ARG is returned.
-	 *
-	 * @section	CompCalTodoSetSubjectPageSolutionSection Resolutions
-	 * 			This issue has been resolved in Tizen.  @n
-	 * 			-# There is no limit for the length of the subject.
-	 * @endif
 	 */
 
 	/**
 	 * Sets the description of the current instance of %CalTodo.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Compatibility] </i>
-	 * @endif
 	 * @since	2.0
-	 * @if OSPCOMPAT
-	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 *					For more information, see @ref CompCalTodoSetDescriptionPage "here".
-	 * @endif
 	 *
 	 * @return		An error code
 	 * @param[in]	description		The to-do description, @n
@@ -243,59 +218,31 @@ public:
 	result SetDescription(const Tizen::Base::String& description);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page	CompCalTodoSetDescriptionPage Compatibility for SetDescription()
-	 * @section	CompCalTodoSetDescriptionPageIssueSection Issues
-	 *			Implementing this method in OSP compatible applications has the following issues:   @n
-	 *			-# If the length of the description to be set is greater than 1000 characters, E_INVALID_ARG is returned.
-	 *
-	 * @section	CompCalTodoSetDescriptionPageSolutionSection Resolutions
-	 * 			This issue has been resolved in Tizen.  @n
-	 * 			-# There is no limit for the length of the description.
-	 * @endif
 	 */
 
 	/**
-	 * @if OSPDEPREC
 	 * @{
+	 * @if OSPDEPREC
 	 * Sets the start date and due date for the current instance of %CalTodo. @n
 	 * The due date must be later than or equal to the start date.
 	 *
-	 * @if OSPCOMPAT
-	 * @brief <i> [Deprecated] [Compatibility] </i>
-	 * @endif
 	 * @deprecated	This method is deprecated. Instead of using this method, it is recommended to use SetStartDate() and SetDueDate().
 	 * @since	2.0
-	 * @if OSPCOMPAT
- 	 * @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	 * 				For more information, see @ref CompCalTodoSetStartAndDueDatePage "here".
-	 * @endif
 	 *
 	 * @return		An error code
-	 * @param[in]	startDate			The start date
-	 * @param[in]	dueDate			The due date
+	 * @param[in]	startDate			The start date. @n Any value with a unit that is less than a second is ignored.
+	 * @param[in]	dueDate			The due date. @n Any value with a unit that is less than a second is ignored.
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_INVALID_ARG		Either of the following conditions has occurred: @n
 	 *									- The specified @c dueDate is earlier than the specified @c startDate.
 	 *									- The @c startDate or @c dueDate is not a valid range. @n
 	 *									The valid range of the date can be referenced from GetMaxDateTime() and GetMinDateTime().
-	 * @}
 	 * @endif
+	 * @}
 	 */
 	result SetStartAndDueDate(const Tizen::Base::DateTime& startDate, const Tizen::Base::DateTime& dueDate);
 
 	/**
-	 * @if OSPCOMPAT
-	 * @page	CompCalTodoSetStartAndDueDatePage Compatibility for SetStartAndDueDate()
-	 * @section	CompCalTodoSetStartAndDueDatePageIssueSection Issues
-	 * 		Implementing this method in OSP compatible applications has the following issues:   @n
-	 *			-# The start and due date cannot be unset. And if the SetStartAndDueDate() is not called, the default start and due date @n
-	 *			are set to the system time when the to-do is constructed.
-	 *
-	 * @section	CompCalTodoSetStartAndDueDatePageSolutionSection Resolutions
-	 * 			This issue has been resolved in Tizen.  @n
-	 *			-# The default start and due date of the to-do is unset.
-	 * @endif
 	 */
 
 	/**
@@ -306,7 +253,7 @@ public:
 	 * @since	2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	startDate			The start date
+	 * @param[in]	startDate			The start date. @n Any value with a unit that is less than a second is ignored.
 	 * @exception	E_SUCCESS		The method is successful. @n
 	 *								Either @c startDate is between Calendarbook::GetMaxDateTime() and Calendarbook::GetMinDateTime(), or
 	 *								@c startDate is the minimum value of Tizen::Base::DateTime to unset the start date.
@@ -323,7 +270,7 @@ public:
 	 * @since	2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	dueDate			The due date
+	 * @param[in]	dueDate			The due date. @n Any value with a unit that is less than a second is ignored.
 	 * @exception	E_SUCCESS		The method is successful. @n
 	 *								Either @c dueDate is between Calendarbook::GetMaxDateTime() and Calendarbook::GetMinDateTime(), or
 	 *								@c dueDate is the minimum value of Tizen::Base::DateTime to unset the due date.

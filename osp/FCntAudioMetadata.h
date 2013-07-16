@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -156,7 +155,7 @@ public:
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The frequency in hertz (hz)
+	 * @return		The frequency in hertz (Hz)
 	 */
 	int GetFrequency(void) const;
 
@@ -188,43 +187,52 @@ public:
 	Tizen::Base::String GetComment(void) const;
 
 	/**
-	 * Gets the track number of the audio file.
+	 * Gets the description of an audio file.
+	 *
+	 * @since		2.1
+	 *
+	 * @return		The description of an audio file
+	 */
+	Tizen::Base::String GetDescription(void) const;
+
+	/**
+	 * Gets the track number of an audio file.
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The track number of the audio file
+	 * @return		The track number of an audio file
 	 */
 	int GetTrack(void) const;
 
 	/**
-	 * Gets the genre information of the audio file.
+	 * Gets the genre information of an audio file.
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The genre information of the audio file
+	 * @return		The genre information of an audio file
 	 */
 	Tizen::Base::String GetGenre(void) const;
 
 	/**
-	 * Gets the composer information of the audio file.
+	 * Gets the composer information of an audio file.
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The composer information of the audio file
+	 * @return		The composer information of an audio file
 	 */
 	Tizen::Base::String GetComposer(void) const;
 
 	/**
-	 * Gets the copyright information of the audio file.
+	 * Gets the copyright information of an audio file.
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The copyright information of the audio file
+	 * @return		The copyright information of an audio file
 	 */
 	Tizen::Base::String GetCopyright(void) const;
 
 	/**
-	 * Gets the duration of the audio file.
+	 * Gets the duration of an audio file.
 	 *
 	 * @since		2.0
 	 *
@@ -233,16 +241,16 @@ public:
 	long GetDuration(void) const;
 
 	/**
-	 * Gets the year information of the audio file.
+	 * Gets the year information of an audio file.
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The year information of the audio file
+	 * @return		The year information of an audio file
 	 */
 	int GetYear(void) const;
 
 	/**
-	 * Gets the track information of the audio file.
+	 * Gets the track information of an audio file.
 	 *
 	 * @since		2.0
 	 *
@@ -253,27 +261,27 @@ public:
 	Tizen::Base::String GetTrackInfo(void) const;
 
 	/**
-	 * Gets the recording date of the audio file.
+	 * Gets the recording date of an audio file.
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The recording date of the audio file
+	 * @return		The recording date of an audio file
 	 */
 	Tizen::Base::String GetRecordingDate(void) const;
 
 	/**
-	 * Gets the number of channels of the audio file.
+	 * Gets the number of channels of an audio file.
 	 *
 	 * @since		2.0
 	 *
-	 * @return		The number of channels of the audio file
+	 * @return		The number of channels of an audio file
 	 * @remarks	A monophonic stream has one channel and a stereophonic stream has two channels. @n
 	 *					Valid values are either @c 1 or @c 2.
 	 */
 	int GetChannelCount(void) const;
 
 	/**
-	 * Gets the thumbnail of the audio file.
+	 * Gets the thumbnail of an audio file.
 	 *
 	 * @since			2.0
 	 *
@@ -281,13 +289,14 @@ public:
 	 * @exception	E_SUCCESS					The method is successful.
 	 * @exception	E_DATA_NOT_FOUND		The thumbnail image does not exist.
 	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
-	 * @remarks		This method returns the thumbnail image that is resized to 80x60 pixels. @n
-	 *                  The specific error code can be accessed using the GetLastResult() method.
+	 * @remarks
+	 *				- This method returns the thumbnail image that is resized to 80x60 pixels.
+	 *				- The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Tizen::Graphics::Bitmap* GetThumbnailN(void) const;
 
 	/**
-	 * Gets the album art of the audio file.
+	 * Gets the album art of an audio file.
 	 *
 	 * @since			2.0
 	 *
@@ -295,9 +304,10 @@ public:
 	 * @exception	E_SUCCESS					The method is successful.
 	 * @exception	E_DATA_NOT_FOUND		The album art does not exist.
 	 * @exception	E_OUT_OF_MEMORY		The memory is insufficient.
-	 * @remarks		GetThumbnailN() returns the thumbnail image that is resized to 80x60 pixels. @n
-	 *						GetAlbumArtN() returns the original album art that is embedded in the content metadata. @n
-	 *						The specific error code can be accessed using the GetLastResult() method.
+	 * @remarks
+	 * 				- GetThumbnailN() returns the thumbnail image that is resized to 80x60 pixels.
+	 *				- GetAlbumArtN() returns the original album art that is embedded in the content metadata.
+	 *				- The specific error code can be accessed using the GetLastResult() method.
 	 */
 	Tizen::Graphics::Bitmap* GetAlbumArtN(void) const;
 

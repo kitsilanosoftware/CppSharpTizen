@@ -51,7 +51,7 @@ namespace Tizen { namespace Messaging
 	*
 	* @code
 	*
-	// Creates a listener to override the OnMmsMessageSent() function of IMmsListener
+	// Creates a listener to override the OnMmsMessageSent() method of IMmsListener
 	// in order to be notified of a change in the state of the message being sent.
 
 	class MmsListener
@@ -135,10 +135,15 @@ namespace Tizen { namespace Messaging
 		*
 		* @since		2.0
 		*
-		* @return			An error code
+		* @feature		%http://tizen.org/feature/network.telephony.mms
+		* @return		An error code
 		* @param[in]	listener		The listener to receive a send result asynchronously
 		* @exception 	E_SUCCESS		The method is successful.
 		* @exception	E_OUT_OF_MEMORY	The memory is insufficient.
+		* @exception  	E_UNSUPPORTED_OPERATION	The Emulator or target device does not support the required feature. @b Since: @b 2.1
+		* 										For more information, see <a href="../org.tizen.gettingstarted/html/tizen_overview/application_filtering.htm">Application Filtering</a>.
+		* @remarks	Before calling this method, check whether the feature is supported by 
+		*			Tizen::System::SystemInfo::GetValue(const Tizen::Base::String&, bool&).
 		*/
 		result			Construct(IMmsListener &listener);
 
@@ -146,10 +151,12 @@ namespace Tizen { namespace Messaging
 		* Sends the MMS message.
 		*
 		* @since		2.0
-		* @privilege	%http://tizen.org/privilege/messaging.mms
+		* @privlevel	public
+		* @privilege	%http://tizen.org/privilege/messaging.write @n
+		* 				(%http://tizen.org/privilege/messaging.mms is deprecated.)
 		*
 		* @return		An error code
-		* @param[in]	message					The message to be sent
+		* @param[in]	message					The message to send
 		* @param[in]	recipientList			The list of recipients
 		* @param[in]	saveToSentbox			Set to @c true to save the message in the Sentbox, @n
 		*										else @c false
@@ -164,9 +171,11 @@ namespace Tizen { namespace Messaging
 		* @exception	E_INVALID_ARG			The number of recipients is @c 0 or the message is empty.
 		* @exception	E_MAX_EXCEEDED			The number of recipients has crossed the maximum limit (Maximum 10).
 		* @exception	E_PRIVILEGE_DENIED      The application does not have the privilege to call this method.
-		* @remarks		Some service providers may not support sending MMS messages with an empty subject or body. @n
-		*				In this case, the result of the status report will be the E_FAILURE exception. @n
-		*				The CC and BCC recipients in the @c recipientList are merged with the TO recipients when sending an MMS message.
+		* @exception    E_USER_NOT_CONSENTED    The user blocks an application from calling this method. @b Since: @b 2.1
+		* @remarks		
+		*				- Some service providers may not support sending MMS messages with an empty subject or body.
+		*				- In this case, the result of the status report will be the E_FAILURE exception.
+		*				- The CC and BCC recipients in the @c recipientList are merged with the TO recipients when sending an MMS message.
 		* @see			IMmsListener::OnMmsMessageSent()
 		*/
 		result Send(const MmsMessage& message, const RecipientList& recipientList, bool saveToSentbox);

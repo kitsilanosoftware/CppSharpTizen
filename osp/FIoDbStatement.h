@@ -1,5 +1,4 @@
 //
-// Open Service Platform
 // Copyright (c) 2012 Samsung Electronics Co., Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the License);
@@ -61,14 +60,7 @@ public:
 	/**
 	* Binds an integer value to the statement parameter.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompDatabaseExceptionPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	columnIndex			The index of the column whose value is bound
@@ -86,14 +78,7 @@ public:
 	/**
 	* Binds a @c long @c long value to the statement parameter.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompDatabaseExceptionPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	columnIndex			The index of the column whose value is bound
@@ -111,14 +96,7 @@ public:
 	/**
 	* Binds a @c double value to the statement parameter.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompDatabaseExceptionPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	columnIndex			The index of the column whose value is bound
@@ -136,14 +114,7 @@ public:
 	/**
 	* Binds a String value to the statement parameter.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompDatabaseExceptionPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	columnIndex			The index of the column whose value is bound
@@ -161,14 +132,7 @@ public:
 	/**
 	* Binds a value of type ByteBuffer to the statement parameter.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompDatabaseExceptionPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	columnIndex		    The index of the column whose value is bound
@@ -191,14 +155,7 @@ public:
 	/**
 	* Binds the raw blob data to the statement parameter.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompDatabaseExceptionPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	columnIndex	        The index of the column whose value is bound
@@ -222,14 +179,7 @@ public:
 	/**
 	* Binds a DateTime value to the statement parameter.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompDatabaseExceptionPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	columnIndex			The index of the column whose value is bound
@@ -248,14 +198,7 @@ public:
 	/**
 	* Binds a @c null value to the statement parameter.
 	*
-	* @if OSPCOMPAT
-	* @brief			<i> [Compatibility] </i>
-	* @endif
 	* @since			2.0
-	* @if OSPCOMPAT
-	* @compatibility	This method has compatibility issues with OSP compatible applications. @n
-	*					For more information, see @ref CompDatabaseExceptionPage "here".
-	* @endif
 	*
 	* @return		An error code
 	* @param[in]	columnIndex			The index of the column whose value is bound

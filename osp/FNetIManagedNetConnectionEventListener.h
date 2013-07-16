@@ -2,7 +2,7 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Flora License, Version 1.1 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
@@ -39,7 +39,7 @@ class ManagedNetConnection;
  *
  *  The %IManagedNetConnectionEventListener interface specifies the methods used to create the notifications about the different kinds of network
  *	connection events. These events are sent only when %IManagedNetConnectionEventListener is added to the ManagedNetConnection instance, and
- *	this is done by invoking the SetManagedNetConnectionEventListener() method. A method of this interface is called when a network connection
+ *	this is done by invoking the ManagedNetConnection::SetManagedNetConnectionEventListener() method. A method of this interface is called when a network connection
  *	event is generated.
  *
  * For more information on the class features, see <a href="../org.tizen.native.appprogramming/html/guide/net/managing_network_connections.htm">Managing Network Connections</a>.

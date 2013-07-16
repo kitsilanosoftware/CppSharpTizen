@@ -124,8 +124,8 @@ public:
 	 *
 	 * @return		@c true if the values match, @n
 	 *			else @c false
-	 * @param[in]	obj 	The other Object to be compared
-	 * @see 		Object::Equals()
+	 * @param[in]	obj 	The other Tizen::Base::Object to compare
+	 * @see 		Tizen::Base::Object::Equals()
 	 */
 	virtual bool Equals(const Tizen::Base::Object& obj) const;
 

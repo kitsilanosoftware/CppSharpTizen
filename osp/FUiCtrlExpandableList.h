@@ -2,14 +2,14 @@
 // Open Service Platform
 // Copyright (c) 2012-2013 Samsung Electronics Co., Ltd.
 //
-// Licensed under the Flora License, Version 1.0 (the License);
+// Licensed under the Apache License, Version 2.0 (the License);
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://floralicense.org/license/
+//     http://www.apache.org/licenses/LICENSE-2.0/
 //
 // Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an AS IS BASIS,
+// distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
@@ -93,8 +93,8 @@ public:
 	virtual result OnTerminating(void);
 
 	// IExpandableItemEventListener
-	virtual void OnItemStateChanged(const Control& source, int mainIndex, int subIndex, int itemId, Tizen::Ui::ItemStatus  status);
-	virtual void OnItemStateChanged(const Control& source, int mainIndex, int subIndex, int itemId, int elementId, Tizen::Ui::ItemStatus  status);
+	virtual void OnItemStateChanged(const Control& source, int mainIndex, int subIndex, int itemId, Tizen::Ui::ItemStatus status);
+	virtual void OnItemStateChanged(const Control& source, int mainIndex, int subIndex, int itemId, int elementId, Tizen::Ui::ItemStatus status);
 
 
 
@@ -162,7 +162,7 @@ ExpandableListSample::OnInitializing(void)
 	AddListSubItem(*pExpandableList, ID_LIST_MAINITEM, L"SubItem");
 
 	// Adds the expandable list to the form
-	AddControl(*pExpandableList);
+	AddControl(pExpandableList);
 
 	// Deallocates bitmaps
 	delete pBitmapNormal;
@@ -295,7 +295,8 @@ class _OSP_EXPORT_ ExpandableList
 public:
 	/**
 	 * @if OSPDEPREC
-	 * The object is not fully constructed after this constructor is called. For full construction, the Construct() method must be called right after calling this constructor.
+	 * The object is not fully constructed after this constructor is called. @n
+	 * For full construction, the ExpandableList::Construct() method must be called right after calling this constructor.
 	 *
 	 * @brief       <i> [Deprecated] </i>
 	 * @deprecated	This class is deprecated. Instead of using this class, use GroupedTableView class.
@@ -306,7 +307,8 @@ public:
 
 	/**
 	 * @if OSPDEPREC
-	 * This polymorphic destructor should be overridden if required. This way, the destructors of the derived classes are called when the destructor of this interface is called.
+	 * This polymorphic destructor should be overridden if required. @n
+	 * This way, the destructors of the derived classes are called when the destructor of this interface is called.
 	 *
 	 * @brief       <i> [Deprecated] </i>
 	 * @deprecated	This class is deprecated. Instead of using this class, use GroupedTableView class.
@@ -331,7 +333,7 @@ public:
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception   E_INVALID_ARG		A specified input parameter is invalid.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks	The size of the control must be within the range defined by the minimum size and the maximum size.
+	 * @remarks	The size of the control must be within the range defined by the minimum size and the maximum size. @n
 	 *		The minimum size of this control is 92 x 72 on a WVGA screen, 60 x 48 on a HVGA screen and 46 x 36 on a WQVGA screen.
 	 * @endif
 	 */
@@ -346,7 +348,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use GroupedTableView class.
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be added
+	 * @param[in]	listener	The event listener to add
 	 * @endif
 	 */
 	void AddExpandableItemEventListener(Tizen::Ui::IExpandableItemEventListener& listener);
@@ -360,7 +362,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use GroupedTableView class.
 	 * @since		2.0
 	 *
-	 * @param[in]	listener	The event listener to be removed
+	 * @param[in]	listener	The event listener to remove
 	 * @endif
 	 */
 	void RemoveExpandableItemEventListener(Tizen::Ui::IExpandableItemEventListener& listener);
@@ -374,14 +376,15 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	item			The CustomListItem to be added
+	 * @param[in]	item			The CustomListItem to add
 	 * @param[in]	itemId			The item ID for the item
 	 * @exception	E_SUCCESS		The method is successful.
 	 * @exception	E_SYSTEM		A system error has occurred.
-	 * @remarks		The item ID can be used to identify the specific %CustomListItem instance or to associate the user-allocated resources. @n
-	 *				Note that %ExpandableList does not throw an exception, if the same item ID is given to multiple items. @n
-	 *              	The added item is deleted automatically when the list is destroyed. @n
-	 *				Do not add, insert, or set an item which already belongs to the %ExpandableList.
+	 * @remarks
+	 *			- The item ID can be used to identify the specific %CustomListItem instance or to associate the user-allocated resources.
+	 *			- Note that %ExpandableList does not throw an exception, if the same item ID is given to multiple items.
+	 *			- The added item is deleted automatically when the list is destroyed.
+	 *			- Do not add, insert, or set an item which already belongs to the %ExpandableList.
 	 * @endif
 	 */
 	result AddItem(const CustomListItem& item, int itemId = LIST_ITEM_UNSPECIFIED_ID);
@@ -396,13 +399,14 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]   mainIndex       	The index at which to insert the item
-	 * @param[in]	item            	The CustomListItem to be inserted
+	 * @param[in]	item            	The CustomListItem instance to insert
 	 * @param[in]	itemId         		The item ID for the item
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception   E_INVALID_ARG   	The specified @c index is less than @c 0 or greater than the item count.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks     The inserted item is deleted automatically when the list is destroyed.
-	 *				Do not add, insert, or set an item that already belongs to the %ExpandableList control.
+	 * @remarks
+	 *			- The inserted item is deleted automatically when the list is destroyed.
+	 *			- Do not add, insert, or set an item that already belongs to the %ExpandableList control.
 	 * @endif
 	 */
 	result InsertItemAt(int mainIndex, const CustomListItem& item, int itemId = LIST_ITEM_UNSPECIFIED_ID);
@@ -417,7 +421,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]   mainIndex       	The index at which to set the contents of the item
-	 * @param[in]	item            	The CustomListItem to be set
+	 * @param[in]	item            	The CustomListItem instance to set
 	 * @param[in]	itemId          	The item ID for the item
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception   E_INVALID_ARG   	The specified @c index is less than @c 0 or greater than the item count.
@@ -436,7 +440,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return		An error code
-	 * @param[in]	mainIndex			The index of the item to be deleted
+	 * @param[in]	mainIndex			The index of the item to delete
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception   E_INVALID_ARG   	The specified @c index is less than @c 0 or greater than the item count.
 	 * @exception	E_SYSTEM			A system error has occurred.
@@ -486,7 +490,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]   mainIndex       	The index of the main item to which the sub-item is added
-	 * @param[in]	item            	The CustomListItem instance to be added
+	 * @param[in]	item            	The CustomListItem instance to add
 	 * @param[in]	itemId          	The item ID for the sub-item
 	 * @exception	E_SUCCESS       	The method is successful.
 	 * @exception	E_INVALID_ARG		The specified index is less than @c 0, or greater than the item count.
@@ -506,7 +510,7 @@ public:
 	 * @return		An error code
 	 * @param[in]   mainIndex       	The index of the main item to which the sub-item is added
 	 * @param[in]   subIndex        	The index of the sub-item at which to insert the item
-	 * @param[in]	item            	The CustomListItem instance to be inserted
+	 * @param[in]	item            	The CustomListItem instance to insert
 	 * @param[in]	itemId          	The item ID
 	 * @exception	E_SUCCESS       	The method is successful.
 	 * @exception	E_INVALID_ARG   	The specified index is less than @c 0, or greater than the item count.
@@ -526,7 +530,7 @@ public:
 	 * @return		An error code
 	 * @param[in]   mainIndex       	The main index of the sub-item at which to set the contents of the item
 	 * @param[in]   subIndex        	The sub-index of the sub-item at which to set the contents of the item
-	 * @param[in]   item            	The CustomListItem instance to be set
+	 * @param[in]   item            	The CustomListItem instance to set
 	 * @param[in]   itemId          	The item ID
 	 * @exception   E_SUCCESS       	The method is successful.
 	 * @exception   E_INVALID_ARG   	The specified index is less than @c 0, or greater than the item count.
@@ -545,7 +549,7 @@ public:
 	 *
 	 * @return		An error code
 	 * @param[in]   mainIndex       	The index of the main item which the sub-item belongs to
-	 * @param[in]   subIndex        	The index of the sub-item to be deleted in the main item
+	 * @param[in]   subIndex        	The index of the sub-item to delete in the main item
 	 * @exception   E_SUCCESS			The method is successful.
 	 * @exception   E_INVALID_ARG   	The specified index is less than @c 0, or greater than the item count.
 	 * @exception   E_SYSTEM        	A system error has occurred.
@@ -719,7 +723,7 @@ public:
 	 * @since		2.0
 	 *
 	 * @return      An error code
-	 * @param[in]   mainIndex       	The index of the main item, for which the status is to be set
+	 * @param[in]   mainIndex       	The index of the main item, for which the status is set
 	 * @param[in]   enable          	Set to @c true to enable the main item, @n
 	 *									else @c false
 	 * @exception   E_SUCCESS			The method is successful.
@@ -739,7 +743,7 @@ public:
 	 *
 	 * @return      @c true if the main item is enabled, @n
 	 *              else @c false
-	 * @param[in]	mainIndex	The index of the main item to be checked
+	 * @param[in]	mainIndex	The index of the main item to check
 	 * @endif
 	 */
 	bool IsItemEnabled(int mainIndex) const;
@@ -951,6 +955,7 @@ public:
 	int GetNextCheckedItemIndexAfter(int mainIndex) const;
 
 	/**
+	 * @if OSPDEPREC
 	 * Gets the next checked sub-item from the specified index in the main item.
 	 *
 	 * @brief       <i> [Deprecated] </i>
@@ -1034,8 +1039,9 @@ public:
 	 * @param[out]	subIndex			The sub-index of the top drawn item
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception   E_SYSTEM			A system error has occurred.
-	 * @remarks     @c mainIndex is @c -1 if no item is visible. @n
-	 *				@c subIndex is @c -1 if the top item drawn is a main item.
+	 * @remarks
+	 *			- @c mainIndex is @c -1 if no item is visible.
+	 *			- @c subIndex is @c -1 if the top item drawn is a main item.
 	 * @endif
 	 */
 	result GetTopDrawnItemIndex(int& mainIndex, int& subIndex) const;
@@ -1054,8 +1060,9 @@ public:
 	 * @param[out]	subIndex			The sub-index of the bottom drawn item
 	 * @exception	E_SUCCESS			The method is successful.
 	 * @exception	E_SYSTEM			A system error has occurred.
-	 * @remarks     @c mainIndex is @c -1 if no item is visible. @n
-	 *				@c subIndex is @c -1 if the bottom item drawn is a main item.
+	 * @remarks
+	 *			- @c mainIndex is @c -1 if no item is visible.
+	 *			- @c subIndex is @c -1 if the bottom item drawn is a main item.
 	 * @endif
 	 */
 	result GetBottomDrawnItemIndex(int& mainIndex, int& subIndex) const;
@@ -1082,7 +1089,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use GroupedTableView class.
 	 * @since		2.0
 	 *
-	 * @param[in]	text	The text message to be displayed
+	 * @param[in]	text	The text message to display
 	 * @endif
 	 */
 	void SetTextOfEmptyList(const Tizen::Base::String& text);
@@ -1095,7 +1102,7 @@ public:
 	 * @deprecated	This class is deprecated. Instead of using this class, use GroupedTableView class.
 	 * @since       2.0
 	 *
-	 * @param[in]	color	The color of the text to be displayed
+	 * @param[in]	color	The color of the text to display
 	 * @endif
 	 */
 	void SetTextColorOfEmptyList(const Tizen::Graphics::Color& color);

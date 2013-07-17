@@ -15,19 +15,26 @@ namespace CppSharp
             //options.OutputDir = "gen";
 
             options.GeneratorKind = LanguageGeneratorKind.CSharp;
-            options.OutputDir = "gen_csharp";
+            options.OutputDir = "../../../../HelloTizen/TizenGenerated/src";
 
-            options.IncludeDirs.Add("../../../examples/Tizen/osp");
+            options.IncludeDirs.Add("../../../examples/Tizen/tizen-sdk/platforms/tizen2.1/rootstraps/tizen-emulator-2.1.native/usr/include/osp");
             options.GenerateLibraryNamespace = false;
 
             options.Headers.Add("FAppApp.h");
             options.Headers.Add("FAppAppRegistry.h");
             options.Headers.Add("FAppUiApp.h");
+
+            options.LibraryDirs.Add("C:\\SourceTreeProjects\\CppSharp\\examples\\Tizen\\tizen-sdk\\platforms\\tizen2.1\\rootstraps\\tizen-emulator-2.1.native\\usr\\lib\\osp\\");
+            options.Libraries.Add("libosp-uifw.so.1.2.1.0");
+            options.Libraries.Add("libosp-appfw.so.1.2.1.0");
+
+            
+            
+            /*
             options.Headers.Add("FSysIScreenEventListener.h");
             options.Headers.Add("FSysPowerManager.h");
             options.Headers.Add("FUiControl.h");
 
-/*
             options.Headers.Add("FUiContainer.h");
 
             options.Headers.Add("FUiCtrlButton.h");

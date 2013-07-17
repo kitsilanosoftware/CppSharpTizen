@@ -15,7 +15,7 @@ namespace CppSharp
             //options.OutputDir = "gen";
 
             options.GeneratorKind = LanguageGeneratorKind.CSharp;
-            options.OutputDir = "../../../../HelloTizen/TizenGenerated/src";
+            options.OutputDir = "../../../../HelloTizen/Tizen/src";
 
             options.IncludeDirs.Add("../../../examples/Tizen/tizen-sdk/platforms/tizen2.1/rootstraps/tizen-emulator-2.1.native/usr/include/osp");
             options.GenerateLibraryNamespace = false;
@@ -28,7 +28,10 @@ namespace CppSharp
             options.Libraries.Add("libosp-uifw.so.1.2.1.0");
             options.Libraries.Add("libosp-appfw.so.1.2.1.0");
 
-            
+            //options.TargetTriple = "i686-pc-linux-gnu";
+            //options.MicrosoftMode = false;
+            //options.NoStandardIncludes = true;
+            //options.NoBuiltinIncludes = true;            
             
             /*
             options.Headers.Add("FSysIScreenEventListener.h");
@@ -64,7 +67,7 @@ namespace CppSharp
 
             // We are mapping Tizen::Base::String to a standard .NET string class,
             // so don't need to generate any code for that either.
-            lib.IgnoreHeadersWithName("FBaseString.h");
+            //lib.IgnoreHeadersWithName("FBaseString.h");
 
             // Don't know why we are ignoring these.   Ask Joao.
             lib.IgnoreHeadersWithName("FBaseObject.h");
@@ -93,9 +96,9 @@ namespace CppSharp
     }
 
     // Map Tizen's string class to a standard .NET string class.
-    [TypeMap("Tizen::Base::String")]
-    class StringMap : Types.Std.String
-    {
-    }
+    //[TypeMap("Tizen::Base::String")]
+    //class StringMap : Types.Std.String
+    //{
+    //}
 
 }

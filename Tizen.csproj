@@ -45,17 +45,17 @@
     <None Include="premake4.lua" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Bridge\Bridge.csproj">
-      <Project>{92B21DAA-7E54-4880-670F-5CD45350CFD0}</Project>
-      <Name>Bridge</Name>
+    <ProjectReference Include="..\..\src\AST\CppSharp.AST.csproj">
+      <Project>{BC4C5C41-A8AF-EBE5-5135-249C3D77B768}</Project>
+      <Name>CppSharp.AST</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Generator\Generator.csproj">
-      <Project>{8C17FE7D-F881-B2F4-41C0-639AAD699049}</Project>
-      <Name>Generator</Name>
+    <ProjectReference Include="..\..\src\Generator\CppSharp.Generator.csproj">
+      <Project>{1BD1FEC4-07B5-BF1A-7015-BA6D5C18AA9C}</Project>
+      <Name>CppSharp.Generator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\build\vs2012\projects\Parser.vcxproj">
-      <Project>{D27997C9-BE1B-C29F-A7D6-D5F3931749F0}</Project>
-      <Name>Parser</Name>
+    <ProjectReference Include="..\..\build\vs2012\projects\CppSharp.Parser.vcxproj">
+      <Project>{C105FD61-2D91-6A26-36A2-ED1AA2ACC626}</Project>
+      <Name>CppSharp.Parser</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

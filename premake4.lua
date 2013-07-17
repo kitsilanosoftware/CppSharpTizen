@@ -7,7 +7,7 @@ project "Tizen"
   
   files { "Tizen.cs", "./*.lua" }
 
-  links { "Bridge", "Generator", "Parser" }
+  links { "CppSharp.AST", "CppSharp.Generator", "CppSharp.Parser" }
 
 
 project "Tizen.Tests"

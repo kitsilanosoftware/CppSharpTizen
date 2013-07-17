@@ -619,7 +619,7 @@ public:
 	 *
 	 * @since 2.0
 	 */
-	static const double NO_NUMERIC_VALUE = -123456789;
+	static constexpr double NO_NUMERIC_VALUE = -123456789;
 
 private:
 	friend class Int8;

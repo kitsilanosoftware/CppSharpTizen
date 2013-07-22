@@ -30,6 +30,23 @@ namespace CppSharp
             options.Libraries.Add("libosp-uifw.so.1.2.1.0");
             options.Libraries.Add("libosp-appfw.so.1.2.1.0");
 
+            // We appear to need these Clang built-in headers FIRST for size_t to defined.   And using the
+            // "proper-way" of enabling built-in includes doesn't work, because the include path ends up
+            // at the end of the list, which isn't early enough.   So, we do this manually.   This is
+            // also depend on the Junction of these files directly into the output directory so that they
+            // are available at runtime.   With these being hard-coded now that doesn't make sense anymore,
+            // so I should just undo this.
+            //
+            // Debugging this was a pain, because options.Verbose didn't work for me.    I had to add
+            // "-v" as a hardcoded setting in Parser.cpp.
+            //
+            // Why did I even have to venture into this messy place?   Why are the Tizen headers not defining
+            // size_t, ptrdiff_t, etc?   Are they built into the compiler?   Do I need to pass some extra
+            // settings into Clang which do something equivalent?    Or is using the built-in Clang headers
+            // the recommended way of handling this?
+            options.NoBuiltinIncludes = false;
+            options.SystemIncludeDirs.Add("C:\\SourceTreeProjects\\CppSharp\\build\\vs2012\\lib\\lib\\clang\\3.4\\include");
+
             options.SystemIncludeDirs.Add("C:\\SourceTreeProjects\\CppSharp\\examples\\Tizen\\tizen-sdk\\platforms\\tizen2.1\\rootstraps\\tizen-emulator-2.1.native\\usr\\include\\");
             options.SystemIncludeDirs.Add("C:\\SourceTreeProjects\\CppSharp\\examples\\Tizen\\tizen-sdk\\platforms\\tizen2.1\\rootstraps\\tizen-emulator-2.1.native\\usr\\include\\linux\\");
             options.SystemIncludeDirs.Add("C:\\SourceTreeProjects\\CppSharp\\examples\\Tizen\\tizen-sdk\\platforms\\tizen2.1\\rootstraps\\tizen-emulator-2.1.native\\usr\\include\\C++\\4.5.3\\");
@@ -39,7 +56,7 @@ namespace CppSharp
             options.TargetTriple = "i586-tizen-linux";
             options.MicrosoftMode = false;
             options.NoStandardIncludes = true;
-            options.NoBuiltinIncludes = true;            
+            options.Verbose = true;
             
             /*
             options.Headers.Add("FSysIScreenEventListener.h");

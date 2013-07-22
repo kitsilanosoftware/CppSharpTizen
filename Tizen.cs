@@ -1,4 +1,5 @@
-﻿using CppSharp.Generators;
+﻿using CppSharp.AST;
+using CppSharp.Generators;
 using CppSharp.Passes;
 using CppSharp.Types;
 
@@ -17,21 +18,28 @@ namespace CppSharp
             options.GeneratorKind = LanguageGeneratorKind.CSharp;
             options.OutputDir = "../../../../HelloTizen/Tizen/src";
 
-            options.IncludeDirs.Add("../../../examples/Tizen/tizen-sdk/platforms/tizen2.1/rootstraps/tizen-emulator-2.1.native/usr/include/osp");
+            options.IncludeDirs.Add("C:\\SourceTreeProjects\\CppSharp\\examples\\Tizen\\tizen-sdk\\platforms\\tizen2.1\\rootstraps\\tizen-emulator-2.1.native\\usr\\include\\osp\\");
             options.GenerateLibraryNamespace = false;
 
-            options.Headers.Add("FAppApp.h");
+            options.Headers.Add("FBaseDataTypes.h");
+            //options.Headers.Add("FAppApp.h");
             options.Headers.Add("FAppAppRegistry.h");
-            options.Headers.Add("FAppUiApp.h");
+            //options.Headers.Add("FAppUiApp.h");
 
             options.LibraryDirs.Add("C:\\SourceTreeProjects\\CppSharp\\examples\\Tizen\\tizen-sdk\\platforms\\tizen2.1\\rootstraps\\tizen-emulator-2.1.native\\usr\\lib\\osp\\");
             options.Libraries.Add("libosp-uifw.so.1.2.1.0");
             options.Libraries.Add("libosp-appfw.so.1.2.1.0");
 
-            //options.TargetTriple = "i686-pc-linux-gnu";
-            //options.MicrosoftMode = false;
-            //options.NoStandardIncludes = true;
-            //options.NoBuiltinIncludes = true;            
+            options.SystemIncludeDirs.Add("C:\\SourceTreeProjects\\CppSharp\\examples\\Tizen\\tizen-sdk\\platforms\\tizen2.1\\rootstraps\\tizen-emulator-2.1.native\\usr\\include\\");
+            options.SystemIncludeDirs.Add("C:\\SourceTreeProjects\\CppSharp\\examples\\Tizen\\tizen-sdk\\platforms\\tizen2.1\\rootstraps\\tizen-emulator-2.1.native\\usr\\include\\linux\\");
+            options.SystemIncludeDirs.Add("C:\\SourceTreeProjects\\CppSharp\\examples\\Tizen\\tizen-sdk\\platforms\\tizen2.1\\rootstraps\\tizen-emulator-2.1.native\\usr\\include\\C++\\4.5.3\\");
+            options.SystemIncludeDirs.Add("C:\\SourceTreeProjects\\CppSharp\\examples\\Tizen\\tizen-sdk\\platforms\\tizen2.1\\rootstraps\\tizen-emulator-2.1.native\\usr\\include\\C++\\4.5.3\\tr1\\");
+            options.SystemIncludeDirs.Add("C:\\SourceTreeProjects\\CppSharp\\examples\\Tizen\\tizen-sdk\\platforms\\tizen2.1\\rootstraps\\tizen-emulator-2.1.native\\usr\\include\\C++\\4.5.3\\i586-tizen-linux\\");
+
+            options.TargetTriple = "i586-tizen-linux";
+            options.MicrosoftMode = false;
+            options.NoStandardIncludes = true;
+            options.NoBuiltinIncludes = true;            
             
             /*
             options.Headers.Add("FSysIScreenEventListener.h");
@@ -70,9 +78,9 @@ namespace CppSharp
             //lib.IgnoreHeadersWithName("FBaseString.h");
 
             // Don't know why we are ignoring these.   Ask Joao.
-            lib.IgnoreHeadersWithName("FBaseObject.h");
-            lib.IgnoreHeadersWithName("FOspCompat.h");
-            lib.IgnoreClassWithName("Tizen::Base::Object");
+            //lib.IgnoreHeadersWithName("FBaseObject.h");
+            //lib.IgnoreHeadersWithName("FOspCompat.h");
+            //lib.IgnoreClassWithName("Tizen::Base::Object");
         }
 
         public void Postprocess(Library lib)
